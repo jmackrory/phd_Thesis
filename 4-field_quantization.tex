@@ -15,7 +15,7 @@ Maxwell's equations in a dielectric, non magnetic medium, without sources  are
 \nabla\times\vect{H} &= \mu_0\partial_t\vect{D}.
 \end{align}
 
-Here we will ignore the frequency dependence and dispersion.  We are implicitly assuming a monochromatic field.  Later, we will extend this work to handle frequency dependence in the dielectric.  Dealing with dispersion also forces us to deal with dissipation.  Quantization with a dielectric medium has been done by Huttner and Barnett~\cite{Huttner92}, and in the Casimir context by Rosa~\textit{et.~al.}~\cite{Rosa10}.  
+Here we will ignore the frequency dependence and dispersion.  We are implicitly assuming a monochromatic field.  Later, we will extend this work to handle frequency dependence in the dielectric.  Dealing with dispersion also forces us to deal with dissipation.  Quantization with a dielectric medium has been done by Huttner and Barnett~\cite{Huttner1992}, and in the Casimir context by Rosa~\textit{et.~al.}~\cite{Rosa2010}.  
 
 For a linear medium we can write 
 \begin{equation}
@@ -49,7 +49,7 @@ The remaining two Maxwell equations are then given by
 
 \section{Classical Lagrangian Formulation}
 
-Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.  We will choose a Lagrangian, following other workers \cite{Huttner92, Glauber91}, and show that it retrieves Maxwell's equations.  
+Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.  We will choose a Lagrangian, following other workers \cite{Huttner1992, Glauber1991}, and show that it retrieves Maxwell's equations.  
 \begin{align}
 L &= \frac{1}{2}\int d^3x\, \vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H} \\
 & = \frac{\epsilon_0}{2}\int\! d^3x\, \epsvx(\nabla\phi+\partial_t\vect A)^2 - c^2(\nabla\times\vect A)^2.
@@ -61,9 +61,9 @@ The momenta conjugate to the coordinates $A^\mu = (\phi,\vect A)$ are
 \vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsvx(\nabla\phi+\partial_t\vect A).
 \end{align}
 
-As before, we must satisfy the constraints that $\Pi_0 = 0$.  This will in turn provide another constraint for the Hamiltonian theory.  We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac64, Dirac66}
+As before, we must satisfy the constraints that $\Pi_0 = 0$.  This will in turn provide another constraint for the Hamiltonian theory.  We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac1964, Dirac1966}
 
-Ultimately we want to develop the Hamiltonian formulation where we will have to be careful to correctly account for the constraints.  We are going to follow the approach suggested by Paul Dirac in refs \cite{Dirac64, Dirac66}, which is analogous to the Gupta-Bleuler formulation.  In that method the fields have canonical commutation relations imposed upon them, and the gauge freedom restricts the states allowed the theory.  
+Ultimately we want to develop the Hamiltonian formulation where we will have to be careful to correctly account for the constraints.  We are going to follow the approach suggested by Paul Dirac in refs \cite{Dirac1964, Dirac1966}, which is analogous to the Gupta-Bleuler formulation.  In that method the fields have canonical commutation relations imposed upon them, and the gauge freedom restricts the states allowed the theory.  
 Eq. (\ref{eq:constraint1}) is a constraint on the Hamiltonian and we must check for any further constraints implied by that.  We must take all of these into account, \emph{after} we take over the classical Poisson brackets over to quantum commutation relations. 
 
 
@@ -197,7 +197,7 @@ As before we can carry out the momentum integral by completing the square.  The 
 \begin{align}
  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3x \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsvx} -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\Lambda_\beta) \right] \propto   [\epsvx]^{3/2}\exp \left[ -\frac{\epsilon_0d\beta}{2\hbar^2}\int d^3x\, \epsvx(\partial_\beta \vect A_\beta - \nabla\Lambda_\beta)^2 \right].
 \end{align}
-Initially I missed the factor of $\epsvx^{3/2}$, which I discovered by reading a paper by Bordag on path integral quantization in dielectric media \cite{Bordag98}.  Since we will eventually be taking the ratio of this partition function to it's vacuum couterpart, any constant terms involving $\pi, \hbar, etc$ will cancel out.  
+Initially I missed the factor of $\epsvx^{3/2}$, which I discovered by reading a paper by Bordag on path integral quantization in dielectric media \cite{Bordag1998}.  Since we will eventually be taking the ratio of this partition function to it's vacuum couterpart, any constant terms involving $\pi, \hbar, etc$ will cancel out.  
 
 Shortly we will introduce a path integral notation.  We are integrating over all field configurations, and at all points in space.  We will introduce a notation
 \begin{equation}
@@ -271,7 +271,7 @@ where any constant factors are assumed to be absorbed into the normalization of 
 \begin{equation}
  Z = \int D\vect{\widetilde{A}} DA_4\, \det \frac{\delta G}{\delta \alpha} \exp\left[-S_E-\frac{\epsilon_0 c}{2\hbar}\int d^4x\, G^2\right].
 \end{equation}
- The functional determinant is often turned into an integral over anti-commuting Grassman variables \cite{Srednicki08}.  This is only truly necessary for non-Abelian fields where the gauge transformation will depend on the field variables.  For electromagnetism, which is an abelian gauge field theory the functional determinant decouples from the dynamics.  Nonetheless, we ned to keep track of this determinant to correctly count the degrees of freedom.  We will ignore the determinant from the delta function when the gauge is independent of $\epsilon$.  However, if we choose a gauge that depends on $\epsilon$, then the determinant will depend on the configuration of external bodies and we cannot ignore it.  
+ The functional determinant is often turned into an integral over anti-commuting Grassman variables \cite{Srednicki2008}.  This is only truly necessary for non-Abelian fields where the gauge transformation will depend on the field variables.  For electromagnetism, which is an abelian gauge field theory the functional determinant decouples from the dynamics.  Nonetheless, we ned to keep track of this determinant to correctly count the degrees of freedom.  We will ignore the determinant from the delta function when the gauge is independent of $\epsilon$.  However, if we choose a gauge that depends on $\epsilon$, then the determinant will depend on the configuration of external bodies and we cannot ignore it.  
 
 \subsection{Gauge Choices}
 Overall, the path integral is independent of our choice of gauge, and it would be nice to show that you get the same results in two different gauges.  I have come across the following gauge choices:
@@ -280,10 +280,10 @@ Overall, the path integral is independent of our choice of gauge, and it would b
 This gauge is the familiar choice in non-relativistic quantum optics.  The potential decouples from the vector field, which only has two transverse degrees of freedom.  While this is a good choice in free space, it is complicated by the presence of $\epsvx$.  You find for general $\epsilon$ that $\vect A$ is coupled to $A_4$, which ends up requiring some messy work with Green functions to get around.  The functional determinant won't depend on epsilon so we can ignore it, since it will cancel out when we consider the difference between the vacuum energy and the energy when bodies are present.  
 
 \item Generalized Coulomb Gauge: $\nabla\cdot\epsilon\vect A=0$\\
-  This is the natural choice if you allow the dielectric to vary spatially.  This is in fact the choice used in other attempts to quantize the EM field inside a dielectric~\cite{Knoll87, Glauber91}.  Note that in those cases, they have $\nabla\cdot\epsilon\vect A'=0$, while our vector potential is scaled, $\vect{\widetilde{A}} = \sqrt{\epsilon}\vect A'$.  This choice removes any coupling between $\vect{\widetilde{A}}$ and $A_4$.  As can be seen from the equations of motion.  The functional determinant then depends on $\epsilon$, so we should track it.  Unfortunately, this is not susceptible to the above gauge-fixing techniques.  Generalized Lorenz gauge solves that issue, and is how we have proceeded.  
+  This is the natural choice if you allow the dielectric to vary spatially.  This is in fact the choice used in other attempts to quantize the EM field inside a dielectric~\cite{Knoell1987, Glauber1991}.  Note that in those cases, they have $\nabla\cdot\epsilon\vect A'=0$, while our vector potential is scaled, $\vect{\widetilde{A}} = \sqrt{\epsilon}\vect A'$.  This choice removes any coupling between $\vect{\widetilde{A}}$ and $A_4$.  As can be seen from the equations of motion.  The functional determinant then depends on $\epsilon$, so we should track it.  Unfortunately, this is not susceptible to the above gauge-fixing techniques.  Generalized Lorenz gauge solves that issue, and is how we have proceeded.  
 
 \item Temporal Gauge: $A_4=0$.  
-This gauge simply removes the scalar field, and rolls all of that dependence into the longitudinal part of $\vect A$.  Ramond claims that this does not fully specify the gauge of the field~\cite{Ramond90}, which I should check into more.  Surprisingly, this does seem to be a fairly common gauge for people working with path integrals in dielectrics~\cite{Bechler99,Rahi09}.  However, it is not a complete gauge fixing so we will not pursue it any further.  
+This gauge simply removes the scalar field, and rolls all of that dependence into the longitudinal part of $\vect A$.  Ramond claims that this does not fully specify the gauge of the field~\cite{Ramond1990}, which I should check into more.  Surprisingly, this does seem to be a fairly common gauge for people working with path integrals in dielectrics~\cite{Bechler1999,Rahi2009}.  However, it is not a complete gauge fixing so we will not pursue it any further.  
 
 \item Bordag's generalized Lorenz gauge: $\frac{1}{\epsilon}\nabla\cdot\epsilon\vect A + \epsilon\partial A_4=0$.   Bordag \textit{et.~al.} used this gauge in a calculation of the heat kernel for the EM field in a linear dielectric.   This gauge choice has the advantage of also removing any coupling between $\vect A$ and $A_4$.  It has the downside of introducing some extra terms in the energy for $A_4$.  This is effectively a generalized Lorenz gauge.  I'm not sure why they need the extra factors of $\epsilon$.  The determinant will depend on $\epsilon$, so we cannot drop the determinant.  
 

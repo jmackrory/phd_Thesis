@@ -6,11 +6,33 @@
 
 \section{Casimir Forces in general and physical interpretation}
 
-The Casimir force is an attractive force that arises due to fluctuations in quantum fields.  
+The Casimir force is an attractive force that arises due to fluctuations in quantum fields.  It was first predicted in 1948 by Henrik Casimir~\cite{Casimir1948}.  If we consider two planar perfect conductors, we find that there is an attractive force between them due to the zero point energy of the electromagnetic field.  In a quantum electrodynamics the ground state of each mode of the electromagnetic field contributes $\hbar\omega/2$, where $\hbar$ is Planck's constant, and $\omega$ is the frequency of the mode.  The presence of the conductors forces the electric field to vanish on the surfaces, which restricts the allowed modes of the electromagnetic field. If we add up the energy from all modes of the electromagnetic field, and compare it to the case when the plates are infinitely far apart from one another, we find the energy is reduced as the plates are brought closer together.  The energy between the plates is then
+\begin{equation}
+  E = -\frac{\hbar c}{240\pi^2 d^3},
+\end{equation}
+where $c$ is the speed of light in vacuum, and $d$ is the distance between the plates.
+
+\comment{Give simple derivation of force? Cite Bordag/Dalvit?}
+
+The Casimir force is also important for atoms near surfaces.  This variant is known as the Casimir-Polder force, after a paper by Casimir and Polder where they computed the force between an atom and a perfect conductor accounting for the finite speed of light~\cite{CasimirPolder1948}.  
+In this case, the atom feels an attractive potential to a surface a distance $d$ away,
+\begin{equation}
+V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4}.
+\end{equation}
+
+The formalism was extended to include dielectric media by Lifshitz~\cite{Lifshitz1956}.  \comment{He also worked alongside co-workers Dzayolshinkii and Abrisokov to further compute the force from using Feynman diagrammatic methods\cite{Dzyaloshinskii1959,Dzyaloshinskii1961}}.  
+\comment{Point of view: Due to thermal fluctuations in medium.}
+
+\comment{Mclachlan\cite{Mclachlan1963} cites these guys?}
+
+\comment{Barton}
+
+
 
 \begin{itemize}
-\item Cite Casimir/Casimir-Polder and Lifshitz
-\item Cite Books - Milonni and Bordag
+%\item Cite Casimir/Casimir-Polder and Lifshitz.
+\item Cite Books - Milonni~\cite{Milonnibook1994}, Bordag~\cite{Bordagbook2009}, Dalvit~\cite{Dalvitbook2011}.
+\item More general books on Casimir , Parsegian~\cite{Parsegian2006}, Israelachivili~\cite{Israelachvili2011}, 
 \item Physical size of energies and length-scale.  Perfect electrical conductor, and atom-wall
 \item Casimir vs Van Der Waals vs London Forces
 \item Renormalization
@@ -22,16 +44,26 @@ The Casimir force is an attractive force that arises due to fluctuations in quan
 \section{Physical relevance and experimental relevance}
 
 \section{Experiments}
+\subsection{Physics}
+\begin{itemize}
+\item Helium
+\item Spaarnay
+\item Lamoreaux - for 1997 measurements\cite{Lamoreaux1997}, and also recent thermal work by Sushkov\cite{Sushkov2011}.
+\item Mohideen \cite{Mohideen1998} AFM with sphere above plate.
+\item Capasso \cite{Chan2001}  torsion oscillator above plate
+\item Bressi \cite{Bressi2002} Parallel Plates.
+\item Cornell - atoms near wall\cite{Harber2005, Obrecht2007}.  BEC near wall, use frequency to detect chane
+\item Antezza - chapters in Dalvit.  
+\item Kimble atoms near toroidal resonators.  \cite{Alton2011}.  Atoms above 1D Microcavity \cite{Hung2013}
+\item Atom-chips  Schmiedmeyer\cite{Folman2000,Schneider2003}(?)
+\item Cronin \cite{Perreault2005,Lonij2009}  Atom interferometry experiments for atoms near gratings.
+\item Sukenik\cite{Sukenik1993}, atoms passing through cavity to detect Casimir-Polder.  
+\end{itemize}
+
+\subsection{Chemistry/Helium/Geckos?}
 
 \begin{itemize}
-\item Lamoreaux - for 1997 measurements, and also recent thermal work by Sushkov.
-\item Capasso
-\item Mohideen  
-\item Cornell - atoms near wall
-\item Kimble atoms near toroidal resonators.  
-\item Painter?
-\item Atom-chips
-\item Cronin
+\item Geckos use the Casimir force \cite{Autumn2002}
 \end{itemize}
 
 \section{Other Computational methods}
@@ -66,7 +98,7 @@ The Casimir force is an attractive force that arises due to fluctuations in quan
 \item Cite Emig,Jaffe,  and others for initial analytical techniques.  Relies on Green theorem.
 \item Cite Johnson/Reid/ for numerical progress.  Note use of existent analytical methods and similarities to existent numerical FTDT techniques on earlier papers.  
 \item Note success,applicability
-\item Estimates on scaling.
+\item Estimates on scaling of algorithm?
 \end{itemize}
 
 \subsection{Worldlines}
@@ -75,14 +107,14 @@ The Casimir force is an attractive force that arises due to fluctuations in quan
 \item Cite Kirsten, Strassler on general worldline
 \item Cite QED Worldline paper on numerics?
 \item Cite Gies papers (all of them!) note work on thermal/geometry.
-\item Cite Schaden applying
+\item Cite Schaden applying to pistons
 \item Shortcomings: 
 \end{itemize}
 
 \section{Thesis outline}
 
 
-Our work is based on the worldline method developed by Gies~\textit{et.~al}\cite{Gies03}
+Our work is based on the worldline method developed by Gies~\textit{et.~al}\cite{Gies2003}
 
 
 %%% Local Variables: 

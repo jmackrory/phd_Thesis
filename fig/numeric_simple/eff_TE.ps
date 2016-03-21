@@ -1,0 +1,105 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(fig/plotfonts.ps) run
+(fig/plotparameters.ps) run
+(fig/plotarrows.ps) run
+/width {7} bind def
+/height {5} bind def
+
+/xmax {3.1} def
+/xmin {-3.1} def
+/ymin {-4.1} def
+/ymax {-0.5} def
+
+/xmaxstr (3.1) def
+/xminstr (-3.1) def
+/ymaxstr (-0.5) def
+/yminstr (-4) def
+
+
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+
+(fig/plotutilities.ps) run
+(fig/casimirutilities.ps) run
+<< /PageSize [20 in 10 in] >> setpagedevice 
+4 in 0 translate
+
+startplot
+
+%Energy curve 
+1 setlinewidth
+
+/symbolsz 6 def % in points
+outcol
+(fig/data/TEatomchi_anlt.dat) run % load loop 1
+20 PlotStackDataLogLog
+
+TEcol
+(fig/data/TEatomchi_num.dat) run % load loop 1
+20 PlotStackDataLogLogErr
+
+%XAxisLabelsLog
+%YAxisLabelsLog
+[ (-3) (-2) (-1)] ExtraYTicksLog
+[ (-3) (-2) (-1) (0) (1) (2) (3)] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (h(c))]  YAxisTitle
+
+
+
+%start log-linear inset
+
+/insetoffx {1.9 in} def
+/insetoffy {-0.9 in} def
+/insetscale {0.4} def
+
+
+/xmax {3} def
+/xmin {-3} def
+/ymin {0} def
+/ymax {0.16} def
+
+/xmaxstr (3) def
+/xminstr (-3) def
+/ymaxstr (0.16) def
+/yminstr (0) def
+
+
+startinset
+
+
+gsave
+%Energy curve 
+1 setlinewidth
+outcol
+(fig/data/TEatomchi_anlt.dat) run % load loop 1
+
+20 PlotStackDataLogX
+
+TEcol
+
+(fig/data/TEatomchi_num.dat) run % load loop 1
+
+20 PlotStackDataLogXYerr
+
+%outcol
+%(fig/test.dat) run
+%50 PlotStackData
+
+grestore
+
+%XAxisLabelsLog
+%YAxisLabels
+[ (0.05) (0.1) (0.15)] ExtraYTicks
+%[ (0.05) (0.1) ] ExtraYTicks
+[ (-3) (0) (3) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (h(c))]  YAxisTitle
+
+endinset
+
+endplot

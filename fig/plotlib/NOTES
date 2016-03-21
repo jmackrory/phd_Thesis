@@ -1,0 +1,17 @@
+to enable "run" in ps2pdf:
+in /usr/local/bin/ps2pdfwr
+change line
+
+OPTIONS="-P- -dSAFER"
+
+to 
+
+OPTIONS="-P -dSAFER"
+
+
+and in /usr/texbin/ps2eps: change 2 occurrences of 
+'-dSAFER'
+to
+'-P -dSAFER'
+
+do the same, in 1 occurrence of /usr/texbin/epstopdf

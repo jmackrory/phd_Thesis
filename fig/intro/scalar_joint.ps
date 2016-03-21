@@ -1,0 +1,78 @@
+%!PS-Adobe-2.0 
+%%EndProcSet
+%%BeginProcSet: Utilities
+(fig/plotfonts.ps) run
+(fig/plotparameters.ps) run
+%%EndProcSet
+
+/width {20 } bind def
+/height {3} bind def
+/xmax {1} bind def
+/xmin {-1} bind def
+/ymax {1} bind def
+/ymin {-1} bind def
+/linesize {1} bind def
+
+(fig/plotutilities.ps) run
+(fig/casimirutilities.ps) run
+
+0 setgray 
+startplot
+
+
+gsave
+fillcol
+1.5 in 3 in moveto
+0 -5 in rlineto
+1.2 in 0 rlineto
+0 5 in rlineto
+ -1.2 in 0  rlineto
+fill
+grestore 
+
+gsave
+-2.5 in 2.0 in translate
+mark
+80 rotate
+1 0.75 scale
+(fig/cp2.loop) run % load loop 1
+hitcol
+10000 PlotStackDataNoClip
+% plot data points
+mark
+
+grestore
+
+
+
+gsave
+-2 in 0.0 in translate
+mark
+1 0.75 scale
+(fig/cp1.loop) run % load loop 1
+180 rotate
+TMcol
+10000 PlotStackDataNoClip
+% plot data points
+mark
+
+grestore
+
+
+gsave
+0 setgray
+1.5 in 3 in moveto
+0 in -5 in rlineto
+stroke
+grestore
+
+
+
+%atom
+gsave
+1 in 0 in translate
+-120 50 5 atom
+grestore
+
+
+endplotnoborder

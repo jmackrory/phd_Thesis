@@ -135,11 +135,12 @@ We can estimate typical distance scales by considering the dominant resonances o
 
 For macroscopic bodies we can compare the Casimir energy for perfect metal conductors at a distance $d$ to the energy stored in the capacitance.  Note that we compute an energy per unit area.  
 
-The Casimir energy is $\frac{\hbar c\pi^2}{240 d^3}$, while the voltage for a parallel plate capacitor is.
+The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the voltage for a parallel plate capacitor is.
 \begin{shaded}
 \begin{itemize}
 \item Capacitance is $V=Q/C$.  
 \item $C = \epsilon_0 A/d$.  
+\item Energy is $\frac{1}{2}CV^2=\frac{Q^2}{2C} $
 \end{itemize}
 \end{shaded}
 
@@ -182,7 +183,9 @@ As QED calculation, the Casimir energy is formally divergent and must be renorma
 \item Liquid Helium
 \item Spaarnay
 \item Lamoreaux - for 1997 measurements\cite{Lamoreaux1997}, and also recent thermal work by Sushkov\cite{Sushkov2011}.
+
 \item Mohideen \cite{Mohideen1998} AFM with sphere above plate.
+
 \item Capasso \cite{Chan2001}  torsion oscillator above plate
 \item Bressi \cite{Bressi2002} Parallel Plates.
 \item Cornell - atoms near wall\cite{Harber2005, Obrecht2007}.  BEC near wall, detect change in oscillation frequency of trap due to Casimir-Polder energy.  Using thermal shift?
@@ -191,6 +194,12 @@ As QED calculation, the Casimir energy is formally divergent and must be renorma
 \item Atom-chips  Schmiedmeyer\cite{Folman2000,Schneider2003}(?)  Not explicitly using Casimir-Polder forces?  
 \item Cronin \cite{Perreault2005,Lonij2009}  Atom interferometry experiments for atoms near gratings.
 \item Sukenik\cite{Sukenik1993}, atoms passing through cavity to detect Casimir-Polder.  
+\end{itemize}
+
+\begin{itemize}
+\item Controversies about role of zero temperature pole.  
+\item Lamoreaux favors Drude model, Capasso favours plasma model.
+\item Seems experiments favour more 
 \end{itemize}
 
 \subsection{Chemistry/Helium/Geckos?}
@@ -213,7 +222,7 @@ Requires very careful measurements, on top of carefully extracting Casimir force
 \subsection{Proximity Force Approximation}
 
 \begin{itemize}
-\item Find first use?  Lamoreaux mentions usage.  
+\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
 \item Note problem with non-additivity. 
 \item Good as order of magnitude estimate?  Useful if very limited curvature, or effectively approximate geometry as planar.  
 \end{itemize}
@@ -255,41 +264,45 @@ Requires very careful measurements, on top of carefully extracting Casimir force
 
 \subsection{Worldlines}
 
+The worldline method is an alternative method for computing Casimir energies.  The worldline method was initially developed as an alternative method for carrying out QFT calculations in terms of particle mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  In particular we can compute compute quantum effective actions in terms of the suitable dynamics of a quantum particle.  
+
+The basic insight is that for one loop effective actions, we can recast a field path integral calculation in terms of the particle path integral for particles travelling in closed space-time loops.  This is quite similar to the scalar electrodynamics Feynman explored in his Ph.D thesis~\cite{Feynman1942, Brown2005}\comment{Seems to actually be his 1950 QED paper RE Schubert2001}.  Higher order loop calculations can also be carried out with more particles, and gauge fields can also be treated~\cite{Schubert2001}.  For example, the worldline method has been used to compute relativistic field effects for QED such as the Lamb shift~\cite{Schmidt1995}.  It has also been used as a numerical algorithm\cite{Mazur2014}.
+
+The worldline method is heavily based on Feynman's path integral method~\cite{Feynman1948,Feynman1965}.
+
+Our primary interest in the worldline method is for computing Casimir energies, which can be cast as effective actions.  The worldline was first used for the Casimir energy by Gies\etal~\cite{Gies2003,Gies2006, Gies2006a}.  While the initial work focused on the zero temperature limit, the worldline method has also been extended to finite temperatures~\cite{Klingmueller2008}.  This has also been used to study the torsion of inclined planes~\cite{Weber2009}, and planes and spheres and planes and cylinders~\cite{Weber2010, Weber2010a}.  
+
+We will briefly introduce the method here, and discuss the method at length in Ch.~\ref{ch:scalar_worldlines}.  Let the action for the scalar field be given by 
+\begin{equation}
+  S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
+\end{equation}
+where $V(\vect{x},t)$ defines the surfaces of the objects we wish to compute the Casimir energy between.  The potential is typically chosen to be $V(\vect{x},t)=\lambda\delta[\sigma(\vect{x})]$, where $\sigma(\vect{x})=0$ defines the surfaces.  In the limit $\lambda\rightarrow\infty$ the potential enforces Dirichlet boundary conditions, where $\phi(\vect{x})\big|_{\sigma(\vect{x})=0} =0$.  This corresponds to assuming the surfaces are idealized perfect conductors.  
+
+We can compute the partition function for the field by Wick rotating to imaginary time (or finite temperature), where the partition function is now given by 
+\begin{equation}
+  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x \left[ (\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
+\end{equation}
+The Gaussian integration over fields can be carried out as a functional determinant.  In order to compute the energy we need the logarithm of the partition function, and various derivatives of it.  The end result of these manipulations is that the renormalized energy can be written as 
+\begin{equation}
+E_{\text{scalar}} = \frac{\hbar c}{(2\pi)^{D/2}}\int_0^\infty \frac{d\cT}{\cT^{1+D/2}} \int d\vect{x} \dlangle e^{-\cT\langle V\rangle} -1\drangle,
+\end{equation}
+where $\cT$ is the loop ``time'' and governs the extent of the loops, $\vect{x}_0$ is the loop starting point, $\dlangle \cdots\drangle$ denotes an ensemble average over closed Gaussian random walks, and $\langle\cdots\rangle$ denotes the average of a quantity around the loop.  
+
+
+
+
+
 \begin{itemize}
 \item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
 \comment{Other references - was one contemporaneous with Strassler?}
 \begin{itemize}
 \item Summarize Strassler.  Can compute QFT effects from worldline path integrals.  
-\item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
-\item Cite QED at one loop order paper.  Get same results.  
-\item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
+% \item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
+% \item Cite QED at one loop order paper.  Get same results.  
+% \item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
 \end{itemize}
-\item Cite QED Worldline paper on numerics?
-\item Cite Gies papers~\cite{Gies2003,Gies2006, Gies2006a} (all of them!) note work on thermal/geometry~\cite{Klingmueller2008,Weber2009, Weber2010}
-\begin{itemize}
-\item Action
-\begin{equation}
-  S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
-\end{equation}
-\item Euclidean Path integral (Generating Function) 
-\begin{equation}
-  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x \left[ (\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
-\end{equation}
-\item Gaussian integral.  Can integrate out $\phi$ to get an effective action for particular geometry of objects.  (Or use Free energy).  
-\begin{equation}
-  F = -k_BT\log Z = -k_BT \log\det[-\partial_t^2-\nabla^2-V(\vect{x},t)]
-\end{equation}
-\item Can use $\tr\log A = \log\det A$, and integral representation of log, 
-\begin{equation}
-  \log A -\log B= -\int_0^\infty \frac{dT}{T} (e^{-AT} - e^{-BT}),
-\end{equation}
-\item Worldline path integral
-  \begin{equation}
-    F = - \int \frac{dT}{T^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
-  \end{equation}
-  where $\cT$ is the loop proper time, $\langle V\rangle$ is the average of the potential around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble average over Brownian paths.  
-\item Typically take $V = \lambda\delta[\vect{x}-\sigma(\vect{x})]$, where $\sigma(\vect{x})=0$ is a function describing the surfaces.  In the limit $\lambda\rightarrow\infty$ this amounts to enforcing Dirichlet boundary conditions on the fields at the surfaces.  
-\end{itemize}
+%\item Cite QED Worldline paper on numerics?
+
 \item Cite Schaden applying to pistons\cite{Schaden2009}
 \item Figure showing loops.  
 \item Advantages

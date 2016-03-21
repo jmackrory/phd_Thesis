@@ -1,0 +1,107 @@
+#!/usr/bin/perl
+
+$Pgname = `basename $0`; chop $Pgname;
+
+sub usage {
+   print <<"END";
+usage: $Pgname <ps or eps file>
+
+  Replaces all files included in postscript files with 'run' commands
+  by the contents of the appropriate file.  
+
+  Fonts in plotfonts.ps are treated more intelligently; they
+  are included only if they are actually used. 
+
+  Output to standard out.
+
+END
+   exit;
+}
+
+&usage if $#ARGV==-1;
+&usage if $#ARGV>0;
+$file = $ARGV[0];
+
+@fontfiles = qw(
+  plotlib/ComputerModern-Regular.pfa
+  plotlib/ComputerModernExtraBold.pfa
+  plotlib/ComputerModernExtraBoldItalic.pfa
+  plotlib/Cymbol.pfa
+  plotlib/KahoeTech.pfa
+  plotlib/KahoeTecGreek.pfa
+  plotlib/KahoeTecGreekItal.pfa
+  plotlib/KahoeTechSym.pfa
+  plotlib/KahoeTechSymItal.pfa
+  plotlib/LucidaSansRegular.pfa
+  plotlib/Verdana.pfa
+  plotlib/cmmi10.pfa
+  plotlib/cmcsc10.pfa
+  plotlib/rsfs10.pfa
+);
+@fontnames = qw(
+  /ComputerModern-Regular
+  /ComputerModernExtraBold
+  /ComputerModernExtraBoldItalic
+  /Cymbol
+  /KahoeTechLatin
+  /KahoeTechGreek
+  /KahoeTechGreek-Italic
+  /KahoeTechSymbols
+  /KahoeTechSymbols-Italic
+  /LucidaSans
+  /Verdana
+  /CMMI10
+  /CMCSC10
+  /rsfs10
+);
+for ($j=0; $j<=$#fontnames; $j++) {
+  $fontfile{$fontnames[$j]} = $fontfiles[$j];
+}
+
+### search through file for fonts used
+die("cannot open file '$file'") unless
+  open (file, "<$file");
+
+while(<file>) {
+  $line = $_;
+  foreach $font (@fontnames) {
+    if ($line =~ /$font/) { $fontused{$font}++; }
+    if ($line =~ /ExtraXTicks|ExtraYTicks|XAxisLabels|YAxisLabels/) { $fontused{'/ComputerModern-Regular'}++; }
+  }
+}
+close file;
+
+foreach $font (@fontnames) {
+  print STDERR "font '$font' used '$fontused{$font}' times\n";
+}
+
+### now we'll write out the self-contained file
+die("cannot open file '$file'") unless
+  open (file, "<$file");
+
+while(<file>) {
+  $line = $_;
+  if ($line =~ /\(plotlib\/plotfonts.ps\)\s*run/) { 
+    foreach $font (@fontnames) {
+      if ($fontused{$font} != '') {
+        print STDERR "Usin' font '$font' in '$fontfile{$font}' now\n";
+        &outputfile($fontfile{$font});
+      }
+    }
+  } elsif ($line =~ /\((\S+)\)\s*run/) {
+    $outfile = $1;
+    print STDERR "Usin' file '$outfile' now\n";
+    &outputfile($outfile);
+  } else {
+    print $line;
+  }
+}
+close file;
+
+sub outputfile {
+  my ($file) = @_;
+  die("cannot open file '$file'") unless
+    open (outfile, "<$file");
+  while (<outfile>) { print; }
+  close $file;
+}

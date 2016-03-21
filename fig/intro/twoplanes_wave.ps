@@ -1,0 +1,85 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {5 } bind def
+/height {3} bind def
+/xmaxstr (1.5) def
+/xminstr (-1.5) def
+/yminstr (-1) def
+/ymaxstr (2) def
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+
+(plotlib/plotutilities.ps) run
+
+/d {.5} def
+/Np {100} def
+/fitcol{0.0 0.67 0 setrgbcolor} def
+/misscol{0.0 0 0.67 setrgbcolor} def
+
+startplot
+
+0.7 setlinewidth
+%left conductor
+0 setgray
+d neg ymin cc moveto 
+d neg ymax cc lineto
+stroke
+
+%Right conductor
+0 setgray
+d ymin cc moveto 
+d ymax cc lineto
+stroke
+
+%plot lines
+gsave
+
+mark
+misscol
+(sinnL.dat) run
+Np PlotStackData
+
+mark
+misscol
+(sinnR.dat) run
+Np PlotStackData
+
+mark
+misscol
+(sin2aL.dat) run
+Np PlotStackData
+
+mark
+misscol
+(sin2aR.dat) run
+Np PlotStackData
+
+mark
+misscol
+(sin3aL.dat) run
+Np PlotStackData
+
+mark
+misscol
+(sin3aR.dat) run
+Np PlotStackData
+
+%Plot data that fit
+mark
+fitcol
+(sin1.dat) run
+300 PlotStackData
+
+mark
+(sin2.dat) run
+300 PlotStackData
+
+grestore
+%endplot

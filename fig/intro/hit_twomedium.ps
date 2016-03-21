@@ -1,0 +1,125 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(fig/plotfonts.ps) run
+(fig/plotparameters.ps) run
+(fig/plotarrows.ps) run
+/width {6 } bind def
+/height {6} bind def
+/xmax {3} def
+/xmin {-10} def
+/ymin {0} def
+/ymax {2} def
+/sigma {3} bind def
+/linesize {0.5} bind def
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
+(fig/plotutilities.ps) run
+(fig/casimirutilities.ps) run
+
+<< /PageSize [20 in 10 in] >> setpagedevice 
+startplot
+
+%TwoSlab
+%Wall
+gsave
+4 in 0 translate
+0 setgray
+1 setlinewidth
+
+newpath
+0 in 2 in moveto
+0 in -4 in rlineto
+stroke
+
+newpath
+fillcol
+0 in 2 in moveto
+0 in -4 in rlineto
+1.5 in 0 in rlineto
+0 in 4 in rlineto
+-1.5 in 0 in rlineto
+fill
+grestore
+
+%Wall 2
+gsave
+1 in 0 translate
+0 setgray
+1 setlinewidth
+
+newpath
+0 in 2 in moveto
+0 in -4 in rlineto
+stroke
+
+newpath
+fillcol
+0 in 2 in  moveto
+0 in -4 in rlineto
+-1.5 in 0 in rlineto
+0 in 4 in rlineto
+1.5 in 0 in rlineto
+fill
+grestore
+
+
+
+
+
+%Force arrows
+gsave
+ 0 setgray
+% 1 in 1 in  2 in 1 in 2 1 arrowend
+% 4 in 1 in  3 in 1 in 2 1 arrowend
+
+% 1 in -1.5 in  4 in -1.5 in 1.5 1 arrowboth
+% %Labels
+% 2.5 in 0.9 in  moveto
+% [  /KahoeTechLatin normal (Eo(d)) ]
+% 		titlesize PrintArrayCenter
+
+% 2.5 in -1.3 in  moveto
+% [  /KahoeTechLatin normal (d) ]
+% 		titlesize PrintArrayCenter
+
+
+0.15 in -1.5 in moveto
+[  /KahoeTechGreek normal (c) ]
+		titlesize PrintArrayCenter
+[  /KahoeTechGreek subscript (1) ]
+		subsize PrintArrayCenter
+
+	4.75 in -1.5 		 in moveto
+[  /KahoeTechGreek normal (c) ]
+		titlesize PrintArrayCenter
+[  /KahoeTechGreek subscript (2) ]
+		subsize PrintArrayCenter
+
+		
+grestore
+
+%Labels
+
+
+gsave
+-1 in 1 in translate
+mark
+90 rotate
+2.5 0.45 scale
+(fig/cp2.loop) run % load loop 1
+hitcol
+10000 PlotStackDataNoClip
+% plot data points
+mark
+grestore
+
+
+
+
+

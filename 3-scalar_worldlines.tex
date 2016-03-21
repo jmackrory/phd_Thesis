@@ -1,7 +1,60 @@
 \chapter{Worldlines for Scalar Fields}
+\label{ch:scalar_worldlines}
     \section{Partition Function to Worldline path integral}
     \section{Numerical method}
     \section{Deficiencies of the scalar method}
+
+\begin{itemize}
+\item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
+\comment{Other references - was one contemporaneous with Strassler?}
+\begin{itemize}
+\item Summarize Strassler.  Can compute QFT effects from worldline path integrals.  
+\item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
+\item Cite QED at one loop order paper.  Get same results.  
+\item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
+\end{itemize}
+\item Cite QED Worldline paper on numerics?
+\item Cite Gies papers~\cite{Gies2003,Gies2006, Gies2006a} (all of them!) note work on thermal/geometry~\cite{Klingmueller2008,Weber2009, Weber2010}
+\begin{itemize}
+\item Action
+\begin{equation}
+  S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
+\end{equation}
+\item Euclidean Path integral (Generating Function) 
+\begin{equation}
+  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x \left[ (\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
+\end{equation}
+\item Gaussian integral.  Can integrate out $\phi$ to get an effective action for particular geometry of objects.  (Or use Free energy).  
+\begin{equation}
+  F = -k_BT\log Z = -k_BT \log\det[-\partial_t^2-\nabla^2-V(\vect{x},t)]
+\end{equation}
+\item Can use $\tr\log A = \log\det A$, and integral representation of log, 
+\begin{equation}
+  \log A -\log B= -\int_0^\infty \frac{dT}{T} (e^{-AT} - e^{-BT}),
+\end{equation}
+\item Worldline path integral
+  \begin{equation}
+    F = - \int \frac{dT}{T^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
+  \end{equation}
+  where $\cT$ is the loop proper time, $\langle V\rangle$ is the average of the potential around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble average over Brownian paths.  
+\item Typically take $V = \lambda\delta[\vect{x}-\sigma(\vect{x})]$, where $\sigma(\vect{x})=0$ is a function describing the surfaces.  In the limit $\lambda\rightarrow\infty$ this amounts to enforcing Dirichlet boundary conditions on the fields at the surfaces.  
+\end{itemize}
+\item Cite Schaden applying to pistons\cite{Schaden2009}
+\item Figure showing loops.  
+\item Advantages
+  \begin{itemize}
+  \item Algorithm is geometry independent, and no spatial grid.
+  \item parallelizable.  Computation time scales as one /resources.  
+  \end{itemize}
+
+\item Shortcomings
+\begin{itemize}
+  \item No coupling of photons to medium.
+  \item A scalar, not vector electromagnetism.
+\end{itemize}
+  
+\end{itemize}
+
 
 %%% Local Variables: 
 %%% mode: latex

@@ -1,0 +1,13 @@
+This is MetaPost, version 1.803 (kpathsea version 6.1.1)  28 FEB 2016 19:27
+**wall-wall
+(mpost.mp (/usr/share/texlive/texmf-dist/metapost/base/plain.mp
+Preloading the plain mem file, version 1.004) ) (./wall-wall.mp
+(/home/jonathan/texmf/metapost/feynmf/feynmp.mp) [1] )
+ 
+Here is how much of MetaPost's memory you used:
+ 313 strings using 4462 characters
+ 1637208 bytes of node memory
+ 922 symbolic tokens
+ 14i,77n,28p,107b,3f stack positions out of 16i,96n,31p,200b,4f
+1 output file written: wall-wall.1
+

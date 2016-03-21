@@ -1,0 +1,79 @@
+%%% standard parameters for postscript plots;
+%%% override as needed in main file
+/width      5.0           def  % width of plot on page, in inches
+/height     3.0           def  % height of plot on page, in inches
+/xminstr    (-5)          def  % min x-axis value, in parens
+/xmaxstr    (5)           def  % max x-axis value, in parens
+/yminstr    (0)           def  % min y-axis value, in parens
+/ymaxstr    (1)           def  % max y-axis value, in parens
+/linesize   0.3           def  % size of lines, in points
+/indicatorlinesize   0.1  def  % size of indicator lines, in points
+
+/titlesize    {14}        def   % font size of main title
+/titleoffset  {0.12 in}   def   % vertical offset of main title
+
+/xlabelsize   {10}      bind  def   % font size of axis labels
+/xlabeloffset {-0.18 in}  def   % vertical offset of labels
+/xtitlesize   {13}        def   % font size of axis title
+/xtitleoffset {-0.4 in}   def   % vertical offset of axis title
+/xlabelfont   {/ComputerModern-Regular} def
+
+/ylabelsize   {10}        def   % font size of axis labels
+/ylabeloffset {-0.06 in}  def   % horizontal  offset of y labels
+/ytitlesize   {13}        def   % font size of axis title
+/ytitleoffset {-0.3 in}   def   % horizontal offset of y-axis title
+/ylabelvertnudge {ylabelsize -2 8 div mul} bind def  % vert offset of labels
+/ytitlevertnudge {ytitlesize -3 8 div mul} bind def  % vert offset of axis title
+/ylabelfont   {/ComputerModern-Regular} def
+
+/ticklen {0.1 in}          def
+/shortticklen {0.05 in}    def
+/minorticklen {0.05 in}    def
+/plotlabelsize {12}        def   % font size of plot labels
+
+/symbolsz 4 def % in points
+/errorbarthick .3 def % in points
+/errorbarwid symbolsz def
+
+/borderweight 0.1 def
+/tickweight borderweight def
+/minortickweight tickweight 0.8 mul def
+
+/insetoffx  {1.5 in}       def  % x offset of inset (center to center from main)
+/insetoffy  {.85 in}       def  % y offset of inset (center to center from main)
+/insetscale    0.35        def  % scale of inset compared to main plot
+
+
+/diagramlabelsize {10}     def
+
+/pi 3.14159265358979 def
+/e 2.71828182845905 def
+
+/LogBaseXstr  (10)         def  % base for log X axis
+/LogBaseYstr  (10)         def  % base for log Y axis
+/LogBaseX  {LogBaseXstr cvr}  def
+/LogBaseY  {LogBaseYstr cvr}  def
+
+
+%%% override command for standard dimensions for two-column paper
+%   in PRL style, the command to include this would be
+%     \includegraphics[scale=.94]{plot.eps}
+%   adjust scaling a bit for other journals
+%  (more adjustments in inset below)
+/twocolumndimensions {
+/width      3.0             def  % width of plot on page, in inches
+/height     3.0 5 div 3 mul def  % height of plot on page, in inches
+/xlabelsize {9}          bind def % size of axis labels
+/xlabeloffset {-0.18 in} bind def % vertical offset of labels
+/xtitlesize {11}         bind def % size of axis title
+/xtitleoffset {-0.35 in}  bind def % vertical offset of axis title
+/ylabelsize {9}          bind def % size of axis labels
+/ylabeloffset {-0.06 in} bind def % vertical offset of labels
+/ytitlesize {11}         bind def % size of axis title
+/ytitleoffset {-0.2 in}  bind def % horizontal offset of axis title
+/plotlabelsize {9}       bind def % size of plot labels
+/insetoffx  {.97 in}       def  % x offset of inset (center to center from main)
+/insetoffy  {.56 in}       def  % y offset of inset (center to center from main)
+/insetscale    0.32        def  % scale of inset compared to main plot
+} bind def
+

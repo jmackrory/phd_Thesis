@@ -1,0 +1,99 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(fig/plotfonts.ps) run
+(fig/plotparameters.ps) run
+(fig/plotarrows.ps) run
+%Height and width in inches
+/width {7} bind def   
+/height {5} bind def
+%Numerical Axis limits
+% /xmax {5} def
+% /xmin {-5} def
+% /ymax {0} def
+% /ymin {-14} def
+% In plotutilities these are converted to real numbers
+/xmaxstr (3.2) def
+/xminstr (-3.2) def
+/ymaxstr (0.2) def
+/yminstr (-3.5) def
+
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+
+%load utilities
+(fig/plotutilities.ps) run
+(fig/casimirutilities.ps) run
+<< /PageSize [8 in 11 in] >> setpagedevice 
+%4 in 0 translate
+
+startplot
+
+%Energy curve 
+1 setlinewidth
+
+/symbolsz 6 def % in points
+outcol
+(fig/data/TM_atom_wall_anlt.clean.dat) run % load loop 1
+20 PlotStackDataLogLog
+
+TMcol
+(fig/data/TM_atom_wall_eff.clean.dat) run % load loop 1
+20 PlotStackDataLogLogErr
+
+%XAxisLabelsLog
+%YAxisLabelsLog
+[ (-3) (-2) (-1) (0) ] ExtraYTicksLog
+[ (-3) (-2) (-1) (0) (1) (2) (3) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (h o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
+
+
+%start log-linear inset
+
+/insetoffx {1.9 in} def
+/insetoffy {-0.9 in} def
+/insetscale {0.4} def
+
+%New Limits will override all others
+/xmaxstr (3.5) def
+/xminstr (-3.5) def
+/ymaxstr (1.1) def
+/yminstr (0) def
+
+startinset
+
+/ytitlevertnudge 0 def
+
+gsave
+%Energy curve 
+1 setlinewidth
+outcol
+(fig/data/TM_atom_wall_anlt.clean.dat) run % load loop 1
+
+20 PlotStackDataLogX
+
+TMcol
+(fig/data/TM_atom_wall_eff.clean.dat) run % load loop 1
+
+20 PlotStackDataLogXYerr
+
+grestore
+
+%XAxisLabelsLog
+%YAxisLabels
+[ (0.25) (0.5) (0.75) (1.0) ] ExtraYTicks
+%[ (0.05) (0.1) ] ExtraYTicks
+[ (-2) (0) (2) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (h o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
+
+endinset
+
+
+
+endplot

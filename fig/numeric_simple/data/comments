@@ -1,0 +1,10 @@
+
+TM_scalingN computed the birth-death code using recursive subroutines.
+These use a much larger amount of memory, around N^2 since every fork must be stored, along with computation parameters that must be passed along.
+
+I think this is what leads to the spike upwards in computation time towards the end?
+
+Plots of interest: computation time, scaling with N and absolute discrepency 
+on log-scales.
+
+Next: Gradient derivative scaling 

@@ -1,0 +1,313 @@
+%%BeginMyFunc
+
+%translate moves centre around to where 0,0 sits at middle of future plot
+/translatetopleft{ %move 1.5 picture sizes up to top left corner
+    -1.5 width in  mul -1.5 xgap mul add % x coord
+    1.5 height in mul 1.5 ygap mul add % y coord	
+    translate
+} def
+   
+/translatedown{ %translate down for next plot
+ 0   %x coord
+ height -1 in mul ygap neg add  % y coord
+ translate   
+}def
+
+/translateright{ %translate right for next column
+width in xgap add % x coord
+height in ygap add 2 mul% y coord
+translate
+} def
+
+%make separate functions for left, right and normal plots.  
+
+/PlotStep{%plots step measurement function
+    %takes xlabels, ylabels as arguments
+    %if yflag = 1, then print mu(x) label on y axis
+    % 1. extra x tick marks
+    % 2. x axis label
+    % 3. extra y tick marks
+    % 4. yflag
+    gsave
+    /myxtitle exch def
+    newpath
+    0 setgray
+    2 setlinewidth
+    0 0 moveto
+    {Step} 512 PlotFunction	
+    [xlabelfont normal myxtitle] XAxisTitle
+    %mu title is jury-rigged.  only call if flag is set
+   
+	[/KahoeTechGreek normal (e) ] YAxisTitle
+	[/ComputerModern-Regular normal (      (x))]YAxisTitle
+    
+    DrawBorder	
+    grestore
+}def
+
+/Step{  % Step ->returns heaviside step value
+    /xval exch def
+    xval 0 ge {1} {0} ifelse
+} def
+
+
+
+
+/cas_energy{ %1/z^4
+		/xval exch def
+		xval cas_xoffset add 0.0 eq {0} 
+		{1 xval cas_xoffset add
+		div dup mul dup mul neg
+		cas_yoffset add}
+		ifelse
+} def 
+
+/Axes{ %Print orthogonal axes with labels and subscripts for labels.
+		%Allow axes to be rotated by angle theta.
+		/zsub exch def
+		/zlabel exch def
+		/ysub exch def	
+		/ylabel exch def
+		/xsub exch def		
+		/xlabel exch def
+		/angle exch def
+%x,y,z axes
+gsave
+%x arrow
+gsave
+angle rotate
+0 in 0 in 0 in 1 in 2 0.8 arrowend
+grestore
+
+%y dot
+gsave
+  0 in 0 in  4 0 360 arc fill
+  0 in 0 in 10 0 360 arc stroke
+grestore
+
+%z arrow
+gsave
+angle rotate
+0 in 0 in 1 in 0 in 2 0.8 arrowend
+grestore
+
+gsave
+angle rotate
+-0.35 in 0.9 in moveto
+angle neg rotate
+		
+[/KahoeTechLatin normal xlabel]
+		titlesize PrintArrayCenter
+		[  /KahoeTechLatin subscript xsub]
+		subsize PrintArrayCenter
+
+		%subscript
+grestore
+
+gsave
+angle rotate
+-0.3 in -0.4  in moveto
+angle neg rotate
+[  /KahoeTechLatin normal ylabel]
+		titlesize PrintArrayCenter
+[  /KahoeTechLatin subscript ysub]
+		subsize PrintArrayCenter
+grestore
+
+
+gsave
+angle rotate
+0.8 in -0.4 in moveto
+angle neg rotate
+[  /KahoeTechLatin normal zlabel]
+		titlesize PrintArrayCenter
+		[  /KahoeTechLatin subscript zsub]
+		subsize PrintArrayCenter
+
+grestore
+
+grestore
+
+		
+}def
+
+/OneSlab{
+%Wall
+gsave
+
+2 setlinewidth
+newpath
+%0.24 0.52 0.75 setrgbcolor
+0.7 0.7 1.0 setrgbcolor
+%0.5 0.6 0.9 setrgbcolor
+-0 in 2.5 in moveto
+0 in -6 in rlineto
+2.5 in 0 in rlineto
+0 in 6 in rlineto
+-2.5 in 0 in rlineto
+fill
+
+0 setgray
+
+newpath
+-0 in 2.5 in moveto
+0 in -6 in rlineto
+stroke
+
+grestore
+%Labels
+gsave
+0 setgray
+-1.5 in 2.0 in moveto
+[  /ComputerModern-Regular normal (vacuum) ]
+		titlesize PrintArrayCenter
+
+2.0 in 0 in rmoveto
+[  /ComputerModern-Regular normal (medium) ]
+		titlesize PrintArrayCenter
+		
+grestore
+
+
+}def
+
+
+
+/TwoSlab{
+%Wall
+gsave
+2 in 0 moveto
+0 setgray
+2 setlinewidth
+
+newpath
+-0.1 in 3 in moveto
+0 in -6 in rlineto
+stroke
+
+newpath
+fillcolor
+-0.1 in 3 in moveto
+0 in -6 in rlineto
+3 in 0 in rlineto
+0 in 6 in rlineto
+-3 in 0 in rlineto
+fill
+grestore
+
+%Wall 2
+gsave
+-2 in 0 moveto
+0 setgray
+2 setlinewidth
+newpath
+2 in 3 in moveto
+0 in -6 in rlineto
+stroke
+
+newpath
+
+fillcol
+0 0 rmoveto
+0 in -6 in rlineto
+-3 in 0 in rlineto
+0 in 6 in rlineto
+3 in 0 in rlineto
+fill
+grestore
+
+
+%Labels
+gsave
+0 setgray
+-1.5 in 2.5 in moveto
+[  /ComputerModern-Regular normal (vacuum) ]
+		titlesize PrintArrayCenter
+
+2.0 in 0 in rmoveto
+[  /ComputerModern-Regular normal (medium) ]
+		titlesize PrintArrayCenter
+		
+grestore
+
+}def
+
+
+/PlotStackDataLogLogErr { % plot x,y pairs on the stack
+                           %   as separate points, not line
+                           %   with y error bars
+                           %   select point symbol with selectsymbol first
+  % to use: give
+  %   1. data to plot on stack with errs, x1, y1, e1, x2, y2, e2, ...
+  %   2. number of data triples on stack (after data)
+  % e.g.:
+  %   1.0 1.1 0.1   2.0 1.2 0.2   2 PlotStackDataPointsYerr
+  /npoints exch def
+  gsave SetClip newpath
+	-3 in 0 moveto
+  1 1 npoints {pop
+	%define various points
+    /myerr exch def
+    /myy exch  def
+    /myx exch  def
+		/mylogx myx log def
+		/mylogy myy log def
+		myy myerr add abs log
+		/mylogy_top  exch def
+		 myy myerr sub  0 gt {myy myerr sub log} {ymin} ifelse
+    /mylogy_bot	exch def
+		
+    mylogx mylogy cc
+		pointsymbol
+    newpath
+    errorbarthick setlinewidth
+		%vertical line
+    mylogx mylogy_top  cc moveto
+    mylogx mylogy_bot  cc lineto
+    stroke newpath
+		%bottom error bar
+    mylogx mylogy_bot cc moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke newpath
+		%top error bar	
+    mylogx mylogy_top cc moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke
+  } for
+  grestore
+} bind def
+
+%/PlotStackDataLogLogPoints { % plot x,y pairs on the stack, taking log of each
+%  % to use: give
+%  %   1. data to plot on stack, x1, y1, x2, y2, ...
+%  %   2. number of data pairs on stack (after data)
+%  % e.g.:
+%  %   1.0 1.1 2.0 1.2   2 PlotStackData
+%  /npoints exch def
+%  gsave SetClip newpath
+%  log exch log exch
+%  cc moveto
+%  2 1 npoints { pop
+%    log exch log exch
+%    cc pointsymbol
+%  } for
+%  stroke
+%  grestore
+%} bind def
+
+
+
+
+
+/fillcol{ 0.7 0.7 1.0 setrgbcolor} def
+%/TEcol{1 0.3 0 setrgbcolor} def 
+%/TMcol{1 0.0 0 setrgbcolor} def
+
+/TEcol{0 0.67 0 setrgbcolor} def 
+/TMcol{0 0 1 setrgbcolor} def
+
+%/hitcol{.6 0. 0.7 setrgbcolor} def
+/outcol{0 0 0 setrgbcolor} def
+/hitcol{0.0 0.67 0 setrgbcolor} def

@@ -1,8 +1,9 @@
 %!PS-Adobe-2.0 
 %%EndProcSet
 %%BeginProcSet: Utilities
-(fig/plotfonts.ps) run
-(fig/plotparameters.ps) run
+(plotlib/plotfonts.ps) run
+(plotlib/plotmisc.ps) run
+(plotlib/plotparameters.ps) run
 %%EndProcSet
 
 /width {20 } bind def
@@ -13,8 +14,8 @@
 /ymin {-1} bind def
 /linesize {2} bind def
 
-(fig/plotutilities.ps) run
-(fig/casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
 0 setgray 
 startplot
 
@@ -35,9 +36,10 @@ gsave
 0 in 1.7 in translate
 mark
 1 0.75 scale
-(fig/cp1.loop) run % load loop 1
+(intro/data/cp1.loop) run % load loop 1
 TMcol
-10000 PlotStackDataNoClip
+NoPlotClip
+10000 PlotStackData
 % plot data points
 mark
 

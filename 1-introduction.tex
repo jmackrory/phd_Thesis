@@ -47,6 +47,11 @@ Reprise original Casimir calculation~\cite{Casimir1948}.
 \item Renormalization
 \end{itemize}
 
+\begin{figure}
+\center
+\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
+\caption{Sketch of allowed modes between perfectly conducting plates.}
+\end{figure}
 
 
 \subsection{Casimir-Polder energy}
@@ -264,7 +269,7 @@ Requires very careful measurements, on top of carefully extracting Casimir force
 
 \subsection{Worldlines}
 
-The worldline method is an alternative method for computing Casimir energies.  The worldline method was initially developed as an alternative method for carrying out QFT calculations in terms of particle mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  In particular we can compute compute quantum effective actions in terms of the suitable dynamics of a quantum particle.  
+The worldline method is an alternative method for computing Casimir energies.  The worldline method was initially developed as an alternative method for carrying out QFT calculations in terms of particle mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  In particular we can compute compute quantum effective actions in terms of the suitable dynamics of a quantum particle.  \comment{Other references - was one contemporaneous with Strassler? Bern-Kosower}
 
 The basic insight is that for one loop effective actions, we can recast a field path integral calculation in terms of the particle path integral for particles travelling in closed space-time loops.  This is quite similar to the scalar electrodynamics Feynman explored in his Ph.D thesis~\cite{Feynman1942, Brown2005}\comment{Seems to actually be his 1950 QED paper RE Schubert2001}.  Higher order loop calculations can also be carried out with more particles, and gauge fields can also be treated~\cite{Schubert2001}.  For example, the worldline method has been used to compute relativistic field effects for QED such as the Lamb shift~\cite{Schmidt1995}.  It has also been used as a numerical algorithm\cite{Mazur2014}.
 
@@ -289,20 +294,23 @@ E_{\text{scalar}} = \frac{\hbar c}{(2\pi)^{D/2}}\int_0^\infty \frac{d\cT}{\cT^{1
 where $\cT$ is the loop ``time'' and governs the extent of the loops, $\vect{x}_0$ is the loop starting point, $\dlangle \cdots\drangle$ denotes an ensemble average over closed Gaussian random walks, and $\langle\cdots\rangle$ denotes the average of a quantity around the loop.  
 
 
+\begin{figure}
+\center
+\includegraphics[width=10cm]{fig/intro/hit_strong_coupling}
+\caption{Upper loop touches both objects and will contribute to Casimir energy.  Lower loop only touches one body, and does not contribute to Casimir energy.}
+\end{figure}
 
 
 
 \begin{itemize}
-\item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
-\comment{Other references - was one contemporaneous with Strassler?}
-\begin{itemize}
-\item Summarize Strassler.  Can compute QFT effects from worldline path integrals.  
-% \item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
-% \item Cite QED at one loop order paper.  Get same results.  
-% \item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
-\end{itemize}
+%\item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
+% \begin{itemize}
+% %\item Summarize Strassler.  Can compute QFT effects from worldline path integrals.  
+% % \item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
+% % \item Cite QED at one loop order paper.  Get same results.  
+% % \item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
+% \end{itemize}
 %\item Cite QED Worldline paper on numerics?
-
 \item Cite Schaden applying to pistons\cite{Schaden2009}
 \item Figure showing loops.  
 \item Advantages

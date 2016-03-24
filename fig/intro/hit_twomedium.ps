@@ -1,9 +1,10 @@
 %!PS-Adobe-2.0 
 %%EndComments
 %%BeginProlog
-(fig/plotfonts.ps) run
-(fig/plotparameters.ps) run
-(fig/plotarrows.ps) run
+(plotlib/plotfonts.ps) run
+(plotlib/plotmisc.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
 /width {6 } bind def
 /height {6} bind def
 /xmax {3} def
@@ -19,8 +20,8 @@
 /subsize {20}         bind def % size of plot title
 /cas_xoffset {-6}  def
 /cas_yoffset {.25}  def
-(fig/plotutilities.ps) run
-(fig/casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
 
 << /PageSize [20 in 10 in] >> setpagedevice 
 startplot
@@ -29,13 +30,6 @@ startplot
 %Wall
 gsave
 4 in 0 translate
-0 setgray
-1 setlinewidth
-
-newpath
-0 in 2 in moveto
-0 in -4 in rlineto
-stroke
 
 newpath
 fillcol
@@ -45,11 +39,7 @@ fillcol
 0 in 4 in rlineto
 -1.5 in 0 in rlineto
 fill
-grestore
 
-%Wall 2
-gsave
-1 in 0 translate
 0 setgray
 1 setlinewidth
 
@@ -57,6 +47,12 @@ newpath
 0 in 2 in moveto
 0 in -4 in rlineto
 stroke
+
+grestore
+
+%Wall 2
+gsave
+1 in 0 translate
 
 newpath
 fillcol
@@ -66,6 +62,16 @@ fillcol
 0 in 4 in rlineto
 1.5 in 0 in rlineto
 fill
+
+0 setgray
+1 setlinewidth
+
+
+newpath
+0 in 2 in moveto
+0 in -4 in rlineto
+stroke
+
 grestore
 
 
@@ -112,9 +118,10 @@ gsave
 mark
 90 rotate
 2.5 0.45 scale
-(fig/cp2.loop) run % load loop 1
+(intro/data/cp2.loop) run % load loop 1
 hitcol
-10000 PlotStackDataNoClip
+NoPlotClip
+10000 PlotStackData
 % plot data points
 mark
 grestore

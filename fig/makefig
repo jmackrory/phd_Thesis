@@ -1,18 +1,19 @@
 #!/bin/bash
-#bash script to make EPS files of figures
-#makes them selfcontained for easy transport.
-#then uses ps2eps to put a bounding box on them.  
+#bash script to make PDF files of figures
 
-for j in twoplanes_wave eff_atom eff_2wall
- do
+workdir=$1; 
+
+if [ -d "$workdir" ]; then
+for j in $workdir/*.ps; do
+		name=${j%.ps}
 #Dans version
-  # ps2eps -l -f $i
-  # ps2pdf -dAutoRotatePages=/None -DEPSCrop ${i%.ps}.eps
-  # rm -f ${i%.ps}.eps
-
- ps2pdf -P $j.ps $j.1.pdf
- pdfcrop  $j.1.pdf $j.pdf
- rm $j.1.pdf
+   # ps2eps -l -f $j
+   # ps2pdf -dAutoRotatePages=/None -DEPSCrop ${j%.ps}.eps
+   # rm -f ${j%.ps}.eps
+ ps2pdf -P $name.ps $name.1.pdf
+ pdfcrop  $name.1.pdf $name.pdf
+ rm $name.1.pdf
 done
+fi
 
 

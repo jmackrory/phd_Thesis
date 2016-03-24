@@ -1,11 +1,11 @@
 %!PS-Adobe-2.0 
 %%EndComments
 %%BeginProlog
-(fig/plotfonts.ps) run
-(fig/plotparameters.ps) run
-(fig/plotarrows.ps) run
-/width {6 } bind def
-/height {6} bind def
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {8 } bind def
+/height {11} bind def
 /xmax {3} def
 /xmin {-10} def
 /ymin {0} def
@@ -18,11 +18,10 @@
 /subsize {20}         bind def % size of plot title
 /cas_xoffset {-6}  def
 /cas_yoffset {.25}  def
-(fig/plotutilities.ps) run
-(fig/casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
 
-<< /PageSize [20 in 10 in] >> setpagedevice 
-startplot
+1 in 5 in  translate
 
 %TwoSlab
 %Wall
@@ -81,8 +80,8 @@ gsave
 [  /KahoeTechLatin normal (Eo(d)) ]
 		titlesize PrintArrayCenter
 
-2.5 in -1.3 in  moveto
-[  /KahoeTechLatin normal (d) ]
+2.5 in -1.3 in  moveto[
+  /KahoeTechLatin normal (d) ]
 		titlesize PrintArrayCenter
 
 

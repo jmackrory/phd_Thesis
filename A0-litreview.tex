@@ -174,7 +174,7 @@ Yukawa type forces.
 \subsection{Papers: Proximity Force Approximation}
 
 \begin{itemize}
-\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
+\item Find first use?  Lamoreaux mentions usage.  Derjaguin?\cite{Derjaguin1956} \cite{Blocki1977}
 \item Note problem with non-additivity. 
 \item Good as order of magnitude estimate?  Useful if very limited curvature, or effectively approximate geometry as planar.  
 \end{itemize}
@@ -273,6 +273,39 @@ For example, the worldline method has been used to compute relativistic field ef
 \subsubsection{Gies 2003}
 \cite{Gies2003}
 
+\begin{itemize}
+\item Cite earlier paper by themselves for first worldline numerics?   Found citations for PFA.
+\item Action for scalar fields.   Massive scalar field interacting with some potential $V(x)$.  $V$ has dimensions of mass-squared.  (Field theory units $\hbar=c=1$, so $E=mc^2$)
+\begin{equation}
+\cL = \frac{1}{2}\partial_\mu\phi\partial^\mu\phi +\frac{1}{2}m^2\phi^2+\frac{1}{2}V(x)\phi^2
+\end{equation}
+\item Complete unrenormalized quantum effective action for $V$ (integrate out fields $\phi$) is 
+\begin{align}
+  \Gamma[V] &=\frac{1}{2}\tr\ln \left[ \frac{-\partial_\mu\partial^\mu +m^2 + V(x)}{-\partial_\mu\partial^\mu +m^2}\right]\\
+&   =-\frac{1}{2}\int \frac{d\cT}{\cT} \int d^D x \left\{ \langle x|e^{-\cT[-\partial_\mu\partial^\mu +m^2 + V(x)]}|x\rangle -\frac{e^{-m^2 \cT}}{(4\pi \cT)^{D/2}}\right\}
+\end{align}
+Working in $D=d+1$ euclidean space-time dimensions.  
+\item Convert matrix element to path integral.  
+\begin{equation}
+  \int d^D x \langle x|e^{-\cT[-\partial^2+V(x)]}|x\rangle = \int d^D x_{\text{CM}} \mathcal{N}\int_{x(0)=x(\cT)}Dx e^{-\int_0^\cT d\tau \dot{x}^2/4}
+\end{equation}
+Comments: Fix normalization from limit of zero potential (which is evaluated in momentum basis), and note that choice to drop factors of 2 has left them with an extra $\sqrt{2}$ in the definition  of the loops.
+\begin{align}
+\langle x| e^{\partial^2T}|x\rangle &= \int d^Dp\frac{1}{(2\pi)^{D/2}} e^{-p^2T}\langle x|p\rangle\langle p|x\rangle\\
+&= \frac{1}{(4\pi \cT)^{D/2}}\\
+&=\cN \int_{x(0)=x(\cT)}Dx \exp\left\{-\int_0^\cT d\tau \left[\frac{\dot{x}^2}{4}+V(x_{\text{CM}}+x(\tau)\right]\right\}
+\end{align}
+\item Now interpret path integral as Gaussian integral/ensemble average over closed loops.  
+\begin{equation}
+\cN \int_{x(0)=x(\cT)}Dx \exp\left\{-\int_0^\cT d\tau \left[\frac{\dot{x}^2}{4}+V(x_{\text{CM}}+x(\tau)\right]\right\} = \frac{1}{(4\pi \cT)^{D/2}}\dlangle e^{-\int_0^\cT d\tau V[x_{\text{CM}}+x(\tau)]}\drangle
+\end{equation}
+Also use scaled loops: 
+\begin{equation}
+x_\mu(\cT) = \sqrt{\cT}y_\mu(\cT t),
+\end{equation}
+where $t\in [0,1]$.  
+\end{itemize}
+
 \subsubsection{Gies 2006}
 \cite{Gies2006}
 
@@ -320,8 +353,7 @@ Why?  What for?  Benefits?
 \subsection{Vogel and Welsch}
 
 
-
-\cite{Dung1998}
+%\cite{Dung1998}
 \cite{Raabe2006}
 \cite{Raabe2007}
 

@@ -301,16 +301,66 @@ Comments: Fix normalization from limit of zero potential (which is evaluated in 
 \end{equation}
 Also use scaled loops: 
 \begin{equation}
-x_\mu(\cT) = \sqrt{\cT}y_\mu(\cT t),
+x_\mu(\cT t) = \sqrt{\cT}y_\mu(t),
 \end{equation}
-where $t\in [0,1]$.  
+where $t\in [0,1]$, and we view $\cT$ as a parameter.  
+\item Plugging in path representation
+\begin{align}
+\Gamma[V]=&-\frac{1}{2 (4\pi)^{D/2}}\int_{1/\Lambda^2}^\infty \frac{d\cT}{\cT^{1+D/2}} e^{-m^2\cT}\int d^Dx_{\text{CM}} \\
+&\times\dlangle e^{-\cT\int_0^1dt V[x_\text{CM} +\sqrt{\cT}y(t)]}-1 \drangle
+\end{align}
+For time independent backgrounds use $\int dx_0 = L_{x_0}$ as ``length'' in time direction.  \comment{For partition function version Get $\beta\hbar c$ instead.}
+\item \textbf{Renormalization}
+Consider field theoretic renormalization (I think whereby an analogue of the Integral Trajectory Matching formalism fixes the unknown(divergent) values at some known scale - typically from a low energy experiment).  
+\item Heat Kernel Expansion \comment{Cite Gilkey} .  Expand to non-diverging order to regularize UV divergences.  Each power of $V$ amounts to an external leg.  Get a Tadpole $T^{-D/2}\int dx_0 V$, and 
+\item Ignore self-energies and focus on interaction energies (which are insentitive to Field theoretic divergence)
+\begin{equation}
+E_\text{int}= E_{V_1+V_2+\cdots}- E_{V_1} - E_{V_2}-\cdots
+\end{equation}
+Can carry out renormalization at loop level and thus avoid divergent sums.  
+\item They note that this emphasis on interaction energy is \emph{not} a renormalization procedure.  It circumvents that for multiple bodies.  However for isolated bodies (sphere self-stress), one must specify all of the renormalization conditions, and your answers may depend on the procedure used.
+\item \textbf{Numerics}
+Introduce some methods (most of which are useless).
+Important method is the v-loop.  An exact diagonalization of the Gaussians, under the loop closure constraint.  Note that they choose their loop constraint to be $\int d\tau y_\mu(\tau) =0$.  This amounts to making the center of mass of the loop centered on $x_\text{CM}$.  In contrast, our work has typically used $x(0)=x(\cT)=0$.  
+
+The ``v-loop'' algorithm amounts to considering the probability measure,
+\begin{equation}
+P(\{x_k\}) =  \delta(x_N-x_0)\prod_{j=0}^{N}e^{-\frac{(x_{j+1}-x_j)^2}{2\Delta T}},
+\end{equation}
+and completing the square in the exponents to decouple the Gaussians.  
+Note their version uses $\sum_{j}x_j=0$ to fix $y_N$.  
+The Jacobian can be shown to unity, since the matrix is upper diagonal, with unit diagonal.  
+\item \textbf{Tests}
+\item Compare to parallel plate energy to get convergence. 
+\item Give some consideration to finite $\lambda$ in potential.  
+\begin{equation}
+V(x) = \lambda\int_{\Sigma}d\sigma \delta(x-x\sigma)
+\end{equation}
+where $\Sigma$ is a $d-1$ dimensional surface, $\sigma$ is a reparameterization invariant measure and $x_\sigma$ points to the surface.  
+\item For interaction energies, need $(e^{-V_{1+2}} - 1) -  (e^{-V_1}-1) - (e^{-V_{2}}-1)$.  If only touch one surface (of disconnected bodies) then 
+no contribution, since $V_{1+2}=V_1$
+\item Then consider massless scalar between sphere/plate and cylinder plate.  
+\item Consider breakdown of PFA as function of separation $a$ to sphere radius $R$.  
+\item \textbf{Conclusions}
+\item Needs no underlying symmetry.  Precision hinges on loop parameters chosen (and presumably discretization of surfaces)
+\item Claim their delta potentials are ``hard''.
+\item Note finite temperature and roughness required.  
+\item Note numerical differentiation to get force is hard, but derivative can be done right off the bat.  (And energy-momentum tensors)
+\item Cite Feinberg and Sucher for possible path for EM quantization.  
 \end{itemize}
+
+\subsubsection{Gies2001}
+\cite{Gies2001}
+
+Use worldlines to compute EM effective action in specified background EM field, modelling interaction with scalar particle.  
 
 \subsubsection{Gies 2006}
 \cite{Gies2006}
 
-\subsubsection{Gies 2006 a}
+Very similar?  Advances?  
+D-loops?  Note similarity to methods of generating brownian walks by doubling intermediate points to imrpvoe resolution where required.  
 
+\subsubsection{Gies 2006 a}
 \cite{Gies2006a}
 
 \subsection{Papers: Thermal worldlines}

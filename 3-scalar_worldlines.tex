@@ -56,6 +56,16 @@
 \end{itemize}
 
 
+\begin{shaded}
+  The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.  This follows either from Hormander's argument, that 
+  \begin{equation}
+    \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
+  \end{equation}
+where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and $|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.  In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.  If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.  If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
+\footnote{See pages 826-828 of Dan's notes.}
+\end{shaded}
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "thesis_master"

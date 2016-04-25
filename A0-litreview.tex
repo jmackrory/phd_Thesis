@@ -9,16 +9,16 @@ I need to figure out the appropriate way to cite chapters/equations/pages within
 
 \subsection{Milonni: Quantum Vacuum}
 
-Milonni~\cite{Milonnibook1994}
+Milonni~\cite{Milonni1994}
 
 \subsection{Milton: Casimir Effect}
-Milton~\cite{Miltonbook2001}
+Milton~\cite{Milton2001}
 
 \subsection{Bordag}
-Bordag~\cite{Bordagbook2009}
+Bordag~\cite{Bordag2009}
 
 \subsection{Dalvit: Casimir Effect}
-Dalvit~\cite{Dalvitbook2011}
+Dalvit~\cite{Dalvit2011}
 
 \subsection{Parsegian: van der Waals forces}
 
@@ -96,6 +96,64 @@ Feynman-Diagram approach to Casimir.
 
 \cite{Dzyaloshinskii1961}
 
+\subsection{BarashGinzburg1975}
+
+\cite{Barash1975}
+Also comments that resuls derived under limited assumptions also work at finite temperature, and with dissipation.  
+
+Introduce Argument principle: $D(\vect{r},\omega)= 1-r_1r_2 e^{-2 r l}$ where $r=\sqrt{k_x^2+k_y^2}$.  
+Can write sum over energies as $\sum_n \hbar\omega_n$, as the integral against an integral in the complex plane whose poles are at integer spacings.  
+In this case, (Eq 6) there are solutions when $D=0$.  So 
+\begin{equation}
+E=\sum_{\alpha}\frac{\hbar\omega_\alpha}{2}=-\frac{-1}{2\pi i} \int \frac{dk_xdk_y}{(2\pi)^2}\int_{-i\infty}^{i\infty}d\omega \frac{\hbar\omega}{2}\partial_\omega\ln[D(\vect{r},\omega)]
+\end{equation}
+
+Also gets used/cited by Schaden's 90s papers.
+
+Comment on studying auxiliary system where frequency is treated as parameter.
+
+Stress the approximation that reduces computing van der Waals forces to computing the Green function.  
+
+Show from microscopic theory (and Maxwell's equations) that the macroscopic theory applies in general.  Average interaction hamiltonian over fluctuations.  (Similar to Milonni 2010 no?)  Get relations involving Green tensor   Eq.(25-26)
+(They use $g$ to model adiabatic turn-on/turn-off of interaction.)
+\begin{equation}
+\frac{\omega_n^2}{c^2}\int d\vect{r''} \epsilon_{il}(\vect{r},\vect{r''},i|\omega_n|,g)D_{lk}(\vect{r''},\vect{r'},\omega_n,g)+[\nabla\times\nabla\times D]_{ik}(\vect{r},\vect{r'},\omega_n,g) = -\frac{4\pi}{c}\delta_{ik}\delta(\vect{r-r'})
+\end{equation}
+Change in free energy is 
+\begin{equation}
+\Delta F = -\frac{k_B T}{2\pi c}\sum_{n}'\omega_n^2\int_0^1\frac{dg}{g}\int d\vect{r'}d\vect{r}\left[\epsilon_{il}(\vect{r},\vect{r'},i\omega_n,g)-\delta_{il}\delta(\vect{r-r'})\right]D_{li}(\vect{r'},\vect{r},\omega_n,g)
+\end{equation}
+
+Split forces into short-range forces which depend strongly on details, and more universal fluctuation physics.  They allow spatial dispersion on small scales, which is more important for short range forces.  
+
+Eq.35 suggests a connection to QED via the polarization operator, 
+\begin{equation}
+\Pi_{il}(\vect{r},\vect{r'},\omega_n,\zeta)=\frac{\omega_n^2}{4\pi c}[\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)-\delta_{il}\delta(\vect{r-r'})]
+\end{equation}
+where the full green function for the EM field obeys
+\begin{equation}
+D = D_0+ \zeta^2D_0\Pi D
+\end{equation}
+(I think $\zeta$ acts to index contribution of long-wavelength photons, $\zeta=0$ is long-wavelength, $\zeta=1$ is all?)
+So they quote a familiar looking result: 
+\begin{equation}
+\Delta F_{\text{long}} =-2k_BT \sum_{n}'\int_0^1 \frac{d\zeta}{\zeta}\zeta^2 \tr[\Pi D]
+\end{equation}
+Ok, they finally argue that the dielectric constant is dominated by short wavelength physics, and finally take $\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)=\epsilon(\vect{r},i\omega_n)\delta(\vect{r-r'})$.
+
+Then finally show that $D$ is the full Green tensor obeying the usual macroscopic Maxwell equations.  
+
+Just above Eq. 50 they comment that the ``simple'' theory cannot be used with the full/exact dielectric function, since it is itself derived as an approximation.  
+
+Last few pages seem to be taking the near-field and far-field limits.  
+
+Generalization to multilayer systems is easy from this point of view, since you just tack on more reflection coefficients.  
+
+Comment that anisotropic systems tend to also have torque!
+
+Also cover atom-atom forces from both the dilute limit, and also pointwise interactions.  
+They also include magnetic interactions (and seem to have to allow electric-magnetic cross coupling?)
+
 \subsection{Mclachlan1963}
 
 \cite{Mclachlan1963}
@@ -126,7 +184,7 @@ Feynman-Diagram approach to Casimir.
 \cite{Obrecht2007}
 
 \subsection{Antezza chapter}
-\cite{Dalvitbook2011}
+\cite{Dalvit2011}
 
 \subsection{Alton2011:Atoms-Toroid}
 

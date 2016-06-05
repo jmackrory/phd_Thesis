@@ -30,7 +30,6 @@ Parsegian~\cite{Parsegian2006}
 
 Israelachivili~\cite{Israelachvili2011}
 
-
 \section{Field Theory Books}
 
 \subsection{Brown Quantum Field Theory}
@@ -99,13 +98,17 @@ Feynman-Diagram approach to Casimir.
 \subsection{BarashGinzburg1975}
 
 \cite{Barash1975}
-Also comments that resuls derived under limited assumptions also work at finite temperature, and with dissipation.  
+Also comments that resuls derived under limited assumptions also work at finite temperature,
+ and with dissipation.  
 
 Introduce Argument principle: $D(\vect{r},\omega)= 1-r_1r_2 e^{-2 r l}$ where $r=\sqrt{k_x^2+k_y^2}$.  
-Can write sum over energies as $\sum_n \hbar\omega_n$, as the integral against an integral in the complex plane whose poles are at integer spacings.  
+Can write sum over energies as $\sum_n \hbar\omega_n$,
+ as the integral against an integral in the complex plane whose poles are at integer spacings.  
 In this case, (Eq 6) there are solutions when $D=0$.  So 
 \begin{equation}
-E=\sum_{\alpha}\frac{\hbar\omega_\alpha}{2}=-\frac{-1}{2\pi i} \int \frac{dk_xdk_y}{(2\pi)^2}\int_{-i\infty}^{i\infty}d\omega \frac{\hbar\omega}{2}\partial_\omega\ln[D(\vect{r},\omega)]
+E=\sum_{\alpha}\frac{\hbar\omega_\alpha}{2}=
+-\frac{-1}{2\pi i} \int \frac{dk_xdk_y}{(2\pi)^2}\int_{-i\infty}^{i\infty}d\omega
+ \frac{\hbar\omega}{2}\partial_\omega\ln[D(\vect{r},\omega)]
 \end{equation}
 
 Also gets used/cited by Schaden's 90s papers.
@@ -114,40 +117,56 @@ Comment on studying auxiliary system where frequency is treated as parameter.
 
 Stress the approximation that reduces computing van der Waals forces to computing the Green function.  
 
-Show from microscopic theory (and Maxwell's equations) that the macroscopic theory applies in general.  Average interaction hamiltonian over fluctuations.  (Similar to Milonni 2010 no?)  Get relations involving Green tensor   Eq.(25-26)
+Show from microscopic theory (and Maxwell's equations) that the macroscopic 
+theory applies in general.
+  Average interaction hamiltonian over fluctuations.
+  (Similar to Milonni 2010 no?)
+  Get relations involving Green tensor   Eq.(25-26)
 (They use $g$ to model adiabatic turn-on/turn-off of interaction.)
 \begin{equation}
-\frac{\omega_n^2}{c^2}\int d\vect{r''} \epsilon_{il}(\vect{r},\vect{r''},i|\omega_n|,g)D_{lk}(\vect{r''},\vect{r'},\omega_n,g)+[\nabla\times\nabla\times D]_{ik}(\vect{r},\vect{r'},\omega_n,g) = -\frac{4\pi}{c}\delta_{ik}\delta(\vect{r-r'})
+\frac{\omega_n^2}{c^2}\int d\vect{r''} 
+\epsilon_{il}(\vect{r},\vect{r''},i|\omega_n|,g)D_{lk}(\vect{r''},\vect{r'},\omega_n,g)
++[\nabla\times\nabla\times D]_{ik}(\vect{r},\vect{r'},\omega_n,g)
+ = -\frac{4\pi}{c}\delta_{ik}\delta(\vect{r-r'})
 \end{equation}
 Change in free energy is 
 \begin{equation}
-\Delta F = -\frac{k_B T}{2\pi c}\sum_{n}'\omega_n^2\int_0^1\frac{dg}{g}\int d\vect{r'}d\vect{r}\left[\epsilon_{il}(\vect{r},\vect{r'},i\omega_n,g)-\delta_{il}\delta(\vect{r-r'})\right]D_{li}(\vect{r'},\vect{r},\omega_n,g)
+\Delta F = -\frac{k_B T}{2\pi c}\sum_{n}'\omega_n^2\int_0^1\frac{dg}{g}\int d\vect{r'}d\vect{r}
+\left[\epsilon_{il}(\vect{r},\vect{r'},i\omega_n,g)
+-\delta_{il}\delta(\vect{r-r'})\right]D_{li}(\vect{r'},\vect{r},\omega_n,g)
 \end{equation}
 
-Split forces into short-range forces which depend strongly on details, and more universal fluctuation physics.  They allow spatial dispersion on small scales, which is more important for short range forces.  
+Split forces into short-range forces which depend strongly on details,
+ and more universal fluctuation physics.
+ They allow spatial dispersion on small scales, which is more important for short range forces.  
 
 Eq.35 suggests a connection to QED via the polarization operator, 
 \begin{equation}
-\Pi_{il}(\vect{r},\vect{r'},\omega_n,\zeta)=\frac{\omega_n^2}{4\pi c}[\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)-\delta_{il}\delta(\vect{r-r'})]
+\Pi_{il}(\vect{r},\vect{r'},\omega_n,\zeta)=\frac{\omega_n^2}{4\pi c}
+[\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)-\delta_{il}\delta(\vect{r-r'})]
 \end{equation}
 where the full green function for the EM field obeys
 \begin{equation}
 D = D_0+ \zeta^2D_0\Pi D
 \end{equation}
-(I think $\zeta$ acts to index contribution of long-wavelength photons, $\zeta=0$ is long-wavelength, $\zeta=1$ is all?)
+(I think $\zeta$ acts to index contribution of long-wavelength photons,
+ $\zeta=0$ is long-wavelength, $\zeta=1$ is all?)
 So they quote a familiar looking result: 
 \begin{equation}
 \Delta F_{\text{long}} =-2k_BT \sum_{n}'\int_0^1 \frac{d\zeta}{\zeta}\zeta^2 \tr[\Pi D]
 \end{equation}
-Ok, they finally argue that the dielectric constant is dominated by short wavelength physics, and finally take $\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)=\epsilon(\vect{r},i\omega_n)\delta(\vect{r-r'})$.
+Ok, they finally argue that the dielectric constant is dominated by short wavelength physics,
+ and finally take $\epsilon_{il}(\vect{r},\vect{r'},i|\omega_n|,\zeta)=\epsilon(\vect{r},i\omega_n)\delta(\vect{r-r'})$.
 
 Then finally show that $D$ is the full Green tensor obeying the usual macroscopic Maxwell equations.  
 
-Just above Eq. 50 they comment that the ``simple'' theory cannot be used with the full/exact dielectric function, since it is itself derived as an approximation.  
+Just above Eq. 50 they comment that the ``simple'' theory cannot be used with the
+ full/exact dielectric function, since it is itself derived as an approximation.  
 
 Last few pages seem to be taking the near-field and far-field limits.  
 
-Generalization to multilayer systems is easy from this point of view, since you just tack on more reflection coefficients.  
+Generalization to multilayer systems is easy from this point of view,
+ since you just tack on more reflection coefficients.  
 
 Comment that anisotropic systems tend to also have torque!
 
@@ -261,24 +280,198 @@ Spheres
 \subsection{Lambrecht/MaiaNeto}
 
 \cite{Lambrecht2006}
-\cite{MaiaNeto2008}
-\cite{Canaguier-Durand2012}
+This paper seems to emphasize the optical network aspect of things.  
+Uses the single mirror results to form result for Fabry-Perot cavity.
+Treats loss.  
 
-\subsection{Scattering Matrix Path Integral Methods}
+\cite{MaiaNeto2008}
+This paper treats plate-sphere results.  (Hmm, I thought they had more to do with this)
+
+\cite{Canaguier-Durand2012}
 
 \subsection{Stratton}
 Surface integral equations (Stratton-chu)
 \cite{Stratton1941}
 
-\subsection{Emig/Buscher}
+Early Emig paper~\cite{Emig2001} computes Casimir energy for corrugated waveguide.
+Apparently field splits into two independent scalars.  (TE/TM)
+Perfectly conducting boundary conditions, so one scalar obeys Dirichlet, 
+the other scalar obeys Neumann BC.
+  Interesting for that thought, but otherwise not relevant.  
+
+\subsection{Emig2004}
 
 Paper on deformations showing you can use homogenous green functions within bounding surface.  
+\cite{Emig2004}
 
-\subsection{Emig/Rahi}
+Quantize EM in general in Lorentz gauge with Fadeev-Popov gauge fixing.  
+Introduce restricted partition function that ( I think) enforces EM boundary
+conditions on the surfaces. (Note that this idea is exploited in Reids derivation)
+\begin{equation}
+Z^2(H)=\int D(A^*A)\prod_{\alpha,j}\prod_{\zeta_n}\prod_{\vect{x}\in R_\alpha}
+\delta\left[\int_{\vect{x'}\in S_\alpha} \mathcal{L}^\alpha_{j\mu}(\zeta_n;\vect{x},\vect{x'})
+  A^\mu(\zeta_n,\vect{x})\right]e^{-S_E[A,A^*]}
+\end{equation}
+where $R_\alpha$ are auxiliary surfaces, $S_\alpha$ denote surfaces.
+$\mathcal{L}^\alpha_{j\mu}$ is differential operator depending on $\epsilon$, normal $\vect{n}_\alpha$.  
+
+Boundary conditions are introduced by appeal to the extinction theorem.  
+Tangential components of $B, E$ are continuous across surface.
+Normal components of $B, D$ are continuous.
+
+Treat surface constraints at functional delta functions defined on surfaces.
+Use Fourier Representation of the delta.  Given quadratic  nature of path integral,
+can integrate out fields.
+
+Use Green's theorem to relate full Green function to integrals over surfaces
+of of \emph{homogenous} Green functions, where $\epsilon(\omega)$ is constant.  
+
+(Relation to Surface Integral equations?)
+
+\subsection{Emig 2007}
+\cite{Emig2007}
+\comment{Note: Feinberg and Sucher extended Casimir-Polder to magnetic effects.
+Should also include Haakh's work}
+
+Ref 9 is for scalar coupled to dielectric (in terms of scattering matrices).
+This is Kenneth/Klich.
+
+Emphasizes a Schwinger like point of view, which attributes field to fluctuating
+sources inside bodies.  
+Focusing on gauge-invariant quantities.  
+
+Use multipole expansion to derive quantities (Reid and others represent this
+with a boundary-element method, which expands fields over surfaces.)
+
+(This paper is the prelude to the 2009 Rahi paper.)
+
+\subsection{Rahi 2009}
 
 Multipole expansion
 \cite{Buscher2004}
-\cite{Emig2004, Emig2007, Rahi2009}
+\cite{Rahi2009}
+
+Extensive bibliography noting connection to Kenneth/Klich, Balian and Duplantier.
+Physics connection to Schwinger in terms of fluctuating currents as source.
+(Choice amounts to which you emphasize our integrate out first.)
+
+\subsubsection{EM Path Integral}
+
+Start from Lagrangian density
+\begin{equation}
+\mathcal{L} =\frac{1}{2}(\vect{E\cdot D}-\vect{B\cdot H}).
+\end{equation}
+Physical fields given in terms of gauge fields
+\begin{gather}
+\vect{E}=-\nabla\phi-\partial_t\vect{A}\\
+\vect{B} = \nabla\times\vect{A}.
+\end{gather}
+Constitutive relations,
+\begin{gather}
+\vect{B}(t,\vect{x})=\int_{-\infty}^0 dt' \mur(t-t',\vect{x})\vect{H}(t',\vect{x})
+\vect{D}(t,\vect{x})=\int_{-\infty}^0 dt' \epsr(t-t',\vect{x})\vect{E}(t',\vect{x})
+\end{gather}
+Neglecting spatial dispersion, so get local dielectric.  Also assumed to be 
+isotropic.  
+Assume action integral is given by up to some time $T$. (They're totally going
+to go to imaginary time and temperature with this).
+Fourier Expand the fields
+\begin{equation}
+  \vect{E}(\vect{x},t)=\sum_{n=-\infty}^{\infty} e^{-i\omega_nT}\vect{E}(\omega_n,\vect{x}),
+\end{equation}
+with $\omega_n=2\pi n/T$.
+
+The electromagnetic action is then
+\begin{equation}
+S(T) = \frac{T}{2}\sum_{n=-\infty}^\infty \int d\vect{x}
+\left(\vect{E_n^*}\frac{1}{\epsr}\vect{E}_n-\vect{B}_n^*\frac{1}{\mur}\vect{B}_n\right)
+\end{equation}
+
+Now use Classical equations of motion ($\nabla\times\vect{E}=-\partial_t\vect{B}$)
+to eliminate $\vect{B}$ from equations.  This is all still at the classical level.
+Action becomes
+\begin{align}
+S(T) = \frac{T}{2}\sum_{n=-\infty}^\infty \int d\vect{x}
+\left[\vect{E_n^*}\epsr\vect{E}_n-\frac{1}{\omega_n^2}
+(\nabla\times\vect{E}_n^*)\frac{1}{\mur}(\nabla\times\vect{E}_n)\right]
+\end{align}
+Now use tensor identity manipulation, where the $k^{th}$ element of $(\nabla\times\vect{A})=$ is
+\begin{align}
+&\int d^3x (\nabla\times\vect{A}) \cdot f(\nabla\times\vect{B})\\
+&=\int d^3x f\epsilon_{ijk}\epsilon_{imn}\partial_jA_k\partial_mB_n\\
+%&=-\int d^3x A_k \epsilon_{ijk}\partial_j\epsilon_{imn} f(\partial_mB_n)\\
+&=\int d^3x A_k \epsilon_{kji}\partial_j\epsilon_{imn} f(\partial_mB_n)\\
+&=\int d^3x \vect{A}\cdot\nabla\times f \nabla\times\vect{B}
+\end{align}
+Using this integration by parts, the action can be written purely in terms of the electric field
+\begin{align}
+S(T) = \frac{T}{2}\sum_{n=-\infty}^\infty \int d\vect{x}\vect{E_n^*}
+\left[\epsr-\frac{1}{\omega_n^2}\nabla\times\frac{1}{\mur}\nabla\times\right]\vect{E}_n
+\end{align}
+(Note that this paper uses relative permitivitties.) If you factor out appropriate factors of $\epsilon_0$
+you get $c^2$ on magnetic/gradient term.  
+This can be further decomposed as
+\begin{align}
+S(T) = \frac{T}{2}\sum_{n=-\infty}^\infty \int d\vect{x}\vect{E_n^*}
+\left[D -\frac{c^2}{\omega_n^2}V\right]\vect{E}_n
+\end{align}
+where the free space wave operator $D$, and a scattering potential $V$, are given by
+\begin{gather}
+D=I-\frac{c^2}{\omega_n^2}\nabla\times\nabla\times\\
+V=I\frac{\omega_n^2}{c^2}[1-\epsr]-\nabla\times\left(\frac{1}{\mur}-1\right)\nabla\times.
+\end{gather}
+Note that $D$ has simple expressions for the Green function, since this is just the free-space
+EM wave operator.  $V$ can then be treated as a perturbation and its effect solved for.
+
+\subsubsection{Path Integrals}
+This is promoted to quantum theory by using the fac that or quadratic Hamiltonians, 
+the transition amplitude can be written as 
+\begin{equation}
+\langle \vect{E}_b|e^{-iHT/\hbar}|\vect{E}_b\rangle = \int D\vect{A} e^{\frac{i}{\hbar}S[T]}
+\bigg|_{\vect{E}(t=0)=\vect{E}_a,\vect{E}(t=T)=\vect{E}_b}
+\end{equation}
+Note that they choose $A_0=0$ gauge-fixing.  ( I think there is an additional implicit
+gauge this is fixed by this choice, or that they then use the resulting Classical equations
+of motion to produce the result).  
+
+Can get Euclidean path integral by setting $\vect{E}_b=\vect{E}_a$, and tracing over.  Then taking
+$T\rightarrow -i\hbar \beta$ yields the path integral expression for the partition function
+$Z=\tr[e^{-\beta H}]$ for the EM field.  
+
+Interested in ground state energy at zero temperature.  
+\begin{equation}
+E=-frac{1}{\beta}\log Z
+\end{equation}
+Formally divergent, must be regularized.  If consider energy differences to some reference configuration,
+these cutoff dependent contributions drop out.  
+
+Renormalize by considering some reference case.
+\begin{equation}
+E-E_0=-frac{1}{\beta}[\log Z-\log Z_0]
+\end{equation}
+
+Rotate action from Minkowski to Euclidean, by taking $\epsilon(\omega)\rightarrow\epsilon(i\kappa_n)$
+where $\kappa_n=2\pi n/(\hbar\beta c)$.  The traditional Matsubara frequencies are defined as $s_n=c\kappa_n$.
+  For other gauges apparently must also rotate $A_0$.  
+
+Exploit the facts that:
+1) EM field is real, so $\vect{E}^*(\omega)=\vect{E}(-\omega)$ on the real axis.  
+2) Can show response functions also obey $\epsilon(ic\kappa)=\epsilon(-ic\kappa)$.  So only need
+to consider integration over $\kappa>0$.  
+3) However, this means $\vect{E},\vect{E}^*$ are now treated as independent variables (?)
+4) In $\beta\rightarrow \infty$ limit, replace sum with integral:
+$\sum_{n\ge 0} \rightarrow \frac{\hbar c\beta}{2\pi}\int d\kappa$
+So energy can be written
+\begin{equation}
+E = -\frac{\hbar c}{2\pi}\int_0^\infty d\kappa \log Z(\kappa).
+\end{equation}
+
+
+
+\subsubsection{Scattering  theory}
+
+\subsubsection{Translation Matrices}
+
 
 \subsection{Kenneth/Klich}
 \cite{Kenneth2006}
@@ -287,7 +480,9 @@ Multipole expansion
 \subsection{Reid/Johnson/Rodriguez}
 
 Early numerical papers.
-\cite{Rodriguez2007},\cite{Rodriguez2007a}, \cite{Rodriguez2009}.  Note use of existent analytical methods and similarities to existent numerical FTDT techniques Builds on earlier papers (uses better basis) 
+\cite{Rodriguez2007},\cite{Rodriguez2007a}, \cite{Rodriguez2009}.
+  Note use of existent analytical methods and similarities to existent numerical 
+FTDT techniques Builds on earlier papers (uses better basis) 
 
 Cite Johnson textbook.\cite{Johnson2011}
 
@@ -306,7 +501,7 @@ Note success, applicability.  \comment{Cite experimental tylenol pill paper}
 
 \section{Papers: Worldlines}
 
-Note citations in bordag/johnson mostly as dismissive and limited  
+Note citations in bordag/johnson mostly as dismissive and limited.  
 
 \subsection{Effective actions}
 
@@ -320,7 +515,8 @@ Note citations in bordag/johnson mostly as dismissive and limited
 
 \subsubsection{Applied to QED}
 
-For example, the worldline method has been used to compute relativistic field effects for QED such as the Lamb shift~\cite{Schmidt1995}.  It has also been used as a numerical algorithm\cite{Mazur2014}.
+For example, the worldline method has been used to compute relativistic field effects for QED such
+ as the Lamb shift~\cite{Schmidt1995}.  It has also been used as a numerical algorithm\cite{Mazur2014}.
 
 \subsection{Feynman Path Integral for QM}
 
@@ -333,14 +529,17 @@ For example, the worldline method has been used to compute relativistic field ef
 
 \begin{itemize}
 \item Cite earlier paper by themselves for first worldline numerics?   Found citations for PFA.
-\item Action for scalar fields.   Massive scalar field interacting with some potential $V(x)$.  $V$ has dimensions of mass-squared.  (Field theory units $\hbar=c=1$, so $E=mc^2$)
+\item Action for scalar fields.   Massive scalar field interacting with some potential $V(x)$.
+  $V$ has dimensions of mass-squared.  (Field theory units $\hbar=c=1$, so $E=mc^2$)
 \begin{equation}
 \cL = \frac{1}{2}\partial_\mu\phi\partial^\mu\phi +\frac{1}{2}m^2\phi^2+\frac{1}{2}V(x)\phi^2
 \end{equation}
 \item Complete unrenormalized quantum effective action for $V$ (integrate out fields $\phi$) is 
 \begin{align}
-  \Gamma[V] &=\frac{1}{2}\tr\ln \left[ \frac{-\partial_\mu\partial^\mu +m^2 + V(x)}{-\partial_\mu\partial^\mu +m^2}\right]\\
-&   =-\frac{1}{2}\int \frac{d\cT}{\cT} \int d^D x \left\{ \langle x|e^{-\cT[-\partial_\mu\partial^\mu +m^2 + V(x)]}|x\rangle -\frac{e^{-m^2 \cT}}{(4\pi \cT)^{D/2}}\right\}
+  \Gamma[V] &=\frac{1}{2}\tr\ln \left[ \frac{-\partial_\mu\partial^\mu +m^2 + V(x)}
+    {-\partial_\mu\partial^\mu +m^2}\right]\\
+&   =-\frac{1}{2}\int \frac{d\cT}{\cT} \int d^D x \left\{ 
+\langle x|e^{-\cT[-\partial_\mu\partial^\mu +m^2 + V(x)]}|x\rangle -\frac{e^{-m^2 \cT}}{(4\pi \cT)^{D/2}}\right\}
 \end{align}
 Working in $D=d+1$ euclidean space-time dimensions.  
 \item Convert matrix element to path integral.  
@@ -490,13 +689,36 @@ Why?  What for?  Benefits?
 \cite{Bechler1999}
 \cite{Bechler2006}
 
+\section{Quantization in dielectric}
+
+
+\subsection{Rosa2010}
+
+Justifies/derives why it is okay to use neglect dispersion in derivations
+of the Casimir energy.  i.e. okay to set things up with real $\epsilon$,
+then take $\epsilon\rightarrow\epsilon(i\omega_n)$.  \cite{Rosa2010}
+
+The classical energy density in a dispersive medium is (Eq. 1)
+\begin{equation}
+  \bar{u}(\vect{r},\omega) = 
+  \left[\frac{d(\omega\epsilon_R)}{d\omega}|\vect{E}_\omega(\vect{r})|^2 +
+    \frac{d(\omega\mu_R)}{d\omega}|\vect{H}_\omega(\vect{r})|^2\right],
+\end{equation}
+where $\epsilon_R,\mu_R$ are the real parts of the permittivity and magnetic 
+permeability.  This is neglecting dispersion. 
+Apparently this also holds in the quantum theory, at finite temperature,
+with or without dispersion \emph{in uniform media}.  
+(They note relation to Barash and Ginzburg)
+
+Use harmonic model and carefully add up contributions from each dipole.
+Define energy based on integral of Poynting's theorem.  
 
 
 
 \section{Quantum Trajectories}
 
 \subsection{Carmichael}
-Cite Carmichael Rice JOSA paper.
+Cite Carmichael Rice JOSA paper.\cite{Carmichael1989,Carmichael1991}
 
 Cite Carmichael 1993 lectures. \cite{Carmichael1993}
 
@@ -513,21 +735,32 @@ Cite Marte, Zoller, Parkins, Gardiner (MCWF) \cite{Dalibard1992}
 
 \subsection{Measuring atom positions}
 
+Measurement of atom's\cite{Caves1987}
+
  Cite Holland, Meystre.  Applied to position measurements of atoms by detecting photons.  Detection of photons localizes atoms.  
 \cite{Holland1996}
 
+Motion in optical lattice
+\cite{Greenwood1997}
+
+Lose spatial coherence from single emission.
+\cite{Pfau1994}
+
+Which-way \cite{Gagen1993}
 
 \subsection{Control theory}
  Control Theory.  Cite Wiseman book.   \cite{WisemanMilburn2010}
- 
+
+Doherty and Jacobs \cite{Doherty1999}
+
 Cite Steck feedback control paper.  \cite{Steck2004, Steck2006}
 
 \subsection{Quantum chaos}
 
-Cite Bhattacharya quantum paper.  \cite{Bhattacharya2005}
+Cite Bhattacharya quantum paper.  \cite{Bhattacharya2000}
 
 \subsection{Noisy measurements}
-Cite Warshawski/Wiseman \cite{Warszawski2003}
+Cite Warshawski/Wiseman \cite{Warszawski2003a,Warszawski2003b}
 
 Cite Jeremy Thorne.  
 

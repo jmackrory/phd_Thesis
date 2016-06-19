@@ -677,18 +677,28 @@ where there is only a factor of $\frac{1}{2}$ for $n=0$.
 \end{equation}
 Note that for $n=0$ the Matsubara frequency $\omega_n=0$, so we have 
 \begin{align}
-  \log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{x})\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] - \log\det\left[ \frac{1}{2}\left(\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] = 0.
+  \log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{x})\frac{\omega_0^2}{c^2} -\nabla^2\right)\right]
+ - \log\det\left[ \frac{1}{2}\left(\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] = 0.
 \end{align}
-This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
+This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, 
+such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
 
 Now the renormalized free energy is 
 \begin{align}
 F-F_0 & = -k_BT \log \frac{Z_{TE}}{Z_0} \\
-& = k_BT {\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]-\log\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
-&=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:worldline_partition_function}
+& = k_BT {\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
+    \left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]
+-\log\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
+&=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
+\dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
+\label{eq:worldline_partition_function}
 \end{align}
-where we introduced the path integral.  In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.  So we also only use the normalization for 3D.  The remaining factor of $\sqrt{2\pi T}$ will emerge in the zero temperature limit.  This scaling with $T$ also reflects the different scaling behaviours in the near-field, thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
-
+where we introduced the path integral.
+  In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.
+  So we also only use the normalization for 3D.
+  The remaining factor of $\sqrt{2\pi T}$ will emerge in the zero temperature limit.
+  This scaling with $T$ also reflects the different scaling behaviours in the near-field, 
+thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
 
 \begin{shaded}
 The sequence of events we actually followed when we neglected dispersion from the start was
@@ -711,43 +721,43 @@ E(x') = \frac{\hbar c\alpha_0}{16\pi^2\epsilon_0} \int \frac{dT}{T^3} \dlangle \
 \end{enumerate}
 \end{shaded}
 
-\begin{shaded}
-\subsection{First thing I tried, and evidently the wrong thing to do}
+% \begin{shaded}
+% \subsection{First thing I tried, and evidently the wrong thing to do}
 
-(Note that using the free-energy would entirely bypass these concerns : No extra derivatives, no problems.)
+% (Note that using the free-energy would entirely bypass these concerns : No extra derivatives, no problems.)
 
-So I think it is correct to start from:
-\begin{equation}
-E=-\partial_\beta \log Z = -\partial_\beta{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle  - e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-\end{equation}
+% So I think it is correct to start from:
+% \begin{equation}
+% E=-\partial_\beta \log Z = -\partial_\beta{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle  - e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
+% \end{equation}
 
-For clarity, from here on I will suppress the renormalization terms.  They can be restored by subtracting off the same thing but with $\epsilon\rightarrow 1$ everywhere.  
+% For clarity, from here on I will suppress the renormalization terms.  They can be restored by subtracting off the same thing but with $\epsilon\rightarrow 1$ everywhere.  
 
-Our sequence of operations once we got $\log Z$ in this case was: 
-\begin{enumerate}
-\item Take $\partial_\beta\log Z$ to get the energy.  
-\begin{align}
-E&={\sum_n}'\frac{\omega_n^2}{\beta c^2}\int d^3x_0\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left( \langle\epsilon(i\omega_n)\rangle +\frac{i}{2}\omega_n\langle\partial_\omega\epsilon(i\omega_n)\rangle \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-\end{align}
+% Our sequence of operations once we got $\log Z$ in this case was: 
+% \begin{enumerate}
+% \item Take $\partial_\beta\log Z$ to get the energy.  
+% \begin{align}
+% E&={\sum_n}'\frac{\omega_n^2}{\beta c^2}\int d^3x_0\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left( \langle\epsilon(i\omega_n)\rangle +\frac{i}{2}\omega_n\langle\partial_\omega\epsilon(i\omega_n)\rangle \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
+% \end{align}
 
-\item Expand to linear order in $\alpha$
+% \item Expand to linear order in $\alpha$
 
-\begin{align}
-E&={\sum_n}'\frac{\omega_n^2}{\epsilon_0\beta c^2}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left(\alpha(i\omega_n)+\frac{i}{2}\omega_n\partial_\omega\alpha(i\omega_n) - \frac{ T \omega_n^2\alpha(i\omega_n)}{2c^2} \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle_{x_0=x'}
-\end{align}
-\item Take zero temperature limit, which replaces $\omega_n\rightarrow \omega,\sum_n \rightarrow \int_0^\infty d\omega$.  Also take the far-field limit on the frequency integral.  $\alpha(i\omega)\rightarrow\alpha_0, \epsilon(i\omega,x)\rightarrow \epsilon(x)$.  
-\begin{equation}
-E=\frac{\hbar}{2\pi\epsilon_0 c^2}\int_0^\infty d\omega\,\omega^2\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle   \left(\alpha_0 - \frac{ T \omega^2\alpha_0}{2c^2} \right)e^{-\frac{ T \omega^2\langle\epsilon\rangle}{2c^2}}\drangle
-\end{equation}
-\item Carry out the Gaussian integral in frequency.  
-\begin{equation}
-E= \frac{\hbar c\alpha_0}{8\pi^2 \epsilon_0}\int_0^\infty \frac{dT}{T^3}\dlangle  \left( \frac{1}{\langle \epsilon\rangle^{3/2}}-\frac{3}{2\langle\epsilon\rangle^{5/2}} \right) \drangle.
-\end{equation}
-\end{enumerate}
-Perhaps the derivative $\partial_\beta$ does not commute with some of these limits and approximations?  Perhaps this should be delayed to the final stage?  A derivative of a sum, is not necessarily equal to the sum of derivatives?  
+% \begin{align}
+% E&={\sum_n}'\frac{\omega_n^2}{\epsilon_0\beta c^2}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left(\alpha(i\omega_n)+\frac{i}{2}\omega_n\partial_\omega\alpha(i\omega_n) - \frac{ T \omega_n^2\alpha(i\omega_n)}{2c^2} \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle_{x_0=x'}
+% \end{align}
+% \item Take zero temperature limit, which replaces $\omega_n\rightarrow \omega,\sum_n \rightarrow \int_0^\infty d\omega$.  Also take the far-field limit on the frequency integral.  $\alpha(i\omega)\rightarrow\alpha_0, \epsilon(i\omega,x)\rightarrow \epsilon(x)$.  
+% \begin{equation}
+% E=\frac{\hbar}{2\pi\epsilon_0 c^2}\int_0^\infty d\omega\,\omega^2\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle   \left(\alpha_0 - \frac{ T \omega^2\alpha_0}{2c^2} \right)e^{-\frac{ T \omega^2\langle\epsilon\rangle}{2c^2}}\drangle
+% \end{equation}
+% \item Carry out the Gaussian integral in frequency.  
+% \begin{equation}
+% E= \frac{\hbar c\alpha_0}{8\pi^2 \epsilon_0}\int_0^\infty \frac{dT}{T^3}\dlangle  \left( \frac{1}{\langle \epsilon\rangle^{3/2}}-\frac{3}{2\langle\epsilon\rangle^{5/2}} \right) \drangle.
+% \end{equation}
+% \end{enumerate}
+% Perhaps the derivative $\partial_\beta$ does not commute with some of these limits and approximations?  Perhaps this should be delayed to the final stage?  A derivative of a sum, is not necessarily equal to the sum of derivatives?  
 
-Of those steps, I think you can safely swap  3 and 4.  But I think these must precede step 5, otherwise you don't have an integral, or even a Gaussian one.  
-\end{shaded}
+% Of those steps, I think you can safely swap  3 and 4.  But I think these must precede step 5, otherwise you don't have an integral, or even a Gaussian one.  
+% \end{shaded}
 
 \subsection{Casimir-Polder energy}
 We can extract the Casimir-Polder energy by introducing a test-particle, with $\epsilon(\omega,\vect{x})\rightarrow \epsilon(\omega,\vect{x})+\frac{\alpha(i\omega)}{\epsilon_0}\delta(\vect{x}-\vect{x}_0)$.  The factor of $\epsilon_0$ arises since this is the relative permittivity.  Some care is necessary with the $\delta$-function, and should really be considered the limiting result of some function like $f(x,\sigma) = e^{-x^2/(2\sigma^2)}/\sqrt{2\pi\sigma^2}$.  We will then expand the energy to linear order in $\alpha$.  
@@ -973,8 +983,8 @@ Finally, let's integrate by parts with respect to $p$.
 \end{align}
 We can also write:
 \begin{align}
-\frac{d}{dp}[1-r_1r_2 e^{-2p\omega_n d/c }]&= -\left( r_1\frac{dr_2}{dp} e^{-2p\omega_n d/c} + r_2\frac{dr_1}{dp} e^{-2p\omega_n d/c} - 2\xi r_1r_2d e^{-2p\omega_n d/c}\right)\\
-&= -\left( -2 \frac{r_1r_2}{\sqrt{p^2+\chi_2}} -2 \frac{r_1r_2}{\sqrt{p^2+\chi_1}}- 2r_1r_2\frac{\omega_nd}{c} \right)e^{-2p\omega_n d/c}\\
+\frac{d}{dp}[1-r_1r_2 e^{-2p\omega_n d/c }]% &= -\left( r_1\frac{dr_2}{dp} e^{-2p\omega_n d/c} + r_2\frac{dr_1}{dp} e^{-2p\omega_n d/c} - 2\xi r_1r_2d e^{-2p\omega_n d/c}\right)\\
+% &= -\left( -2 \frac{r_1r_2}{\sqrt{p^2+\chi_2}} -2 \frac{r_1r_2}{\sqrt{p^2+\chi_1}}- 2r_1r_2\frac{\omega_nd}{c} \right)e^{-2p\omega_n d/c}\\
 &= 2\left(\frac{\omega_nd}{c} +\frac{1}{\sqrt{p^2+\chi_1}} +\frac{1}{\sqrt{p^2+\chi_2}}\right) r_1r_2e^{-2p\omega_n d/c},
 \end{align}
 which suggests 
@@ -985,25 +995,30 @@ which suggests
 
 So after integration by parts our the renormalized Casimir energy becomes
 \begin{align}
-E-E_0 & = k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\int_1^\infty dp\,(p^2-1)\frac{ r_1r_2e^{-2\omega_n p d/c}}{(1 -r_1r_2 e^{-2\omega_n pd/c})}\left[ \frac{\omega_n d}{c} +\frac{1}{\sqrt{p^2+\chi_1}}+\frac{1}{\sqrt{p^2+\chi_2}}\right]\\
-& = k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\left\{\frac{1}{2}\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right](p^2-1)\bigg|_{p=1}^\infty - \int_1^\infty dp \,p\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right]\right\}\\
-& = -k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\int_1^\infty dp \,p\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right]\label{eq:Casimir_energy_finite_temperature}
+E-E_0 & % = k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\int_1^\infty dp\,(p^2-1)\frac{ r_1r_2e^{-2\omega_n p d/c}}{(1 -r_1r_2 e^{-2\omega_n pd/c})}\left[ \frac{\omega_n d}{c} +\frac{1}{\sqrt{p^2+\chi_1}}+\frac{1}{\sqrt{p^2+\chi_2}}\right]\\
+% & = k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\left\{\frac{1}{2}\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right](p^2-1)\bigg|_{p=1}^\infty - \int_1^\infty dp \,p\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right]\right\}\\
+& = -k_BT{\sum_n}'\frac{\omega_n^2}{2\pi c^2}\int_1^\infty dp \,p
+\log\left[1-r_1r_2 e^{-2\omega_n p d/c}\right]\label{eq:Casimir_energy_finite_temperature}
 \end{align}
 We can take the zero temperature limit here as well:
 \begin{align}
-E-E_0& = -\frac{\hbar c}{4\pi^2}\int_0^\infty dk\,k^2\int_1^\infty dp \,p\log\left[1-r_1r_2 e^{-2k p d}\right]\label{eq:Casimir_energy_zero_temperature}
+E-E_0& = -\frac{\hbar c}{4\pi^2}\int_0^\infty dk\,k^2\int_1^\infty dp \,p
+\log\left[1-r_1r_2 e^{-2k p d}\right]\label{eq:Casimir_energy_zero_temperature}
 \end{align}
 
 \section{TM Polarization:Partition Function}
 
 In this case we are starting from the TM polarization
 \begin{equation}
-Z_{TM} = \int D\psi \exp\left[ -\frac{\epsilon_0}{2}\int_0^\beta d\beta'\int d^3x\, \left( \frac{\epsilon(x)}{\hbar^2}(\partial_{\beta'}\psi)^2 + c^2\frac{1}{\epsilon}|\nabla\sqrt{\epsilon}\psi|^2\right)\right] .
+Z_{TM} = \int D\psi \exp\left[ -\frac{\epsilon_0}{2}\int_0^\beta d\beta'\int d^3x\,
+ \left( \frac{\epsilon(x)}{\hbar^2}(\partial_{\beta'}\psi)^2 + c^2\frac{1}{\epsilon}|\nabla\sqrt{\epsilon}\psi|^2\right)\right] .
 \end{equation}
 
 Let us change to using $\tau = \beta \hbar c$ as our temperature coordinate.  Then   
 \begin{equation}
-Z_{TM} = \int D\psi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^{\hbar\beta c} d\tau'\int d^3x\, \psi\left( \epsilon(x)(\partial_{\tau}-\sqrt{\epsilon}\nabla \epsilon^{-1}\nabla\sqrt{\epsilon} -\nabla^2\right)\psi\right].
+Z_{TM} = \int D\psi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^{\hbar\beta c} 
+d\tau'\int d^3x\, \psi\left( \epsilon(x)(\partial_{\tau}
+  -\sqrt{\epsilon}\nabla \epsilon^{-1}\nabla\sqrt{\epsilon} -\nabla^2\right)\psi\right].
 \end{equation}
 
 We will now introduce the Matsubara frequencies $\omega_n = (2\pi n)/(\beta \hbar)$, with 
@@ -1018,23 +1033,34 @@ and $\psi_n^* = \psi_{-n}$ since $\psi^*(\beta, x) = \psi(\beta, x)$.
 
 Then we have 
 \begin{equation}
-Z_{TM} = \prod_{n=-\infty}^{\infty} \int D\psi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}\int d^3x\, \psi_n^*\left(\epsilon(i\omega_n,x)\frac{\omega_n^2}{c^2}+   V_{TM} -\nabla^2\right)\psi_n\right], 
+Z_{TM} = \prod_{n=-\infty}^{\infty} \int D\psi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}\int d^3x\, 
+\psi_n^*\left(\epsilon(i\omega_n,x)\frac{\omega_n^2}{c^2}+   V_{TM} -\nabla^2\right)\psi_n\right], 
 \end{equation}
-where $V_{TM} = (\nabla\ln\sqrt{\epsilon})^2-\nabla^2\log\sqrt{\epsilon}$.  Note that the presence of $V_{TM}$ implies there will be a contribution to the $n=0$ Matsubara term, which is good, since we know that the TM energy is the dominant contribution in that case.   We will renormalize this against vacuum, 
+where $V_{TM} = (\nabla\ln\sqrt{\epsilon})^2-\nabla^2\log\sqrt{\epsilon}$.
+  Note that the presence of $V_{TM}$ implies there will be a contribution to the $n=0$ Matsubara term,
+ which is good, since we know that the TM energy is the dominant contribution in that case.
+   We will renormalize this against vacuum, 
 \begin{equation}
-\log Z_{TE} -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ \frac{1}{2}\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} +V_{TM}-\nabla^2\right)\right] - \log\det\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}
+\log Z_{TE} -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ \frac{1}{2}
+\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} +V_{TM}-\nabla^2\right)\right]
+ - \log\det\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}
 \end{equation}
 Note that for $n=0$ the Matsubara frequency $\omega_n=0$, so we have 
 \begin{align}
-&\log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{x})\frac{\omega_0^2}{c^2}+V_{TM} -\nabla^2\right)\right] - \log\det\left[ \frac{1}{2}\left(\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] \nonumber\\
-&= \log\det\left[\frac{1}{2}\left(V_{TM} -\nabla^2\right)\right] - \log\det\left[ \frac{1}{2}\left( -\nabla^2\right)\right]\ne  0
+&\log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{x})\frac{\omega_0^2}{c^2}+V_{TM} -\nabla^2\right)\right]
+ - \log\det\left[ \frac{1}{2}\left(\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] \nonumber\\
+&= \log\det\left[\frac{1}{2}\left(V_{TM} -\nabla^2\right)\right]
+ - \log\det\left[ \frac{1}{2}\left( -\nabla^2\right)\right]\ne  0
 \end{align}
-This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    This is what should give us a the dominant near-field, and high temperature results.  
+This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency,
+ such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
+This is what should give us a the dominant near-field, and high temperature results.  
 
 Then renormalized Casimir energy is 
 \begin{align}
 E-E_0 & = -k_BT \log \frac{Z_{TM}}{Z_0} \\
-&=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - \frac{T}{2}\langle V_{TM}\rangle}\drangle\label{eq:worldline_partition_function}
+&=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}}
+ -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - \frac{T}{2}\langle V_{TM}\rangle}\drangle\label{eq:worldline_partition_function}
 \end{align}
 
 \subsection{Casimir-Polder energy}
@@ -1042,12 +1068,20 @@ E-E_0 & = -k_BT \log \frac{Z_{TM}}{Z_0} \\
 The Casimir-Polder energy can be recovered by expanding $\epsilon$ to linear order in $\alpha(i\omega)/\epsilon_0\delta(x-x').$  We will also have to expand $V_{TM}$,
 \begin{align}
 T\langle V_{TM}\rangle =& \int_0^Tdt\, (\partial_x\log\sqrt{\epsilon})^2 - \partial_x^2\log\sqrt{\epsilon}\\
-=& \int_0^Tdt\, \frac{1}{4}(\partial_x\log\epsilon)^2 - \frac{1}{2}\partial_x^2\log\epsilon\\
+%=& \int_0^Tdt\, \frac{1}{4}(\partial_x\log\epsilon)^2 - \frac{1}{2}\partial_x^2\log\epsilon\\
 =& \int_0^Tdt\, \frac{1}{4}[\partial_x\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)]^2 - \frac{1}{2}\partial_x^2\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)\\
-=& \int_0^Tdt\, \frac{1}{4}\{\partial_x[\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon(x_0)\epsilon_0)]\}^2 - \frac{1}{2}\partial_x^2\{\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon_0\epsilon(x_0))\}\\
-=& \int_0^Tdt\, V_{TM} +\frac{\alpha}{2}\partial_x\log\epsilon\partial_x[\delta(x-x_0)/(\epsilon(x)\epsilon_0)] - \frac{\alpha}{2}\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]
+%=& \int_0^Tdt\, \frac{1}{4}\{\partial_x[\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon(x_0)\epsilon_0)]\}^2 - \frac{1}{2}\partial_x^2\{\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon_0\epsilon(x_0))\}\\
+=& \int_0^Tdt\, V_{TM} +\frac{\alpha}{2}\partial_x\log\epsilon\partial_x[\delta(x-x_0)/(\epsilon(x)\epsilon_0)]
+ - \frac{\alpha}{2}\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]
 \end{align}
-We will simplify this a bit by assuming we are only considering the polarizable particle in regions where $\epsilon(x)$ is constant in the vicinity of $x_0$.  Then we can drop any terms in $\partial_x\epsilon|_{x=x_0}$.  This lets us drop the second term, and any derivatives from expanding out the derivative.  I think any extra terms from expanding out these derivatives would ultimately get eaten when considering the effect of $\delta'$.  It will be operationally cleaner to just leave the derivatives acting on the products, and integrate by parts at the end. 
+We will simplify this a bit by assuming we are only considering the polarizable particle in regions 
+where $\epsilon(x)$ is constant in the vicinity of $x_0$.
+  Then we can drop any terms in $\partial_x\epsilon|_{x=x_0}$.
+  This lets us drop the second term, and any derivatives from expanding out the derivative.
+  I think any extra terms from expanding out these derivatives would ultimately get eaten when
+ considering the effect of $\delta'$.
+  It will be operationally cleaner to just leave the derivatives acting on the products, 
+and integrate by parts at the end. 
 
 Let us suppress the renormalization terms for the mean time.  
 \begin{align}
@@ -1098,30 +1132,37 @@ E-E_0=& -k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty dT\,\fr
 \end{align}
 Now make our usual substitutions: $\lambda = \kappa\omega_n^2/(2c^2)$, and then $p^2 = \kappa+1$.  
 \begin{align}
-E-E_0=& -k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{4\pi\epsilon_0}\left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)\int_0^\infty d\kappa\, \frac{\omega_n^2}{2c^2}\frac{e^{-2\sqrt{\kappa+1}\omega_n d/c}c}{\omega_n\sqrt{\kappa+1}}\frac{\sqrt{\kappa+1+\chi}-\sqrt{\kappa+1}e^{2\Xi}}{\sqrt{\kappa+1+\chi}+\sqrt{\kappa+1}e^{2\Xi}} \\
-=& -k_BT{\sum_n}'\frac{\omega_n\alpha(i\omega_n)}{4\pi\epsilon_0c}\left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)\int_1^\infty dp\,e^{-2p\omega_n d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} 
+E-E_0%=& -k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{4\pi\epsilon_0}\left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)\int_0^\infty d\kappa\, \frac{\omega_n^2}{2c^2}\frac{e^{-2\sqrt{\kappa+1}\omega_n d/c}c}{\omega_n\sqrt{\kappa+1}}\frac{\sqrt{\kappa+1+\chi}-\sqrt{\kappa+1}e^{2\Xi}}{\sqrt{\kappa+1+\chi}+\sqrt{\kappa+1}e^{2\Xi}} \\
+=& -k_BT{\sum_n}'\frac{\omega_n\alpha(i\omega_n)}{4\pi\epsilon_0c}
+\left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)
+\int_1^\infty dp\,e^{-2p\omega_n d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} 
 \end{align}
 
 Take the $\partial_d$ derivatives, get 
 \begin{align}
 E-E_0%=& -k_BT{\sum_n}'\frac{\omega_n\alpha(i\omega_n)}{4\pi\epsilon_0c}\int_1^\infty dp\,\left(\frac{\omega_n^2}{c^2}  - \frac{2\omega_n^2p^2}{c^2}\right)e^{-2p\omega_n d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} \\
-=& -k_BT{\sum_n}'\frac{\omega^3_n\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,\left(1-2p^2\right)e^{-2p\omega_n d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} 
+=& -k_BT{\sum_n}'\frac{\omega^3_n\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,
+\left(1-2p^2\right)e^{-2p\omega_n d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} 
 \end{align}
-
-
 
 \subsubsection{Zero temperature, far-field}
 In the far-field of the atom, we have $d\omega_{j0}/c>>1$, so replace $\epsilon,\alpha$ by their d.c. values.  
 \begin{align}
-E-E_0=& -\frac{\hbar}{2\pi}\int_0^\infty d\omega \frac{\omega^3\alpha_0}{4\pi\epsilon_0c^3}\int_1^\infty dp\,\left(1-2p^2\right)e^{-2p\omega d/c}\frac{\sqrt{p^2+\chi}-p(1+\chi)}{\sqrt{p^2+\chi}+p(1+\chi)}\\
-=& -\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0d^4}\int_1^\infty dp\,p^{-4}\left(1-2p^2\right)\frac{\sqrt{p^2+\chi}-p(1+\chi)}{\sqrt{p^2+\chi}+p(1+\chi)},
+E-E_0=& -\frac{\hbar}{2\pi}\int_0^\infty d\omega \frac{\omega^3\alpha_0}{4\pi\epsilon_0c^3}
+\int_1^\infty dp\,\left(1-2p^2\right)e^{-2p\omega d/c}\frac{\sqrt{p^2+\chi}-p(1+\chi)}{\sqrt{p^2+\chi}+p(1+\chi)}\\
+=& -\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0d^4}\int_1^\infty dp\,p^{-4}
+\left(1-2p^2\right)\frac{\sqrt{p^2+\chi}-p(1+\chi)}{\sqrt{p^2+\chi}+p(1+\chi)},
 \end{align}
-yet another familiar integral (up to a lingering sign on a reflection coefficient?. I seem to have currently stumbled onto the correct choice. )  
-
+yet another familiar integral (up to a lingering sign on a reflection coefficient?
+ I seem to have currently stumbled onto the correct choice. )  
 
 \subsubsection{Zero temperature, near-field}
 
-In this limit you take $d\rightarrow 0$, but all frequencies contribute, as governed by $\alpha(i\omega)$.    We have frequency integral determined by $\alpha$ so frequencies $w < w_{j0}$ will dominate.  Alternatively, just take $p\sim c/(d\omega)$.  Since $d$ is small, then important $p$ are very large?  I think this implicitly takes $\omega d/c<<1$?
+In this limit you take $d\rightarrow 0$, but all frequencies contribute, as governed by $\alpha(i\omega)$.
+    We have frequency integral determined by $\alpha$ so frequencies $w < w_{j0}$ will dominate.
+  Alternatively, just take $p\sim c/(d\omega)$.
+  Since $d$ is small, then important $p$ are very large?
+  I think this implicitly takes $\omega d/c<<1$?
 \begin{align}
 E-E_0=& -\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega \omega^3\alpha(i\omega)\int_1^\infty dp\,\left(1-2p^2\right)e^{-2p\omega d/c}\frac{\sqrt{p^2+\chi}-pe^{2\Xi}}{\sqrt{p^2+\chi}+p e^{2\Xi}} 
 \end{align}

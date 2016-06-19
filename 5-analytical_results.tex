@@ -229,19 +229,25 @@ We will renormalize against $d\rightarrow \infty$, and drop the normalization fa
 Dan focuses on the case where we normalize against $e^{-c^2/(2t)}/\sqrt{t}$, as opposed to $e^{-c^2/(2t)}/\sqrt{2\pi t}$.  \comment{I will multiply my results by $\sqrt{2\pi}$.  }
 
 \begin{align}
-\mathcal{V}_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\frac{\left(\sqrt{\lambda+s}e^{2\Xi }- \sqrt{\lambda +s(1 +\chi)}\right) }{\sqrt{\lambda +s} e^{2 \Xi }+\sqrt{\lambda +s(1+\chi)}}\frac{e^{-2\sqrt{2(\lambda+s) } |d|}}{\sqrt{(\lambda+s)}}
+\mathcal{V}_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
+\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}
+\frac{\left(\sqrt{\lambda+s}e^{2\Xi }- \sqrt{\lambda +s(1 +\chi)}\right) }
+{\sqrt{\lambda +s} e^{2 \Xi }+\sqrt{\lambda +s(1+\chi)}}\frac{e^{-2\sqrt{2(\lambda+s) } |d|}}{\sqrt{(\lambda+s)}}
 \end{align}
 What follows is a lot of changes of variables to turn this into something like an integral against a decaying exponential.  
 $u=\lambda+s$.  
 \begin{align}
-\mathcal{V}_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-2\sqrt{2u } |d|}
+\mathcal{V}_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
+\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}
+\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-2\sqrt{2u } |d|}
 \end{align}
 Now take $u\rightarrow u/8d^2, s\rightarrow s/(8d^2)$.  
 \begin{align}
-\mathcal{V}_D(\chi,d)=&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^\alpha}\frac{1}{(8d^2)^{(D-1)/2-\alpha+1-1/2}}\nonumber\\
-& \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}\\
+\mathcal{V}_D(\chi,d)% =&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^\alpha}\frac{1}{(8d^2)^{(D-1)/2-\alpha+1-1/2}}\nonumber\\
+% & \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}\\
 =&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\nonumber\\
-& \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2} (u-s)^{(D-1)/2-\alpha}\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}
+& \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2} (u-s)^{(D-1)/2-\alpha}
+\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}
 \end{align}
 Now define $u = sv$.  
 \begin{align}
@@ -250,18 +256,23 @@ Now define $u = sv$.
 \end{align}
 Now define $ s = t^2, v = w^2$.  
 \begin{align}
-\mathcal{V}_D=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_0^\infty dt\, t^{(D-2)+1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}\\
-=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_0^\infty dt\, t^{D-1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}
+\mathcal{V}_D%=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_0^\infty dt\, t^{(D-2)+1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}\\
+=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}
+\int_0^\infty dt\, t^{D-1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}
+\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}
 \end{align}
 Now take swap the $t,w$ integrals, and turn the $t$ integral into a Gamma function.  
 \begin{align}
-\mathcal{V}_D=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}\int_0^\infty dt\, t^{D-1}e^{-tw}\\
-=&-\frac{4\sqrt{\pi}\Gamma[D]}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}
+\mathcal{V}_D%=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}\int_0^\infty dt\, t^{D-1}e^{-tw}\\
+=&-\frac{4\sqrt{\pi}\Gamma[D]}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
+\frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}
+\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}
 \end{align}
 
 So we finally have
 \begin{align}
-\Aboxed{\mathcal{V}_D=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{3D/2-2}\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{d^{D}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}},
+\Aboxed{\mathcal{V}_D=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{3D/2-2}\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
+\frac{1}{d^{D}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}},
 \end{align}
 where we used $\Xi = \log\sqrt{1+\chi}$.  
 
@@ -276,13 +287,13 @@ V = \mathcal{V}_D(\chi,d;3/2) - \frac{1}{2}\partial_d^2\mathcal{V}_{D-2}(x,d;1/2
 
 We need $D=4$, $\alpha=3/2$.  
 \begin{align}
-\mathcal{V}_D(\chi;d;3/2)=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{4}\Gamma[3/2]\Gamma\left[(D+1)/2-3/2\right]}\frac{1}{d^D}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-3/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
+\mathcal{V}_D(\chi;d;3/2)%=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{4}\Gamma[3/2]\Gamma\left[(D+1)/2-3/2\right]}\frac{1}{d^D}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-3/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
 =&-\frac{3}{4d^4}\int_1^\infty dw\,w^{-4}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
 \end{align}
 
 We also need $D=2$, $\alpha=1/2$
 \begin{align}
-\mathcal{V}_{D-2}(\chi;d;1/2)=&-\frac{\Gamma[D-2]\sqrt{\pi}}{2^{(3(D-2)/2-2)}\Gamma[1/2]\Gamma\left[(D-1)/2-1/2\right]}\frac{1}{d^{D-2}}\int_1^\infty dw\,w^{-(D-2)}(w^2-1)^{(D-3)/2-1/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
+\mathcal{V}_{D-2}(\chi;d;1/2)%=&-\frac{\Gamma[D-2]\sqrt{\pi}}{2^{(3(D-2)/2-2)}\Gamma[1/2]\Gamma\left[(D-1)/2-1/2\right]}\frac{1}{d^{D-2}}\int_1^\infty dw\,w^{-(D-2)}(w^2-1)^{(D-3)/2-1/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
 =&-\frac{1}{2d^2}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
 \end{align}
 \comment{Doesn't $V_2$ go to zero for $D=2$ due to $\Gamma[0]$ in the denominator?}
@@ -563,7 +574,8 @@ E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\,
 \end{align}
 We can use Eqs.~(\label{eq:CTM}) and (\label{eq:TM_integrate_by_parts}) to integrate with respect to $p$.  
 \begin{align}
-I_2 =& \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+I_2 =& \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}
+\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
 =& \left[(p^2-1)\frac{1}{2u}\log[1-r'^2 e^{-2pu}]\right]_{p=1}^\infty - \int_1^\infty dp\,\frac{p}{u}\log[1-r'^2 e^{-2pu}]
 \end{align}
 Which gives us 
@@ -587,7 +599,9 @@ We will handle the finite temperature (and dispersion) in the atom-plane geometr
 
 \subsection{Should really be using the Free Energy?}
 
-So I read Babb's paper \footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., ``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'', Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.)
+So I read Babb's paper \footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., 
+``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'',
+ Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.)
   In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
   I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 
@@ -596,7 +610,8 @@ Tanmoy's initial calculation emphasized using $\mathcal{F}$ in the limit $\beta\
   In the limit $T\rightarrow 0$ they of course agree - as borne out above.  
 
 However my finite temperature results using the energy are completely crap.
-If I actually use $\mathcal{F}$, then I think I reproduce Dan's  finite temperature result\footnote{Steck, D. A., ``Quantum Optics Notes'', Eq. (14.326)}: 
+If I actually use $\mathcal{F}$, then I think I reproduce Dan's  finite temperature result\footnote{Steck, D. A.,
+ ``Quantum Optics Notes'', Eq. (14.326)}: 
 \begin{equation}
   V_{CP} = \frac{k_BT}{4\pi\epsilon_0c^2}{\sum_{n=0}^{\infty}}'s_n^2\alpha(is_n)
 \int_0^\infty dk_T \frac{k_T}{\kappa_n}\left[ r_\perp(\theta,is_n)+ 
@@ -637,7 +652,14 @@ and $\phi_n^* = \phi_{-n}$ since $\phi^*(\beta, x) = \phi(\beta, x)$.
 \begin{shaded}
 \comment{See Dec 2012 notes for how to handle the variable counting from doubling the number of variables}
 I'm just trying to figure out the factors of 2 here - just think of the transform to Matsubara 
-frequencies as a ordinary change of variables.  In December I had completely reduced the problem to a discrete problem in $\beta$ as well.  Say I have $N_\beta$ initial time-steps.  I have $N_\beta$ real variables.  If I introduce a Fourier series, then I now have $N-2$ complex variables for $0<n<N_\beta/2$, and 2 real variables at $n=0, N_\beta/2$.  Furthermore we know that $\phi_n^* = \phi_{-n}$.  So from the Gaussian structure of the integrals over $\phi_n$, each of these $(N-2)$ integrals over $\phi_n$ is equal.  When I carry out the integrals I have 
+frequencies as a ordinary change of variables.
+  In December I had completely reduced the problem to a discrete problem in $\beta$ as well.
+  Say I have $N_\beta$ initial time-steps.
+  I have $N_\beta$ real variables.
+  If I introduce a Fourier series, then I now have $N-2$ complex variables for $0<n<N_\beta/2$, and 2 real variables at $n=0, N_\beta/2$.
+  Furthermore we know that $\phi_n^* = \phi_{-n}$.
+  So from the Gaussian structure of the integrals over $\phi_n$, each of these $(N-2)$ integrals over $\phi_n$ is equal.
+  When I carry out the integrals I have 
 \begin{equation}
 \prod_{n=-N_\beta/2}^{N_\beta/2-1}\int D\phi_n e^{-A_n|\phi_n|^2} 
 = C\left( \frac{1}{\sqrt{A_0}}\frac{1}{\sqrt{A_{N_\beta/2}}}\prod_{n>0}\frac{1}{A_n}\right),
@@ -666,7 +688,8 @@ Now let's \comment{assume} we just handle dispersion by taking $\epsilon(x)\righ
 where the effect of the electron field has been intregrated out.  
 Then 
 \begin{equation}
-\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left[ \frac{1}{2}\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right].
+\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left[\frac{1}{2}
+\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right].
 \end{equation}
 where there is only a factor of $\frac{1}{2}$ for $n=0$.
   We will renormalize this against vacuum, 
@@ -760,29 +783,51 @@ E(x') = \frac{\hbar c\alpha_0}{16\pi^2\epsilon_0} \int \frac{dT}{T^3} \dlangle \
 % \end{shaded}
 
 \subsection{Casimir-Polder energy}
-We can extract the Casimir-Polder energy by introducing a test-particle, with $\epsilon(\omega,\vect{x})\rightarrow \epsilon(\omega,\vect{x})+\frac{\alpha(i\omega)}{\epsilon_0}\delta(\vect{x}-\vect{x}_0)$.  The factor of $\epsilon_0$ arises since this is the relative permittivity.  Some care is necessary with the $\delta$-function, and should really be considered the limiting result of some function like $f(x,\sigma) = e^{-x^2/(2\sigma^2)}/\sqrt{2\pi\sigma^2}$.  We will then expand the energy to linear order in $\alpha$.  
+We can extract the Casimir-Polder energy by introducing a test-particle,
+ with $\epsilon(\omega,\vect{x})\rightarrow \epsilon(\omega,\vect{x})
++\frac{\alpha(i\omega)}{\epsilon_0}\delta(\vect{x}-\vect{x}_0)$.
+  The factor of $\epsilon_0$ arises since this is the relative permittivity.
+  Some care is necessary with the $\delta$-function, and should really be considered the limiting 
+result of some function like $f(x,\sigma) = e^{-x^2/(2\sigma^2)}/\sqrt{2\pi\sigma^2}$.
+  We will then expand the energy to linear order in $\alpha$.  
 
 \begin{align}
-E-E_0&=k_BT\sum'_n\,\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  \left(1 - \frac{ T\omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\langle \delta(x-x')\rangle\right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
+E-E_0&=k_BT\sum'_n\,\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
+\dlangle e^{-T\frac{\omega_n^2}{2c^2}} - \left(1 - \frac{ T\omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)
+\langle \delta(x-x')\rangle\right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
 \end{align}
-I think the first two terms the energy due to the dielectrics on their own, without the atom, and such can be subtracted from the atom-wall interaction energy.  The physical renormalization is to expand the energy for just a polarizable particle, and consider the energy change with and without the presence of the other dielectric.  So we subtract off the same energy, but with $\epsilon=1$ everywhere.
+I think the first two terms the energy due to the dielectrics on their own, without the atom, 
+and such can be subtracted from the atom-wall interaction energy.
+  The physical renormalization is to expand the energy for just a polarizable particle,
+ and consider the energy change with and without the presence of the other dielectric.
+  So we subtract off the same energy, but with $\epsilon=1$ everywhere.
 
 We can also simplify this a bit by noting that 
 \begin{equation}
 \int d^3x_0\, \dlangle \frac{1}{T}\int_0^T dt \delta(x(t)-x')\drangle = \int d^3x_0 \delta(x_0-x'),
 \end{equation}
-This follows from considering the discrete form of the path integral, $\int d^3x_0 \prod_i\int d^3x_i f(x_i-x_{i-1})$, where the integral is cyclic under permutations of indices.  In this way we can always relabel the point that passes through $x_0$ to be the starting point of the loop.   So we will then only consider loops that start and return to $x_0 = x'$.   Mathematically, we will use this delta function to eliminate the integral over $\int d^3x_0$.  
+This follows from considering the discrete form of the path integral,
+ $\int d^3x_0 \prod_i\int d^3x_i f(x_i-x_{i-1})$, where the integral is cyclic under permutations of indices.  
+In this way we can always relabel the point that passes through $x_0$ to be the starting point of the loop.
+   So we will then only consider loops that start and return to $x_0 = x'$.
+   Mathematically, we will use this delta function to eliminate the integral over $\int d^3x_0$.  
 
 The renormalized result is 
 \begin{align}
-E-E_0&=-k_BT{\sum_n}\,\frac{ \omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} -e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:TE_thermal_energy}
+E-E_0&=-k_BT{\sum_n}\,\frac{ \omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\int_0^\infty dT\,
+\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} 
+-e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:TE_thermal_energy}
 \end{align}
 
-We will focus on the Casimir-Polder result, since I can then compare to Dan's expressions in the notes.  For the Casimir results, I will collate some results from the literature to compare in the non-zero temperature/dispersive cases.  
+We will focus on the Casimir-Polder result, since I can then compare to Dan's expressions in the notes.
+  For the Casimir results, I will collate some results from the literature to compare in the nonzero
+ temperature/dispersive cases.  
 
 
 % \begin{align}
-% E-E_0&=-k_BT \frac{\hbar\beta}{2\pi}\int_{-\infty}^\infty d\omega\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega^2}{2c^2}} -  e^{-\frac{ T \omega^2\langle\epsilon(i\omega)\rangle}{2c^2}}\drangle,
+% E-E_0&=-k_BT \frac{\hbar\beta}{2\pi}\int_{-\infty}^\infty d\omega\int_0^\infty \frac{dT}{T}
+%\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega^2}{2c^2}} 
+%-  e^{-\frac{ T \omega^2\langle\epsilon(i\omega)\rangle}{2c^2}}\drangle,
 % \end{align}
 
 
@@ -793,8 +838,8 @@ We will focus on the Casimir-Polder result, since I can then compare to Dan's ex
 
 
 % \begin{shaded}
-% One question is, can we say $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)= 0?$  If we approximate the atom as a harmonic oscillator \footnotemark
-
+% One question is, can we say $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)= 0?$  
+%If we approximate the atom as a harmonic oscillator \footnotemark
 %  with damping $\gamma$, and resonant frequency $\omega_0$   , then 
 % \begin{equation}
 % \alpha(i\omega)= \frac{e/m}{\omega_0^2+\omega^2+\gamma\omega},
@@ -803,7 +848,8 @@ We will focus on the Casimir-Polder result, since I can then compare to Dan's ex
 % \begin{equation}
 % \alpha(i\omega) =\sum_j \frac{2\omega_{j0}|\langle g | d_z|e_j\rangle|^2}{2\hbar(\omega_{j0}^2+\omega^2)},
 % \end{equation}
-% where $\omega_{j0}$ are the transition frequencies.  Evidently in both cases $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)=0$, if $\gamma=0$.   
+% where $\omega_{j0}$ are the transition frequencies.
+%  Evidently in both cases $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)=0$, if $\gamma=0$.   
 % \end{shaded}
 % \footnotetext{Rosa, F.S.S, Dalvit, D. A. R. and Milonni, P. W., Phys. Rev. A, \textbf{84},053813,(2011), ``Electromagnetic energy, absorption, and Casimir Forces, II. Inhomogenous dielectric media''}
 % \footnotetext{Steck, Daniel A. ``Quantum Optics Notes'', Eq.(14.146) for the scalar Kramers-Heisenberg formula, see also Eq.(14.152).}
@@ -812,51 +858,77 @@ We will focus on the Casimir-Polder result, since I can then compare to Dan's ex
 \subsubsection{Feynman-Kac formula}
 From Dan's work (or my re-working of it) we have the Laplace-Mellin transform for the single body Feynman-Kac formula,
 \begin{align}
-\int_0^\infty \frac{dT}{T^{1+z}}\dlangle e^{-s[T+ \chi\int_0^Tdt\Theta(x-d)]}\drangle =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int _0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
-%=&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-%=& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-=& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty dT e^{-(\lambda+s)T}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle.
+\int_0^\infty \frac{dT}{T^{1+z}}\dlangle e^{-s[T+ \chi\int_0^Tdt\Theta(x-d)]}\drangle 
+=& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int _0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
+=& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty dT e^{-(\lambda+s)T}
+\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle.
 \end{align}
-In our case $z=1/2$, and $s= \omega^2/(2c^2)$.  We also need the actual analytical expression for that path integral,
+In our case $z=1/2$, and $s= \omega^2/(2c^2)$.
+  We also need the actual analytical expression for that path integral,
 \begin{equation}
-\int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi\int_0^T dt \Theta(x-d)}}{\sqrt{2\pi T}}\drangle  =\frac{1}{\sqrt{2(\lambda+s)}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\right].
+\int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi\int_0^T dt \Theta(x-d)}}{\sqrt{2\pi T}}\drangle  
+=\frac{1}{\sqrt{2(\lambda+s)}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}\frac{\sqrt{\lambda+s(1+\chi)}
+-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\right].
 \end{equation}
 
 We will need to apply both of these results as 
 \begin{align}
-\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-sT} - e^{-sT \langle\epsilon(i\omega)\rangle}\drangle & =\frac{1}{2\pi}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{2(\lambda+s)}}\frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
+\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-sT} - e^{-sT \langle\epsilon(i\omega)\rangle}\drangle 
+& =\frac{1}{2\pi}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{2(\lambda+s)}}
+\frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
 \end{align}
 
 On plugging this in to Eq.~(\ref{eq:TE_thermal_energy}) we have
 \begin{align}
-E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+\omega_n^2/(2c^2))}|d|}}{\sqrt{2(\lambda+\omega_n^2/(2c^2))}}\frac{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}-\sqrt{\lambda+\omega_n^2/(2c^2)}}{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}+\sqrt{\lambda+\omega_n^2/(2c^2)}},
+E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\int_0^\infty d\lambda\, 
+\frac{e^{-2\sqrt{2(\lambda+\omega_n^2/(2c^2))}|d|}}{\sqrt{2(\lambda+\omega_n^2/(2c^2))}}
+\frac{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}-\sqrt{\lambda+\omega_n^2/(2c^2)}}
+{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}+\sqrt{\lambda+\omega_n^2/(2c^2)}},
 \end{align}
 Let's make a couple variable changes to put this into a more tractable form.  
 First we change integration variable using $\lambda = \kappa \omega_n^2/(2c^2)$.  
 \begin{align}
-E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\frac{\omega_n^2}{2c^2}\int_0^\infty d\kappa\, \frac{e^{-2\omega_n\sqrt{(\kappa+1)}|d|/c}}{\omega_n\sqrt{(\kappa+1)}/c}\frac{\sqrt{\kappa+1+\chi(i\omega_n)]}-\sqrt{\kappa+1}}{\sqrt{\kappa+1+\chi(i\omega_n)}+\sqrt{\kappa+1}},
+E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\frac{\omega_n^2}{2c^2}
+\int_0^\infty d\kappa\, \frac{e^{-2\omega_n\sqrt{(\kappa+1)}|d|/c}}{\omega_n\sqrt{(\kappa+1)}/c}
+\frac{\sqrt{\kappa+1+\chi(i\omega_n)]}-\sqrt{\kappa+1}}{\sqrt{\kappa+1+\chi(i\omega_n)}+\sqrt{\kappa+1}},
 \end{align}
 Next we define $\kappa +1= p^2$.  
 \begin{align}
-E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^3\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2\omega_n p|d|/c}\frac{\sqrt{p^2+\chi(i\omega_n)}-p}{\sqrt{p^2+\chi(i\omega_n)}+p},\label{eq:TE_CP_finite_temperature}
+E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^3\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2\omega_n p|d|/c}
+\frac{\sqrt{p^2+\chi(i\omega_n)}-p}{\sqrt{p^2+\chi(i\omega_n)}+p},
+\label{eq:TE_CP_finite_temperature}
 \end{align}
-This is the general result for finite temperature and dispersion.  We can also take the zero temperature limit.  In the limit $\beta\rightarrow \infty$ the difference between Matsubara frequencies approaches zero, $\Delta\omega_n =\frac{2\pi}{\beta\hbar}$.  Then we can take $\sum_n\Delta\omega_n \rightarrow \int_0^\infty d\omega$.
+This is the general result for finite temperature and dispersion.
+  We can also take the zero temperature limit.
+  In the limit $\beta\rightarrow \infty$ the difference between Matsubara frequencies approaches zero,
+ $\Delta\omega_n =\frac{2\pi}{\beta\hbar}$.  Then we can take $\sum_n\Delta\omega_n \rightarrow \int_0^\infty d\omega$.
 \begin{align}
-E-E_0%&=-k_BT\frac{\hbar\beta}{2\pi}\int_0^\infty d\omega\frac{\omega^3\alpha(i\omega)}{4\pi\epsilon_0c^3}\int_1^\infty dr\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}\\
-&=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p},\label{eq:TE_CP_zero_temperature}
+E-E_0&=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)
+\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p},\label{eq:TE_CP_zero_temperature}
 \end{align}
 where now $\omega$ is a continuous variable.  
 
 \subsection{Various Limiting Cases}
 
-Let us now consider the various limits for the Casimir-Polder case.  Since we are taking an ensemble average over Gaussian random walks, the loops will intersect all the surfaces when $T\sim d^2$, where $d$ is the distance from the source point $x_0$ to the farthest surface.  Secondly, the frequency sum/integral is dominated by the exponential factors, which will contribute most when $T\omega_n^2/c^2\sim 1$.  This suggests that frequencies with  $\omega_n^2< c^2/d^2$  will contribute most.   
+Let us now consider the various limits for the Casimir-Polder case.
+  Since we are taking an ensemble average over Gaussian random walks,
+ the loops will intersect all the surfaces when $T\sim d^2$, 
+where $d$ is the distance from the source point $x_0$ to the farthest surface.
+  Secondly, the frequency sum/integral is dominated by the exponential factors,
+ which will contribute most when $T\omega_n^2/c^2\sim 1$.
+  This suggests that frequencies with  $\omega_n^2< c^2/d^2$  will contribute most.   
 
 \subsubsection{Zero temperature, far-field limit}
 
-We start from Eq.~(\ref{eq:TE_CP_zero_temperature}).  If we also take the limit where $d/c$ is large, only frequencies near $0$ will contribute, and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$, $\alpha(i\omega)\approx\alpha_0$ everywhere.  
-\comment{Does this also only work up to a certain distance, at which point the integral crosses over to High temperature,since there is always some thermal background.  e.g. infra-red radiation. }
+We start from Eq.~(\ref{eq:TE_CP_zero_temperature}).
+  If we also take the limit where $d/c$ is large, only frequencies near $0$ will contribute,
+ and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$, $\alpha(i\omega)\approx\alpha_0$ everywhere.  
+\comment{Does this also only work up to a certain distance, 
+at which point the integral crosses over to High temperature,since there is always some thermal background.
+  e.g. infra-red radiation. }
 \begin{align}
-E-E_0&=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(0)}-p}{\sqrt{p^2+\chi(0)}+p}
+E-E_0&=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)
+\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(0)}-p}{\sqrt{p^2+\chi(0)}+p}
 \end{align}
 
  Now evaluate the $\omega$ integral, 
@@ -869,27 +941,37 @@ E-E_0&= -\frac{3\hbar c\alpha_0}{64\pi^2 \epsilon_0 d^4}\int_1^\infty dp\,p^{-4}
 \end{align}
 
 \subsubsection{Near field, low temperature}
-Let's now work in the limit where $d<<c/\omega_{j0}$.  In this case all frequencies contribute, but we can convert the sum into an integral.  The difference here is that all of the frequency dependence of $\epsilon(\omega)$  will matter.  
+Let's now work in the limit where $d<<c/\omega_{j0}$.
+  In this case all frequencies contribute, but we can convert the sum into an integral.
+  The difference here is that all of the frequency dependence of $\epsilon(\omega)$  will matter.  
 \begin{equation}
-E-E_0=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}
+E-E_0=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)
+\int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}
 \end{equation}
-The integral contributes most when the exponent is order unity.  The presence of $\alpha$ means that frequencies around $\omega_{j0}$ will dominate the frequency integral.  Then $p \sim  c/(d\omega_{j0})\gg 1$.  Let's use that fact to approximate the reflection coefficient, and see if we can reproduce the known van der Waals result.  
+The integral contributes most when the exponent is order unity.
+  The presence of $\alpha$ means that frequencies around $\omega_{j0}$ will dominate the frequency integral.
+  Then $p \sim  c/(d\omega_{j0})\gg 1$.
+  Let's use that fact to approximate the reflection coefficient, 
+and see if we can reproduce the known van der Waals result.  
 \begin{align}
-\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}\approx & \frac{ p + \frac{\chi}{2p}-p}{2p+\frac{\chi(i\omega)}{2p}} \approx \frac{\chi}{4p^2} 
+  \frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}\approx 
+& \frac{ p + \frac{\chi}{2p}-p}{2p+\frac{\chi(i\omega)}{2p}} \approx \frac{\chi}{4p^2} 
 \end{align}
 Plugging this in, we can then evaluate the $p$ integral
 \begin{align}
-E-E_0=&-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\chi(i\omega)\int_1^\infty dp\,\frac{1}{4p^2}e^{-2\omega p|d|/c}\\
-=&-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\chi(i\omega)\int_1^\infty dp\,\frac{1}{4p^2}e^{-2\omega p|d|/c}
+E-E_0=&-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\chi(i\omega)
+\int_1^\infty dp\,\frac{1}{4p^2}e^{-2\omega p|d|/c}
 \end{align}
 
 Let's try to work on that integral a bit.  
 \begin{align}
-\int_1^\infty dp\,\frac{1}{4p^2}e^{-2\omega p|d|/c} =& -\frac{1}{4p}e^{-2\omega p d/c}\bigg|_{p=1}^{\infty} + \int_1^\infty dp\, \frac{1}{4p}\times \frac{-2\omega d}{c}e^{-2\omega pd/c}\\
+\int_1^\infty dp\,\frac{1}{4p^2}e^{-2\omega p|d|/c} =& -\frac{1}{4p}e^{-2\omega p d/c}\bigg|_{p=1}^{\infty}
+ + \int_1^\infty dp\, \frac{1}{4p}\times \frac{-2\omega d}{c}e^{-2\omega pd/c}\\
 =& \frac{1}{4}e^{-2\omega d/c} - \frac{2\omega d}{c} \int_1^\infty dp\, \frac{e^{-2\omega pd/c}}{p}.
 \end{align}
 
-Recall, we are working in the so-called near-field limit where $d\omega_{j0}/c<<1.$  I think we can get away with approximating this as just the exponential term.  
+Recall, we are working in the so-called near-field limit where $d\omega_{j0}/c<<1.$  
+I think we can get away with approximating this as just the exponential term.  
 
 \begin{align}
 E-E_0=&-\frac{\hbar}{32\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\chi(i\omega)e^{-2\omega d/c}\\
@@ -902,7 +984,8 @@ Since I think we are working wiht $d\omega/c$ is very small, so this term is tin
 
 \subsubsection{High Temperature, (far field ?)}  
 
-As we noted earlier, the renormalized partition function vanishes for $\omega_0$.  The leading term is $\omega_1$, which will be exponentially suppressed relative to the TM contribution.  
+As we noted earlier, the renormalized partition function vanishes for $\omega_0$.
+  The leading term is $\omega_1$, which will be exponentially suppressed relative to the TM contribution.  
 
 
 % \subsubsection{High Temperature,Near field}.  In this case $d\rightarrow 0$, so all frequencies contribute.  I think you're stuck in this case having to evaluate that sum.    
@@ -1201,17 +1284,6 @@ Other work tells us that only $\omega_0$ contributes here.  Naively taking $\ome
 % =& -\partial_\beta\frac{\omega^3_1\alpha(i\omega_1)}{4\pi\epsilon_0c^3}\frac{\sqrt{1+\chi}-1 }{\sqrt{1+\chi}+1}e^{-2\omega_1 d/c}\frac{c}{2\omega_1 d}.  
 % \end{align}
 % Which just decays exponentially with distance (rapidly no less).  Hmm.
-
-\subsubsection{Using the Energy: $\omega_0\rightarrow 0$ as a limit?}
-Hmm.  Let's try this again, but treating the approach of $\omega_0\rightarrow 0$ as a limiting process?  Let's work with $\omega_0 \sim \lim_{\eta\rightarrow 0}\eta \omega_1$.  Then the exponent is $\eta p\omega d/c$.  Since $\eta\rightarrow 0$, large $p$ dominate.  (Having read Dan's notes I know this should spit out something like the van der Waals energy, with a $k_BT$.)
-\begin{align}
-E-E_0=& -\frac{1}{2}\partial_\beta\lim_{\eta\rightarrow 0}\frac{\eta^3\omega_1^3\alpha(i\eta\omega_1)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,\left(1-2p^2\right)e^{-2\eta p\omega_1 d/c}\frac{\sqrt{p^2+\chi}-p(1+\chi)}{\sqrt{p^2+\chi}+p (1+\chi)} \\
-\approx& -\frac{1}{2}\partial_\beta\lim_{\eta\rightarrow 0}\frac{\eta^3\omega_1^3\alpha(i\eta\omega_1)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,\left(1-2p^2\right)e^{-2\eta p\omega_1 d/c}\frac{p-p(1+\chi)}{p+p (1+\chi)} \\
-=& -\frac{1}{2}\partial_\beta\lim_{\eta\rightarrow 0}\frac{\eta^3\omega_1^3\alpha(i\eta\omega_1)}{4\pi\epsilon_0c^3}\frac{(1+\chi)-1}{(1+\chi)+1}\int_1^\infty dp\,\left(2p^2-1\right)e^{-2\eta p\omega_1 d/c} \\
-=& -\frac{1}{2}\partial_\beta\lim_{\eta\rightarrow 0}\frac{\eta^3\omega_1^3\alpha(i\eta\omega_1)}{4\pi\epsilon_0c^3}\frac{\epsilon(i\eta\omega_1)-1}{\epsilon(i\eta\omega_1)+1}\frac{\left(1 + (\eta\omega_1d/c)\right)^2}{2 (\eta\omega_1d/c)^3} e^{-2\eta\omega_1d/c}  \\
-=& -\partial_\beta\lim_{\eta\rightarrow 0}\frac{\alpha(i\eta\omega_1)}{16\pi\epsilon_0d^3}\frac{\epsilon(i\eta\omega_1)-1}{\epsilon(i\eta\omega_1)+1}\left(1 + (\eta\omega_1d/c)\right)^2 e^{-2\eta\omega_1d/c} 
-\end{align}
-This is basically reproducing the near-field calculation.  If we keep this sequence of limits, $\eta\rightarrow 0$ first, then $\partial_\beta$ this just gives us zero.  If we swap the limits and take the derivative, then we have left over factors of $\eta$.  If we set $\eta=1$, we can see that higher terms are exponentially suppressed.  
 
 \subsubsection{Retrying with free energy}
 

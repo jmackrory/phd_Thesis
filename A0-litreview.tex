@@ -22,13 +22,15 @@ Dalvit~\cite{Dalvit2011}
 
 \subsection{Parsegian: van der Waals forces}
 
-Parsegian~\cite{Parsegian2006}
-
-
+Parsegian~\cite{Parsegian2006}.
+Covers van der Waals forces at varying levels of detail.  Finally gets to Green function
+point of view for various geometries.  Published prior to major theory breakthroughs.  
 
 \subsection{Israelachivili:Molecular Forces}
 
-Israelachivili~\cite{Israelachvili2011}
+Israelachivili~\cite{Israelachvili2011}.
+Primarily interested in chemistry effects (and other effects that contribute in addition to 
+van der Waals)
 
 \section{Field Theory Books}
 
@@ -60,7 +62,8 @@ Effective theory
 Thermal field theory
 
 Feynman-Diagram approach to Casimir.
-
+This is tightly related to the version published in papers.  In particular using the 
+field theoretic Green function approach.  
 
 \section{Stochastic Books}
 
@@ -292,7 +295,6 @@ This paper treats plate-sphere results.  (Hmm, I thought they had more to do wit
 \subsection{Stratton}
 Surface integral equations (Stratton-chu)
 \cite{Stratton1941}
-
 Early Emig paper~\cite{Emig2001} computes Casimir energy for corrugated waveguide.
 Apparently field splits into two independent scalars.  (TE/TM)
 Perfectly conducting boundary conditions, so one scalar obeys Dirichlet, 
@@ -440,14 +442,14 @@ $Z=\tr[e^{-\beta H}]$ for the EM field.
 
 Interested in ground state energy at zero temperature.  
 \begin{equation}
-E=-frac{1}{\beta}\log Z
+E=-\frac{1}{\beta}\log Z
 \end{equation}
 Formally divergent, must be regularized.  If consider energy differences to some reference configuration,
 these cutoff dependent contributions drop out.  
 
 Renormalize by considering some reference case.
 \begin{equation}
-E-E_0=-frac{1}{\beta}[\log Z-\log Z_0]
+E-E_0=-\frac{1}{\beta}[\log Z-\log Z_0]
 \end{equation}
 
 Rotate action from Minkowski to Euclidean, by taking $\epsilon(\omega)\rightarrow\epsilon(i\kappa_n)$
@@ -465,10 +467,282 @@ So energy can be written
 \begin{equation}
 E = -\frac{\hbar c}{2\pi}\int_0^\infty d\kappa \log Z(\kappa).
 \end{equation}
+where path integral $Z$ is
+\begin{align}
+Z(\kappa)=\int D\vect{A}D\vect{A}^*\exp\left\{-\beta\int d\vect{x}\vect{E}^*\left[
+\left(I+\frac{1}{\kappa^2}\nabla\times\nabla\times\right)+\frac{1}{\kappa^2}V\right]\vect{E}\right\}
+\end{align}
+where the potential operator is
+\begin{equation}
+V=I\kappa[1-\epsr(ic\kappa,\vect{x}]-\nabla\times\left(\frac{1}{\mur(ic\kappa,\vect{x})}-1\right)\nabla\times.
+\end{equation}
+
+\subsubsection{Green function expansions}
+Now an aside on setting up the classical Green functions.
+The wave equation associated with the classical action in the absence of media is
+\begin{equation}
+\left(-I\frac{\omega^2}{c^2}+\nabla\times\nabla\times\right)\vect{E}(\omega,\vect{x})=0
+\end{equation}
+The Green's function dyadic satisfies the associated equation with delta function source,
+\begin{equation}
+\left(-I\frac{\omega^2}{c^2}+\nabla\times\nabla\times\right)G^0(\omega,\vect{x},\vect{x'})=I\delta(\vect{x-x'})
+\label{eq:A0-Green-x}
+\end{equation}
+This equation can be solved via a Fourier transform,
+\begin{equation}
+  G^0(\omega;\vect{k},x')=\int d\vect{x} e^{-i\vect{k\cdot x}} G^0(\omega;\vect{x},\vect{x'})
+\end{equation}
+Using the Fourier representation of the delta function, the Green function must satisfy
+\begin{equation}
+\left(-I\frac{\omega^2}{c^2}-\vect{k}\times\vect{k}\times\right)G^0(\omega,\vect{k},\vect{x'})
+=Ie^{-i\vect{k}\cdot(\vect{x'})}\label{eq:A0-Green-k}
+\end{equation}
+This is now a linear matrix equation, which can be solved readily.  We will use 
+\begin{equation}
+(\vect{k}\times\vect{k}\times)_{ij}=-k^2\left(\delta_{ij}-\frac{k_ik_j}{k^2}\right)=-k^2(P_T)_{ij}
+\end{equation}
+where we used
+\begin{equation}
+  \epsilon_{iab}k_a\epsilon_{bcd}k_c = \epsilon_{bia}\epsilon_{bcd}k_ak_c 
+= (\delta_{ic}\delta_{ad}-\delta_{id}\delta_{ac})k_ak_c
+= k_ik_d-\delta_{id}k^2
+\end{equation}
+We can use the transverse/longitudinal projectors to write the inverse of the matrix on the LHS. 
+\begin{equation}
+  I = P_L + P_T \quad P_L^2=P_L\quad P_T^2=P_T\quad P_LP_T=0
+\end{equation}
+The matrix inverse of the operator in Eq.~(\ref{eq:A0-Green-k}) must satisfy
+\begin{equation}
+  (aP_L + b P_T)[-\frac{\omega^2}{c^2}(P_L+P_T)-k^2P_T]=I
+\end{equation}
+for some constants $a$,$b$.  Expanding the above relation out, and equating terms on each side,
+we find that 
+\begin{align}
+  (aP_L + b P_T)[-\frac{\omega^2}{c^2}P_L+(k^2-\omega^2/c^2)P_T]=I
+\end{align}
+Then $a = -\frac{c^2}{\omega^2}$, and $b=\frac{1}{k^2-\omega^2/c^2}$.  
+If we write Eq.~(\ref{eq:A0-Green-k}) as $A G = I e^{-i\vect{k\cdot x'}}$, then the Green function 
+can be written as 
+\begin{align}
+  G^0_{ij}& = A^{-1}_{ik}I_{kj} e^{-i\vect{k\cdot x'}} =e^{-i\vect{k\cdot x'}} \left[-\frac{c^2}{\omega^2}\frac{k_ik_j}{k^2}
+    +\frac{1}{k^2-\omega^2/c^2}\left(\delta_{ij}-\frac{k_ik_j}{k^2}\right)\right]
+\end{align}
+Now simplify the term in front of longitudinal projector (briefly using $\alpha=\omega/c$)
+\begin{equation}
+  -\frac{1}{\alpha^2}+\frac{1}{k^2-\alpha^2} =  -\frac{k^2-\alpha^2+\alpha^2}{\alpha^2(k^2-\alpha^2)}
+=-\frac{k^2}{\alpha^2(k^2-\alpha^2)}
+\end{equation}
+If we invert the Fourier transform in $k$, then the Green function is written as
+\begin{equation}
+G^0_{ij}(\omega;\vect{x},\vect{x'})=\int \frac{d\vect{k}}{(2\pi)^3} \frac{e^{i\vect{k}\cdot(\vect{x-x'})}}
+{k^2-(\omega/c+i\epsilon)^2}\left(\delta_{ij}-\frac{c^2}{\omega^2}k_ik_j\right),
+\end{equation}
+where that choice of pole prescription corresponds to choosing outgoing waves, i.e. $e^{ik x}$
+The Fourier transform can be evaluated (simple exercise in spherical integrals, and reasoning about 
+which way to complete the contour.  
+This can also be written as 
+\begin{align}
+G^0_{ij}(\omega;\vect{x},\vect{x'})&=\left(\delta_{ij}-\frac{c^2}{\omega^2}\partial_i\partial'_j\right)
+\int \frac{d\vect{k}}{(2\pi)^3} \frac{e^{i\vect{k}\cdot(\vect{x-x'})}}
+{k^2-(\omega/c+i\epsilon)^2}\\
+&=\left(\delta_{ij}-\frac{c^2}{\omega^2}\partial_i\partial'_j\right)
+\frac{e^{i\omega/c|\vect{x-x'}|}}{4\pi|\vect{x-x'}|}
+\end{align}
+So far, so standard.  
+
+Can write Green function in terms of states, using $\vect{E}_\alpha(\omega)=
+\langle x|\vect{E}_\alpha(\omega)\rangle$, where $\alpha$ is labelling index.
+Then the Green function can be expanded in Hilbert space as 
+\begin{equation}
+  G^0 = \int d\omega' \sum_{\alpha} C_\alpha(\omega')
+  \frac{|\vect{E}^\mathrm{reg}_\alpha(\omega')\rangle\langle \vect{E}^\mathrm{reg}_\alpha(\omega')|}
+  {\omega'^2/c^2-(\omega/c+i\epsilon)^2}
+\end{equation}
+where $\vect{E}^\mathrm{reg}$ is a ``regular'' non-singular solution to equations of motion.  
+Note these are normalized for EM scattering theory, \emph{not} quantum mechanics,
+\begin{equation}
+\int d\omega' \sum_{\alpha} C_\alpha(\omega')
+  |\vect{E}^\mathrm{reg}_\alpha(\omega')\rangle\langle \vect{E}^\mathrm{reg}_\alpha(\omega')| = I
+\end{equation}
+
+Distinguish ``regular'', (solutions to source-free equations), from ``outgoing'' solutions
+which must obey outgoing boundary conditions as ``outward'' variable, $\xi_1$ goes to infinity.
+Must pick one of the coordinates $\xi_i$ to denote a notion of outward.  
+They use the example from spherical scattering of Hankel functions being outgoing, $h_l^{(1)}(kr)\sim \frac{e^{ikr}}{r}$
+which is singular at the origin.  This is contrasted with the regular Bessel solution, $j_l^{(1)}$.  
+The full outgoing solution is the outgoing solution in $\xi_1$ multiplied by the regular solutions
+in $\xi_2,\xi_3$.  
+
+The Green function (carrying out the contour integral in $\omega'$) is:
+\begin{equation}
+G^0_{ij}=\sum_\alpha C_\alpha(\omega)\left\{\begin{array}{cr}
+E_i^\mathrm{out}(\omega,\vect{\xi}) E_j^{\mathrm{reg}*}(\omega,\vect{\xi'}) & \xi_1(\vect{x})>\xi_1'(\vect{x'})\\
+E_i^\mathrm{reg}(\omega,\vect{\xi}) E_j^{\mathrm{in}*}(\omega,\vect{\xi'}) & \xi_1(\vect{x})<\xi_1'(\vect{x'})
+\end{array}
+\right.
+\end{equation}
+Set $C_\alpha$ using the Wronskian of the regular and outgoing solutions, while the completeness
+relation for $\xi_2,\xi_3$ sets the correct ``jump'' condition at $\vect{x=x'}$.  
+
+For imaginary $k$, find incoming and regular solutions increase exponentially with $\xi_1$,
+which outgoing solutions descrease exponentially.  
+
+(They  use on-shell to denote only equal frequency components contribute, i.e. $\omega'=\omega$.)
+
+\subsubsection{Translation matrices}
+
+In order to use this formalism, one must be able to translate the matrices to different origins on
+different bodies.  
+
+You can use the regular solutions as a basis for expansion - provided you omit the possibly 
+singular origin for the outgoing solutions.  
+\begin{equation}
+\vect{E}^\text{reg}_\alpha(\omega,\vect{x}_i) = \sum_{\beta}\mathcal{V}^{ij}_{\beta,\alpha}(\kappa,\vect{x}_i-\vect{x}_j)
+\vect{E}^\text{reg}_\beta(\omega,\vect{x}_j)
+\end{equation}
+Note that in this formulation, $\vect{x}_i$ is the vector from origin $\mathcal{O}_i$ to a particular 
+point, and $\vect{x}_j$ is a vector to the \emph{same} point, but with a different origin.  
+
+So for the outgoing solutions, 
+\begin{equation}
+\vect{E}^\text{out}_\alpha(\omega,\vect{x}_i) = \sum_{\beta}\mathcal{U}^{ij}_{\beta,\alpha}(\kappa,\vect{x}_i-\vect{x}_j)
+\vect{E}^\text{reg}_\beta(\omega,\vect{x}_j),
+\end{equation}
+provided $x_i$ is not near the origin of its coordinate system.  
+
+(They use $X_{ij}=\vect{x}_i-\vect{x}_j$)
+
+This can be applied to express the Green function when $\vect{x}$ lies on one object,
+and $\vect{x'}$ lies on another object.  
+\begin{equation}
+G^0_{ij}(ic\kappa,\vect{x},\vect{x'})=\sum_{\alpha,\beta} C_\beta(\omega)\left\{\begin{array}{cr}
+E_{i,\alpha}^\mathrm{reg}(\kappa,\vect{x}_i) \mathcal{U}^{ij}_{\alpha\beta} E_{j,\beta}^{\mathrm{reg}*}(\omega,\vect{x}_j)
+& \text{if $i$ and $j$ are outside each other}\\
+E_{i,\alpha}^\mathrm{reg}(\kappa,\vect{x}_i) \mathcal{V}^{ij}_{\alpha\beta} E_{j,\beta}^{\mathrm{in}*}(\omega,\vect{x}_j)
+& \text{if $i$ is inside $j$, or $i$ is below $j$ (plane)}\\
+E_{i,\alpha}^\mathrm{out}(\kappa,\vect{x}_i) \mathcal{W}^{ji}_{\alpha\beta} E_{j,\beta}^{\mathrm{reg}*}(\omega,\vect{x}_j)
+& \text{if $j$ is inside $i$, or $j$ is below $i$ (plane)},
+\end{array}\right.\label{eq:G0_expansion}
+\end{equation}
+where $\mathcal{W}^{ij}_{\alpha\beta}=\frac{C_\alpha}{C_\beta}{\mathcal{V}^{ij}_{\alpha\beta}}^\dag$.
+
+This can be further written in matrix form as 
+\begin{equation}
+G^0_{ij}(ic\kappa,\vect{x},\vect{x'})=\sum_{\alpha,\beta}C_\beta(\omega)
+\left( E_{i,\alpha}^\mathrm{reg}(\kappa,\vect{x}_i), E_{i,\alpha}^\mathrm{out}(\kappa,\vect{x}_i)\right)
+\Bigg(
+\begin{array}{cc}
+\mathcal{U}^{ij}_{\alpha\beta} & \mathcal{V}^{ij}_{\alpha\beta}\\
+\mathcal{W}^{ji}_{\alpha\beta} & 0
+\end{array}\Bigg)
+\Bigg(\begin{array}{c}
+ E_{j,\alpha}^{\mathrm{reg}*}(\kappa,\vect{x}_j)\\
+E_{j,\alpha}^{\mathrm{in}*}(\kappa,\vect{x}_j)
+\end{array}
+\Bigg)
+\end{equation}
+For a given geometry only one of these translation matrices is non-zero, and thus picks out 
+one element of the resulting matrix.  
+
+This can be further written in bra-ket notation, where we will define the negative
+of the central matrix as $X^{ij}$. (They use BB letters).
+
+(This choice of basis expansion does not work well for intersecting objects - however the 
+Johnson choice in terms of triangles works just fine)
+
+\subsubsection{Classical Scattering  theory}
+
+Maxwell's equations can be written in Fourier space as 
+\begin{gather}
+\nabla\times\vect{E}(\omega,\vect{x}) = i\omega \vect{B}(\omega,\vect{x})\\
+\nabla\times\frac{1}{\mur}\vect{B}(\omega,\vect{x}) = -i\frac{\omega}{c^2}\epsr\vect{E}(\omega,\vect{x})
+\end{gather}
+If we combine the equations, the resulting wave equation can be written as
+\begin{equation}
+  [H_0+V(\omega,\vect{x})]\vect{E} = \frac{\omega^2}{c^2}\vect{E}(\omega,\vect{x})
+\end{equation}
+where 
+\begin{align}
+H_0 = \nabla\times\nabla\times \\
+V_0 = I\frac{\omega^2}{c^2}[1-\epsr(\omega,\vect{x})]+\nabla\times\left(\frac{1}{\mur}-1\right)\nabla\times,
+\end{align}
+and $V_0$ is the same potential operator that showed up in the quantum theory.  
+
+The Lippmann-Schwinger equation says
+\begin{equation}
+|\vect{E}\rangle = |\vect{E}_0\rangle - G_0V|\vect{E}\rangle,
+\end{equation}
+where $G_0$ is the free Green operator and $|\vect{E}_0\rangle$ is a solution of the free 
+wave equation, i.e. $(H_0-\omega^2/c^2I)|\vect{E}_0\rangle=0$.  (I think This follows from
+ defining $|\vect{E}\rangle$ as the original free solution, and some scattered part. Then plug this in
+and solve for the implicit equation for $\vect{E}$.)
+
+If you plug this into itself repeatedly, then 
+\begin{equation}
+|\vect{E}\rangle = |\vect{E}_0\rangle - G_0V(|\vect{E}_0\rangle - G_0V|\vect{E}\rangle)\cdots
+=|\vect{E}_0\rangle -G_0T|\vect{E}_0\rangle,
+\end{equation}
+where the electromagnetic T-operator is
+\begin{equation}
+  T = V\frac{I}{I+G_0V}= VGG_0^{-1},
+\end{equation}
+where $G$ is the Green function of the full Hamiltonian: $(-\frac{\omega^2}{c^2}I+H_0+V)G=I$
+The free Green function $G_0$ obeys $(-\frac{\omega^2}{c^2}I+H_0)G_0=I$.
+  
+The $T$ operator is related to the scattering amplitude $\mathcal{F}$.  So if we scatter a wave 
+from the exterior of an object, then $|\vect{E}_0\rangle$ is taken to be $|\vect{E}^{\text{reg}}_\alpha\rangle$.
+Then using the Green function (\ref{eq:G0_expansion}), the full state can be written as
+\begin{equation}
+  \vect{E}(\omega,\vect{x}) = \vect{E}^{\text{reg}}_\alpha(\omega,\vect{x}) - \sum_\beta \vect{E}^{\text{out}}_\beta(\omega,\vect{x})
+  \int d\vect{x'}d\vect{x''} C_\beta(\omega)\vect{E}^{\text{reg}*}_\beta(\omega,\vect{x'})T(\omega,\vect{x'},\vect{x''})
+\vect{E}^{\text{reg}}_\beta(\omega,\vect{x''}).
+\end{equation}
+This can be further written in Dirac notation (reg-out), 
+\begin{equation}
+  |\vect{E}(\omega)\rangle = |\vect{E}^{\text{reg}}_\alpha(\omega)\rangle+
+  \sum_\beta\mathcal{F}_{\beta\alpha}^{ee}|\vect{E}^{\text{out}}_\beta(\omega)\rangle
+\end{equation}
+where the external-external scattering amplitude is defined as
+\begin{equation}
+  \mathcal{F}^{ee}_{\beta,\alpha}=(-1)C_\beta(\omega)\langle \vect{E}^{\text{reg}}_\beta|(\omega)T(\omega)
+|\vect{E}^{\text{reg}}_\alpha(\omega)\rangle.
+\end{equation}
+Similary, for internal-external scattering one has (reg-reg) 
+\begin{equation}
+  |\vect{E}(\omega)\rangle = |\vect{E}^{\text{reg}}_\alpha(\omega)\rangle+
+  \sum_\beta\mathcal{F}_{\beta\alpha}^{ie}|\vect{E}^{\text{reg}}_\beta(\omega)\rangle
+\end{equation}
+where the internal-external scattering amplitude is defined as
+\begin{equation}
+  \mathcal{F}^{ie}_{\beta,\alpha}=(-1)C_\beta(\omega)\langle \vect{E}^{\text{in}}_\beta|(\omega)T(\omega)
+|\vect{E}^{\text{reg}}_\alpha(\omega)\rangle.
+\end{equation}
+This corresponds to some outside wave being scattered inwards. 
+
+The converse in internal scattering (hard to actually realize).
+In this case $E_0\rightarrow E^{\text{out}}$.  (I'll skip this)
+
+The whole set of scattering amplitudes can be written in matrix form,
+\begin{equation}
+F = \left(\begin{array}{cc}
+    F^{ee} & F^{ei} \\ F^{ie} & F^{ii}
+  \end{array}
+  \right)
+\end{equation}
+where the amplitudes are 
+\begin{align}
+  F^{ee}& = C_\alpha \langle \vect{E}^{\text{reg}}_\alpha|T|\vect{E}^{\text{reg}}_\beta\rangle\\
+  F^{ie}& = C_\alpha \langle \vect{E}^{\text{in}}_\alpha|T|\vect{E}^{\text{reg}}_\beta\rangle\\
+  F^{ei}& = C_\alpha \langle \vect{E}^{\text{reg}}_\alpha|T|\vect{E}^{\text{out}}_\beta\rangle\\
+  F^{ii}& = C_\alpha \langle \vect{E}^{\text{in}}_\alpha|T|\vect{E}^{\text{out}}_\beta\rangle
+\end{align}
+Seems that you don't actually find $T$, but rather make an ansatz for the solutions appropriate
+ to the scattering scenario you are considering, and match the appropriate boundary conditions.
+(Well what was the point of all that then?)
 
 
 
-\subsubsection{Scattering  theory}
+\subsubsection{Applying to Partition function}
 
 \subsubsection{Translation Matrices}
 
@@ -484,12 +758,25 @@ Early numerical papers.
   Note use of existent analytical methods and similarities to existent numerical 
 FTDT techniques Builds on earlier papers (uses better basis) 
 
-Cite Johnson textbook.\cite{Johnson2011}
+Cite Johnson textbook chapter.\cite{Johnson2011}
 
 \subsection{Reid papers}
 
 \cite{Reid2009},\cite{Reid2011}, \cite{Reid2013} 
 Note success, applicability.  \comment{Cite experimental tylenol pill paper}
+
+This numerical approach is related to prior multipole scattering approach~\cite{Rahi2009}.
+Earlier work chose to expand the scattering amplitudes in terms of mode function
+solutions.  In contrast, this work expands the fields at the surfaces using 
+boundary elements - in particular triangles.  
+This avoids some of the issues of poorly converging summations of solutions that occured in
+the multipole method.  Get very similar results, but different choice of basis for calculations.
+Multipoles exploit symmetry, while boundary elements are generally applicable, make no assumptions 
+about surface.  Other than the bodies are piece-wise continuous.  
+
+Naturally decomposes separate frequencies into independent integral.  Could parallelize that way.
+Still have to handle large matrices.  Freely available as ScuffEM package maintained by
+ Homer Reid~\cite{ScuffEM2016}.  
 
 \section{Repulsion}
 
@@ -501,7 +788,7 @@ Note success, applicability.  \comment{Cite experimental tylenol pill paper}
 
 \section{Papers: Worldlines}
 
-Note citations in bordag/johnson mostly as dismissive and limited.  
+Note citations in Bordag/Johnson mostly as dismissive and limited.  
 
 \subsection{Effective actions}
 

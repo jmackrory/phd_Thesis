@@ -607,11 +607,15 @@ If we define the position operators such that
 \begin{equation}
 \langle \vect{q'}|\op{q}|\psi\rangle=\vect{q'}\langle \vect{q'}|\psi\rangle,
 \end{equation}
-then we can infer from the commutation relations the form of the momentum operators
+then we can infer from the commutation relations, and the hermiticity condition
+that the momentum operators are given by
 \begin{align}
-
+\langle\phi|\op{p}_i|\psi\rangle = \int d\vect{q}\sqrt{|g|}\phi^*(\vect{q})
+\frac{1}{\sqrt{|g|}}\frac{\partial}{\partial q_i}\sqrt{|g|}\psi(\vect{q}).  
 \end{align}
-
+The presence of the extra factors of $\sqrt{|g|}$ ensures that the 
+$\langle\phi|(\op{p}_i|\psi\rangle = (\langle \phi|\op{p}_i^\dag)|\psi\rangle$,
+which follows from the integral represenation via an integration by parts.  
 
 An alternative method of setting up the path integral in curved space is to 
 transform that flat-space path integral to curvilinear coordinates~\cite{Gervais1976,Girotti1983}.  
@@ -622,8 +626,24 @@ functions~\cite{McLaughlin1971}.
 
 Let us consider the following action
 \begin{equation}
-  S = 
+  S = \frac{m}{2}g_{ij}(\vect{q})\dot{q}_i\dot{q}_j - V(x)
 \end{equation}
+We will find the 
+
+
+\begin{itemize}
+\item Lagrangian.
+\item Momentum
+\item Hamiltonian.  Note $pgp$ structure.  Operator ordering problem in curved space.  
+  Have classical equations, with ambiguous ordering (and tiny, tiny consequences)
+  for different choices.  
+\item Wave equation is Laplace-Beltrami operator (what you get from changing coords
+  -motivates Gervais approach.  
+\item DeWitt: Path integral is kernel of appropriate Schrodinger equation.
+\item Kleinert, transformation useful in curvilinear coordinates. (path integral
+  for hydrogen atom.
+\end{itemize}
+
 
 
 

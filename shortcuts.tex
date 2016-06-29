@@ -11,13 +11,15 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{epigraph}
 %\usepackage{simplewick}
 \usepackage{framed}
 \usepackage{slashed}
 \usepackage{mathtools}
 %\usepackage{makeidx}
 %\usepackage{showidx}
-\usepackage[bookmarks]{hyperref}
+\usepackage[bookmarks,colorlinks]{hyperref}
+
 
 % \usepackage{tikz}
 % \usetikzlibrary{shapes,arrows}
@@ -60,8 +62,36 @@
 \def\vx{\ensuremath\mathbf{x}}
 \def\vk{\ensuremath\mathbf{k}}
 
-\def\dlangle{\ensuremath{\left\langle\!\left\langle}}
-\def\drangle{\ensuremath{\right\rangle\!\right\rangle}}
+\def\dlangle{\left\langle\!\left\langle}
+\def\drangle{\right\rangle\!\right\rangle}
+\def\bigdlangle{{\big\langle\kern-.23em\big\langle}}
+\def\bigdrangle{{\big\rangle\kern-.23em\big\rangle}}
+\def\Bigdlangle{{\Big\langle\kern-.35em\Big\langle}}
+\def\Bigdrangle{{\Big\rangle\kern-.35em\Big\rangle}}
+\def\biggdlangle{{\bigg\langle\kern-.35em\bigg\langle}}
+\def\biggdrangle{{\bigg\rangle\kern-.35em\bigg\rangle}}
+\def\Biggdlangle{{\Bigg\langle\kern-.35em\Bigg\langle}}
+\def\Biggdrangle{{\Bigg\rangle\kern-.35em\Bigg\rangle}}
+
+\def\cT{\ensuremath{\mathcal{T}}}
+\def\xA{\ensuremath{\mathbf{x}_\mathrm{\scriptscriptstyle A}}}
+\def\rA{\ensuremath{\mathbf{r}_\mathrm{\scriptscriptstyle A}}}
+\def\x0{\ensuremath{\mathbf{x}_\mathrm{0}}}
+\def\epsr{\ensuremath{\epsilon_{\mathrm{r}}}}
+\def\mur{\ensuremath{\mu_{\mathrm{r}}}}
+\def\subEM{_\mathrm{\scriptscriptstyle EM}}
+\def\subTE{_\mathrm{\scriptscriptstyle TE}}
+\def\subTM{_\mathrm{\scriptscriptstyle TM}}
+\def\subCP{_\mathrm{\scriptscriptstyle CP}}
+\def\supTE{^\mathrm{\scriptscriptstyle (TE)}}
+\def\supTM{^\mathrm{\scriptscriptstyle (TM)}}
+\def\ZTE{\ensuremath{Z\subTE}}
+\def\VTE{\ensuremath{V\subTE}}
+\def\ETE{\ensuremath{E\subTE}}
+\def\ZTM{\ensuremath{Z\subTM}}
+\def\VTM{\ensuremath{V\subTM}}
+\def\ETM{\ensuremath{E\subTM}}
+\def\etal{\textit{~et.~al~}}
 
 
 %traces
@@ -86,11 +116,4 @@
 %QFT shortcuts
 \def\Psibar{\ensuremath{\bar{\Psi}}}
 
-% \newcommand{\mattwo}[4]{\ensuremath{\left(\begin{array}{cc} #1 & #2 \\ #3  & #4\end{array}\right)}}
-
-% \newcommand{\coltwo}[3]{\ensuremath{\left(\begin{array}{c} #1 \\ #2\end{array}\right)}}
-% \newcommand{\rowtwo}[2]{\ensuremath{\left(\begin{array}{cc} #1 & #2\end{array}\right)}}
-
-% \newcommand{\rowthree}[4]{\ensuremath{\left(\begin{array}{ccc} #1 & #2 & #3 \end{array}\right)}}
-% \newcommand{\colthree}[4]{\ensuremath{\left(\begin{array}{c} #1 \\ #2 \\ #3 \end{array}\right)}}
-
+\usepackage[colorlinks]{hyperref}

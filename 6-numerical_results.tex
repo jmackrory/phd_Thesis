@@ -1,5 +1,40 @@
 \chapter{Electromagnetic Worldlines - Numerical Results}
+
+\section{Numerical Methods}
+
+\begin{itemize}
+  \item V-loop for loop sampling.
+  \item Monte-Carlo sampling of $T$, $x$.  
+  \item Malliavin calculus for gradient estimation.
+  \item Birth-death methods for tempering log-normal fluctuations from multiplying potentials
+    together.  
+\end{itemize}
+
+
     \section{ Atom-Plates}
+    
+    \subsection{TE Polarization}
+    \begin{itemize}
+      \item Simple Trapezoidal rule
+      \item Convergence arguments
+      \item ``Exact methods''
+    \end{itemize}
+    
+    \subsection{TM Polarization}
+
+    \begin{itemize}
+      \item Need gradient estimation.  Use Malliavin calculus~\cite{Fournie1999, Chen2007,Kohatsu-Higa2003}.
+        Formal introductions \cite{Nualart2006, Malliavin2006, DiNunno2009}.
+      \item Gradients required for computing forces.  
+      \item Birth-death methods to handle product of increments.  Related to Genealogical 
+        methods used in rare-event simulation.  
+      \item Histogram of raw values, with/without birth-death.
+      \item 
+    \end{itemize}
+    
+
+
+
     \section{Planar Dielectrics}
     \section{Atom-Sphere}
     \section{Atom-Cylinder}

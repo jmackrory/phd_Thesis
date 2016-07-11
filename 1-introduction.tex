@@ -8,9 +8,14 @@ Quantum mechanics is an inherently statistical theory - we can only make predict
 \comment{Cite Dirac/Sakurai as general textbook}.
 \begin{itemize}
 \item Add complex amplitudes together.  Take modulus squared to get probabilities.  
-\item Feynman path integral construction of quantum mechanics- to get amplitude to get from one position to another, add up \emph{all} possible paths, with a suitable phase, $e^{-i S[x]/\hbar}$, \cite{Feynman1942, Feynman1965}
-\item Found common use in field theory particularly for covariantly quantizing gauge field theories, such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
-\item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.   Can mathematically formulate a path integral as very high-dimensional integral.  Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
+\item Feynman path integral construction of quantum mechanics- 
+to get amplitude to get from one position to another, add up \emph{all} possible paths,
+ with a suitable phase, $e^{-i S[x]/\hbar}$, \cite{Feynman1942, Feynman1965}
+\item Found common use in field theory particularly for covariantly quantizing gauge field theories,
+ such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
+\item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
+   Can mathematically formulate a path integral as very high-dimensional integral.
+  Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
 \end{itemize}
 
 \begin{itemize}
@@ -18,12 +23,20 @@ Quantum mechanics is an inherently statistical theory - we can only make predict
 \item Thus, sequences of measurements are also inherently random.  
 \item Greater experiemtnal control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
 \item Move beyond simple projective measurements, which cannot describe things like position measurements.
-\item To describe continuously weakly probing a system, also use stochastic processes as part of numerical simulation strategy.
-\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe, for example shining light on the atom. \cite{Carmichael1993}
-\item Simulated trajectories are possible trajectories a system could trace out as we observe.  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
+\item To describe continuously weakly probing a system, also use stochastic processes as part of
+ numerical simulation strategy.
+\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe,
+ for example shining light on the atom. \cite{Carmichael1993}
+\item Simulated trajectories are possible trajectories a system could trace out as we observe.
+  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
 \end{itemize}
 
-\comment{There are two roles for the randomness here.  From one point of view, the randomness is an intrinsic part of quantum mechanics, and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.  Alternatively, if we are considering these calculations for energy or evolution as large integrals, then we can efficiently compute these integrals by randomly sampling from their dominant regions.  In this sense, the randomness shows up as a calculational tool.}
+\comment{There are two roles for the randomness here.
+  From one point of view, the randomness is an intrinsic part of quantum mechanics,
+ and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
+  Alternatively, if we are considering these calculations for energy or evolution as large integrals,
+ then we can efficiently compute these integrals by randomly sampling from their dominant regions.
+  In this sense, the randomness shows up as a calculational tool.}
 
 This thesis will cover a two different computational projects in quantum optics.
 The first project relates to computing Casimir forces via the worldline method.
@@ -41,7 +54,8 @@ that we will explore using stochastic calculus, and Monte-Carlo methods for nume
 \item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
 \item First new method for computing electromagnetic Casimir energies.
 \item Second, continuous position measurements of atoms taking into account experimental constraints.  
-\item United in perspective of numerical work relying on Monte-Carlo techniques, to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
+\item United in perspective of numerical work relying on Monte-Carlo techniques,
+ to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
 \end{itemize}
 
 
@@ -228,7 +242,7 @@ The formalism was extended to include dielectric media by Lifshitz~\cite{Lifshit
  further compute the force from using Feynman diagrammatic methods\cite{Dzyaloshinskii1959,Dzyaloshinskii1961}}.  
 \comment{Point of view: Due to thermal fluctuations in medium.}
 
-\comment{Mclachlan\cite{Mclachlan1963} cites these guys?}
+Mclachlan\cite{McLachlan1963} cites these guys?
 
 
 \subsection{Scale and Physical Interpretation}
@@ -344,13 +358,14 @@ The Casimir force is intimately related to the van der Waals forces between mole
 Van der Waals forces are usually ascribed to the dipole fluctuations of the 
 neutral atoms.
 In the limit where the atoms are far apart retardation becomes important and 
-the force changes decays more quickly as $r^{-7}$.
-  In this limit the forces are sometimes referred to as London dispersion forces.
-  Normally Casimir forces consider the 
+the force changes decays more quickly as $r^{-7}$, as first found by Casimir and Polder.  
+In this limit the forces are sometimes referred to as London dispersion forces.
+Normally Casimir forces consider the 
 
 Throughout this thesis we shall use Casimir forces to refer to the forces between
- macroscopic bodies, and Casimir-Polder forces to refer to the forces between 
-atoms and macroscopic bodies.  
+macroscopic bodies, and Casimir-Polder forces to refer to the forces between 
+atoms and macroscopic bodies.  Van der Waals forces are also sometimes referred to as the 
+short-distance limit of the Casimir force, where retardation can be ignored.      
 
 \item Renormalization
 
@@ -381,7 +396,7 @@ Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton}
 \end{itemize}
 \item Dynamical Casimir effect/Unruh Effect?
 \begin{itemize}
-  \item Accelerating plate creates photons.  L
+  \item Accelerating plate creates photons.  
 \end{itemize}
 \end{itemize}
 
@@ -551,6 +566,23 @@ of vanishing curvature, the PFA converges to the correct Casimir force.
 \item Cite Barton
 \item Cite Philbin(?)
 \item Cite Vogel and Welsch
+\item Green function equation
+\begin{equation}
+  \nabla\times\nabla\times G(\vect{x},\vect{x'}) + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'})  = \delta_{ij}\delta(\vect{x-x'})
+\end{equation}
+\item Energy expressions.  
+\begin{equation}
+  E_{CP} = \int_0^\infty ds \alpha_{ij}(is,\vect{x})G^{(S)}_{ji}(is,\vect{x},\vect{x})
+\end{equation}
+Focus on scattering part - renormalization.  $\alpha$ is atomic polarizability tensor,
+ $G$ is electromagnetic Green tensor.  
+ Evaluate at imaginary frequency. Note fully quantum theory, can account for atomic transitions.
+\item Definition of $\alpha$,$G$ in terms of eigenfunctions, field modes.  
+\begin{equation}
+  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}
+\end{equation}
+\item Calculations correspond to given order of perturbation theory in QED hamiltonian.  
+\item Finite temperature.  
 \end{itemize}
 
 \subsection{Scattering Approach}
@@ -565,13 +597,22 @@ Numerous authors contributed over decades.
 \end{itemize}
 
 \begin{itemize}
+  \item Developed as general method, for scattering between basis modes.  
+    Initially used with analytical mode expansions.  Can also use finite element basis,
+    much more adapted to arbitrary bodies.  
+\item Physical picture is fluctuating currents on bodies.  Interact via EM field.
+  Can use Green function as if dielectric suffused all space.  
+SIE equations and Green's theorem relate surface integrals.  
+\end{itemize}
+
+
+\begin{itemize}
 \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
 \item Cite Lambrecht and French collaborators
   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
 \item Cite Milton
 \item Physical Picture based on generalized Green theorem from 
   SIE~\comment{Stratton}\cite{Stratton1941}.
-\item What are the SIE ?  
 \item Comment on Emig/Buscher showing you can use homogenous green function.
   Relation to Green's theorem.
 \item Cite Emig,Jaffe,  and others for initial analytical techniques.  Relies on Green theorem.

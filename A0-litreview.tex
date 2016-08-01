@@ -178,7 +178,7 @@ They also include magnetic interactions (and seem to have to allow electric-magn
 
 \subsection{Mclachlan1963}
 
-\cite{Mclachlan1963}
+\cite{McLachlan1963}
 
 \section{Experimental Papers:Casimir}
 
@@ -230,6 +230,8 @@ They also include magnetic interactions (and seem to have to allow electric-magn
 
 \cite{Sukenik1993}
 
+(First attempt at Casimir-Polder with CQED).
+
 \subsection{Experimental arguments}
 
 \begin{itemize}
@@ -239,6 +241,7 @@ They also include magnetic interactions (and seem to have to allow electric-magn
 \end{itemize}
 
 \subsection{Geckos: Autumn2002}
+Cool, but irrelevant?
 \cite{Autumn2002}
 
 \cite{Hawkes2014}
@@ -286,7 +289,6 @@ Spheres
 This paper seems to emphasize the optical network aspect of things.  
 Uses the single mirror results to form result for Fabry-Perot cavity.
 Treats loss.  
-
 \cite{MaiaNeto2008}
 This paper treats plate-sphere results.  (Hmm, I thought they had more to do with this)
 
@@ -299,7 +301,7 @@ Early Emig paper~\cite{Emig2001} computes Casimir energy for corrugated waveguid
 Apparently field splits into two independent scalars.  (TE/TM)
 Perfectly conducting boundary conditions, so one scalar obeys Dirichlet, 
 the other scalar obeys Neumann BC.
-  Interesting for that thought, but otherwise not relevant.  
+ Interesting for that thought, but otherwise not relevant.  
 
 \subsection{Emig2004}
 
@@ -740,8 +742,6 @@ Seems that you don't actually find $T$, but rather make an ansatz for the soluti
  to the scattering scenario you are considering, and match the appropriate boundary conditions.
 (Well what was the point of all that then?)
 
-
-
 \subsubsection{Applying to Partition function}
 
 \subsubsection{Translation Matrices}
@@ -777,6 +777,242 @@ about surface.  Other than the bodies are piece-wise continuous.
 Naturally decomposes separate frequencies into independent integral.  Could parallelize that way.
 Still have to handle large matrices.  Freely available as ScuffEM package maintained by
  Homer Reid~\cite{ScuffEM2016}.  
+
+\subsection{Reid 2013}
+
+\subsubsection{Intro}
+
+Interaction of effective currents on surfaces.  Get energies/forces/torques from
+this matrix, and appropriate derivatives.  Derive things two ways:
+i) stress-tensor, ii) path-integral expression.  Get to the same place both ways.  
+
+Point out derivation holds for general temperatures, cite Philbin and Pitaevskii
+as pointing out doubts about the canonical case.  
+
+Note use of special function methods that work great when well-suited basis is 
+available.  (Cites Lambrecht, Kenneth/Klich here and others.)
+
+Then note Maxwell stress-tensor approach requires integral over volume.
+Reid2013 eliminates the volume integral for a surface integral, where surface currents
+enter as fixing EM boundary conditions on some bounding surface.    
+
+The basic formulae are: 
+\begin{gather}
+  \mathcal{E} = \frac{\hbar}{2\pi}\int_0^\infty d\xi \ln\frac{\det\mathbf{M}(\xi)}{\det\mathbf{M}_\infty(\xi)}
+  \quad \text{(T=0 energy density)}\\
+  \mathcal{F}_i = -\frac{\hbar}{2\pi}\int_0^\infty d\xi \tr\left[\mathbf{M}^{-1}(\xi)
+\frac{\partial}{\partial \vect{r}_i}\mathbf{M}(\xi)\right]\quad \text{(T=0 Force)}\\
+  \mathcal{T}_i = -\frac{\hbar}{2\pi}\int_0^\infty d\xi \tr\left[\mathbf{M}^{-1}(\xi)
+\frac{\partial}{\partial \theta_i}\mathbf{M}(\xi)\right]\quad \text{(T=0 Torque)}
+\end{gather}
+$\xi$ Integrals run over imaginary axis.  Trace runs over all scattering matrix elements.  
+Similarity to Rahi work in the matrices.  The meaning however is coupling/scattering between
+different bases.  Here it is coupling between surface current elementss.  There it was 
+between different field modes.  
+
+Point out their method is more general than mode-function version, 
+and better adapted when basis is not good.
+
+Can also use coupling between Homogenous Green functions (re Stratton, and Emig2004 ).
+
+This paper is theoretical - numerical details discussed elsewhere. 
+
+
+\subsection{Path Integral Derivation}
+
+Do gauge-fixing method of quantization of path integral.
+Assuming linear coupling, at zero temperature.  
+
+In contrast with taking ``Weyl gauge'' $A_0=0$, or in terms of Electric fields.    
+
+Introduce surface currents via fixing EM boundary conditions on surfaces.  
+
+(Cites a 1985 Bordag Ann. Phys Paper for similarities explicit independence of Fadeev-Popov
+gauge fixing).
+
+The action is 
+\begin{equation}
+  S = \frac{1}{2}\int\frac{d\omega}{2\pi}\int d^3x\,\left[ 
+    \epsilon(\omega,\vect{x})|\vect{E}(\omega,\vect{x})|^2 - \mu(\omega,\vect{x})|\vect{H}(\omega,\vect{x})|^2\right]
+\end{equation}
+Then rewriting $\vect{E},\vect{H}$ in terms of the 4-potentials, the initial Lagrangian density is 
+\begin{equation}
+ \mathcal{L}= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\left[ 
+    \epsilon(\omega,\vect{x})(\partial_i A^0+i\omega A^i)(\partial_i {A^0}^*-i\omega A^i)
+- \frac{1}{\mu}(\epsilon_{ijk}\partial_jA^k\epsilon_{imn}\partial_mA^n)\right]
+\end{equation}
+\begin{shaded}
+This follows since if we Fourier expand the real-valued time version of this we have 
+\begin{equation}
+  \int_{0}^T dt e^{i(\omega_n+\omega_mt)}A_nA_m = A_nA_m^*\delta_{n,-m}
+\end{equation}
+Since the fields are real, $A_n^* = A_{-n}$.  If we take the limit $T\rightarrow\infty$,
+the Fourier series is replaced by a sum.  (This will recur again when we confront finite temperature.)
+\end{shaded}
+Now integrate by parts, and Wick rotate to Euclidean space with 
+$\{\omega, A^0, {A^0}^*\}\rightarrow \{i\xi,iA_0,iA_0^*\}$.
+\begin{align}
+ \mathcal{L}&= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+    \epsilon(\omega,\vect{x})(\partial_i A^0\partial_i {A^0}^*+i\omega A^i\partial_i {A^0}^*
+    -i\omega\partial_iA^0{A^i}^* +\omega^2A^i {A^i}^*)\nonumber\\
+    &- \frac{1}{\mu}(\partial_jA^k\partial_jA^k-\partial_jA^k\partial_kA^j)\big]\\
+% &= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+%     \epsilon(\omega,\vect{x})( A^0(-\partial_i\partial^i) {A^0}^*+i\omega A^i\partial_i {A^0}^*
+%     -i\omega\partial_iA^0{A^i}^*+\omega^2A^i {A^i}^*)\nonumber\\
+%     &+ \frac{1}{\mu}(A^k\partial_j\partial_jA^k-A^k\partial_j\partial_kA^j) 
+%     -A^0(\partial_i\epsilon)\partial_iA^{0*} +A^k(\partial_j\frac{1}{\mu})(\partial_jA^k-\partial_kA^j)\big]
+&= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+    \epsilon(\omega,\vect{x})( A^{0,*}(-\partial_i\partial^i) A^0-i\omega {A^0}^*(\partial_iA^i+A^i\partial_i\epsilon)
+    -i\omega\partial_iA^0{A^i}^*+\omega^2A^i {A^i}^*)\nonumber\\
+    &+ \frac{1}{\mu}(A^k\partial_j\partial_jA^k-A^k\partial_j\partial_kA^j) 
+    -A^0(\partial_i\epsilon)\partial_iA^{0*} +A^k(\partial_j\frac{1}{\mu})(\partial_jA^k-\partial_kA^j)\big]
+\end{align}
+\begin{shaded}
+\comment{Wait - WTF?  They dropped any terms like $\partial_i\epsilon A^i A^0$.  Is this part of 
+assuming $\epsilon$ is piecewise constant, and thus these terms occur on the surfaces anyway?
+Since they will explicitly fix the fields on the boundary regions to satisfy Maxwell's equations, 
+they can omit these pieces? Or would these pieces act as effective boundary conditions?}
+\end{shaded}
+Then split the Lagrangian into: 
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} [\left(-\epsilon\xi^2+\frac{1}{\mu}\nabla^2\right)\delta_{\mu\nu} 
+  - \alpha_\mu\alpha_\nu]\tilde{A}^\nu,
+\end{equation}
+where $(\tilde{A}^0,\tilde{A}^j) = (\sqrt{\epsilon\mu}A^0,\vect{A})$, 
+and $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$.
+We can equivalently write this as 
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu} - \alpha_\mu\alpha_\nu]\tilde{A}^\nu,
+\end{equation}
+which transparently has the form of a transverse projector.  
+This has a null eigenvalue along $\alpha_\mu$, which corresponds to gauge-transformations.  
+The null eigenvalue is normally removed within path integrals by using the Fadeev-Popov method for gauge fixing. 
+While Fadeev-Popov gauge fixing runs into issues in Non-Abelian theories at very large field strengths,
+we are only going to use it for perturbative QED computations, well inside its range of validity.
+They then link up with the Fadeev-Popov
+method by noting that the Fadeev-Popov method handles gauge-fixing by introducing 
+\begin{equation}
+  1 = \int d\omega \exp\left[-\int_0^{\hbar\beta}d\tau\,\frac{\omega^2}{2} \right]
+  \det[-\frac{\delta G}{\delta f}]\delta[G(a,f)-\omega]
+\end{equation}
+Here we have constructed two factors of unity.  First, we want to eliminate gauge degrees of freedom
+by fixing $G(a)=0$, via a functional delta function.  We must include the leading determinant
+to account to give the correct weight to each physically independent state.
+Secondly we use t'Hooft's trick of displacing the gauge fixing to $\omega$, which we integrate over.
+
+If we use a generalized Lorentz gauge 
+\begin{equation}
+  G[\tilde{A}^0,\tilde{A}^j] = i\omega \tilde{A}^0 + \partial_j \tilde{A}^j,
+\end{equation}
+then under the gauge transformation
+\begin{equation}
+  (\tilde{A}^0,A^j)\rightarrow  (\tilde{A}^0,A^j) + (i\omega,\partial^j)f,
+\end{equation}
+we can find the functional derivative, 
+\begin{equation}
+  \frac{\delta G}{\delta f} = \frac{G[A^0+i\omega f,A^j+\partial^jf]  -[A^0,A^j]}{f}
+  = (-\omega^2 +\partial_j^2)
+\end{equation}
+Note that framed in these variables the are no boundary terms at discontinuities.  
+This functional determinant is constant, and does not depend on the geometry at all.  
+
+The gauge-fixed Lagrangian is given by
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu}
+  -(1-\alpha^{-1}_{FP})\alpha_\mu\alpha_\nu]\tilde{A}^\nu
+=\tilde{\vect{A}}^{*}[\mathfrak{D}_1-\mathfrak{D}_2]\tilde{\vect{A}},
+\end{equation}
+where $\alpha_{FP}=1$ corresponds to so-called Feynman gauge, and $\alpha_{FP}=\infty$ is Landau gauge.
+Note that this derivation proceeds under the assumption that we will  explicitly enforce 
+EM boundary conditions at all surfaces.  Thus we can neglect and ignore any terms involving
+$\partial_i\epsilon$.   This stands in contrast to our approach which would attempt to retain 
+all such terms.  Our attempts at this path integral for the worldline method would retain these
+terms to enforce boundary conditions, and to scale the gradients to be in flat space.  
+
+The claim is that the partition function is given by 
+\begin{equation}
+  Z_{EM} = \int [D\tilde{A}]_C e^{-\frac{\beta}{2}\int d\vect{x} \mathcal{L}},
+\end{equation}
+where $[D\tilde{A}]_C$ integrates over all field conditions that satisfy the boundary conditions.
+The boundary conditions will be explicitly enforced via functional delta-functions.  
+
+\subsubsection{EM Boundary Conditions}
+
+At a surface the tangential electric and magnetic fields are continuous.
+
+Recall that Maxwell's equations in media are:
+\begin{gather}
+  \nabla\times \vect{E} =-\partial_t \vect{B}\\
+  \nabla\cdot\vect{B}=0\\
+  \nabla\times\vect{H} = -\partial_t \vect{D} +\vect{j}\\
+  \nabla\cdot\vect{D} =\rho.
+\end{gather}
+If we use the integral forms of these equations we can derive the EM boundary conditions.
+We assume we are working without sources, other than the bound charges on the objects.  
+
+Then with appropriate Gaussian pillboxes, and Stokes' loops we have:
+\begin{gather}
+  \vect{E}^\|_1 =\vect{E}^\|_2 \\
+  B_1^\perp = B_2^\perp\\
+  \vect{H}^\|_1 =\vect{H}^\|_2 \\
+  D_1^\perp = D_2^\perp,
+\end{gather}
+where the $1,2$ subscripts denote the media the fields are evaluated in.  
+We can enforce boundary conditions in path integrals via functional delta functions using
+the Fourier representation of the delta function 
+(Cites Bordag, and Kardar and Li)
+\begin{equation}
+  \delta(\vect{E}^\|_1-\vect{E}^\|_2) = \int D\vect{K} e^{i\int_{\partial \mathcal{O}} d^3\vect{x}\,
+    \vect{K}\cdot(\vect{E}^\|_1-\vect{E}^\|_2)},
+\end{equation}
+where the integral takes place over the interface/boundary of the object $\mathcal{O}$.
+There is a similar expression for the magnetic fields $\vect{H}$, with $\vect{N}$ as the multiplier.  
+These Lagrange multiplier fields correspond to the fluctuating surface currents, as they 
+are just the currents one must have to enforce the boundary conditions.  
+
+The boundary conditions can be recast in terms of the gauge fields by introducing an appropriate
+derivative operators $L^{E,r}$ and $L^{M,r}$.  In piece-wise constant media the operators are given by
+\begin{equation}
+  E_j:=L^{E,r}_{j\mu}\tilde{A}^\mu = -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_j \tilde{A}^0+i\xi A^j
+  H_j:=L^{M,r}_{j\mu}\tilde{A}^\mu = \frac{1}{\mu^r}\epsilon_{jkl}\partial_k A^l
+\end{equation}
+In matrix form
+\begin{gather}
+  L^{E,r} = \left( \begin{array}{cccc} 
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_x & -i\xi & 0 & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_y & 0 &-i\xi & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_z & 0 & 0 & -i\xi
+    \end{array}
+  \right)\\
+  L^{M,r} = \frac{1}{\mu_r}\left( \begin{array}{cccc} 
+      0 & 0 & -\partial_z & \partial_y\\
+      0 & \partial_z & 0 & -\partial_x\\
+      0 & -\partial_y & \partial_x & 0
+    \end{array}
+  \right)
+  \end{gather}
+Note that the piece-wise continuous media assumption lets you commute derivatives and 
+material functions with impunity. 
+
+\subsubsection{Integrating out the photon field}
+
+We can now insert the functional delta functions to create the constrained path-integral.  
+It is then a relatively straightforward matter of integrating out the photon 4-vector field.  
+This will leave us with a picture of interacting surface currents.  
+\begin{align}
+  Z_{TE} &= \int D\tilde{A}^\mu \prod_rD\vect{K}_rD\vect{N}_r\exp\bigg\{-\frac{\beta}{2}\int d^3\vect{x}\,
+    \tilde{\vect{A}}^{*} [\mathfrak{D}_1 -\mathfrak{D}_2]\tilde{\vect{A}}\nonumber\\
+    &\hspace{1cm}  +i\sum_{r} \int_{\partial\mathcal{O}_r}d\vect{x}\,\vect{K}\cdot(
+    \vect{L}^{E,r}\tilde{\vect{A}}^{r}-\vect{L}^{E,e}\tilde{\vect{A}}^e)\nonumber\\
+    &\hspace{1cm}  +i\sum_{r} \int_{\partial\mathcal{O}_r}d\vect{x}\,\vect{N}\cdot(
+    \vect{L}^{M,r}\tilde{\vect{A}}^{r}-\vect{L}^{M,e}\tilde{\vect{A}}^e)\bigg\}
+\end{align}
+where we use $r$ to denote the body at position $\vect{x}$, and $e$ to denote the exterior.
+Note that both the operators, and fields depend on material constants, resulting in a somewhat
+overburdened notation.  We have introduced bold-face to denote both vectors and matrices.
+
+We are then free to evaluate the Gaussian integral over $\vect{A}$ in each region, using
+We can think of the integrand being split into a number of volumes, 
 
 \section{Repulsion}
 

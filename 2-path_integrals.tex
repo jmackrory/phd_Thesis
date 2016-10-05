@@ -149,7 +149,6 @@
 \begin{itemize}
   \item For actual solutions work in steady-state limit.  
   \item {Work with Laplace transform.  }
-
     Now let us consider steady state, for potentials $V(x,t) = V(x)$.
     In this case, we can drop the initial condition, and take $f(x,t=0)=0$, as the steady state is insensitive to the initial condition.
     In addition, we take $g(x,t)=g(x)$.   then as $t\rightarrow \infty$ we have 
@@ -160,7 +159,6 @@
     \begin{equation}
       0 = \frac{1}{2}\partial_x^2f(x) - (V+\lambda)f + g(x).  
     \end{equation}
-
   \item Take $g(x)=\delta(x)$.
   \item Solve associated diffusion equation.  (So works for separable geometries.  But foundational
     for approximations suited step-wise basis.)
@@ -174,193 +172,200 @@
     Later we will have need of these results in our analytical calculations.  The planar open
     path results are essential for numerical techniques.      
 \end{itemize}
-\section{Planar Dirichlet Conditions}
 
 \section{Sojourn Time and One Step Potential }
 
 \begin{itemize}
   \item {Take $V=\chi\Theta[x-d]$.}
-    We start with a single step, $V = \chi\Theta[x-d]$.  We need to solve the following Fokker-Planck equation 
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f - (\chi\Theta(x-d)+\lambda)f + \delta(x).
-    \end{equation}
-    where $g$ will act as the source which pins the solutions to a particular point, $x_0$.
-    While it is possible to solve this using the Fourier representation of the delta function, 
-    I found it more transparent to use an explicit delta function and explicitly handle the cases where the pole is in different places.  
-    Cite Steck, and Hooghiemstra
-  \item {Solve for various sub-cases.  }
-    Now from Eq.~(\ref{eq:path_int_solution}) we have 
-    \begin{equation}
-      f(x) = \dlangle  \int_0^\infty ds\,\delta(x) e^{-\lambda s-\int_0^s du\,\chi\Theta[x(u)-d]} \drangle,
-    \end{equation}
-    is the solution to 
-    \begin{equation}
-      \partial_x^2 f = 2(\chi\Theta(x-d)+\lambda)f - 2\delta(x).  
-    \end{equation}
-    In general the solutions are of the form, 
-    \begin{equation}
-      f(x) = A e^{\kappa x} + B e^{-\kappa x},
-    \end{equation}
-    where we will fix $\kappa$ appropriately, and choose the bounded solution.
-    We also have to take care with the boundary conditions at surfaces.
-    At the jump discontinuity at $x=d$ we have 
-    \begin{equation}
-      \partial_xf(d+\epsilon) - \partial_x f(d-\epsilon) = 0, \qquad f(d+\epsilon)-f(d-\epsilon) = 0.  
-    \end{equation}
-    For the boundary conditions at the delta function we have 
-    \begin{equation}
-      \partial_xf(\epsilon) -\partial_x f(-\epsilon) = -2 , \qquad f(d+\epsilon)-f(d-\epsilon) = 0,
-    \end{equation}
-    where both of these relations follow from integrating the PDE across the discontinuity.  
-    \subsection{$ d>0$}
-    Then for $d>0$ have 
-    \begin{equation}
-      f(x) =\left\{ 
-        \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
-          B e^{\sqrt{2\lambda}x} + Ce^{-\sqrt{2\lambda}x} & \hspace{2cm} & 0<x<d\\
-          D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>d
-        \end{array}
-      \right.
-    \end{equation}
-    where the coefficients are fixed by matching the boundary conditions together.
-    This was done using Mathematica to speed up the tedious algebraic work.  
-
-    \comment{Why does only $x=0$ give the right answer?}
-    We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.  
-    It turns out that 
-    \begin{equation}
-      A = \frac{1}{\sqrt{2\lambda}} - u\,e^{-2\sqrt{2\lambda}d},\end{equation}
-    where
-    \begin{equation}
-      u = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}},
-    \end{equation}
-    plays a similar role to the $TE$ reflection coefficient.
-    Considering we are solving a nearly identical differential equation this is not much of a surprise.  
-
-    Ultimately, we find that 
-    \begin{equation}
-      \int_0^\infty dt e^{-\lambda t} \dlangle \frac{e^{-s \theta[x(t)-d]}}{\sqrt{2\pi t}}\drangle  
-      = \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right],
-      \label{eq:Feynman-Kac TE one step}
-    \end{equation}
-    where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
+  \item Quote FPE, with potential.  Note source term for closed loops.  
+    % We start with a single step, $V = \chi\Theta[x-d]$.  We need to solve the following Fokker-Planck equation 
+    % \begin{equation}
+    %   \partial_t f = \frac{1}{2}\partial_x^2 f - (\chi\Theta(x-d)+\lambda)f + \delta(x).
+    % \end{equation}
+    % where $g$ will act as the source which pins the solutions to a particular point, $x_0$.
+  \item Note using explicit delta function, rather than unified Fourier representation.  
+    % While it is possible to solve this using the Fourier representation of the delta function, 
+    % I found it more transparent to use an explicit delta function and explicitly handle the cases where the pole is in different places.  
+    % Cite Steck, and Hooghiemstra
+  \item Quote Laplace-transformed solution, and appropriate PDE. 
+    % Now from Eq.~(\ref{eq:path_int_solution}) we have 
+    % \begin{equation}
+    %   f(x) = \dlangle  \int_0^\infty ds\,\delta(x) e^{-\lambda s-\int_0^s du\,\chi\Theta[x(u)-d]} \drangle,
+    % \end{equation}
+    % is the solution to 
+    % \begin{equation}
+    %   \partial_x^2 f = 2(\chi\Theta(x-d)+\lambda)f - 2\delta(x).  
+    % \end{equation}
+  \item Quote general form of solution, note choosing bounded solution
+    % In general the solutions are of the form, 
+    % \begin{equation}
+    %   f(x) = A e^{\kappa x} + B e^{-\kappa x},
+    % \end{equation}
+    % where we will fix $\kappa$ appropriately, and choose the bounded solution.
+  \item Quote boundary conditions.  
+    % We also have to take care with the boundary conditions at surfaces.
+    % At the jump discontinuity at $x=d$ we have 
+    % \begin{equation}
+    %   \partial_xf(d+\epsilon) - \partial_x f(d-\epsilon) = 0, \qquad f(d+\epsilon)-f(d-\epsilon) = 0.  
+    % \end{equation}
+    % For the boundary conditions at the delta function we have 
+    % \begin{equation}
+    %   \partial_xf(\epsilon) -\partial_x f(-\epsilon) = -2 , \qquad f(d+\epsilon)-f(d-\epsilon) = 0,
+    % \end{equation}
+    % where both of these relations follow from integrating the PDE across the discontinuity.  
+    
+    \item Quote general form of solution for $d>0$.  
+    % Then for $d>0$ have 
+    % \begin{equation}
+    %   f(x) =\left\{ 
+    %     \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
+    %       B e^{\sqrt{2\lambda}x} + Ce^{-\sqrt{2\lambda}x} & \hspace{2cm} & 0<x<d\\
+    %       D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>d
+    %     \end{array}
+    %   \right.
+    % \end{equation}
+    % where the coefficients are fixed by matching the boundary conditions together.
+    % This was done using Mathematica to speed up the tedious algebraic work.  
+    \item{Note for $d>0$ need $A$}
+    % We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.  
+    % It turns out that 
+    % \begin{equation}
+    %   A = \frac{1}{\sqrt{2\lambda}} - u\,e^{-2\sqrt{2\lambda}d},\end{equation}
+    % where
+    % \begin{equation}
+    %   u = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}},
+    % \end{equation}
+  \item Note reflection coefficient similarity.  
+    % plays a similar role to the $TE$ reflection coefficient.
+    % Considering we are solving a nearly identical differential equation this is not much of a surprise.  
+  \item For $d<0$, can get similar result from $D$, if $\lambda \leftrightarrow \lambda+\chi$.
+  \item Final result for all cases.  
+    % Ultimately, we find that 
+    % \begin{equation}
+    %   \int_0^\infty dt e^{-\lambda t} \dlangle \frac{e^{-s \theta[x(t)-d]}}{\sqrt{2\pi t}}\drangle  
+    %   = \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right],
+    %   \label{eq:Feynman-Kac TE one step}
+    % \end{equation}
+    % where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
+  \item Note normalization factor
     The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
+  \item For $d<0$, note we can use symmetry and substitutions. 
+    % \subsection{$d<0$}
+    % We can go through the same procedure for $d<0$.
+    % This extra effort will be necessary for the Casimir energy where we will have to apply these formulae over all space.    
+    % Then for $d>0$ have 
+    % \begin{equation}
+    %   f(x) =\left\{ 
+    %     \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<d\\
+    %       B e^{\sqrt{2(\lambda+\chi)}x} + Ce^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & d<x<0\\
+    %       D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>0
+    %     \end{array}
+    %   \right.
+    % \end{equation}
+    % where the coefficients are fixed by matching the boundary conditions together.
+    % This was done using Mathematica to speed up the tedious algebraic work.  
 
-    \subsection{$d<0$}
-    We can go through the same procedure for $d<0$.
-    This extra effort will be necessary for the Casimir energy where we will have to apply these formulae over all space.    
-    Then for $d>0$ have 
-    \begin{equation}
-      f(x) =\left\{ 
-        \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<d\\
-          B e^{\sqrt{2(\lambda+\chi)}x} + Ce^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & d<x<0\\
-          D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>0
-        \end{array}
-      \right.
-    \end{equation}
-    where the coefficients are fixed by matching the boundary conditions together.
-    This was done using Mathematica to speed up the tedious algebraic work.  
-
-    We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $D$ for this case.
-    It turns out that 
-    \begin{equation}
-      D = \frac{1}{\sqrt{2\lambda}} + u e^{2\sqrt{2\lambda}d}.
-    \end{equation}
-
-    We can pull these results together to write
-    \begin{equation}
-      f_{TE,1}(x) = \left\{\begin{array}{lcr} 
-          \dfrac{1}{\sqrt{2\lambda}}\left[1+ u e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
-        \end{array} \right. 
-    \end{equation}
+    % We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $D$ for this case.
+    % It turns out that 
+    % \begin{equation}
+    %   D = \frac{1}{\sqrt{2\lambda}} + u e^{2\sqrt{2\lambda}d}.
+    % \end{equation}
+    \item Final results.
+    % We can pull these results together to write
+    % \begin{equation}
+    %   f_{TE,1}(x) = \left\{\begin{array}{lcr} 
+    %       \dfrac{1}{\sqrt{2\lambda}}\left[1+ u e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
+    %       \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
+    %     \end{array} \right. 
+    % \end{equation}
 
   \item Identify similarity to reflection coefficients
-  \item Note connection to Dirichlet boundary conditions.  
   \item {Quote result for integration over surface.}
 
-
-    \subsubsection{Integrating over position}
-
-    We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$.
-    The integrals over position is 
-    \begin{align}
-      I_{TE,1} &= \int_{-\infty}^h dx_0 \frac{1}{\sqrt{2(\lambda+\chi_1)}}\left(1 - u_1e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} \right) 
-      + \int_h^\infty dx_0 \frac{1}{\sqrt{2\lambda}}\left(1 + u_1 e^{2\sqrt{2\lambda}(h-x_0)}\right) \\
-      % &= \int_h^\infty dx_0[(2\lambda)^{-1/2}+(2\kappa)^{-1/2}]  -  \int_{-\infty}^0  dx_0 \frac{1}{\sqrt{2\kappa_1}}u_1e^{2\sqrt{2\kappa_1}x_0} + \int_0^\infty dx_0 \frac{1}{\sqrt{2\lambda}}u_1 e^{-2\sqrt{2\lambda}x_0}\\
-      &= I^{(1)}_{div}  +   \left(\frac{1}{4\lambda}- \frac{1}{4(\lambda+\chi_1)}\right)u_1,
-    \end{align}
-    where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
+    % We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$.
+    % The integrals over position is 
+    % \begin{align}
+    %   I_{TE,1} &= \int_{-\infty}^h dx_0 \frac{1}{\sqrt{2(\lambda+\chi_1)}}\left(1 - u_1e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} \right) 
+    %   + \int_h^\infty dx_0 \frac{1}{\sqrt{2\lambda}}\left(1 + u_1 e^{2\sqrt{2\lambda}(h-x_0)}\right) \\
+    %   % &= \int_h^\infty dx_0[(2\lambda)^{-1/2}+(2\kappa)^{-1/2}]  -  \int_{-\infty}^0  dx_0 \frac{1}{\sqrt{2\kappa_1}}u_1e^{2\sqrt{2\kappa_1}x_0} + \int_0^\infty dx_0 \frac{1}{\sqrt{2\lambda}}u_1 e^{-2\sqrt{2\lambda}x_0}\\
+    %   &= I^{(1)}_{div}  +   \left(\frac{1}{4\lambda}- \frac{1}{4(\lambda+\chi_1)}\right)u_1,
+    % \end{align}
+    % where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
 
 \end{itemize}
 
+\subsection{Planar Dirichlet Conditions}
+
+\begin{itemize}
+  \item (Comment- important to get this correct and simple as this is the template?)
+  \item Note connection to Gies work (they don't use this).    Note we will discuss this in
+    accelerated convergence techniques.  
+  \item Take delta function potential a distance $d$ away.  Use open loops.  
+  \item Quote potential
+\end{itemize}
 
 \section{Two Step Potentials}
 
 \begin{itemize}
   \item {Take $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.}
-    When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
-    We will use exactly the same procedure as above, but with an extra step. 
+    % When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
+    % We will use exactly the same procedure as above, but with an extra step. 
 
-    Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
-    We have solutions, 
-    \begin{equation}
-      f(x) = \left\{ \begin{array}{lcr}
-          A e^{\sqrt{2(\lambda+\chi_1)}x}   & \hspace{1cm} & x<0\\
-          B e^{\sqrt{2(\lambda+\chi_1)}x} + C e^{-\sqrt{2(\lambda+\chi_1)}x}  & \hspace{1cm} & 0<x<h\\
-          D e^{\sqrt{2\lambda}x} + F e^{-\sqrt{2\lambda}x}  & \hspace{1cm} & h<x<h+d\\
-          G e^{-\sqrt{2(\lambda+\chi_2)}x} & \hspace{1cm} & x>d_2
-        \end{array}
-      \right.
-    \end{equation}
-    We will take $d_1 = h, d_2 = d+h$.
-    We can then check that our final solutions are independent of $h$ once we have integrated over position.
-    We would expect the Casimir energy to only depend on $d$ in this case.   
-
-
-
+    % Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
+    % We have solutions, 
+    % \begin{equation}
+    %   f(x) = \left\{ \begin{array}{lcr}
+    %       A e^{\sqrt{2(\lambda+\chi_1)}x}   & \hspace{1cm} & x<0\\
+    %       B e^{\sqrt{2(\lambda+\chi_1)}x} + C e^{-\sqrt{2(\lambda+\chi_1)}x}  & \hspace{1cm} & 0<x<h\\
+    %       D e^{\sqrt{2\lambda}x} + F e^{-\sqrt{2\lambda}x}  & \hspace{1cm} & h<x<h+d\\
+    %       G e^{-\sqrt{2(\lambda+\chi_2)}x} & \hspace{1cm} & x>d_2
+    %     \end{array}
+    %   \right.
+    % \end{equation}
+    % We will take $d_1 = h, d_2 = d+h$.
+    % We can then check that our final solutions are independent of $h$ once we have integrated over position.
+    % We would expect the Casimir energy to only depend on $d$ in this case.   
   \item {Solve in each region, (quote results)}
-    We then need 
-    \begin{equation}
-      f_{TE,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
-          \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
-          \frac{1}{\sqrt{2\lambda}} + \dfrac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{(u_1 e^{-2\sqrt{2\lambda}d}-u_2)}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
-        \end{array}
-      \right.
-    \end{equation}
-    with 
-    \begin{equation}
-      u_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}},
-    \end{equation}
+    % We then need 
+    % \begin{equation}
+    %   f_{TE,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
+    %       \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
+    %       \frac{1}{\sqrt{2\lambda}} + \dfrac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
+    %       \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{(u_1 e^{-2\sqrt{2\lambda}d}-u_2)}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
+    %     \end{array}
+    %   \right.
+    % \end{equation}
+    % with 
+    % \begin{equation}
+    %   u_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}},
+    % \end{equation}
   \item Identify similarity to reflection coefficients/ Fabry-Perot resonance condition.
-  \item Leave in Laplace transformed version.  
-  \item {Carry out integral over position. }
-    We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$. 
-    First up we need $I_{12}=\int dx_0 f_{12}[x-(h-x_0)]$
-    \begin{align}
-      I_{TE,12} %=& \int_{-\infty}^h  dx_0  f_{x_0<h} + \int_{h}^{h+d}  dx_0  f_{h<x_0<h+d} + \int_{h+d}^\infty dx_0 f_{x_0>h+d}\\
-      =&\int_{-\infty}^h dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right] \nonumber\\
-      & +\int_{h}^{h+d}dx_0\left[\frac{1}{\sqrt{2\lambda}} + \frac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} \right]\nonumber\\
-      &+ \int_{h+d}^\infty dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right]
-    \end{align}
+  \item Leave in Laplace transformed version for analytical comparisons.    
+  \item {Carry out integral over position. Note divergent terms, these are cancelled out by 
+    suitable renormalization.}
+    % We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$. 
+    % First up we need $I_{12}=\int dx_0 f_{12}[x-(h-x_0)]$
+    % \begin{align}
+    %   I_{TE,12} %=& \int_{-\infty}^h  dx_0  f_{x_0<h} + \int_{h}^{h+d}  dx_0  f_{h<x_0<h+d} + \int_{h+d}^\infty dx_0 f_{x_0>h+d}\\
+    %   =&\int_{-\infty}^h dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right] \nonumber\\
+    %   & +\int_{h}^{h+d}dx_0\left[\frac{1}{\sqrt{2\lambda}} + \frac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} \right]\nonumber\\
+    %   &+ \int_{h+d}^\infty dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right]
+    % \end{align}
 
-    % We need 
+     % We need 
     % \begin{gather}
     %   \int_{-\infty}^h dx_0 e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} = \int_{-\infty}^0 dx_0 e^{2\sqrt{2(\lambda+\chi_1)}(x_0)} = \frac{1}{2\sqrt{2(\lambda+\chi_1)}}\\
     %   \int_{h+d}^\infty dx_0 e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))} = \int_0^\infty e^{-2\sqrt{2(\lambda+\chi_2)}x_0} = \frac{1}{2\sqrt{2(\lambda+\chi_2)}}\\
     %   \int_{h}^{h+d} dx_0 e^{-2\sqrt{2\lambda}(x_0-h)} = \int_0^d  dx_0 e^{-2\sqrt{2\lambda}x_0} = \frac{1 - e^{-2\sqrt{2\lambda}d}}{2\sqrt{2\lambda}}\\
     %   \int_{h}^{h+d} dx_0 e^{2\sqrt{2\lambda}(x_0-d-h)} = \int_{-d}^0  dx_0 e^{2\sqrt{2\lambda}x_0} = \frac{1 - e^{-2\sqrt{2\lambda}d}}{2\sqrt{2\lambda}}
     % \end{gather}
-    \item Final integrated value
-    So that we get:
-    \begin{align}
-      I_{TE,12} =& -I_{div} + \dfrac{u_2 e^{-2\sqrt{2\lambda}d}-u_1}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u_1u_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} + (u_1+u_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u_1u_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
-      & +\frac{u_1 e^{-2\sqrt{2\lambda}d} - u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})},
-    \end{align}
-    where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
-    
-
+%    \item Final integrated value
+    % So that we get:
+    % \begin{align}
+    %   I_{TE,12} =& -I_{div} + \dfrac{u_2 e^{-2\sqrt{2\lambda}d}-u_1}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u_1u_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} + (u_1+u_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u_1u_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
+    %   & +\frac{u_1 e^{-2\sqrt{2\lambda}d} - u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})},
+    % \end{align}
+    % where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
 \end{itemize}
 
 \section{Feynman-Kac formula for TM Potentials}
@@ -392,7 +397,6 @@
   \item Derive Feynman-Kac formula between fixed end points.  Absolutely essential for numerical
     work.
 \end{itemize}
-
 
 \subsection{Transfer Layer Boundary conditions for TM Potential}
 
@@ -676,12 +680,38 @@
 \begin{itemize}
   \item Path integral construction on metric-affine space is surprisingly complicated 
     and error-fraught.  
-  \item Given analogy of a medium to a 
   \item Care is required in construction to get all terms.  
-  \item Similar to multiplicative 
-
+  \item Similar to multiplicative noise in SDE.
 \end{itemize}
 
+\begin{itemize}
+  \item Given analogy of a medium to a curved space. Cite Leonhardt, Gordon  
+  \item Note general requirement for $\mu=\epsilon$.  Hard to achieve, especially broadband.
+  \item Application to TM path integral with rescaling $\epsilon$.
+\end{itemize}
+
+\subsection{Operators in Curved Space}
+
+\begin{itemize}
+  \item Quote Position Operator and inner product for spatial wavefunctions.
+  \item Note only momentum operator consistent with that.
+  \item Develop path integral
+  \item Show it obeys the Schrodinger equation (Grosche's test)
+\end{itemize}
+
+\subsection{Transformation}
+
+\begin{itemize}
+  \item Start with flat-space path integral.\cite{Gervais1971, Kleinert}
+  \item Introduce coordinate transformation
+  \item Choose expansion point, expand consistently to $\order(\Delta T)$.
+  \item Note connection to choice of stochastic calculus.
+  \item Expand Jacobian factors
+  \item Expand Gaussian factors
+  \item Convert to terms involving curvature tensors.
+  \item Simplify down to $1D$
+  \item Note typically small value of quantum correction.  $\hbar^2$.
+\end{itemize}
 
 %%% Local Variables: 
 %%% mode: latex

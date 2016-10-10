@@ -1,45 +1,62 @@
 \chapter{Path Integrals and Feynman-Kac formulae}
 
-
     The path integral was originally developed by Richard Feynman as an alternative formulation of quantum mechanics
     ~\cite{Feynman1948,Feynman1965}.  
     In the path integral, the amplitude for a particle to propagate from one position to another,
     is given by the sum over \emph{all} possible paths between the points.  
     Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path,
-    and $\hbar$ is the reduced Planck constant.  
-    
-    %put later with reference to Feynman-Kac formulae.  
-    Mark Kac put the path integral on firmer mathematical footing, who worked with similar
-    functional integrals~\cite{Kac1949}.  Instead of attributing a phase to each path, one weights each path
-    by $e^{-S_E[x]}$, where $S_E$ is the so-called Euclidean action.  This passage from imaginary, oscillatory
-    exponents to real, decaying exponents makes the convergence of the results integrals much clearer.
+    and $\hbar$ is the reduced Planck constant.   
+    Mark Kac worked with similar functional integrals, and put the path integral 
+    on firmer mathematical footing~\cite{Kac1949}.  In Kac's work, and much of the mathematical
+    work that followed, one weights each path
+    by with $e^{-S_E[x]}$, where $S_E$ is the so-called Euclidean action.  
+    This amounts to solving a diffusion equation, rather than the Schr\"odinger equation.  
 
-    
-    
+    Path integrals have been used extensively in a wide range of theoretical physics~\cite{Kleinert2012}.
+    They form one basis for quantum field theory~\cite{Brown1994}, where they naturally
+    account for the symmetries of the gauge field theories that underly the Standard Model of 
+    particle physics~\cite{Srednicki2008}.  Path integrals have also been used in the 
+    mathematics and statistics to describe stochastic processes~\cite{Durrett1996, Karatzas1991},
+    They have even been used in studying quantum chaos - the study of the quantum analogues 
+    of classically chaotic systems~\cite{Gutzwiller}.
 
+    In honor of the pioneering work by Feynman and Kac, the fact that path integrals
+    act as the solutions to diffusion/Schrodinger equations is referred to as the Feynman-Kac 
+    formula.  In our parlance, this connection is also used to refer to the exact analytical
+    result for a given path integral.  
+    This chapter is devoted to deriving the Feynman-Kac formula, and then solving
+    it for some simple geometries.  These results will be used in our analytical and numerical
+    calculations of the Casimir force.  
 
-\begin{itemize}
+  % \item Path integral have broad applications in theoretical physics as a grounding for field theories
+  %   \cite{Brown1994}, finance~\cite{Glasserman2004} and statistics~\cite{Durrett1996, Karatzas1991}.
+  %   \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
+  %   In field theory offer simple way to quantize Gauge theory, and in statistical and financial 
+  %   applications provide a natural way to connect the sample paths, 
+    
+%\begin{itemize}
   % \item Path integral method is alternate formulation of quantum mechanics developed by 
   %   Feynman.  
   % \item Mathematical footing.  Kac
   % \item Relates transition amplitude for quantum particle to sum over all paths connecting
   %   end points, weighted by phase given by classical action for path.  
-  \item Put on firmer mathematical ground by Kac\comment{Citation!}.  
-    Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
-    Replaces oscillating Gaussian integrals for real, decaying ones.
-  \item Path integral have broad applications in theoretical physics as a grounding for field theories
-    \cite{Brown1994}, finance~\cite{Glasserman2004} and statistics~\cite{Durrett1996, Karatzas1991}.
-    \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
-    In field theory offer simple way to quantize Gauge theory, and in statistical and financial 
-    applications provide a natural way to connect the sample paths, 
-  \item This fact (path integrals are solutions to diffusion equations) is referred to as the 
-    Feynman-Kac formula.  
-    In addition, the same term is used to refer to particular solutions for given situation.
-    We will typically employ the term in this second sense to refer to particular
-    solutions corresponding to path integrals.  
-\end{itemize}
+  % \item Put on firmer mathematical ground by Kac\comment{Citation!}.  
+  %   Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
+  %   Replaces oscillating Gaussian integrals for real, decaying ones.
+  % \item Path integral have broad applications in theoretical physics as a grounding for field theories
+  %   \cite{Brown1994}, finance~\cite{Glasserman2004} and statistics~\cite{Durrett1996, Karatzas1991}.
+  %   \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
+  %   In field theory offer simple way to quantize Gauge theory, and in statistical and financial 
+  %   applications provide a natural way to connect the sample paths, 
+%   \item This fact (path integrals are solutions to diffusion equations) is referred to as the 
+%     Feynman-Kac formula.  
+%     In addition, the same term is used to refer to particular solutions for given situation.
+%     We will typically employ the term in this second sense to refer to particular
+%     solutions corresponding to path integrals.  
+% \end{itemize}
 
 \section{Derivation of Feynman-Kac formula }
+
 \begin{itemize}
   \item Follow spirit of Feynman~\cite{Feynman1948}, and derivation in Sakurai\cite{Sakurai1994}.  
     Related material in Steck Sec 17.9~\cite{SteckNotes} 
@@ -659,16 +676,21 @@
     We then need to solve this for the various cases of $h,h+d $ on each side of $x=0$:
     \begin{equation}
       f_{TM,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
-          \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u'_2 e^{-2\sqrt{2\lambda}d} - u'_1}{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
-          \frac{1}{\sqrt{2\lambda}} + \dfrac{2u'_1u'_2 e^{-2\sqrt{2\lambda}d} + u'_1 e^{2\sqrt{2\lambda}(h-x_0)} +u'_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{(u'_1 e^{-2\sqrt{2\lambda}d}-u'_2)}{\sqrt{2(\lambda+\chi_2)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
+          \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}
+\dfrac{u'_2 e^{-2\sqrt{2\lambda}d} - u'_1}{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
+          \frac{1}{\sqrt{2\lambda}} + 
+          \dfrac{2u'_1u'_2 e^{-2\sqrt{2\lambda}d} + u'_1 e^{2\sqrt{2\lambda}(h-x_0)} +u'_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}
+          {\sqrt{2\lambda}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
+          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}
+          \dfrac{(u'_1 e^{-2\sqrt{2\lambda}d}-u'_2)}{\sqrt{2(\lambda+\chi_2)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
         \end{array}
       \right.
     \end{equation}
     \item {Quote various limits for $h,h+d$ on either side of 0}
     For have $h,h+d>0$
     \begin{align}
-      f(x) =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}h}\frac{u'_2 e^{-2\sqrt{2\lambda}d}-u'_1 }{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})}
+      f(x) =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}h}
+      \frac{u'_2 e^{-2\sqrt{2\lambda}d}-u'_1 }{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})}
     \end{align}
 
     For $h<0, h+d>0$ we need 
@@ -903,899 +925,14 @@ The following is my attempt to follow their work.
 They also cite a relevant paper by McLaughlin and Schulman\footnote{
 McLaughlin, D. W. and Schulman, L. S. \textit{Path Integrals in Curved Spaces}, 
 J. Math. Phys. \textbf{12}, 2520, (1971)}.
-The basic idea here is to shift a Cartesian path integral into curvilinear coordinates.
-You then have to keep terms to fourth order when expanding the ``kinetic'' term
- in the path integral, and so second order in the Jacobian to find all terms 
-that contribute to $\order(\Delta t)$.
-Kleinert has a similar prescription.
-This is very close to Bryce deWitt's work, although McLaughlin and Shulman carry it one further.
-They then expand the higher order terms, and integrate against the Gaussian.
-This leads to an effective potential.
-
-\subsection{Definitions and variable transformation}
-We start from the following Lagrangian,
-\begin{equation}
-L = \frac{1}{2}\dot{q}_a\dot{q}_a,
-\end{equation}
-where $a=1,\ldots D$, and we are employing the Einstein summation convention.  
-We will suppress any potential terms, which can be added again at the end 
-without modification.  
-
-We start with the Euclidean space path-integral for the transition amplitude
-from $q_0$ to $q_{N+1}$ in time $T$,
-\begin{equation}
-Z = \int \prod_{k=1}^Nd^Dq_i \frac{1}{\sqrt{2\pi\Delta T}}
-\exp\left[ - \frac{\left(q_{a,k+1}-q_{a,k}\right)^2}{2\Delta T}\right].
-\end{equation}
-
-We now change variables to $q_i = F_i(Q_j)$.  This change of variables
-effectively introduces curvature into the space.  
-We will also introduce the metric tensor, 
-\begin{equation}
-g_{ij} = \partial_i F_a \partial_j F_a.
-\end{equation}
-This is closely related to the so-called \textit{vielbein} formalism 
-(vielbien is German for many legs), 
-which relates the local coordinates on the manifold to some Euclidean coordinates.
-Carrol refers to this as a non-coordinate basis\footnote{Carrol, S., 
-``Spacetime and Geometry'', Addison-Wesley, Appendix J}.  
-
-\comment{This variable transformation depends only on the current time!
-  Our version also requires a knowledge of the past.}
-After the transformation the path integral is given by
-\begin{equation}
-Z = \int \prod_{i=1}^D\prod_{k=1}^NdQ_i(k) \left| \frac{\partial F_a}{\partial Q_{j}(k)}\right|
- \frac{1}{\sqrt{2\pi\Delta T}} \exp\left[ 
-- \frac{\left[F_{a}(k+1)-F_a(k)\right]\left[F_{a}(k+1)-F_a(k)\right]}{2\Delta T}\right].
-\end{equation}
-where subscripts denote vector components, and parentheses are the ``time'' argument. 
- We can also relate the determinant of the Jacobian determinant to the determinant of the metric,
- $\left|\frac{\partial F_i}{\partial Q_j}\right| = \sqrt{|g_{ij}|}$.  The path-integral
-can be written as
-\begin{equation}
-Z = g^{1/4}(Q_0)g^{1/4}(Q_N)\int \prod_{k=1}^N\frac{d^DQ(k)}{(2\pi\Delta T)^{D/2}} 
-g^{1/4}(k)g^{1/4}(k+1) \exp\left[ - \frac{\left[F_{a}(k+1)-F_a(k)\right]^2}{2\Delta T}\right],
-\end{equation}
-where we have factoring the terms to be split across adjacent increments.  
-
-\subsection{Expanding to $\order(\Delta T)$}
-
-Our goal will be to develop the path integral by consistently expanding all terms
-to first order in $\delta T$.  
-We will use an Ito-like rule treating $\Delta q^2\sim\Delta T$. This 
-reasoning follows from assuming the dominant contributions come when the 
-argument of the exponential is of order one.  
-In some terms we find we must expand up to to fourth order in $\Delta Q$. 
-
-We will derive the path-integral in the so-called ``anypoint'' expansion, 
-where we will Taylor expand the potentials from any point within $(Q(k),Q(k+1))$.
-
-\subsubsection{Kinetic term}
-We now want to expand the kinetic term to high enough order such that it is correct to $\order(\Delta T)$.
-  We will Taylor expand each integral around
-\begin{equation}
-\bar{Q}(t) = \alpha Q(t+1)+(1-\alpha)Q(t),
-\end{equation}
-where $\alpha\in(0,1)$.  Some values of $\alpha$ correspond to particular 
-choices of stochastic calculus:  Ito calculus emerges by expanding all functions
-before the increment, so $\alpha=0$;  Stratonovich calculus comes from expanding
-about the midpoint of the increment, $\alpha=1/2$; and anticipating calculus
-by expanding about the end-point of the increment or $\alpha=1$.  This is mostly
-done to make comparison with different results easier, rather than any inherent
-superiority for this expansion.
-
-We will use the increments $\Delta Q(t) =Q(t+1)-Q(t)$ as our integration
-variables.  The basic trick will be to expand around $\bar{Q}$, and integrate
-over $\Delta Q(t)$, treating each Gaussian integral independently.  
-
-The positions can be rewritten in terms of these new variables,
-\begin{align}
-Q(t) &= \bar{Q}(t)-\alpha\Delta Q(t)\\
-Q(t+1) &= \bar{Q}(t)+(1-\alpha)\Delta Q(t).
-\end{align}
-We drop the $(t)$ labels, since we will be focusing on one particular time in
-what follows.  
-The Taylor expansion for position, $q_a=F_a(Q)$ around $\bar{Q}$ is then 
-\begin{align}
-F_a(t) &= F_a\left[\bar{\vect{Q}} -\alpha\vect{\Delta Q}\right]\\
-&\approx F_a(\bar{Q}) -\alpha \Delta Q_i \partial_i F_a 
-+\frac{\alpha^2}{2!}\Delta Q_i\Delta Q_j\partial_i\partial_j F_a 
--\frac{\alpha^3}{3!}\Delta Q_i\Delta Q_j\Delta Q_k\partial_i\partial_j\partial_kF_a.
-\end{align}
-Similarly, we can expand $q_a(t+1)$
-\begin{align}
-F_a(t+1) &= F_a\left[\bar{\vect{Q}} +(1-\alpha)\vect{\Delta Q}\right]\\
-&\approx F_a(\bar{Q}) +(1-\alpha) \Delta Q_i \partial_i F_a 
-+\frac{(1-\alpha)^2}{2!}\Delta Q_i\Delta Q_j\partial_i\partial_j F_a \nonumber\\
-&+\frac{(1-\alpha)^3}{3!}\Delta Q_i\Delta Q_j\Delta Q_k\partial_i\partial_j\partial_kF_a.
-\end{align}
-The increment $dq_a$ then follows from subtracting these results from each other:
-\begin{align}
-F_a(t+1)-F_a(t)%   &\approx (1-1)F_a(\bar{Q}) +[(1-\alpha)-(-\alpha)] \Delta Q_i \partial_i F_a \nonumber\\
-% & +\frac{(1-\alpha)^2-\alpha^2}{2!}\Delta Q_i\Delta Q_j\partial_i\partial_j F_a \nonumber\\
-% & +\frac{(1-\alpha)^3-(-\alpha^3)}{3!}\Delta Q_i\Delta Q_j\Delta Q_k\partial_i\partial_j\partial_kF_a\\
-&\approx \Delta Q_i \partial_i F_a +\frac{(1-2\alpha)}{2}\Delta Q_i\Delta Q_j\partial_i\partial_j F_a \nonumber\\
-&+\frac{(1-3\alpha+3\alpha^2)}{6}\Delta Q_i\Delta Q_j\Delta Q_k\partial_i\partial_j\partial_kF_a.
-\end{align}
-where all the functions are evaluated at $\bar{Q}(t)$.  
-We will now substitute this increment into the kinetic energy term of the path integral.  
-The leading order term predicts that $\Delta Q^2\sim\Delta T$.  
-We will need to keep terms to $\order(\Delta Q^4)$ to get a result 
-consistent to $\order(\Delta T)$.
-The kinetic term of the path integral can then be rewritten as 
-\begin{align}
-\Delta T \dot{q}_a\dot{q}_a & = \frac{1}{\Delta T}\big[
-\Delta Q_i \partial_i F_a 
-+\frac{(1-2\alpha)}{2}\Delta Q_i\Delta Q_j\partial_i\partial_j F_a 
-+\frac{(1-3\alpha+3\alpha^2)}{6}\Delta Q_i\Delta Q_j\Delta Q_k\partial_i\partial_j\partial_kF_a\big]^2\\
-& = \frac{1}{\Delta T}\bigg[
-\Delta Q_i \Delta Q_r\partial_i F_a \partial_r F_a \nonumber\\
-&\hspace{1.5cm}+(1-2\alpha)\Delta Q_i \Delta Q_j\Delta Q_k\partial_i F_a\partial_j\partial_kF_a  \nonumber\\
-&\hspace{1.5cm}+\left(\frac{1}{3}-\alpha+\alpha^2\right)\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\partial_i F_a 
-\partial_j\partial_k\partial_lF_a\nonumber\\
-&\hspace{1.5cm}+\left(\frac{1}{4}-\alpha+\alpha^2\right)\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l
-\partial_i\partial_j F_a\partial_k\partial_lF_a\bigg]
-% &=\frac{1}{\Delta T}\left[\Delta Q_i \Delta Q_j\partial_j F_a\partial_i F_a 
-% + \frac{1}{12}\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l\partial_i\partial_j\partial_kF_a\partial_lF_a\right]\\
-\end{align}
-That strange fourth order term will lead to an extra potential of order $\Delta T$.    
-
-%Can we combine some terms and perhaps re-express this in slightly simpler terms?
-We can simplify this a little if we define the metric tensor as
-\begin{equation}
-  g_{ij} = \partial_iF_a\partial_jF_a,
-\end{equation}
-which is related to the non-coordinate basis (defined in terms of orthonormal
-vectors - and the vierbein).
-The corresponding inverse metric is 
-\begin{equation}
-  g^{ij} = \partial_aQ^i\partial_aQ^j,
-\end{equation}
-where $\partial_a$ denotes $\frac{\partial}{\partial F^a}$.
-Some work rephrases this in terms of the Christoffel symbols and the Ricci
-scalar (which is defined in terms of Christoffel symbols and their derivatives).
-% The final potential we arrive at should be proportional to the Ricci scalar times 
-% $\hbar^2$.  I will hold off on simplification until the end.    
-For example the first derivative of the metric is, 
-\begin{equation}
-\partial_k(g_{ij})=\partial_k(\partial_iF_a\partial_jF_a) =
- \partial_i\partial_kF_a\partial_jF_a+\partial_iF_a\partial_j\partial_kF_a.
-\end{equation}
-The second derivative is more complicated, 
-\begin{align}
-\partial_{k}\partial_l(\partial_iF_a\partial_jF_a) 
-% &=\partial_l( \partial_i\partial_kF_a\partial_jF_a+\partial_iF_a\partial_j\partial_kF_a)\nonumber\\
-% &=\partial_i\partial_k\partial_lF_a\partial_jF_a+\partial_i\partial_kF_a\partial_j\partial_lF_a
-% +\partial_i\partial_lF_a\partial_j\partial_kF_a +\partial_iF_a\partial_j\partial_k\partial_lF_a\nonumber\\
-&=2(\partial_i\partial_k\partial_lF_a\partial_jF_a+\partial_i\partial_kF_a\partial_j\partial_lF_a),
-\end{align}
-where we simplified since we will multiply by a completely symmetric tensor.    
-
-The Christoffel symbols are defined as
-\begin{gather}
-  [ij,l]=\frac{1}{2}(\partial_ig_{jl}+\partial_jg_{li}-\partial_lg_{ij})\\
-  \Gamma_{ij}^k = g^{kl}[ij,l],
-\end{gather}
-and for our metric they are given by 
-\begin{align}
-  [ij,l]&=\frac{1}{2}[\partial_i(\partial_jF^a\partial_l F^a)
-  +\partial_j(\partial_lF^a\partial_i F^a)
-  -\partial_l(\partial_iF^a\partial_j F^a)]\\
-  &= \partial_lF^a\partial_i\partial_j F^a
-\end{align}
-Their derivatives are
-\begin{align}
- \partial_k[ij,l] &= \partial_k\partial_lF^a\partial_i\partial_j F^a 
-+ \partial_lF^a\partial_i\partial_j\partial_k F^a
-\end{align}
-
-The kinetic term can be more compactly written as
-\begin{align}
-\Delta T \dot{q}_a\dot{q}_a & 
-& = \frac{1}{\Delta T}\bigg[
-\Delta Q_i \Delta Q_r\partial_i F_a \partial_r F_a \nonumber\\
-&\hspace{1.5cm}+(1-2\alpha)\Delta Q_i \Delta Q_j\Delta Q_k[ij,k]  \nonumber\\
-&\hspace{1.5cm}+\left(\frac{1}{3}-\alpha+\alpha^2\right)\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\partial_i F_a 
-\partial_j\partial_k\partial_lF_a\nonumber\\
-&\hspace{1.5cm}+\left(\frac{1}{4}-\alpha+\alpha^2\right)\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l
-\partial_i\partial_j F_a\partial_k\partial_lF_a\bigg]
-% &=\frac{1}{\Delta T}\left[\Delta Q_i \Delta Q_j\partial_j F_a\partial_i F_a 
-% + \frac{1}{12}\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l\partial_i\partial_j\partial_kF_a\partial_lF_a\right]\\
-\end{align}
-
-
-
-The Riemann curvature tensor is in general refined as
-\begin{align}
-  {R^{r}}_{smn}=\partial_m\Gamma^{r}_{ns}-\partial_n \Gamma^{r}_{ms}
-  +\Gamma^{r}_{ml}\Gamma^l_{ns} - +\Gamma^{r}_{nl}\Gamma^l_{ms}
-\end{align}
-The Ricci tensor is 
-\begin{align}
-  {R^{r}}_{srn}=\partial_r\Gamma^{r}_{ns}-\partial_n \Gamma^{r}_{rs}
-  +\Gamma^{r}_{rl}\Gamma^l_{ns} - \Gamma^{r}_{nl}\Gamma^l_{rs},
-\end{align}
-and the Ricci scalar is 
-\begin{align}
-  g^{ns}{R^{r}}_{srn}=g^{ns}\partial_r\Gamma^{r}_{ns}-g^{ns}\partial_n \Gamma^{r}_{rs}
-  +g^{ns}\Gamma^{r}_{rl}\Gamma^l_{ns} - g^{ns}\Gamma^{r}_{nl}\Gamma^l_{rs}.
-\end{align}
-DeWitt showed that the quantum corrections to the path integral we will derive
-involve coupling to the Ricci scalar.  
-
-
-The kinetic term can be rewritten in terms of the metric and its derivatives
-as
-\begin{align}
-\Delta T^2 \dot{q}_a\dot{q}_a % &= \frac{1}{\Delta T}\big[
-% \Delta Q_i \Delta Q_rg_{ir} \nonumber\\
-% &+\frac{(1-2\alpha)}{2}\Delta Q_i \Delta Q_j\Delta Q_k\partial_kg_{ij}  \nonumber\\
-% &+\frac{(2-6\alpha+6\alpha^2)}{6}\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\partial_i F_a 
-% \partial_j\partial_k\partial_lF_a\nonumber\\
-% &+\frac{1-4\alpha+4\alpha^2}{4}\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l
-% \partial_i\partial_j F_a\partial_k\partial_lF_a\big]\\
-% &= \Delta Q_i \Delta Q_rg_{ir} \nonumber\\
-% &+\frac{(1-2\alpha)}{2}\Delta Q_i \Delta Q_j\Delta Q_k\partial_kg_{ij}  \nonumber\\
-% &+\left(\alpha-\frac{1}{2}\right)^2\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l
-% (\partial_i F_a \partial_j\partial_k\partial_lF_a
-% +\partial_i\partial_j F_a\partial_k\partial_lF_a)\nonumber\\
-% &+\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\left(\frac{1}{12}\partial_i F_a 
-% \partial_j\partial_k\partial_lF_a\right)\nonumber\\
-&= \Delta Q_i \Delta Q_rg_{ir} \nonumber\\
-&+\frac{(1-2\alpha)}{2}\Delta Q_i \Delta Q_j\Delta Q_k\partial_kg_{ij}  \nonumber\\
-&+\frac{1}{2}\left(\alpha-\frac{1}{2}\right)^2\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l
-\partial_j\partial_kg_{il}\nonumber\\
-&+\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\left(\frac{1}{12}\partial_i F_a 
-\partial_j\partial_k\partial_lF_a\right)\nonumber\\
-\end{align}
-
-
-
-
-
-\subsubsection{Jacobian determinant}
-\comment{I think this is heavily influenced by Gr\"osche's work.}
-Further to this, we must also expand the Jacobian factors
- in the measure of the path integral
-\begin{equation}
-J=g^{1/4}(t+1)g^{1/4}(t)\label{eq:jacobian}.
-\end{equation}
-We need to also expand this to quadratic order in $\Delta T$.  
-We can do this by using the following form of the determinant
-\begin{equation}
-\det(A) = e^{\tr\ln A}.\label{eq:exp det}
-\end{equation}
-
-At the risk of being dopey, let's just expand directly in terms of $F_a(Q)$,
-rather than in terms of the effective metric tensor.    
-
-The Jacobian factor arises from changing variable, 
-\begin{equation}
-J(t)=\left|\frac{\partial F_a(t)}{\partial q_i}\right| 
-= \left|\frac{\partial F_a(t)}{\partial q_i}\frac{\partial F_a(t)}{\partial q_j}\right|^{1/2}
-\end{equation}
-This can be justified by thinking of $\frac{\partial F_a(t)}{\partial q_i}$
-as an orthogonal transformation~\footnote{Schutz, B., \textit{Geometrical Methods of Mathematical Physics},(1980),pg. 133}.
-  In effect, we are demanding that $g_{ij} = (\Lambda)^TI\Lambda$, 
-where we assumed that the $q_i$ where orthonormal, 
-and thus their metric was the identity.   
-The determinant of the metric tensor is then
-\begin{equation}
-\det[g] = \det[ \Lambda^T I\Lambda] = (\det\Lambda)^2 = \det\left(\frac{\partial F_a}{\partial q_j}\right).
-\end{equation}
-
-In order to proceed we will carry out the expansion to second order in $\Delta Q$.  
-The expansion of the metric tensor to second order in $\Delta Q$,
-\begin{align}
-g_{ij}[Q(t+1)] &= g_{ij}[\bar{\vect{Q}}+(1-\alpha)\vect{\Delta Q}]\\
-&= g_{ij}[\bar{\vect{Q}}] + (1-\alpha)\Delta Q_k \partial_kg_{ij}[\vect{\bar Q}]
-+ \frac{(1-\alpha)^2}{2!}\Delta Q_k\Delta Q_l \partial_k\partial_lg_{ij}[\vect{\bar Q}]
-\label{eq:expand g}
-\end{align}
-We will also need to expand the logarithm for matrices using
-\begin{equation}
-\log[\underbar{g} + \underbar{A}] = \log\underbar{g}+\log(\underbar{I}+\underbar{g}^{-1}\underbar{A}) 
-= \log\underbar{g} + \underbar{g}^{-1}\underbar{A} -\frac{1}{2}\underbar{g}^{-1}{\underbar{A}}{\underbar{g}^{-1}}\underbar{A}
-\label{eq:log g}
-\end{equation}
-where we use $\underbar{A}$ to denote a matrix.  
-Combining relations~(\ref{eq:log g}) and (\ref{eq:expand g}), with the 
-exponential representation of the determinant, we find 
-\begin{align}
-g^{1/4}(t+1) = & \exp\left\{\frac{1}{4}\tr\log[g_{ij}(t+1)]\right\}\\
-= & \exp\left\{\frac{1}{4}\tr\log[\bar{g}_{ij}]
-+\frac{1}{4}\tr\log\left[\delta^n_j+(1-\alpha)\Delta Q_k \bar{g}^{ni}\partial_k\bar{g}_{ij}
-+ \frac{(1-\alpha)^2}{2!}\Delta Q_k\Delta Q_l \bar{g}^{nj}\partial_k\partial_l\bar{g}_{ij}
-\right]\right\}\\
-= & \bar{g}^{1/4}\exp\bigg\{
-\frac{1}{4}\big[(1- \alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}\nonumber\\
-&+ \frac{(1-\alpha)^2}{2}\Delta Q_k\Delta Q_l 
-\big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
--\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-\big]\bigg\},
-\end{align}
-where in the first line we factored out Taylor expanded around $\bar{Q}$ inside
-the logarithm, and then expanded the logarithm to second order and took the 
-trace.
-There is an analogous term from the pre-step, which we can recover by taking
-$(1-\alpha)\rightarrow(-\alpha)$.  
-\begin{align}
-g^{1/4}(t) = & \exp\left\{\frac{1}{4}\tr\log[g_{ij}(t)]\right\}\\
-= & \bar{g}^{1/4}\exp\bigg\{
-\frac{1}{4}\big[-\alpha\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}\nonumber\\
-&+\frac{\alpha^2}{2}\Delta Q_k\Delta Q_l 
-\big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
--\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-\big]\bigg\}
-\end{align}
-These can be combined together to yield, 
-\begin{align}
-g^{1/4}(t+1)g^{1/4}(t) =& \bar{g}^{1/2}\exp\bigg\{
-\frac{1}{4}\big[(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}\nonumber\\
-&+ \frac{1-2\alpha+2\alpha^2}{2}\Delta Q_k\Delta Q_l 
-\big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
--\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-\big]\bigg\}
-\end{align}
-
-
-\subsection{Evaluating higher order moments}
-
-We can now expand the exponential terms up to quartic order in $\Delta T$,
-and then replace the increments with their ensemble averages.  
-Each term in $\Delta Q$ can be treated as a Gaussian integral, 
-and we can exploit the Gaussian moment theorem (or Wick's theorem).  
-We will then be able to re-exponentiate these expressions to find 
-the final effective potential. 
-
-\subsubsection{Gaussian Integrals}
-
-First up we need to compute 
-\begin{equation}
-I_2 = \int d^Dx\,\frac{g^{1/2}}{(2\pi\Delta T)^{D/2}}  e^{-\frac{x_ig_{ij}x_j}{2\Delta T}}x_a x_b
-\end{equation}
-
-Let uss change variables to $y$ where $g_{ij}y_j = \lambda_jy_i$, i.e. the principle basis of $g$.
-We can write expand the old coordinates in terms of the new ones via a unitary transformation $x_i = O_{ij}y_j$.
-We can also write the determinant as $g = \det[g_{ij}] = \prod_i \lambda_i$.
-The matrix $g_{ij} = O_{ik}O_{jm}\delta_{km}\lambda_m.$  
-The integral is then
-\begin{equation}
-I_2 = \int d^Dy\,\frac{\prod_i \lambda_i^{1/2}}{(2\pi\Delta T)^{D/2}} 
- e^{-\frac{-\lambda_i}{2\Delta T} y_i^2} O_{aj}O_{bk}y_jy_k.
-\end{equation}
-We can evaluate this from symmetry.
-If $j\ne k$, the integrand is odd and the integral vanishes.
-However for $j=k$, we are finding the integral for $D-1$ normalized Gaussians,
- and one variance.
-So the answer is 
-\begin{equation}
-\boxed{  I_2 = O_{aj}O_{bk}\delta_{jk}\frac{\Delta T}{\lambda_j}
- = \Delta Tg^{-1}_{ab} = \Delta T g^{ab}.}
-\end{equation}
-
-Similarly, we need to evaluate 
-\begin{equation}
-I_4 = \int d^Dx\,\frac{g^{1/2}}{(2\pi\Delta T)^{D/2}}
-  e^{-\frac{x_ig_{ij}x_j}{2\Delta T}}x_a x_b x_c x_d
-\end{equation}
-The same logic can be traced through for all pairs of contracted indices.    
-In this case we get 
-\begin{equation}
-\boxed{I_4 = \Delta T^2(g^{ab}g^{cd} + g^{ac}g^{bd} + g^{ad}g^{bc}).}
-\end{equation}
-Note that this term shows up as $I_4/\Delta T$, so this is order $\Delta T$.  
-
-We will set the integrals that have odd powers of $\Delta Q$ to zero.  
-
-\subsubsection{Expanding Exponential}
-
-The transformed path integral is 
-\begin{align}
-I=\,& \int \frac{d^Dq_i}{(2\pi \Delta T)^{D/2}} e^{-(q_iq_i)/(2\Delta T)}\\
-=\,&\int \frac{d^DQ_i}{(2\pi \Delta T)^{D/2}}\bar{g}^{1/2}
-\exp\bigg[-\frac{\Delta Q_i \Delta Q_rg_{ir}}{2\Delta T}\bigg] \nonumber\\
-&\times\exp\bigg\{
-\frac{1}{4}\big[(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}\nonumber\\
-&+ \frac{1-2\alpha+2\alpha^2}{2}\Delta Q_k\Delta Q_l 
-\big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
--\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-\big]\bigg\}\nonumber\\
-&\times\exp\bigg\{-\frac{1}{2\Delta T}\big[
-\frac{(1-2\alpha)}{2}\Delta Q_i \Delta Q_j\Delta Q_k\partial_k\bar{g}_{ij}  \nonumber\\
-&+\frac{1}{2}\left(\alpha-\frac{1}{2}\right)^2\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l
-\partial_j\partial_k\bar{g}_{il}\nonumber\\
-&+\frac{1}{12}\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\partial_i F_a 
-\partial_j\partial_k\partial_lF_a
-\big]\bigg\}
-\end{align}
-The exponential can be expanded in powers of $\Delta Q$ as 
-% \begin{align}
-% I=\,&\int \frac{d^DQ_i}{(2\pi \Delta T)^{D/2}}\bar{g}^{1/2}e^{-\Delta Q_i \Delta Q_rg_{ir}/(2\Delta T)} \nonumber\\
-% &\times\bigg\{1+\frac{1}{4}\big[(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}
-% \nonumber\\
-% &+\frac{1}{2\cdot 4^2}(1-2\alpha)^2\Delta Q_l\Delta Q_k 
-% \bar{g}^{rs}\partial_l\bar{g}_{rs}\bar{g}^{ji}\partial_k\bar{g}_{ij}\nonumber\\
-% &+ \frac{1-2\alpha+2\alpha^2}{2}\Delta Q_k\Delta Q_l 
-% \big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
-% -\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-% \big]\bigg\}
-% \nonumber\\
-% &\times\bigg\{1
-% -\big[1+\frac{1}{4}\big[(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}\big]\nonumber
-% \times\frac{(1-2\alpha)}{4\Delta T}\Delta Q_i \Delta Q_j\Delta Q_k\partial_k\bar{g}_{ij}  \nonumber\\
-% &-\frac{(1-2\alpha)^2}{2(4\Delta T)^2}\Delta Q_i \Delta Q_j\Delta Q_k
-% \Delta Q_r \Delta Q_s\Delta Q_t\partial_r\bar{g}_{st}\partial_k\bar{g}_{ij}  \nonumber\\
-% &-\frac{1}{4\Delta T}\left(\alpha-\frac{1}{2}\right)^2\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l
-% \partial_j\partial_k\bar{g}_{il}\nonumber\\
-% &-\frac{1}{24\Delta T}\Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\partial_i F_a 
-% \partial_j\partial_k\partial_lF_a
-% \big]\bigg\}  %Expand exponentials to Order(Delta T), and include cross term.
-% \end{align}
-% \begin{align}
-% I=\,&\int \frac{d^DQ_i}{(2\pi \Delta T)^{D/2}}\bar{g}^{1/2}e^{-\Delta Q_i \Delta Q_rg_{ir}/(2\Delta T)} \nonumber\\
-% &\times\bigg\{1+\frac{1}{4}(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}
-% +\frac{1}{2\cdot 4^2}(1-2\alpha)^2\Delta Q_l\Delta Q_k 
-% \bar{g}^{rs}\partial_k\bar{g}_{rs}\bar{g}^{ji}\partial_l\bar{g}_{ij}\nonumber\\
-% &+ \frac{1-2\alpha+2\alpha^2}{8}\Delta Q_k\Delta Q_l 
-% \big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
-% -\bar{g}^{js}\partial_k\bar{g}_{sm}\bar{g}^{mr}\partial_k\bar{g}_{rj}\big)
-% \nonumber\\
-% &-\frac{(1-2\alpha)}{4\Delta T}\Delta Q_i \Delta Q_j\Delta Q_k\partial_k\bar{g}_{ij}
-% -\frac{(1-2\alpha)^2}{16\Delta T} \bar{g}^{ji}\partial_k\bar{g}_{ij}
-% \partial_r\bar{g}_{st}\Delta Q_k\Delta Q_r \Delta Q_s\Delta Q_t  \nonumber\\
-% %
-% &-\frac{(1-2\alpha)^2}{2(4\Delta T)^2}\partial_r\bar{g}_{st}\partial_k\bar{g}_{ij}
-% \Delta Q_r \Delta Q_s\Delta Q_t\Delta Q_i \Delta Q_j\Delta Q_k  \nonumber\\%6
-% &-\frac{1}{4\Delta T}\left(\alpha-\frac{1}{2}\right)^2\partial_j\partial_k\bar{g}_{il}
-% \Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l\nonumber\\ %4
-% &-\frac{1}{24\Delta T}\partial_i F_a \partial_j\partial_k\partial_lF_a
-% \Delta Q_i \Delta Q_j\Delta Q_k\Delta Q_l %4
-% \big]\bigg\}  %Expand (keep odd terms - give velocities?)
-\begin{align}
-I=\,&\int \frac{d^DQ_i}{(2\pi \Delta T)^{D/2}}\bar{g}^{1/2}e^{-\Delta Q_i \Delta Q_rg_{ir}/(2\Delta T)} \nonumber\\
-&\times\bigg\{1+\frac{1}{4}(1-2\alpha)\Delta Q_k \bar{g}^{ji}\partial_k\bar{g}_{ij}
--\frac{(1-2\alpha)}{4\Delta T}\partial_k\bar{g}_{ij}\Delta T
-(\bar{g}^{jk}\Delta Q_i+\bar{g}^{ki}\Delta Q_j+\bar{g}^{ij}\Delta Q_k)\nonumber\\
-&
--\frac{1}{8}\left(\frac{3}{4}-\alpha+\alpha^2\right)
-\bar{g}^{rs}\partial_k\bar{g}_{rs}\bar{g}^{ji}\partial_l\bar{g}_{ij}\Delta T \bar{g}^{kl} \nonumber\\
-&+ \frac{1-2\alpha+2\alpha^2}{8}\big(\bar{g}^{ji}\partial_k\partial_l\bar{g}_{ij}
-\big)\Delta T \bar{g}^{kl}
-\nonumber\\
-&
--\frac{(1-2\alpha)^2}{16\Delta T} \bar{g}^{ji}\partial_k\bar{g}_{ij}
-\partial_r\bar{g}_{st}\Delta T^2\left[\bar{g}^{kr}\bar{g}^{st} +\bar{g}^{ks}\bar{g}^{rt}+\bar{g}^{kt}\bar{g}^{rs} \right] \nonumber\\
-%
-&-\frac{(1-2\alpha)^2}{2(4\Delta T)^2}\partial_r\bar{g}_{st}\partial_k\bar{g}_{ij}
-\Delta Q_r \Delta Q_s\Delta Q_t\Delta Q_i \Delta Q_j\Delta Q_k  \nonumber\\%6
-&-\frac{1}{4\Delta T}\left(\alpha-\frac{1}{2}\right)^2\partial_j\partial_k\bar{g}_{il}
-\Delta T^2[ \bar{g}^{ij}\bar{g}^{kl} + \bar{g}^{ik}\bar{g}^{jl}+\bar{g}^{il}\bar{g}^{jk}]\nonumber\\ %4
-&-\frac{1}{24\Delta T}\partial_i F_a \partial_j\partial_k\partial_lF_a
-\Delta T^2[ \bar{g}^{ij}\bar{g}^{kl} + \bar{g}^{ik}\bar{g}^{jl}+\bar{g}^{il}\bar{g}^{jk}]
-\big]\bigg\}  %Replace moments.  and drop odd terms.  
-\end{align}
-
-\subsection{Screwing around with symbols}
-
-The metric is defined as
-\begin{equation}
-g_{ij} =\partial_iF_a\partial_jF_a.
-\end{equation}
-The Christoffel symbols and the Riemann curvature tensor are defined in terms
-of the metric as:
-\begin{align}
-\Gamma_{ij}^k &= g^{kl}(\partial_ig_{jl}+\partial_jg_{li}-\partial_lg_{ij})\\
-&= g^{kl}[\partial_i(\partial_j F_a\partial_lF_a)+\partial_j(\partial_lF_a\partial_iF_a)
--\partial_l(\partial_iF_a\partial_jF_a)]\\
-&= g^{kl}[\partial_i\partial_j F_a\partial_lF_a+\partial_lF_a\partial_j\partial_iF_a]\\
-%
-{R^{i}}_{jkl} &=\partial_k\Gamma_{jl}^i-\partial_l\Gamma_{jk}^i
-+\Gamma^i_{km}\Gamma^{m}_{jl}-\Gamma^i_{jm}\Gamma^m_{kl}
-\end{align}
-Note that the curvature tensor is defined in terms of the connection, and we
-will normally choose the Christoffel connection.  
-
-\comment{Gervais and Jevicki have odd definition?} 
-They define the Christoffel
-symbols via:
-\begin{equation}
-  \partial_{i}\partial_jF^a = \Gamma^{l}_{ij}\partial_lF^a
-\end{equation}
-(I think this is consistent with the way Carrol does it.  )
-Note this amounts to asserting metric compatibility of the connection,
-or $\nabla_\sigma g_{\mu\nu} = 0$.  
-
-Recall that $\nabla_\mu \omega_\nu = \partial_\mu\omega_\nu - \Gamma_{\mu\nu}^\kappa\omega_\kappa$,
-and $\nabla_\mu A^\nu = \partial_\mu A^\nu + \Gamma_{\mu\kappa}^\nu A_\kappa$,
-
-
-\subsection{Joining results}
-
-So we had a path integral
-\begin{equation}
-Z = g^{1/4}(Q_0)g^{1/4}(Q_N)\int \prod_{k=1}^N\frac{d^DQ(k)}{\sqrt{2\pi\Delta T}} g^{1/4}(k)g^{1/4}(k+1) \exp\left[ - \frac{\left[F_{a}(k+1)-F_a(k)\right]^2}{2\Delta T} - \Delta T V(Q(k))\right].
-\end{equation}
-We have expanded the $\dot{q}^2 = \Delta F^2$ and $g^{1/4}$ terms out to linear order in $\Delta T$.  This can be exponentiated.  
-\begin{align}
-Z =& g^{1/4}(Q_0)g^{1/4}(Q_N)\int \prod_{k=1}^N\frac{d^DQ(k)}{\sqrt{2\pi\Delta T}} \sqrt{\bar{g}}\left[ 1+\frac{\Delta Q_i\Delta Q_j}{16}\left(\partial_i g^{ab}\partial_j g_{ba}  + g^{ab}\partial_{ij}^2 g_{ba}\right)  \right]\nonumber\\
-&\times \left[1- \frac{1}{24\Delta T}\Delta Q_i\Delta Q_j\Delta Q_k\Delta Q_l\left(\partial_i\partial_j\partial_kF_a\partial_lF_a\right)\right]\nonumber\\
-&\times\exp\left[ - \frac{1}{2\Delta T}\Delta Q_i g_{ij}\Delta Q_j - \Delta T V(Q(k))\right].
-\end{align}
-
-
-
-The result is 
-\begin{equation}
-Z \approx g^{1/4}(Q_0)g^{1/4}(Q_N)\int \prod_{k=1}^Nd^DQ(k) \bar{g}^{1/2}(k)\frac{1}{\sqrt{2\pi\Delta T}} \exp\left[ -\frac{1}{2\Delta T}\Delta Q_i g_{ij}\Delta Q_j - \Delta T V(Q(k)) - \Delta T V_\text{extra}\right],
-\end{equation}
-where 
-\begin{equation}
-V_\text{extra} = -\frac{1}{16}g^{ij}\left(\partial_i g^{ab}\partial_j g_{ba}  + g^{ab}\partial_{ij}^2 g_{ba}\right)+  \frac{1}{24}(g^{ij}g^{kl} + g^{il}g^{jk} + g^{ik}g^{jl})\left(\partial_i\partial_j\partial_kF_a\partial_lF_a\right).
-\end{equation}
-We can see that all of the terms in the second part are the same by symmetry, so we can write
-\begin{equation}
-V_\text{extra} = -\frac{1}{16}g^{ij}\left(\partial_i g^{ab}\partial_j g_{ba}  + g^{ab}\partial_{ij}^2 g_{ba}\right)+  \frac{1}{8}g^{ij}g^{kl}\left(\partial_i\partial_j\partial_kF_a\partial_lF_a\right).
-\end{equation}
-This agrees with Gervais and Jevicki.  They then proceed to phrase this in terms of Christoffel symbols, which makes for more compact form of the potential.  
-
-\section{Stratonovich-Ito conversion}
-
-For the moment, let us assume we have a path integral
-\begin{equation}
-Z = \int \prod_k \frac{dx_k}{\sqrt{2\pi\Delta T\sigma^2(\bar{x}_k)}} e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta T\sigma^2(\bar{x}_k)}}
-\end{equation}
-Let us now convert this to an Ito ordering.  This is similar material to covered in Chapter 5 of Langouche\footnote{Langouche, F., Roekaerts, D. and Tirapegui, E. \textit{Functional Integration and Semiclassical Expansions}, (1982)} where they also discuss the relation between different orderings, and then shifting the point of the evaluation.  
-
-We will expand each matrix element to $\order(\Delta T)$.  
-
-A table of derivatives
-\begin{gather}
- f= \frac{1}{\sigma^2}\\
-f' = -\frac{2\sigma'}{\sigma^3}\\
-f'' = -\frac{2\sigma''}{\sigma^3} + 6\frac{(\sigma')^2}{\sigma^4}
-\end{gather}
-
-First up we can expand 
-\begin{align}
-\frac{1}{\sigma^2(\bar{x})} & \approx \frac{1}{\sigma^2} -\frac{\Delta x}{2}\frac{(-2\sigma')}{\sigma^3} + \frac{1}{2!}\frac{\Delta x^2}{4}\left[-\frac{2\sigma''}{\sigma^3} + 6\frac{(\sigma')^2}{\sigma^4}\right]\\
-& = \frac{1}{\sigma^2} +\Delta x\frac{\sigma'}{\sigma^3} + \frac{\Delta x^2}{4}\left[-\frac{\sigma''}{\sigma^3} + 3\frac{(\sigma')^2}{\sigma^4}\right]
-\end{align}
-
-So the argument of the exponential is 
-\begin{equation}
--\frac{\Delta x^2}{2\Delta T\sigma^2(\bar{x}_k)} \approx -\frac{\Delta x^2}{2\Delta T\sigma^2(x)}-\frac{\Delta x^3}{2\Delta T\sigma^2(x)}\frac{\sigma'}{\sigma} - \frac{\Delta x^4}{8\Delta T\sigma^2(x)}\left(-\frac{\sigma''}{\sigma} + 3\frac{(\sigma')^2}{\sigma^2}\right)
-\end{equation}
-It seems like the done thing here is to then treat the higher order terms as small, and expand this out.  Note that we will have to treat $\Delta x^4/\Delta T$ as $\order(\Delta T)$.  
-
-We will also need to expand the normalization.  
-In that case we have 
-\begin{equation}
-\frac{1}{\sigma(\bar{x})} \approx \frac{1}{\sigma} -\frac{\Delta x}{2}.\frac{-\sigma'}{\sigma^2} + \frac{1}{2!}\frac{\Delta x^2}{2^2}\left(-\frac{\sigma''}{\sigma^2} + 2\frac{(\sigma')^2}{\sigma^3}\right)
-\end{equation}
-So on expanding both the exponential and the normalization we have 
-\begin{align}
-Z & = \frac{ e^{-\frac{\Delta x^2}{2\Delta T\sigma^2(\bar{x})}}}{\sqrt{2\pi\Delta T\sigma^2(\bar{x})}}\\
-\approx & C \frac{ e^{-\frac{\Delta x^2}{2\Delta T\sigma^2(x)}}}{\sqrt{2\pi\Delta T\sigma^2(x)}}
-\end{align}
-where 
-\begin{align}
-C & = \left[1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\Delta x^2}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right)\right]\left[ 1 - \frac{\Delta x^3}{2\Delta T\sigma^2}\frac{\sigma'}{\sigma} - \frac{\Delta x^4}{8\Delta T\sigma^2}\left(-\frac{\sigma''}{\sigma} + 3\frac{(\sigma')^2}{\sigma^2}\right)\right]\\
-\approx & \left[1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\Delta x^2}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right)-\frac{\Delta x^4}{4\Delta T\sigma^2}\frac{(\sigma')^2}{\sigma^2} - \frac{\Delta x^3}{2\Delta T\sigma^2}\frac{\sigma'}{\sigma} - \frac{\Delta x^4}{8\Delta T\sigma^2}\left(-\frac{\sigma''}{\sigma} + 3\frac{(\sigma')^2}{\sigma^2}\right)\right]\\
-= & \left[1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\Delta x^2}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right) - \frac{\Delta x^3}{2\Delta T\sigma^2}\frac{\sigma'}{\sigma} - \frac{\Delta x^4}{8\Delta T\sigma^2}\left(-\frac{\sigma''}{\sigma} + \frac{5(\sigma')^2}{\sigma^2}\right)\right]
-\end{align}
-
-
-\subsection{Replacing higher order terms with averages}
-
-We start from \footnote{Tirapagui}
-I think we now replace the higher order moments by their averages.  In which case 
-\begin{gather}
-\int \frac{d^Dy}{\sqrt{2\pi\sigma^2}} y^iy^jy^k  e^{-\frac{y^m g_{mn} y^n}{2}} = \int \frac{d^Dy}{\sqrt{2\pi\sigma^2}}\, g^{(ij} y^{k)}  e^{-\frac{y^m g_{mn} y^n}{2}}\\
-\int \frac{dy}{\sqrt{2\pi\sigma^2}} y^iy^jy^ky^l e^{-\frac{y^m g_{mn}y^n}{2}} = \int \frac{dy}{\sqrt{2\pi\sigma^2}} g^{(ij}g^{kl)} e^{-\frac{y^2}{2\sigma^2}}
-\end{gather}
-where $(\cdots)$ denotes adding up all distinct permutations of the indices.  
-All these equalities follow by just considering the change of variables in a single integral.  And then using the property that the path integral is a product of these integrals, correct up to $\order(\Delta T)$.  
-
-\begin{align}
-C= & 1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\sigma^2\Delta T}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right) - \frac{3}{2}\Delta x\frac{\sigma'}{\sigma} - \frac{3\sigma^2\Delta T}{8}\left(-\frac{\sigma''}{\sigma} + \frac{5(\sigma')^2}{\sigma^2}\right)\\
-& 1 -\Delta x\frac{\sigma'}{\sigma} + \frac{\sigma^2\Delta T}{8}\left[2\frac{\sigma''}{\sigma} -13\frac{(\sigma')^2}{\sigma^2}\right]
-\end{align}
-We can now exponentiate this as 
-\begin{align}
-C &= \exp\left[-\Delta x\frac{\sigma'}{\sigma} + \frac{\Delta x^2}{2}\frac{(\sigma')^2}{\sigma^2} + \frac{\sigma^2\Delta T}{8}\left[2\sigma''\sigma -13(\sigma')^2\right] \right]\\
-&= \exp\left[-\Delta x\frac{\sigma'}{\sigma} + \frac{\Delta T}{2}(\sigma')^2 + \frac{\sigma^2\Delta T}{8}\left[2\sigma''\sigma -13(\sigma')^2\right] \right].
-\end{align}
-We can substitute this back in and complete the square in the Gaussian.  
-\begin{align}
-Z &= \int dx_k \frac{ 1}{\sqrt{2\pi\Delta T\sigma^2(x)}}\exp\left[-\frac{\Delta x^2}{2\Delta T\sigma^2(x)}-\Delta x\frac{\sigma'}{\sigma} - \frac{\Delta T}{2}(\sigma')^2 + \frac{\sigma^2\Delta T}{8}\left[2\sigma''\sigma -13(\sigma')^2\right] \right]\\
-&= \int dx_k \frac{1}{\sqrt{2\pi\Delta T\sigma^2(x)}}\exp\left[-\frac{(\Delta x^2+\Delta T\sigma'\sigma)^2}{2\Delta T\sigma^2} + \frac{\sigma^2\Delta T}{8}\left[2\sigma''\sigma -13(\sigma')^2\right] \right]\\
-\end{align}
-Mmm..
-\subsubsection{Fishy kludge}
-\comment{If we suppress the term between the normalization and the exponential expansions} we have
-\begin{align}
-C &= 1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\Delta x^2}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right) - \frac{\Delta x^3}{2\Delta T\sigma^2}\frac{\sigma'}{\sigma} - \frac{\Delta x^4}{8\Delta T\sigma^2}\left(-\frac{\sigma''}{\sigma} + 3\frac{(\sigma')^2}{\sigma^2}\right)
-\end{align}.
-
-Replacing these higher order moments we have
-\begin{align}
-C &= 1 +\frac{\Delta x}{2}\frac{\sigma'}{\sigma} + \frac{\sigma^2\Delta T}{8}\left(-\frac{\sigma''}{\sigma} + 2\frac{(\sigma')^2}{\sigma^2}\right) - 3\frac{\Delta x}{2}\frac{\sigma'}{\sigma} - \frac{3\sigma^2\Delta T}{8}\left(-\frac{\sigma''}{\sigma} + 3\frac{(\sigma')^2}{\sigma^2}\right)\\
-&= 1 -\Delta x\frac{\sigma'}{\sigma}  + \frac{\Delta T}{8}\left(2\sigma'\sigma'' - 7(\sigma')^2\right)
-\end{align}.
-
-\section{Operator ordering}
-
-So we must have started from $[\sigma^2p^2]_W$.  Let's operator order this and see what we get.  
-\begin{equation}
-\frac{1}{2}[\sigma^2p^2]_W = \frac{1}{8}[\sigma^2p^2 + 2p\sigma^2 p + p^2\sigma^2]
-\end{equation}
-We need to Ito order this.  
-
-First up,
-\begin{align}
-p\sigma^2 p & = p^2\sigma^2 + p[\sigma^2,p]\\
-& = p^2\sigma^2 + 2ip\sigma'\sigma
-\end{align}
-
-We will also need 
-\begin{align}
-\sigma^2 p ^2 &= p\sigma^2p + [\sigma^2,p]p\\
-% &= p\sigma^2p + 2i\sigma'\sigma p \\
-% &= p^2\sigma^2 + p(2i\sigma'\sigma) + 2ip\sigma'\sigma p -2(\sigma'\sigma)'\\
-&= p^2\sigma^2 + 4pi\sigma'\sigma -2\left[\sigma''\sigma+(\sigma')^2\right]
-\end{align}
-
-Then 
-\begin{equation}
-\boxed{\frac{1}{2}[\sigma^2p^2]_W = \frac{1}{2}p^2\sigma^2 + ip\sigma'\sigma -\frac{1}{4}[\sigma''\sigma + (\sigma')^2]}
-\end{equation}
-
-
-\subsubsection{Higher moments}
-I've seen claims that 
-\begin{equation}
-(\Delta x)^3 \dot{=} 3\Delta x \Delta T,
-\end{equation}
-where $\dot{=}$ means equal so far as the functional integral is concerned.
- I think this just means accurate for one matrix element to order $\Delta T$, when under the integral.  
-\begin{equation}
-\int \frac{dx_{k+1}}{\sqrt{2\pi\Delta T}}\, \frac{(\Delta x)^3}{\Delta T} e^{-\frac{\Delta x^2}{2\Delta T}} = \int dx_{k+1}\,3\Delta x e^{-\frac{\Delta x^2}{2\Delta T}}
-\end{equation}
-\comment{The slowest decay in any of this is the Gaussian piece.
- We expect this to be order 1, so $\Delta x\sim(\Delta T)^{1/2}$.
- We then expand everything out treating that.}
-
-
-\comment{This amounts to Dan's argument that we can replace anything with an equivalent Gaussian.
- We will expand all terms that are effectively linear order in $\Delta T$, and replace them with their means.  }
-
-I think we just integrate by parts often enough until we have something of the form $\Delta x^{n\le 2}$.  
-
-Let's start with 
-\begin{equation}
-I_3 = \int d^D x\, \frac{1}{(2\pi \Delta T)^{D/2}g^{1/2}} \frac{x^ix^jx^k}{\Delta T} e^{-\frac{x^ig_{ij}x^j}{2\Delta T}}
-\end{equation}
-Let's make a unitary transformation to diagonalize $g_{ij}$.  I think this amounts to finding the principle axes of $g$.  We have I'm going to suspend the summation convention.  
-\begin{gather}
-y^i = \sum_jO_{ij}x^j\\
-\sum_jg_{ij}y^j = \lambda^j y^i\\
-\sum_{kl}O_{ik}O_{jl}g_{kl} = \lambda^i\delta_{ij}\\
-\sum_j O_{ij}O_{kj} = \delta_{jk}
-\end{gather}
-
-The transformed version of the integral is 
-\begin{equation}
-I_3 = \int d^D x\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}}\sum_{m,n,p} O_{im}O_{jn}O_{kp}\frac{y^my^ny^p}{\Delta T} e^{-\sum_i\frac{\lambda_i y_i^2}{2\Delta T}}
-\end{equation}
-Let's look at this term by term.  This is evidently zero if $m\ne n\ne p$.  If we have $m=n$, then 
-\begin{align}
-I_3 = \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}} \sum_{n,p} O_{kp}y^p O_{in}O_{jn}\frac{y^ny^n}{\Delta T} e^{-\frac{\lambda_i y_i^2}{2\Delta T}}
-\end{align}
-Now let's integrate by parts using 
-\begin{align}
-\int dx\, f(x)x^2e^{-\frac{\alpha x^2}{2}}& = -\frac{f(x)}{\alpha}x e^{-\alpha x^2/2}\bigg|_{x=-\infty}^\infty + \int dx\, \frac{1}{\alpha}\frac{d}{dx}(f(x)x)e^{-\alpha x^2/2}\\
-& = \frac{1}{\alpha}\int dx\, \left(x\frac{df}{dx} + f\right)e^{-\alpha x^2/2}
-\end{align}
-So the integral can be written 
-\begin{align}
-I_3 &= \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}} \sum_{n,p} \frac{1}{\lambda_n}\left[\left(\frac{d}{dy^n}O_{kp}y^p\right)y_nO_{in}O_{jn} + O_{kp}y^pO_{in}O_{jn} \right]e^{-\frac{\lambda_i y_i^2}{2\Delta T}}\\
-%&= \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}} \sum_{n,p} \frac{1}{\lambda_n}\left[O_{kp}\delta_{pn}y_nO_{in}O_{jn} + O_{kp}y^pO_{in}O_{jn} \right]e^{-\frac{\lambda_i y_i^2}{2\Delta T}}\\
-&= \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}}\left[ \sum_{n} \frac{1}{\lambda_n}O_{kn}y_nO_{in}O_{jn} + \sum_pO_{kp}y^p\sum_n\frac{1}{\lambda_n}O_{in}O_{jn} \right]e^{-\frac{\lambda_i y_i^2}{2\Delta T}}
-\end{align}
-So we have two terms.  The first is 
-\begin{align}
-I_{3,a}&= \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}}\left[ \sum_{n} \frac{1}{\lambda_n}O_{kn}y_nO_{in}O_{jn} \right]e^{-\frac{\lambda_i y_i^2}{2\Delta T}}\\
-I_{3,b}&= \int d^D y\, \frac{1}{(2\pi \Delta T)^{D/2}}\frac{1}{\prod_k \lambda_k^{1/2}}\left[\sum_pO_{kp}y^p\sum_n\frac{1}{\lambda_n}O_{in}O_{jn} \right]e^{-\frac{\lambda_i y_i^2}{2\Delta T}}\\
-&= \int d^D x\, \frac{1}{(2\pi \Delta T)^{D/2}g^{1/2}}x^kg^{ij} e^{-\frac{x^i g_{ij} x^j}{2\Delta T}}
-\end{align}
-Now of course there are other pairings.  In which case we must sum over all of them.  At least that is the usual logic.  But what of the extra term?  Can we just say this one is zero?
-
-\subsubsection{Gaussian moments}
-
-For one dimension we need 
-\begin{gather}
-\langle x \rangle = \int dx\,x \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} = \mu\\
-\langle x^2 \rangle = \int dx\,x^2 \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} = \sigma^2 + \mu^2.
-\end{gather}
-
-We then have to also evaluate 
-\begin{align}
-\langle x^3\rangle & = \int dx\, x^3 \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
-& = \int dx\, (x+\mu)^3 \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}} \\
-& = \int dx\, (x^3 + 3\mu x^2 + 3\mu^2 x + \mu^3 )\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}} \\
-& = 3\mu\sigma^2 + 4\mu^3
-\end{align}
-
-\begin{align}
-\langle x^4\rangle & = \int dx\, x^4\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
-& = \int dx\, (x+\mu)^4 \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}} \\
-& = \int dx\, (x^4 + 4\mu x^3 + 6\mu^2 x^2 + 4\mu x + \mu^4 )\frac{e^{-\frac{x^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}} \\
-& = 3\sigma^4 + 6\mu^2 \sigma^2  + \mu^4 
-\end{align}
-
-Now the idea is to go through and use those moment formulae to rewrite those higher order moments in terms of the lower moments.
-  Can we then write a functional equivalence?  
-
 
 \section{Following DeWitt}
 
-This section is where I will try to reproduce Bryce DeWitt's results\footnote{deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the Classical and Quantum Action Principles}, \\{Rev. Mod. Phys.}, \textbf{29}, 377,(1957)}.  I'll skip the material on transformation theory, etc, and just leap to the curved spaces.  We will need some of those results, but the classical material is a touch irrelevant.  
-\subsection{Classical Lagrangian Mechanics}
-We have a particle Lagrangian
-\begin{equation}
-  L= \frac{1}{2}g_{ij}\dot{q}^i\dot{q}^j - V,
-\end{equation}
-with metric $g_{ij}$ which has inverse $g^{ij}$.  The Lagrangian can be made invariant under point transformations, $q^i=q^i(\bar{q},t)$.  Let's transform the Lagrangian and see what the new constants $a,g,V$ have to look like.  
-\begin{align}
-\bar{L} &=\frac{1}{2}g_{ij}\left(\frac{\partial q^i}{\partial \bar{q}^m}\dot{\bar{q}}^m+\frac{\partial q^i}{\partial t}\right)\left(\frac{\partial q^j}{\partial \bar{q}^n}\dot{\bar{q}}^n+\frac{\partial q^j}{\partial t}\right)  - V\\
-&=\frac{1}{2}\bar{g}_{mn}\dot{\bar{q}}^m\dot{\bar{q}}^n  - \bar{V}
-\end{align}
-where 
-\begin{gather}
-\bar{g}_{mn} = \frac{\partial q^i}{\partial\bar{q}^m}\frac{\partial q^j}{\partial\bar{q}^n}g_{ij}\\
-\bar{V} = V  - \frac{1}{2}g_{ij}\frac{\partial q^i}{\partial t}\frac{\partial q^j}{\partial t},
-\end{gather}
-and all functions are evaluated for $\bar{q}$.  
-
-The conjugate momenta are 
-\begin{equation}
-p_i = \frac{\partial L}{\partial \dot{q}^i} = g_{ij}\dot{q}^j.
-\end{equation}
-
-\subsubsection{Equations of motion}
-
-% The equations of motion are then given by 
-% \begin{equation}
-% \frac{d}{dt}\frac{\partial L}{\partial \dot{q}^k} - \frac{\partial L}{\partial q^k} = 0
-% \end{equation}
-% Let's introduce the notation, $\partial_i = \frac{\partial}{\partial q^i}$ (note the placement of indices)
-% First up we need 
-% \begin{align}
-% \frac{d}{dt}\frac{\partial L}{\partial \dot{q}^k} &= \frac{d}{dt}\left(g_{kj}\dot{q}^j  + a_k\right)\\
-% %&= g_{ij}\ddot{q}^j + \frac{\partial g_{ij}}{\partial q^k}\dot{q}^k\dot{q}^j  + \frac{\partial a_i}{\partial q^j}\dot{q}^j + \frac{\partial g_{ij}}{\partial t}q^j + \frac{\partial a_i}{\partial t}\\
-% &= g_{kj}\ddot{q}^j + \partial_i g_{kj}\dot{q}^i\dot{q}^j  + \partial_j a_k\dot{q}^j + \partial_t g_{kj}\dot{q}^j + \partial_t a_k\\
-% &= g_{kj}\ddot{q}^j + \frac{1}{2}\left(\partial_i g_{kj}\dot{q}^i\dot{q}^j + \partial_j g_{ki}\dot{q}^i\dot{q}^j\right) + \partial_j a_k\dot{q}^j + \partial_t g_{kj}\dot{q}^j + \partial_t a_k
-% \end{align}
-% Second we need 
-% \begin{align}
-% \frac{\partial L}{\partial q^k} &= \frac{\partial }{\partial q^k}\left( \frac{1}{2}g_{ij}\dot{q}^i\dot{q}^j + a_i\dot{q}^i - V\right)\\
-% &=  \frac{1}{2}\partial_k g_{ij}\dot{q}^i\dot{q}^j + \partial_k a_i\dot{q}^i - \partial_k V
-% \end{align}
-
-% So the equations of motion are 
-% \begin{align}
-% 0 & = \frac{d}{dt}\frac{\partial L}{\partial \dot{q}^k} - \frac{\partial L}{\partial q^k} \\
-% &= g_{kj}\ddot{q}^j + \frac{1}{2}\left(\partial_i g_{kj} + \partial_jg_{ki}\right)\dot{q}^i\dot{q}^j  + \partial_j a_k\dot{q}^j + \partial_t g_{kj}\dot{q}^j + \partial_t a_k - \left(  \frac{1}{2}\partial_k g_{ij}\dot{q}^i\dot{q}^j + \partial_k a_i\dot{q}^i - \partial_k V\right)
-% \end{align}
-
-
-Let's start from the action
-\begin{equation}
-S = \frac{1}{2}\int dt\, g_{ij}\dot{q}^i\dot{q}^j
-\end{equation}
-Under a variation this becomes 
-\begin{equation}
-S+\delta S = \frac{1}{2}\int dt\, (g+\delta q^k\partial_kg_{ij})\dot{q}^i\dot{q}^j+ g_{ij}\frac{d}{dt}(q+\delta q)^iq^j + g_{ij}\frac{d}{dt}(q+\delta q)^jq^i\,
-\end{equation}
-with 
-\begin{equation}
-\delta S   = \frac{1}{2}\int dt\, \partial_kg_{ij}\dot{q}^i\dot{q}^j\delta q^k + g_{ij}\frac{d\delta q^i}{dt}q^j + g_{ij}\frac{d}{dt}(\delta q)^j\dot{q}^i\,
-\end{equation}
-Let's now integrate by parts on the last two terms.  We then have
-\begin{align}
-\delta S & = \frac{1}{2}\int dt\, \partial_kg_{ij}\dot{q}^i\dot{q}^j\delta q^k - \frac{d}{dt}(g_{ij}\dot{q}^j)\delta q^i - \frac{d}{dt}(g_{ij}\dot{q}^i)\delta q^j\\
-% & = \frac{1}{2}\int dt\, \partial_kg_{ij}\dot{q}^i\dot{q}^j\delta q^k - \left( g_{ij}\ddot{q}^j + \partial_k g_{ij}\dot{q}^k\dot{q}^j\right)\delta q^i - \left(g_{ij}\ddot{q}^i + \partial_k g_{ij}\dot{q}^i \dot{q}^k\right)\delta q^j\\
-% & = \frac{1}{2}\int dt\, \left[\partial_kg_{ij}\dot{q}^i\dot{q}^j - \left( g_{kj}\ddot{q}^j + \partial_i g_{kj}\dot{q}^i\dot{q}^j\right) - \left(g_{ik}\ddot{q}^i + \partial_j g_{ik}\dot{q}^i \dot{q}^j\right)\right]\delta q^k\\
-& = \frac{1}{2}\int dt\, \left[-g_{ik}\ddot{q}^i - [ij,k]\dot{q}^i \dot{q}^j\right]\delta q^k
-\end{align}
-
-We then have the equation of motion
-\begin{equation}
-g_{ki}\ddot{q}^i  + [ij,k]\dot{q}^i\dot{q}^j= 0,\label{eq:eqn_of_motion}
-\end{equation}
-where 
-\begin{equation}
-[ij,k] = \frac{1}{2}(\partial_ig_{jk} + \partial_jg_{ik} - \partial_k g_{ij})
-\end{equation}
-
-\subsubsection{Short time action}
-
-So deWitt claims that you can find the action function explicitly by solving the equations of motion, and plugging back in, or by solving the Hamiltonian Jacobi equations.  (There seems to be some link between the action and the transformation function in the Hamilton-Jacobi equations.  ) I think the action in this case corresponds to $S_{+-}$ in his parlance, which is a transformation function from $S(q',t'|q,t)$.  
-
-He claims that by solving 
-\begin{equation}
-\frac{\partial S}{\partial t'}  + \frac{1}{2}  \frac{\partial S}{\partial {q'}^i}g^{ij}(q')  \frac{\partial S}{\partial {q'}^j} + V' = 0
-\end{equation}
-you can find the action.  
-Note that all the stuff on the right is actually the Hamiltonian, with $p'' = \frac{\partial S}{\partial q''}$.  
-
-Now apparently we can expand everything to leading order for $t''-t', q''-q'\ll 1$.    I'm now going to transcribe what he claims.  This will be necessary at some point where we need the van-Vleck-Morette determinant.  
-\begin{align}
-S(q',t'|q,t) & = \frac{1}{t'-t}\bigg\{ \frac{1}{2}g_{ij}({q'}^i-{q}^i)({q'}^j-{q}^j) 
-+ \frac{1}{12}\left(\partial_kg_{ij} + \partial_i g_{jk} + \partial_j g_{ik}\right)
-({q'}^i-{q}^i)({q'}^j-{q}^j)({q'}^k-{q}^k) \nonumber \\
-&\hspace{2cm}+ \frac{1}{72}\bigg[\partial_{k}\partial_lg_{ij} + \partial_j\partial_l g_{ik} + \partial_j\partial_kg_{il} + \partial_i\partial_j g_{kl} + \partial_i\partial_kg_{jl} + \partial_i\partial_lg_{jk}\nonumber \\
-&\hspace{2cm}  - {g}^{mn}\left([ij,m][kl,n]+ [il,m][jk,n] + [ik,m][jl,n]\right)\bigg]({q'}^i-{q}^i)({q'}^j-{q}^j)({q'}^k-{q}^k)({q'}^l-{q}^l)\bigg\}
-\end{align}
-
-It seems that you can get also this by expanding $S = \int dt L$ by treating $(q'-q)$ as $\order(\Delta T^{1/2})$.  
-\begin{align}
-S(q',t'|q,t) = \int_t^{t'} dt \frac{1}{2}g_{ij}\dot{q}^i\dot{q}^j \\
-& = \int_t^{t'}ds\frac{1}{2}g_{ij}(q(s))\dot{q}^i(s)\dot{q}^j(s)\\
-%& \approx \frac{1}{2}\int_t^{t'}ds\,g_{ij}\dot{q}^i \dot{q}^j\bigg|_{s=t} + (s-t)\frac{d}{dt}g_{ij}\dot{q}^i \dot{q}^j\bigg|_{s=t} + \frac{1}{2}(s-t)^2\frac{d^2}{dt^2}g_{ij}\dot{q}^i \dot{q}^j\bigg|_{s=t}\\
-& \approx \frac{1}{2}g_{ij}(t-t')\dot{q}^i \dot{q}^j\bigg|_{s=t} + \frac{1}{4}(t'-t)^2\frac{d}{dt}g_{ij}\dot{q}^i \dot{q}^j\bigg|_{s=t} + \frac{1}{6}(t'-t)^3\frac{d^2}{dt^2}g_{ij}\dot{q}^i \dot{q}^j\bigg|_{s=t}
-\end{align}
-
-Let's try evaluating these derivatives, treating $ q\sim \sqrt{\Delta t}$.  If we want this correct to order 
-\begin{align}
-\frac{d}{dt}g_{ij}\dot{q}^i\dot{q}^j &= \partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k  + g_{ij}\ddot{q}^i\dot{q}^j +g_{ij}\dot{q}^i\ddot{q}^j\\
-% =& \partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k  - [ki,j]\dot{q}^i\dot{q}^j\dot{q}^k - [kj,i]\dot{q}^i\dot{q}^j\dot{q}^k \\
-% =& \partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k  - \frac{1}{2}(\partial_ig_{jk}+\partial_kg_{ij} - \partial_jg_{ik})\dot{q}^i\dot{q}^j\dot{q}^k  - \frac{1}{2}(\partial_kg_{ji}+\partial_jg_{ik} - \partial_ig_{jk})\dot{q}^i\dot{q}^j\dot{q}^k \\
-=&   - \frac{1}{2}(\partial_ig_{jk} - \partial_jg_{ik})\dot{q}^i\dot{q}^j\dot{q}^k  - \frac{1}{2}(+\partial_jg_{ik} - \partial_ig_{jk})\dot{q}^i\dot{q}^j\dot{q}^k  = 0
-\end{align}
-where we used the equation of motion in Eq.~(\ref{eq:eqn_of_motion})  which is correct for finding the action of the classical path.  The second derivative term is much more complicated.  
-\begin{align}
-\frac{d^2}{dt^2}g_{ij}\dot{q}^i\dot{q}^j  =& \frac{d}{dt}\left(\partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k  - 2[kj,i]\dot{q}^i\dot{q}^j\dot{q}^k\right)\\
-=& \partial_k\partial_lg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l + 2\partial_kg_{ij}\ddot{q}^i\dot{q}^j\dot{q}^k + \partial_kg_{ij}\dot{q}^i\dot{q}^j\ddot{q}^k\\
-&-2\partial_l[ij,k]\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l - 2[ij,k]\ddot{q}^i\dot{q}^j\dot{q}^k- 2[ij,k]\dot{q}^i\ddot{q}^j\dot{q}^k- 2[ij,k]\dot{q}^i\dot{q}^j\ddot{q}^k
-% =& \frac{d}{dt}\left(\partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k  - g_{ij}\Gamma_{kl}^i\dot{q}^k\dot{q}^l\dot{q}^j - g_{ij}\Gamma^j_{kl}\dot{q}^i\dot{q}^k\dot{q}^l\right)\\
-%  =& \partial_l\partial_kg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l + \partial_kg_{ij}\left(\ddot{q}^i\dot{q}^j\dot{q}^k + \dot{q}^i\ddot{q}^j\dot{q}^k+\dot{q}^i\dot{q}^j\ddot{q}^k\right) \nonumber \\
-% &-\partial_mg_{ij}\Gamma_{kl}^i\dot{q}^m\dot{q}^k\dot{q}^l\dot{q}^j - \partial_mg_{ij}\Gamma^j_{kl}\dot{q}^i\dot{q}^k\dot{q}^l\dot{q}^m \nonumber \\
-% &- g_{ij}\partial_m\Gamma^{j}_{kl}\dot{q}^i\dot{q}^k\dot{q}^l\dot{q}^m- g_{ij}\partial_m\Gamma^{i}_{kl}\dot{q}^j\dot{q}^k\dot{q}^l\dot{q}^m\nonumber\\
-% &  - g_{ij}\Gamma_{kl}^i\ddot{q}^k\dot{q}^l\dot{q}^j- g_{ij}\Gamma_{kl}^i\dot{q}^k\ddot{q}^l\dot{q}^j - g_{ij}\Gamma_{kl}^i\dot{q}^k\dot{q}^l\ddot{q}^j\nonumber\\
-% &  - g_{ij}\Gamma^j_{kl}\ddot{q}^i\dot{q}^k\dot{q}^l   - g_{ij}\Gamma^j_{kl}\dot{q}^i\ddot{q}^k\dot{q}^l  - g_{ij}\Gamma^j_{kl}\dot{q}^i\dot{q}^k\ddot{q}^l
-% \end{align}
-\end{align}
-
-We will need 
-\begin{align}
-\partial_m[ij,k] &= \frac{1}{2}(\partial_m\partial_ig_{jk} + \partial_m\partial_jg_{ik} - \partial_m\partial_kg_{ij})\\
-\ddot{q}^i &= g^{ij}[kl,j]\dot{q}^k\dot{q}^l
-\end{align}
-
-\begin{align}
-\frac{d^2}{dt^2}g_{ij}\dot{q}^i\dot{q}^j  =& \partial_k\partial_lg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l + 2\partial_kg_{ij}\ddot{q}^i\dot{q}^j\dot{q}^k + \partial_kg_{ij}\dot{q}^i\dot{q}^j\ddot{q}^k\nonumber\\
-&-2\partial_l[ij,k]\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l - 2[ij,k]\ddot{q}^i\dot{q}^j\dot{q}^k- 2[ij,k]\dot{q}^i\ddot{q}^j\dot{q}^k- 2[ij,k]\dot{q}^i\dot{q}^j\ddot{q}^k\\
-% =& \partial_k\partial_lg_{ij}\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l + 2\partial_kg_{ij}g^{im}[np,m]\dot{q}^n\dot{q}^p\dot{q}^j\dot{q}^k + 2\partial_kg_{ij}g^{km}[np,m]\dot{q}^n\dot{q}^p\dot{q}^j\dot{q}^i\nonumber\\
-% & - (\partial_l\partial_ig_{jk} + \partial_l\partial_jg_{ik} - \partial_l\partial_kg_{ij})\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l - 4[ij,k]g^{im}[np,m]\dot{q}^n\dot{q}^p\dot{q}^j\dot{q}^k \nonumber\\
-% &- 2[ij,k]g^{km}[np,m]\dot{q}^i\dot{q}^j\dot{q}^n\dot{q}^p\\ 
-=&\bigg[ \partial_k\partial_lg_{ij} + 2\partial_kg_{nj}g^{nm}[il,m] + 2\partial_ng_{kj}g^{nm}[il,m]\nonumber\\
- &  - 4[nj,k]g^{nm}[il,m] - 2[ij,n]g^{nm}[kl,m]- 
-(\partial_l\partial_ig_{jk} + \partial_l\partial_jg_{ik} - \partial_l\partial_kg_{ij})\bigg]
-\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l\\
-% =&\bigg[ 2\partial_k\partial_lg_{ij} -\partial_l\partial_ig_{jk} 
-% - \partial_l\partial_jg_{ik}+ 2\partial_kg_{nj}g^{nm}[il,m] + 2\partial_ng_{kj}g^{nm}[il,m] + 2\partial_\nonumber\\
-%  &  - 4g^{nm}[nj,k][il,m] - 2g^{nm}[ij,n][kl,m]\bigg]\dot{q}^i\dot{q}^j\dot{q}^k\dot{q}^l
-\end{align}
-
-Get Action.
-
-The Pauli-Van Vleck determinant.  $D$
-
-Then Matrix element. 
-
-Then try to use $H$ to derive path integral.  
+This section is where I will try to reproduce Bryce DeWitt's results
+\footnote{deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the Classical and Quantum Action Principles}, 
+\\{Rev. Mod. Phys.}, \textbf{29}, 377,(1957)}.
+  I'll skip the material on transformation theory, etc, and just leap to the curved spaces.
+  We will need some of those results, but the classical material is a touch irrelevant.  
 
 \section{1D Example}
 
@@ -1943,7 +1080,10 @@ Note that the overlap between spatial and momentum states also changes.
 
 \section{2013-April}
 
-We will follow work\footnote{Girotti, H.O. and Simoes, T.J.M. \textit{A Generalized Treatment of Point Canonical Transformations in the Path Integral}, Il Nuovo Cimento, \textbf{74}, 59, (1983)} extending the point transformation approach for handling arbitrary orderings.  This covers all orderings, but also offers proof for the higher order moments.  
+We will follow work\footnote{Girotti, H.O. and Simoes, T.J.M. 
+\textit{A Generalized Treatment of Point Canonical Transformations in the Path Integral}, Il Nuovo Cimento, \textbf{74}, 59, (1983)} 
+extending the point transformation approach for handling arbitrary orderings.
+  This covers all orderings, but also offers proof for the higher order moments.  
 
 We start from a flat space, with 
 \begin{equation}
@@ -1951,236 +1091,10 @@ H = \frac{1}{2}\sum_j p_j^2 + V(q),
 \end{equation}
 with $[q_i,p_j]=i\hbar\delta_{ij}$.  The propagator is 
 \begin{equation}
-K(q_f,t_f; q_i,t_i) = \int \prod_k \frac{d^nq_k}{(2\pi i \hbar \Delta T)^{n/2}} \exp\left[ \frac{i}{\hbar}\left(\frac{(q_{i,k+1}-q_{i,k})^2}{2\Delta T} -\Delta T V(q_k)\right)\right]
+K(q_f,t_f; q_i,t_i) = \int \prod_k \frac{d^nq_k}{(2\pi i \hbar \Delta T)^{n/2}} 
+\exp\left[ \frac{i}{\hbar}\left(\frac{(q_{i,k+1}-q_{i,k})^2}{2\Delta T} -\Delta T V(q_k)\right)\right]
 \end{equation}
 
- \section{Multiple Dimensions}
- \subsection{Transformation}
-
-Let's now introduce some nonlinear point transformation where 
-\begin{equation}
-q^j(t) = F^j[x(t)],
-\end{equation}
-where $x^i$ are the new curvilinear coordinates.  We have metric tensor 
-\begin{equation}
-g_{ij} = \frac{\partial F^r}{\partial x^i}\frac{\partial F^r}{\partial x^j} = \partial_iF^r \partial_jF^r
-\end{equation}
-If we take the determinant we get 
-\begin{equation}
-\det[g_{ij}] = \det[\partial_i F^r\partial_jF^r] = \det[(\partial_i F^r)(\partial_j F_r)^T] = \det[\partial_i F_r]^2
-\end{equation}
-Now we normally need the Jacobian determinant for the change of variables.  
-\begin{equation}
-\det\left|\frac{\partial q^i}{\partial x^j}\right| = \det|g_{ij}|^{1/2} = \sqrt{q}
-\end{equation}
-So the path integral in these new coordinates is
-\begin{equation}
-K(q_f,t_f; q_i,t_i) = \int \prod_k d^nx_k\frac{\sqrt{g}}{(2\pi i \hbar \Delta T)^{n/2}} \exp\left[ \frac{i}{\hbar}\left(\frac{(F^i_{k+1}-F^i_{k})^2}{2\Delta T} -\Delta T V[F(x_k)]\right)\right]
-\end{equation}
-
-\subsection{Ordering and Expanding.}
-
-We will expand these operators around 
-\begin{equation}
-x_\alpha(k) = \left(\alpha+\frac{1}{2}\right)x(k+1) + \left(\frac{1}{2}-\alpha\right)x(k)
-\end{equation}
-with $-1/2\le \alpha \le 1/2$.  Then we can expand in Taylor series 
-\begin{gather}
-\boxed{x(k)-x_\alpha   = -\left(\alpha+\frac{1}{2}\right)\Delta x}\\
-\boxed{x(k+1)-x_\alpha = \left(\frac{1}{2}-\alpha\right)\Delta x}
-\end{gather}
-For notational ease, let's define $\alpha_\pm = \frac{1}{2} \pm \alpha$, with $\alpha_++\alpha_- =1, \alpha_+-\alpha_- = 2\alpha$. So we have 
-\begin{gather}
-x_\alpha = \alpha_+ x(k+1) + \alpha_-x(k)\\
-x(k) -x_\alpha  = -\alpha_+\Delta x \\
-x(k+1)-x_\alpha = \alpha_-\Delta x
-\end{gather}
-
-\subsubsection{Kinetic term}
-We now need to expand out to order $\Delta T$.  We will do this first in the exponential.  
-\begin{align}
-F^r[x(k+1)] = &F^r(x_\alpha) + \alpha_-\Delta x^i\partial_iF^r +\frac{1}{2}\alpha_-^2\Delta x^i\Delta x^j\partial_i\partial_j F^r(x_\alpha) +\frac{1}{6}\alpha_-^3\Delta x^i\Delta x^j\Delta x^k\partial_i\partial_j\partial_k F^r(x_\alpha) \\
-F^r[x(k)] = &F^r(x_\alpha) - \alpha_+\Delta x^i\partial_iF^r +\frac{1}{2}\alpha_+^2\Delta x^i\Delta x^j\partial_i\partial_j F^r(x_\alpha) -\frac{1}{6}\alpha_+^3\Delta x^i\Delta x^j\Delta x^k\partial_i\partial_j\partial_k F^r(x_\alpha)
-\end{align}
-Now we anticipate that $\Delta x\sim\Delta T$.  We will have to treat terms like $(\Delta x)^2\sim \Delta T,$ $(\Delta x)^3/\Delta T\sim \sqrt{\Delta T},$ $(\Delta x)^4/\Delta T\sim \Delta T,$ and $(\Delta x)^6/\Delta T^2\sim \Delta T$.  
-So we have 
-\begin{align}
-F(k+1)-F(k)&  = (\alpha_-+\alpha_+)\Delta x^i\partial_iF^r +\frac{1}{2}(\alpha_-^2-\alpha_+^2)\Delta x^i\Delta x^j\partial_i\partial_j F^r(x_\alpha) +\frac{1}{6}(\alpha_-^3+\alpha_+^3)\Delta x^i\Delta x^j\Delta x^k\partial_i\partial_j\partial_k F^r(x_\alpha) \\
-&  = \Delta x^i\partial_iF^r -\alpha\Delta x^i\Delta x^j\partial_i\partial_j F^r(x_\alpha) +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^i\Delta x^j\Delta x^k\partial_i\partial_j\partial_k F^r(x_\alpha) 
-\end{align}
-Now square it, and divide by $\Delta T$, and work to order $\Delta T$.  
-\begin{align}
-\frac{[F^r(k+1)-F^r(k)]^2}{\Delta T} & = \frac{1}{\Delta T}\left[\Delta x^i\partial_iF^r -\alpha\Delta x^i\Delta x^j\partial_i\partial_j F^r +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^i\Delta x^j\Delta x^k\partial_i\partial_j\partial_k F^r\right]\nonumber\\
-& \times\left[\Delta x^m\partial_mF^r -\alpha\Delta x^m\Delta x^n\partial_m\partial_n F^r +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^m\Delta x^n\Delta x^p\partial_m\partial_n\partial_p F^r\right]\\
- =& \frac{1}{\Delta T}\bigg[\Delta x^i\Delta x^j\partial_iF^r\partial_jF^r -2\alpha\Delta x^i\Delta x^j\Delta x^k\partial_iF^r \partial_j\partial_k F^r(x_\alpha) \nonumber\\
-& + \alpha^2\Delta x^i\Delta x^j\Delta x^k\Delta x^l\partial_i\partial_jF\partial_k\partial_lF +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^i\Delta x^j\Delta x^k\Delta x^l\partial_iF^r\partial_j\partial_k\partial_l F^r(x_\alpha)\bigg]
-\end{align}
-So our exponential has become 
-\begin{align}
-e^{i\frac{[F(k+1)-F(k)]^2}{2\hbar\Delta T}}= & \exp\left\{\frac{i}{2\hbar \Delta T}\bigg(g_{ij}\Delta x^i\Delta x^j -2\alpha\Delta x^i\Delta x^j\Delta x^k\partial_iF^r \partial_j\partial_k F^r \right. \nonumber\\
-& \left. + \left[\alpha^2\partial_i\partial_jF\partial_k\partial_lF +\left(\alpha^2 + \frac{1}{12}\right)\partial_iF^r\partial_j\partial_k\partial_l F^r\right]\Delta x^i\Delta x^j\Delta x^k\Delta x^l\bigg)\right\}\\
-& \approx e^{i\frac{g_{ij}\Delta x^i\Delta x^j}{2\hbar\Delta T}}\bigg\{ 1  -\frac{i}{\hbar}\alpha\partial_iF^r \partial_j\partial_k F^r\frac{\Delta x^i\Delta x^j\Delta x^k}{\Delta T}  \nonumber\\
-&  +\frac{i}{\hbar}\left[\alpha^2\partial_i\partial_jF\partial_k\partial_lF +\left(\alpha^2 + \frac{1}{12}\right)\partial_iF^r\partial_j\partial_k\partial_l F^r\right]\frac{\Delta x^i\Delta x^j\Delta x^k\Delta x^l}{\Delta T}\nonumber\\
-& -\frac{1}{2\hbar^2} \alpha^2\partial_iF^r \partial_j\partial_k F^r\partial_lF^r \partial_m\partial_n F^r\frac{\Delta x^i\Delta x^j\Delta x^k\Delta x^l\Delta x^m\Delta x^n}{\Delta T^2}\bigg\}
-\end{align}
-Let us expand this out to linear order in $\Delta T$. 
-
-\subsubsection{Normalization}
-In addition, we must also carry out the expansion for the normalization factor.  
-Let's expand this out as 
-\begin{align}
-\sqrt{g[x(k)]} & = \sqrt{g(x_\alpha)} + \frac{1}{2}[x(k)-x_\alpha]^i\partial_i \sqrt{g} + \frac{1}{4}[x(k)-x_\alpha]^i[x(k)-x_\alpha]^j\partial_i\partial_j \sqrt{g}
-\end{align}
-
-Now we can use 
-\begin{equation}
-\det[A]^{1/2} = e^{\frac{1}{2}tr\ln A}
-\end{equation}
-so we can write 
-\begin{equation}
-partial_i\det[A]^{1/2} = \partial_i e^{\frac{1}{2}tr\ln A} = \frac{1}{2}\tr[A^{-1}\partial_i A] e^{\frac{1}{2}\tr\ln A}
-\end{equation}
-So we have 
-\begin{equation}
-\partial_i\sqrt{g} = \frac{1}{2}g^{jk}\partial_ig_{jk}\sqrt{g}
-\end{equation}
-and 
-\begin{align}
-\partial_i\partial_j\sqrt{g} &= \frac{1}{2}\partial_j(g^{kl}\partial_ig_{kl}\sqrt{g})\\
-&= \frac{1}{2}\left[ \partial_jg^{kl}\partial_ig_{kl}\sqrt{g} + g^{kl}\partial_i\partial_j g_{kl}\sqrt{g} + \frac{1}{2}g^{kl}\partial_ig_{kl}g^{mn}\partial_jg_{mn}\sqrt{g}\right].
-\end{align}
-Pulling this expansion together we get 
-\begin{align}
-  \sqrt{g[x(k)]} & = \sqrt{g(x_\alpha)}\left[ 1 + [x(k)-x_\alpha]^i\frac{1}{2}g^{jk}\partial_ig_{jk} \right. \nonumber\\
-& \left. + \frac{1}{4}[x(k)-x_\alpha]^i[x(k)-x_\alpha]^j
-\left(\partial_jg^{kl}\partial_ig_{kl} + g^{kl}\partial_i\partial_j g_{kl} + \frac{1}{2}g^{kl}\partial_ig_{kl}g^{mn}\partial_jg_{mn}\right)\right]
-\end{align}
-
-\section{Point Transformation in One dimension}
-
-Let's now think a little about one dimension.  We have all this work in higher dimensions.  How do all these 
-\begin{equation}
-g = \partial_x q(x)\partial_xq(x)
-\end{equation}
-Now $g^{-1} = 1/g$.  
-
-We usually define the Christoffel connection as  
-\begin{equation}
-\Gamma^{i}_{kl}  = \frac{1}{2}g^{ij}(\partial_kg_{jl} +\partial_l g_{jk} - \partial_jg_{kl})
-\end{equation}
-In one dimension this becomes 
-\begin{equation}
-\Gamma = \frac{1}{2} g^{-1}\partial_x g = \frac{1}{2}\partial_x \ln g
-\end{equation}
-
-The Riemann Curvature tensor is 
-\begin{equation}
-  R^\rho_{\sigma\mu\nu} = \partial_\mu\Gamma^{\rho}_{\nu\sigma} - \partial_\nu\Gamma^\rho_{\mu\sigma} + \Gamma^{\rho}_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}
-\end{equation}
-Due to the anti-symmetry, it is clear that this vanishes in 1D.  This is evident because you can't have any non-trivial parallalel transport.  
-
-The Ricci tensor is 
-\begin{equation}
-R_{\mu\nu} = R^\lambda_{\mu\lambda\nu}
-\end{equation}
-
-\begin{equation}
-  R_{\mu\nu} = \partial_\mu\Gamma^{\rho}_{\nu\rho} - \partial_\nu\Gamma^\rho_{\mu\rho} + \Gamma^{\rho}_{\mu\lambda}\Gamma^\lambda_{\nu\rho} - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\rho}=0
-\end{equation}
-
-The Ricci scalar is 
-\begin{equation}
-R = {R^{\lambda\mu}} g_{\lambda\mu} =0
-\end{equation}
-
-\section{Three dimensions, diagonal metric}
-
-Let's assume we have a metric like 
-\begin{equation}
-g_{ij} = g(\vect{x})\delta_{ij}
-\end{equation}
-Then the Christoffel symbols are 
-We usually define the Christoffel connection as  
-\begin{align}
-\Gamma^{i}_{kl}  =& \frac{1}{2g}\delta^{ij}(\partial_kg\delta_{jl} +\partial_l g\delta_{jk} - \partial_jg\delta _{kl})
-\end{align}
-
-Let's assume that $\delta^{m}_n = \delta_{mn}?$ 
-\subsubsection{Riemann Curvature Tensor}
-The Riemann curvature tensor is 
-\begin{align}
-  R^r_{smn} =& R^{(1)} + R^{(2)}
-\end{align}
-where 
-\begin{align}
-R^{(1),r}_{smn}=&\partial_m\left(\Gamma^{r}_{ns}  \right) - \partial_n\left(\Gamma^r_{ms}\right) \\
-=& \partial_m\left(\frac{1}{2g}\delta^{rt}(\partial_ng\delta_{st} +\partial_s g\delta_{nt} - \partial_tg\delta _{ns})  \right) - \partial_n\left(\frac{1}{2g}\delta^{rt}(\partial_mg\delta_{st} + \partial_sg\delta_{mt} - \partial_t g \delta_{ms})^r_{ms}\right) \\
-=& \partial_m\left(\frac{1}{2g}(\partial_ng\delta^{r}_{s} +\partial_s g\delta^{r}_n - \partial_tg\delta^{rt}\delta _{ns})  \right) - \partial_n\left(\frac{1}{2g}(\partial_mg\delta^{r}_{s} + \partial_sg\delta^{r}_{m} - \delta^{rt}\partial_t g \delta_{ms})\right) \\
-% =& -\frac{\partial_m g}{2g^2}(\partial_ng\delta^{r}_{s} +\partial_s g\delta^{r}_n - \partial_tg\delta^{rt}\delta _{ns}) + \frac{1}{2g}(\partial_m\partial_ng\delta^{r}_{s} +\partial_m\partial_s g\delta^{r}_n - \partial_m\partial_tg\delta^{rt}\delta _{ns})\nonumber\\
-% & + \frac{\partial_n g}{2g^2}(\partial_mg\delta^{r}_{s} + \partial_sg\delta^{r}_{m} - \delta^{rt}\partial_t g \delta_{ms}) -\frac{1}{2g}(\partial_n\partial_mg\delta^{r}_{s} + \partial_n\partial_sg\delta^{r}_{m} - \delta^{rt}\partial_n\partial_t g \delta_{ms})\\
-% =& -\frac{\partial_m g}{2g^2}(\partial_s g\delta^{r}_n - \partial_tg\delta^{rt}\delta _{ns}) + \frac{1}{2g}(\partial_m\partial_s g\delta^{r}_n - \partial_m\partial_tg\delta^{rt}\delta _{ns})\nonumber\\
-% & + \frac{\partial_n g}{2g^2}( \partial_sg\delta^{r}_{m} - \delta^{rt}\partial_t g \delta_{ms}) -\frac{1}{2g}( \partial_n\partial_sg\delta^{r}_{m} - \delta^{rt}\partial_n\partial_t g \delta_{ms})\\
-% =& -\frac{\partial_m g}{2g^2}(\partial_s g\delta_{rn} - \partial_rg\delta _{ns}) + \frac{1}{2g}(\partial_m\partial_s g\delta_{rn} - \partial_m\partial_rg\delta _{ns})\nonumber\\
-% & + \frac{\partial_n g}{2g^2}( \partial_sg\delta_{rm} - \partial_r g \delta_{ms}) -\frac{1}{2g}( \partial_n\partial_sg\delta_{rm} - \partial_n\partial_r g \delta_{ms})\\
-=&\frac{1}{2g}(\partial_m\partial_s g\delta_{rn} - \partial_m\partial_rg\delta _{ns})  -\frac{1}{2g}( \partial_n\partial_sg\delta_{rm} - \partial_n\partial_r g \delta_{ms}) \nonumber\\
-&+ \frac{1}{2g^2}\partial_s g (\partial_ng\delta_{rm}-\partial_mg \delta_{rn}) - \frac{1}{2g^2}\partial_rg(\partial_ng\delta_{ms} -\partial_mg\delta _{ns}),
-\end{align}
-and 
-\begin{align}
-R^{(2),r}_{smn}=&\Gamma^{r}_{ml}\Gamma^l_{ns} - \Gamma^r_{nl}\Gamma^l_{ms}\\
-=&\frac{1}{4g^2}\delta^{rt}(\partial_m g\delta_{tl} + \partial_l g\delta_{mt} - \partial_t g\delta_{lm})\delta^{lt}(\partial_ng\delta_{st} + \partial_sg\delta_{nt} - \partial_tg_{ns}) \nonumber\\
-&-\frac{1}{4g^2}\delta^{rt}(\partial_n g\delta_{tl} + \partial_l g\delta_{nt} - \partial_t g\delta_{ln})\delta^{lt}(\partial_mg\delta_{st} + \partial_sg\delta_{mt} - \partial_tg_{ms})\\
-% =&\frac{1}{4g^2}\bigg(\partial_m g\delta^{r}_{l} + \partial_l g\delta^{r}_{m} - \partial_t g\delta^{rt}\delta_{lm})(\partial_ng\delta^{l}_{s} + \partial_sg\delta^{l}_{n} - \partial_tg\delta^{lt}\delta_{ns}) \nonumber\\
-% &-(\partial_n g\delta^{r}_{l} + \partial_l g\delta^{r}_{n} - \partial_t g\delta^{rt}\delta_{ln})(\partial_mg\delta^{l}_{s} + \partial_sg\delta^{l}_{m} - \partial_tg\delta^{lt}\delta_{ms})\bigg)\\
-%
-% =&\partial_m g(\partial_sg\delta_{rn} - \partial_rg\delta_{ns}) \nonumber\\
-% &-\partial_n g( \partial_sg\delta_{rm} - \partial_rg\delta_{ms}) \nonumber\\
-% &+ (\partial_s g\delta_{rm}\partial_ng + \partial_n g\delta_{rm}\partial_sg - \partial_l g\partial_lg\delta_{ns}\delta_{rm}) \nonumber\\
-% &- \partial_s g\delta_{rn}\partial_mg - \partial_m g\delta_{rn}\partial_sg + \partial_l g\delta_{rn}\partial_lg\delta_{ms}
-%  \nonumber\\
-% &- 2\partial_r g(\partial_ng\delta_{ms} - \partial_mg\delta_{ns}) \\
-% =&\partial_s g (\partial_mg\delta_{rn} - \partial_n g\delta_{rm}) +\partial_r g (\partial_n \delta_{ms}-\partial_m g\delta_{ns}) \nonumber\\
-% &+ 2\partial_s g(\delta_{rm}\partial_ng -\delta_{rn}\partial_mg) - 2\partial_r g(\partial_ng\delta_{ms} - \partial_mg\delta_{ns}) \nonumber\\
-% & + \partial_l g\partial_lg(\delta_{rn}\delta_{ms}- \delta_{ns}\delta_{rm})\\
-= &\frac{1}{4g^2}\partial_s g(\delta_{rm}\partial_ng -\delta_{rn}\partial_mg) - \frac{1}{4g^2}\partial_r g(\partial_ng\delta_{ms} - \partial_mg\delta_{ns}) \nonumber\\
-& + \frac{1}{4g^2}\partial_l g\partial_lg(\delta_{rn}\delta_{ms}- \delta_{ns}\delta_{rm})
-\end{align}
-Now pull $R^{(1)}$ and $R^{(2)}$ together.  
-\begin{align}
-R^r_{smn}=&\frac{1}{2g}(\partial_m\partial_s g\delta_{rn} - \partial_m\partial_rg\delta _{ns})  -\frac{1}{2g}( \partial_n\partial_sg\delta_{rm} - \partial_n\partial_r g \delta_{ms}) \nonumber\\
-&+ \frac{1}{2g^2}\partial_s g (\partial_ng\delta_{rm}-\partial_mg \delta_{rn}) - \frac{1}{2g^2}\partial_rg(\partial_ng\delta_{ms} -\partial_mg\delta _{ns})\nonumber\\
-& +\frac{1}{4g^2}\partial_s g(\delta_{rm}\partial_ng -\delta_{rn}\partial_mg) - \frac{1}{4g^2}\partial_r g(\partial_ng\delta_{ms} - \partial_mg\delta_{ns}) \nonumber\\
-& + \frac{1}{4g^2}\partial_l g\partial_lg(\delta_{rn}\delta_{ms}- \delta_{ns}\delta_{rm})\\
-=&\frac{1}{2g}(\partial_m\partial_s g\delta_{rn} - \partial_m\partial_rg\delta _{ns})  -\frac{1}{2g}( \partial_n\partial_sg\delta_{rm} - \partial_n\partial_r g \delta_{ms}) \nonumber\\
-&+ \frac{3}{4g^2}\partial_s g (\partial_ng\delta_{rm}-\partial_mg \delta_{rn}) - \frac{3}{4g^2}\partial_rg(\partial_ng\delta_{ms} -\partial_mg\delta _{ns})\nonumber\\
-& + \frac{1}{4g^2}\partial_l g\partial_lg(\delta_{rn}\delta_{ms}- \delta_{ns}\delta_{rm})
-\end{align}
-
-\subsubsection{Ricci tensor}
-
-The Ricci tensor is 
-\begin{equation}
-R_{sn} = R^r_{srn}
-\end{equation}
-So we have
-\begin{align}
-R_{sn}=&\frac{1}{2g}(\partial_r\partial_s g\delta_{rn} - \partial_r\partial_rg\delta _{ns})  -\frac{1}{2g}( \partial_n\partial_sg\delta_{rr} - \partial_n\partial_r g \delta_{rs}) \nonumber\\
-&+ \frac{3}{4g^2}\partial_s g (\partial_ng\delta_{rr}-\partial_rg \delta_{rn}) - \frac{3}{4g^2}\partial_rg(\partial_ng\delta_{rs} -\partial_rg\delta _{ns})\nonumber\\
-& + \frac{1}{4g^2}\partial_l g\partial_lg(\delta_{rn}\delta_{rs}- \delta_{ns}\delta_{rr})\\
-% =&\frac{1}{2g}(\partial_n\partial_s g - \partial_r\partial_rg\delta _{ns})  -\frac{1}{2g}\partial_n\partial_sg ( d -1 ) \nonumber\\
-% &+ \frac{3}{4g^2}\partial_n g \partial_s g ( d-1 ) - \frac{3}{4g^2}(\partial_sg\partial_ng -\partial_rg\partial_rg\delta _{ns})\nonumber\\
-% & - \frac{1}{4g^2}\partial_r g\partial_rg\delta_{ns}(d-1)\\
-=&-\frac{1}{2g}\partial_n\partial_s g(d-2) - \frac{1}{2g}\partial_r\partial_rg\delta _{ns}  + \frac{3}{4g^2}\partial_n g \partial_s g ( d-2 )  - \frac{1}{4g^2}\partial_r g\partial_rg\delta_{ns}(d-4)
-\end{align}
-\subsubsection{Ricci scalar}
-Then we finally have
-\begin{align}
-R&=g^{ns}R_{ns}\\
-&=\frac{1}{g}\delta^{ns}\left(-\frac{1}{2g}\partial_n\partial_s g(d-2) - \frac{1}{2g}\partial_r\partial_rg\delta _{ns}  + \frac{3}{4g^2}\partial_n g \partial_s g ( d-2 )  - \frac{1}{4g^2}\partial_r g\partial_rg\delta_{ns}(d-4)\right)\\
-% &=-\frac{1}{2g^2}\partial_n\partial_n g(d-2) - \frac{1}{2g^2}\partial_r\partial_rg d  + \frac{3}{4g^3}\partial_n g \partial_n g ( d-2 )  - \frac{1}{4g^3}\partial_n g\partial_ng d(d-4)\\
-% &=-\frac{1}{g^2}\partial_n\partial_n g(d-1)   - \frac{1}{4g^3}\partial_n g \partial_n g \left(  d^2 -3d +6 \right) \\
-&=-\frac{1}{g^2}\partial_n\partial_n g(d-1)   - \frac{1}{4g^3}\partial_n g \partial_n g (d-2)(d-1)
-\end{align}
 
 
 \section{Transforming a One-Dimensional path integral}
@@ -2246,7 +1160,6 @@ Now square it, and divide by $\Delta T$, and work to order $\Delta T$.  Let us n
  % =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -2\alpha\Delta x^3\sqrt{g}\sqrt{g}' + \alpha^2\Delta x^4(\sqrt{g}')^2 +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\sqrt{g}\sqrt{g}''\bigg]\\
  =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -\alpha\Delta x^3g' + \alpha^2\Delta x^4\frac{(g')^2}{4g} +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right)\bigg]
 \end{align}
-
 
 \subsubsection{Normalization}
 In addition, we must also carry out the expansion for the normalization factor.  Let's expand this out as 
@@ -2481,7 +1394,8 @@ H &= g^{-1/4}p_i  g^{1/2}g^{ij}p_j g^{-1/4}\\
 \end{align}
 Let's now consider 1D, where $g^{ij} = 1/g, \det{g^{ij}} = g, g_{ij} = g$.  We then have 
 \begin{align}
-H & =  p^2g - i\hbar p \frac{g'}{g^2} - \frac{\hbar^2}{4}\left(\frac{g''}{g^2} - \frac{3}{4}\frac{(g')^2}{g^{3}} - \frac{(g')^2}{g^3} \right)
+H & =  p^2g - i\hbar p \frac{g'}{g^2} - \frac{\hbar^2}{4}\left(\frac{g''}{g^2} 
+  - \frac{3}{4}\frac{(g')^2}{g^{3}} - \frac{(g')^2}{g^3} \right)
 \end{align}
 
 \subsubsection{One Dimension}
@@ -2801,10 +1715,10 @@ Next up we need to calculate the change in the normalization when constrained to
 The Euclidean norm of the gradient is defined as 
 \begin{align}
 \|\nabla_{\vect{z}}h(\vect{z})\|^2 = &  \Delta T \|\nabla_{d\vect{W}}h(d\vect{W})\|^2\\
- = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2\\
- = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
-&\left.\qquad - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
- = & \Delta T  \sum_{k=0}^{N-1}\left[\frac{1}{\sqrt{g_k}} - \frac{1}{\sqrt{g_k}}\frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2\\
+%  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2\\
+%  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
+% &\left.\qquad - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
+%  = & \Delta T  \sum_{k=0}^{N-1}\left[\frac{1}{\sqrt{g_k}} - \frac{1}{\sqrt{g_k}}\frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2\\
  = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}\left[1 - \frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2
 \end{align}
 where we carried out the sum over $j$.    Now we have to start guessing a bit - using some inspiration to approximate this thing.  
@@ -2817,9 +1731,9 @@ It turns out that we can simplify the bracketered term.  We have a sum like:
 So our complicated factor is just an exponential.  
 So we get 
 \begin{equation}
-{\|\nabla_{\vect{z}}h(\vect{z})\|^2 = 
-  \Delta T \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[
-    -\sum_{j=k+1}^{N-1}\frac{g_j'}{2g_j^{3/2}}dW_j - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2}
+  {\|\nabla_{\vect{z}}h(\vect{z})\|^2 = 
+    \Delta T \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[
+      -\sum_{j=k+1}^{N-1}\frac{g_j'}{2g_j^{3/2}}dW_j - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2}
 \end{equation}
 Now we can use the logarithmic expansion to rewrite the Wiener increment term
 \begin{align}

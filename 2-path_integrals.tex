@@ -18,7 +18,7 @@
     particle physics~\cite{Srednicki2008}.  Path integrals have also been used in the 
     mathematics and statistics to describe stochastic processes~\cite{Durrett1996, Karatzas1991},
     They have even been used in studying quantum chaos - the study of the quantum analogues 
-    of classically chaotic systems~\cite{Gutzwiller}.
+    of classically chaotic systems~\cite{Gutzwiller1990}.
 
     In honor of the pioneering work by Feynman and Kac, the fact that path integrals
     act as the solutions to diffusion/Schrodinger equations is referred to as the Feynman-Kac 
@@ -28,6 +28,7 @@
     it for some simple geometries.  These results will be used in our analytical and numerical
     calculations of the Casimir force.  
 
+    \todo{Reference connection between diffusion equation, path integrals, and SDEs.}
   % \item Path integral have broad applications in theoretical physics as a grounding for field theories
   %   \cite{Brown1994}, finance~\cite{Glasserman2004} and statistics~\cite{Durrett1996, Karatzas1991}.
   %   \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
@@ -57,27 +58,52 @@
 
 \section{Derivation of Feynman-Kac formula }
 
+In this section we will derive the path integral as the solution to a diffusion equation,
+using techniques from quantum mechanics.  Our derivation will stay close in spirit to the 
+one found in Sakurai~\cite{Sakurai1994}.  More formal derivations are available from mathematical~\cite{Cartier2004},
+and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  We will extend the usual quantum derivation to
+including a source term, as is more common in statistics.   
+ An detailed discussion of the more formal probabilistic derivation is availabble in Steck Sec 17.9~\cite{SteckNotes} .
+
+
 \begin{itemize}
-  \item Follow spirit of Feynman~\cite{Feynman1948}, and derivation in Sakurai\cite{Sakurai1994}.  
-    Related material in Steck Sec 17.9~\cite{SteckNotes} 
-    Formal derivations in Karatzas and Shreve~\cite{Karatzas1991}, and Durrett~\cite{Durrett1996}
-    \comment{Cite Morette-de Witt}
-  \item Key idea is to always work to order $\Delta T$ or $1/N$.  
+\item We aim to solve the diffusion equation given by 
+\begin{equation}
+  \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,
+\end{equation}
+where $f=f(\vect{x},t)$, $V=V(\vect{x},t)$, and $g=g(\vect{x},t)$.  
+\item Interpretation.  Statistics: $f$ is probability distribution, this is Fokker-Planck
+    equation describing evolution of probability distribution, driven by a source. 
+    Undergoing killing rate given by $V(x)$. 
+    Quantum: evolution of wave function for quantum particle in a potential $V$.  
+\item Can derive path integral using techniques from quantum. Solve by introducing Hilbert space 
+    Commutation relation
+    \begin{gather}
+      [\op{x}_i,\op{p}_j]=i\delta_{ij}
+    \end{gather}
+    Spatial representation of operators
+    \begin{gather}
+      \langle \vect{x}|\op{x}_i|\psi\rangle = x_i\psi(\vect{x})\\
+      \langle \vect{x}|\op{p}_i|\psi\rangle = -i\partial_i\psi(\vect{x})
+    \end{gather}
+    Resolutions of the identity
+    \begin{gather}
+      I_x = \int d\vect{x}|\vect{x}\langle \rangle \vect{x}|, \\
+      I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\langle \rangle \vect{p}|
+    \end{gather}
+\item Can write diffusion equation as operator equation:
+\begin{equation}
+  \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,
+\end{equation}
+    
+\begin{itemize}
+  % \item Follow spirit of Feynman~\cite{Feynman1948}, and derivation in Sakurai\cite{Sakurai1994}.  
+  %   Related material in Steck Sec 17.9~\cite{SteckNotes} 
+  %   Formal derivations in Karatzas and Shreve~\cite{Karatzas1991}, and Durrett~\cite{Durrett1996}
+  %   \comment{Cite Morette-de Witt}
+  % \item Key idea is to always work to order $\Delta T$ or $1/N$.  
   \item {Quote form of general PDE, and form of solution.}
     We can evaluate these functions using the insight that all of the path integrals are also the solution to Fokker-Planck equation.  
-    For example,
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f  - [V(x,t)+\lambda]f +g(x,t) ,
-    \end{equation}
-    has the solution
-    \begin{equation}
-      f(x,t) = \dlangle  f[x_0+x(t)] e^{-\lambda t - \int_0^t dt'\,V[x(t')]} + 
-      \int_0^t ds\,g(x,t-s) e^{-\lambda s-\int_0^s du V(x,t-u)} \drangle 
-    \end{equation}
-    with initial condition $f(x,t=0)= f_0(x)$, and $\dlangle \cdots\drangle$ denotes the ensemble average over Brownian walks.
-  \item Introduce double angle bracket notation, and relate to typically path integral notation.
-  \item Also introduce path-average notation as time integral.
-  \item Comment on subscripts denoting types of loops $\dlangle\cdots\drangle_{\vect{x}_0}$
 \end{itemize}
 
 \subsection{Path Integral without Source}
@@ -146,14 +172,13 @@
     Then reverting the transformation to $h$ back to $f$, and using $f(t=0)=f_0=h_0$,  we have: 
     \begin{align}
       f(t) &= e^{-\int_0^t dt' \alpha(t')}h(t)  \\
-      &= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}e^{-\int_0^t dt' \alpha(t')}  \\
+%      &= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}e^{-\int_0^t dt' \alpha(t')}  \\
       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{-\int_s^t du \alpha(u)}.
     \end{align}
     Now take $s \rightarrow t-v$, and $u \rightarrow t-u$.    
     \begin{align}
       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t dv\, g(t-v) e^{-\int_{0}^v du \alpha(t-u)},
     \end{align}
-    which is pretty much what Dan has, albeit with more sophisticated machinery in play.  
 
   \item Integrating factor for PDE
 
@@ -163,6 +188,7 @@
     \begin{equation}
       \partial_t f = \frac{1}{2}\partial_x^2 f - V f + g, 
     \end{equation}
+    \todo{Sort out sign conventions for diffusion!}
     this can be turned into an operator equation: 
     \begin{equation}
       \partial_t\langle x |f\rangle = -\langle x|\left[\frac{\op{p}^2}{2}+V(\op{x})\right]|f\rangle + \langle x|g\rangle,
@@ -174,9 +200,39 @@
     \end{equation}
     (literally a path integral)?
 
-
-
+  \item Let us shift to an interaction picture using 
+    \begin{equation}
+      H_0 = \frac{\op{\vect{p}}^2}{2}+V(\op{x})
+    \end{equation}
+    with states transforming to $|\tilde{\psi}\rangle = e^{-H t}|\psi\rangle$. 
+    \todo{Time ordered product in evolution operator - check Sakurai}
+    The transformed states obey 
+    \begin{equation}
+      \partial_t|\tilde{\psi}\rangle = |\tilde{g}(t)\rangle = e^{-Ht}|g\rangle
+    \end{equation}
+    This can be formally integrated over time.  
+    \begin{equation}
+      |\tilde{\psi}(t)\rangle-|\tilde{\psi}(0)\rangle = \int_0^t ds e^{-Hs}|g\rangle
+    \end{equation}
+    Or 
+    \begin{equation}
+      |\psi(t)\rangle = e^{Ht}|\psi(0)\rangle +\int_0^t ds e^{-H(s-t)}|g(s)\rangle
+    \end{equation}
   \item Need careful time ordering.  
+    For example,
+    \begin{equation}
+      \partial_t f = \frac{1}{2}\partial_x^2 f  - [V(x,t)+\lambda]f +g(x,t) ,
+    \end{equation}
+    has the solution
+    \begin{equation}
+      f(x,t) = \dlangle  f[x_0+x(t)] e^{-\lambda t - \int_0^t dt'\,V[x(t')]} + 
+      \int_0^t ds\,g(x,t-s) e^{-\lambda s-\int_0^s du V(x,t-u)} \drangle 
+    \end{equation}
+    with initial condition $f(x,t=0)= f_0(x)$, and $\dlangle \cdots\drangle$ denotes the ensemble average over Brownian walks.
+  \item Introduce double angle bracket notation, and relate to typically path integral notation.
+  \item Also introduce path-average notation as time integral.
+  \item Comment on subscripts denoting types of loops $\dlangle\cdots\drangle_{\vect{x}_0}$
+
 \end{itemize}
 
 

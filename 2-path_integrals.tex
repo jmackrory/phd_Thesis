@@ -63,83 +63,157 @@ using techniques from quantum mechanics.  Our derivation will stay close in spir
 one found in Sakurai~\cite{Sakurai1994}.  More formal derivations are available from mathematical~\cite{Cartier2004},
 and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  We will extend the usual quantum derivation to
 including a source term, as is more common in statistics.   
- An detailed discussion of the more formal probabilistic derivation is availabble in Steck Sec 17.9~\cite{SteckNotes} .
+An detailed discussion of the more formal probabilistic derivation is availabble in Steck Sec 17.9~\cite{SteckNotes} .
 
 
-\begin{itemize}
-\item We aim to solve the diffusion equation given by 
+We aim to find a solution $f(x,t)$ to the driven diffusion equation given by 
 \begin{equation}
-  \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,
+  \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,\label{eq:diffusion_equation}
 \end{equation}
-where $f=f(\vect{x},t)$, $V=V(\vect{x},t)$, and $g=g(\vect{x},t)$.  
-\item Interpretation.  Statistics: $f$ is probability distribution, this is Fokker-Planck
-    equation describing evolution of probability distribution, driven by a source. 
-    Undergoing killing rate given by $V(x)$. 
-    Quantum: evolution of wave function for quantum particle in a potential $V$.  
-\item Can derive path integral using techniques from quantum. Solve by introducing Hilbert space 
-    Commutation relation
+where the potential/killing rate is given by $V=V(\vect{x},t)$, and the source term is $g=g(\vect{x},t)$.  
+    In this form $f$ corresponds to the probability distribution for a diffusing particle with a source
+    of particles $g$, with spatially dependent killing rate $V$.  If we take $\tau\rightarrow -it$,
+    we recover the Schr\"odinger equation. 
+    We can use techniques from quantum mechanics, and introduce a Hilbert space with operators.
+    The differential equation can be written in operator form using 
     \begin{gather}
-      [\op{x}_i,\op{p}_j]=i\delta_{ij}
+      \langle \vect{x}|\op{x}_i|f\rangle = x_if(\vect{x})\\
+      \langle \vect{x}|\op{p}_i|f\rangle = -i\partial_if(\vect{x}),
     \end{gather}
-    Spatial representation of operators
+    The position and momentum operators have commutation relations
     \begin{gather}
-      \langle \vect{x}|\op{x}_i|\psi\rangle = x_i\psi(\vect{x})\\
-      \langle \vect{x}|\op{p}_i|\psi\rangle = -i\partial_i\psi(\vect{x})
+      [\op{x}_i,\op{p}_j]=i\delta_{ij},
     \end{gather}
-    Resolutions of the identity
+    and overlap 
+    \begin{equation}
+      \langle \vect{x}|\vect{p}\rangle = e^{i\vect{x\cdot p}}.
+    \end{equation}
+    We also need the position and momentum resolutions of the identity
     \begin{gather}
-      I_x = \int d\vect{x}|\vect{x}\langle \rangle \vect{x}|, \\
-      I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\langle \rangle \vect{p}|
+      I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \\
+      I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\rangle \langle \vect{p}|.
     \end{gather}
-\item Can write diffusion equation as operator equation:
+The diffusion equation~(\ref{eq:diffusion_equation}) can be written in operator form
 \begin{equation}
-  \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,
+  \langle \vect{x}|\partial_t |f(t)\rangle = -\langle \vect{x}|
+  \left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}},t)+\lambda\right]|f(t)\rangle +\langle \vect{x}|g(t)\rangle.
 \end{equation}
-    
-\begin{itemize}
-  % \item Follow spirit of Feynman~\cite{Feynman1948}, and derivation in Sakurai\cite{Sakurai1994}.  
-  %   Related material in Steck Sec 17.9~\cite{SteckNotes} 
-  %   Formal derivations in Karatzas and Shreve~\cite{Karatzas1991}, and Durrett~\cite{Durrett1996}
-  %   \comment{Cite Morette-de Witt}
-  % \item Key idea is to always work to order $\Delta T$ or $1/N$.  
-  \item {Quote form of general PDE, and form of solution.}
-    We can evaluate these functions using the insight that all of the path integrals are also the solution to Fokker-Planck equation.  
-\end{itemize}
+We can solve this by introducing the evolution operator,
+\begin{equation}
+  U(t) = \text{T}\exp\left\{-\int_0^t ds\left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}},s)+\lambda\right]\right\},
+\end{equation}
+where $\text{T}$ is the time-ordering operator.  \comment{Dyson series? - re QFT Derivation of S-matrix?}
+We can then use the operator analogue of an integrating factor method, by transforming 
+the vectors to the Heisenberg picture, $|f\rangle \rightarrow |\tilde{f}\rangle=U^{-1}(t)|f\rangle$.  
+The transformed vectors obey
+\begin{equation}
+  \partial_t|\tilde{f}\rangle = U^{-1}(t)|\tilde{g}\rangle.
+\end{equation}
+This equation can be formally integrated with respect to time
+\begin{equation}
+  |\tilde{f}(t)\rangle-|\tilde{f}(0)\rangle = \int_0^t ds |\tilde{g}(s)\rangle.
+\end{equation}
+If we transform back to the original vectors we find
+\begin{equation}
+  |f(t)\rangle = U(t)|f(0)\rangle + U(t) \int_0^t ds U^{-1}(s)|g(s)\rangle,
+\end{equation}
+where we used $|\tilde{g}(t)\rangle = U^{-1}(t)|g(t)\rangle$.  
+If we assume we can combine  the operators, then 
+\begin{equation}
+  f(x_f,t)\rangle = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
+\end{equation}
+
+\subsection{Evaluating the matrix element}
+
+We can now evaluate the matrix elements for each piece.  In particular, 
+\begin{equation}
+  M = \langle \vect{x}_f|U(t)|f\rangle,
+\end{equation}
+where $U$ is the time-ordered evolution operator (so time increases towards the left.)
+\begin{equation}
+  U(t) = T\exp\left[-\int_0^t du H(u) \right] = \prod_{n=1}^N e^{-\Delta T \op{H}(n\Delta T)}
+\end{equation}
+If we insert position/momentum identities between each of these, we have
+\begin{align}
+  M_n &= \langle \vect{x}_f| e^{-\Delta T \op{H}(t_N)}|f\rangle\\
+  &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta T \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
+\prod_{j=1}^{N-1} e^{-\Delta T \op{H}(t_j)}|f\rangle\\
+  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
+  \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta T \op{H}(t_k)}|\vect{p}_k\rangle
+    \langle \vect{p}_k| \vect{x}_{k}\rangle \right]
+  \langle \vect{x}_0| f\rangle
+\end{align}
+\comment{Do we need to consider how the ket's evolve?}
+We use the Baker-Campbell-Hausdorff theorem to split the exponential operator into a position
+and momentum pieces
+\begin{equation}
+  e^{-\Delta T [\op{p}^2+V(\op{x})]} = e^{-\Delta T V(\op{x})}e^{-\Delta T \op{p}^2} +\order(\Delta T^2).
+\end{equation}
+The operators can then acquire the respective eigenvalues from operating to the left/right respectively.
+\begin{align}
+  M_n  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
+  \prod_{j=1}^{N} e^{-\Delta T\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
+  f(\vect{x}_0,0)\\
+&= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}}{(2\pi\Delta T)^{D/2}}
+  \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta T)-\Delta T V(\vect{x}_k,t_k)}f(\vect{x}_0,0)
+\end{align}
+This is the fairly traditional form of the euclidean path integral.  We can transform it 
+to look like the mathematical version, stressing the connection to Brownian motion
+by changing integration variables.  
+We now define the vector Wiener increments $\Delta \vect{W}_k = \vect{x}_{N-k-1}-\vect{x}_{N-k}$ (note that this
+is backwards labelling from the usual convention).  The Jacobian determinant for this
+transformation is unity. Then we can write the positions in terms of the Brownian motion
+$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.  Since we are treating $\vect{x}_N$ as a fixed point
+(where we will be evaluating the solution) we should reference our points to that point.  
+We can use
+\begin{equation}
+  \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k.
+\end{equation}
+In terms of the Wiener increments the path integral is
+\begin{align}
+  M_n  &= \int \prod_{k=0}^{N-1}\frac{d\Delta \vect{W}_{k}}{(2\pi\Delta T)^{D/2}}
+  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta T)-\Delta T V(\vect{x}_N+\sum_{j=0}^{N-k}\Delta \vect{W}_j,t_k)}
+  f(\vect{x}_N+\sum_{j=0}^{N-j}\Delta \vect{W}_j,0)\\
+&= \int \prod_{k=0}^{N-1}\frac{d\Delta \vect{W}_{k}}{(2\pi\Delta T)^{D/2}}
+  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta T)-\Delta T V(\vect{x}_N+\vect{W}_{N-k},t_k)}
+  f(\vect{x}_N+\vect{W}_{N},0)
+\end{align}
+where in the second equality we defined the Wiener process as $\vect{W}_k=\sum_{j=0}^{k} \Delta \vect{W_j}$, then we can write 
+If we pass over to continuum language, where the Riemann sum becomes an integral, and $\vect{W}_k=\vect{W}(t_k)$,
+(we will also define $\vect{x}=\vect{x}_N$
+ is a continuous process we can write
+\begin{align}
+  M_n  &= \biggdlangle e^{-\int\limits_0^t du V(\vect{x}+\vect{W}(t-u),u)} f(\vect{x}+\vect{W}(t),0)\biggdrangle
+\end{align}
+The same style of reasoning can be used for both pieces.  \comment{Note however change in time limits on $g$
+term.  Also do the time arguments of $g$ work out?}
+
 
 \subsection{Path Integral without Source}
 \begin{itemize}
   \item {Fokker-Planck Equation on Hilbert space.  }
-    So let's do the quantum mechanical approach to this.  We start from 
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f - V f + g, 
-    \end{equation}
-    this can be turned into an operator equation: 
-    \begin{equation}
-      \partial_t\langle x |f\rangle = -\langle x|\left[\frac{\op{p}^2}{2}+V(\op{x})\right]|f\rangle
-    \end{equation}
-  \item Solution is exponential operator.  
   \item {Split operators into $N$ steps.  Baker-Campbell-Hausdorff}
-    Then, do the usual path integral tricks:
-    \begin{align}
-      \langle x_N|f(t)\rangle =& \langle x_N|\exp\left[-t\frac{\op{p}^2}{2}-tV(\op{x})\right]|f\rangle \\
-      =& \langle x_N|\prod_{k=1}^N\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
-      =& \langle x_N|\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})] \ldots \exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
-      =& \int \prod_{k=0}^{N-1}dx_k \langle x_N|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_{N-1}\rangle\langle x_{N-1}| \ldots \langle x_1|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_0\rangle\langle x_0|f\rangle \\
-      =& \int \prod_{k=1}^N\frac{dx_{k-1}dp_k}{(2\pi)}\prod_{j=1}^N e^{-\frac{\Delta T}{2}p_j^2 +ip_j(x_j-x_{j-1}) - V(x_j)\Delta T}\langle x_0|f\rangle \\
-      =& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}}e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)
-    \end{align}
-    Now somehow transform this to something like $f(x_n + \sum_{j}dW_j)$ to get the same form as Dan?
-    Transform to integrating over the increments $dW_j = x_{j+1}-x_j$.
-    Then $\sum_{j=0}^{N-1} dW_j = x_N - x_0$.
-    Well, just quickly solve, and you see that $x_0 = x_N - \sum_{j=0}^{N-1}dW_j$.
-    Similarly, $x_k = x_N - \sum_{j=k}^{N-1}dW_j$.  
+  %   Then, do the usual path integral tricks:
+  %   \begin{align}
+  %     \langle x_N|f(t)\rangle =& \langle x_N|\exp\left[-t\frac{\op{p}^2}{2}-tV(\op{x})\right]|f\rangle \\
+  %     % =& \langle x_N|\prod_{k=1}^N\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
+  %     % =& \langle x_N|\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})] \ldots \exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
+  %     % =& \int \prod_{k=0}^{N-1}dx_k \langle x_N|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_{N-1}\rangle\langle x_{N-1}| \ldots \langle x_1|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_0\rangle\langle x_0|f\rangle \\
+  %     % =& \int \prod_{k=1}^N\frac{dx_{k-1}dp_k}{(2\pi)}\prod_{j=1}^N e^{-\frac{\Delta T}{2}p_j^2 +ip_j(x_j-x_{j-1}) - V(x_j)\Delta T}\langle x_0|f\rangle \\
+  %     =& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}}e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)
+  %   \end{align}
+  %   Now somehow transform this to something like $f(x_n + \sum_{j}dW_j)$ to get the same form as Dan?
+  %   Transform to integrating over the increments $dW_j = x_{j+1}-x_j$.
+  %   Then $\sum_{j=0}^{N-1} dW_j = x_N - x_0$.
+  %   Well, just quickly solve, and you see that $x_0 = x_N - \sum_{j=0}^{N-1}dW_j$.
+  %   Similarly, $x_k = x_N - \sum_{j=k}^{N-1}dW_j$.  
 
-  \item {Continuum limit.  Note source of walks}
-    \begin{align}
-      f(x_N,t)=& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}} e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)\\
-      =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k\Delta t V(x_N-\sum_{j=k}^{N-1}dW_j)}f(x_N-\sum_{j=0}^{N-1}dW_j)\\
-      =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k \Delta t V(x_N+\sum_{j=0}^{k}dW_j)}f(x_N+\sum_{j=0}^{N-1}dW_j),
-    \end{align}
+  % \item {Continuum limit.  Note source of walks}
+  %   \begin{align}
+  %     f(x_N,t)=& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}} e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)\\
+  %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k\Delta t V(x_N-\sum_{j=k}^{N-1}dW_j)}f(x_N-\sum_{j=0}^{N-1}dW_j)\\
+  %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k \Delta t V(x_N+\sum_{j=0}^{k}dW_j)}f(x_N+\sum_{j=0}^{N-1}dW_j),
+  %   \end{align}
     or in continuous language:
     \begin{equation}
       f(x,t)= \dlangle e^{-\int_0^t dt'  V[x+W(t')]}f_0[x+W(t)]\drangle
@@ -151,73 +225,73 @@ where $f=f(\vect{x},t)$, $V=V(\vect{x},t)$, and $g=g(\vect{x},t)$.
     Note that I think this definition also assumes that the brownian walks are starting from the origin.  
   \item Discuss notions of Brownian motion, Brownian bridges.  Specify in terms of increments,
     final positions.  Introduce measures like correlation?
-\end{itemize}
 
-\subsection{Path Integral without Source}
 
-\begin{itemize}
-  \item {Integrating factor method for ODE.  (Interaction picture?)}
-    Consider how to solve: 
-    \begin{equation}
-      \partial_t f = -\alpha(t) f + g(t)
-    \end{equation}
-    This can be solved via an integrating factor.  Let's introduce $h = e^{\int_0^t dt' \alpha(t')} f$.  then 
-    \begin{equation}
-      \partial_t h = e^{\int_0^t dt'\alpha(t')} [\partial_t f +\alpha(t)f(t) ] = e^{\int_0^t dt'\alpha(t')} g(t),
-    \end{equation}
-    where we used the differential equation for $f$.  This differential equation in $h$ has a solution
-    \begin{equation}
-      h(t) = h_0 + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}.  
-    \end{equation}
-    Then reverting the transformation to $h$ back to $f$, and using $f(t=0)=f_0=h_0$,  we have: 
-    \begin{align}
-      f(t) &= e^{-\int_0^t dt' \alpha(t')}h(t)  \\
-%      &= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}e^{-\int_0^t dt' \alpha(t')}  \\
-      f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{-\int_s^t du \alpha(u)}.
-    \end{align}
-    Now take $s \rightarrow t-v$, and $u \rightarrow t-u$.    
-    \begin{align}
-      f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t dv\, g(t-v) e^{-\int_{0}^v du \alpha(t-u)},
-    \end{align}
+% \subsection{Path Integral without Source}
 
-  \item Integrating factor for PDE
+% \begin{itemize}
+%   \item {Integrating factor method for ODE.  (Interaction picture?)}
+%     Consider how to solve: 
+%     \begin{equation}
+%       \partial_t f = -\alpha(t) f + g(t)
+%     \end{equation}
+%     This can be solved via an integrating factor.  Let's introduce $h = e^{\int_0^t dt' \alpha(t')} f$.  then 
+%     \begin{equation}
+%       \partial_t h = e^{\int_0^t dt'\alpha(t')} [\partial_t f +\alpha(t)f(t) ] = e^{\int_0^t dt'\alpha(t')} g(t),
+%     \end{equation}
+%     where we used the differential equation for $f$.  This differential equation in $h$ has a solution
+%     \begin{equation}
+%       h(t) = h_0 + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}.  
+%     \end{equation}
+%     Then reverting the transformation to $h$ back to $f$, and using $f(t=0)=f_0=h_0$,  we have: 
+%     \begin{align}
+%       f(t) &= e^{-\int_0^t dt' \alpha(t')}h(t)  \\
+% %      &= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}e^{-\int_0^t dt' \alpha(t')}  \\
+%       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{-\int_s^t du \alpha(u)}.
+%     \end{align}
+%     Now take $s \rightarrow t-v$, and $u \rightarrow t-u$.    
+%     \begin{align}
+%       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t dv\, g(t-v) e^{-\int_{0}^v du \alpha(t-u)},
+%     \end{align}
 
-    Now imagine applying the same path integral procedure, but you're just careful to keep the operator ordering clear.  
+%   \item Integrating factor for PDE
 
-    So let's do the quantum mechanical approach to this.  We start from 
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f - V f + g, 
-    \end{equation}
-    \todo{Sort out sign conventions for diffusion!}
-    this can be turned into an operator equation: 
-    \begin{equation}
-      \partial_t\langle x |f\rangle = -\langle x|\left[\frac{\op{p}^2}{2}+V(\op{x})\right]|f\rangle + \langle x|g\rangle,
-    \end{equation}
-    Then let us introduce
-    \begin{equation}
-      U(t) =  T \exp\left[-\int_0^t dt'\frac{\op{p}^2}{2} +V(\op{x})\right]
-      = \prod_{k=1}^N \exp\left[ -\Delta t\frac{p^2}{2}-\Delta tV(x_k)\right]
-    \end{equation}
-    (literally a path integral)?
+%     Now imagine applying the same path integral procedure, but you're just careful to keep the operator ordering clear.  
 
-  \item Let us shift to an interaction picture using 
-    \begin{equation}
-      H_0 = \frac{\op{\vect{p}}^2}{2}+V(\op{x})
-    \end{equation}
-    with states transforming to $|\tilde{\psi}\rangle = e^{-H t}|\psi\rangle$. 
-    \todo{Time ordered product in evolution operator - check Sakurai}
-    The transformed states obey 
-    \begin{equation}
-      \partial_t|\tilde{\psi}\rangle = |\tilde{g}(t)\rangle = e^{-Ht}|g\rangle
-    \end{equation}
-    This can be formally integrated over time.  
-    \begin{equation}
-      |\tilde{\psi}(t)\rangle-|\tilde{\psi}(0)\rangle = \int_0^t ds e^{-Hs}|g\rangle
-    \end{equation}
-    Or 
-    \begin{equation}
-      |\psi(t)\rangle = e^{Ht}|\psi(0)\rangle +\int_0^t ds e^{-H(s-t)}|g(s)\rangle
-    \end{equation}
+%     So let's do the quantum mechanical approach to this.  We start from 
+%     \begin{equation}
+%       \partial_t f = \frac{1}{2}\partial_x^2 f - V f + g, 
+%     \end{equation}
+%     \todo{Sort out sign conventions for diffusion!}
+%     this can be turned into an operator equation: 
+%     \begin{equation}
+%       \partial_t\langle x |f\rangle = -\langle x|\left[\frac{\op{p}^2}{2}+V(\op{x})\right]|f\rangle + \langle x|g\rangle,
+%     \end{equation}
+%     Then let us introduce
+%     \begin{equation}
+%       U(t) =  T \exp\left[-\int_0^t dt'\frac{\op{p}^2}{2} +V(\op{x})\right]
+%       = \prod_{k=1}^N \exp\left[ -\Delta t\frac{p^2}{2}-\Delta tV(x_k)\right]
+%     \end{equation}
+%     (literally a path integral)?
+
+%   \item Let us shift to an interaction picture using 
+%     \begin{equation}
+%       H_0 = \frac{\op{\vect{p}}^2}{2}+V(\op{x})
+%     \end{equation}
+%     with states transforming to $|\tilde{\psi}\rangle = e^{-H t}|\psi\rangle$. 
+%     \todo{Time ordered product in evolution operator - check Sakurai}
+%     The transformed states obey 
+%     \begin{equation}
+%       \partial_t|\tilde{\psi}\rangle = |\tilde{g}(t)\rangle = e^{-Ht}|g\rangle
+%     \end{equation}
+%     This can be formally integrated over time.  
+%     \begin{equation}
+%       |\tilde{\psi}(t)\rangle-|\tilde{\psi}(0)\rangle = \int_0^t ds e^{-Hs}|g\rangle
+%     \end{equation}
+%     Or 
+%     \begin{equation}
+%       |\psi(t)\rangle = e^{Ht}|\psi(0)\rangle +\int_0^t ds e^{-H(s-t)}|g(s)\rangle
+%     \end{equation}
   \item Need careful time ordering.  
     For example,
     \begin{equation}
@@ -772,1241 +846,1238 @@ where $f=f(\vect{x},t)$, $V=V(\vect{x},t)$, and $g=g(\vect{x},t)$.
   \item Comment on divergent parts cancelling out. 
 \end{itemize}
 
-\section{Path Integral in Curved Space}
+% \section{Path Integral in Curved Space}
 
-\begin{itemize}
-  \item Path integral construction on metric-affine space is surprisingly complicated 
-    and error-fraught.  
-  \item Care is required in construction to get all terms.  
-  \item Similar to multiplicative noise in SDE.
-\end{itemize}
+% \begin{itemize}
+%   \item Path integral construction on metric-affine space is surprisingly complicated 
+%     and error-fraught.  
+%   \item Care is required in construction to get all terms.  
+%   \item Similar to multiplicative noise in SDE.
+% \end{itemize}
 
-\begin{itemize}
-  \item Given analogy of a medium to a curved space. Cite Leonhardt, Gordon  
-  \item Note general requirement for $\mu=\epsilon$.  Hard to achieve, especially broadband.
-  \item Application to TM path integral with rescaling $\epsilon$.
-\end{itemize}
+% \begin{itemize}
+%   \item Given analogy of a medium to a curved space. Cite Leonhardt, Gordon  
+%   \item Note general requirement for $\mu=\epsilon$.  Hard to achieve, especially broadband.
+%   \item Application to TM path integral with rescaling $\epsilon$.
+% \end{itemize}
 
-\subsection{Operators in Curved Space}
+% \subsection{Operators in Curved Space}
 
-\begin{itemize}
-  \item Quote Position Operator and inner product for spatial wavefunctions.
-  \item Note only momentum operator consistent with that.
-  \item Develop path integral
-  \item Show it obeys the Schrodinger equation (Grosche's test)
-\end{itemize}
+% \begin{itemize}
+%   \item Quote Position Operator and inner product for spatial wavefunctions.
+%   \item Note only momentum operator consistent with that.
+%   \item Develop path integral
+%   \item Show it obeys the Schrodinger equation (Grosche's test)
+% \end{itemize}
 
-\subsection{Transformation}
+% \subsection{Transformation}
 
-\begin{itemize}
-  \item Start with flat-space path integral.\cite{Gervais1976, Kleinert2012}
-  \item Introduce coordinate transformation
-  \item Choose expansion point, expand consistently to $\order(\Delta T)$.
-  \item Note connection to choice of stochastic calculus.
-  \item Expand Jacobian factors
-  \item Expand Gaussian factors
-  \item Convert to terms involving curvature tensors.
-  \item Simplify down to $1D$
-  \item Note typically small value of quantum correction.  $\hbar^2$.
-\end{itemize}
-
-
-\section{Operator Quantization in Curved Space}
-
-This follows from Bryce DeWitt's early papers \footnote{
-DeWitt, B. S. \textit{Point Transformations in Quantum Mechanics}, 
-{Phys. Rev.}, \textbf{85}, 653, 1952.\\
-deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the 
-Classical and Quantum Action Principles}, {Rev. Mod. Phys.}, \textbf{29}, 377,(1957). } .
-See also a review by Pauli\footnote{
-Pauli, W., \textit{General Principles of Quantum Mechanics}, (1980), 
-translated by P. Achuthan and K Venkatesan} 
-
-There are two ways of deriving the path integral in curved space.  In the first 
-formulation, we derive the relevant path integral in curved space
-by starting with the curved space Hamiltonian and quantized appropriately.  
-This requires changing the form of the momentum operators, which gain corrections.
-This is in contrast to the second approach, which starts with a flat-space path
- integral, and transforms that path integral to curvilinear coordinates.
- We will use $x$ to denote the curvilinear coordinates, and $q_i$ to denote the flat-space coordinates.  
-
-Consider the following particle Lagrangian,
-\begin{equation}
-L = \frac{1}{2}g_{ij}(x)\dot{x}^i\dot{x}^j
-\end{equation}
-with line element, $ds^2 = g_{ij} dx^i dx^j$, and volume element, 
-$dV = \sqrt{|\det[g_{ij}]|}\prod_idx_i$.  
-
-This has canonical momenta 
-\begin{equation}
-p_i := \frac{\partial L}{\partial \dot{x}^i} = g_{ij}\dot{x}^j.
-\end{equation}
-
-The equivalent Hamiltonian is 
-\begin{align}
-H & = p_i\dot{x}^i - L \\
-& = \frac{1}{2} p_i g^{-1}_{ij}p_j = \frac{1}{2}p_i g^{ij}p_j,
-\end{align}
-where  ${g^{-1}}_{ij} = g^{ij}$ is the inverse metric.  
-
-The choice of where to place the metric (which is a function of position)
- relative to the momentum operators is sometimes called the 
-\textit{operator-ordering problem}.  We have no classical reason for picking
-any one of the myriad quantum operator ordering choices.  
-We will see that this operator ordering is related to our choice of stochastic calculus.  
-
-\subsection{Quantization}
-
-When we quantize this we require that the position and momentum obey the usual commutation relations
-\begin{equation}
-[x_i,p_j] = i\hbar\delta_{ij}.
-\end{equation}
-The other piece we need is representation of the identity for states.
- We will represent the spatial and momentum identity operators as 
-\begin{gather}
-\int d\vect{x} \sqrt{g} |\vect{x}\rangle \langle \vect{x}| = 1\\
-\int \frac{d\vect{p}}{(2\pi\hbar)^d} |\vect{p}\rangle \langle \vect{p}| = 1
-\end{gather}
-This representation of the spatial identity implies the inner product between
-is
-\begin{equation}
-\langle \phi |\psi\rangle = \int d\vect{x} \sqrt{g} \phi^*(x)\psi(x),
-\end{equation}
-where we have introduced the shorthand notation, $g = \det[g_{ij}]$.
-The position space representation of the momentum operator can be de derived 
-by seeking consistency with the commutation relations and ensuring that the 
-momentum is a hermitian operator
-\begin{equation}
-\langle x| \op{p}_i|\psi\rangle = -i \frac{1}{g^{1/4}} \partial_i\left[ g^{1/4}\psi(x)\right] 
-= -i\left(\partial_i +\frac{1}{4}\frac{\partial_i g}{g}\right)\psi(x).
-\end{equation}
-We can check the hermiticity by requiring 
-$\langle\phi |\op{p}|\psi\rangle = \langle \psi |\op{p}\phi\rangle^{*}$.
-  In position space this becomes 
-\begin{align}
-\langle \phi|\op{p}|\psi\rangle & = -i\int dx\,\sqrt{g}\phi^*(x) 
-\frac{1}{g^{1/4}} \partial_x\left[ g^{1/4}\psi(x)\right]\\
-& = i\int dx\,\partial_i\left[g^{1/4}\phi^*(x)\right] g^{1/4}\psi(x)\\
-& = i\int dx\,\sqrt{g}\psi(x) \frac{1}{g^{1/4}}\partial_i\left[g^{1/4}\phi^*(x)\right]\\
-& = \langle \psi |\op{p}|\phi\rangle^*
-\end{align}
-The spatial representation of the momentum operator can also be written
-in terms of the Christoffel symbols,
-\begin{equation}
- \frac{1}{g^{1/4}}\partial_i g^{1/4} f = \partial_i f + \frac{1}{4}\partial_i\ln(g)f.
-\end{equation}
-The Christoffel symbols are defined as
-\begin{equation}
-\Gamma_{ij}^k = \frac{1}{2}g^{kl}\left(\partial_ig_{jl}+\partial_jg_{li} 
-  - \partial_lg_{ij}\right)
-\end{equation}
-We can trace over the Christoffel symbols, 
-\begin{align}
-\Gamma_{i} &= \Gamma_{ik}^k=\frac{1}{2}g^{kl}\left(\partial_ig_{kl}+\partial_kg_{li} 
-  - \partial_lg_{ik}\right)\\
-%&=\frac{1}{2}\left(g^{kl}\partial_ig_{kl}+\partial^lg_{li} 
-%  - \partial_kg_{ik}\right)\\
-&=\frac{1}{2}g^{kl}\partial_ig_{kl} = \frac{1}{2}{g^{-1}}_{kl}\partial_ig_{kl}
-\end{align}
-This can be rewritten using $\tr-\log(A) = \log\det(A)$.  Our expression
-for the derivative involves,
-\begin{equation}
-\partial_i\log\det(g)=\partial_i\tr\log(A)=\tr\partial_i\log(A) = \tr[g^{-1}\partial_ig]
-\end{equation}
-We can then write the derivative operator as 
-\begin{equation}
-\langle \vect{q}|p_i|\psi\rangle 
-= -i\hbar\left(\partial_i +\frac{1}{2}\Gamma_i\right)\psi(\vect{q})
-\end{equation}
-
-This is not quite the full covariant derivative one might anticipate,
-\begin{equation}
-\nabla_iV^j = \partial_iV^j + \Gamma_{ik}^jV^k
-\end{equation}
-However, the wavefunction is a scalar, rather than a vector, and thus
-we are not tracking how the vector components are changed in a curved space. 
-Perhaps this would emerge naturally for spinors (or spin-1 particles - say for
-the photon?), where the wavefunction should be decomposed in terms of irreducible
-represenations of whatever group we are working with?
-
-We also need to specify the form of the matrix elements.  The matrix elements
-are:
-\begin{gather}
-\langle \vect{q}|\vect{q'}\rangle = \frac{1}{\sqrt{g}}\delta(\vect{q}-\vect{q'})\\
-\langle \vect{p}|\vect{p'}\rangle = \delta(\vect{p}-\vect{p'})\\
-\langle \vect{q}|\vect{p}\rangle = \frac{e^{ip_iq^i/\hbar}}{\sqrt{2\pi\hbar }g^{1/4}}.
-\end{gather}
-The first two relations ensure that $I_x^2=I_x$, $I_p^2=I_p$ by returning delta-functions
-with appropriate factors of the matrix.  
-The third ensures the overlap integral is independent of the basis used.  
+% \begin{itemize}
+%   \item Start with flat-space path integral.\cite{Gervais1976, Kleinert2012}
+%   \item Introduce coordinate transformation
+%   \item Choose expansion point, expand consistently to $\order(\Delta T)$.
+%   \item Note connection to choice of stochastic calculus.
+%   \item Expand Jacobian factors
+%   \item Expand Gaussian factors
+%   \item Convert to terms involving curvature tensors.
+%   \item Simplify down to $1D$
+%   \item Note typically small value of quantum correction.  $\hbar^2$.
+% \end{itemize}
 
 
-If we assume we have quantum Hamiltonian,
-\begin{equation}
-H = \frac{1}{2}\op{p}_ig^{ij}(\op{q})\op{p}_j
-\end{equation}
-then in position space, the Schrodinger equation is 
-\begin{equation}
-i\hbar \partial_t\psi = 
--\frac{\hbar^2}{2}\frac{1}{g^{1/4}}\partial_i g^{1/4}g^{ij}g^{1/4}\partial_j \frac{1}{g^{1/4}}\psi(q)
- = -\frac{\hbar^2}{2}\Delta_{\text{LB}}\psi
-\end{equation}
-This can be reordered into the form of the Laplace-Beltrami operator\footnote{
-Kleinert, H. G. \textit{Path Integrals in Quantum Mechanics, Statistics, 
-Polymer Physics and Financial Markets}, $5^{\text{th}}$ edition, Sec 1.13}
-where the differential operator is the Laplace-Beltrami operator.  
-The Laplace-Beltrami operator is the natural curved-space analogue of the 
-flat-space Laplacian, $\Delta_{\text{LB}}f = \nabla^\mu \nabla_\mu f$.  
-In curved space the divergence, and gradient are modified by the metric.
-The Wikipedia article on the Laplace-Beltrami operator defines 
-\begin{equation}
-\Delta_{LB} = \frac{1}{g^{1/2}}\partial_i g^{1/2}g^{ij} \partial_j
-\end{equation}
-which differs by some ordering terms from the proposed quantum operator.  
-The Laplace-Beltrami operator is given by 
-\begin{align}
-\nabla_i\nabla^i f &= \nabla_i(g^{in}\partial_n f)\\
-&= [\partial_m+\Gamma_{im}^i](g^{mn}\partial_n f)\\
-&= [\partial_m+(\partial_m\ln\sqrt{g})](g^{mn}\partial_n f)\\
-&= \frac{1}{\sqrt{g}}\partial_m[\sqrt{g}(g^{mn}\partial_n f)]
-\end{align}
+% \section{Operator Quantization in Curved Space}
 
-\section{Point transformations as effective potentials}
+% This follows from Bryce DeWitt's early papers \footnote{
+% DeWitt, B. S. \textit{Point Transformations in Quantum Mechanics}, 
+% {Phys. Rev.}, \textbf{85}, 653, 1952.\\
+% deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the 
+% Classical and Quantum Action Principles}, {Rev. Mod. Phys.}, \textbf{29}, 377,(1957). } .
+% See also a review by Pauli\footnote{
+% Pauli, W., \textit{General Principles of Quantum Mechanics}, (1980), 
+% translated by P. Achuthan and K Venkatesan} 
 
-I have found a paper by Gervais and Jevicki\footnote{Gervais, J.-L and  Jevicki,
- A. \textit{Point Canonical Transformations in the Path Integral},
- Nuclear Physics B, \textbf{110}, 93, (1976)} which covers similar ground 
-to what we are treading.  
-The following is my attempt to follow their work.
-They also cite a relevant paper by McLaughlin and Schulman\footnote{
-McLaughlin, D. W. and Schulman, L. S. \textit{Path Integrals in Curved Spaces}, 
-J. Math. Phys. \textbf{12}, 2520, (1971)}.
+% There are two ways of deriving the path integral in curved space.  In the first 
+% formulation, we derive the relevant path integral in curved space
+% by starting with the curved space Hamiltonian and quantized appropriately.  
+% This requires changing the form of the momentum operators, which gain corrections.
+% This is in contrast to the second approach, which starts with a flat-space path
+%  integral, and transforms that path integral to curvilinear coordinates.
+%  We will use $x$ to denote the curvilinear coordinates, and $q_i$ to denote the flat-space coordinates.  
 
-\section{Following DeWitt}
+% Consider the following particle Lagrangian,
+% \begin{equation}
+% L = \frac{1}{2}g_{ij}(x)\dot{x}^i\dot{x}^j
+% \end{equation}
+% with line element, $ds^2 = g_{ij} dx^i dx^j$, and volume element, 
+% $dV = \sqrt{|\det[g_{ij}]|}\prod_idx_i$.  
 
-This section is where I will try to reproduce Bryce DeWitt's results
-\footnote{deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the Classical and Quantum Action Principles}, 
-\\{Rev. Mod. Phys.}, \textbf{29}, 377,(1957)}.
-  I'll skip the material on transformation theory, etc, and just leap to the curved spaces.
-  We will need some of those results, but the classical material is a touch irrelevant.  
+% This has canonical momenta 
+% \begin{equation}
+% p_i := \frac{\partial L}{\partial \dot{x}^i} = g_{ij}\dot{x}^j.
+% \end{equation}
 
-\section{1D Example}
+% The equivalent Hamiltonian is 
+% \begin{align}
+% H & = p_i\dot{x}^i - L \\
+% & = \frac{1}{2} p_i g^{-1}_{ij}p_j = \frac{1}{2}p_i g^{ij}p_j,
+% \end{align}
+% where  ${g^{-1}}_{ij} = g^{ij}$ is the inverse metric.  
 
-Path integrals in curved spaces are a contentious topic.  
-Most authors who end up strayin into the field either missed out prior
-literature, or made mistakes.  Given the tedious algebra required by calculations
-this is understandable.  There are numerous books inveighing against all other
-approaches, and declaring their version to be the received truth on how to 
-properly write the path integral in curved space.  
+% The choice of where to place the metric (which is a function of position)
+%  relative to the momentum operators is sometimes called the 
+% \textit{operator-ordering problem}.  We have no classical reason for picking
+% any one of the myriad quantum operator ordering choices.  
+% We will see that this operator ordering is related to our choice of stochastic calculus.  
 
-We don't need the full glory of those results, so we will focus our attention
-on just one dimension, and the TM potential directly.  We will look at a couple
-different approaches.    
-Let us apply these results to the 1D TM potential example.
-The single particle 
-\begin{equation}
-  \langle x|H_{TM}|\psi\rangle = \frac{1}{2}(-\nabla\frac{1}{\epsilon}\nabla+\omega^2)\psi(x)
-\end{equation}
+% \subsection{Quantization}
 
-\subsection{Operator view}
+% When we quantize this we require that the position and momentum obey the usual commutation relations
+% \begin{equation}
+% [x_i,p_j] = i\hbar\delta_{ij}.
+% \end{equation}
+% The other piece we need is representation of the identity for states.
+%  We will represent the spatial and momentum identity operators as 
+% \begin{gather}
+% \int d\vect{x} \sqrt{g} |\vect{x}\rangle \langle \vect{x}| = 1\\
+% \int \frac{d\vect{p}}{(2\pi\hbar)^d} |\vect{p}\rangle \langle \vect{p}| = 1
+% \end{gather}
+% This representation of the spatial identity implies the inner product between
+% is
+% \begin{equation}
+% \langle \phi |\psi\rangle = \int d\vect{x} \sqrt{g} \phi^*(x)\psi(x),
+% \end{equation}
+% where we have introduced the shorthand notation, $g = \det[g_{ij}]$.
+% The position space representation of the momentum operator can be de derived 
+% by seeking consistency with the commutation relations and ensuring that the 
+% momentum is a hermitian operator
+% \begin{equation}
+% \langle x| \op{p}_i|\psi\rangle = -i \frac{1}{g^{1/4}} \partial_i\left[ g^{1/4}\psi(x)\right] 
+% = -i\left(\partial_i +\frac{1}{4}\frac{\partial_i g}{g}\right)\psi(x).
+% \end{equation}
+% We can check the hermiticity by requiring 
+% $\langle\phi |\op{p}|\psi\rangle = \langle \psi |\op{p}\phi\rangle^{*}$.
+%   In position space this becomes 
+% \begin{align}
+% \langle \phi|\op{p}|\psi\rangle & = -i\int dx\,\sqrt{g}\phi^*(x) 
+% \frac{1}{g^{1/4}} \partial_x\left[ g^{1/4}\psi(x)\right]\\
+% & = i\int dx\,\partial_i\left[g^{1/4}\phi^*(x)\right] g^{1/4}\psi(x)\\
+% & = i\int dx\,\sqrt{g}\psi(x) \frac{1}{g^{1/4}}\partial_i\left[g^{1/4}\phi^*(x)\right]\\
+% & = \langle \psi |\op{p}|\phi\rangle^*
+% \end{align}
+% The spatial representation of the momentum operator can also be written
+% in terms of the Christoffel symbols,
+% \begin{equation}
+%  \frac{1}{g^{1/4}}\partial_i g^{1/4} f = \partial_i f + \frac{1}{4}\partial_i\ln(g)f.
+% \end{equation}
+% The Christoffel symbols are defined as
+% \begin{equation}
+% \Gamma_{ij}^k = \frac{1}{2}g^{kl}\left(\partial_ig_{jl}+\partial_jg_{li} 
+%   - \partial_lg_{ij}\right)
+% \end{equation}
+% We can trace over the Christoffel symbols, 
+% \begin{align}
+% \Gamma_{i} &= \Gamma_{ik}^k=\frac{1}{2}g^{kl}\left(\partial_ig_{kl}+\partial_kg_{li} 
+%   - \partial_lg_{ik}\right)\\
+% %&=\frac{1}{2}\left(g^{kl}\partial_ig_{kl}+\partial^lg_{li} 
+% %  - \partial_kg_{ik}\right)\\
+% &=\frac{1}{2}g^{kl}\partial_ig_{kl} = \frac{1}{2}{g^{-1}}_{kl}\partial_ig_{kl}
+% \end{align}
+% This can be rewritten using $\tr-\log(A) = \log\det(A)$.  Our expression
+% for the derivative involves,
+% \begin{equation}
+% \partial_i\log\det(g)=\partial_i\tr\log(A)=\tr\partial_i\log(A) = \tr[g^{-1}\partial_ig]
+% \end{equation}
+% We can then write the derivative operator as 
+% \begin{equation}
+% \langle \vect{q}|p_i|\psi\rangle 
+% = -i\hbar\left(\partial_i +\frac{1}{2}\Gamma_i\right)\psi(\vect{q})
+% \end{equation}
 
-In this version, we interpret $\epsilon$ as a metric.  This implies the
-form of the momentum operators, and spatial identities are changed.  
-The spatial identity is
-\begin{equation}
-  I_X = \int dx\sqrt{\epsilon}|x\rangle\langle x|
-\end{equation}
-where the metric is $g=\epsilon$.
-The conjugate momentum operator is 
-\begin{equation}
-  \langle x|\op{p}|\psi\rangle = -i(\partial_x+\frac{1}{2}\partial_x\ln\sqrt{\epsilon})\psi
-\end{equation}
-The correction is related to the trace of the Christoffel symbols.
-In one dimension we will just use $\Gamma_x=\partial_x\ln\sqrt{\epsilon}$.
-The differential can then be written in operator form as
-\begin{align}
-  H &=\frac{1}{2}[-\partial_x\epsilon^{-1}\partial_x]\\
-%  &=\frac{1}{2}[(\op{p}-\frac{i}{2}\Gamma_x)\epsilon^{-1}(\op{p}-\frac{i}{2}\Gamma_x)]\\
-  &=\op{p}\epsilon^{-1}\op{p}-\frac{i}{2}\op{p}\epsilon^{-1}\Gamma_x
--\frac{i}{2}\Gamma_x\epsilon^{-1}\op{p}-\frac{\Gamma_x^2}{4\epsilon}
-  \label{eq:H_op}
-\end{align}
+% This is not quite the full covariant derivative one might anticipate,
+% \begin{equation}
+% \nabla_iV^j = \partial_iV^j + \Gamma_{ik}^jV^k
+% \end{equation}
+% However, the wavefunction is a scalar, rather than a vector, and thus
+% we are not tracking how the vector components are changed in a curved space. 
+% Perhaps this would emerge naturally for spinors (or spin-1 particles - say for
+% the photon?), where the wavefunction should be decomposed in terms of irreducible
+% represenations of whatever group we are working with?
 
-In order to evaluate the matrix elements we must operator-order the Hamiltonian.
-The three basic orderings are anti-standard, Weyl and standard orderings,
-each of which correspond to Ito, Stratonovich and anticipating stochastic
-calculus, which further correspond to expanding the path integral about the
-pre-point, mid-point and post-point.
+% We also need to specify the form of the matrix elements.  The matrix elements
+% are:
+% \begin{gather}
+% \langle \vect{q}|\vect{q'}\rangle = \frac{1}{\sqrt{g}}\delta(\vect{q}-\vect{q'})\\
+% \langle \vect{p}|\vect{p'}\rangle = \delta(\vect{p}-\vect{p'})\\
+% \langle \vect{q}|\vect{p}\rangle = \frac{e^{ip_iq^i/\hbar}}{\sqrt{2\pi\hbar }g^{1/4}}.
+% \end{gather}
+% The first two relations ensure that $I_x^2=I_x$, $I_p^2=I_p$ by returning delta-functions
+% with appropriate factors of the matrix.  
+% The third ensures the overlap integral is independent of the basis used.  
 
-We will use the commutation relations $[x,p]=i$.  Prior works were considering
-work in a quantum context, where explicit factors of $\hbar$ are required.  
-Since we will be working with the 
 
-\subsubsection{Standard ordering}
+% If we assume we have quantum Hamiltonian,
+% \begin{equation}
+% H = \frac{1}{2}\op{p}_ig^{ij}(\op{q})\op{p}_j
+% \end{equation}
+% then in position space, the Schrodinger equation is 
+% \begin{equation}
+% i\hbar \partial_t\psi = 
+% -\frac{\hbar^2}{2}\frac{1}{g^{1/4}}\partial_i g^{1/4}g^{ij}g^{1/4}\partial_j \frac{1}{g^{1/4}}\psi(q)
+%  = -\frac{\hbar^2}{2}\Delta_{\text{LB}}\psi
+% \end{equation}
+% This can be reordered into the form of the Laplace-Beltrami operator\footnote{
+% Kleinert, H. G. \textit{Path Integrals in Quantum Mechanics, Statistics, 
+% Polymer Physics and Financial Markets}, $5^{\text{th}}$ edition, Sec 1.13}
+% where the differential operator is the Laplace-Beltrami operator.  
+% The Laplace-Beltrami operator is the natural curved-space analogue of the 
+% flat-space Laplacian, $\Delta_{\text{LB}}f = \nabla^\mu \nabla_\mu f$.  
+% In curved space the divergence, and gradient are modified by the metric.
+% The Wikipedia article on the Laplace-Beltrami operator defines 
+% \begin{equation}
+% \Delta_{LB} = \frac{1}{g^{1/2}}\partial_i g^{1/2}g^{ij} \partial_j
+% \end{equation}
+% which differs by some ordering terms from the proposed quantum operator.  
+% The Laplace-Beltrami operator is given by 
+% \begin{align}
+% \nabla_i\nabla^i f &= \nabla_i(g^{in}\partial_n f)\\
+% &= [\partial_m+\Gamma_{im}^i](g^{mn}\partial_n f)\\
+% &= [\partial_m+(\partial_m\ln\sqrt{g})](g^{mn}\partial_n f)\\
+% &= \frac{1}{\sqrt{g}}\partial_m[\sqrt{g}(g^{mn}\partial_n f)]
+% \end{align}
 
-First, let us put the Hamiltonian (\ref{eq:H_op}) into anti-standard ordering
-with all position operators to the left of momentum operators.  
+% \section{Point transformations as effective potentials}
 
-We will have ample opportunity to use: $[f(x),p]=if'$, which implies
-$fp = pf +if'$ and $pf = fp-if'$
-\begin{align}
-  H&=(\op{p}-\frac{i}{2}\Gamma_x)\epsilon^{-1}(\op{p}-\frac{i}{2}\Gamma_x)\\
-   % &=(\frac{1}{\epsilon}p+i\frac{\epsilon'}{\epsilon^2})(p-\frac{i}{2}\Gamma_x)
-   % -\frac{i}{2\epsilon}\Gamma_x(p-\frac{i}{2}\Gamma_x)\\
-   % &=\frac{1}{\epsilon}p^2-\frac{i}{2\epsilon}(\Gamma_xp-i\Gamma_x')+i\frac{\epsilon'}{\epsilon^2}(p-\frac{i}{2}\Gamma_x)
-   % -\frac{i\Gamma_x}{2\epsilon}p-\frac{\Gamma_x^2}{4\epsilon}\\
-   &=\frac{1}{\epsilon}p^2
-   +i\frac{\Gamma_x}{\epsilon}p+\frac{3\Gamma_x^2}{4\epsilon}-\frac{\Gamma_x'}{2\epsilon}
-\end{align}
-Retrying from different starting point
-\begin{align}
-H&=p\epsilon^{-1}  p-p\epsilon^{-1}\frac{i}{2}\Gamma_x
--\frac{i}{2}\Gamma_x\epsilon^{-1}p-\frac{\Gamma_x^2}{4\epsilon}\\
-% &=(\epsilon^{-1}p +i\frac{\epsilon'}{\epsilon^2})p
-% -\frac{i}{2}[\epsilon^{-1}\Gamma_xp -i(\frac{\Gamma_x'}{\epsilon}-\frac{\Gamma\epsilon'}{\epsilon^2})]
+% I have found a paper by Gervais and Jevicki\footnote{Gervais, J.-L and  Jevicki,
+%  A. \textit{Point Canonical Transformations in the Path Integral},
+%  Nuclear Physics B, \textbf{110}, 93, (1976)} which covers similar ground 
+% to what we are treading.  
+% The following is my attempt to follow their work.
+% They also cite a relevant paper by McLaughlin and Schulman\footnote{
+% McLaughlin, D. W. and Schulman, L. S. \textit{Path Integrals in Curved Spaces}, 
+% J. Math. Phys. \textbf{12}, 2520, (1971)}.
+
+% \section{Following DeWitt}
+
+% This section is where I will try to reproduce Bryce DeWitt's results
+% \footnote{deWitt, B. S. \textit{Dynamical Theory in Curved Spaces I: A Review of the Classical and Quantum Action Principles}, 
+% \\{Rev. Mod. Phys.}, \textbf{29}, 377,(1957)}.
+%   I'll skip the material on transformation theory, etc, and just leap to the curved spaces.
+%   We will need some of those results, but the classical material is a touch irrelevant.  
+
+% \section{1D Example}
+
+% Path integrals in curved spaces are a contentious topic.  
+% Most authors who end up strayin into the field either missed out prior
+% literature, or made mistakes.  Given the tedious algebra required by calculations
+% this is understandable.  There are numerous books inveighing against all other
+% approaches, and declaring their version to be the received truth on how to 
+% properly write the path integral in curved space.  
+
+% We don't need the full glory of those results, so we will focus our attention
+% on just one dimension, and the TM potential directly.  We will look at a couple
+% different approaches.    
+% Let us apply these results to the 1D TM potential example.
+% The single particle 
+% \begin{equation}
+%   \langle x|H_{TM}|\psi\rangle = \frac{1}{2}(-\nabla\frac{1}{\epsilon}\nabla+\omega^2)\psi(x)
+% \end{equation}
+
+% \subsection{Operator view}
+
+% In this version, we interpret $\epsilon$ as a metric.  This implies the
+% form of the momentum operators, and spatial identities are changed.  
+% The spatial identity is
+% \begin{equation}
+%   I_X = \int dx\sqrt{\epsilon}|x\rangle\langle x|
+% \end{equation}
+% where the metric is $g=\epsilon$.
+% The conjugate momentum operator is 
+% \begin{equation}
+%   \langle x|\op{p}|\psi\rangle = -i(\partial_x+\frac{1}{2}\partial_x\ln\sqrt{\epsilon})\psi
+% \end{equation}
+% The correction is related to the trace of the Christoffel symbols.
+% In one dimension we will just use $\Gamma_x=\partial_x\ln\sqrt{\epsilon}$.
+% The differential can then be written in operator form as
+% \begin{align}
+%   H &=\frac{1}{2}[-\partial_x\epsilon^{-1}\partial_x]\\
+% %  &=\frac{1}{2}[(\op{p}-\frac{i}{2}\Gamma_x)\epsilon^{-1}(\op{p}-\frac{i}{2}\Gamma_x)]\\
+%   &=\op{p}\epsilon^{-1}\op{p}-\frac{i}{2}\op{p}\epsilon^{-1}\Gamma_x
+% -\frac{i}{2}\Gamma_x\epsilon^{-1}\op{p}-\frac{\Gamma_x^2}{4\epsilon}
+%   \label{eq:H_op}
+% \end{align}
+
+% In order to evaluate the matrix elements we must operator-order the Hamiltonian.
+% The three basic orderings are anti-standard, Weyl and standard orderings,
+% each of which correspond to Ito, Stratonovich and anticipating stochastic
+% calculus, which further correspond to expanding the path integral about the
+% pre-point, mid-point and post-point.
+
+% We will use the commutation relations $[x,p]=i$.  Prior works were considering
+% work in a quantum context, where explicit factors of $\hbar$ are required.  
+% Since we will be working with the 
+
+% \subsubsection{Standard ordering}
+
+% First, let us put the Hamiltonian (\ref{eq:H_op}) into anti-standard ordering
+% with all position operators to the left of momentum operators.  
+
+% We will have ample opportunity to use: $[f(x),p]=if'$, which implies
+% $fp = pf +if'$ and $pf = fp-if'$
+% \begin{align}
+%   H&=(\op{p}-\frac{i}{2}\Gamma_x)\epsilon^{-1}(\op{p}-\frac{i}{2}\Gamma_x)\\
+%    % &=(\frac{1}{\epsilon}p+i\frac{\epsilon'}{\epsilon^2})(p-\frac{i}{2}\Gamma_x)
+%    % -\frac{i}{2\epsilon}\Gamma_x(p-\frac{i}{2}\Gamma_x)\\
+%    % &=\frac{1}{\epsilon}p^2-\frac{i}{2\epsilon}(\Gamma_xp-i\Gamma_x')+i\frac{\epsilon'}{\epsilon^2}(p-\frac{i}{2}\Gamma_x)
+%    % -\frac{i\Gamma_x}{2\epsilon}p-\frac{\Gamma_x^2}{4\epsilon}\\
+%    &=\frac{1}{\epsilon}p^2
+%    +i\frac{\Gamma_x}{\epsilon}p+\frac{3\Gamma_x^2}{4\epsilon}-\frac{\Gamma_x'}{2\epsilon}
+% \end{align}
+% Retrying from different starting point
+% \begin{align}
+% H&=p\epsilon^{-1}  p-p\epsilon^{-1}\frac{i}{2}\Gamma_x
 % -\frac{i}{2}\Gamma_x\epsilon^{-1}p-\frac{\Gamma_x^2}{4\epsilon}\\
-&=(\epsilon^{-1}p +i\frac{\Gamma_x}{\epsilon})p
- -\frac{\Gamma_x'}{2\epsilon}+\frac{3\Gamma_x^2}{\epsilon}
-\end{align}
+% % &=(\epsilon^{-1}p +i\frac{\epsilon'}{\epsilon^2})p
+% % -\frac{i}{2}[\epsilon^{-1}\Gamma_xp -i(\frac{\Gamma_x'}{\epsilon}-\frac{\Gamma\epsilon'}{\epsilon^2})]
+% % -\frac{i}{2}\Gamma_x\epsilon^{-1}p-\frac{\Gamma_x^2}{4\epsilon}\\
+% &=(\epsilon^{-1}p +i\frac{\Gamma_x}{\epsilon})p
+%  -\frac{\Gamma_x'}{2\epsilon}+\frac{3\Gamma_x^2}{\epsilon}
+% \end{align}
 
 
-\subsubsection{Anti-Standard ordering}
-Now move momentum operators to the left.  $fp = pf+if'$
-\begin{align}
-  H&=(p-\frac{i}{2}\Gamma_x)\epsilon^{-1}(p-\frac{i}{2}\Gamma_x)\\
-% &=p\epsilon^{-1}p-p\epsilon^{-1}\frac{i}{2}\Gamma_x
-% -\frac{i}{2}\Gamma_x\epsilon^{-1}p-\frac{\Gamma_x^2}{4\epsilon}\\
-% &=p\left(p\epsilon^{-1}-\frac{i\epsilon'}{\epsilon^2}\right)-p\epsilon^{-1}\frac{i}{2}\Gamma_x
-% -\frac{i}{2}\left[p\Gamma_x\epsilon^{-1}
-%   +i\left(\frac{\Gamma_x'}{\epsilon}-\Gamma_x\frac{\epsilon'}{\epsilon^2}\right) \right]
+% \subsubsection{Anti-Standard ordering}
+% Now move momentum operators to the left.  $fp = pf+if'$
+% \begin{align}
+%   H&=(p-\frac{i}{2}\Gamma_x)\epsilon^{-1}(p-\frac{i}{2}\Gamma_x)\\
+% % &=p\epsilon^{-1}p-p\epsilon^{-1}\frac{i}{2}\Gamma_x
+% % -\frac{i}{2}\Gamma_x\epsilon^{-1}p-\frac{\Gamma_x^2}{4\epsilon}\\
+% % &=p\left(p\epsilon^{-1}-\frac{i\epsilon'}{\epsilon^2}\right)-p\epsilon^{-1}\frac{i}{2}\Gamma_x
+% % -\frac{i}{2}\left[p\Gamma_x\epsilon^{-1}
+% %   +i\left(\frac{\Gamma_x'}{\epsilon}-\Gamma_x\frac{\epsilon'}{\epsilon^2}\right) \right]
+% % -\frac{\Gamma_x^2}{4\epsilon}\\
+% &=p\left(p\epsilon^{-1}-\frac{3i\Gamma_x}{\epsilon}\right)
+% +\left(\frac{\Gamma_x'}{2\epsilon}-\frac{5\Gamma_x^2}{4\epsilon}\right)
+% \end{align}
+
+% \subsubsection{Weyl ordering}
+
+% $fp-pf = if'\rightarrow fp = pf+if'$
+% We can then use these pieces to symmetrically order the total as: 
+% \begin{align}
+% H_W&=\frac{1}{4}\left[p(p\epsilon^{-1}-i\frac{\epsilon'}{\epsilon^2})+ 2p\epsilon^{-1}p +
+%   (\epsilon^{-1}p+i\frac{\epsilon'}{\epsilon^2})p\right]
+% -\frac{i}{2}\left(p\frac{\Gamma_x}{\epsilon}+\frac{\Gamma_x}{\epsilon}p\right)
 % -\frac{\Gamma_x^2}{4\epsilon}\\
-&=p\left(p\epsilon^{-1}-\frac{3i\Gamma_x}{\epsilon}\right)
-+\left(\frac{\Gamma_x'}{2\epsilon}-\frac{5\Gamma_x^2}{4\epsilon}\right)
-\end{align}
+% % &=(p^2\epsilon^{-1})_W 
+% % -i\left(p\frac{\Gamma_x}{\epsilon}\right)_W
+% % -\frac{\Gamma_x^2}{4\epsilon}+i\left[\frac{\epsilon'}{\epsilon^2},p\right] \\
+% &=[(p+\frac{i}{2}\Gamma_x)^2\epsilon^{-1}]_W 
+% +\left(\frac{2(\epsilon')^2}{\epsilon^3}-\frac{\epsilon''}{\epsilon^2}\right)
+% \end{align}
+% The potential term can be rewritten as
+% \begin{align}
+%   (\partial_x\ln\sqrt{\epsilon}) = \frac{\epsilon'}{2\epsilon}\\
+%   (\partial_x^2\ln\sqrt{\epsilon}) = \frac{\epsilon''}{2\epsilon}-\frac{\epsilon'^2}{2\epsilon^2}
+% \end{align}
+% Accounting for the factor of two we have suppressed, the potential can be written
+% \begin{align}
+%  V'&= \left(\frac{(\epsilon')^2}{\epsilon^3}-\frac{\epsilon''}{2\epsilon^2}\right)\\
+%  &=\frac{1}{\epsilon}\left[2(\partial_x\ln\sqrt{\epsilon})^2-\partial_x^2\ln\sqrt{\epsilon}\right],
+% \end{align}
+% which has an additional factor of $\epsilon$, and $\ln\sqrt{\epsilon}$ relative to the
+% TM potential.  Maybe this will be eaten in the path integral? 
 
-\subsubsection{Weyl ordering}
+% We want to compute the following path integral.  
+% \begin{equation}
+%   E = \log Z = -\int \frac{d\cT}{\cT}\tr[\exp(-H\cT)]
+% \end{equation}
+% If we assume that the metric term is only on one dimension, then this becomes a path integral,
+% \begin{align}
+%   E &= -\int \frac{d\cT}{\cT}\int \prod_k\frac{dx_k dp_k}{2\pi}
+% \exp\left[-\frac{\Delta T}{2\epsilon}(p_k-i\Gamma_k/2)^2 -V'_k\Delta T+ip_k\Delta x_k\right]\\
+% % &= -\int \frac{d\cT}{\cT}\int \prod_k\frac{dx_k dp_k}{2\pi}\sqrt{\epsilon} 
+% % \exp\left[-\frac{\Delta T}{2\epsilon}\left(p_k^2-2i\frac{\Gamma_k}{2}p_k-2i\frac{\epsilon_k}{\Delta T}\Delta x_kp_k\right)
+% % +\Gamma_k^2\frac{\Delta T}{8\epsilon} -V'_k\Delta T\right]\\
+% &= -\int \frac{d\cT}{\cT}\int \prod_kdx_k\sqrt{\epsilon} 
+% \sqrt{\frac{\epsilon_k}{2\pi\Delta T}}
+% \exp\left[-\frac{\epsilon_k}{2\Delta T}\left(\Delta x_k+\frac{\Gamma_k\Delta T}{2\epsilon_k}\right)^2
+% +\Gamma_k^2\frac{\Delta T}{8\epsilon} -V'_k\Delta T\right]
+% \end{align}
+% where we have used the Weyl correspondence, $[a(\op{x})b(\op{p})]_W\rightarrow a(\bar{x})b(p)$
+% Note that the overlap between spatial and momentum states also changes. 
+% \begin{equation}
+% \langle x|p\rangle = \frac{e^{ipx}}{\epsilon^{1/4}}
+% \end{equation}
 
-$fp-pf = if'\rightarrow fp = pf+if'$
-We can then use these pieces to symmetrically order the total as: 
-\begin{align}
-H_W&=\frac{1}{4}\left[p(p\epsilon^{-1}-i\frac{\epsilon'}{\epsilon^2})+ 2p\epsilon^{-1}p +
-  (\epsilon^{-1}p+i\frac{\epsilon'}{\epsilon^2})p\right]
--\frac{i}{2}\left(p\frac{\Gamma_x}{\epsilon}+\frac{\Gamma_x}{\epsilon}p\right)
--\frac{\Gamma_x^2}{4\epsilon}\\
-% &=(p^2\epsilon^{-1})_W 
-% -i\left(p\frac{\Gamma_x}{\epsilon}\right)_W
-% -\frac{\Gamma_x^2}{4\epsilon}+i\left[\frac{\epsilon'}{\epsilon^2},p\right] \\
-&=[(p+\frac{i}{2}\Gamma_x)^2\epsilon^{-1}]_W 
-+\left(\frac{2(\epsilon')^2}{\epsilon^3}-\frac{\epsilon''}{\epsilon^2}\right)
-\end{align}
-The potential term can be rewritten as
-\begin{align}
-  (\partial_x\ln\sqrt{\epsilon}) = \frac{\epsilon'}{2\epsilon}\\
-  (\partial_x^2\ln\sqrt{\epsilon}) = \frac{\epsilon''}{2\epsilon}-\frac{\epsilon'^2}{2\epsilon^2}
-\end{align}
-Accounting for the factor of two we have suppressed, the potential can be written
-\begin{align}
- V'&= \left(\frac{(\epsilon')^2}{\epsilon^3}-\frac{\epsilon''}{2\epsilon^2}\right)\\
- &=\frac{1}{\epsilon}\left[2(\partial_x\ln\sqrt{\epsilon})^2-\partial_x^2\ln\sqrt{\epsilon}\right],
-\end{align}
-which has an additional factor of $\epsilon$, and $\ln\sqrt{\epsilon}$ relative to the
-TM potential.  Maybe this will be eaten in the path integral? 
+% \section{2013-April}
 
-We want to compute the following path integral.  
-\begin{equation}
-  E = \log Z = -\int \frac{d\cT}{\cT}\tr[\exp(-H\cT)]
-\end{equation}
-If we assume that the metric term is only on one dimension, then this becomes a path integral,
-\begin{align}
-  E &= -\int \frac{d\cT}{\cT}\int \prod_k\frac{dx_k dp_k}{2\pi}
-\exp\left[-\frac{\Delta T}{2\epsilon}(p_k-i\Gamma_k/2)^2 -V'_k\Delta T+ip_k\Delta x_k\right]\\
-% &= -\int \frac{d\cT}{\cT}\int \prod_k\frac{dx_k dp_k}{2\pi}\sqrt{\epsilon} 
-% \exp\left[-\frac{\Delta T}{2\epsilon}\left(p_k^2-2i\frac{\Gamma_k}{2}p_k-2i\frac{\epsilon_k}{\Delta T}\Delta x_kp_k\right)
-% +\Gamma_k^2\frac{\Delta T}{8\epsilon} -V'_k\Delta T\right]\\
-&= -\int \frac{d\cT}{\cT}\int \prod_kdx_k\sqrt{\epsilon} 
-\sqrt{\frac{\epsilon_k}{2\pi\Delta T}}
-\exp\left[-\frac{\epsilon_k}{2\Delta T}\left(\Delta x_k+\frac{\Gamma_k\Delta T}{2\epsilon_k}\right)^2
-+\Gamma_k^2\frac{\Delta T}{8\epsilon} -V'_k\Delta T\right]
-\end{align}
-where we have used the Weyl correspondence, $[a(\op{x})b(\op{p})]_W\rightarrow a(\bar{x})b(p)$
-Note that the overlap between spatial and momentum states also changes. 
-\begin{equation}
-\langle x|p\rangle = \frac{e^{ipx}}{\epsilon^{1/4}}
-\end{equation}
+% We will follow work\footnote{Girotti, H.O. and Simoes, T.J.M. 
+% \textit{A Generalized Treatment of Point Canonical Transformations in the Path Integral}, Il Nuovo Cimento, \textbf{74}, 59, (1983)} 
+% extending the point transformation approach for handling arbitrary orderings.
+%   This covers all orderings, but also offers proof for the higher order moments.  
 
-\section{2013-April}
-
-We will follow work\footnote{Girotti, H.O. and Simoes, T.J.M. 
-\textit{A Generalized Treatment of Point Canonical Transformations in the Path Integral}, Il Nuovo Cimento, \textbf{74}, 59, (1983)} 
-extending the point transformation approach for handling arbitrary orderings.
-  This covers all orderings, but also offers proof for the higher order moments.  
-
-We start from a flat space, with 
-\begin{equation}
-H = \frac{1}{2}\sum_j p_j^2 + V(q),
-\end{equation}
-with $[q_i,p_j]=i\hbar\delta_{ij}$.  The propagator is 
-\begin{equation}
-K(q_f,t_f; q_i,t_i) = \int \prod_k \frac{d^nq_k}{(2\pi i \hbar \Delta T)^{n/2}} 
-\exp\left[ \frac{i}{\hbar}\left(\frac{(q_{i,k+1}-q_{i,k})^2}{2\Delta T} -\Delta T V(q_k)\right)\right]
-\end{equation}
+% We start from a flat space, with 
+% \begin{equation}
+% H = \frac{1}{2}\sum_j p_j^2 + V(q),
+% \end{equation}
+% with $[q_i,p_j]=i\hbar\delta_{ij}$.  The propagator is 
+% \begin{equation}
+% K(q_f,t_f; q_i,t_i) = \int \prod_k \frac{d^nq_k}{(2\pi i \hbar \Delta T)^{n/2}} 
+% \exp\left[ \frac{i}{\hbar}\left(\frac{(q_{i,k+1}-q_{i,k})^2}{2\Delta T} -\Delta T V(q_k)\right)\right]
+% \end{equation}
 
 
 
-\section{Transforming a One-Dimensional path integral}
-\subsection{Transformation}
+% \section{Transforming a One-Dimensional path integral}
+% \subsection{Transformation}
 
-Let's now introduce some nonlinear point transformation where 
-\begin{equation}
-q(t) = F[x(t)],
-\end{equation}
-where $x$ are the new ``curvilinear'' coordinates.  We have metric tensor 
-\begin{equation}
-g = \frac{\partial F}{\partial x}\frac{\partial F}{\partial x} = (\partial_xF)^2
-\end{equation}
-Now we normally need the Jacobian determinant for the change of variables.  
-\begin{equation}
-J = \sqrt{g}
-\end{equation}
-We have a flat space propagator which satisfies 
-\begin{align}
-\psi(q_n,t_n) &= \int dq_0 K(q_n,t_n; q_0,t_0)\psi(q_0,t_0)\\
-&= \int dx \sqrt{g(x_0)}K(x_n,t_n; x_0,t_0)\psi(x_0,t_0)
-\end{align}
-So the path integral in these new coordinates is
-\begin{equation}
-K(x_n,t_n; x_0,t_0) = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{\hbar}\left(\frac{(F_{k+1}-F_{k})^2}{2\Delta T} -\Delta T V[F(x_k)]\right)\right],
-\end{equation}
-where we had to multiply and divide by $\sqrt{g(x_0)}$. 
-\subsection{Ordering and Expanding.}
+% Let's now introduce some nonlinear point transformation where 
+% \begin{equation}
+% q(t) = F[x(t)],
+% \end{equation}
+% where $x$ are the new ``curvilinear'' coordinates.  We have metric tensor 
+% \begin{equation}
+% g = \frac{\partial F}{\partial x}\frac{\partial F}{\partial x} = (\partial_xF)^2
+% \end{equation}
+% Now we normally need the Jacobian determinant for the change of variables.  
+% \begin{equation}
+% J = \sqrt{g}
+% \end{equation}
+% We have a flat space propagator which satisfies 
+% \begin{align}
+% \psi(q_n,t_n) &= \int dq_0 K(q_n,t_n; q_0,t_0)\psi(q_0,t_0)\\
+% &= \int dx \sqrt{g(x_0)}K(x_n,t_n; x_0,t_0)\psi(x_0,t_0)
+% \end{align}
+% So the path integral in these new coordinates is
+% \begin{equation}
+% K(x_n,t_n; x_0,t_0) = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{\hbar}\left(\frac{(F_{k+1}-F_{k})^2}{2\Delta T} -\Delta T V[F(x_k)]\right)\right],
+% \end{equation}
+% where we had to multiply and divide by $\sqrt{g(x_0)}$. 
+% \subsection{Ordering and Expanding.}
 
-We will expand these operators around 
-\begin{equation}
-x_\alpha(k) = \left(\alpha+\frac{1}{2}\right)x(k+1) + \left(\frac{1}{2}-\alpha\right)x(k)
-\end{equation}
-with $-1/2\le \alpha \le 1/2$.  Then we can expand in Taylor series 
-\begin{gather}
-\boxed{x(k)-x_\alpha   = -\left(\alpha+\frac{1}{2}\right)\Delta x}\\
-\boxed{x(k+1)-x_\alpha = \left(\frac{1}{2}-\alpha\right)\Delta x}
-\end{gather}
+% We will expand these operators around 
+% \begin{equation}
+% x_\alpha(k) = \left(\alpha+\frac{1}{2}\right)x(k+1) + \left(\frac{1}{2}-\alpha\right)x(k)
+% \end{equation}
+% with $-1/2\le \alpha \le 1/2$.  Then we can expand in Taylor series 
+% \begin{gather}
+% \boxed{x(k)-x_\alpha   = -\left(\alpha+\frac{1}{2}\right)\Delta x}\\
+% \boxed{x(k+1)-x_\alpha = \left(\frac{1}{2}-\alpha\right)\Delta x}
+% \end{gather}
 
-For notational ease, let's define $\alpha_\pm = \frac{1}{2} \pm \alpha$, with $\alpha_++\alpha_- =1, \alpha_+-\alpha_- = 2\alpha$. So we have 
-\begin{gather}
-x_\alpha = \alpha_+ x(k+1) + \alpha_-x(k)\\
-x(k)   = x_\alpha-\alpha_+\Delta x \\
-x(k+1) = x_\alpha+\alpha_-\Delta x
-\end{gather}
+% For notational ease, let's define $\alpha_\pm = \frac{1}{2} \pm \alpha$, with $\alpha_++\alpha_- =1, \alpha_+-\alpha_- = 2\alpha$. So we have 
+% \begin{gather}
+% x_\alpha = \alpha_+ x(k+1) + \alpha_-x(k)\\
+% x(k)   = x_\alpha-\alpha_+\Delta x \\
+% x(k+1) = x_\alpha+\alpha_-\Delta x
+% \end{gather}
 
-\subsubsection{Kinetic term}
-We now need to expand out to order $\Delta T$.  We will do this first in the exponential.  
-\begin{align}
-F[x(k+1)] = &F(x_\alpha) + \alpha_-\Delta x\partial_xF +\frac{1}{2}\alpha_-^2\Delta x^2\partial_x^2F(x_\alpha) +\frac{1}{6}\alpha_-^3\Delta x^3\partial_x^3F(x_\alpha) \\
-F[x(k)] = &F(x_\alpha) - \alpha_+\Delta x\partial_xF +\frac{1}{2}\alpha_+^2\Delta x^2\partial_x^2 F(x_\alpha) -\frac{1}{6}\alpha_+^3\Delta x^3\partial_x^3 F(x_\alpha)
-\end{align}
-Now we anticipate that $\Delta x\sim\Delta T$.  We will have to treat terms like $(\Delta x)^2\sim \Delta T,$ $(\Delta x)^3/\Delta T\sim \sqrt{\Delta T},$ $(\Delta x)^4/\Delta T\sim \Delta T,$ and $(\Delta x)^6/\Delta T^2\sim \Delta T$.  
-So we have 
-\begin{align}
-F(k+1)-F(k)&  = (\alpha_-+\alpha_+)\Delta x F' +\frac{1}{2}(\alpha_-^2-\alpha_+^2)\Delta x^2 F'' +\frac{1}{6}(\alpha_-^3+\alpha_+^3)\Delta x^3 F''' \\
-&  = \Delta xF' -\alpha\Delta x^2F''(x_\alpha) +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^3  F'''(x_\alpha) 
-\end{align}
-Now square it, and divide by $\Delta T$, and work to order $\Delta T$.  Let us now use $F' = \sqrt{g}$.  
-\begin{align}
-\frac{[F^r(k+1)-F^r(k)]^2}{\Delta T} & = \frac{1}{\Delta T}\left[\Delta xF' -\alpha\Delta x^2F''(x_\alpha) +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^3  F'''(x_\alpha) \right]^2\\
- % =& \frac{1}{\Delta T}\bigg[\Delta x^2(F')^2 -2\alpha\Delta x^3F' F'' + \alpha^2\Delta x^4F''F'' +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4F' F'''\bigg]\\
- % =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -2\alpha\Delta x^3\sqrt{g}\sqrt{g}' + \alpha^2\Delta x^4(\sqrt{g}')^2 +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\sqrt{g}\sqrt{g}''\bigg]\\
- =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -\alpha\Delta x^3g' + \alpha^2\Delta x^4\frac{(g')^2}{4g} +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right)\bigg]
-\end{align}
+% \subsubsection{Kinetic term}
+% We now need to expand out to order $\Delta T$.  We will do this first in the exponential.  
+% \begin{align}
+% F[x(k+1)] = &F(x_\alpha) + \alpha_-\Delta x\partial_xF +\frac{1}{2}\alpha_-^2\Delta x^2\partial_x^2F(x_\alpha) +\frac{1}{6}\alpha_-^3\Delta x^3\partial_x^3F(x_\alpha) \\
+% F[x(k)] = &F(x_\alpha) - \alpha_+\Delta x\partial_xF +\frac{1}{2}\alpha_+^2\Delta x^2\partial_x^2 F(x_\alpha) -\frac{1}{6}\alpha_+^3\Delta x^3\partial_x^3 F(x_\alpha)
+% \end{align}
+% Now we anticipate that $\Delta x\sim\Delta T$.  We will have to treat terms like $(\Delta x)^2\sim \Delta T,$ $(\Delta x)^3/\Delta T\sim \sqrt{\Delta T},$ $(\Delta x)^4/\Delta T\sim \Delta T,$ and $(\Delta x)^6/\Delta T^2\sim \Delta T$.  
+% So we have 
+% \begin{align}
+% F(k+1)-F(k)&  = (\alpha_-+\alpha_+)\Delta x F' +\frac{1}{2}(\alpha_-^2-\alpha_+^2)\Delta x^2 F'' +\frac{1}{6}(\alpha_-^3+\alpha_+^3)\Delta x^3 F''' \\
+% &  = \Delta xF' -\alpha\Delta x^2F''(x_\alpha) +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^3  F'''(x_\alpha) 
+% \end{align}
+% Now square it, and divide by $\Delta T$, and work to order $\Delta T$.  Let us now use $F' = \sqrt{g}$.  
+% \begin{align}
+% \frac{[F^r(k+1)-F^r(k)]^2}{\Delta T} & = \frac{1}{\Delta T}\left[\Delta xF' -\alpha\Delta x^2F''(x_\alpha) +\left(\frac{1}{2}\alpha^2 + \frac{1}{24}\right)\Delta x^3  F'''(x_\alpha) \right]^2\\
+%  % =& \frac{1}{\Delta T}\bigg[\Delta x^2(F')^2 -2\alpha\Delta x^3F' F'' + \alpha^2\Delta x^4F''F'' +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4F' F'''\bigg]\\
+%  % =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -2\alpha\Delta x^3\sqrt{g}\sqrt{g}' + \alpha^2\Delta x^4(\sqrt{g}')^2 +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\sqrt{g}\sqrt{g}''\bigg]\\
+%  =& \frac{1}{\Delta T}\bigg[\Delta x^2 g -\alpha\Delta x^3g' + \alpha^2\Delta x^4\frac{(g')^2}{4g} +\left(\alpha^2 + \frac{1}{12}\right)\Delta x^4\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right)\bigg]
+% \end{align}
 
-\subsubsection{Normalization}
-In addition, we must also carry out the expansion for the normalization factor.  Let's expand this out as 
-\begin{align}
-\sqrt{g[x(k)]} & = \sqrt{g(x_\alpha)} + (x(k)-x_\alpha)\frac{g'}{2\sqrt{g}} + \frac{1}{2}(x(k)-x_\alpha)^2\left(\frac{g''}{2\sqrt{g}} - \frac{(g')^2}{4 g^{3/2}}\right)\\
-& = \sqrt{g(x_\alpha)}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]
-\end{align}
+% \subsubsection{Normalization}
+% In addition, we must also carry out the expansion for the normalization factor.  Let's expand this out as 
+% \begin{align}
+% \sqrt{g[x(k)]} & = \sqrt{g(x_\alpha)} + (x(k)-x_\alpha)\frac{g'}{2\sqrt{g}} + \frac{1}{2}(x(k)-x_\alpha)^2\left(\frac{g''}{2\sqrt{g}} - \frac{(g')^2}{4 g^{3/2}}\right)\\
+% & = \sqrt{g(x_\alpha)}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]
+% \end{align}
 
-\subsubsection{Expanding the exponential and normalization}
+% \subsubsection{Expanding the exponential and normalization}
 
-So the exponential expansion is 
-\begin{align}
-K & = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{\hbar}\left(\frac{(F_{k+1}-F_{k})^2}{2\Delta T} -\Delta T V[F(x_k)]\right)\right]\\
-& = \int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]\nonumber\\
-&\times \exp\bigg\{ -\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T} + \frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}\frac{\Delta x^4}{\Delta T} +\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\frac{\Delta x^4}{\Delta T}\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right)\bigg]\bigg\}
-\end{align}
-Let's now expand that exponential 
-\begin{align}% 
-K& = \frac{1}{\sqrt{g(x_0)}}\int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]\nonumber\\
-&\times \bigg\{1 -\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T}  + \frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}\frac{\Delta x^4}{\Delta T}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\frac{\Delta x^4}{\Delta T}\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) - \frac{\alpha^2}{8\hbar^2}(g')^2\frac{\Delta x^6}{(\Delta T)^2}\bigg]\bigg\}\\
-& = \int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T} C,
-\end{align}
-where the prefactor is 
-\begin{align}
-C =&1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)-\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T}\nonumber\\
-&   + \left[\frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) +\frac{i\alpha_+\alpha}{4\hbar}\frac{(g')^2}{g}\right]\frac{\Delta x^4}{\Delta T} \nonumber\\
-&- \frac{\alpha^2}{8\hbar^2}(g')^2\frac{\Delta x^6}{(\Delta T)^2}.
-\end{align}
-
-
-\subsection{Replacing higher moments with their averages}
-
-Using the above moment theorems We can then make the following replacements which are correct to $\order(\Delta T)$.  
-
-\begin{align}
-\Delta x^2 \dot{=} & i\hbar\frac{1}{g}\Delta T\\
-\frac{\Delta x^3}{\Delta T} \dot{=}& 3i\hbar \frac{1}{g} \Delta x\\
-\frac{\Delta x^4}{\Delta T} \dot{=}& 3(i\hbar)^2\frac{1}{g^2}\Delta T\\
-\frac{\Delta x^6}{\Delta T^2} \dot{=}& 15(i\hbar)^3\frac{1}{g^3}\Delta T
-\end{align}
-
-The new averaged prefactor is 
-\begin{align}
-C =&1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\left(i\hbar\frac{\Delta T}{g}\right)-\frac{i\alpha}{2\hbar}g'\left(3i\hbar \frac{\Delta x}{g}\right)\nonumber\\
-&   + \left[\frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) +\frac{i\alpha_+\alpha}{4\hbar}\frac{(g')^2}{g}\right]\left(3(i\hbar)^2\frac{1}{g^2}\Delta T\right) \nonumber\\
-&- \frac{\alpha^2}{8\hbar^2}(g')^2\left(15(i\hbar)^3\frac{1}{g^3}\Delta T\right)\\
-% =&1 +\alpha\Delta x\frac{g'}{g}-\frac{g'}{4g}\Delta x + \frac{i\hbar}{2}\left(\alpha +\frac{1}{2}\right)^2\left(\frac{g''}{2g^2} - \frac{(g')^2}{4 g^{3}}\right)\Delta T\nonumber\\
-% & -  3i\hbar\Delta T \left[\frac{3\alpha^2}{8}\frac{(g')^2}{g^3}+\frac{1}{2}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2 g^2}  - \frac{(g')^2}{4g^3}\right) +\frac{\alpha}{8}\frac{(g')^2}{g^3}\right]+15i\hbar\frac{(g')^2}{g^3} \frac{\alpha^2}{8}\Delta T\\
-% =&1 +\left(\alpha-\frac{1}{4}\right)\Delta x\frac{g'}{g} + \frac{i\hbar}{2}\left[ \left(\alpha +\frac{1}{2}\right)^2 -3\left(\alpha^2 + \frac{1}{12}\right)\right]\left(\frac{g''}{2g^2} - \frac{(g')^2}{4 g^{3}}\right)\Delta T\nonumber\\
-% & +  \frac{3i}{4}\hbar\Delta T \left(\alpha^2-\frac{\alpha}{2}\right)\frac{(g')^2}{g^3}\\
-=&1 +\left(\alpha-\frac{1}{4}\right)\Delta x\frac{g'}{g} + i\hbar\left(\alpha^2 -\frac{\alpha}{2}\right)\left( \frac{(g')^2}{ g^{3}}-\frac{g''}{2g^2}\right)\Delta T 
-\end{align}
+% So the exponential expansion is 
+% \begin{align}
+% K & = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{\hbar}\left(\frac{(F_{k+1}-F_{k})^2}{2\Delta T} -\Delta T V[F(x_k)]\right)\right]\\
+% & = \int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]\nonumber\\
+% &\times \exp\bigg\{ -\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T} + \frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}\frac{\Delta x^4}{\Delta T} +\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\frac{\Delta x^4}{\Delta T}\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right)\bigg]\bigg\}
+% \end{align}
+% Let's now expand that exponential 
+% \begin{align}% 
+% K& = \frac{1}{\sqrt{g(x_0)}}\int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T}\left[1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\right]\nonumber\\
+% &\times \bigg\{1 -\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T}  + \frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}\frac{\Delta x^4}{\Delta T}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\frac{\Delta x^4}{\Delta T}\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) - \frac{\alpha^2}{8\hbar^2}(g')^2\frac{\Delta x^6}{(\Delta T)^2}\bigg]\bigg\}\\
+% & = \int \prod_{j=1}^{n-1} dx_j \sqrt{\frac{g(x_\alpha)}{2\pi i \hbar\Delta T}}   e^{i\frac{g(x_\alpha)\Delta x^2}{2\hbar\Delta T} -iV(x_\alpha)\Delta T} C,
+% \end{align}
+% where the prefactor is 
+% \begin{align}
+% C =&1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\Delta x^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)-\frac{i\alpha}{2\hbar}g'\frac{\Delta x^3}{\Delta T}\nonumber\\
+% &   + \left[\frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) +\frac{i\alpha_+\alpha}{4\hbar}\frac{(g')^2}{g}\right]\frac{\Delta x^4}{\Delta T} \nonumber\\
+% &- \frac{\alpha^2}{8\hbar^2}(g')^2\frac{\Delta x^6}{(\Delta T)^2}.
+% \end{align}
 
 
-\subsection{Moment theorems}
-This follows (and fixed a typo in) Dan's work.  
-Let us now consider evaluating Gaussian moments of the form,
-\begin{equation}
-E_{\sigma(x)}[x^n] = \int dx\, x^n \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}
-\end{equation}
-We will treat $x$ as $\order(\sqrt{\Delta T})$
-Now expand about the origin
-\begin{gather}
-\sigma(x) \approx \sigma(\mu) + (x-\mu)\sigma'(\mu)\\
-\frac{1}{\sigma(x)} \approx \frac{1}{\sigma(\mu)} -\frac{\sigma'(\mu)}{\sigma^2(\mu)}(x-\mu)\\
-\frac{1}{\sigma^2(x)} \approx \frac{1}{\sigma^2(\mu)} -\frac{2\sigma'(\mu)}{\sigma^3(\mu)}(x-\mu)
-\end{gather}
-We have to deal with moments like $\Delta x^{2n}/\Delta T^{2(n-1)}$ and $\Delta x^{2n+1}/\Delta x^{2n-1}$.  
-Now note that our correction is already $\Delta T$ for even moments, or $\order(\sqrt{\Delta T})$ for the odd moments.  So for even moments, we can drop the corrections, whereas for odd moments we will have to keep the first order correction.  
+% \subsection{Replacing higher moments with their averages}
 
-\subsubsection{Normal Gaussian Moment theorem}
+% Using the above moment theorems We can then make the following replacements which are correct to $\order(\Delta T)$.  
 
-Let's now think about the recursion relations for the Gaussian moment theorem.  
-\begin{align}
-E[x^n] =& \int dx\,x^n \frac{e^{-\frac{x^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}\\
- =&  -\sigma^2x^{n-1}e^{-\frac{x^2}{2\sigma^2}}\bigg|_{x=-\infty}^{\infty} + \int dx\,(n-1)\sigma^2x^{n-2} \frac{e^{-\frac{x^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}\\
- =&  (n-1)\sigma^2E[x^{n-2}]
-\end{align}
+% \begin{align}
+% \Delta x^2 \dot{=} & i\hbar\frac{1}{g}\Delta T\\
+% \frac{\Delta x^3}{\Delta T} \dot{=}& 3i\hbar \frac{1}{g} \Delta x\\
+% \frac{\Delta x^4}{\Delta T} \dot{=}& 3(i\hbar)^2\frac{1}{g^2}\Delta T\\
+% \frac{\Delta x^6}{\Delta T^2} \dot{=}& 15(i\hbar)^3\frac{1}{g^3}\Delta T
+% \end{align}
 
-Now for $\mu = 0$, only $m=n$ contributes, and 
-\begin{align}
-E[x^n] = (n-1)\sigma^2E[x^{n-2}]
-\end{align}
-
-So for even moments you get $n = 2k$
-\begin{equation}
-E[x^{2k}] = (2k-1)!!\sigma^{2k},\quad k =1,2,\ldots
-\end{equation}
-where $n!! = n(n-2)(n-4)(n-6)\ldots 1$.  (The recursion truncates at $2k-2n = 0$, or $n = k$).  For odd moments we get $n=2k-1$
-\begin{equation}
-E[x^{2k-1}] = (2k-2)\sigma^2E[x^{2k-3}] = (2k-2)!!\sigma^{2k-2}E[x]
-\end{equation}
-Repeat for $m$ steps until $2k-1-2m = 1$, or $m=k-1$.  
-
-\subsubsection{Odd moments}
-
-Note that we want to simplify $x^3/\Delta T$, which is order $\Delta T^{1/2}$.  
-\begin{align}
-  E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right] =& \int dx\, \frac{x^{2n+1}}{\Delta T^{n}} \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\\
-% \approx&  \int dx\, \frac{x^{2n+1}}{\Delta T^{n}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[1 - x\frac{\sigma'}{\sigma}  \right]\left[1 + \frac{2\sigma'}{\sigma}\frac{x^3}{2\sigma^2\Delta T}\right]\\
- \approx&  \int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[\frac{x^{2n+1}}{\Delta T^{n}} - \frac{x^{2n+2}}{\Delta T^{n}}\frac{\sigma'}{\sigma}  + \frac{x^{2n+4}}{\Delta T^{n+1}}\frac{\sigma'}{\sigma^3}\right]
-\end{align}
-Where we expanded everything to $\order(\Delta T^{1/2})$, since the coefficient is already $\order\Delta T^{1/2}$.  Now we integrate by parts 
-\begin{align}
- E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right]=&-\sigma^2\Delta T\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[\frac{x^{2n}}{\Delta T^{n}} - \frac{x^{2n+1}}{\Delta T^{n}}\frac{\sigma'}{\sigma}  + \frac{x^{2n+3}}{\Delta T^{n+1}}\frac{\sigma'}{\sigma^3}\right]_{x=-\infty}^{\infty}\nonumber\\
-&+\sigma^2\int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[2n\frac{x^{2n-1}}{\Delta T^{n-1}} - \frac{(2n+1)x^{2n}}{\Delta T^{n-1}}\frac{\sigma'}{\sigma}  + \frac{(2n+3)x^{2n+2}}{\Delta T^{n}}\frac{\sigma'}{\sigma^3}\right]\\
-=&\sigma^2\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[2n - (2n+1)x\frac{\sigma'}{\sigma}  + \frac{(2n+3)x^{3}}{\Delta T}\frac{\sigma'}{\sigma^3}\right]
-\end{align}
-
-Now isolate the coefficient of the lower moment we want.  Integrate by parts once more on the extra term.  
-\begin{align}
- E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right]=&(2n+1)\sigma^2\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[1 - x\frac{\sigma'}{\sigma}  + \frac{x^{3}}{\Delta T}\frac{\sigma'}{\sigma^3}\right] \nonumber \\
-&+\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[-\sigma^2+ \frac{2x^{3}}{\Delta T}\frac{\sigma'}{\sigma}\right] \\
-% =&(2n+1)\sigma^2E_{\sigma(x)}\left[\frac{x^{2n-1}}{\Delta T^{n-1}}\right]+2\sigma'\sigma \int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \frac{x^{2n+1}}{\Delta T^{n}}\\
-% =&(2n+1)\int dx \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\frac{x^{2n-1}}{\Delta T^{n-1}}\left[\sigma^2 + 2\sigma'\sigma\right]\\
- \approx&(2n+1)\int dx \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\frac{x^{2n-1}}{\Delta T^{n-1}}\sigma^2(x)\\
-%=&(2n+1)E_{\sigma(x)}\left[\sigma^2(x)\frac{x^{2n-1}}{\Delta T^{n-1}}\right]\\
-=&(2n+1)!!E_{\sigma(x)}\left[\sigma^{2n}(x)x\right]
-\end{align}
-In the last line we used the recursion relation $n$ times.  
+% The new averaged prefactor is 
+% \begin{align}
+% C =&1 -\alpha_+\Delta x\frac{g'}{2g} + \frac{1}{2}\alpha_+^2\left(\frac{g''}{2g} - \frac{(g')^2}{4 g^{2}}\right)\left(i\hbar\frac{\Delta T}{g}\right)-\frac{i\alpha}{2\hbar}g'\left(3i\hbar \frac{\Delta x}{g}\right)\nonumber\\
+% &   + \left[\frac{i\alpha^2}{8\hbar}\frac{(g')^2}{g}+\frac{i}{2\hbar}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2}  - \frac{(g')^2}{4g}\right) +\frac{i\alpha_+\alpha}{4\hbar}\frac{(g')^2}{g}\right]\left(3(i\hbar)^2\frac{1}{g^2}\Delta T\right) \nonumber\\
+% &- \frac{\alpha^2}{8\hbar^2}(g')^2\left(15(i\hbar)^3\frac{1}{g^3}\Delta T\right)\\
+% % =&1 +\alpha\Delta x\frac{g'}{g}-\frac{g'}{4g}\Delta x + \frac{i\hbar}{2}\left(\alpha +\frac{1}{2}\right)^2\left(\frac{g''}{2g^2} - \frac{(g')^2}{4 g^{3}}\right)\Delta T\nonumber\\
+% % & -  3i\hbar\Delta T \left[\frac{3\alpha^2}{8}\frac{(g')^2}{g^3}+\frac{1}{2}\left(\alpha^2 + \frac{1}{12}\right)\left(\frac{g''}{2 g^2}  - \frac{(g')^2}{4g^3}\right) +\frac{\alpha}{8}\frac{(g')^2}{g^3}\right]+15i\hbar\frac{(g')^2}{g^3} \frac{\alpha^2}{8}\Delta T\\
+% % =&1 +\left(\alpha-\frac{1}{4}\right)\Delta x\frac{g'}{g} + \frac{i\hbar}{2}\left[ \left(\alpha +\frac{1}{2}\right)^2 -3\left(\alpha^2 + \frac{1}{12}\right)\right]\left(\frac{g''}{2g^2} - \frac{(g')^2}{4 g^{3}}\right)\Delta T\nonumber\\
+% % & +  \frac{3i}{4}\hbar\Delta T \left(\alpha^2-\frac{\alpha}{2}\right)\frac{(g')^2}{g^3}\\
+% =&1 +\left(\alpha-\frac{1}{4}\right)\Delta x\frac{g'}{g} + i\hbar\left(\alpha^2 -\frac{\alpha}{2}\right)\left( \frac{(g')^2}{ g^{3}}-\frac{g''}{2g^2}\right)\Delta T 
+% \end{align}
 
 
+% \subsection{Moment theorems}
+% This follows (and fixed a typo in) Dan's work.  
+% Let us now consider evaluating Gaussian moments of the form,
+% \begin{equation}
+% E_{\sigma(x)}[x^n] = \int dx\, x^n \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}
+% \end{equation}
+% We will treat $x$ as $\order(\sqrt{\Delta T})$
+% Now expand about the origin
+% \begin{gather}
+% \sigma(x) \approx \sigma(\mu) + (x-\mu)\sigma'(\mu)\\
+% \frac{1}{\sigma(x)} \approx \frac{1}{\sigma(\mu)} -\frac{\sigma'(\mu)}{\sigma^2(\mu)}(x-\mu)\\
+% \frac{1}{\sigma^2(x)} \approx \frac{1}{\sigma^2(\mu)} -\frac{2\sigma'(\mu)}{\sigma^3(\mu)}(x-\mu)
+% \end{gather}
+% We have to deal with moments like $\Delta x^{2n}/\Delta T^{2(n-1)}$ and $\Delta x^{2n+1}/\Delta x^{2n-1}$.  
+% Now note that our correction is already $\Delta T$ for even moments, or $\order(\sqrt{\Delta T})$ for the odd moments.  So for even moments, we can drop the corrections, whereas for odd moments we will have to keep the first order correction.  
 
- \subsection{Dan's log trick}
+% \subsubsection{Normal Gaussian Moment theorem}
 
-We have terms, which we can exponentiate as 
-\begin{equation}
-1 + \left(\alpha-\frac{1}{4}\right)\frac{g'}{g}\Delta x = \exp\left[\left(\alpha - \frac{1}{4}\right)\frac{g'}{g}\Delta x-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]
-\end{equation}
-We will rewrite this as the variation of a logarithm.  We will then be able to relate these linear terms to a normalization factor.  We can expand the log out to second order as 
-\begin{equation}
-\log(y +dy) = \log(y) +\frac{dy}{y} - \frac{1}{2}\frac{dy^2}{y^2}.
-\end{equation}
-We will expand functions of $x_{k+1}$ and $x_k$ around  $x_\alpha$.  
-\begin{align}
-\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] =& \log[g(x_\alpha+\alpha_-\Delta x)] - \log[ g(x_\alpha -\alpha_+\Delta x)]\\
-% =& \log\left[g(x_{\alpha})+\alpha_-\Delta x g' + \alpha_-^2\frac{\Delta x^2}{2} g''\right] - \log\left[g(x_{\alpha})-\alpha_+\Delta x g' + \alpha_+^2\frac{\Delta x^2}{2} g''\right]\\
-% =& \left(\log[g(x_\alpha)] + \alpha_-\Delta x \frac{g'}{g} + \frac{\alpha^2_-\Delta x^2}{2}\frac{g''}{g} - \alpha_-^2\frac{\Delta x^2}{2}\frac{(g')^2}{g^2}\right) \nonumber\\
-% &- \left(\log[g(x_\alpha)] - \alpha_+\Delta x \frac{g'}{g} + \frac{\alpha^2_+\Delta x^2}{2}\frac{g''}{g} - \alpha_+^2\frac{\Delta x^2}{2}\frac{(g')^2}{g^2}\right)\\
-% =& (\alpha_+ +\alpha_-)\frac{g'}{g}\Delta x -(\alpha^2_+-\alpha^2_-)\frac{g''}{2g}\Delta x^2 + (\alpha_+^2-\alpha_-^2)\frac{(g')^2}{2g^2}\\  
-=&   \Delta x \frac{g'}{g} -\alpha\Delta x^2\frac{g''}{g} + \alpha\Delta x^2\frac{(g')^2}{g^2}
-\end{align}
-So we can write 
-\begin{align}
-\frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  +\alpha\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right)\label{eq:velocity_log}
-\end{align}
-Plugging in this expansion for the exponent we have
-\begin{align}
-1 + \left(\alpha-\frac{1}{4}\right)\frac{g'}{g}\Delta x  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\frac{g'}{g}\Delta x-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]\\
-%  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\left[\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)  +\alpha\Delta x^2\left(\frac{g''}{g} - \frac{(g')^2}{g^2}\right)\right]-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]\\
+% Let's now think about the recursion relations for the Gaussian moment theorem.  
+% \begin{align}
+% E[x^n] =& \int dx\,x^n \frac{e^{-\frac{x^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}\\
+%  =&  -\sigma^2x^{n-1}e^{-\frac{x^2}{2\sigma^2}}\bigg|_{x=-\infty}^{\infty} + \int dx\,(n-1)\sigma^2x^{n-2} \frac{e^{-\frac{x^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}\\
+%  =&  (n-1)\sigma^2E[x^{n-2}]
+% \end{align}
+
+% Now for $\mu = 0$, only $m=n$ contributes, and 
+% \begin{align}
+% E[x^n] = (n-1)\sigma^2E[x^{n-2}]
+% \end{align}
+
+% So for even moments you get $n = 2k$
+% \begin{equation}
+% E[x^{2k}] = (2k-1)!!\sigma^{2k},\quad k =1,2,\ldots
+% \end{equation}
+% where $n!! = n(n-2)(n-4)(n-6)\ldots 1$.  (The recursion truncates at $2k-2n = 0$, or $n = k$).  For odd moments we get $n=2k-1$
+% \begin{equation}
+% E[x^{2k-1}] = (2k-2)\sigma^2E[x^{2k-3}] = (2k-2)!!\sigma^{2k-2}E[x]
+% \end{equation}
+% Repeat for $m$ steps until $2k-1-2m = 1$, or $m=k-1$.  
+
+% \subsubsection{Odd moments}
+
+% Note that we want to simplify $x^3/\Delta T$, which is order $\Delta T^{1/2}$.  
+% \begin{align}
+%   E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right] =& \int dx\, \frac{x^{2n+1}}{\Delta T^{n}} \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\\
+% % \approx&  \int dx\, \frac{x^{2n+1}}{\Delta T^{n}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[1 - x\frac{\sigma'}{\sigma}  \right]\left[1 + \frac{2\sigma'}{\sigma}\frac{x^3}{2\sigma^2\Delta T}\right]\\
+%  \approx&  \int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[\frac{x^{2n+1}}{\Delta T^{n}} - \frac{x^{2n+2}}{\Delta T^{n}}\frac{\sigma'}{\sigma}  + \frac{x^{2n+4}}{\Delta T^{n+1}}\frac{\sigma'}{\sigma^3}\right]
+% \end{align}
+% Where we expanded everything to $\order(\Delta T^{1/2})$, since the coefficient is already $\order\Delta T^{1/2}$.  Now we integrate by parts 
+% \begin{align}
+%  E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right]=&-\sigma^2\Delta T\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[\frac{x^{2n}}{\Delta T^{n}} - \frac{x^{2n+1}}{\Delta T^{n}}\frac{\sigma'}{\sigma}  + \frac{x^{2n+3}}{\Delta T^{n+1}}\frac{\sigma'}{\sigma^3}\right]_{x=-\infty}^{\infty}\nonumber\\
+% &+\sigma^2\int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[2n\frac{x^{2n-1}}{\Delta T^{n-1}} - \frac{(2n+1)x^{2n}}{\Delta T^{n-1}}\frac{\sigma'}{\sigma}  + \frac{(2n+3)x^{2n+2}}{\Delta T^{n}}\frac{\sigma'}{\sigma^3}\right]\\
+% =&\sigma^2\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[2n - (2n+1)x\frac{\sigma'}{\sigma}  + \frac{(2n+3)x^{3}}{\Delta T}\frac{\sigma'}{\sigma^3}\right]
+% \end{align}
+
+% Now isolate the coefficient of the lower moment we want.  Integrate by parts once more on the extra term.  
+% \begin{align}
+%  E_{\sigma(x)}\left[\frac{x^{2n+1}}{\Delta T^{n}}\right]=&(2n+1)\sigma^2\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[1 - x\frac{\sigma'}{\sigma}  + \frac{x^{3}}{\Delta T}\frac{\sigma'}{\sigma^3}\right] \nonumber \\
+% &+\int dx\, \frac{x^{2n-1}}{\Delta T^{n-1}}\frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \left[-\sigma^2+ \frac{2x^{3}}{\Delta T}\frac{\sigma'}{\sigma}\right] \\
+% % =&(2n+1)\sigma^2E_{\sigma(x)}\left[\frac{x^{2n-1}}{\Delta T^{n-1}}\right]+2\sigma'\sigma \int dx\, \frac{e^{-\frac{x^2}{2\sigma^2\Delta T}}}{\sqrt{2\pi\sigma^2\Delta T}} \frac{x^{2n+1}}{\Delta T^{n}}\\
+% % =&(2n+1)\int dx \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\frac{x^{2n-1}}{\Delta T^{n-1}}\left[\sigma^2 + 2\sigma'\sigma\right]\\
+%  \approx&(2n+1)\int dx \frac{e^{-\frac{x^2}{2\sigma^2(x)\Delta T}}}{\sqrt{2\pi\sigma^2(x)\Delta T}}\frac{x^{2n-1}}{\Delta T^{n-1}}\sigma^2(x)\\
+% %=&(2n+1)E_{\sigma(x)}\left[\sigma^2(x)\frac{x^{2n-1}}{\Delta T^{n-1}}\right]\\
+% =&(2n+1)!!E_{\sigma(x)}\left[\sigma^{2n}(x)x\right]
+% \end{align}
+% In the last line we used the recursion relation $n$ times.  
+
+%  \subsection{Dan's log trick}
+
+% We have terms, which we can exponentiate as 
+% \begin{equation}
+% 1 + \left(\alpha-\frac{1}{4}\right)\frac{g'}{g}\Delta x = \exp\left[\left(\alpha - \frac{1}{4}\right)\frac{g'}{g}\Delta x-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]
+% \end{equation}
+% We will rewrite this as the variation of a logarithm.  We will then be able to relate these linear terms to a normalization factor.  We can expand the log out to second order as 
+% \begin{equation}
+% \log(y +dy) = \log(y) +\frac{dy}{y} - \frac{1}{2}\frac{dy^2}{y^2}.
+% \end{equation}
+% We will expand functions of $x_{k+1}$ and $x_k$ around  $x_\alpha$.  
+% \begin{align}
+% \log\left[\frac{g(x_{k+1})}{g(x_k)}\right] =& \log[g(x_\alpha+\alpha_-\Delta x)] - \log[ g(x_\alpha -\alpha_+\Delta x)]\\
+% % =& \log\left[g(x_{\alpha})+\alpha_-\Delta x g' + \alpha_-^2\frac{\Delta x^2}{2} g''\right] - \log\left[g(x_{\alpha})-\alpha_+\Delta x g' + \alpha_+^2\frac{\Delta x^2}{2} g''\right]\\
+% % =& \left(\log[g(x_\alpha)] + \alpha_-\Delta x \frac{g'}{g} + \frac{\alpha^2_-\Delta x^2}{2}\frac{g''}{g} - \alpha_-^2\frac{\Delta x^2}{2}\frac{(g')^2}{g^2}\right) \nonumber\\
+% % &- \left(\log[g(x_\alpha)] - \alpha_+\Delta x \frac{g'}{g} + \frac{\alpha^2_+\Delta x^2}{2}\frac{g''}{g} - \alpha_+^2\frac{\Delta x^2}{2}\frac{(g')^2}{g^2}\right)\\
+% % =& (\alpha_+ +\alpha_-)\frac{g'}{g}\Delta x -(\alpha^2_+-\alpha^2_-)\frac{g''}{2g}\Delta x^2 + (\alpha_+^2-\alpha_-^2)\frac{(g')^2}{2g^2}\\  
+% =&   \Delta x \frac{g'}{g} -\alpha\Delta x^2\frac{g''}{g} + \alpha\Delta x^2\frac{(g')^2}{g^2}
+% \end{align}
+% So we can write 
+% \begin{align}
+% \frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  +\alpha\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right)\label{eq:velocity_log}
+% \end{align}
+% Plugging in this expansion for the exponent we have
+% \begin{align}
+% 1 + \left(\alpha-\frac{1}{4}\right)\frac{g'}{g}\Delta x  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\frac{g'}{g}\Delta x-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]\\
+% %  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\left[\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)  +\alpha\Delta x^2\left(\frac{g''}{g} - \frac{(g')^2}{g^2}\right)\right]-\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2\frac{g'^2}{g^2}\Delta x^2\right]\\
+% %  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)  +\alpha\left(\alpha - \frac{1}{4}\right)\Delta x^2\frac{g''}{g}\right]\nonumber\\
+% % &\times\exp\left\{-\Delta x^2\frac{(g')^2}{g^2}\left[\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2+\alpha\left(\alpha - \frac{1}{4}\right)\right]\right\}\\
 %  =& \exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)  +\alpha\left(\alpha - \frac{1}{4}\right)\Delta x^2\frac{g''}{g}\right]\nonumber\\
-% &\times\exp\left\{-\Delta x^2\frac{(g')^2}{g^2}\left[\frac{1}{2}\left(\alpha-\frac{1}{4}\right)^2+\alpha\left(\alpha - \frac{1}{4}\right)\right]\right\}\\
- =& \exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)  +\alpha\left(\alpha - \frac{1}{4}\right)\Delta x^2\frac{g''}{g}\right]\nonumber\\
-&\times\exp\left[-\Delta x^2\frac{(g')^2}{g^2}\left(\frac{3\alpha^2}{2} -\frac{\alpha}{2}+\frac{1}{32}\right)\right]
-%=& \exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right) +i\hbar\Delta T\left(\alpha^2 - \frac{\alpha}{4}\right)\frac{g''}{g^2} - i\hbar\Delta T\left[\alpha ^3+\frac{\alpha^2}{4}  - \frac{1}{32}\right]\frac{g'^2}{g^3}\right],
-\end{align}
-where in the third line we expanded the exponential to order $\Delta T$, used the moment theorem, and re-exponentiated the result.  So this is a bit unwieldy. 
+% &\times\exp\left[-\Delta x^2\frac{(g')^2}{g^2}\left(\frac{3\alpha^2}{2} -\frac{\alpha}{2}+\frac{1}{32}\right)\right]
+% %=& \exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right) +i\hbar\Delta T\left(\alpha^2 - \frac{\alpha}{4}\right)\frac{g''}{g^2} - i\hbar\Delta T\left[\alpha ^3+\frac{\alpha^2}{4}  - \frac{1}{32}\right]\frac{g'^2}{g^3}\right],
+% \end{align}
+% where in the third line we expanded the exponential to order $\Delta T$, used the moment theorem, and re-exponentiated the result.  So this is a bit unwieldy. 
 
-\subsection{Restoring the rest: The effective potential}
+% \subsection{Restoring the rest: The effective potential}
 
-Now we are in a position to restore the rest of this mess.  
-We can now exponentiate the remaining $\Delta T$ terms, which will give a potential, (recalling $e^{\frac{i}{\hbar}S}=e^{\frac{i\Delta T}{\hbar}(K-V)}$)
-\begin{align}
-  \frac{-V_{\text{tot}}+V_{\text{ext}}}{\hbar} &= \left(\alpha^2 - \frac{\alpha}{4}\right)\frac{g''}{g^2} -\left(\frac{3}{2}\alpha ^2-\frac{\alpha}{2}  + \frac{1}{32}\right)\frac{g'^2}{g^3}+\left(\alpha^2 -\frac{\alpha}{2}\right)\left( \frac{(g')^2}{ g^{3}}-\frac{g''}{2g^2}\right)\\
-&= \left(\alpha^2 - \frac{\alpha}{4} - \frac{\alpha^2}{2} +\frac{\alpha}{4}\right)\frac{g''}{g^2} +\left(\alpha^2 -\frac{\alpha}{2}-\frac{3}{2}\alpha ^2+\frac{\alpha}{2}- \frac{1}{32}\right)\frac{g'^2}{g^3}\\
-&=  \frac{\alpha^2}{2}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) - \frac{1}{32}\frac{g'^2}{g^3}
-\end{align}
-So we have the following effective potential:
-\begin{equation}
-\boxed{V_{\text{eff}} = \frac{\hbar}{32}\frac{g'^2}{g^3} -\hbar\frac{\alpha^2}{2}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) }
-\end{equation}
-\comment{Agrees with Dan's cases}
+% Now we are in a position to restore the rest of this mess.  
+% We can now exponentiate the remaining $\Delta T$ terms, which will give a potential, (recalling $e^{\frac{i}{\hbar}S}=e^{\frac{i\Delta T}{\hbar}(K-V)}$)
+% \begin{align}
+%   \frac{-V_{\text{tot}}+V_{\text{ext}}}{\hbar} &= \left(\alpha^2 - \frac{\alpha}{4}\right)\frac{g''}{g^2} -\left(\frac{3}{2}\alpha ^2-\frac{\alpha}{2}  + \frac{1}{32}\right)\frac{g'^2}{g^3}+\left(\alpha^2 -\frac{\alpha}{2}\right)\left( \frac{(g')^2}{ g^{3}}-\frac{g''}{2g^2}\right)\\
+% &= \left(\alpha^2 - \frac{\alpha}{4} - \frac{\alpha^2}{2} +\frac{\alpha}{4}\right)\frac{g''}{g^2} +\left(\alpha^2 -\frac{\alpha}{2}-\frac{3}{2}\alpha ^2+\frac{\alpha}{2}- \frac{1}{32}\right)\frac{g'^2}{g^3}\\
+% &=  \frac{\alpha^2}{2}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) - \frac{1}{32}\frac{g'^2}{g^3}
+% \end{align}
+% So we have the following effective potential:
+% \begin{equation}
+% \boxed{V_{\text{eff}} = \frac{\hbar}{32}\frac{g'^2}{g^3} -\hbar\frac{\alpha^2}{2}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) }
+% \end{equation}
+% \comment{Agrees with Dan's cases}
 
-\subsection{Propagator}
+% \subsection{Propagator}
 
-So pulling all of this together we have 
-\begin{align}
-K(q_n,t_n; q_0,t_0) = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{2\Delta T\hbar}g_{ij}\Delta x^i\Delta x^j +\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)-\frac{i}{\hbar}\Delta T [V+V_{\text{eff}}]\right]
-\end{align}
-Now we can use deal with the log by taking (recall we used this trick for all $\Delta x_k = x_{k+1}-x_k, k=0,1,....n-1$)
-\begin{align}
-\prod_{k=0}^{n-1}\exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)\right] & = \exp\left[\left(\alpha - \frac{1}{4}\right)\sum_{k=0}^{n-1}\left(\log[g(x_k)]-\log[g(x_{k+1})]\right)\right]\\
-& = \exp\left[\left(\frac{1}{4}-\alpha\right)\log\left(\frac{g(x_{n})}{g(x_0)}\right)\right]\\
-& = \left[\frac{g(x_{n})}{g(x_0)}\right]^{ \frac{1}{4}-\alpha}
-\end{align}
-so we have
-\begin{align}
-K(q_n,t_n; q_0,t_0) = \left[\frac{g(x_n)}{g(x_0)}\right]^{\frac{1}{4}-\alpha}\frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g(x_{k,\alpha})}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i\Delta x^i\Delta x^j}{2\hbar\Delta T}g_{ij}(x_{k,\alpha}) -\frac{i}{\hbar}\Delta T [V+V_{\text{eff}}]\right]
-\end{align}
-\comment{Agrees with Dan}
+% So pulling all of this together we have 
+% \begin{align}
+% K(q_n,t_n; q_0,t_0) = \frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g_k}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i}{2\Delta T\hbar}g_{ij}\Delta x^i\Delta x^j +\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)-\frac{i}{\hbar}\Delta T [V+V_{\text{eff}}]\right]
+% \end{align}
+% Now we can use deal with the log by taking (recall we used this trick for all $\Delta x_k = x_{k+1}-x_k, k=0,1,....n-1$)
+% \begin{align}
+% \prod_{k=0}^{n-1}\exp\left[\left(\alpha - \frac{1}{4}\right)\log\left(\frac{g(x_{k+1})}{g(x_k)}\right)\right] & = \exp\left[\left(\alpha - \frac{1}{4}\right)\sum_{k=0}^{n-1}\left(\log[g(x_k)]-\log[g(x_{k+1})]\right)\right]\\
+% & = \exp\left[\left(\frac{1}{4}-\alpha\right)\log\left(\frac{g(x_{n})}{g(x_0)}\right)\right]\\
+% & = \left[\frac{g(x_{n})}{g(x_0)}\right]^{ \frac{1}{4}-\alpha}
+% \end{align}
+% so we have
+% \begin{align}
+% K(q_n,t_n; q_0,t_0) = \left[\frac{g(x_n)}{g(x_0)}\right]^{\frac{1}{4}-\alpha}\frac{1}{\sqrt{g(x_0)}}\int \prod_{k=1}^{n-1} dx_k\frac{\sqrt{g(x_{k,\alpha})}}{\sqrt{2\pi i \hbar \Delta T}} \exp\left[ \frac{i\Delta x^i\Delta x^j}{2\hbar\Delta T}g_{ij}(x_{k,\alpha}) -\frac{i}{\hbar}\Delta T [V+V_{\text{eff}}]\right]
+% \end{align}
+% \comment{Agrees with Dan}
 
-\subsection{Operator Orderings DeWitt's results}
-DeWitt claims that when setting up the path integral in curved coordinates, you find the relevant differential operator in the schrodinger equation is 
-\begin{equation}
-H = -g^{-1/2}\partial_i g^{1/2}g^{ij}\partial_j,
-\end{equation}
-where that is the Laplace-Beltrami operator
+% \subsection{Operator Orderings DeWitt's results}
+% DeWitt claims that when setting up the path integral in curved coordinates, you find the relevant differential operator in the schrodinger equation is 
+% \begin{equation}
+% H = -g^{-1/2}\partial_i g^{1/2}g^{ij}\partial_j,
+% \end{equation}
+% where that is the Laplace-Beltrami operator
 
-Now using 
-\begin{equation}
-\langle x| p_i |\psi\rangle = -i\hbar g^{-1/4}\partial_i g^{1/4}
-\end{equation}
-Then we can write 
-\begin{align}
-H &= g^{-1/2}g^{1/4}(i\hbar g^{-1/4}\partial_i g^{1/4}) g^{-1/4} g^{1/2}g^{ij} g^{1/4}(i\hbar g^{-1/4} \partial_j g^{1/4} g^{-1/4}
-&= g^{-1/4}p_i  g^{1/2}g^{ij}p_j g^{-1/4}
-\end{align}
+% Now using 
+% \begin{equation}
+% \langle x| p_i |\psi\rangle = -i\hbar g^{-1/4}\partial_i g^{1/4}
+% \end{equation}
+% Then we can write 
+% \begin{align}
+% H &= g^{-1/2}g^{1/4}(i\hbar g^{-1/4}\partial_i g^{1/4}) g^{-1/4} g^{1/2}g^{ij} g^{1/4}(i\hbar g^{-1/4} \partial_j g^{1/4} g^{-1/4}
+% &= g^{-1/4}p_i  g^{1/2}g^{ij}p_j g^{-1/4}
+% \end{align}
 
-Now if we assume 
-\begin{equation}
-[f(x),p] = i\hbar f'
-\end{equation}
-we can set about ordering this.  
+% Now if we assume 
+% \begin{equation}
+% [f(x),p] = i\hbar f'
+% \end{equation}
+% we can set about ordering this.  
 
-\subsection{Ito Ordering}
+% \subsection{Ito Ordering}
 
-For Ito order we want all $x$ operators to the left of their counterparts.  
-\begin{equation}
-H = p_ip_j g^{ij}
-\end{equation}
+% For Ito order we want all $x$ operators to the left of their counterparts.  
+% \begin{equation}
+% H = p_ip_j g^{ij}
+% \end{equation}
 
-So let's start commuting things.  
-\begin{align}
-H &= g^{-1/4}p_i  g^{1/2}g^{ij}p_j g^{-1/4}\\
-% & = \left[ p_i g^{-1/4} + i\hbar\partial_i(g^{-1/4})\right] g^{1/2}g^{ij}p_j g^{-1/4}\\
-% & = \left[ p_i g^{-1/4}  -i\frac{\hbar}{4}\frac{\partial_ig}{g^{5/4}}\right]g^{1/2}g^{ij}p_j g^{-1/4}\\
-% & =  p_i g^{1/4}g^{ij}p_j g^{-1/4}  -i\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij}p_j g^{-1/4}\\
-% & =  p_i [p_j g^{ij}g^{1/4} + i\hbar\partial_j(g^{1/4}g^{ij})]g^{-1/4}  -ip_j\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij} g^{-1/4} - \frac{\hbar^2}{4}\partial_j\left( \frac{\partial_ig}{g^{3/4}}g^{ij} \right)g^{-1/4}\\
-% & =  p_i p_j g^{ij} + i\hbar p_i\left( \frac{1}{4}\frac{\partial_jg}{g^{3/4}}g^{ij} + g^{1/4}\partial_j g^{ij}\right)g^{-1/4} -ip_j\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij} g^{-1/4} - \frac{\hbar^2}{4}\partial_j\left( \frac{\partial_ig}{g^{3/4}}g^{ij} \right)g^{-1/4}\\
-% & =  p_i p_j g^{ij} + i\hbar p_i \partial_j g^{ij} - \frac{\hbar^2}{4}\left(\frac{g^{ij}}{g^{3/4}}\partial_j\partial_i g - \frac{3}{4}g^{ij}\partial_ig \frac{\partial_jg}{g^{7/4}} + \frac{\partial_i g}{g^{3/4}}\partial_jg^{ij} \right)g^{-1/4}\\
-& =  p_i p_j g^{ij} + i\hbar p_i \partial_j g^{ij} - \frac{\hbar^2}{4}\left(g^{ij}\frac{\partial_j\partial_i g}{g} - \frac{3}{4}g^{ij}\frac{\partial_ig \partial_jg}{g^{2}} + \frac{\partial_i g}{g}\partial_jg^{ij} \right)
-\end{align}
-Let's now consider 1D, where $g^{ij} = 1/g, \det{g^{ij}} = g, g_{ij} = g$.  We then have 
-\begin{align}
-H & =  p^2g - i\hbar p \frac{g'}{g^2} - \frac{\hbar^2}{4}\left(\frac{g''}{g^2} 
-  - \frac{3}{4}\frac{(g')^2}{g^{3}} - \frac{(g')^2}{g^3} \right)
-\end{align}
+% So let's start commuting things.  
+% \begin{align}
+% H &= g^{-1/4}p_i  g^{1/2}g^{ij}p_j g^{-1/4}\\
+% % & = \left[ p_i g^{-1/4} + i\hbar\partial_i(g^{-1/4})\right] g^{1/2}g^{ij}p_j g^{-1/4}\\
+% % & = \left[ p_i g^{-1/4}  -i\frac{\hbar}{4}\frac{\partial_ig}{g^{5/4}}\right]g^{1/2}g^{ij}p_j g^{-1/4}\\
+% % & =  p_i g^{1/4}g^{ij}p_j g^{-1/4}  -i\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij}p_j g^{-1/4}\\
+% % & =  p_i [p_j g^{ij}g^{1/4} + i\hbar\partial_j(g^{1/4}g^{ij})]g^{-1/4}  -ip_j\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij} g^{-1/4} - \frac{\hbar^2}{4}\partial_j\left( \frac{\partial_ig}{g^{3/4}}g^{ij} \right)g^{-1/4}\\
+% % & =  p_i p_j g^{ij} + i\hbar p_i\left( \frac{1}{4}\frac{\partial_jg}{g^{3/4}}g^{ij} + g^{1/4}\partial_j g^{ij}\right)g^{-1/4} -ip_j\frac{\hbar}{4} \frac{\partial_ig}{g^{3/4}}g^{ij} g^{-1/4} - \frac{\hbar^2}{4}\partial_j\left( \frac{\partial_ig}{g^{3/4}}g^{ij} \right)g^{-1/4}\\
+% % & =  p_i p_j g^{ij} + i\hbar p_i \partial_j g^{ij} - \frac{\hbar^2}{4}\left(\frac{g^{ij}}{g^{3/4}}\partial_j\partial_i g - \frac{3}{4}g^{ij}\partial_ig \frac{\partial_jg}{g^{7/4}} + \frac{\partial_i g}{g^{3/4}}\partial_jg^{ij} \right)g^{-1/4}\\
+% & =  p_i p_j g^{ij} + i\hbar p_i \partial_j g^{ij} - \frac{\hbar^2}{4}\left(g^{ij}\frac{\partial_j\partial_i g}{g} - \frac{3}{4}g^{ij}\frac{\partial_ig \partial_jg}{g^{2}} + \frac{\partial_i g}{g}\partial_jg^{ij} \right)
+% \end{align}
+% Let's now consider 1D, where $g^{ij} = 1/g, \det{g^{ij}} = g, g_{ij} = g$.  We then have 
+% \begin{align}
+% H & =  p^2g - i\hbar p \frac{g'}{g^2} - \frac{\hbar^2}{4}\left(\frac{g''}{g^2} 
+%   - \frac{3}{4}\frac{(g')^2}{g^{3}} - \frac{(g')^2}{g^3} \right)
+% \end{align}
 
-\subsubsection{One Dimension}
+% \subsubsection{One Dimension}
 
-So let's start commuting things.  
-\begin{align}
-H &= g^{-1/4}p  g^{-1/2}p g^{-1/4}\\
-% & = \left[ p g^{-1/4} + i\hbar(g^{-1/4})'\right] g^{-1/2}p_j g^{-1/4}\\
-% & = \left[ p g^{-1/4}  -i\frac{\hbar}{4}\frac{g'}{g^{5/4}}\right]g^{-1/2}p g^{-1/4}\\
-% & =  p g^{-3/4}p g^{-1/4}  -i\frac{\hbar}{4} \frac{g'}{g^{7/4}}p g^{-1/4}\\
-% & =  p(p g^{-1} - i\hbar \frac{3}{4}\frac{g'}{g^{2}})  -i\frac{\hbar}{4}p \frac{g'}{g^{2}} +\frac{\hbar^2}{4}\left(\frac{g''}{g^{7/4}}- \frac{7(g')^2}{4g^{11/4}}\right)'g^{-1/4}\\
-% & =  p\left(p g^{-1} - i\hbar \frac{3}{4}\frac{g'}{g^{2}}\right)  -i\frac{\hbar}{4}p \frac{g'}{g^{2}} +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\\
-& =  p^2 g^{-1} - i\hbar p\frac{g'}{g^{2}}  +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)
-\end{align}
+% So let's start commuting things.  
+% \begin{align}
+% H &= g^{-1/4}p  g^{-1/2}p g^{-1/4}\\
+% % & = \left[ p g^{-1/4} + i\hbar(g^{-1/4})'\right] g^{-1/2}p_j g^{-1/4}\\
+% % & = \left[ p g^{-1/4}  -i\frac{\hbar}{4}\frac{g'}{g^{5/4}}\right]g^{-1/2}p g^{-1/4}\\
+% % & =  p g^{-3/4}p g^{-1/4}  -i\frac{\hbar}{4} \frac{g'}{g^{7/4}}p g^{-1/4}\\
+% % & =  p(p g^{-1} - i\hbar \frac{3}{4}\frac{g'}{g^{2}})  -i\frac{\hbar}{4}p \frac{g'}{g^{2}} +\frac{\hbar^2}{4}\left(\frac{g''}{g^{7/4}}- \frac{7(g')^2}{4g^{11/4}}\right)'g^{-1/4}\\
+% % & =  p\left(p g^{-1} - i\hbar \frac{3}{4}\frac{g'}{g^{2}}\right)  -i\frac{\hbar}{4}p \frac{g'}{g^{2}} +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\\
+% & =  p^2 g^{-1} - i\hbar p\frac{g'}{g^{2}}  +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)
+% \end{align}
 
-On constructing the path integral we then have to evaluate 
-\begin{align}
-\langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g^{-1/4}(x_f)g^{-1/4}(x_i)\int\prod_k \frac{dx_k dp_k}{2\pi\hbar}\, e^{\frac{i}{\hbar}p_k(x_{k+1}-x_k)}\nonumber\\
-&\times\exp\left[ -\frac{i}{2\hbar}\Delta t\left(  p^2g^{-1} - i\hbar p g^{-1}\partial_x \ln g  +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right)\right]
-\end{align}
+% On constructing the path integral we then have to evaluate 
+% \begin{align}
+% \langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g^{-1/4}(x_f)g^{-1/4}(x_i)\int\prod_k \frac{dx_k dp_k}{2\pi\hbar}\, e^{\frac{i}{\hbar}p_k(x_{k+1}-x_k)}\nonumber\\
+% &\times\exp\left[ -\frac{i}{2\hbar}\Delta t\left(  p^2g^{-1} - i\hbar p g^{-1}\partial_x \ln g  +\frac{\hbar^2}{4}\left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right)\right]
+% \end{align}
 
-Complete the square in the momentum
-\begin{equation}
--\frac{i\Delta T}{2\hbar}\left(\frac{p^2}{g} - i\hbar p\frac{g'}{g^2}  -2p_k\frac{(x_{k+1}-x_k)}{\Delta T} \right) = -\frac{i\Delta T}{2\hbar g}\left(p - g\frac{x_{k+1}-x_k}{\Delta T} - i\hbar \frac{g'}{2g}\right) +\frac{i\Delta T}{2\hbar g}\left(g\frac{x_{k+1}-x_k}{\Delta T} + i\hbar\frac{g'}{2g}\right)^2
-\end{equation}
-Let's now expand out that quadratic term, and use dan's log trick.  
-\begin{align}
-\langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
-\exp\left[\frac{i\Delta T g }{2\hbar }\left(\frac{x_{k+1}-x_k}{\Delta T} + i\hbar\frac{g'}{2g^2}\right)^2 -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right]\\
+% Complete the square in the momentum
+% \begin{equation}
+% -\frac{i\Delta T}{2\hbar}\left(\frac{p^2}{g} - i\hbar p\frac{g'}{g^2}  -2p_k\frac{(x_{k+1}-x_k)}{\Delta T} \right) = -\frac{i\Delta T}{2\hbar g}\left(p - g\frac{x_{k+1}-x_k}{\Delta T} - i\hbar \frac{g'}{2g}\right) +\frac{i\Delta T}{2\hbar g}\left(g\frac{x_{k+1}-x_k}{\Delta T} + i\hbar\frac{g'}{2g}\right)^2
+% \end{equation}
+% Let's now expand out that quadratic term, and use dan's log trick.  
+% \begin{align}
+% \langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
+% \exp\left[\frac{i\Delta T g }{2\hbar }\left(\frac{x_{k+1}-x_k}{\Delta T} + i\hbar\frac{g'}{2g^2}\right)^2 -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right]\\
+% % =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
+% % \exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -\frac{i g}{2}(x_{k+1}-x_k)\frac{g'}{g^2}\right]\nonumber\\
+% % &\times\exp\left[ -\frac{i\hbar\Delta T g}{8}\frac{(g')^2}{g^4} -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right]\\
 % =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
-% \exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -\frac{i g}{2}(x_{k+1}-x_k)\frac{g'}{g^2}\right]\nonumber\\
-% &\times\exp\left[ -\frac{i\hbar\Delta T g}{8}\frac{(g')^2}{g^4} -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{7(g')^2}{4g^{3}}\right)\right]\\
-=& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
-\exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -(x_{k+1}-x_k)\frac{g'}{2g}\right]\nonumber\\
-&\times\exp\left[ -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{3(g')^2}{4g^{3}}\right)\right]
-\end{align}
-
-Now we can use 
-\begin{equation}
-\frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{1}{2}\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right) = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{i\hbar\Delta T}{2}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right)
-\end{equation}
-The propagator is 
-\begin{align}
-\langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
-\exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -\frac{1}{2}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] \right]\nonumber\\
-&\times\exp\left[ \frac{i\hbar\Delta T}{4}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{3(g')^2}{4g^{3}}\right)\right]\\
-=& g_f^{-3/4}g_i^{1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
-\exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T }+ \frac{i\hbar\Delta T}{8}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) -\frac{i\hbar\Delta T}{32}\frac{(g')^2}{g^3}\right],
-\end{align}
-which agrees with the transformed path integral picture.  
-
-
-\section{Dielectric as  a Metric}
-
-
-How about we force that differential operator into Laplace-Beltrami form
-\begin{align}
-H(x) &= -\frac{1}{\sqrt{\epsilon}}\nabla^2\frac{1}{\sqrt{\epsilon}} \\
-&= -\frac{1}{\sqrt{\epsilon}}\partial_x\left[\frac{1}{\sqrt{\epsilon}}\partial_x  + \left(\partial_x\frac{1 }{\sqrt{\epsilon} }\right)\right] 
-\end{align}
-Let's now try to put this in operator form, using $p = -ig^{-1/4}\partial_x g^{1/4}$.   Let us also choose $g = \epsilon$.
-\begin{align}
-H(x)&= -\frac{1}{\sqrt{g}}ig^{1/4}pg^{-1/4}\left[\frac{1}{\sqrt{g}}ig^{1/4}p g^{-1/4}  -i\left[\frac{1}{\sqrt{g}},p\right]\right]\\
-%&= g^{-1/4}pg^{-1/2}p g^{-1/4}  -g^{-1/4}pg^{-1/4}\left[\frac{1}{\sqrt{g}},p\right]\\
-&= g^{-1/4}p^2g^{-3/4}
-\end{align}
-
-Intriguingly, the coordinate transform viewpoint says:
-\begin{align}
-\Delta_{LB} =& \frac{1}{\sqrt{g}}\partial_x \frac{1}{\sqrt{g}}\partial_x\\
-=& \frac{\partial x}{\partial q}\partial_x \frac{\partial x}{\partial q}\partial_x\\
-=& \partial_q^2
-\end{align}
-where $\sqrt{g} = \frac{\partial q}{\partial x}$, if $q$ are the initial flat coordinates.  In which case, Dan's claim that the Laplace-Beltrami operator is ``trivial'' stands quite readily.  
-So if we take $\sqrt{g} = \sqrt{\epsilon}$ this says that lengths are increased by $\sqrt{\epsilon(x)} = n(x)$ in this space.   The coordinate transformation would have to be $q(x) = \int_{x_0}^x dx' \sqrt{\epsilon(x')}$.(\comment{where $q$ are the initial flat coordinates})
-
-
-Let's now try to develop this as a path integral.  
-\subsection{Ito ordering}
-If we Ito order we have
-\begin{align}
-H =& p^2 g^{-1} + [g^{-1/4},p^2]g^{-3/4}\\
-% =& p^2 g^{-1} -i\frac{1}{4}(g^{-5/4}g'p + p g^{-5/4}g')g^{-3/4}\\
-% =& p^2 g^{-1} -\frac{i}{4}pg^{-2}g' -\frac{i}{4}[g^{-5/4}g',p]g^{-3/4}-\frac{i}{4} p g^{-2}g'\\
-=& p^2 g^{-1} -\frac{i}{2}pg^{-2}g' +\frac{1}{4}\left(-\frac{5}{4}g^{-3}g'^2 + g^{-2}g''\right)
-\end{align}
-
-We then have a path integral
-\begin{align}
-\Tr[e^{-HT}] =& \int \prod_{k=1}^N\frac{dx_k dp_k}{2\pi}\, \exp\left\{ -\left[\frac{p_k^2}{g} -\frac{i}{2}p\frac{g'}{g^2}+\frac{1}{4}\left(-\frac{5g'^2}{4g^{3}}+ \frac{g''}{g^2}\right)\right]\Delta T+ip_k(x_{k+1}-x_k)  \right\}\\
-% =& \int \prod_{k=1}^N\frac{dx_k dp_k}{2\pi}\, \exp\left[ -\frac{\Delta T}{g}p_k^2 +ip_k\left(x_{k+1}-x_k\frac{g'}{2g^2}\Delta T\right) - \frac{\Delta T}{4}\left(-\frac{5g'^2}{4g^{3}}+ \frac{g''}{g^2}\right) \right]\\
-% =& \int \prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g}{4\Delta T}\left(x_{k+1}-x_k\frac{g'}{2g^2}\Delta T\right)^2 + \frac{\Delta T}{4}\left(\frac{5g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
-% =&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + (x_{k+1}-x_k)\frac{g'}{4g} - \frac{g'^2}{4g^3}\Delta T+ \frac{\Delta T}{4}\left(\frac{5g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
-=&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + (x_{k+1}-x_k)\frac{g'}{4g} + \frac{\Delta T}{4}\left(\frac{g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]
-\end{align}
-
-Now we write the linear velocity term as a logarithm using
-\begin{equation}
-\frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{1}{2}\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right) = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  +\frac{\Delta T}{g}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right),
-\end{equation}
-where we used $\langle\langle \Delta x^2\rangle\rangle = 2\Delta T g^{-1}$.  
-
-The path integral is now
-\begin{align}
-\tr[e^{-HT}]=&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left\{ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + \frac{1}{4}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] \right\} \nonumber\\
-&\times \exp\left[\frac{\Delta T}{4g}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) + \frac{\Delta T}{4}\left(\frac{g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
-=&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left\{ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + \frac{1}{4}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right]-\frac{3\Delta T}{4g}\frac{(g')^2}{g^3} \right\}
-\end{align}
-Now since we have a loop integral, the log does yields 
-\begin{equation}
-\prod_{k=0}^{N-1} \log\left[ \frac{g(x_{k+1})}{g(x_k)}\right] = \log\left[ \frac{g(x_{N})}{g(x_0)}\right] = 0
-\end{equation}
-
-So we get the Ito ordered path integral
-\begin{equation}
-\boxed{\tr[e^{-g^{-1/4}p^2g^{-3/4}T}]=  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T}-\frac{3\Delta T}{4g}\frac{(g')^2}{g^3} \right]}\label{eq:Ito_PI_metric}
-\end{equation}
-
-\subsection{Weyl Ordered Path Integral}
-
-Let's set about Weyl ordering that Hamiltonian.  
-\subsubsection{Various permutations of operators}
-
-We will need the anti-standard order expression
-\begin{equation}
-H = p^2 g^{-1} -\frac{i}{2}pg^{-2}g' +\frac{1}{4}\left(-\frac{5}{4}g^{-3}g'^2 + g^{-2}g''\right).
-\end{equation}
-
-In addition we need the corresponding expression in standard order
-\begin{align}
-H =& g^{-1/4}p^2g^{-3/4}\\
-% =& g^{-1}p^2 + g^{-1/4}[p^2,g^{-3/4}]\\
-% =& g^{-1}p^2 +\frac{3i}{4}g^{-1/4}\left(pg'g^{-7/4} + g'g^{-7/4}p\right)\\
-% =& g^{-1}p^2 +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3i}{4}g^{-1/4}[p,g'g^{-7/4}]\\
-=& g^{-1}p^2 +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3}{4}\left( \frac{g''}{g^2} -\frac{7g'^2}{4g^3}\right)
-\end{align}
-
-And finally, $g$ in the middle.  
-\begin{align}
-H =& g^{-1/4}p^2g^{-3/4}\\
-% =& \left(pg^{-1/4}+ [g^{-1/4},p]\right)\left( g^{-3/4}p  + [p,g^{-3/4}]\right)\\
-% =& \left(pg^{-1/4}-\frac{i}{4}g'g^{-5/4}\right)\left( g^{-3/4}p  +i\frac{3}{4}g'g^{-7/4}\right)\\
-=& pg^{-1}p -\frac{i}{4}g'g^{-2}p  +i\frac{3}{4}pg'g^{-2} + \frac{3}{16}\frac{g'^2}{g^3}
-\end{align}
-
-
-So we have 
-\begin{align}
-H =& [pg^{-1}p]_W + \frac{1}{4}\left[ -\frac{i}{2}p\frac{g'}{g^{2}} +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3}{4}\left( \frac{g''}{g^2} -\frac{7g'^2}{4g^3}\right) -\frac{i}{2}g'g^{-2}p  +i\frac{3}{2}pg'g^{-2} + \frac{3}{8}\frac{g'^2}{g^3}\right]\\
-%=& [pg^{-1}p]_W + \frac{1}{4}\left[ ip\frac{g'}{g^2} +i\frac{g'}{g^2}p +\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right]\\
-=& [pg^{-1}p]_W + \frac{i}{2}\left[p\frac{g'}{g^2}\right]_W +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right)
-\end{align}
-So we get a velocity in this case, due to the asymmetry of the operators.  
-
-Using the midpoint rule for  Weyl ordered operators, we then can form the path integral as 
-\begin{align}
-\tr[e^{-HT}_W] =& \int \prod_k \frac{dx_kdp_k}{2\pi}\exp\left[-\left(p^2\bar{g}^{-1} + \frac{i}{2}\left[p\frac{\bar{g}'}{\bar{g}^2}\right]_W +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right)\right)\Delta T + ip_k(x_{k+1}-x_k)\right]\\
-% =& \int \prod_k \frac{dx_kdp_k}{2\pi}\exp\left[-p^2\bar{g}^{-1}\Delta T - ip_k\left(x_{k+1}-x_k-\frac{\bar{g}'}{2\bar{g}^2}\Delta T\right) -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
-% =& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}}{4\Delta T}\left(x_{k+1}-x_k-\frac{\bar{g}'}{2\bar{g}^2}\Delta T\right)^2 -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
-% =& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T} +(x_{k+1}-x_k)\frac{\bar{g}'}{4\bar{g}} -\frac{\bar{g}'^2}{16 g^3}\Delta T  -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
-=& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T} +(x_{k+1}-x_k)\frac{\bar{g}'}{4\bar{g}}  -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) \right]
-\end{align}
-
-So now we need to carry out the log expansion for $\alpha=0$.  Fortunately, to order $\Delta T$ we have 
-\begin{equation}
-\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] = \frac{\bar{g}'}{\bar{g}}(x_{k+1}-x_k)
-\end{equation}
-So we have no corrections to the potential from eliminating the velocity, since the log drops out for a trace.  
-\begin{equation}
-\boxed{\tr[e^{-HT}]_W= \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T}   -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) \right]}
-\end{equation}
-
-
-\section{Dielectric as in flat space}
-\subsection{Ito ordering}
-
-
-Let's consider trying to find
-\begin{equation}
-E = \int \frac{dT}{T\sqrt{4\pi T}}  \tr e^{-\sigma p^2\sigma T}
-\end{equation}
-
-We will choose to adopt anti-standard order(this gives an Ito calculus).
-\begin{align}
-\sigma p^2\sigma   %= (p\sigma + i\sigma')p\sigma \\
-& = p\sigma p\sigma + i\sigma' p \sigma\\
-%& = p(p\sigma + i\sigma')\sigma + i(p\sigma' + i \sigma'') \sigma\\
-& = p^2\sigma^2 + 2ip\sigma'\sigma- \sigma''\sigma
-\end{align}
-
-
-\subsection{Configuration Space}
-
-We can carry out the momentum integrals, which gives us 
-\begin{align}
-\tr e^{-\sigma p^2\sigma T} &= \int dx_k dp_k \delta(x_N-x_0)e^{-\frac{\Delta T}{2} p_k^2\sigma^2_{k} - ip(\sigma'\sigma \Delta T) + \frac{\Delta T}{2}\sigma''\sigma+ i p_k(x_{k+1}-x_{k})}\\
-&= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2_{k}}} e^{-\frac{[x_{k+1}-x_{k}-(\sigma'\sigma)_{k}\Delta T]^2}{2\Delta T\sigma^2_{k}}  + \frac{1}{2}\Delta T(\sigma''\sigma)_{k}}\\
-&= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2_{k}}} e^{-\frac{(x_{k+1}-x_{k})^2}{2\sigma^2_{k}\Delta T}  +(x_{k+1}-x_k)\frac{\sigma'}{\sigma}   + \frac{1}{2}\Delta T(\sigma''\sigma - \sigma'^2)_{k}}.
-\end{align}
-
-We will now explicitly deal with the linear velocity term.  This will produce a normalization constant.   
-We can then expand a logarithm as 
-\begin{align}
-\log\left[\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right] =& \log\left[  1 + \Delta x \frac{\sigma'}{\sigma}  + \frac{1}{2}\Delta x^2\frac{\sigma''}{\sigma}\right]= \Delta x\frac{\sigma'}{\sigma} + \frac{1}{2}\Delta x^2\left(\frac{\sigma''}{\sigma} - \frac{\sigma'^2}{\sigma^2}\right)
-\end{align}
-If we use this log substitution immediately inside the exponential, we get
-\begin{equation}
-\exp\left[\Delta x\frac{\sigma'}{\sigma}\right] = \exp\left[\log\left[\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right] - \frac{1}{2}\sigma^2\Delta T\left(\frac{\sigma''}{\sigma} - \frac{\sigma'^2}{\sigma^2}\right)\right],
-\end{equation}
-which would cancel out the potential.  
-
-We will also need
-\begin{equation}
-\prod_{k=0}^{N-1} \exp\left[\log\left(\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right)\right] =  \exp\left[\prod_{k=0}^{N-1}\log\left(\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right)\right] = \frac{\sigma(x_N)}{\sigma(x_0)} = 1,
-\end{equation}
-where we employed $x_N = x_0$.  
-
-Then we just have 
-\begin{equation}
-Z= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2(x_{k})}} e^{-\frac{(x_{k+1}-x_{k})^2}{2\sigma^2(x_k)\Delta T}}.
-\end{equation}
-
-
-\section{Putting into Numerical form-Ito$g$} 
-
-So let's put a bit of thought into how to handle 
-\begin{equation}
-Z = \int \prod_{k=1}^{N-1}dx_k \frac{\sqrt{g_k}}{\sqrt{2\pi\Delta T}} \exp\left[- \frac{g(x_k)(x_{k+1}-x_k)^2}{2\Delta T}\right]
-\end{equation}
-
-\subsection{Transforming to a Gaussian}
-We can transform variable from positions $x_k$ to increments
-\begin{equation}
-u_k = x_{k+1} - x_k, k = 0,N-1,
-\end{equation}
-with
-\begin{equation}
-x_{k} = \sum_{j=0}^{k-1} u_j.
-\end{equation}
-This transformation has unit Jacobian.  
-\begin{equation}
-Z= \int du_k \delta\left(\sum u_k \right)\sqrt{\frac{g[x_k(u)]}{2\pi \Delta T}} e^{-\frac{g[x(u)]u_k^2}{2\Delta T}}.
-\end{equation}
-
-Let's now try to decouple the random variables.  Let us introduce 
-\begin{equation}
-dW_k = \sqrt{g_k}u_k
-\end{equation}
-
-We will need to calculate a Jacobian, and a euclidean norm of gradients.  In both cases we will need $\frac{\partial u_k}{\partial dW_j}$.  
-So we can iteratively define the increments from the Gaussians as 
-\begin{equation}
-u_k = \frac{1}{\sqrt{g_k[x_k(u_{j<k})]}}dW_k.
-\end{equation}
-
-We then have 
-\begin{align}
-\frac{\partial u_j}{\partial dW_k} &= \frac{\partial}{\partial dW_k}\frac{1}{\sqrt{g_j[(u_{i<j})]}}dW_j\\
-&= \frac{1}{\sqrt{g_j}}\delta_{jk} -\frac{g_j'}{2g^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}.
-\end{align}
-So we start at $j,k=0$.  We can solve this laboriously, or quite quickly by starting the recursion at zero.  
-We have 
-\begin{gather}
-\frac{\partial u_0}{\partial dW_0} = \frac{1}{\sqrt{g_0}}, \quad \frac{\partial u_0}{\partial dW_{j>0}} = 0
-\end{gather}
-Similarly the second increment is 
-\begin{align}
-\frac{\partial u_1}{\partial dW_0}& = -\frac{1}{\sqrt{g_0}}\frac{g'_1}{2g_1^{3/2}}dW_1, \quad \frac{\partial u_1}{\partial dW_1} = \frac{1}{\sqrt{g_1}} ,\quad \frac{\partial u_1}{\partial dW_{j>1}} = 0.
-\end{align}
-The third increment is 
-\begin{align}
-\frac{\partial u_2}{\partial dW_0}& = -\frac{g'_2}{2g_2^{3/2}}dW_2\left(1-\frac{g'_1}{2g_1^{3/2}}dW_1\right)\frac{1}{\sqrt{g_0}}\, \quad \frac{\partial u_2}{\partial dW_1} = -\frac{1}{\sqrt{g_1}}\frac{g'_2}{2g_2^{3/2}}dW_2, \quad \frac{\partial u_2}{\partial dW_2} = \frac{1}{\sqrt{g_2}}, \quad \frac{\partial u_2}{\partial dW_{j>2}} = 0.
-\end{align}
-
-For the diagonal, we just get $g_k^{-1/2}$. 
-So if we're off the diagonal we multiply by $g_j' dW_j$ for the current row $j$, and sum up all of the preceding entries in this column.   
-
-This is enough to infer the pattern
-\begin{align}
-&\frac{\partial u_j}{\partial dW_k} \nonumber\\
-=& \left( 
-\begin{array}{lllllll}
-\frac{1}{\sqrt{g_0}}      & 0     &   \\
--\frac{1}{\sqrt{g_0}}dW_1\frac{g'_{1}}{2g^{3/2}_1}    & \frac{1}{\sqrt{g_1}}     & 0 \\
--\frac{1}{\sqrt{g_0}}\left(1-\frac{g'_{1}}{2g^{3/2}_1}dW_1\right)\frac{g'_{2}}{2g^{3/2}_2}dW_2 & -\frac{1}{\sqrt{g_1}}\frac{g'_{2}}{2g^{3/2}_2}dW_2    & \frac{1}{\sqrt{g_2}}   & 0 & 0 \\
--\frac{1}{\sqrt{g_0}}\left(1-\frac{g'_{1}}{2g^{3/2}_1}dW_1\right)\left(1-\frac{g'_{2}}{2g^{3/2}_2}dW_2\right)\frac{g'_{3}}{2g^{3/2}_3}dW_3 &  -\frac{1}{\sqrt{g_1}}(1-\frac{g'_{2}}{2g^{3/2}_2}dW_2)\frac{g'_{3}}{2g^{3/2}_3}dW_3     &  -\frac{1}{\sqrt{g_2}}\frac{g'_{3}}{2g^{3/2}_3}dW_3 &\frac{1}{\sqrt{g_3}} & 0 \\
-\vdots & & & \ddots
-\end{array}
-\right)
-\end{align}
-Evidently a generic term off the diagonal will have components (row is $u_j$, column is $dW_k$ increment)
-\begin{equation}
-\boxed{\frac{\partial u_j}{\partial dW_k} =
- \frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1}
- - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2),}
-\end{equation}
-with $j,k=0,1,\ldots N-1$. If we further define $dW_k = \sqrt{\Delta T}z_k$, then we should multiply this by $\sqrt{\Delta T}$.  
-
-\subsection{Jacobian}
-
-The first place we need this result is in calculating the jacobian:
-\begin{equation}
-\left|\frac{\partial u_j}{\partial dz_k}\right| = \prod_{k=0}^{N-1}\frac{\sqrt{\Delta T}}{\sqrt{g_k}},
-\end{equation}
-which follows because the matrix is in lower-triangular form.
-  The Jacobian from changing from positions to increments is also lower-triangular, and just gives unit determinant.
-  This factor will eat all of the prefactor normalizations.  
-
-\subsection{Euclidean norm of gradient}
-
-Next up we need to calculate the change in the normalization when constrained to loops that close.
-  The loop must close, or the increments sum to zero.
-   Our constraint is 
-\begin{align}
-  h(d\vect{W}) = x_n-x_0 = \sum_{j=0}^{N-1} u_j = \sum_{j=0}^{N-1}u_j\left[\sum_{k<j} u_k[dW] \right]=0
-\end{align}
-The Euclidean norm of the gradient is defined as 
-\begin{align}
-\|\nabla_{\vect{z}}h(\vect{z})\|^2 = &  \Delta T \|\nabla_{d\vect{W}}h(d\vect{W})\|^2\\
-%  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2\\
-%  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
-% &\left.\qquad - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
-%  = & \Delta T  \sum_{k=0}^{N-1}\left[\frac{1}{\sqrt{g_k}} - \frac{1}{\sqrt{g_k}}\frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2\\
- = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}\left[1 - \frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2
-\end{align}
-where we carried out the sum over $j$.    Now we have to start guessing a bit - using some inspiration to approximate this thing.  
-It turns out that we can simplify the bracketered term.  We have a sum like: 
-\begin{align}
-1- f_{k+1}  - \sum_{j={k+2}}^{N-1} f_j\prod_{m=k+1}^{j-1}(1-f_m) =& 1 - f_{k+1}  - f_{k+2}(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots\\
-=& (1-f_{k+2})(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots \\
-=& \prod_{j=k+1}^{N-1}(1-f_j)
-\end{align}
-So our complicated factor is just an exponential.  
-So we get 
-\begin{equation}
-  {\|\nabla_{\vect{z}}h(\vect{z})\|^2 = 
-    \Delta T \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[
-      -\sum_{j=k+1}^{N-1}\frac{g_j'}{2g_j^{3/2}}dW_j - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2}
-\end{equation}
-Now we can use the logarithmic expansion to rewrite the Wiener increment term
-\begin{align}
-d\log\left[g\right]=& \frac{g'}{g}dx +\frac{1}{2}\left(\frac{g''}{g} -\frac{g'^2}{g^2}\right)dx^2   \\ 
-=& \frac{g'}{g^{3/2}} dW +\frac{1}{2}\left(\frac{g''}{g^2} -\frac{g'^2}{g^3}\right)dT,
-\end{align}
-to write 
- \begin{align}
- \|\nabla_{\vect{z}}h(\vect{z})\|^2 = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}
- \exp\left[\sum_{j=k+1}^{N-1}-\frac{1}{2}\log\frac{g_{j+1}}{g_j}+\frac{\Delta T}{4}\left(\frac{g''}{g^2}
-  -\frac{g'^2}{g^3}\right) - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2\\
-  = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[\log\frac{g_{k+1}}{g_{N}}
-  +\frac{\Delta T}{2}\sum_{j=k+1}^{N-1}\left(\frac{g''}{g^2}-\frac{3g'^2}{2g^3}\right)\right]
-\\
-= & \Delta T  \sum_{k=0}^{N-1}\frac{g_{k+1}}{g_k}\frac{1}{g_N}\exp\left[
-\frac{\Delta T}{2}\sum_{j=k+1}^{N-1}\left(\frac{g''}{g^2} -\frac{3g'^2}{2g^3}\right)\right]
- \end{align}
-Now we can use the fact that the trace is invariant under cyclic permutations to write, $g_N$ as a loop average.
-  This follows since we cyclically permute all labels.
-  However, I think the integration over partial times will remain.  
-Can we drop the ``small'' terms?
-
-In continuum language we have
-\begin{equation}
-\|\nabla_{\vect{z}}h(\vect{z})\|^2 =\int_0^T dt\, \frac{g(t+dt)}{g(t)}\frac{1}{g(T)} \exp\left[\int_t^Tds\left(\frac{g''}{2g^2} -\frac{3g'^2}{4g^3}\right)\right]
-\end{equation}
-I think we can then argue that $g(t+dt)/g(t)\sim 1 + \order(N^{-1/2})$, and we can drop the correction at this point.  We can also write $g(T)$ as a sum over all permutations, since this is just a label.  
-
-So at the end of the day we get:
-\begin{equation}
-Z = \frac{1}{\sqrt{2\pi T}} \bigg<\bigg< e^{-\int dt V}[\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int dt \exp\left(\frac{g''}{2g^2} -\frac{3g'^2}{4g^3}\right)\right]^{-1/2}\bigg>\bigg>
-\end{equation}
-
-If we use the cyclic permutation argument we can rewrite that extra exponential.  We can also pull in the other potential to write this as:
-\begin{equation}
-Z = \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle \sigma^2\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(-\int_{0}^tds \sigma''(s) \sigma(s) + \int_0^T dt\, 2V(t)\right)\right]^{-1/2}\bigg>\bigg>
-\end{equation}
-
-From our work above: if we use the metric form of the partition function in Eq.~(\ref{eq:Ito_PI_metric}), we have 
-\begin{equation}
-V = \frac{3}{8}\frac{g'^2}{g^3},
-\end{equation}
-where we took $g\rightarrow 2g$ to get from the earlier work creating the path integral to the current convention.  
-So the partition function is 
-\begin{align}
-Z =& \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(\int_{0}^tds \frac{g''}{2g^2}-\frac{3g'^2}{4g^3} + \int_0^T dt\, \frac{3 g'^2}{4g^3}\right)\right]^{-1/2}\bigg>\bigg>\\
-=& \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(\int_{0}^tds \frac{g''}{g^2}+ \int_t^T dt\, \frac{3 g'^2}{2g^3}\right)\right]^{-1/2}\bigg>\bigg>
-\end{align}
-If however, we operator order in flat space there is no potential, since it cancels with the change in variables from the mean velocity.  
-
-
-\section{Putting into Numerical form-Weyl} 
-
-So let's put a bit of thought into how to handle 
-\begin{equation}
-Z = \int \prod_{k=1}^{N-1}dx_k \frac{\sqrt{\bar{g}_k}}{\sqrt{2\pi\Delta T}} \exp\left[- \frac{g(\bar{x}_k)(x_{k+1}-x_k)^2}{2\Delta T}\right],
-\end{equation}
-where we will use $\bar{x}_k = (x_{k+1}+x_k)/2$, and $\bar{g} = g(\bar{x})$.  
-\subsection{Transforming to a Gaussian}
-We can transform variable from positions $x_k$ to increments
-\begin{equation}
-u_k = x_{k+1} - x_k, k = 0,N-1,
-\end{equation}
-with
-\begin{equation}
-x_{k} = \sum_{j=0}^{k-1} u_j.
-\end{equation}
-This transformation has unit Jacobian.  
-\begin{equation}
-Z= \int du_k \delta\left(\sum u_k \right)\sqrt{\frac{\bar{g}_k}{2\pi \Delta T}} e^{-\frac{\bar{g}_ku_k^2}{2\Delta T}}.
-\end{equation}
-now where 
-\begin{equation}
-\bar{g}_k = g\left(\bar{x}_k\right) =  g\left(\frac{u_k}{2}+\sum_{j<k} u_j\right) 
-\end{equation}
-
-Let's now try to decouple the random variables.  Let us introduce 
-\begin{equation}
-dW_k = \sqrt{\bar{g}_k}u_k
-\end{equation}
-\comment{I amy miss some bars - all functions are understood to be functions of $\bar{x}_j$.  }
-We will need to calculate a Jacobian, and a euclidean norm of gradients.  In both cases we will need $\frac{\partial u_k}{\partial dW_j}$.  
-So we can iteratively define the increments from the Gaussians as 
-\begin{equation}
-u_k = \frac{1}{\sqrt{\bar{g}_k}}dW_k.
-\end{equation}
-
-\subsection{Partial derivatives of increments}
-We then have 
-\begin{align}
-\frac{\partial u_j}{\partial dW_k} &= \frac{\partial}{\partial dW_k}\frac{1}{\sqrt{g\left(\frac{u_j}{2} +\sum_{i<j}u_i\right)}}dW_j\\
-&= \frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\left(\frac{1}{2}\frac{du_j}{dW_k} + \sum_{i<j}\frac{d u_i}{dW_k}\right)\\
-\left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)\frac{du_j}{dW_k} &= \frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}\\
-\frac{du_j}{dW_k} &= \left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)^{-1}\left(\frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}\right).
-\end{align}
-Now approximate that leading coeffient to order $\Delta T$.  
-\begin{align}
-\left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)^{-1} \approx& 1 - \frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j + \frac{\bar{g}_j'^2}{16 \bar{g}_j^3}\Delta T\\
-\approx& \exp\left(-\frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right) \\
-=& e^{U_j}\label{eq:defn_exp_U}
-\end{align}
-where 
-\begin{equation}
-U_j = -\frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T
-\end{equation}
-\subsubsection{Logarithm}
-Now we can expand the increment in $\log g$ to order $\Delta T$.
-\begin{align}
-\log[g(x_{j+1})] -\log[g(x_{j})] =& \log[g\left(\bar{x}_j+ \frac{dx_j}{2}\right)] -\log[g\left(\bar{x}_j- \frac{dx_j}{2}\right)]\\
-=& \log\left[\bar{g}_j+ \frac{dx_j}{2}\bar{g}_j' + \frac{dx_j^2}{4}\bar{g}''_j\right]-\log\left[\bar{g}_j- \frac{dx_j}{2}\bar{g}_j' + \frac{dx_j^2}{4}\bar{g}''_j\right]\\
-=& \log\left[\bar{g}_j\right] + \frac{dx_j}{2}\frac{\bar{g}_j'}{g_j} + \frac{dx_j^2}{4}\frac{\bar{g}''_j}{g_j} - \frac{1}{2}\frac{dx_j^2}{4}\frac{\bar{g}_j'^2}{g^2}\nonumber\\
-&-\left(\log\left[\bar{g}_j\right] - \frac{dx_j}{2}\frac{\bar{g}_j'}{g_j} + \frac{dx_j^2}{4}\frac{\bar{g}''_j}{g_j} - \frac{1}{2}\frac{dx_j^2}{4}\frac{\bar{g}_j'^2}{g^2}\right)\\
-=& dx_j\frac{\bar{g}'_j}{\bar{g}_j}.\label{eq:log_strat}
-\end{align}
-So we can write 
-\begin{equation}
-\boxed{U_k=-\frac{1}{4}\log\left(\frac{\bar{g}_{j+1}}{\bar{g}_j}\right)+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T}
-\end{equation}
-
-\subsubsection{Putting derivative matrix into closed form}
-
-Let us now return to finding the derivative of u w.r.t w:
-\begin{equation}
-\boxed{\frac{du_j}{dW_k} = \frac{e^{U_j}}{\sqrt{\bar{g}_j}}\delta_{jk} -e^{U_j}\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}.}
-\end{equation}
-We can solve this by starting the recursion at $j,k=0$.  We have 
-\begin{gather}
-\frac{\partial u_0}{\partial dW_0} = \frac{e^{U_0}}{\sqrt{\bar{g}_0}}, \quad \frac{\partial u_0}{\partial dW_{j>0}} = 0
-\end{gather}
-Similarly the second increment is 
-\begin{align}
-\frac{\partial u_1}{\partial dW_0}& = -\frac{e^{U_0}}{\sqrt{\bar{g}_0}}\frac{e^{U_1}\bar{g}'_1}{2\bar{g}_1^{3/2}}dW_1, \quad \frac{\partial u_1}{\partial dW_1} = \frac{e^{U_1}}{\sqrt{\bar{g}_1}} ,\quad \frac{\partial u_1}{\partial dW_{j>1}} = 0.
-\end{align}
-The third increment is 
-\begin{align}
-\frac{\partial u_2}{\partial dW_0}& = -\frac{e^{U_2}\bar{g}'_2}{2\bar{g}_2^{3/2}}dW_2\left(1-\frac{e^{U_1}\bar{g}'_1}{2\bar{g}_1^{3/2}}dW_1\right)\frac{e^{U_0}}{\sqrt{\bar{g}_0}}\, \quad \frac{\partial u_2}{\partial dW_1} = -\frac{e^{U_1}}{\sqrt{\bar{g}_1}}\frac{e^{U_2}\bar{g}'_2}{2\bar{g}_2^{3/2}}dW_2, \quad \frac{\partial u_2}{\partial dW_2} = \frac{e^{U_2}}{\sqrt{\bar{g}_2}}, \quad \frac{\partial u_2}{\partial dW_{j>2}} = 0.
-\end{align}
-
-For the diagonal, we just get $\bar{g}_k^{-1/2}$. 
-So if we're off the diagonal we multiply by $\bar{g}_j' dW_j$ for the current row $j$, and sum up all of the preceding entries in this column.   
-Evidently a generic term off the diagonal will have components (row is $u_j$, column is $dW_k$ increment)
-\begin{equation}
-\boxed{\frac{\partial u_j}{\partial dW_k} = \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\delta_{jk} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\delta_{j,k+1} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\Theta(j\ge k+2),}
-\end{equation}
-with $j,k=0,1,\ldots N-1$. If we further define $dW_k = \sqrt{\Delta T}z_k$, then we should multiply this by $\sqrt{\Delta T}$.  
-
-\subsection{Jacobian}
-
-The first place we need this result is in calculating the jacobian:
-\begin{equation}
-\left|\frac{\partial u_j}{\partial dz_k}\right| = \prod_{k=0}^{N-1}\frac{e^{U_k}\sqrt{\Delta T}}{\sqrt{\bar{g}_k}}
-\end{equation}
-which follows because the matrix is in lower-triangular form.  The Jacobian from changing from positions to increments is also lower-triangular, and just gives unit determinant.  This factor will eat all of the prefactor normalizations, and slightly shift the potential.  
-
-After cancelling out the normalization prefactors we then have to deal with 
-\begin{equation}
-\exp\left[\sum_k U_k\right] = \prod_{j=0}^{N-1}\left( \frac{\bar{g}_j}{\bar{g}_{j+1}}\right)^{1/4}\exp\left( \sum_j\frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right) = \exp\left( \sum_j\frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right),
-\end{equation}
-since we have closed loops, so that prefactor just gives us unity.  
-
-
-\subsection{Euclidean norm of gradient}
-
-Next up we need to calculate the change in the normalization when constrained to loops that close.  The loop must close, or the increments sum to zero.   Our constraint is 
-\begin{align}
-  h(d\vect{W}) = x_n-x_0 = \sum_{j=0}^{N-1} u_j = \sum_{j=0}^{N-1}u_j\left[\sum_{k<j} u_k[dW] \right]=0
-\end{align}
-We will use the $z_k$, to ensure we carry out all of the transformations we need.  
-The Euclidean norm of the gradient is defined as 
-\begin{align}
-\|\nabla_{\vect{z}}h(\vect{z})\|^2 = &  \Delta T \|\nabla_{d\vect{W}}h(d\vect{W})\|^2\\
- = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2
-\end{align}
-We will plug in our form for $\frac{\partial u_j}{\partial dW_k} $, and simplify the sums.  
-\begin{align}
-\|\nabla_{\vect{z}}h(\vect{z})\|^2 = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{e^{U_k}}{\sqrt{\bar{g}_k}}\delta_{jk} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
-&\left.\qquad - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
- = & \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\left[1 - \frac{e^{U_{k+1}}\bar{g}'_{k+1}}{2\bar{g}^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\right]^2
-\end{align}
-where we carried out the sum over $j$.    Now we have to start guessing a bit - using some inspiration to approximate this thing.  It turns out that we can simplify the bracketed term.  We will just start writing out the sum starting at $k+2$, and then factoring terms.  It will be clear that wecan then proceed to just factor all of the terms up.  
-\begin{align}
-1- f_{k+1}  - \sum_{j={k+2}}^{N-1} f_j\prod_{m=k+1}^{j-1}(1-f_m) =& 1 - f_{k+1}  - f_{k+2}(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots\\
-=& (1-f_{k+2})(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots \\
-=& \prod_{j=k+1}^{N-1}(1-f_j)
-\end{align}
-Now that is in a form that begs to be exponentiated.  We can plug in $e^{U_m}$ using the definition in Eq.~(\ref{eq:defn_exp_U}), and simplify this a bit.  
-So we get 
-\begin{align}
-\|\nabla_{\vect{z}}h(\vect{z})\|^2 =& \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\left[\prod_{m=k+1}^{N-1}\left(1 -\frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\right]^2\\
-=& \Delta T  \sum_{k=0}^{N-1}\frac{e^{U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\left[1 -\left(1 - \frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j + \frac{\bar{g}_j'^2}{16 \bar{g}_j^3}\Delta T\right)\frac{\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right]^2\\
-\approx& \Delta T  \sum_{k=0}^{N-1}\frac{e^{U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\left(1 -\frac{\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m + \frac{\bar{g}_j'^2}{8\bar{g}_j^{3} }\Delta T\right)\\
-\approx& \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right)\\
-\approx& \Delta T  \sum_{k=0}^{N-1}\frac{1}{\bar{g}_k}\exp\left(-\frac{\bar{g}_k'}{2\bar{g}_k^{3/2} }dW_k+ \frac{\bar{g}_k'^2}{16 \bar{g}_k^3}\Delta T\right)\prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right)
-\end{align}
-Now we can use the logarithmic expansion in Eq.(~\ref{eq:log_strat}) to rewrite the Wiener increment term
-\begin{align}
--\frac{g'_m}{g_m^{3/2}} dW_m = -\frac{g'_m}{g_m'} dx = \ln\frac{g_m}{g_{m+1}}
-\end{align}
-We have a sum of these: 
-\begin{equation}
-\prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right) = \prod_{m=k+1}^{N-1} \frac{g_m}{g_{m+1}} = \frac{g_{k+1}}{g_N}.
-\end{equation}
-If this came out with a different sign we could be dancing?  
-So our normalization factor is 
-\begin{equation}
-\boxed{\|\nabla_{\vect{z}}h(\vect{z})\|^2 = \Delta T \sum_{k=0}^{N-1}\frac{1}{\bar{g}_k}\frac{\bar{g}_{k+1}}{\bar{g}_{N}} \approx \frac{ T}{g_N} + \order(N^{-1/2})}
-\end{equation}
-
-Fuck.  So that potential has to do something.   Or this is really just wrong -> check logic for extracting a mean energy.  
-Maybe we forgot an extra term?  
-
-So if we pull together the Jacobian and Euclidean norm factors we get 
-\begin{align}
-\boxed{Z= \left<\left< \sqrt{\frac{g_N}{2\pi T}}  e^{\Delta T\sum_{m}\frac{\bar{g}'^2}{32g^3}-V}\right>\right>_{g}},
-\end{align}
-where the loops are to be taken with respect to the $g$ loops.  There may be an additional potentital arising rom operator ordering.  
-\comment{replacing constants with their loop average? what order should this be done in?  average of functions, or function of averages?  }
+% \exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -(x_{k+1}-x_k)\frac{g'}{2g}\right]\nonumber\\
+% &\times\exp\left[ -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{3(g')^2}{4g^{3}}\right)\right]
+% \end{align}
+
+% Now we can use 
+% \begin{equation}
+% \frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{1}{2}\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right) = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{i\hbar\Delta T}{2}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right)
+% \end{equation}
+% The propagator is 
+% \begin{align}
+% \langle x_f| e^{-i\frac{H}{\hbar}t} |x_i\rangle =& g_f^{-1/4}g_i^{-1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
+% \exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T } -\frac{1}{2}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] \right]\nonumber\\
+% &\times\exp\left[ \frac{i\hbar\Delta T}{4}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) -\frac{i\hbar\Delta T}{8} \left(\frac{g''}{g^{2}}- \frac{3(g')^2}{4g^{3}}\right)\right]\\
+% =& g_f^{-3/4}g_i^{1/4}\int\prod_k dx_k\sqrt{\frac{g}{2\pi i\hbar\Delta T}}
+% \exp\left[\frac{ig (x_{k+1}-x_k)^2}{2\hbar\Delta T }+ \frac{i\hbar\Delta T}{8}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) -\frac{i\hbar\Delta T}{32}\frac{(g')^2}{g^3}\right],
+% \end{align}
+% which agrees with the transformed path integral picture.  
+
+
+% \section{Dielectric as  a Metric}
+
+% How about we force that differential operator into Laplace-Beltrami form
+% \begin{align}
+% H(x) &= -\frac{1}{\sqrt{\epsilon}}\nabla^2\frac{1}{\sqrt{\epsilon}} \\
+% &= -\frac{1}{\sqrt{\epsilon}}\partial_x\left[\frac{1}{\sqrt{\epsilon}}\partial_x  + \left(\partial_x\frac{1 }{\sqrt{\epsilon} }\right)\right] 
+% \end{align}
+% Let's now try to put this in operator form, using $p = -ig^{-1/4}\partial_x g^{1/4}$.   Let us also choose $g = \epsilon$.
+% \begin{align}
+% H(x)&= -\frac{1}{\sqrt{g}}ig^{1/4}pg^{-1/4}\left[\frac{1}{\sqrt{g}}ig^{1/4}p g^{-1/4}  -i\left[\frac{1}{\sqrt{g}},p\right]\right]\\
+% %&= g^{-1/4}pg^{-1/2}p g^{-1/4}  -g^{-1/4}pg^{-1/4}\left[\frac{1}{\sqrt{g}},p\right]\\
+% &= g^{-1/4}p^2g^{-3/4}
+% \end{align}
+
+% Intriguingly, the coordinate transform viewpoint says:
+% \begin{align}
+% \Delta_{LB} =& \frac{1}{\sqrt{g}}\partial_x \frac{1}{\sqrt{g}}\partial_x\\
+% =& \frac{\partial x}{\partial q}\partial_x \frac{\partial x}{\partial q}\partial_x\\
+% =& \partial_q^2
+% \end{align}
+% where $\sqrt{g} = \frac{\partial q}{\partial x}$, if $q$ are the initial flat coordinates.  In which case, Dan's claim that the Laplace-Beltrami operator is ``trivial'' stands quite readily.  
+% So if we take $\sqrt{g} = \sqrt{\epsilon}$ this says that lengths are increased by $\sqrt{\epsilon(x)} = n(x)$ in this space.   The coordinate transformation would have to be $q(x) = \int_{x_0}^x dx' \sqrt{\epsilon(x')}$.(\comment{where $q$ are the initial flat coordinates})
+
+
+% Let's now try to develop this as a path integral.  
+% \subsection{Ito ordering}
+% If we Ito order we have
+% \begin{align}
+% H =& p^2 g^{-1} + [g^{-1/4},p^2]g^{-3/4}\\
+% % =& p^2 g^{-1} -i\frac{1}{4}(g^{-5/4}g'p + p g^{-5/4}g')g^{-3/4}\\
+% % =& p^2 g^{-1} -\frac{i}{4}pg^{-2}g' -\frac{i}{4}[g^{-5/4}g',p]g^{-3/4}-\frac{i}{4} p g^{-2}g'\\
+% =& p^2 g^{-1} -\frac{i}{2}pg^{-2}g' +\frac{1}{4}\left(-\frac{5}{4}g^{-3}g'^2 + g^{-2}g''\right)
+% \end{align}
+
+% We then have a path integral
+% \begin{align}
+% \Tr[e^{-HT}] =& \int \prod_{k=1}^N\frac{dx_k dp_k}{2\pi}\, \exp\left\{ -\left[\frac{p_k^2}{g} -\frac{i}{2}p\frac{g'}{g^2}+\frac{1}{4}\left(-\frac{5g'^2}{4g^{3}}+ \frac{g''}{g^2}\right)\right]\Delta T+ip_k(x_{k+1}-x_k)  \right\}\\
+% % =& \int \prod_{k=1}^N\frac{dx_k dp_k}{2\pi}\, \exp\left[ -\frac{\Delta T}{g}p_k^2 +ip_k\left(x_{k+1}-x_k\frac{g'}{2g^2}\Delta T\right) - \frac{\Delta T}{4}\left(-\frac{5g'^2}{4g^{3}}+ \frac{g''}{g^2}\right) \right]\\
+% % =& \int \prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g}{4\Delta T}\left(x_{k+1}-x_k\frac{g'}{2g^2}\Delta T\right)^2 + \frac{\Delta T}{4}\left(\frac{5g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
+% % =&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + (x_{k+1}-x_k)\frac{g'}{4g} - \frac{g'^2}{4g^3}\Delta T+ \frac{\Delta T}{4}\left(\frac{5g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
+% =&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + (x_{k+1}-x_k)\frac{g'}{4g} + \frac{\Delta T}{4}\left(\frac{g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]
+% \end{align}
+
+% Now we write the linear velocity term as a logarithm using
+% \begin{equation}
+% \frac{g'}{g}\Delta x = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  -\frac{1}{2}\Delta x^2\left(\frac{g''}{g} -\frac{(g')^2}{g^2}\right) = \log\left[\frac{g(x_{k+1})}{g(x_k)}\right]  +\frac{\Delta T}{g}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right),
+% \end{equation}
+% where we used $\langle\langle \Delta x^2\rangle\rangle = 2\Delta T g^{-1}$.  
+
+% The path integral is now
+% \begin{align}
+% \tr[e^{-HT}]=&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left\{ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + \frac{1}{4}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right] \right\} \nonumber\\
+% &\times \exp\left[\frac{\Delta T}{4g}\left(\frac{g''}{g^2} -\frac{(g')^2}{g^3}\right) + \frac{\Delta T}{4}\left(\frac{g'^2}{4g^{3}}- \frac{g''}{g^2}\right) \right]\\
+% =&  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left\{ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T} + \frac{1}{4}\log\left[\frac{g(x_{k+1})}{g(x_k)}\right]-\frac{3\Delta T}{4g}\frac{(g')^2}{g^3} \right\}
+% \end{align}
+% Now since we have a loop integral, the log does yields 
+% \begin{equation}
+% \prod_{k=0}^{N-1} \log\left[ \frac{g(x_{k+1})}{g(x_k)}\right] = \log\left[ \frac{g(x_{N})}{g(x_0)}\right] = 0
+% \end{equation}
+
+% So we get the Ito ordered path integral
+% \begin{equation}
+% \boxed{\tr[e^{-g^{-1/4}p^2g^{-3/4}T}]=  \int\prod_{k=1}^Ndx_k \sqrt{\frac{g_k}{4\pi \Delta T}}\, \exp\left[ -\frac{g(x_{k+1}-x_k)^2}{4\Delta T}-\frac{3\Delta T}{4g}\frac{(g')^2}{g^3} \right]}\label{eq:Ito_PI_metric}
+% \end{equation}
+
+% \subsection{Weyl Ordered Path Integral}
+
+% Let's set about Weyl ordering that Hamiltonian.  
+% \subsubsection{Various permutations of operators}
+
+% We will need the anti-standard order expression
+% \begin{equation}
+% H = p^2 g^{-1} -\frac{i}{2}pg^{-2}g' +\frac{1}{4}\left(-\frac{5}{4}g^{-3}g'^2 + g^{-2}g''\right).
+% \end{equation}
+
+% In addition we need the corresponding expression in standard order
+% \begin{align}
+% H =& g^{-1/4}p^2g^{-3/4}\\
+% % =& g^{-1}p^2 + g^{-1/4}[p^2,g^{-3/4}]\\
+% % =& g^{-1}p^2 +\frac{3i}{4}g^{-1/4}\left(pg'g^{-7/4} + g'g^{-7/4}p\right)\\
+% % =& g^{-1}p^2 +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3i}{4}g^{-1/4}[p,g'g^{-7/4}]\\
+% =& g^{-1}p^2 +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3}{4}\left( \frac{g''}{g^2} -\frac{7g'^2}{4g^3}\right)
+% \end{align}
+
+% And finally, $g$ in the middle.  
+% \begin{align}
+% H =& g^{-1/4}p^2g^{-3/4}\\
+% % =& \left(pg^{-1/4}+ [g^{-1/4},p]\right)\left( g^{-3/4}p  + [p,g^{-3/4}]\right)\\
+% % =& \left(pg^{-1/4}-\frac{i}{4}g'g^{-5/4}\right)\left( g^{-3/4}p  +i\frac{3}{4}g'g^{-7/4}\right)\\
+% =& pg^{-1}p -\frac{i}{4}g'g^{-2}p  +i\frac{3}{4}pg'g^{-2} + \frac{3}{16}\frac{g'^2}{g^3}
+% \end{align}
+
+
+% So we have 
+% \begin{align}
+% H =& [pg^{-1}p]_W + \frac{1}{4}\left[ -\frac{i}{2}p\frac{g'}{g^{2}} +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) +\frac{3i}{2} \frac{g'}{g^2}p  + \frac{3}{4}\left( \frac{g''}{g^2} -\frac{7g'^2}{4g^3}\right) -\frac{i}{2}g'g^{-2}p  +i\frac{3}{2}pg'g^{-2} + \frac{3}{8}\frac{g'^2}{g^3}\right]\\
+% %=& [pg^{-1}p]_W + \frac{1}{4}\left[ ip\frac{g'}{g^2} +i\frac{g'}{g^2}p +\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right]\\
+% =& [pg^{-1}p]_W + \frac{i}{2}\left[p\frac{g'}{g^2}\right]_W +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right)
+% \end{align}
+% So we get a velocity in this case, due to the asymmetry of the operators.  
+
+% Using the midpoint rule for  Weyl ordered operators, we then can form the path integral as 
+% \begin{align}
+% \tr[e^{-HT}_W] =& \int \prod_k \frac{dx_kdp_k}{2\pi}\exp\left[-\left(p^2\bar{g}^{-1} + \frac{i}{2}\left[p\frac{\bar{g}'}{\bar{g}^2}\right]_W +\frac{1}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right)\right)\Delta T + ip_k(x_{k+1}-x_k)\right]\\
+% % =& \int \prod_k \frac{dx_kdp_k}{2\pi}\exp\left[-p^2\bar{g}^{-1}\Delta T - ip_k\left(x_{k+1}-x_k-\frac{\bar{g}'}{2\bar{g}^2}\Delta T\right) -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
+% % =& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}}{4\Delta T}\left(x_{k+1}-x_k-\frac{\bar{g}'}{2\bar{g}^2}\Delta T\right)^2 -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
+% % =& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T} +(x_{k+1}-x_k)\frac{\bar{g}'}{4\bar{g}} -\frac{\bar{g}'^2}{16 g^3}\Delta T  -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{5g'^2}{4g^3}\right) \right]\\
+% =& \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T} +(x_{k+1}-x_k)\frac{\bar{g}'}{4\bar{g}}  -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) \right]
+% \end{align}
+
+% So now we need to carry out the log expansion for $\alpha=0$.  Fortunately, to order $\Delta T$ we have 
+% \begin{equation}
+% \log\left[\frac{g(x_{k+1})}{g(x_k)}\right] = \frac{\bar{g}'}{\bar{g}}(x_{k+1}-x_k)
+% \end{equation}
+% So we have no corrections to the potential from eliminating the velocity, since the log drops out for a trace.  
+% \begin{equation}
+% \boxed{\tr[e^{-HT}]_W= \int \prod_k dx_k\sqrt{\frac{\bar{g}}{4\pi\Delta T}}\exp\left[-\frac{\bar{g}(x_{k+1}-x_k)^2}{4\Delta T}   -\frac{\Delta T}{4}\left(\frac{g''}{g^2}-\frac{g'^2}{g^3}\right) \right]}
+% \end{equation}
+
+
+% \section{Dielectric as in flat space}
+% \subsection{Ito ordering}
+
+
+% Let's consider trying to find
+% \begin{equation}
+% E = \int \frac{dT}{T\sqrt{4\pi T}}  \tr e^{-\sigma p^2\sigma T}
+% \end{equation}
+
+% We will choose to adopt anti-standard order(this gives an Ito calculus).
+% \begin{align}
+% \sigma p^2\sigma   %= (p\sigma + i\sigma')p\sigma \\
+% & = p\sigma p\sigma + i\sigma' p \sigma\\
+% %& = p(p\sigma + i\sigma')\sigma + i(p\sigma' + i \sigma'') \sigma\\
+% & = p^2\sigma^2 + 2ip\sigma'\sigma- \sigma''\sigma
+% \end{align}
+
+
+% \subsection{Configuration Space}
+
+% We can carry out the momentum integrals, which gives us 
+% \begin{align}
+% \tr e^{-\sigma p^2\sigma T} &= \int dx_k dp_k \delta(x_N-x_0)e^{-\frac{\Delta T}{2} p_k^2\sigma^2_{k} - ip(\sigma'\sigma \Delta T) + \frac{\Delta T}{2}\sigma''\sigma+ i p_k(x_{k+1}-x_{k})}\\
+% &= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2_{k}}} e^{-\frac{[x_{k+1}-x_{k}-(\sigma'\sigma)_{k}\Delta T]^2}{2\Delta T\sigma^2_{k}}  + \frac{1}{2}\Delta T(\sigma''\sigma)_{k}}\\
+% &= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2_{k}}} e^{-\frac{(x_{k+1}-x_{k})^2}{2\sigma^2_{k}\Delta T}  +(x_{k+1}-x_k)\frac{\sigma'}{\sigma}   + \frac{1}{2}\Delta T(\sigma''\sigma - \sigma'^2)_{k}}.
+% \end{align}
+
+% We will now explicitly deal with the linear velocity term.  This will produce a normalization constant.   
+% We can then expand a logarithm as 
+% \begin{align}
+% \log\left[\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right] =& \log\left[  1 + \Delta x \frac{\sigma'}{\sigma}  + \frac{1}{2}\Delta x^2\frac{\sigma''}{\sigma}\right]= \Delta x\frac{\sigma'}{\sigma} + \frac{1}{2}\Delta x^2\left(\frac{\sigma''}{\sigma} - \frac{\sigma'^2}{\sigma^2}\right)
+% \end{align}
+% If we use this log substitution immediately inside the exponential, we get
+% \begin{equation}
+% \exp\left[\Delta x\frac{\sigma'}{\sigma}\right] = \exp\left[\log\left[\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right] - \frac{1}{2}\sigma^2\Delta T\left(\frac{\sigma''}{\sigma} - \frac{\sigma'^2}{\sigma^2}\right)\right],
+% \end{equation}
+% which would cancel out the potential.  
+
+% We will also need
+% \begin{equation}
+% \prod_{k=0}^{N-1} \exp\left[\log\left(\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right)\right] =  \exp\left[\prod_{k=0}^{N-1}\log\left(\frac{\sigma(x_{k+1})}{\sigma(x_k)}\right)\right] = \frac{\sigma(x_N)}{\sigma(x_0)} = 1,
+% \end{equation}
+% where we employed $x_N = x_0$.  
+
+% Then we just have 
+% \begin{equation}
+% Z= \int dx_k \delta(x_N-x_0)\frac{1}{\sqrt{4\pi \Delta T\sigma^2(x_{k})}} e^{-\frac{(x_{k+1}-x_{k})^2}{2\sigma^2(x_k)\Delta T}}.
+% \end{equation}
+
+
+% \section{Putting into Numerical form-Ito$g$} 
+
+% So let's put a bit of thought into how to handle 
+% \begin{equation}
+% Z = \int \prod_{k=1}^{N-1}dx_k \frac{\sqrt{g_k}}{\sqrt{2\pi\Delta T}} \exp\left[- \frac{g(x_k)(x_{k+1}-x_k)^2}{2\Delta T}\right]
+% \end{equation}
+
+% \subsection{Transforming to a Gaussian}
+% We can transform variable from positions $x_k$ to increments
+% \begin{equation}
+% u_k = x_{k+1} - x_k, k = 0,N-1,
+% \end{equation}
+% with
+% \begin{equation}
+% x_{k} = \sum_{j=0}^{k-1} u_j.
+% \end{equation}
+% This transformation has unit Jacobian.  
+% \begin{equation}
+% Z= \int du_k \delta\left(\sum u_k \right)\sqrt{\frac{g[x_k(u)]}{2\pi \Delta T}} e^{-\frac{g[x(u)]u_k^2}{2\Delta T}}.
+% \end{equation}
+
+% Let's now try to decouple the random variables.  Let us introduce 
+% \begin{equation}
+% dW_k = \sqrt{g_k}u_k
+% \end{equation}
+
+% We will need to calculate a Jacobian, and a euclidean norm of gradients.  In both cases we will need $\frac{\partial u_k}{\partial dW_j}$.  
+% So we can iteratively define the increments from the Gaussians as 
+% \begin{equation}
+% u_k = \frac{1}{\sqrt{g_k[x_k(u_{j<k})]}}dW_k.
+% \end{equation}
+
+% We then have 
+% \begin{align}
+% \frac{\partial u_j}{\partial dW_k} &= \frac{\partial}{\partial dW_k}\frac{1}{\sqrt{g_j[(u_{i<j})]}}dW_j\\
+% &= \frac{1}{\sqrt{g_j}}\delta_{jk} -\frac{g_j'}{2g^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}.
+% \end{align}
+% So we start at $j,k=0$.  We can solve this laboriously, or quite quickly by starting the recursion at zero.  
+% We have 
+% \begin{gather}
+% \frac{\partial u_0}{\partial dW_0} = \frac{1}{\sqrt{g_0}}, \quad \frac{\partial u_0}{\partial dW_{j>0}} = 0
+% \end{gather}
+% Similarly the second increment is 
+% \begin{align}
+% \frac{\partial u_1}{\partial dW_0}& = -\frac{1}{\sqrt{g_0}}\frac{g'_1}{2g_1^{3/2}}dW_1, \quad \frac{\partial u_1}{\partial dW_1} = \frac{1}{\sqrt{g_1}} ,\quad \frac{\partial u_1}{\partial dW_{j>1}} = 0.
+% \end{align}
+% The third increment is 
+% \begin{align}
+% \frac{\partial u_2}{\partial dW_0}& = -\frac{g'_2}{2g_2^{3/2}}dW_2\left(1-\frac{g'_1}{2g_1^{3/2}}dW_1\right)\frac{1}{\sqrt{g_0}}\, \quad \frac{\partial u_2}{\partial dW_1} = -\frac{1}{\sqrt{g_1}}\frac{g'_2}{2g_2^{3/2}}dW_2, \quad \frac{\partial u_2}{\partial dW_2} = \frac{1}{\sqrt{g_2}}, \quad \frac{\partial u_2}{\partial dW_{j>2}} = 0.
+% \end{align}
+
+% For the diagonal, we just get $g_k^{-1/2}$. 
+% So if we're off the diagonal we multiply by $g_j' dW_j$ for the current row $j$, and sum up all of the preceding entries in this column.   
+
+% This is enough to infer the pattern
+% \begin{align}
+% &\frac{\partial u_j}{\partial dW_k} \nonumber\\
+% =& \left( 
+% \begin{array}{lllllll}
+% \frac{1}{\sqrt{g_0}}      & 0     &   \\
+% -\frac{1}{\sqrt{g_0}}dW_1\frac{g'_{1}}{2g^{3/2}_1}    & \frac{1}{\sqrt{g_1}}     & 0 \\
+% -\frac{1}{\sqrt{g_0}}\left(1-\frac{g'_{1}}{2g^{3/2}_1}dW_1\right)\frac{g'_{2}}{2g^{3/2}_2}dW_2 & -\frac{1}{\sqrt{g_1}}\frac{g'_{2}}{2g^{3/2}_2}dW_2    & \frac{1}{\sqrt{g_2}}   & 0 & 0 \\
+% -\frac{1}{\sqrt{g_0}}\left(1-\frac{g'_{1}}{2g^{3/2}_1}dW_1\right)\left(1-\frac{g'_{2}}{2g^{3/2}_2}dW_2\right)\frac{g'_{3}}{2g^{3/2}_3}dW_3 &  -\frac{1}{\sqrt{g_1}}(1-\frac{g'_{2}}{2g^{3/2}_2}dW_2)\frac{g'_{3}}{2g^{3/2}_3}dW_3     &  -\frac{1}{\sqrt{g_2}}\frac{g'_{3}}{2g^{3/2}_3}dW_3 &\frac{1}{\sqrt{g_3}} & 0 \\
+% \vdots & & & \ddots
+% \end{array}
+% \right)
+% \end{align}
+% Evidently a generic term off the diagonal will have components (row is $u_j$, column is $dW_k$ increment)
+% \begin{equation}
+% \boxed{\frac{\partial u_j}{\partial dW_k} =
+%  \frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1}
+%  - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2),}
+% \end{equation}
+% with $j,k=0,1,\ldots N-1$. If we further define $dW_k = \sqrt{\Delta T}z_k$, then we should multiply this by $\sqrt{\Delta T}$.  
+
+% \subsection{Jacobian}
+
+% The first place we need this result is in calculating the jacobian:
+% \begin{equation}
+% \left|\frac{\partial u_j}{\partial dz_k}\right| = \prod_{k=0}^{N-1}\frac{\sqrt{\Delta T}}{\sqrt{g_k}},
+% \end{equation}
+% which follows because the matrix is in lower-triangular form.
+%   The Jacobian from changing from positions to increments is also lower-triangular, and just gives unit determinant.
+%   This factor will eat all of the prefactor normalizations.  
+
+% \subsection{Euclidean norm of gradient}
+
+% Next up we need to calculate the change in the normalization when constrained to loops that close.
+%   The loop must close, or the increments sum to zero.
+%    Our constraint is 
+% \begin{align}
+%   h(d\vect{W}) = x_n-x_0 = \sum_{j=0}^{N-1} u_j = \sum_{j=0}^{N-1}u_j\left[\sum_{k<j} u_k[dW] \right]=0
+% \end{align}
+% The Euclidean norm of the gradient is defined as 
+% \begin{align}
+% \|\nabla_{\vect{z}}h(\vect{z})\|^2 = &  \Delta T \|\nabla_{d\vect{W}}h(d\vect{W})\|^2\\
+% %  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2\\
+% %  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{1}{\sqrt{g_k}}\delta_{jk} - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
+% % &\left.\qquad - \frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
+% %  = & \Delta T  \sum_{k=0}^{N-1}\left[\frac{1}{\sqrt{g_k}} - \frac{1}{\sqrt{g_k}}\frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{1}{\sqrt{g_k}}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2\\
+%  = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}\left[1 - \frac{g'_{k+1}}{2g^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{g'_j}{2g^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{g'_m}{2g^{3/2}_m}dW_m\right)\right]^2
+% \end{align}
+% where we carried out the sum over $j$.    Now we have to start guessing a bit - using some inspiration to approximate this thing.  
+% It turns out that we can simplify the bracketered term.  We have a sum like: 
+% \begin{align}
+% 1- f_{k+1}  - \sum_{j={k+2}}^{N-1} f_j\prod_{m=k+1}^{j-1}(1-f_m) =& 1 - f_{k+1}  - f_{k+2}(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots\\
+% =& (1-f_{k+2})(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots \\
+% =& \prod_{j=k+1}^{N-1}(1-f_j)
+% \end{align}
+% So our complicated factor is just an exponential.  
+% So we get 
+% \begin{equation}
+%   {\|\nabla_{\vect{z}}h(\vect{z})\|^2 = 
+%     \Delta T \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[
+%       -\sum_{j=k+1}^{N-1}\frac{g_j'}{2g_j^{3/2}}dW_j - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2}
+% \end{equation}
+% Now we can use the logarithmic expansion to rewrite the Wiener increment term
+% \begin{align}
+% d\log\left[g\right]=& \frac{g'}{g}dx +\frac{1}{2}\left(\frac{g''}{g} -\frac{g'^2}{g^2}\right)dx^2   \\ 
+% =& \frac{g'}{g^{3/2}} dW +\frac{1}{2}\left(\frac{g''}{g^2} -\frac{g'^2}{g^3}\right)dT,
+% \end{align}
+% to write 
+%  \begin{align}
+%  \|\nabla_{\vect{z}}h(\vect{z})\|^2 = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}
+%  \exp\left[\sum_{j=k+1}^{N-1}-\frac{1}{2}\log\frac{g_{j+1}}{g_j}+\frac{\Delta T}{4}\left(\frac{g''}{g^2}
+%   -\frac{g'^2}{g^3}\right) - \Delta T\frac{g_j'^2}{8g_j^3}\right]^2\\
+%   = & \Delta T  \sum_{k=0}^{N-1}\frac{1}{g_k}\exp\left[\log\frac{g_{k+1}}{g_{N}}
+%   +\frac{\Delta T}{2}\sum_{j=k+1}^{N-1}\left(\frac{g''}{g^2}-\frac{3g'^2}{2g^3}\right)\right]
+% \\
+% = & \Delta T  \sum_{k=0}^{N-1}\frac{g_{k+1}}{g_k}\frac{1}{g_N}\exp\left[
+% \frac{\Delta T}{2}\sum_{j=k+1}^{N-1}\left(\frac{g''}{g^2} -\frac{3g'^2}{2g^3}\right)\right]
+%  \end{align}
+% Now we can use the fact that the trace is invariant under cyclic permutations to write, $g_N$ as a loop average.
+%   This follows since we cyclically permute all labels.
+%   However, I think the integration over partial times will remain.  
+% Can we drop the ``small'' terms?
+
+% In continuum language we have
+% \begin{equation}
+% \|\nabla_{\vect{z}}h(\vect{z})\|^2 =\int_0^T dt\, \frac{g(t+dt)}{g(t)}\frac{1}{g(T)} \exp\left[\int_t^Tds\left(\frac{g''}{2g^2} -\frac{3g'^2}{4g^3}\right)\right]
+% \end{equation}
+% I think we can then argue that $g(t+dt)/g(t)\sim 1 + \order(N^{-1/2})$, and we can drop the correction at this point.  We can also write $g(T)$ as a sum over all permutations, since this is just a label.  
+
+% So at the end of the day we get:
+% \begin{equation}
+% Z = \frac{1}{\sqrt{2\pi T}} \bigg<\bigg< e^{-\int dt V}[\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int dt \exp\left(\frac{g''}{2g^2} -\frac{3g'^2}{4g^3}\right)\right]^{-1/2}\bigg>\bigg>
+% \end{equation}
+
+% If we use the cyclic permutation argument we can rewrite that extra exponential.  We can also pull in the other potential to write this as:
+% \begin{equation}
+% Z = \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle \sigma^2\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(-\int_{0}^tds \sigma''(s) \sigma(s) + \int_0^T dt\, 2V(t)\right)\right]^{-1/2}\bigg>\bigg>
+% \end{equation}
+
+% From our work above: if we use the metric form of the partition function in Eq.~(\ref{eq:Ito_PI_metric}), we have 
+% \begin{equation}
+% V = \frac{3}{8}\frac{g'^2}{g^3},
+% \end{equation}
+% where we took $g\rightarrow 2g$ to get from the earlier work creating the path integral to the current convention.  
+% So the partition function is 
+% \begin{align}
+% Z =& \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(\int_{0}^tds \frac{g''}{2g^2}-\frac{3g'^2}{4g^3} + \int_0^T dt\, \frac{3 g'^2}{4g^3}\right)\right]^{-1/2}\bigg>\bigg>\\
+% =& \frac{1}{\sqrt{2\pi T}}\bigg<\bigg< [\langle g^{-1}\rangle_{\text{loop}}]^{-1/2}\left[\frac{1}{T}\int_0^T dt \exp\left(\int_{0}^tds \frac{g''}{g^2}+ \int_t^T dt\, \frac{3 g'^2}{2g^3}\right)\right]^{-1/2}\bigg>\bigg>
+% \end{align}
+% If however, we operator order in flat space there is no potential, since it cancels with the change in variables from the mean velocity.  
+
+
+% \section{Putting into Numerical form-Weyl} 
+
+% So let's put a bit of thought into how to handle 
+% \begin{equation}
+% Z = \int \prod_{k=1}^{N-1}dx_k \frac{\sqrt{\bar{g}_k}}{\sqrt{2\pi\Delta T}} \exp\left[- \frac{g(\bar{x}_k)(x_{k+1}-x_k)^2}{2\Delta T}\right],
+% \end{equation}
+% where we will use $\bar{x}_k = (x_{k+1}+x_k)/2$, and $\bar{g} = g(\bar{x})$.  
+% \subsection{Transforming to a Gaussian}
+% We can transform variable from positions $x_k$ to increments
+% \begin{equation}
+% u_k = x_{k+1} - x_k, k = 0,N-1,
+% \end{equation}
+% with
+% \begin{equation}
+% x_{k} = \sum_{j=0}^{k-1} u_j.
+% \end{equation}
+% This transformation has unit Jacobian.  
+% \begin{equation}
+% Z= \int du_k \delta\left(\sum u_k \right)\sqrt{\frac{\bar{g}_k}{2\pi \Delta T}} e^{-\frac{\bar{g}_ku_k^2}{2\Delta T}}.
+% \end{equation}
+% now where 
+% \begin{equation}
+% \bar{g}_k = g\left(\bar{x}_k\right) =  g\left(\frac{u_k}{2}+\sum_{j<k} u_j\right) 
+% \end{equation}
+
+% Let's now try to decouple the random variables.  Let us introduce 
+% \begin{equation}
+% dW_k = \sqrt{\bar{g}_k}u_k
+% \end{equation}
+% \comment{I amy miss some bars - all functions are understood to be functions of $\bar{x}_j$.  }
+% We will need to calculate a Jacobian, and a euclidean norm of gradients.  In both cases we will need $\frac{\partial u_k}{\partial dW_j}$.  
+% So we can iteratively define the increments from the Gaussians as 
+% \begin{equation}
+% u_k = \frac{1}{\sqrt{\bar{g}_k}}dW_k.
+% \end{equation}
+
+% \subsection{Partial derivatives of increments}
+% We then have 
+% \begin{align}
+% \frac{\partial u_j}{\partial dW_k} &= \frac{\partial}{\partial dW_k}\frac{1}{\sqrt{g\left(\frac{u_j}{2} +\sum_{i<j}u_i\right)}}dW_j\\
+% &= \frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\left(\frac{1}{2}\frac{du_j}{dW_k} + \sum_{i<j}\frac{d u_i}{dW_k}\right)\\
+% \left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)\frac{du_j}{dW_k} &= \frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}\\
+% \frac{du_j}{dW_k} &= \left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)^{-1}\left(\frac{1}{\sqrt{\bar{g}_j}}\delta_{jk} -\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}\right).
+% \end{align}
+% Now approximate that leading coeffient to order $\Delta T$.  
+% \begin{align}
+% \left(1 + \frac{\bar{g}_j'}{4\bar{g}^{3/2}_j}dW_j\right)^{-1} \approx& 1 - \frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j + \frac{\bar{g}_j'^2}{16 \bar{g}_j^3}\Delta T\\
+% \approx& \exp\left(-\frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right) \\
+% =& e^{U_j}\label{eq:defn_exp_U}
+% \end{align}
+% where 
+% \begin{equation}
+% U_j = -\frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T
+% \end{equation}
+% \subsubsection{Logarithm}
+% Now we can expand the increment in $\log g$ to order $\Delta T$.
+% \begin{align}
+% \log[g(x_{j+1})] -\log[g(x_{j})] =& \log[g\left(\bar{x}_j+ \frac{dx_j}{2}\right)] -\log[g\left(\bar{x}_j- \frac{dx_j}{2}\right)]\\
+% =& \log\left[\bar{g}_j+ \frac{dx_j}{2}\bar{g}_j' + \frac{dx_j^2}{4}\bar{g}''_j\right]-\log\left[\bar{g}_j- \frac{dx_j}{2}\bar{g}_j' + \frac{dx_j^2}{4}\bar{g}''_j\right]\\
+% =& \log\left[\bar{g}_j\right] + \frac{dx_j}{2}\frac{\bar{g}_j'}{g_j} + \frac{dx_j^2}{4}\frac{\bar{g}''_j}{g_j} - \frac{1}{2}\frac{dx_j^2}{4}\frac{\bar{g}_j'^2}{g^2}\nonumber\\
+% &-\left(\log\left[\bar{g}_j\right] - \frac{dx_j}{2}\frac{\bar{g}_j'}{g_j} + \frac{dx_j^2}{4}\frac{\bar{g}''_j}{g_j} - \frac{1}{2}\frac{dx_j^2}{4}\frac{\bar{g}_j'^2}{g^2}\right)\\
+% =& dx_j\frac{\bar{g}'_j}{\bar{g}_j}.\label{eq:log_strat}
+% \end{align}
+% So we can write 
+% \begin{equation}
+% \boxed{U_k=-\frac{1}{4}\log\left(\frac{\bar{g}_{j+1}}{\bar{g}_j}\right)+ \frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T}
+% \end{equation}
+
+% \subsubsection{Putting derivative matrix into closed form}
+
+% Let us now return to finding the derivative of u w.r.t w:
+% \begin{equation}
+% \boxed{\frac{du_j}{dW_k} = \frac{e^{U_j}}{\sqrt{\bar{g}_j}}\delta_{jk} -e^{U_j}\frac{\bar{g}_j'}{2\bar{g}^{3/2}_j}dW_j\sum_{i<j}\frac{d u_i}{dW_k}.}
+% \end{equation}
+% We can solve this by starting the recursion at $j,k=0$.  We have 
+% \begin{gather}
+% \frac{\partial u_0}{\partial dW_0} = \frac{e^{U_0}}{\sqrt{\bar{g}_0}}, \quad \frac{\partial u_0}{\partial dW_{j>0}} = 0
+% \end{gather}
+% Similarly the second increment is 
+% \begin{align}
+% \frac{\partial u_1}{\partial dW_0}& = -\frac{e^{U_0}}{\sqrt{\bar{g}_0}}\frac{e^{U_1}\bar{g}'_1}{2\bar{g}_1^{3/2}}dW_1, \quad \frac{\partial u_1}{\partial dW_1} = \frac{e^{U_1}}{\sqrt{\bar{g}_1}} ,\quad \frac{\partial u_1}{\partial dW_{j>1}} = 0.
+% \end{align}
+% The third increment is 
+% \begin{align}
+% \frac{\partial u_2}{\partial dW_0}& = -\frac{e^{U_2}\bar{g}'_2}{2\bar{g}_2^{3/2}}dW_2\left(1-\frac{e^{U_1}\bar{g}'_1}{2\bar{g}_1^{3/2}}dW_1\right)\frac{e^{U_0}}{\sqrt{\bar{g}_0}}\, \quad \frac{\partial u_2}{\partial dW_1} = -\frac{e^{U_1}}{\sqrt{\bar{g}_1}}\frac{e^{U_2}\bar{g}'_2}{2\bar{g}_2^{3/2}}dW_2, \quad \frac{\partial u_2}{\partial dW_2} = \frac{e^{U_2}}{\sqrt{\bar{g}_2}}, \quad \frac{\partial u_2}{\partial dW_{j>2}} = 0.
+% \end{align}
+
+% For the diagonal, we just get $\bar{g}_k^{-1/2}$. 
+% So if we're off the diagonal we multiply by $\bar{g}_j' dW_j$ for the current row $j$, and sum up all of the preceding entries in this column.   
+% Evidently a generic term off the diagonal will have components (row is $u_j$, column is $dW_k$ increment)
+% \begin{equation}
+% \boxed{\frac{\partial u_j}{\partial dW_k} = \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\delta_{jk} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\delta_{j,k+1} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\Theta(j\ge k+2),}
+% \end{equation}
+% with $j,k=0,1,\ldots N-1$. If we further define $dW_k = \sqrt{\Delta T}z_k$, then we should multiply this by $\sqrt{\Delta T}$.  
+
+% \subsection{Jacobian}
+
+% The first place we need this result is in calculating the jacobian:
+% \begin{equation}
+% \left|\frac{\partial u_j}{\partial dz_k}\right| = \prod_{k=0}^{N-1}\frac{e^{U_k}\sqrt{\Delta T}}{\sqrt{\bar{g}_k}}
+% \end{equation}
+% which follows because the matrix is in lower-triangular form.  The Jacobian from changing from positions to increments is also lower-triangular, and just gives unit determinant.  This factor will eat all of the prefactor normalizations, and slightly shift the potential.  
+
+% After cancelling out the normalization prefactors we then have to deal with 
+% \begin{equation}
+% \exp\left[\sum_k U_k\right] = \prod_{j=0}^{N-1}\left( \frac{\bar{g}_j}{\bar{g}_{j+1}}\right)^{1/4}\exp\left( \sum_j\frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right) = \exp\left( \sum_j\frac{\bar{g}_j'^2}{32 \bar{g}_j^3}\Delta T\right),
+% \end{equation}
+% since we have closed loops, so that prefactor just gives us unity.  
+
+
+% \subsection{Euclidean norm of gradient}
+
+% Next up we need to calculate the change in the normalization when constrained to loops that close.  The loop must close, or the increments sum to zero.   Our constraint is 
+% \begin{align}
+%   h(d\vect{W}) = x_n-x_0 = \sum_{j=0}^{N-1} u_j = \sum_{j=0}^{N-1}u_j\left[\sum_{k<j} u_k[dW] \right]=0
+% \end{align}
+% We will use the $z_k$, to ensure we carry out all of the transformations we need.  
+% The Euclidean norm of the gradient is defined as 
+% \begin{align}
+% \|\nabla_{\vect{z}}h(\vect{z})\|^2 = &  \Delta T \|\nabla_{d\vect{W}}h(d\vect{W})\|^2\\
+%  = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1} \frac{\partial u_j}{\partial dW_k} \right)^2
+% \end{align}
+% We will plug in our form for $\frac{\partial u_j}{\partial dW_k} $, and simplify the sums.  
+% \begin{align}
+% \|\nabla_{\vect{z}}h(\vect{z})\|^2 = & \Delta T \sum_{k=0}^{N-1} \left(\sum_{j=0}^{N-1}\frac{e^{U_k}}{\sqrt{\bar{g}_k}}\delta_{jk} - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\delta_{j,k+1} \right. \nonumber\\
+% &\left.\qquad - \frac{e^{U_k}}{\sqrt{\bar{g}_k}}\frac{\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\Theta(j\ge k+2)\right)^2\\
+%  = & \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\left[1 - \frac{e^{U_{k+1}}\bar{g}'_{k+1}}{2\bar{g}^{3/2}_{k+1}}dW_{k+1} - \sum_{j=k+2}^{N-1}\frac{e^{U_j}\bar{g}'_j}{2\bar{g}^{3/2}_j}dW_j\prod_{m=k+1}^{j-1} \left(1- \frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\right]^2
+% \end{align}
+% where we carried out the sum over $j$.    Now we have to start guessing a bit - using some inspiration to approximate this thing.  It turns out that we can simplify the bracketed term.  We will just start writing out the sum starting at $k+2$, and then factoring terms.  It will be clear that wecan then proceed to just factor all of the terms up.  
+% \begin{align}
+% 1- f_{k+1}  - \sum_{j={k+2}}^{N-1} f_j\prod_{m=k+1}^{j-1}(1-f_m) =& 1 - f_{k+1}  - f_{k+2}(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots\\
+% =& (1-f_{k+2})(1-f_{k+1}) - f_{k+3}(1-f_{k+2})(1-f_{k+1}) + \ldots \\
+% =& \prod_{j=k+1}^{N-1}(1-f_j)
+% \end{align}
+% Now that is in a form that begs to be exponentiated.  We can plug in $e^{U_m}$ using the definition in Eq.~(\ref{eq:defn_exp_U}), and simplify this a bit.  
+% So we get 
+% \begin{align}
+% \|\nabla_{\vect{z}}h(\vect{z})\|^2 =& \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\left[\prod_{m=k+1}^{N-1}\left(1 -\frac{e^{U_m}\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right)\right]^2\\
+% =& \Delta T  \sum_{k=0}^{N-1}\frac{e^{U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\left[1 -\left(1 - \frac{\bar{g}_j'}{4\bar{g}_j^{3/2} }dW_j + \frac{\bar{g}_j'^2}{16 \bar{g}_j^3}\Delta T\right)\frac{\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m\right]^2\\
+% \approx& \Delta T  \sum_{k=0}^{N-1}\frac{e^{U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\left(1 -\frac{\bar{g}'_m}{2\bar{g}^{3/2}_m}dW_m + \frac{\bar{g}_j'^2}{8\bar{g}_j^{3} }\Delta T\right)\\
+% \approx& \Delta T  \sum_{k=0}^{N-1}\frac{e^{2U_k}}{\bar{g}_k}\prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right)\\
+% \approx& \Delta T  \sum_{k=0}^{N-1}\frac{1}{\bar{g}_k}\exp\left(-\frac{\bar{g}_k'}{2\bar{g}_k^{3/2} }dW_k+ \frac{\bar{g}_k'^2}{16 \bar{g}_k^3}\Delta T\right)\prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right)
+% \end{align}
+% Now we can use the logarithmic expansion in Eq.(~\ref{eq:log_strat}) to rewrite the Wiener increment term
+% \begin{align}
+% -\frac{g'_m}{g_m^{3/2}} dW_m = -\frac{g'_m}{g_m'} dx = \ln\frac{g_m}{g_{m+1}}
+% \end{align}
+% We have a sum of these: 
+% \begin{equation}
+% \prod_{m=k+1}^{N-1}\exp\left( -\frac{\bar{g}'_m}{\bar{g}^{3/2}_m}dW_m \right) = \prod_{m=k+1}^{N-1} \frac{g_m}{g_{m+1}} = \frac{g_{k+1}}{g_N}.
+% \end{equation}
+% If this came out with a different sign we could be dancing?  
+% So our normalization factor is 
+% \begin{equation}
+% \boxed{\|\nabla_{\vect{z}}h(\vect{z})\|^2 = \Delta T \sum_{k=0}^{N-1}\frac{1}{\bar{g}_k}\frac{\bar{g}_{k+1}}{\bar{g}_{N}} \approx \frac{ T}{g_N} + \order(N^{-1/2})}
+% \end{equation}
+
+% Fuck.  So that potential has to do something.   Or this is really just wrong -> check logic for extracting a mean energy.  
+% Maybe we forgot an extra term?  
+
+% So if we pull together the Jacobian and Euclidean norm factors we get 
+% \begin{align}
+% \boxed{Z= \left<\left< \sqrt{\frac{g_N}{2\pi T}}  e^{\Delta T\sum_{m}\frac{\bar{g}'^2}{32g^3}-V}\right>\right>_{g}},
+% \end{align}
+% where the loops are to be taken with respect to the $g$ loops.  There may be an additional potentital arising rom operator ordering.  
+% \comment{replacing constants with their loop average? what order should this be done in?  average of functions, or function of averages?  }
 
 
 

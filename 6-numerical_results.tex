@@ -1,26 +1,315 @@
-\chapter{Electromagnetic Worldlines - Numerical Results}
+\chapter{Electromagnetic Worldlines - Numerical Methods and Results}
+
+\begin{itemize}
+\item Need to develop methods that can easily generalize to more complicated geometries.
+\item Even if using them to solve known problems.
+\item Like path integral relies on chaining together correct short-time propagator, we 
+  are effectively using planar results at each step, under the assumption that the 
+\item Need to study convergence effects carefully.  
+
+\end{itemize}
+
 
 \section{Numerical Methods}
 
 \begin{itemize}
-  \item V-loop for loop sampling.
-  \item Monte-Carlo sampling of $T$, $x$.  
-  \item Malliavin calculus for gradient estimation.
-  \item Birth-death methods for tempering log-normal fluctuations from multiplying potentials
-    together.  
+  \item Governing equations we are simulating.  
 \end{itemize}
 
 
-    \section{ Atom-Plates}
+\subsection{Monte-Carlo sampling}
+
+\begin{itemize}
+\item Need average over ensemble of paths.
+\item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
+  integrate over that.  In this case, the loop potential is either zero or one, with no variation.
+  Thus it is more straightforward to integrate over space/loop-time.  
+\item For computationally expensive loops, it makes sense to sample only a single position, time.
+  Explore a larger ensemble in the same computational time.
+  \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
+  \item For time: For TE loops, integrand is zero before first touching time.  
+    So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
+    TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
+    that touch the surface).
+  \item Birth-death method effectively examines a larger ensemble of loops.
+    For two-bodies, it is possible to spawn new loops while close to only a single surface,
+    that might touch the other surface.  Thus the first-touching time for the parent loop
+    is a poor estimate.  Simplest to use an ensemble average estimate for time:
+    $P(\cT,d_0) = \exp(-2d_0^2/\cT)/\cT^3$, where exponential factor is the first touching
+    time.  
+  \item For spatial integrals, sample from uniform distribution within a radius that bounds all objects.
+    Then sample from a power-law outside that, where estimate follows from first-touching time.
+    May be possible to optimize, but captures important features without biasing
+  \item Frequency integrals: Can execute in parallel (like picking different $chi$).
+\end{itemize}
+
+\subsection{Loop generation: TE}
+
+\subsubsection{TE}
+\begin{itemize}
+\item Use v-loop algorithm from Gies.  Loops have Gaussian increments, and closed paths
+\item (Derivation for loops)
+\item Jacobian gives normalization.
+\item Note connection to Brownian bridge SDE.  
+\end{itemize}
+
+\subsubsection{TM}
+\begin{itemize}
+\item TM potential must also be tracked along a given path.
+( Explore the potential-only integrand to highlight the issues.)
+\item TM potential takes on values $1<V_k<2$ outside a body, and $0<V_k<1$ when crossing
+  or inside.  
+\item Leads to large fluctuations, for even moderate $N$.  (Histogram of values, and scaling of variance)
+\item Large fluctuations indicate a poor choice of probability distribution, and we should
+  adjust our choice.
+\item Two methods to incorporate the potential into the probability distribution.
+  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta T)}e^{-\VTM}$.
+  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  FOr differences of Gaussians,
+  use rejection to sample the deviates.  
+  2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
+  is large, and terminate if too small.  
+\item Birth-death method is required for first method anyway, as there is still a potential
+inf the form of the normalizations.  
+\item Figure: Growth of fluctuations.
+\item Figure: Histograms of normalization.
+\end{itemize}
+
+\subsection{Gradient Estimation}
+
+\begin{itemize}
+  \item Need gradients to compute forces, torques from potential.  Also need it directly
+    for TM Casimir-Polder energy.
+  \item Looking for corrections to gravity need curvature.  Similarly, estimating 
+    (Cite Cornell expt) change in oscillation frequency.  Need two spatial derivatives.
+    For TM potential, this is 4 spatial derivatives.  
+\end{itemize}
+
+\subsubsection{Finite Differences}
+
+\begin{itemize}
+  \item Simple to implement.  However, larger fluctuations, and biased. 
+  \item Best to use common random numbers.  Also provides better error estimate.
+  \item Need to balance choosing $N$, $ds$.  
+\end{itemize}
+
+\subsubsection{Partial Averaging-Gaussian Paths}
+
+\begin{itemize}
+  \item Consider how to evaluate Gradients with respect to source point of Gaussian 
+    path integrals of the energy $\epsr$
     
-    \subsection{TE Polarization}
+    \begin{align}
+      E =& -\frac{\hbar c\alpha_0}{2(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2-\alpha}}
+      \biggdlangle \frac{1}{\langle\epsr\rangle}\biggdrangle\\
+      =& -\frac{\hbar c\alpha_0}{2(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2-\alpha}}\int ds\,\frac{s^{\alpha-1}}{\Gamma[\alpha]}
+      \biggdlangle e^{-s\cT \langle \epsr\rangle}\biggdrangle
+    \end{align}
+  \item If we use unshifted integration variables, $\vect{x}_k$, rather than the shifted, scaled
+    Brownian motion variables, can differentiate immediately.
+    Momentarily focus on just the path integral piece,
+    \begin{equation}
+      P = \biggdlangle e^{-s\cT \langle \epsr\rangle}\biggdrangle 
+      = \int \prod_{j=1}^{N-1}dx_k \prod_{j=0}^{N-1}\frac{1}{(2\pi \Delta T)^{D/2}}e^{-(\vect{x}_{j+1}-\vect{x}_j)^2/2\Delta T-s\Delta T \epsr(\vect{x}_j)}.
+    \end{equation}
+    Main component are derivatives w.r.t. Gaussian.  Will neglect derivatives of the potential.  
+    Our basic idea is to integrate out intermediate coordinates.  Under the assumption the 
+    the integrands are approximately stable, or that the steps compose, we can average multiple
+    steps.
+  \item This is related to choosing a non-uniform loop with less resolution close to the beginning of the 
+    loop.  This is justified via switching integration and differentation.  The Gaussian integrals 
+    obviously compose.  The derivatives can just be carried out at the very end.  
+  \item Derivatives of the Gaussian are Hermite polynomials:
+    \begin{equation}
+      \frac{d^n}{dx^n} e^{-x^2} = (-1)^n H_n(x)e^{-x^2}
+    \end{equation}
+    Scaling the variables to $x\rightarrow x/a$ yields
+    \begin{equation}
+      \frac{d^n}{dx^n} e^{-(x-\mu)^2/a^2} = a^{-n}(-1)^n H_n\big(\frac{x-\mu}{a}\big)e^{-(x-\mu)^2/a^2}
+    \end{equation}
+
+    \item Convolution formula.  Let us consider the convolution of Gaussians with a Hermite 
+    polynomial.  This naturally emerges from integrating out a coordinate of the path integral
+    \begin{equation}
+      I = H_n\big(\frac{x-\mu_1}{\sqrt{2\sigma_1^2}}\big) \frac{e^{-(x-\mu_1)^2/(2\sigma_1^2)}}{\sqrt{2\pi \sigma_1^2}} 
+      * \frac{e^{-(x-\mu_2)^2/(2\sigma_2^2)}}{\sqrt{2\pi \sigma_2^2}}.
+    \end{equation}
+    The convolution integral is most naturally carried out using the Fourier transform.
+    \begin{align}
+      f*g =& \int dx' f(x-x')g(x')\\
+      = & \int dx' \frac{dk}{2\pi} \frac{dq}{2\pi} e^{ik(x-x')+iqx'} f(k)g(q)\\
+      = & \int \frac{dk}{2\pi} e^{ikx} f(k)g(k)
+    \end{align}
+    The Fourier transform of the Gaussian is 
+    \begin{align}
+      \int dx e^{ikx}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}} 
+      &= \int dx' \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x'-ik/2)^2/(2\sigma^2)+ik\mu-\sigma^2k^2/2}\\
+      &= e^{-\sigma^2 k^2/2+ik\mu}.
+    \end{align}
+
+    This can be straightforwardly extended to include Hermite polynomials via integration by parts.
+    \begin{align}
+      \int dx e^{ikx}(2\sigma^2)^{-n/2}(-1)^n H_n\big(\frac{x-\mu}{\sqrt{2\sigma^2}}\big)
+        \frac{e^{-(x-\mu)^2/2\sigma^2}}{\sqrt{2\pi \sigma^2}} 
+      &= \int dx e^{ikx}\frac{d^n}{dx^n}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
+      &= (-ik)^n\int dx' \frac{e^{ik(x+\mu)-x^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
+      &= (-ik)^ne^{-\sigma^2 k^2/2+ik\mu}
+    \end{align}
+
+    The convolution of the Hermite-Gaussian, and a regular Gaussian is 
+    \begin{align}
+      I&=\int dx' (2\sigma_1^2)^{-n/2}(-1)^n H_n\left(\frac{x-x'-\mu_1}{\sqrt{2\sigma_1}}\right)
+      \frac{e^{-(x-x'-\mu_1)^2/(2\sigma_1^2)-(x'-\mu_2)^2/(2\sigma_2^2)}}{2\pi \sigma_1 \sigma_2}\\
+      &=\int dx' \int \frac{dk}{2\pi}\frac{dq}{2\pi} (-ik)^n e^{-ik(x-x'-\mu_1)}e^{-iq(x'-\mu_2)}
+      e^{-\sigma_1^2k^2/2-\sigma_2^2q^2/2}\\
+      &=\int \frac{dk}{2\pi}(-ik)^ne^{-ik(x-\mu_1-\mu_2)}e^{-(\sigma_1^2+\sigma_2^2)k^2/2}\\
+      &=(-1)^n[2(\sigma_1^2+\sigma_2^2)]^{-n/2}H_n\bigg(\frac{x-\mu_1-\mu_2}{\sqrt{2(\sigma_1^2+\sigma_2^2)}}\bigg)
+      \frac{e^{-(x-\mu_1-\mu_2)^2/[2(\sigma_1^2+\sigma_2^2)]}}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}
+    \end{align}
+
+  \item Now to actually apply to integrating out Gaussians, starting from endpoint,
+    we need various variable transformations.  Must switch between Hermite polynomial w.r.t $x_0$
+    and convolution form.  
+    \begin{align}
+      & \partial_{0,i}^n e^{-(x_0-x_1)^2/(2T_1)-(x_0-x_{N-1})^2/(2T_{N-1})}\nonumber\\
+      =& 
+     \partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}x_0^2-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1T_{N-1}}x_0
+       -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
+     % =&\partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}
+     %   \left(x_0-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}\right)^2
+     %   +\frac{(T_{N-1}x_1+T_1x_{N-1})^2}{2T_1T_{N-1}(T_1+T_{N-1})}
+     %   -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
+     =&(-1)^n \left(2\sigma^2_{1,N_1}\right)^{-n/2}
+     H_n\bigg(\frac{x_0-z_{1,N-1}}{\sqrt{2}\sigma_{1,N-1}}\bigg)
+       \exp\left[-\frac{(x_0-z_{1,N-1})^2}{2\sigma^2_{1,N-1}}-\frac{(x_1-x_{N-1})^2}{2(T_1+T_{N_1})}\right]\\
+    \end{align}
+    where 
+    \begin{gather}
+      \sigma_{1,N-1} = \sqrt{\frac{T_1+T_{N-1}}{2T_1T_{N_1}}}\\
+      z_{1,N-1} = \frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}
+    \end{gather}
+  \item We really need 
+    \begin{align}
+      C=\int dx_1 \partial_0^n \frac{1}{(2\pi)^{3/2}\sqrt{T_1T_2T_{N_1}}}e^{-(x_0-x_1)^2/(2T_1)-(x_1-x_2)^2/(2T_2)-(x_0-x_{N-1})^2/(2T_{N-1})}
+    \end{align}
+    The simplest approach is to exchange integration and differentiation, then completing the square in $x_0$,
+    and then carry out the derivatives
+    \begin{align}
+      C=&\partial_0^n\int dx_1  \frac{1}{(2\pi)^{3/2}\sqrt{T_1T_2T_{N_1}}}e^{-(x_0-x_1)^2/(2T_1)-(x_1-x_2)^2/(2T_2)-(x_0-x_{N-1})^2/(2T_{N-1})}\\
+      =&\partial_0^n \frac{1}{2\pi\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})}\\
+      =&\partial_0^n \frac{1}{2\pi\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-\mu_2)^2/[2\sigma_2^2]-(x_2-x_{N-1})^2/(2[T_{N-1}+T_1+T_2])}\\
+      =&(-1)^n(\sqrt{2}\sigma_2)^{-n/2}H_n\bigg(\frac{x_0-\mu_2}{\sqrt{2}\sigma_2}\bigg)
+      \frac{1}{(2\pi)\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})},
+    \end{align}
+    where 
+    \begin{gather}
+      \mu_2 = \frac{T_{N-1}x_2+ (T_1+T_2)x_{N-1}}{T_1+T_2+T_{N-1}}
+      \sigma_2^2 = \frac{(T_1+T_2)T_{N-1}}{T_{N-1}+T_1+T_2}
+    \end{gather}
+  \item Now evidently if we integrate out points symmetrically from the loop origin, and we 
+    assume all $T_i=\Delta T$, then after integrated out $m$ steps we have 
+    \begin{gather}
+      \mu_m = \frac{x_{m+1}+ x_{N-m-1}}{2}
+      \sigma_2^2 = m\Delta T.
+    \end{gather}
+    The gradient of the path integral can then be approximately written as 
+    \begin{align}
+      C\approx
+      =&(-1)^n(\sqrt{2 m\Delta T})^{-n/2}H_n\bigg(\frac{x_0-\bar{x}_m}{\sqrt{2 m\Delta T}}\bigg)\nonumber\\
+      &\times \frac{1}{(2\pi m \Delta T)}e^{-(x_0-x_{m+1})^2/[2m\Delta T]-(x_0-x_{N-m-1})^2/(2m\Delta T)}.
+    \end{align}
+  \item We can estimate how many steps to integrate out based on the touching probability in time $T_m$.  
+    The probability to touch a plane a distance $d$ away in time $T_m=m\Delta T = (m/N)T$ is 
+    \begin{equation}
+      P_{\text{touch}} = e^{-2d^2/T_m},
+    \end{equation}
+    which can be solved for $m$ if we require that $P_{\mathrm{touch}}$ does not exceed a threshold
+    $10^{-\rho}$ with $\rho>0$  
+    \begin{equation}
+      \frac{m}{N} \le \frac{2d^2}{T}\rho\ln(10).
+    \end{equation}
+    Note that as $N$ increases, the integration point approaches a constant fraction, even as $N$ increases.  
+    This in effect reduces the fluctuations by $m^n$.  
+    \item This is in effect choosing to make a loop with non-uniform steps, where in particular the first
+    and last step are larger than the others.  We choose the size of those steps to be as 
+    large as possible, while not interacting much with a the nearest surface.  
+    \item While estimating gradients for the stress-tensor it may be necessary to estimate 
+    gradients while close to one surface.  For a renormalized energy, only loops that touch both
+    surfaces will contribute.   In this case, the above approach based on integrating out Gaussians
+    is of limited utility in reducing the fluctuations.  The assumption that the integrals are approximately
+    Gaussian can only be explited for a very small number of steps.  
+    However, if we assume there is a Feynman-Kac formula available taking into account the 
+    interaction with a simple surface, then similar reasoning can be used.  In this case
+    one integrates out further steps, since the Feynman-Kac formulae compose with one another,
+    where now the threshold is must balance the path wandering sufficiently far that a simple 
+    approximation.
+
+    For example, consider using the Feynman-Kac formula for open loops near a Dirichlet surface, 
+    \begin{equation}
+      \dlangle e^{-V_D(x-d)}\drangle_{x_{j}\rightarrow x_{j+1}} 
+      = \theta[(x_j-d)(x_{j+1}-d)]\left(1-e^{-2(x_j-d)(x_{j+1}-d)/T}\right)
+    \end{equation}
+    
+    
+\end{itemize}
+
+
+\begin{itemize}
+  \item Gradients for atom
+  \item Stress energy tensor 
+\item Application to stress-tensor.  (Evaluate derivatives first, then take limit.)
+  Problematic for stress-tensor values near one surface in 2-body scenarios. (Use exponential expressions
+  to allow non-Gaussian integration.  Must just be stable distribution  
+  Thus expact larger fluctuations near surfaces.  
+  For example, stress-energy tensor requires 
+  \begin{equation}
+   T_{zz}=\lim_{\Delta\rightarrow 0} [\partial_{x_{CP}}^2 - \partial_{\Delta}^2]\dlangle \mathfrak{M}\drangle,
+  \end{equation}
+  where $\Delta = (x_N-x_0)/2, x_{CP} = (x_N+x_0)/2$.  Using the chain-rule, and employing the
+  same differentiation this becomes. where $x_{CP}$ is the centre-point, and $\Delta$ is the separation.
+  \begin{gather}
+    x_{CP} =  \frac{1}{2}(x_{N}+x_0)\\
+    \Delta = \frac{1}{2}(x_{N}-x_0)\\
+    x_0  = x_{CP}-\Delta\\
+    x_N = x_{CP}+\Delta
+  \end{gather}
+  Then
+  \begin{align}
+    \frac{\partial}{\partial x_{CP}} 
+    %&= \frac{\partial x_0}{\partial x_{CP}}\frac{\partial}{\partial x_0}
+    % +\frac{\partial x_N}{\partial x_{CP}}\frac{\partial}{\partial x_N}\\
+&= \frac{1}{2}\frac{\partial}{\partial x_N}+\frac{1}{2}\frac{\partial}{\partial x_0}\\
+  \frac{\partial}{\partial \Delta} 
+%&= \frac{\partial x_0}{\partial \Delta }\frac{\partial}{\partial x_0}
+%    +\frac{\partial x_N}{\partial \Delta}\frac{\partial}{\partial x_N}\\
+&= \frac{1}{2}\frac{\partial}{\partial x_N}-\frac{1}{2}\frac{\partial}{\partial x_0}
+  \end{align}
+Then expanding these derivatives out (correct expression?)
+\begin{align}
+  T_{zz} &= \lim_{x_N\rightarrow x_0}\frac{1}{4}[(\partial_0+\partial_N)^2+(\partial_0+\partial_N)^2]G\\
+  &= \lim_{x_N\rightarrow x_0}\frac{1}{2}[\partial_0^2+\partial_N^2]G
+\end{align}
+
+\end{itemize}
+
+
+\subsection{Pinning}
+
+\begin{itemize}
+    \item Force
+\end{itemize}
+
+
+\section{Results}
+    \subsection{Atom-Plates}
+    
+    \subsubsection{TE Polarization}
     \begin{itemize}
       \item Simple Trapezoidal rule
       \item Convergence arguments
       \item ``Exact methods''
     \end{itemize}
     
-    \subsection{TM Polarization}
+    \subsubsection{TM Polarization}
 
     \begin{itemize}
       \item Need gradient estimation.  Use Malliavin calculus~\cite{Fournie1999, Chen2007,Kohatsu-Higa2003}.
@@ -32,13 +321,15 @@
       \item 
     \end{itemize}
     
-
-
-
     \section{Planar Dielectrics}
+
+
+
+
     \section{Atom-Sphere}
     \section{Atom-Cylinder}
 
+    \section{Plane-Sphere}
 
 %%% Local Variables: 
 %%% mode: latex

@@ -294,9 +294,189 @@ Then expanding these derivatives out (correct expression?)
 
 \subsection{Pinning}
 
-\begin{itemize}
-    \item Force
-\end{itemize}
+Let's get the $\delta$-function manipulations correct.  
+If we have 
+\begin{equation}
+  \int d^dx \delta(f(\vect{x}))g(\vect{x}) = \int\limits_{f^{-1}=0} d^{d-1}S \frac{1}{|\nabla f(\vect{S})|}g(\vect{x})
+\end{equation}
+where we split $\vect{x}$ into a surface normal, and tangent integrals, using
+coordinates, $\vect{x}=(f,\vect{S})$, where $\vect{S}$ is $(d-1)$-dimensional, and $|\nabla f|$ using the vector norm.  
+Now using the delta-function to limit the integration to lie on the surface we find 
+\begin{align}
+  F_{2,i}&=\frac{\hbar c a}{8\pi^2}\int \frac{dT}{T^3}\int\limits_{S_2} d^{d-1}\vect{x}_0 
+\biggdlangle \frac{\chi_2\hat{R_i}\cdot\hat{n}_2}{\langle\epsr\rangle^{\alpha+1}}\biggdrangle
+\end{align}
+where we defined the normal vector field
+\begin{equation}
+  n_2 = \frac{-\nabla f_2}{|\nabla f_2|}.
+\end{equation}
+
+   Can treat delta-functions as pinning for Brownian bridges.  Then integrate over times.
+   Consider only paths starting on one surface (thus potential must be smooth/regular).
+    Convergence issues: For $\chi/N\gg 1$, the pinning estimate goes to zero.  Increasing 
+    $N$ 
+    Probability of appropriate path is low?
+    Any one point saturates the integrand.  Region of available, non-zero $T$ goes to zero.  
+    Gies method of parameterizing first touching times directly addresses this.  
+  
+  \subsubsection{Potential Curvature}
+    The pinning idea can be extended to a higher derivatives.  
+    For a dielectric describing two bodies, we can rewrite derivatives of path-averages using 
+    \begin{equation}
+      \nabla_1\langle \epsr\rangle  
+% = \bigg(\sum_k\nabla_k-\nabla_2\bigg)\frac{1}{N}\sum_j
+%       [\epsilon_{\text{r},1}(\vect{x}_j-\vect{R}_1)+\epsilon_{\text{r},2}(\vect{x}_j-\vect{R}_2)],
+= \bigg(\sum_k\nabla_k-\nabla_2\bigg)(\langle \epsilon_1\rangle+\langle\epsilon_2\rangle)
+    \end{equation}
+    where $\nabla_k$ denotes the gradient w.r.t the path-point $\vect{x}_k$, while $\nabla_1,\nabla_2$
+    denote the gradients w.r.t. the body positions $\vect{R}_1$ and $\vect{R}_2$.  
+
+    The gradient of the force, or curvature of the potential is given by 
+    \begin{align}
+      C_{ij} =& -\frac{\partial}{\partial R_{2,j} }F_{2,i}\\
+      =&\frac{\hbar c a}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
+      &\times\biggdlangle \hat{R}_{2,j}\cdot(\sum_k\nabla_k-\nabla_1)
+      \frac{\chi_2\hat{R}_{2,i}\cdot\nabla\theta(\sigma_2)}{\langle\epsr\rangle^{a+1}}\biggdrangle
+    \end{align}
+    If we integrate by parts on the first gradient, the gradients act on the Gaussian probability distribution,
+    and pull down a factor proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
+    For closed paths this sum of increments vanishes, and thus we can drop this term.  
+    \begin{align}
+      C_{ij} 
+      =&\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
+      &\times\biggdlangle (-1)\frac{\chi_1[\hat{R}_{2,j}\cdot\langle \nabla_1\theta(\sigma_1)\rangle]
+      [\chi_2\hat{R}_{2,i}\cdot\langle \nabla\theta(\sigma_2)\rangle]}{\langle\epsr\rangle^{a+2}}\biggdrangle.
+    \end{align}
+    By exploiting the delta functions, and restricting to paths that are constrained to touch both surfaces
+    we can write the potential curvature as 
+\begin{align}
+  C_{ij}&=\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{dT}{T^3}
+\biggdlangle \int_{S_1} dx_0 \sum_{k=1}^{N-1}\frac{1}{N}\int_{S_2} dx_k
+  \nonumber\\
+  &  \frac{\chi_1\chi_2\hat{R}_{2,j}\cdot\hat{n}_1(\vect{x}_0)\hat{R}_{2,i}\cdot\hat{n}_2(\vect{x}_k)}
+  {\langle \epsr(x)\rangle^{a+2}}\frac{e^{-N(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k)\Delta T)}}
+  {(2\pi \Delta T)\sqrt{k (N-k)}}\biggdrangle
+\end{align}
+    As written, there is no need for any further renormalization, since this is only non-zero in the presence 
+    of both bodies.  
+    A similar expression for pinned paths can be developed to compute the force on an atom near
+    a surface.  In that case, we restrict $\vect{x}_0$ to coincide with the atom's position.  
+
+(To numerical sample from the $k$ distribution, we will take sample uniformly
+-despite being sub-optimal, the shape depends strongly on how large $d/T$ is.  
+For $d/T$ small, $[k(N-k)]^{-1/2}$ dominates,  While for $d/T\sim 1$ it's more dominated
+by $k(N-k)$, or a Gaussian.  
+Alternatively, subdivide the region into $N_s$ sub-samples, and uniformly sample from those.  
+
+\subsubsection{Torque}
+
+A similar construction can be made to find the torque.  We will consider rotating 
+one of the bodies, an angle $\theta$ about an axis $\vect{n}$ relative to some reference configuration.
+Then the torque can be written as 
+\begin{equation}
+  K_n = \partial_\theta U[\vect{x}-\vect{R}_1,\mathcal{R}(\vect{x}-\vect{R}_2)]
+\end{equation}
+where $\mathcal{R}= \exp(-\theta n_i \epsilon_{ijk})$ is the rotation operator in 3D, where $\epsilon_{ijk}
+$ is the antisymmetric Levi-Civita tensor, and $\vect{R}_i$ are the respective centers of the bodies, 
+with surfaces defined by $\sigma_i$. \comment{I think this is the torque in the $\vect{n}$ direction.}
+
+For the worldline path integrals the torque can be written as 
+    \begin{equation}
+      K_n = \int d\vect{x_0} \biggdlangle \frac{\partial_\theta[\mathcal{R}_{ij}(\theta)(x_j-R_{2,j})]
+        \partial_i \sigma_2(\vect{x}'-\vect{R}_2')\delta(\sigma_2)}{\langle 1+\chi_1\theta(\sigma_1)+
+        \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+    \end{equation}
+    introduce rotated coordinates $\vect{x}' = \mathcal{R}\vect{x}$.  
+    \comment{Repeated application of the chain rule.  }
+
+ Find that $ \partial_\theta \mathcal{R} = -n_i\epsilon_{ijk}$.
+    \begin{equation}
+      K_n = \int dS_2 \biggdlangle \frac{-n_i\epsilon_{ijk}(x'_k-R_{2,k}')\partial_j \sigma_2'\delta(\sigma_2)}
+      {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+    \end{equation}
+  Note that our choice of original configuration is arbitrary.  We can choose to set $\theta=0$.  
+    (Derivation Amounts to finding energy shift from infinitesimal rotation.)
+    In this case the axis $\hat{n}$ is also arbitrary, and we can use $K_n=\hat{n}\cdot\vect{K}$,
+    to write the full torque as 
+    \begin{equation}
+      \vect{K} = \int\frac{dT}{T^3}\int dS_2 \biggdlangle \frac{(\vect{x}'-\vect{R}_{2}')\times \hat{n}_2}
+      {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+    \end{equation}
+
+\section{Strong coupling limits}
+
+  Compute strong coupling potential as based on probability to \emph{not} touch a surface.
+    \begin{equation}
+      \mathcal{M}(\vect{x}(t)) = (1-\prod_k e^{-V_{1,k}})(1-\prod_j e^{-V_{2,j}})
+    \end{equation}
+    In strong coupling we can treat the potential along each step as 
+    \begin{equation}
+    e^{-V_{1,k}} \approx 1 - \theta(\sigma_1(\vect{x}_k-\vect{R}).
+  \end{equation}
+    The total renormalized potential is then 
+    \begin{equation}
+      \mathcal{M}(\vect{x}(t)) = [1-\prod_k (1-\theta_{1,k})][1-\prod_j (1-\theta_{2,j})].
+    \end{equation}
+    This is unity when a given path intersects both body one, and body 2.  This is 
+    a representation of the $\mathcal{M}$ functional from Schafer~\etal\cite{Schafer2016}.
+
+    The worldline path integral can then be written as 
+    \begin{equation}
+      U = \int \frac{dT}{T^3} \int d\vect{x}_0\dlangle \mathcal{M}(\vect{x}) \drangle
+    \end{equation}
+    Under linearity, there are a few choices available for which order to do integrals and ensemble
+    averaging.  Difference shows up when considering gradients.  
+
+  Gies/Weber ordering
+    \begin{equation}
+      U = \dlangle \int d\vect{x}_0 \int \frac{dT}{T^3} \mathcal{M}(\vect{x}) \drangle
+    \end{equation}
+    Determine $\mathcal{M}(t)$ for a given path, and parameterize as function of $x,T$.
+    Then carry out integrals (analytically for simple geometries).  
+    Then average over paths.  
+    \begin{equation}
+      U = \dlangle \int d\vect{x}_0 \sum_{T_k}\int_{T_k}^{T_{k+1}} \frac{dT}{T^3}\drangle,
+    \end{equation}
+    where $T_k=T_k(\vect{x}(t),\sigma_1,\sigma_2)$ are set of crossing times, when path is in contact with both bodies.  
+    Not all points will touch surface.  
+    For planes, this is simple $T_k = \frac{(d-x_0)^2}{B_k^2}$.
+    Can find force via differentiation.  In general complicated relationship. 
+    
+    Note that the prior strong-coupling limit treated the surface as thin plates.  This is recovered 
+    from our formulation 
+
+    Direct differentiation w.r.t. the body position is 
+    \begin{align}
+      \partial_{2,i}\mathcal{M}(\vect{x}(t)) =& (-1)\big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
+      &\times \sum_j\partial_i\sigma_2\delta[\sigma_2(\vect{x}_j-\vect{R}_2)]\prod_{l\ne j}(1-\theta_{2,l}).
+    \end{align}
+    Then force worldline path-integral is 
+    \begin{align}
+      \vect{F}_2 =& (-1)^2\frac{\hbar c}{8\pi^2} \int \frac{d\cT}{\cT^3}\int_{S_2} d\vect{x}_0 \dlangle 
+      \big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
+      &\times \hat{n}_2\prod_{l\ne 0}(1-\theta_{2,l}).
+    \end{align}
+    \comment{two negative signs: force= -grad U, and $\partial_r \sigma(x-r) = -sigma'(x-r)$}
+    If naively construct paths pinned to surface, as advocated above, only rare paths
+    that do not enter into body 2 contribute.  Better to think of finding first touching time 
+    for paths: want paths that enter the first body, and just graze the second.  
+    Easiest to generate paths, and find first touching time via root-finding.  
+    This amounts to interpreting $\delta(\vect{x}_j-\vect{R})$ as $\delta[f(T)]$.
+    This is exactly the construction of paths employed by Gies and Weber for the sphere-plate 
+    and cylinder-plate geometries~\cite{Weber2010}.  In that work, they re-center the paths such 
+    that the minimum contact of the path just grazes the plane.
+
+   Contrast to Weber approach\cite{Weber2009, Weber2010}. They take derivatives of worldline properties, and average
+    that expression over worldline ensemble, and positions/times. 
+    Captures first touching times, that would be otherwise rare events for paths starting on
+    surface.  Better suited to Dirichlet Limit. 
+
+    Similar reasoning can be exploited at finite $\chi$.  
+  For a particular path and starting position, Can think of 
+  $\int dT \epsr = \sum_j\int_{T_j}^{T_{j+1}}dt c_j$, where $j$ indexes set of times when a point on 
+  the path lies just on the surface of one of the bodies, with $c_j$ being an appropriate constant.  
+  In this discretization, $T_j$ carry the geometric information.  Under differentiation, these are what change.  
+
 
 
 \section{Results}

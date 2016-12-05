@@ -644,6 +644,97 @@ We will find the
   for hydrogen atom.
 \end{itemize}
 
+\section{Harmonic Medium}
+
+In this section we will attempt to carry out the full quantization procedure for a harmonic
+medium.  We will start from a gauge-invariant Lagrangian for the electromagnetic field coupled
+to a medium. 
+We will derive the Hamiltonian, and then compute the partition function.
+ We will then gauge-fix, and integrate out the harmonic medium.  This is essentially
+based on the approach of deriving the dielectric via linear response theory advocated in Rosa~\etal\cite{Rosa2008}.
+We will integrate out the matter-fields, and treat the interaction out to second order in the interaction.  
+We will then carry out the remaining integral over the fields.  
+
+This method should be well-defined perturbation theory, and follow the usual physical reasoning.  This
+should avoid any of the strange features of trying to quantize the field while it is already
+interacting with an effective medium.  
+
+The combined field-matter Lagrangian for the EM field interacting with a charged scalar field is
+\begin{align}
+  L =& \int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_t\vect{A})^2
+  - \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
+&+\bigg(\partial_t+i\frac{e}{c}A_0\bigg)\phi^*\bigg(\partial_t-i\frac{e}{c}A_0\bigg)\phi
+- \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
+-\phi^*(u(x)+m^2)\phi\bigg],
+\end{align}
+where there is a potential $u(x)$ binding the charged scalar to exist only in certain regions.  We
+will take $u(x)=0$ inside the bodies, and $u(x)\rightarrow\infty$ outside the bodies.  
+The action is invariant under the combined gauge transformations,
+\begin{align}
+ A_0&\rightarrow A_0-\partial_t\alpha\\
+\vect{A} & \rightarrow \vect{A}+\nabla\alpha\\
+\phi &\rightarrow e^{-i\frac{e}{c}\alpha}\phi.
+\end{align}
+
+The canonical momenta are found to be
+\begin{align}
+  \pi_0 &:= \frac{\delta L}{\delta (\partial_t A_0)} = 0\\
+  \vect{\Pi} & := \frac{\delta L}{\delta(\partial_t\vect{A})} = \epsilon_0(\nabla A_0+\partial_t\vect{A})\\
+  \vect{\pi} & := \frac{\delta L}{\delta(\partial_t\phi)} = \bigg(\partial_t+i\frac{e}{c}A_0\bigg)\phi^*.
+\end{align}
+As noted before, the vanishing of $\pi_0$ is a constraint which must be maintained by the dynamics.
+Preserving this constraint will require that $\partial_t\vect{\Pi}=\nabla\cdot\vect{\Pi}=0$.
+We will employ the Gupta-Bleuler quantization, which restricts the allowed states. 
+
+The full Hamiltonian is 
+\begin{align}
+  H &:= \int d\vect{x}(\pi_0 \partial_t A_0+\vect{\Pi}\cdot\partial_t\vect{A}+\pi\partial_t\phi 
+  +\pi^*\partial_t\phi^*) - L\\
+%   &:= \int d\vect{x}\bigg[\vect{\Pi}\cdot\frac{(\Pi-\nabla A_0)}{\epsilon_0}
+%   +\pi(\pi^*+i\frac{e}{c}A_0\phi^*) +\pi^*(\pi-i\frac{e}{c}A_0\phi^) \\
+%  &-\frac{\vect{\Pi}^2}{2\epsilon_0} + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
+% &-\frac{\pi^*\pi}{2}+ \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
+% +\phi^*(u(x)+m^2)\phi\\
+  &:= \int d\vect{x}\bigg[\frac{\vect{\Pi}^2}{2\epsilon_0}+\frac{1}{2\mu_0}(\nabla\times\vect{A})^2+\pi^*\pi 
+ +\phi^*(-\nabla^2 + u(x)+m^2)\phi\nonumber\\
+ &\hspace{1cm}  +i\frac{e}{c}A_0(\pi \phi^*-\pi^*\phi) 
+   +i\frac{e}{c}\vect{A}\cdot \big(\phi\nabla\phi^*-\phi^*\nabla\phi\big)+\frac{e^2}{c^2}|\vect{A}|^2\phi^*\phi
++A_0\frac{\nabla\cdot\vect{\Pi}}{\epsilon_0}
+ \bigg]
+\end{align}
+
+Given the Hamiltonian, the partition function can be readily computed, given the Gaussian
+nature of the integrals.  The long-and-short of this procedure should be that we will find 
+$Z\sim\int D()e^{-S_E}.$
+\begin{align}
+  Z &= \tr[e^{-\beta \op{H}}]\\
+  &= \int d^2\phi d\vect{A} dA_0 \langle A_0,\vect{A}| e^{-\beta \op{H}}|A_0,\vect{A}\rangle\\
+  &= \int D\phi^*D\phi D\vect{A} DA_0 D\pi^*D\pi D\vect{\Pi}D\Pi_0\delta(\pi_0)\delta(\nabla\cdot\Pi)
+  e^{-\Delta \beta H_n +\frac{i}{\hbar}(\vect{\Pi}\cdot\partial_\beta \vect{A}+\pi^*\partial_\beta\phi )}
+\end{align}
+\comment{should probably split $\phi = \phi_1+i\phi_2$ integrating over complex fields requires some
+care with the book-keeping.  Then find $\pi_1,\pi_2$.  Can use $\langle \phi_1|\pi_1\rangle = e^{i\phi_1\pi_1/\hbar}$.
+}
+
+End result of careful integration over two independent real fields for matter, we can just skip to 
+\begin{align}
+  Z = \int D\phi^*D\phi D\vect{A}DA_0 e^{-S_E},
+\end{align}
+where
+\begin{align}
+  S_E =& \int_0^{\hbar\beta} d\tau\int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_\tau\vect{A})^2
+  + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
+  &+\bigg(\partial_\tau+i\frac{e}{c}A_0\bigg)\phi^*\bigg(\partial_\tau-i\frac{e}{c}A_0\bigg)\phi
+  + \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
+  +\phi^*(u(x)+m^2)\phi\bigg],
+\end{align}
+and $\tau=\hbar \beta$, and we also scaled $A_0\rightarrow \hbar^{-1} A_0$.  
+
+Now expand the matter part out to quadratic order in the coupling.
+What are the gauge-invariance properties?  
+\begin{equation}
+  
+\end{equation}
 
 
 

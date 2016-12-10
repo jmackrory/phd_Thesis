@@ -84,6 +84,26 @@ inf the form of the normalizations.
     For TM potential, this is 4 spatial derivatives.  
 \end{itemize}
 
+
+Let us consider the sensitivity of an expectation value $\dlangle f \drangle = \int dx f(x)P(x)$,
+with respect to a parameter $\theta$, where $P(x)$ is the probability distribution.  
+    The likelihood ratio method relies on differentiating the underlying probability distribution,
+    and evaluating $\partial_\theta\dlangle f\drangle=\dlangle f(x)\partial_\theta\log P(x;\theta)\drangle$.  
+    One can then estimate the gradient by generating 
+    samples using the original probability distribution, while evaluating this new function.
+    This can be readily applied to computing sensitivities of expectations with respect to Brownian motion~\cite{Broadie1996}.  
+    A similar idea exploits the Malliavin calculus~\cite{Nualart2006}:
+    In the Malliavin framework, one can estimate a sensitivity by evaluating $\dlangle f(x)\pi_\theta(x)\drangle$,
+    where $\pi_\theta$ is the Malliavin weight~\cite{Fournie1999}.  
+    The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion.  
+    One can derive the Malliavin weights by exchanging derivatives with respect to the parameter for
+    derivatives with respect to the Brownian motion, and integrating by parts~\cite{KohatsuHiga2004}.  
+    The Malliavin results can be recovered for Brownian motion if one combines the likelihood-ratio method with partial-averaging
+    along the Brownian motion~\cite{Chen2007}.  In either case, one exchanges differentiation for
+    evaluating a new reweighted function, which depends on the required derivatives, while still
+    using the original paths.  
+
+
 \subsubsection{Finite Differences}
 
 \begin{itemize}
@@ -450,11 +470,12 @@ For the worldline path integrals the torque can be written as
       \partial_{2,i}\mathcal{M}(\vect{x}(t)) =& (-1)\big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
       &\times \sum_j\partial_i\sigma_2\delta[\sigma_2(\vect{x}_j-\vect{R}_2)]\prod_{l\ne j}(1-\theta_{2,l}).
     \end{align}
+
     Then force worldline path-integral is 
     \begin{align}
-      \vect{F}_2 =& (-1)^2\frac{\hbar c}{8\pi^2} \int \frac{d\cT}{\cT^3}\int_{S_2} d\vect{x}_0 \dlangle 
+      \vect{F}_2 =& (-1)^2\frac{\hbar c}{8\pi^2} \int \frac{d\cT}{\cT^3}\int_{S_2} d\vect{x}_0 \biggdlangle 
       \big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
-      &\times \hat{n}_2\prod_{l\ne 0}(1-\theta_{2,l}).
+      &\times \hat{n}_2\prod_{l\ne 0}(1-\theta_{2,l})\biggdrangle.
     \end{align}
     \comment{two negative signs: force= -grad U, and $\partial_r \sigma(x-r) = -sigma'(x-r)$}
     If naively construct paths pinned to surface, as advocated above, only rare paths

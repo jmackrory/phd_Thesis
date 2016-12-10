@@ -979,9 +979,9 @@ derivative operators $L^{E,r}$ and $L^{M,r}$.  In piece-wise constant media the 
 In matrix form
 \begin{gather}
   L^{E,r} = \left( \begin{array}{cccc} 
-      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_x & -i\xi & 0 & 0\\
-      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_y & 0 &-i\xi & 0\\
-      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_z & 0 & 0 & -i\xi
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_x & i\xi & 0 & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_y & 0 &i\xi & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_z & 0 & 0 & i\xi
     \end{array}
   \right)\\
   L^{M,r} = \frac{1}{\mu_r}\left( \begin{array}{cccc} 
@@ -1012,7 +1012,207 @@ Note that both the operators, and fields depend on material constants, resulting
 overburdened notation.  We have introduced bold-face to denote both vectors and matrices.
 
 We are then free to evaluate the Gaussian integral over $\vect{A}$ in each region, using
-We can think of the integrand being split into a number of volumes, 
+\begin{equation}
+  \int D\phi e^{-\frac{\beta}{2}\int d^3\vect{x}\, [\phi^i \mathcal{L}_{ij}\phi^j +i+\psi^k\phi_k]}
+= e^{-\frac{1}{2\beta}\int d^3\vect{x}\,\psi^k G_{km} \psi^m},
+\end{equation}
+where $\mathcal{L}_{ij}G^{jm} = \delta_{i}^m$, and $G$ is the Green function corresponding to $L$.
+The partition function can be slightly re-arranged to a more suitable form,
+\begin{align}
+  Z_{TE} &= \int D\tilde{A}^\mu \prod_rD\vect{K}_rD\vect{N}_re^{-S_{A,e}-\sum_rS_{A,r}+i\sum_rC_r-iC_e}
+\end{align}
+where 
+\begin{align}
+  S_{A,e}&=\frac{\beta}{2}\int_e d^3\vect{x}\,  \tilde{\vect{A}}^{e,*} \mathfrak{D}^e\tilde{\vect{A}}^e \\
+ S_{A,r}&=\frac{\beta}{2}\int_r d^3\vect{x}\, \tilde{\vect{A}}^{r,*} \mathfrak{D}^r\tilde{\vect{A}}^r\\
+ C_r &=\int_{\partial\mathcal{O}_r}d\vect{x}\,
+ (\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r})\cdot\tilde{\vect{A}}^r\\
+ C_e&=\sum_{r}\int_{\partial\mathcal{O}_r}d\vect{x}\,
+ (\vect{K}^r\cdot\vect{L}^{E,e} + \vect{N}^r\cdot\vect{L}^{M,e})\cdot\tilde{\vect{A}}^e
+\end{align}
+If we integrate out the fields on body $\mathcal{O}_r$, and then over the exterior fields then
+\begin{align}
+  Z_{TE} &= \int \prod_rD\vect{K}_rD\vect{N}_re^{-S_e[\vect{K}_r,\vect{N}_r] - S_r[\vect{K}_r,\vect{N}_r] }
+\end{align}
+where the external and internal effective actions are given by 
+\begin{align}
+  S_e&:=\frac{1}{2\beta}\sum_{r,r'}
+  \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\, 
+  (\vect{K}^r\cdot\vect{L}^{E,e} + \vect{N}^r\cdot\vect{L}^{M,e})(x)\cdot\vect{G}^e\cdot
+  (\vect{K}^{r'}\cdot\vect{L}^{E,e} + \vect{N}^{r'}\cdot\vect{L}^{M,e})(x')\\
+  S_r&:= \frac{1}{2\beta}\sum_{r}\int_{\partial\mathcal{O}_r}d\vect{x}\int_{\partial\mathcal{O}_r}d\vect{x'}\,
+    [\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r}](x)\cdot
+    \vect{G}^r\cdot[\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r}](x')\bigg\}.
+\end{align}
+Note that the $S_r$ correspond to body self-energies, as do terms with $r=r'$ from $S_e$.
+(Note you don't carry out renormalization yet - this is added to interaction terms.  WHen we compute
+the determinant these do not cleanly decouple, thus you can't just throw this away.)
+
+% Both of these correspond to photon exchange from patches on the same body.  
+% These terms renormalize out if we consider energy differences between configurations where the 
+% bodies are removed to spatial infinity.  These terms are independent of all other positioning
+% of the bodies, and amount to additive constants to the action.  In the partition function
+% they are multiplicative constants, $Z_{TE,r}$, where we can also use
+% $ Z_{TE,\infty} = \prod_r Z_{TE,r}$, since there are no interactions between the bodies in this limit.
+Focusing on the interaction terms, the effective interaction integrand of the path integral 
+can be written as 
+\begin{align}
+  S_{e}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r\ne r'}
+  \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\, 
+\left(\hspace{-0.1cm} \begin{array}{cc} 
+    \vect{K}^r(x) &   \vect{N}^r(x)
+  \end{array}
+\hspace{-0.1cm}
+\right)
+\left(\begin{array}{cc} 
+    \vect{L}^{E,e}\vect{G}\vect{L}^{E,e} &\vect{L}^{E,e}\vect{G}\vect{L}^{M,e}\\
+    \vect{L}^{M,e}\vect{G}\vect{L}^{E,e} &\vect{L}^{M,e}\vect{G}\vect{L}^{M,e}\\
+  \end{array}
+  \right)
+\left(\hspace{-0.1cm} \begin{array}{c} 
+    \vect{K}^{r'}(x') \\   \vect{N}^{r'}(x')
+  \end{array}
+\hspace{-0.1cm}
+\right)
+\end{align}
+The corresponding interior term is replaces $L$ and $G$ with their interior equivalents.  
+
+It turns out that the combined matrices $L^P G L^Q$ correspond exactly to the usual homogenous Green function
+dyadics, $\Gamma^{PQ}$ for $P, Q\in\{E,M\}$.  In addition, the gauge-pieces do not contribute at all.  
+
+First, we need the Green function $\mathbf{G}$ corresponding to $\mathcal{D} =\mathcal{D}_1-\mathcal{D}_2$.
+Fortunately, give the projector structure this is easy to derive.  Recall that
+\begin{align}
+  \mathfrak{D} = \alpha^2[P_T +\alpha^{-1}_{FP}P_L]
+\end{align}
+where $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$, and we introduced
+the projection operators which the following properties
+\begin{gather}
+  P_L+P_T = I\\
+  P_L = \frac{\alpha^\mu\alpha^\nu}{\alpha^2}\\
+  P_T = \delta_{\mu\nu}-\frac{\alpha^\mu\alpha^\nu}{\alpha^2}.
+\end{gather}
+(Reid points out that manipulating these things is actually easiest in momentum space.  We can use
+\begin{equation}
+  \int d\vect{x} F(\vect{x})D(\partial_i)G(\vect{x}) = \int \frac{d\vect{q}}{(2\pi)^d}
+  F(\vect{q})D(i q_j)G(-\vect{q}).
+\end{equation}
+Then we can find the Fourier-space green function using 
+$\alpha(q) = i(\sqrt{\epsilon}\xi,\frac{\vect{q}}{\sqrt{\mu}})$
+\begin{align}
+  I &=\mathfrak{D}G \\
+  &=\alpha^2[P_T -\alpha^{-1}_{FP}P_L](a G_T+bG_L)\\
+  \rightarrow \vect{G}& = \frac{1}{\alpha^2}(P_T - \alpha_{FP}P_L)
+   = -\frac{\mu_r}{\kappa^2+\vect{q}^2}[\delta^{\mu\nu}
+  + \frac{\mu_r(1-\alpha_{FP})}{\kappa^2+\vect{q}^2}\alpha^\mu\alpha^\nu],
+\end{align}
+where we used $\alpha^2 = -\epsilon_r\mu_r\xi^2-\vect{q}^2$,  and defined 
+$\kappa = \sqrt{\epsilon\mu}\xi$.
+Reid claims that the second longitudinal term does not contribute at all, and thus the 
+gauge-fixing does not affect anything.  
+
+\subsubsection{Nasty-Nasty working-1}
+
+We can do this in two steps.  
+Notethat $P_L$ is a purely longitudinal/gauge degree of freedom.  The $L$ operators 
+convert from potentials to physical fields.  Thus we expect $L^P_{j\mu} \alpha^\mu=0$.
+
+Let's verify that for E and then $M$
+\begin{align}
+  L^{E,r}_{i\nu}\alpha^\nu\sqrt{\mu_r} = -i\left( \begin{array}{cccc} 
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_x & -\xi & 0 & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_y & 0 &-\xi & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_z & 0 & 0 & -\xi
+    \end{array}
+  \right)
+  \left(\begin{array}{c}
+      \sqrt{\epsilon_r\mu_r} \xi \\        q_x \\        q_y\\        q_z
+      \end{array}
+    \right) = \vect{0}
+  \end{align}
+Similarly,
+\begin{align}
+  L^{M,r}_{i\nu}\alpha^\nu\sqrt{\mu_r} = -
+   \frac{1}{\mu_r}\left( \begin{array}{cccc} 
+      0 & 0 & -q_z & q_y\\
+      0 & q_z & 0 & -q_x\\
+      0 & -q_y & q_x & 0
+    \end{array}
+  \right)
+  \left(\begin{array}{c}
+      \sqrt{\epsilon_r\mu_r} \xi \\        q_x \\        q_y\\        q_z
+      \end{array}
+    \right) = \vect{0}
+  \end{align}
+The actual matrix products correspond to outer-products of pairs of these, and they are all zero.
+
+The non-zero products involve a middle identity tensor.  The remaining products require 
+the products between various $L$ matrices.
+First Electric-Electric
+\begin{align}
+  L^{E,r}_{i\nu}L^{E,r}_{j\nu}&=
+ -\left( \begin{array}{cccc} 
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_x & -\xi & 0 & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_y & 0 &-\xi & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_z & 0 & 0 & -\xi
+    \end{array}
+  \right)
+\left( \begin{array}{ccc} 
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_x & \frac{1}{\sqrt{\epsilon^r\mu^r}}q_y & 
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_z\\
+      -\xi &0 & 0\\
+       0   &-\xi & 0\\
+       0   & 0 & -\xi
+    \end{array}
+  \right)\\
+&=-\xi^2\delta_{ij}-c^2q_iq_j
+\end{align}
+Second, Magnetic-Magnetic
+\begin{align}
+  L^{M,r}_{i\nu}L^{M,r}_{j\nu} &= -
+   \frac{1}{\mu_r^2}\left( \begin{array}{cccc} 
+      0 & 0 & -q_z & q_y\\
+      0 & q_z & 0 & -q_x\\
+      0 & -q_y & q_x & 0
+    \end{array}
+  \right)
+\left( \begin{array}{cccc} 
+      0 & 0 &  0\\
+      0 & q_z & -q_y\\
+      -q_z & 0 & q_x\\
+      q_y & -q_x & 0
+    \end{array}
+  \right)\\
+&=\frac{1}{\mu_r^2}(\vect{q}^2\delta_{ij}-q_iq_j)
+\end{align}
+Finally Electric-Magnetic
+\begin{align}
+  L^{M,r}_{i\nu}L^{M,r}_{j\nu} &= -
+   \frac{1}{\mu_r}
+ \left( \begin{array}{cccc} 
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_x & -\xi & 0 & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_y & 0 &-\xi & 0\\
+      \frac{1}{\sqrt{\epsilon^r\mu^r}}q_z & 0 & 0 & -\xi
+    \end{array}
+  \right)
+\left( \begin{array}{cccc} 
+      0 & 0 &  0\\
+      0 & q_z & -q_y\\
+      -q_z & 0 & q_x\\
+      q_y & -q_x & 0
+    \end{array}
+  \right)\\
+&=-\frac{\xi}{\mu_r} \left( \begin{array}{ccc} 
+      0 & q_z & -q_y\\
+      -q_z & 0 & q_x\\
+      q_y & -q_x & 0
+    \end{array}
+  \right)
+\end{align}
+
+(Should probably skip most of this - note differing methods, approximations, and rough technique.)
+But it does suggest a useful comparison for worldline.  
+
 
 \section{Repulsion}
 
@@ -1237,7 +1437,6 @@ Use harmonic model and carefully add up contributions from each dipole.
 Define energy based on integral of Poynting's theorem.  
 
 
-
 \section{Quantum Trajectories}
 
 \subsection{Carmichael}
@@ -1260,6 +1459,7 @@ Cite Marte, Zoller, Parkins, Gardiner (MCWF) \cite{Dalibard1992}
 
 Measurement of atom's\cite{Caves1987}
 
+
  Cite Holland, Meystre.  Applied to position measurements of atoms by detecting photons.  Detection of photons localizes atoms.  
 \cite{Holland1996}
 
@@ -1270,6 +1470,79 @@ Lose spatial coherence from single emission.
 \cite{Pfau1994}
 
 Which-way \cite{Gagen1993}
+
+
+\subsection{Holland1996}
+
+Consider imaging the resonance fluorescence of 2-level atom on a detector.  We want 
+to build up the quantum trajectory picture.  
+This is closer to what would actually be done in an experiment, rather than the typical
+choice of angle-resolved detection.  
+
+The decay operators for a 2-level atom emitting light into free space  plane wave modes are
+\begin{equation}
+  \hat{a}_{\mu\Lambda} = \sum_\sigma\vect{\epsilon}_\sigma\cdot\vect{\epsilon}^*_{\mu\Lambda}
+  \hat{A}_\sigma e^{-ik\vect{u}\cdot\vect{r}}
+\end{equation}
+where $\sigma$ are polarization labels, $\epsilon_i$ are polarization vectors, $\hat{A}_\sigma$
+is the internal lowering operator (with a $\sqrt{\gamma}$), $k$ is the wavelength of light emitted
+in direction of the unit vector $\vect{u}$, at position $\vect{r}$.  
+
+Using these operators corresponds to angle-resolved photon detection.  
+If we pass the photons through a infinite thin lens, we can get a position based detection.
+(Set up the atomic dipole to emit in a particular direction)
+This relies of the fact that in the paraxial approximation, 
+the combination of propagation, with a thin lens acts as a Fourier transform.
+\subsubsection{Fourier Optics}
+
+Conventions borrowed from Stek Classical Optics.  (Also see Fox Fourier Analysis)
+
+\begin{itemize}
+  \item Take 2-d Fourier transform of electric field.  
+  \item Propagate with $e^{i\sqrt{k^2-k_x^2-k_y^2}z}$.  
+  \item Invert Fourier transform at end to get final electric field distribution.  
+  \item In paraxial approximation, use $e^{ik z- i(k_x^2+k_y^2)z/(2k)}$.
+  \item Thin spherical lens is a quadratic phase mask.  $e^{-i(x^2+y^2)/(2f)}$.
+  \item For propagating and inverting we get: 
+    \begin{align}
+      E(x',y',z) 
+      &=  \int \frac{dk_xdk_y}{(2\pi)^2} e^{ik_xx' +ik_yy'}e^{ikz - i(k_x^2+k_y^2)z/(2k)}\int dx dy e^{-ik_xx-ik_y y} E_0(x,y)\\
+      &= e^{ikz}\int dx dy \int \frac{dk_xdk_y}{(2\pi)^2} e^{-ik_x(x-x')-ik_y(y-y')}e^{-i(k_x^2+k_y^2)z/(2k)}E_0(x,y)\\
+      &= e^{ikz}\int dx dy \bigg( \frac{k}{2\pi i z}\bigg)e^{i[k_x(x-x')^2+k_y(y-y')^2]z/(2k)}E_0(x,y)
+    \end{align}
+    Combination of propagate-lens-propagate is 
+    \begin{equation}
+      \tilde{E}_0(k_x,k_y) =  e^{ikz - i(k_x^2+k_y^2)z/(2k)}\int dx dy e^{-ik_xx-ik_y y} E_0(x,y)
+    \end{equation}
+    \begin{align}
+      E(x_2,y_2,z) &= e^{ik(z_1+z_2)}\int dx_1dy_1 \int dx dy \bigg( \frac{ik}{2\pi z_1}\bigg)\bigg( \frac{ik}{2\pi z_2}\bigg)
+      \nonumber \\ 
+      & \times e^{ik[(x_2-x_1)^2+(y_2-y_1)^2]/(2z_2)}e^{-ik(x_1^2+y_1^2)/(2f)} e^{ik[(x-x_1)^2+(y-y_1)^2]/(2z_1)}E_0(x,y)
+    \end{align}
+    If we set $z_1=z_2=f?$  This eliminates one set of  quadratic terms in $x_1,y_1$.  Leaving something like 
+    \begin{align}
+      E(x_2,y_2,z) &= e^{ik(z_1+z_2)}\int dx_1dy_1 \int dx dy \bigg( \frac{ik}{2\pi z_1}\bigg)^2
+      e^{ik[x_2^2-2x_1(x_2+x) +x_1^2 +x^2 + y_2^2-2y_1y_2 +y_1^2 +y^2]/(2z)}E_0(x,y)\\
+      &= e^{2ikf+ik(x_2^2+y_2^2)/2f}\int dx_1dy_1 \int dx dy \bigg( \frac{ik}{2\pi f}\bigg)^2
+      e^{ik[(x_1-x_2-x)^2-(x_2+x)^2 +x^2 +(y_1-y_2-y)^2-(y_2-y)^2 +y_1^2 +y^2]/(2f)}E_0(x,y)\\
+      &= e^{2ikf}\frac{ik}{2\pi f} \int dx dy e^{ik(xx_2+yy_2)/f}E_0(x,y)
+    \end{align}
+    Huzzah for re-proving the obvious.  
+\end{itemize}
+
+Use two lenses (to account for emission into the forwards/backwards hemispheres).  
+The operators are then 
+\begin{align}
+  \op{a}_{\nu\Lambda \zeta} = \int dx dy e^{ik \vect{u}\cdot\op{\vect{x}}-ik}
+\end{align}
+
+In one dimension this becomes 
+\begin{align}
+  \op{a}_{u\sigma} = \sqrt{N_{u\sigma}}\op{A}_\sigma e^{-ik u \op{x}}.
+\end{align}
+where $N_{u\sigma}$ is the relevant dipole emission pattern for $\sigma=0,\pm 1$, $u=k_x$.
+
+
 
 \subsection{Control theory}
  Control Theory.  Cite Wiseman book.   \cite{WisemanMilburn2010}

@@ -731,10 +731,46 @@ where
 and $\tau=\hbar \beta$, and we also scaled $A_0\rightarrow \hbar^{-1} A_0$.  
 
 Now expand the matter part out to quadratic order in the coupling.
-What are the gauge-invariance properties?  
-\begin{equation}
-  
-\end{equation}
+\begin{align}
+  S_E =& \int_0^{\hbar\beta} d\tau\int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_\tau\vect{A})^2
+  + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2
+  +\phi^*\big(-\partial_\tau^2-\nabla^2+u(x)+m^2\big)\phi\nonumber\\
+  &+ i\frac{e}{c}A^\mu(\phi^*\partial_\mu\phi -\phi\partial_\mu\phi^*)
+  +\frac{e^2}{c^2}A^\mu A_\mu\phi^*\phi-i\frac{e}{c}\partial_\mu A^\mu\phi^*\phi\bigg] 
+\end{align}
+where we are using the Euclidean inner product for 4-vectors.  
+
+\begin{itemize}
+  \item Expand exponential to second order in $e$.
+    \begin{equation}
+    e^{-\int d^4x A_\mu j^\mu} \approx (1 - \int d^4x A_\mu(x)j^\mu(x) +\frac{1}{2}\int d^4x A_\mu(x) A_\nu(y)
+    j^\mu(x)j^\nu(y))
+  \end{equation}
+  \item Evaluate Gaussian integrals,
+    \begin{equation}
+      \int D\phi D\phi^* \phi^*(x)\phi(x) e^{-\int d^4x \phi^*(x)G^{-1}\phi(x)} = G(x)
+    \end{equation}
+  \item Simplify, Re-exponentiate.
+    Some people use Kubo formula.
+    By definition for linear response, with Ohm's law 
+    \begin{equation}
+      \vect{J} = \sigma \vect{E},
+    \end{equation}
+    so $\sigma = \epsilon-1$.  
+    Kubo formula for conductivity in linear response is 
+    $\sigma^{\mu\nu}(\omega) = \int dt \langle[ j^\mu(t),j^\nu(t')] e^{-i\omega t}.$
+    Quite general relationship.  $\sigma$ is susceptibility, $[j,j]$ is Green function response.  
+    
+    Hopefully can do this calculation for general 
+
+
+\end{itemize}
+
+
+
+What are the gauge-invariance properties?  Gauge-invariance implies current conversation.  
+
+
 
 
 

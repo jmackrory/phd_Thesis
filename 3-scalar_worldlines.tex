@@ -1,9 +1,5 @@
 \chapter{Worldlines for Scalar Fields}
 \label{ch:scalar_worldlines}
-    \section{Partition Function to Worldline path integral}
-    \section{Numerical method}
-    \section{Deficiencies of the scalar method}
-
 \begin{itemize}
 \item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
 \comment{Other references - was one contemporaneous with Strassler?}
@@ -15,11 +11,78 @@
 \end{itemize}
 \item Cite QED Worldline paper on numerics?
 \item Cite Gies papers~\cite{Gies2003,Gies2006, Gies2006a} (all of them!) note work on thermal/geometry~\cite{Klingmueller2008,Weber2009, Weber2010}
+\end{itemize}
+
+In this chapter we will review prior work on the worldline method, translated to our terminology.
+We will derive the method, and discuss its advantages and shortcomings.  
+
+\section{Partition Function to Worldline path integral}
+
 \begin{itemize}
-\item Action
+\item Intro
+We consider a scalar field coupled to a background potential $V(\vect{x},t)$.  This potential
+embodies the location of the bodies we are considering.  Starting from the classical action,
+we will derive the Hamiltonian for the fields, and then compute the quantum partition function.  
+The partition function can be written as a path-integral, which is readily evaluated as a functional
+determinant.  Ultimately we want the free energy, which can be further converted into a path integral
+for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
+world line method.   
+
+\item Lagrangian - Hamiltonian
+The Lagrangian for the scalar field is
 \begin{equation}
-  S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
+  L := \int d^3x \left[ \frac{1}{2}(\partial_t\phi)^2-\frac{1}{2}(\nabla\phi)^2-V(\vect{x},t)\phi^2\right].
 \end{equation}
+In prior work, the potential $V(\vect{x},t)$ encodes the locations of the interacting bodies, with 
+definition
+\begin{equation}
+  V(\vect{x}) = \lambda \sum_r \delta[\sigma_r(\vect{x}-\vect{R}_r)],
+\end{equation}
+    where $\lambda$ is the coupling constant, $\sigma_r(\vect{x})=0$ marks the locations of the surfaces, 
+    and $\vect{R}_r$ marks the center location of each body.  The coupling constant $\lambda$ 
+    is taken to infinity, which corresponds to imposing Dirichlet boundary conditions on the surfaces.
+
+The conjugate momentum to $\phi$ is given by
+\begin{equation}
+  \Pi := \frac{\delta \cL}{\delta(\partial_t\phi)} = \partial_t\phi,
+\end{equation}
+    where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative w.r.t. $f(t)$.    
+The Hamiltonian can then be easily found,
+\begin{align}
+  H := \int d^3x\,\Pi\partial_t\phi -  L\\ 
+  = \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
+\end{align}
+We are now in a position to quantize the field by promoting the fields to operators, 
+    $\phi\rightarrow \op{\phi}, \Pi\rightarrow\op{\Pi}$.
+The fields can be promoted to operators with equal-time commutation relations
+\begin{equation}
+  [\op{\phi}(\vect{x},t),\op{\Pi}(\vect{x'},t)] = i\hbar \delta(\vect{x}-\vect{x'}).
+\end{equation}
+In exactly analogous fashion to quantum mechanics, the overlap between states is given by 
+\begin{equation}
+  \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3x \phi(\vect{x})\Pi(\vect{x})\bigg].
+\end{equation}
+    
+    We can compute physical quantities of interest such as Casimir energies and forces
+    by taking suitable derivatives of the free energy.  The free energy $\mathcal{F}=-\kb T \log Z$,
+    is in turn given by the partition function $Z$.  
+
+The field partition function is 
+\begin{equation}
+  Z = \tr[ e^{-\beta\op{H}}] = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
+\end{equation}
+where we have evaluated the trace over the complete set of field states.  In classic path-integral
+fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
+in both fields and conjugate-momentum fields can be inserted between each piece.  
+\begin{align}
+  Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\langle
+  \rangle\Pi_n| \phi_{n-1}\rangle
+\end{align}
+\comment{Cite Brown, Altland-Simons}
+
+
+
+
 \item Euclidean Path integral (Generating Function) 
 \begin{equation}
   Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x \left[ (\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
@@ -39,6 +102,10 @@
   where $\cT$ is the loop proper time, $\langle V\rangle$ is the average of the potential around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble average over Brownian paths.  
 \item Typically take $V = \lambda\delta[\vect{x}-\sigma(\vect{x})]$, where $\sigma(\vect{x})=0$ is a function describing the surfaces.  In the limit $\lambda\rightarrow\infty$ this amounts to enforcing Dirichlet boundary conditions on the fields at the surfaces.  
 \end{itemize}
+
+    \section{Numerical method}
+    \section{Deficiencies of the scalar method}
+\begin{itemize}
 \item Cite Schaden applying to pistons\cite{Schaden2009}
 \item Figure showing loops.  
 \item Advantages

@@ -528,13 +528,18 @@ Recall that the total energy for the EM field in a dielectric is
 H = \frac{1}{2}\int dx \frac{\Pi^2}{\epsilon} + c^2(\nabla\times\vect{A})^2 = \frac{1}{2}\int dx \frac{ D^2}{\epsilon} + c^2 B^2
 \end{equation}
 
-We assume an atom interacts with the electric field via $H_{int} = -\vect{d}\cdot\vect{E}$.  From second order perturbation theory, in the far field limit we get
+We assume an atom interacts with the electric field via $H_{int} = -\vect{d}\cdot\vect{E}$.
+  From second order perturbation theory, in the far field limit we get
 \begin{equation}
 V_{CP} = -\frac{1}{2}\alpha_0\langle |\vect{E}|^2\rangle.
+
 \end{equation}
 Our goal is to evaluate $\langle E^2\rangle$ from the thermodynamic partition function.  
 
-If we consider a planar geometry, we can split the modes into TE and TM modes.  With $\vect{E} = E_y\vect{y}$.  From $\nabla\times \vect{H} = \partial_t \vect{D}$ and $\nabla\times\vect {E} = -\partial_t\vect{B}$.  We would like an expression for $B.$
+If we consider a planar geometry, we can split the modes into TE and TM modes.
+  With $\vect{E} = E_y\vect{y}$.
+  From $\nabla\times \vect{H} = \partial_t \vect{D}$ and $\nabla\times\vect {E} = -\partial_t\vect{B}$.
+  We would like an expression for $B.$
 
 If we assume the usual frequency dependence, and decompose the fields into monochromatic plane waves we get 
 \begin{equation}
@@ -544,7 +549,9 @@ As magnitudes we get
 \begin{equation}
 B^2 = \frac{k^2}{\omega^2}E^2(k) = -\frac{1}{\omega^2}(\nabla E_y)^2
 \end{equation}
-I think our scalar in this case is just $A_y$.  With all others $A_x=A_z=\phi=0$.  SInce we must also have $\nabla\cdot\vect{A} = 0$, we can add $\partial_y A_y=0$ everywhere with impunity.  
+I think our scalar in this case is just $A_y$.
+  With all others $A_x=A_z=\phi=0$.
+  SInce we must also have $\nabla\cdot\vect{A} = 0$, we can add $\partial_y A_y=0$ everywhere with impunity.  
 
 \subsection{Equivalent scalar Hamiltonian}
 If we take $E_y = \partial_t\phi$, then $B=\nabla\times \vect{A}$.  So if we started with a Lagrangian,
@@ -560,19 +567,26 @@ where $A_y = \phi$.  This conjugate momentum: $\Pi = \epsilon\partial_t\phi$.  T
 \boxed{H = \int dx \frac{\Pi^2}{2\epsilon} + c^2|\nabla\phi|^2}
 \end{equation}
 
-
 \subsection{Partition function goes to determinant}
-Let's now evaluate the partition function $Z$.  We will be able to get the mean energies we want from here.  We will put this into a form that is amenable for both Casimir-Polder and Casimir energies.  
+Let's now evaluate the partition function $Z$.
+  We will be able to get the mean energies we want from here.
+  We will put this into a form that is amenable for both Casimir-Polder and Casimir energies.  
 \begin{align}
-Z =& \int D\phi D\Pi\, \, \exp\left[-\int_0^\beta d\beta' \int dx \frac{\Pi^2}{2\epsilon}+\frac{c^2}{2}|\nabla\phi|^2 + \frac{i}{\hbar}\partial_\beta\phi \Pi\right]\\
-=& \det[\epsilon]^{-1/2}\int D\phi\, \, \exp\left[-\frac{c^2}{2}\int_0^\beta d\beta' \int dx \frac{\epsilon}{\hbar^2 c^2}\partial_\beta\phi^2+c^2|\nabla\phi|^2 \right],
+Z =& \int D\phi D\Pi\, \, \exp\left[-\int_0^\beta d\beta' \int dx 
+\frac{\Pi^2}{2\epsilon}+\frac{c^2}{2}|\nabla\phi|^2 + \frac{i}{\hbar}\partial_\beta\phi \Pi\right]\\
+=& \det[\epsilon]^{-1/2}\int D\phi\, \, \exp\left[-\frac{c^2}{2}\int_0^\beta d\beta' \int dx 
+\frac{\epsilon}{\hbar^2 c^2}\partial_\beta\phi^2+c^2|\nabla\phi|^2 \right],
 \end{align}
-where we carried out the Gaussian integral in $\Pi$.  We will introduce a ``temperature length'' $\tau = \beta \hbar c$ for consistency of units later, and evaluate the remaining Gaussian integral. 
+where we carried out the Gaussian integral in $\Pi$.
+  We will introduce a ``temperature length'' $\tau = \beta \hbar c$ for consistency of units later,
+ and evaluate the remaining Gaussian integral. 
 \begin{align}
-Z(s)=& \det[\epsilon]^{-1/2}\int D\phi\, \, \exp\left[-\frac{c}{2\hbar}\int_0^{\beta\hbar c} d\tau \int dx\, \epsilon\partial_\tau\phi^2+|\nabla\phi|^2 \right]\\
+Z(s)=& \det[\epsilon]^{-1/2}\int D\phi\, \, \exp\left[-\frac{c}{2\hbar}\int_0^{\beta\hbar c} d\tau \int dx\,
+ \epsilon\partial_\tau\phi^2+|\nabla\phi|^2 \right]\\
 =& \det[\epsilon]^{-1/2}\det\left(-\frac{1}{2}\epsilon\partial^2_\tau -\frac{1}{2}\nabla^2\right)^{-1/2}
 \end{align}
-Breaking with the past, I have left the factor of $\frac{1}{2}$ in the determinant.  This ensures that our path integral just uses Brownian bridges, without the need for further rescaling.  
+Breaking with the past, I have left the factor of $\frac{1}{2}$ in the determinant.
+  This ensures that our path integral just uses Brownian bridges, without the need for further rescaling.  
 
 \subsection{Log-det goes to particle path integral}
 Now use 
@@ -583,27 +597,38 @@ So we have
 \begin{equation}
 \log Z =  \frac{1}{2}\int_0^\infty\frac{dT}{T}\int dx\langle x| e^{\epsilon\partial^2_\tau +\nabla^2T}|x\rangle
 \end{equation}
-Here we assumed that the two reference configurations, have the same bodies, just rearranged.  In this case $\det[\epsilon(x)] = \prod_k \epsilon(x_k)$ is unchanged when we move the objects around.  So that leading determinant cancels out.  
+Here we assumed that the two reference configurations, have the same bodies, just rearranged.
+  In this case $\det[\epsilon(x)] = \prod_k \epsilon(x_k)$ is unchanged when we move the objects around.
+  So that leading determinant cancels out.  
 
-We can convert this to a path integral with identifying the differential operators as momentum operators, introducing an auxialiary Hilbert space, $\langle x| \op{p}|\psi\rangle = -i\partial_x \psi(x)$, with $[x,p]=i$.  Then $\langle x|p\rangle = e^{ipx}$, and $I_x=\int dx|x\rangle\langle x|$, and $I_p = \int dp/(2\pi)dp\,|p\rangle\langle p|$.  
+We can convert this to a path integral with identifying the differential operators as momentum operators,
+ introducing an auxialiary Hilbert space, $\langle x| \op{p}|\psi\rangle = -i\partial_x \psi(x)$, with $[x,p]=i$.
+  Then $\langle x|p\rangle = e^{ipx}$, and $I_x=\int dx|x\rangle\langle x|$, and $I_p = \int dp/(2\pi)dp\,|p\rangle\langle p|$.  
 
 \begin{align}
 \log Z =& \frac{1}{2}\int_0^\infty\frac{dT}{T} \int d^3x_0d\tau_0 \int \frac{d^3x_kd^3p_k d\tau_kdp_{\tau,k}}{(2\pi)^4} \delta^{(4)}(x_0-x_N)e^{-\sum_j \left(p_j^2\Delta T +\epsilon(x_j)p_{j,\tau}^2\Delta T + ip_\tau(j)\Delta\tau_{j} + ip_(j)\Delta x_{j}\right)}\\
 =& \frac{\beta \hbar c}{2}\int_0^\infty\frac{dT}{T} \int d^3x_0\int \frac{dx_k d\tau_k}{(2\pi\Delta T)^2\sqrt{\epsilon(x_k)}} \delta^{(4)}(x_0-x_N) e^{-\sum_k \frac{(x_{k+1}-x_k)^2}{2\Delta T}}e^{-\frac{(\tau_{k+1}-\tau_k)^2}{4\epsilon_k\Delta T}},
 \end{align}
 where we evaluated the Gaussian momentum integrals, and used $\int_0^{\beta\hbar c} d\tau_0 = \beta\hbar c$.  
-We can evaluate the Gaussian integrals over $\tau_k$, noting that these are just coupled Gaussians - the spatial dependence dose not affect these integrals.  
+We can evaluate the Gaussian integrals over $\tau_k$, noting that these are just coupled Gaussians -
+ the spatial dependence dose not affect these integrals.  
 
 \begin{equation}
-\log Z_{TE} -\log Z_0= \frac{\beta \hbar c}{8\pi^2}\int \frac{dT}{T^3}\left<\left< \frac{1}{\langle\epsilon\rangle_{\text{loop}}^{1/2}} - 1 \right>\right> \label{eq:log Z TE}
+\log Z_{TE} -\log Z_0= \frac{\beta \hbar c}{8\pi^2}\int \frac{dT}{T^3}
+\biggdlangle \frac{1}{\langle\epsilon\rangle_{\text{loop}}^{1/2}} - 1 \biggdrangle \label{eq:log Z TE}
 \end{equation}
-
 
 \section{Scalar TM}
 
 \comment{signs with complex variables?}
-In this case we have a TM field.  We will try to turn the electromagnetic energy into an equivalent scalar problem.  In this case we can use 
-If we consider a planar geometry, we can split the modes into TE and TM modes.  With $\vect{H} = H_y\vect{y}$.  From $\nabla\times \vect{H} = \partial_t \vect{D}=\epsilon\partial_t\vect{E}$ and $\nabla\times\vect {E} = -\partial_t\vect{B}$.  We would like an expression for $E^2$ in terms of $H$, which is a scalar.  
+In this case we have a TM field.
+  We will try to turn the electromagnetic energy into an equivalent scalar problem.
+  In this case we can use 
+If we consider a planar geometry, we can split the modes into TE and TM modes.
+  With $\vect{H} = H_y\vect{y}$.
+  From $\nabla\times \vect{H} = \partial_t \vect{D}=\epsilon\partial_t\vect{E}$ and 
+$\nabla\times\vect {E} = -\partial_t\vect{B}$.
+  We would like an expression for $E^2$ in terms of $H$, which is a scalar.  
 
 If we assume the usual frequency dependence we get 
 \begin{equation}
@@ -614,7 +639,8 @@ If we dot this equation into it's conjugate  we get
 (\mu_0\epsilon_0)^2\omega^2\epsilon^2|\vect{E}(\omega)|^2 = |\nabla\times\vect{B}(\omega)|^2 
 \end{align}
 
-Now with $B = B_y\vect{y}$, we can use $\nabla \times \vect{B} = (-\partial_zB_y, 0, \partial_x B_y)$.  We also have $\nabla\cdot B = 0$, so we can add $\nabla\cdot B = \partial_y B_y=0$.
+Now with $B = B_y\vect{y}$, we can use $\nabla \times \vect{B} = (-\partial_zB_y, 0, \partial_x B_y)$.
+  We also have $\nabla\cdot B = 0$, so we can add $\nabla\cdot B = \partial_y B_y=0$.
 \begin{align}
 (\mu_0\epsilon_0)^2\omega^2\epsilon^2\vect{E}^2 =& (\nabla\times\vect{B})^2 = (\nabla B_y)^2\\
 \Aboxed{|\vect{E}|^2 =&  \frac{1}{(\mu_0\epsilon_0)^2\omega^2\epsilon^2}(\nabla B_y)^2}
@@ -630,8 +656,6 @@ Then we have
 \partial_t\vect{E} = \nabla\times \partial_t\phi\vect{y} = \partial_t (\nabla\times\phi\vect{y})
 \end{equation}
 So we get $|\vect{E}|^2 = (\nabla\phi)^2$.  
-
-
 
 The Lagrangian is then 
 \begin{align}
@@ -655,26 +679,33 @@ Z_{TM} = \int D\phi \exp\left[-\int d^4x\,\frac{1}{2} \partial_\tau\phi^2 + \fra
 \end{equation}
 Rescale the fields:
 \begin{equation}
-Z' = \det[\epsilon]^{1/2}\int D\phi \exp\left[-\frac{1}{2}\int d^4x \epsilon\partial_\tau\phi^2 + \epsilon^{-1}\nabla\sqrt{\epsilon}\phi^2\right]
+Z' = \det[\epsilon]^{1/2}\int D\phi \exp\left[-\frac{1}{2}\int d^4x 
+\epsilon(\partial_\tau\phi)^2 + \epsilon^{-1}\nabla\sqrt{\epsilon}\phi^2\right]
 \end{equation}
 
 Now have the functional determinant:
 \begin{equation}
-\log Z_{TM} = -\frac{1}{2}\tr\log\left[ -\frac{1}{2}\partial_\tau\epsilon\partial_\tau -\frac{1}{2}\sqrt{\epsilon}\nabla\epsilon^{-1}\nabla\sqrt{\epsilon}\right]
+\log Z_{TM} = -\frac{1}{2}\tr\log\left[ -\frac{1}{2}\partial_\tau\epsilon\partial_\tau
+ -\frac{1}{2}\sqrt{\epsilon}\nabla\epsilon^{-1}\nabla\sqrt{\epsilon}\right]
 \end{equation}
-We will leave the factor of $1/2$ so that we have normal brownian loops.  Our normal calculations compare against this case, and it will leave us with fewer rescalings to worry about.  
+We will leave the factor of $1/2$ so that we have normal brownian loops.
+  Our normal calculations compare against this case, and it will leave us with fewer rescalings to worry about.  
 
 This is a path integral:
 \begin{align}
-\log Z_{TM} =& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int dx_0\int D^4x D^4p e^{-p_\tau^2\epsilon\Delta T +ip_\tau\Delta \tau -\sqrt{\epsilon}\vect{p}\epsilon^{-1}\vect{p}\epsilon\Delta T + i\vect{p}\vect{\Delta x}}\\
-=& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 \int \prod_{k=1}^N \frac{d^4x_k d^4p_k}{(2\pi)^4} \delta^4(x_N-x_0)e^{-\frac{1}{2}p_{\tau,k}^2\epsilon(x_k)\Delta T +ip_{k\tau}\Delta \tau_k} e^{ -\frac{1}{2}\sqrt{\epsilon}\vect{p}\epsilon^{-1}\vect{p}\epsilon\Delta T + i\vect{p}\vect{\Delta x}}
+\log Z_{TM} =& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int dx_0\int D^4x D^4p 
+e^{-p_\tau^2\epsilon\Delta T +ip_\tau\Delta \tau -\sqrt{\epsilon}\vect{p}\epsilon^{-1}\vect{p}\epsilon\Delta T + i\vect{p}\vect{\Delta x}}\\
+=& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 \int \prod_{k=1}^N \frac{d^4x_k d^4p_k}{(2\pi)^4} 
+\delta^4(x_N-x_0)e^{-\frac{1}{2}p_{\tau,k}^2\epsilon(x_k)\Delta T +ip_{k\tau}\Delta \tau_k} e^{ -\frac{1}{2}\sqrt{\epsilon}\vect{p}\epsilon^{-1}\vect{p}\epsilon\Delta T + i\vect{p}\vect{\Delta x}}
 \end{align}
 
 Let's now operator order that exponent.  This will generate a potential which is important.  
 \begin{align}
-\epsilon^{1/2} p\epsilon^{-1} p\epsilon^{1/2} =& p\epsilon^{-1/2}p\epsilon^{1/2} + \frac{i}{2}\epsilon'\epsilon^{-1/2}\epsilon^{-1}p\epsilon^{1/2}\\
-=& p^2 +ip\epsilon^{1/2}\frac{-\epsilon'}{2\epsilon^{3/2}} + \frac{i\epsilon'}{2\epsilon^{3/2}}p\epsilon^{1/2}\\
-=& p^2 -ip\epsilon^{1/2}\frac{\epsilon'}{2\epsilon^{3/2}} + p\frac{i\epsilon'}{2\epsilon^{3/2}}\epsilon^{1/2}-\epsilon^{1/2}\left(\frac{\epsilon'}{2\epsilon^{3/2}}\right)'\\
+\epsilon^{1/2} p\epsilon^{-1} p\epsilon^{1/2} 
+=& p\epsilon^{-1/2}p\epsilon^{1/2} + \frac{i}{2}\epsilon'\epsilon^{-1/2}\epsilon^{-1}p\epsilon^{1/2}\\
+%=& p^2 +ip\epsilon^{1/2}\frac{-\epsilon'}{2\epsilon^{3/2}} + \frac{i\epsilon'}{2\epsilon^{3/2}}p\epsilon^{1/2}\\
+%=& p^2 -ip\epsilon^{1/2}\frac{\epsilon'}{2\epsilon^{3/2}} 
+%+ p\frac{i\epsilon'}{2\epsilon^{3/2}}\epsilon^{1/2}-\epsilon^{1/2}\left(\frac{\epsilon'}{2\epsilon^{3/2}}\right)'\\
 =& p^2 +\left(\frac{3\epsilon'^2}{4\epsilon^{2}} - \frac{\epsilon''}{2\epsilon}\right)
 \end{align}
 
@@ -686,15 +717,25 @@ Now compare this to
 
 We can then say that 
 \begin{equation}
-\frac{1}{2}\epsilon^{1/2} p\epsilon^{-1} p\epsilon^{1/2}  = \frac{1}{2}p^2 + \frac{1}{2}\left[(\nabla\log\sqrt{\epsilon})^2 - \nabla^2\log\sqrt{\epsilon} \right]= \frac{1}{2}p^2 + V_{TM}
+\frac{1}{2}\epsilon^{1/2} p\epsilon^{-1} p\epsilon^{1/2}  
+= \frac{1}{2}p^2 + \frac{1}{2}\left[(\nabla\log\sqrt{\epsilon})^2 - \nabla^2\log\sqrt{\epsilon} \right]
+= \frac{1}{2}p^2 + V_{TM}
 \end{equation}
 
-%You can evaluate this either way, either by explicitly Ito ordering, or Weyl ordering.  For Weyl ordering, you can then treat the velocity term as a shift, which induces a potential.  This follows from expanding expressions for the logarithm.  Either way, you get the same answer.  
+%You can evaluate this either way, either by explicitly Ito ordering, or Weyl ordering.
+%  For Weyl ordering, you can then treat the velocity term as a shift, which induces a potential.
+%  This follows from expanding expressions for the logarithm.  Either way, you get the same answer.  
 
-We then have a gaussian path integral.  We can evaluate all of the integrals over the momenta, $\vect{p}$, and $p_\tau$.  
+We then have a gaussian path integral.
+  We can evaluate all of the integrals over the momenta, $\vect{p}$, and $p_\tau$.  
 \begin{align}
-\log Z_{TM} =& \frac{\beta\hbar c}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 \int \prod_{k=1}^N \frac{d^4x_k d^4p_k}{(2\pi)^4} \delta^4(x_N-x_0)e^{-\frac{1}{2}p_{\tau,k}^2\epsilon(x_k)\Delta T +ip_{k\tau}\Delta \tau_k} e^{ -\frac{1}{2}\vect{p}^2\Delta T + i\vect{p}\vect{\Delta x} -V_{TM}(x_k)\Delta T}\\
- =& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 \int \prod_{k=1}^N d^4x_k \delta^4(x_N-x_0)\frac{1}{\sqrt{2\pi\epsilon_k \Delta T}}e^{-\frac{\Delta \tau_k^2}{2\epsilon_k\Delta T}}\frac{1}{(2\pi\Delta T)^{3/2}}e^{ -\frac{\Delta x_k^2}{2\Delta T}-V_{TM}(x_k)\Delta T}\\
+\log Z_{TM} =& \frac{\beta\hbar c}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 
+\int \prod_{k=1}^N \frac{d^4x_k d^4p_k}{(2\pi)^4} \delta^4(x_N-x_0)
+e^{-\frac{1}{2}p_{\tau,k}^2\epsilon(x_k)\Delta T +ip_{k\tau}\Delta \tau_k} 
+e^{ -\frac{1}{2}\vect{p}^2\Delta T + i\vect{p}\vect{\Delta x} -V_{TM}(x_k)\Delta T}\\
+ =& \frac{1}{2}\int_0^\infty \frac{dT}{T}\int d^4x_0 \int \prod_{k=1}^N d^4x_k \delta^4(x_N-x_0)
+\frac{1}{\sqrt{2\pi\epsilon_k \Delta T}}e^{-\frac{\Delta \tau_k^2}{2\epsilon_k\Delta T}}
+\frac{1}{(2\pi\Delta T)^{3/2}}e^{ -\frac{\Delta x_k^2}{2\Delta T}-V_{TM}(x_k)\Delta T}\\
 \end{align}
 
 We can immediately carry out the $\tau$ gaussian integrals, using 

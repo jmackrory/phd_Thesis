@@ -97,7 +97,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     where $\pi_\theta$ is the Malliavin weight~\cite{Fournie1999}.  
     The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion.  
     One can derive the Malliavin weights by exchanging derivatives with respect to the parameter for
-    derivatives with respect to the Brownian motion, and integrating by parts~\cite{KohatsuHiga2004}.  
+    derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
     The Malliavin results can be recovered for Brownian motion if one combines the likelihood-ratio method with partial-averaging
     along the Brownian motion~\cite{Chen2007}.  In either case, one exchanges differentiation for
     evaluating a new reweighted function, which depends on the required derivatives, while still
@@ -147,95 +147,96 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
       \frac{d^n}{dx^n} e^{-(x-\mu)^2/a^2} = a^{-n}(-1)^n H_n\big(\frac{x-\mu}{a}\big)e^{-(x-\mu)^2/a^2}
     \end{equation}
 
-    \item Convolution formula.  Let us consider the convolution of Gaussians with a Hermite 
-    polynomial.  This naturally emerges from integrating out a coordinate of the path integral
-    \begin{equation}
-      I = H_n\big(\frac{x-\mu_1}{\sqrt{2\sigma_1^2}}\big) \frac{e^{-(x-\mu_1)^2/(2\sigma_1^2)}}{\sqrt{2\pi \sigma_1^2}} 
-      * \frac{e^{-(x-\mu_2)^2/(2\sigma_2^2)}}{\sqrt{2\pi \sigma_2^2}}.
-    \end{equation}
-    The convolution integral is most naturally carried out using the Fourier transform.
-    \begin{align}
-      f*g =& \int dx' f(x-x')g(x')\\
-      = & \int dx' \frac{dk}{2\pi} \frac{dq}{2\pi} e^{ik(x-x')+iqx'} f(k)g(q)\\
-      = & \int \frac{dk}{2\pi} e^{ikx} f(k)g(k)
-    \end{align}
-    The Fourier transform of the Gaussian is 
-    \begin{align}
-      \int dx e^{ikx}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}} 
-      &= \int dx' \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x'-ik/2)^2/(2\sigma^2)+ik\mu-\sigma^2k^2/2}\\
-      &= e^{-\sigma^2 k^2/2+ik\mu}.
-    \end{align}
+  %   \item Convolution formula.  Let us consider the convolution of Gaussians with a Hermite 
+  %   polynomial.  This naturally emerges from integrating out a coordinate of the path integral
+  %   \begin{equation}
+  %     I = H_n\big(\frac{x-\mu_1}{\sqrt{2\sigma_1^2}}\big) \frac{e^{-(x-\mu_1)^2/(2\sigma_1^2)}}{\sqrt{2\pi \sigma_1^2}} 
+  %     * \frac{e^{-(x-\mu_2)^2/(2\sigma_2^2)}}{\sqrt{2\pi \sigma_2^2}}.
+  %   \end{equation}
+  %   The convolution integral is most naturally carried out using the Fourier transform.
+  %   \begin{align}
+  %     f*g =& \int dx' f(x-x')g(x')\\
+  %     = & \int dx' \frac{dk}{2\pi} \frac{dq}{2\pi} e^{ik(x-x')+iqx'} f(k)g(q)\\
+  %     = & \int \frac{dk}{2\pi} e^{ikx} f(k)g(k)
+  %   \end{align}
+  %   The Fourier transform of the Gaussian is 
+  %   \begin{align}
+  %     \int dx e^{ikx}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}} 
+  %     &= \int dx' \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x'-ik/2)^2/(2\sigma^2)+ik\mu-\sigma^2k^2/2}\\
+  %     &= e^{-\sigma^2 k^2/2+ik\mu}.
+  %   \end{align}
 
-    This can be straightforwardly extended to include Hermite polynomials via integration by parts.
-    \begin{align}
-      \int dx e^{ikx}(2\sigma^2)^{-n/2}(-1)^n H_n\big(\frac{x-\mu}{\sqrt{2\sigma^2}}\big)
-        \frac{e^{-(x-\mu)^2/2\sigma^2}}{\sqrt{2\pi \sigma^2}} 
-      &= \int dx e^{ikx}\frac{d^n}{dx^n}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
-      &= (-ik)^n\int dx' \frac{e^{ik(x+\mu)-x^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
-      &= (-ik)^ne^{-\sigma^2 k^2/2+ik\mu}
-    \end{align}
+  %   This can be straightforwardly extended to include Hermite polynomials via integration by parts.
+  %   \begin{align}
+  %     \int dx e^{ikx}(2\sigma^2)^{-n/2}(-1)^n H_n\big(\frac{x-\mu}{\sqrt{2\sigma^2}}\big)
+  %       \frac{e^{-(x-\mu)^2/2\sigma^2}}{\sqrt{2\pi \sigma^2}} 
+  %     &= \int dx e^{ikx}\frac{d^n}{dx^n}\frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
+  %     &= (-ik)^n\int dx' \frac{e^{ik(x+\mu)-x^2/(2\sigma^2)}}{\sqrt{2\pi \sigma^2}}\\
+  %     &= (-ik)^ne^{-\sigma^2 k^2/2+ik\mu}
+  %   \end{align}
 
-    The convolution of the Hermite-Gaussian, and a regular Gaussian is 
-    \begin{align}
-      I&=\int dx' (2\sigma_1^2)^{-n/2}(-1)^n H_n\left(\frac{x-x'-\mu_1}{\sqrt{2\sigma_1}}\right)
-      \frac{e^{-(x-x'-\mu_1)^2/(2\sigma_1^2)-(x'-\mu_2)^2/(2\sigma_2^2)}}{2\pi \sigma_1 \sigma_2}\\
-      &=\int dx' \int \frac{dk}{2\pi}\frac{dq}{2\pi} (-ik)^n e^{-ik(x-x'-\mu_1)}e^{-iq(x'-\mu_2)}
-      e^{-\sigma_1^2k^2/2-\sigma_2^2q^2/2}\\
-      &=\int \frac{dk}{2\pi}(-ik)^ne^{-ik(x-\mu_1-\mu_2)}e^{-(\sigma_1^2+\sigma_2^2)k^2/2}\\
-      &=(-1)^n[2(\sigma_1^2+\sigma_2^2)]^{-n/2}H_n\bigg(\frac{x-\mu_1-\mu_2}{\sqrt{2(\sigma_1^2+\sigma_2^2)}}\bigg)
-      \frac{e^{-(x-\mu_1-\mu_2)^2/[2(\sigma_1^2+\sigma_2^2)]}}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}
-    \end{align}
+  %   The convolution of the Hermite-Gaussian, and a regular Gaussian is 
+  %   \begin{align}
+  %     I&=\int dx' (2\sigma_1^2)^{-n/2}(-1)^n H_n\left(\frac{x-x'-\mu_1}{\sqrt{2\sigma_1}}\right)
+  %     \frac{e^{-(x-x'-\mu_1)^2/(2\sigma_1^2)-(x'-\mu_2)^2/(2\sigma_2^2)}}{2\pi \sigma_1 \sigma_2}\\
+  %     &=\int dx' \int \frac{dk}{2\pi}\frac{dq}{2\pi} (-ik)^n e^{-ik(x-x'-\mu_1)}e^{-iq(x'-\mu_2)}
+  %     e^{-\sigma_1^2k^2/2-\sigma_2^2q^2/2}\\
+  %     &=\int \frac{dk}{2\pi}(-ik)^ne^{-ik(x-\mu_1-\mu_2)}e^{-(\sigma_1^2+\sigma_2^2)k^2/2}\\
+  %     &=(-1)^n[2(\sigma_1^2+\sigma_2^2)]^{-n/2}H_n\bigg(\frac{x-\mu_1-\mu_2}{\sqrt{2(\sigma_1^2+\sigma_2^2)}}\bigg)
+  %     \frac{e^{-(x-\mu_1-\mu_2)^2/[2(\sigma_1^2+\sigma_2^2)]}}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}
+  %   \end{align}
 
-  \item Now to actually apply to integrating out Gaussians, starting from endpoint,
-    we need various variable transformations.  Must switch between Hermite polynomial w.r.t $x_0$
-    and convolution form.  
-    \begin{align}
-      & \partial_{0,i}^n e^{-(x_0-x_1)^2/(2T_1)-(x_0-x_{N-1})^2/(2T_{N-1})}\nonumber\\
-      =& 
-     \partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}x_0^2-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1T_{N-1}}x_0
-       -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
-     % =&\partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}
-     %   \left(x_0-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}\right)^2
-     %   +\frac{(T_{N-1}x_1+T_1x_{N-1})^2}{2T_1T_{N-1}(T_1+T_{N-1})}
-     %   -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
-     =&(-1)^n \left(2\sigma^2_{1,N_1}\right)^{-n/2}
-     H_n\bigg(\frac{x_0-z_{1,N-1}}{\sqrt{2}\sigma_{1,N-1}}\bigg)
-       \exp\left[-\frac{(x_0-z_{1,N-1})^2}{2\sigma^2_{1,N-1}}-\frac{(x_1-x_{N-1})^2}{2(T_1+T_{N_1})}\right]\\
-    \end{align}
-    where 
-    \begin{gather}
-      \sigma_{1,N-1} = \sqrt{\frac{T_1+T_{N-1}}{2T_1T_{N_1}}}\\
-      z_{1,N-1} = \frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}
-    \end{gather}
-  \item We really need 
-    \begin{align}
-      C=\int dx_1 \partial_0^n \frac{1}{(2\pi)^{3/2}\sqrt{T_1T_2T_{N_1}}}e^{-(x_0-x_1)^2/(2T_1)-(x_1-x_2)^2/(2T_2)-(x_0-x_{N-1})^2/(2T_{N-1})}
-    \end{align}
-    The simplest approach is to exchange integration and differentiation, then completing the square in $x_0$,
+  % \item Now to actually apply to integrating out Gaussians, starting from endpoint,
+  %   we need various variable transformations.  Must switch between Hermite polynomial w.r.t $x_0$
+  %   and convolution form.  
+  %   \begin{align}
+  %     & \partial_{0,i}^n e^{-(x_0-x_1)^2/(2T_1)-(x_0-x_{N-1})^2/(2T_{N-1})}\nonumber\\
+  %     =& 
+  %    \partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}x_0^2-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1T_{N-1}}x_0
+  %      -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
+  %    % =&\partial_{0,i}^n \exp\left[-\frac{T_1+T_{N-1}}{2T_1T_{N_1}}
+  %    %   \left(x_0-\frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}\right)^2
+  %    %   +\frac{(T_{N-1}x_1+T_1x_{N-1})^2}{2T_1T_{N-1}(T_1+T_{N-1})}
+  %    %   -\frac{x_1^2}{2T_1}-\frac{x_{N-1}^2}{2T_{N-1}}\right]\\
+  %    =&(-1)^n \left(2\sigma^2_{1,N_1}\right)^{-n/2}
+  %    H_n\bigg(\frac{x_0-z_{1,N-1}}{\sqrt{2}\sigma_{1,N-1}}\bigg)
+  %      \exp\left[-\frac{(x_0-z_{1,N-1})^2}{2\sigma^2_{1,N-1}}-\frac{(x_1-x_{N-1})^2}{2(T_1+T_{N_1})}\right]\\
+  %   \end{align}
+  %   where 
+  %   \begin{gather}
+  %     \sigma_{1,N-1} = \sqrt{\frac{T_1+T_{N-1}}{2T_1T_{N_1}}}\\
+  %     z_{1,N-1} = \frac{T_{N-1}x_1+T_1x_{N-1}}{T_1+T_{N-1}}
+  %   \end{gather}
+  % \item We really need 
+  %   \begin{align}
+  %     C=\int dx_1 \partial_0^n \frac{1}{(2\pi)^{3/2}\sqrt{T_1T_2T_{N_1}}}e^{-(x_0-x_1)^2/(2T_1)-(x_1-x_2)^2/(2T_2)-(x_0-x_{N-1})^2/(2T_{N-1})}
+  %   \end{align}
+    \item The simplest approach is to exchange integration and differentiation, then completing the square in $x_0$,
     and then carry out the derivatives
     \begin{align}
       C=&\partial_0^n\int dx_1  \frac{1}{(2\pi)^{3/2}\sqrt{T_1T_2T_{N_1}}}e^{-(x_0-x_1)^2/(2T_1)-(x_1-x_2)^2/(2T_2)-(x_0-x_{N-1})^2/(2T_{N-1})}\\
-      =&\partial_0^n \frac{1}{2\pi\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})}\\
+%      =&\partial_0^n \frac{1}{2\pi\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})}\\
       =&\partial_0^n \frac{1}{2\pi\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-\mu_2)^2/[2\sigma_2^2]-(x_2-x_{N-1})^2/(2[T_{N-1}+T_1+T_2])}\\
       =&(-1)^n(\sqrt{2}\sigma_2)^{-n/2}H_n\bigg(\frac{x_0-\mu_2}{\sqrt{2}\sigma_2}\bigg)
-      \frac{1}{(2\pi)\sqrt{(T_1+T_2)T_{N_1}}}e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})},
+      \frac{1}{(2\pi)\sqrt{(T_1+T_2)T_{N_1}}}\nonumber\\
+      &\times e^{-(x_0-x_2)^2/[2(T_1+T_2)]-(x_0-x_{N-1})^2/(2T_{N-1})},
     \end{align}
     where 
     \begin{gather}
-      \mu_2 = \frac{T_{N-1}x_2+ (T_1+T_2)x_{N-1}}{T_1+T_2+T_{N-1}}
+      \mu_2 = \frac{T_{N-1}x_2+ (T_1+T_2)x_{N-1}}{T_1+T_2+T_{N-1}}\\
       \sigma_2^2 = \frac{(T_1+T_2)T_{N-1}}{T_{N-1}+T_1+T_2}
     \end{gather}
   \item Now evidently if we integrate out points symmetrically from the loop origin, and we 
     assume all $T_i=\Delta T$, then after integrated out $m$ steps we have 
     \begin{gather}
-      \mu_m = \frac{x_{m+1}+ x_{N-m-1}}{2}
+      \bar{x}_m = \frac{x_{m+1}+ x_{N-m-1}}{2}\\
       \sigma_2^2 = m\Delta T.
     \end{gather}
     The gradient of the path integral can then be approximately written as 
     \begin{align}
       C\approx
-      =&(-1)^n(\sqrt{2 m\Delta T})^{-n/2}H_n\bigg(\frac{x_0-\bar{x}_m}{\sqrt{2 m\Delta T}}\bigg)\nonumber\\
-      &\times \frac{1}{(2\pi m \Delta T)}e^{-(x_0-x_{m+1})^2/[2m\Delta T]-(x_0-x_{N-m-1})^2/(2m\Delta T)}.
+      &(-1)^n(\sqrt{2 T_m})^{-n/2}H_n\bigg(\frac{x_0-\bar{x}_m}{\sqrt{2 T_m}}\bigg)\nonumber\\
+      &\times \frac{1}{(2\pi T_m)}e^{-(x_0-x_{m+1})^2/(2T_m)-(x_0-x_{N-m-1})^2/(2T_m)}.
     \end{align}
   \item We can estimate how many steps to integrate out based on the touching probability in time $T_m$.  
     The probability to touch a plane a distance $d$ away in time $T_m=m\Delta T = (m/N)T$ is 
@@ -245,14 +246,19 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     which can be solved for $m$ if we require that $P_{\mathrm{touch}}$ does not exceed a threshold
     $10^{-\rho}$ with $\rho>0$  
     \begin{equation}
-      \frac{m}{N} \le \frac{2d^2}{T}\rho\ln(10).
+      \frac{m}{N} \le \frac{2d^2}{T\rho\ln(10)}.
     \end{equation}
     Note that as $N$ increases, the integration point approaches a constant fraction, even as $N$ increases.  
     This in effect reduces the fluctuations by $m^n$.  
     \item This is in effect choosing to make a loop with non-uniform steps, where in particular the first
     and last step are larger than the others.  We choose the size of those steps to be as 
     large as possible, while not interacting much with a the nearest surface.  
-    \item While estimating gradients for the stress-tensor it may be necessary to estimate 
+
+\end{itemize}
+
+\subsubsection{General Method Near Surfaces}
+
+     While estimating gradients for the stress-tensor it may be necessary to estimate 
     gradients while close to one surface.  For a renormalized energy, only loops that touch both
     surfaces will contribute.   In this case, the above approach based on integrating out Gaussians
     is of limited utility in reducing the fluctuations.  The assumption that the integrals are approximately
@@ -263,14 +269,15 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     where now the threshold is must balance the path wandering sufficiently far that a simple 
     approximation.
 
+
+
     For example, consider using the Feynman-Kac formula for open loops near a Dirichlet surface, 
     \begin{equation}
       \dlangle e^{-V_D(x-d)}\drangle_{x_{j}\rightarrow x_{j+1}} 
       = \theta[(x_j-d)(x_{j+1}-d)]\left(1-e^{-2(x_j-d)(x_{j+1}-d)/T}\right)
     \end{equation}
     
-    
-\end{itemize}
+
 
 
 \begin{itemize}
@@ -310,6 +317,42 @@ Then expanding these derivatives out (correct expression?)
 \end{align}
 
 \end{itemize}
+
+\subsubsection{Hermite-Gaussian Sampling}
+
+In order to apply the Hermite-Gaussian method to high order derivatives, it is best to 
+sample from the combined Hermite-Gaussian.  
+\begin{align}
+  G &= \frac{1}{2\pi T_1T_2}\exp\left[-\frac{(x_0-x_1)^2}{2T_1}-\frac{(x_0-x_2)^2}{2T_2}\right]\\
+  % &= \frac{1}{2\pi T_1T_2}\exp\left[-\frac{T_1+T_2}{2T_1T_2}x_0^2 +\left(\frac{x_1}{T_1}+\frac{x_2}{T_2}\right)x_0
+  %   -\frac{x_1^2}{2T_1}-\frac{x_2^2}{2T_2}\right]\\
+  &= \frac{1}{2\pi T_1T_2}\exp\left[-\frac{T_1+T_2}{2T_1T_2}\left(x_0 -\frac{x_1T_2+T_1x_2}{T_1+T_2}\right)^2
+    -\frac{(x_1-x_2)^2}{2(T_1+T_2)}\right]
+\end{align}
+After differentiation w.r.t $x_0$, one finds 
+\begin{equation}
+  P:= \partial_0^n G = \frac{1}{\sqrt{2\pi\sigma^2}\sqrt{2\pi(T_1+T_2)}} (2\sigma^2)^{-n/2}H_n\left(\frac{x_0-\mu}{\sqrt{2\sigma^2}} \right)
+  \exp\left[-\frac{(x_0-\mu)^2}{2\sigma^2} - \frac{(x_1-x_2)^2}{2(T_1+T_2)}\right],
+\end{equation}
+where 
+\begin{gather}
+  \sigma^2:= \frac{T_1T_2}{(T_1+T_2)}\\
+  \mu := \frac{x_1T_2+T_1x_2}{T_1+T_2}.
+\end{gather}
+In the event that $T_1=T_2$, this simplifies down to 
+\begin{gather}
+  \sigma^2:= \frac{T_1}{2}\\
+  \mu := \frac{x_1+x_2}{2}.
+\end{gather}
+In order to sample $x_1, x_2$ one can sample from both the combined Hermite-Gaussian for $mu=(x_1+x_2)/2$,
+and the difference $\Delta x=x_2-x_1$.  
+The raw positions can be found by inverting the relations,
+\begin{align}
+  \mu &= z+x_1\\
+\end{align}
+\comment{Solve for $x_1, x_2$ in terms of deviates}
+
+
 
 
 \subsection{Pinning}

@@ -1,10 +1,40 @@
 \chapter{Introduction}
 
-%The story  I want to tell explains the Casimir force via its historical origins which serve to introduce the big results, while sidestepping weird irrelevant bullshit.  I want to hit the important context for modern scientists and emphasize quantities realted to current experiments.  I also want to outline the currently available most powerful methods to set context for what else is possible, and what its limitations are.  
+%The story  I want to tell explains the Casimir force via its historical origins which serve to introduce the big results,
+% while sidestepping weird irrelevant bullshit.
+%  I want to hit the important context for modern scientists and emphasize quantities realted to current experiments.
+%  I also want to outline the currently available most powerful methods to set context for what else is possible,
+% and what its limitations are.  
 
 %I think I can do this with a partial historical introduction.
 
-Quantum mechanics is an inherently statistical theory - we can only make predictions for the probabilities of events.  
+Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
+the probabilities of events~\cite{Sakurai1994}\comment{Perhaps Peres?}.   
+This implies the results of quantum measurements are generally stochastic quantities which fluctuate.
+Furthermore, quantum fluctuations can lead to novel effects such as the Casimir effect, where
+electrically neutral material bodies are attracted to each other.  
+Through advances in modern experimental technology both of these categories of effect are now 
+directly observable~\cite{Wiseman2010, Dalvit2011}.  
+
+This thesis presents theoretical and computational work on two projects which are  
+connected by their quantum mechanical underpinning, the computational methods 
+employed to simulate stochastic processes, and their relevance to modern experiments on atoms.  
+The first project is a method of computing energies related to Casimir effect, while the second project is related to 
+continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
+to the first project, with the second project being discussed in the final chapter.  
+
+% The first project relates to computing Casimir forces via the worldline method, and occupies the majority
+% of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
+% via ensembles of closed Brownian paths.  The work presented here extends the method by
+%  developing analytical and numerical techniques to 
+
+% The second theme will be using quantum trajectories to simulate continuous positions measurements on atoms.
+% Both of these projects are related to fundamental quantum optical phenomena, 
+% that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
+
+The remainder of the introduction will expand on the history, physical origin, techniques and experimental 
+relevance for both Casimir effects, and quantum measurements.  
+
 \comment{Cite Dirac/Sakurai as general textbook}.
 \begin{itemize}
 \item Add complex amplitudes together.  Take modulus squared to get probabilities.  
@@ -21,7 +51,7 @@ to get amplitude to get from one position to another, add up \emph{all} possible
 \begin{itemize}
 \item Quantum measurements are inherently probabilitistic.  
 \item Thus, sequences of measurements are also inherently random.  
-\item Greater experiemtnal control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
+\item Greater experimental control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
 \item Move beyond simple projective measurements, which cannot describe things like position measurements.
 \item To describe continuously weakly probing a system, also use stochastic processes as part of
  numerical simulation strategy.
@@ -38,16 +68,6 @@ to get amplitude to get from one position to another, add up \emph{all} possible
  then we can efficiently compute these integrals by randomly sampling from their dominant regions.
   In this sense, the randomness shows up as a calculational tool.}
 
-This thesis will cover a two different computational projects in quantum optics.
-The first project relates to computing Casimir forces via the worldline method.
-  Most of the thesis is devoted to discussing the background, 
-and discussing the analytical and numerical techniques developed.
-  In brief, the worldline method is a numerical method for computing Casimir energies via path integrals.
-  The numerical simulations
-
-The second theme will be using quantum trajectories to simulate continupus positions measurements on atoms.
-Both of these projects are related to fundamental quantum optical phenomena, 
-that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
 
 \begin{itemize}
 \item General thesis about quantum physics of atoms using computation.  

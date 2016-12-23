@@ -14,7 +14,7 @@ This implies the results of quantum measurements are generally stochastic quanti
 Furthermore, quantum fluctuations can lead to novel effects such as the Casimir effect, where
 electrically neutral material bodies are attracted to each other.  
 Through advances in modern experimental technology both of these categories of effect are now 
-directly observable~\cite{Wiseman2010, Dalvit2011}.  
+directly observable~\cite{WisemanMilburn2010, Dalvit2011}.  
 
 This thesis presents theoretical and computational work on two projects which are  
 connected by their quantum mechanical underpinning, the computational methods 
@@ -35,60 +35,67 @@ to the first project, with the second project being discussed in the final chapt
 The remainder of the introduction will expand on the history, physical origin, techniques and experimental 
 relevance for both Casimir effects, and quantum measurements.  
 
-\comment{Cite Dirac/Sakurai as general textbook}.
-\begin{itemize}
-\item Add complex amplitudes together.  Take modulus squared to get probabilities.  
-\item Feynman path integral construction of quantum mechanics- 
-to get amplitude to get from one position to another, add up \emph{all} possible paths,
- with a suitable phase, $e^{-i S[x]/\hbar}$, \cite{Feynman1942, Feynman1965}
-\item Found common use in field theory particularly for covariantly quantizing gauge field theories,
- such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
-\item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
-   Can mathematically formulate a path integral as very high-dimensional integral.
-  Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
-\end{itemize}
+% \comment{There are two roles for the randomness here.
+%   From one point of view, the randomness is an intrinsic part of quantum mechanics,
+%  and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
+%   Alternatively, if we are considering these calculations for energy or evolution as large integrals,
+%  then we can efficiently compute these integrals by randomly sampling from their dominant regions.
+%   In this sense, the randomness shows up as a calculational tool.}
+
+% \begin{itemize}
+% \item General thesis about quantum physics of atoms using computation.  
+% \item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
+% \item First new method for computing electromagnetic Casimir energies.
+% \item Second, continuous position measurements of atoms taking into account experimental constraints.  
+% \item United in perspective of numerical work relying on Monte-Carlo techniques,
+%  to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
+% \end{itemize}
+
+\section{Casimir Forces}% in general and physical interpretation}
+
+The Casimir force is an attractive force that arises between material bodies due to fluctuations in quantum fields
+that interact with the bodies.
+The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
+perfectly conducting plates will attract one another due to their interaction with the quantized 
+electromagnetic (EM) field.  
+The presence of the conductors forces the electric field to vanish on the surfaces,
+which restricts the allowed modes of the electromagnetic field, as illustrated in Fig.~\ref{fig:Casimir_sketch}.
+Each quantized mode of the electromagnetic field contributes
+to the energy, even in the ground state with zero photons.  Each mode contributes 
+$E_\alpha=\hbar\omega_\alpha/2$ , where $\hbar$ is Planck's  constant, and $\omega_\alpha$ is the frequency of the mode.
+The total energy is found by summing the mode for each energy --- the total energy is
+badly divergent since each term in the sum is positive.  However a finite answer can 
+be found by consider an energy \emph{difference} between two different configurations.  
+The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
+and will be essential in computations of Casimir quantities.  
+In this case, the energy when the bodies are removed to spatial infinity is subtracted.  
+  The renormalized energy between the plates is
+\begin{equation}
+  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
+\end{equation}
+where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
+and $d$ is the distance between the plates.  
+\begin{figure}
+\center
+\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
+\caption{Sketch of allowed modes between perfectly conducting plates.}
+\label{fig:Casimir_plates}
+\end{figure}
 
 \begin{itemize}
-\item Quantum measurements are inherently probabilitistic.  
-\item Thus, sequences of measurements are also inherently random.  
-\item Greater experimental control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
-\item Move beyond simple projective measurements, which cannot describe things like position measurements.
-\item To describe continuously weakly probing a system, also use stochastic processes as part of
- numerical simulation strategy.
-\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe,
- for example shining light on the atom. \cite{Carmichael1993}
-\item Simulated trajectories are possible trajectories a system could trace out as we observe.
-  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
-\end{itemize}
-
-\comment{There are two roles for the randomness here.
-  From one point of view, the randomness is an intrinsic part of quantum mechanics,
- and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
-  Alternatively, if we are considering these calculations for energy or evolution as large integrals,
- then we can efficiently compute these integrals by randomly sampling from their dominant regions.
-  In this sense, the randomness shows up as a calculational tool.}
-
-
-\begin{itemize}
-\item General thesis about quantum physics of atoms using computation.  
-\item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
-\item First new method for computing electromagnetic Casimir energies.
-\item Second, continuous position measurements of atoms taking into account experimental constraints.  
-\item United in perspective of numerical work relying on Monte-Carlo techniques,
- to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
-\end{itemize}
-
-
-
-\section{Casimir Forces in general and physical interpretation}
-
-\begin{itemize}
-\item Casimir force arises due to fluctuations in quantum fields. 
 \item Forces between macroscopic bodies, atoms and bodies and between atoms.  
-\item Interesting for theory reasons as purely quantum field theory phenomena, 
-  and relevance to current experimental physics.  
+\item Related to van der Waals forces and London forces, which attribute fluctuations
+    to atomic dipoles, rather than fields.
+\item Historically earlier, London applied interaction dipoles in QM perturbation theory.
+\item Casimir-Polder looking at colloidal suspensions, included retardation due to 
+\item Casimir forces afterwards.  
+\item As a matter of nomenclature we will refer to the whole range phenemena as the Casimir effect,
+in particular referring to the interaction between macroscopic bodies.  
+while referring to atom-surface effects as Casimir-Polder effects.  The near-field limit
+passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
+Distinguish between atomic and macroscopic forces, and in different distance regimes.
+\item Ultimately, same physical origin.  
 \end{itemize}
-
 
 \begin{itemize}
 \item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
@@ -97,151 +104,7 @@ to get amplitude to get from one position to another, add up \emph{all} possible
   Parsegian~\cite{Parsegian2006}, Israelachivili~\cite{Israelachvili2011}.
 \end{itemize}
 
-
-\subsection{Casimir energy}
-
-The Casimir force is an force that arises between bodies due to fluctuations in quantum fields.
-  It was first predicted in 1948 by Henrik Casimir~\cite{Casimir1948}.
-  If we consider two planar perfect conductors, we find that there is an 
-attractive force between them due to the zero point energy of the electromagnetic field.
-  In a quantum electrodynamics the ground state of each mode of the 
-electromagnetic field contributes $\hbar\omega/2$, where $\hbar$ is Planck's
- constant, and $\omega$ is the frequency of the mode.
-  The presence of the conductors forces the electric field to vanish on the surfaces,
- which restricts the allowed modes of the electromagnetic field.  
-If we add up the energy from all modes of the electromagnetic field, 
-and compare it to the case when the plates are infinitely far apart from one another, 
-we find the energy is reduced as the plates are brought closer together.
-
-  The energy between the plates is then
-\begin{equation}
-  E = -\frac{\hbar c}{240\pi^2 d^3},
-\end{equation}
-where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
-and $d$ is the distance between the plates.  
-
-\subsubsection{Calculation for perfect conductors}
-
-\comment{Give simple derivation of force? Cite Bordag/Dalvit?}
-Here we will briefly reprise Casimir's original calculation~\cite{Casimir1948}.
-  Let us consider a perfectly conducting box of length $L$.
-  We will place another perfectly conducting plate, of area $L^2$, a distance $a$ from the $xy$ wall.   
-If we consider the quantized electromagnetic field,  
-then the energy of the field in its ground state is
-\begin{equation}
-E = \sum_{\text{modes}}\frac{\hbar\omega_\alpha}{2}.
-\end{equation}
-Since the energies for each mode are positive, and the sum extends over all possible modes,
- this enery is extremely divergent.
-  However, if we consider energy \emph{differences} between two configurations 
-we can find a finite result.  
-This subtraction is a form of renormalization.  
-
-We can write down the allowed modes for a rectangular cavity defined by, 
-\begin{equation}
-0 \le x \le L, \quad 0 \le y\le L, \quad 0 \le z \le a.
-\end{equation}
-From the boundary conditions, and transversality of the field,
- the mode functions for a perfectly conducting box 
-are\footnote{Eq. (8.62) in `` Quantum and Atom Optics'', by Daniel A. Steck 
-  \cite{SteckNotes}}:
-\begin{align}
-\mathbf{f}_{\mathbf{k},\zeta}(\mathbf{r}) =& \sqrt{\frac{8}{V}}\bigg[ 
-\hat{x}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{x})\cos k_xx\sin k_yy\sin k_z z\nonumber\\
-&+\hat{y}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{y})\sin k_xx\cos k_yy\sin k_z z\nonumber\\
-&+\hat{z}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{z})\sin k_xx\sin k_yy\cos k_z z\bigg],
-\end{align}
-where $\hat{\epsilon}_{\mathbf{k},\zeta}$ is the polarization vector associated with
- the mode with wavevector $\vect{k}$ and the polarization index $\zeta$ takes on two values.
-  The conducting boundary conditions mean that the fields must vanish on the surfaces, which requires that
-\begin{equation}
-k_x = \frac{pi n_x}{L},\quad  k_y = \frac{\pi n_y}{L}, \quad k_z=\frac{\pi n_z}{a},
-\end{equation}
-where $n_x,n_y,n_z$ are positive integers. 
- The requirement that $\nabla\cdot\vect{E}=0$, then requires that 
-$\vect{k}\cdot\vect{E}=0$, which limits the polarizations to two values.
-  We can write the frequency for a particular mode as
-\begin{equation}
-  \omega = c|\vect{k}| = c\sqrt{k_x^2+k_y^2+k_z^2}.
-\end{equation}
-Then if we take the limit $L\rightarrow\infty$, we can replace the sums over
- these modes with integrals over a continuum, 
-\begin{equation}
-E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2{\sum_{n_z=0}^\infty}'\int_0^\infty dk_x
-\int_0^\infty dk_y \left(\sqrt{k_x^2+k_y^2+\frac{n_z^2\pi^2}{a^2}}\right),
-\end{equation}
-where ${\sum_n}'$ includes a factor of $1/2$ for the $n=0$ term.
-  (At $n_z=0$, there is only one polarization, while for larger $n$ there are 
-two polarizations.  
-When we come to consider non-zero temperature effects later, 
-we will encounter similar summations.)
-
-We can introduce polar coordinates to evaluate the integral over $k_x,k_y$.  
-If we define $\kappa=\sqrt{k_x^2+k_y^2}$, and carry out the angular integral in 
-the upper quarter plane, we find
-\begin{equation}
-E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}{\sum_{n_z=0}^\infty}'
-\int_0^\infty d\kappa\,\kappa \sqrt{\kappa^2+\frac{n_z^2\pi^2}{a^2}}.
-\end{equation}
-
-On its own this energy is highly divergent.  
-We will then subtract off the energy when the plates are moved farther apart.
-In the limit of large $a$ we can also convert the sum over integers into 
-another integral.  
-The result of this subtraction is
-\begin{equation}
-E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}\int_0^\infty d\kappa\,\kappa
- \left({\sum_{n_z=0}^\infty}'\sqrt{\kappa^2+\frac{n_z^2\pi^2}{a^2}}
--\frac{\pi}{a}\int_0^\infty dk_z\sqrt{\kappa^2+k_z^2}\right).
-\end{equation}
-At this point Casimir introduces a function $f(k/k_m)$ to regularize the calculation.
-This physically amounts to including some dispersion to model an 
-ultra-violet (UV) cutoff.  
-It is known \comment{Kramers-Kr\"onig} that the metal becomes transparent to 
-photons at high enough energies, or short enough wavelengths,
- where $k_m$ indicates the cutoff.
-  $f(k/k_m)$ is one for $k\ll 1$, and approaches zero for $k\gg k_m$.  
-
-If we change variable again to $u=(a\kappa/\pi)^2$, then
-\begin{equation}
-E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}\frac{1}{2}
-\left(\frac{\pi}{a}\right)^3\int_0^\infty du 
-\left({\sum_{n_z=0}^\infty}'\sqrt{u+n_z^2}-\frac{\pi}{a}\int_0^\infty dn\sqrt{u+n^2}\right)
-f\left(\frac{\pi\sqrt{n^2+u}}{a k_m}\right).
-\end{equation}
-%(\pi/a)^2 \frac{1}{2} from change of variable
-If we now use the Euler-Maclaurin formula,
-\begin{equation}
-{\sum_{n=0}^\infty}' F(n)-\int_0^\infty dn\, F(n)
-=-\frac{1}{12}F'(0)+\frac{1}{24\times 30}F'''(0),
-\end{equation}
-where primes denote differentiation w.r.t the argument, 
-\begin{equation}
-F(n)=\int_{n^2}^\infty dw\, \sqrt{w}f\left(\frac{\pi w}{ak_m}\right),
-\end{equation}
-where we have changed variables in the $u$ integral to $w = \sqrt{n^2+u}$
-Then taking 
-\begin{align}
-F'(n) & = -\frac{2n^2}f\left(\frac{\pi n^2}{a k_m}\right)\\
-F'(0) & = 0\\
-F'''(0) & = -4
-\end{align}
-\comment{huh?  Introduced $f(k)$ to regularize Euler-Maclaurin}.
-
-The end result of this, this that the renormalied vacuum energy per unit area is
-\begin{equation}
-\frac{E}{L^2} = -\frac{\hbar c\pi^2}{720 a^3}
-\end{equation}
-
-\begin{figure}
-\center
-\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
-\caption{Sketch of allowed modes between perfectly conducting plates.}
-\end{figure}
-
-This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
-
-\subsection{Casimir-Polder energy}
+%\subsection{Casimir-Polder energy}
 
 The Casimir force is also important for atoms near surfaces.  
 This variant is known as the Casimir-Polder force, 
@@ -255,7 +118,7 @@ V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4}.
 
 \comment{Note Dan's notes as example calculations.  }
 
-\subsection{Van der Waals forces}
+%\subsection{Van der Waals forces}
 
 The formalism was extended to include dielectric media by Lifshitz~\cite{Lifshitz1956}.
   \comment{He also worked alongside co-workers Dzayolshinkii and Abrisokov to
@@ -263,6 +126,123 @@ The formalism was extended to include dielectric media by Lifshitz~\cite{Lifshit
 \comment{Point of view: Due to thermal fluctuations in medium.}
 
 Mclachlan\cite{McLachlan1963} cites these guys?
+
+%\subsection{Casimir energy}
+
+
+% \subsubsection{Calculation for perfect conductors}
+
+% \comment{Give simple derivation of force? Cite Bordag/Dalvit?}
+% Here we will briefly reprise Casimir's original calculation~\cite{Casimir1948}.
+%   Consider a perfectly conducting box of length $L$.
+%   We will place another perfectly conducting plate, of area $L^2$, a distance $a$ from the $xy$ wall.   
+% The energy for the ground state of the quantized electromagnetic field is   
+% \begin{equation}
+% E = \sum_{\text{modes}}\frac{\hbar\omega_\alpha}{2}.
+% \end{equation}
+% Since the energies for each mode are positive, and the sum extends over all possible modes,
+%  this energy is badly divergent.
+%   However, the energy \emph{differences} between two configurations
+%   are finite.  This subtraction is a form of renormalization.  
+
+% We can write down the allowed modes for a rectangular cavity defined by, 
+% \begin{equation}
+% 0 \le x \le L, \quad 0 \le y\le L, \quad 0 \le z \le a.
+% \end{equation}
+% From the boundary conditions, and transversality of the field,
+%  the mode functions for a perfectly conducting box 
+% are\footnote{Eq. (8.62) in `` Quantum and Atom Optics'', by Daniel A. Steck 
+%   \cite{SteckNotes}}:
+% \begin{align}
+% \mathbf{f}_{\mathbf{k},\zeta}(\mathbf{r}) =& \sqrt{\frac{8}{V}}\bigg[ 
+% \hat{x}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{x})\cos k_xx\sin k_yy\sin k_z z\nonumber\\
+% &+\hat{y}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{y})\sin k_xx\cos k_yy\sin k_z z\nonumber\\
+% &+\hat{z}(\hat{\epsilon}_{\mathbf{k},\zeta}\cdot\hat{z})\sin k_xx\sin k_yy\cos k_z z\bigg],
+% \end{align}
+% where $\hat{\epsilon}_{\mathbf{k},\zeta}$ is the polarization vector associated with
+%  the mode with wavevector $\vect{k}$ and the polarization index $\zeta$ takes on two values.
+%   The conducting boundary conditions mean that the fields must vanish on the surfaces, which requires that
+% \begin{equation}
+% k_x = \frac{pi n_x}{L},\quad  k_y = \frac{\pi n_y}{L}, \quad k_z=\frac{\pi n_z}{a},
+% \end{equation}
+% where $n_x,n_y,n_z$ are positive integers. 
+%  The requirement that $\nabla\cdot\vect{E}=0$, then requires that 
+% $\vect{k}\cdot\vect{E}=0$, which limits the polarizations to two values.
+%   We can write the frequency for a particular mode as
+% \begin{equation}
+%   \omega = c|\vect{k}| = c\sqrt{k_x^2+k_y^2+k_z^2}.
+% \end{equation}
+% Then if we take the limit $L\rightarrow\infty$, we can replace the sums over
+%  these modes with integrals over a continuum, 
+% \begin{equation}
+% E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2{\sum_{n_z=0}^\infty}'\int_0^\infty dk_x
+% \int_0^\infty dk_y \left(\sqrt{k_x^2+k_y^2+\frac{n_z^2\pi^2}{a^2}}\right),
+% \end{equation}
+% where ${\sum_n}'$ includes a factor of $1/2$ for the $n=0$ term.
+%   (At $n_z=0$, there is only one polarization, while for larger $n$ there are 
+% two polarizations.  
+% When we come to consider non-zero temperature effects later, 
+% we will encounter similar summations.)
+
+% We can introduce polar coordinates to evaluate the integral over $k_x,k_y$.  
+% If we define $\kappa=\sqrt{k_x^2+k_y^2}$, and carry out the angular integral in 
+% the upper quarter plane, we find
+% \begin{equation}
+% E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}{\sum_{n_z=0}^\infty}'
+% \int_0^\infty d\kappa\,\kappa \sqrt{\kappa^2+\frac{n_z^2\pi^2}{a^2}}.
+% \end{equation}
+
+% On its own this energy is highly divergent.  
+% We will then subtract off the energy when the plates are moved farther apart.
+% In the limit of large $a$ we can also convert the sum over integers into 
+% another integral.  
+% The result of this subtraction is
+% \begin{equation}
+% E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}\int_0^\infty d\kappa\,\kappa
+%  \left({\sum_{n_z=0}^\infty}'\sqrt{\kappa^2+\frac{n_z^2\pi^2}{a^2}}
+% -\frac{\pi}{a}\int_0^\infty dk_z\sqrt{\kappa^2+k_z^2}\right).
+% \end{equation}
+% At this point Casimir introduces a function $f(k/k_m)$ to regularize the calculation.
+% This physically amounts to including some dispersion to model an 
+% ultra-violet (UV) cutoff.  
+% It is known \comment{Kramers-Kr\"onig} that the metal becomes transparent to 
+% photons at high enough energies, or short enough wavelengths,
+%  where $k_m$ indicates the cutoff.
+%   $f(k/k_m)$ is one for $k\ll 1$, and approaches zero for $k\gg k_m$.  
+
+% If we change variable again to $u=(a\kappa/\pi)^2$, then
+% \begin{equation}
+% E = \hbar c\bigg(\frac{L}{\pi}\bigg)^2\frac{\pi}{2}\frac{1}{2}
+% \left(\frac{\pi}{a}\right)^3\int_0^\infty du 
+% \left({\sum_{n_z=0}^\infty}'\sqrt{u+n_z^2}-\frac{\pi}{a}\int_0^\infty dn\sqrt{u+n^2}\right)
+% f\left(\frac{\pi\sqrt{n^2+u}}{a k_m}\right).
+% \end{equation}
+% %(\pi/a)^2 \frac{1}{2} from change of variable
+% If we now use the Euler-Maclaurin formula,
+% \begin{equation}
+% {\sum_{n=0}^\infty}' F(n)-\int_0^\infty dn\, F(n)
+% =-\frac{1}{12}F'(0)+\frac{1}{24\times 30}F'''(0),
+% \end{equation}
+% where primes denote differentiation w.r.t the argument, 
+% \begin{equation}
+% F(n)=\int_{n^2}^\infty dw\, \sqrt{w}f\left(\frac{\pi w}{ak_m}\right),
+% \end{equation}
+% where we have changed variables in the $u$ integral to $w = \sqrt{n^2+u}$
+% Then taking 
+% \begin{align}
+% F'(n) & = -\frac{2n^2}f\left(\frac{\pi n^2}{a k_m}\right)\\
+% F'(0) & = 0\\
+% F'''(0) & = -4
+% \end{align}
+% \comment{huh?  Introduced $f(k)$ to regularize Euler-Maclaurin}.
+
+% The end result of this, this that the renormalied vacuum energy per unit area is
+% \begin{equation}
+% \frac{E}{L^2} = -\frac{\hbar c\pi^2}{720 a^3}
+% \end{equation}
+
+
+% This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
 
 
 \subsection{Scale and Physical Interpretation}
@@ -546,6 +526,20 @@ forces binding bodies together.
 \section{Other Computational methods}
 
 \begin{itemize}
+\item Add complex amplitudes together.  Take modulus squared to get probabilities.  
+\item Feynman path integral construction of quantum mechanics- 
+to get amplitude to get from one position to another, add up \emph{all} possible paths,
+ with a suitable phase, $e^{-i S[x]/\hbar}$, \cite{Feynman1942, Feynman1965}
+\item Found common use in field theory particularly for covariantly quantizing gauge field theories,
+ such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
+\item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
+   Can mathematically formulate a path integral as very high-dimensional integral.
+  Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
+\end{itemize}
+
+
+
+\begin{itemize}
 \item Experiments spurred development of theory.  
 \item Prior methods relied on mode-function expansion of fields, which is only possible
 for simple geometries.  
@@ -792,6 +786,21 @@ Describe open quantum systems, and include information from continuous measureme
 
 
 \subsection{Quantum Trajectories}
+
+\begin{itemize}
+\item Quantum measurements are inherently probabilitistic.  
+\item Thus, sequences of measurements are also inherently random.  
+\item Greater experimental control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
+\item Move beyond simple projective measurements, which cannot describe things like position measurements.
+\item To describe continuously weakly probing a system, also use stochastic processes as part of
+ numerical simulation strategy.
+\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe,
+ for example shining light on the atom. \cite{Carmichael1993}
+\item Simulated trajectories are possible trajectories a system could trace out as we observe.
+  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
+\end{itemize}
+
+
 
 \begin{itemize}
 \item Cite Carmichael Rice JOSA paper~\cite{Carmichael1989}

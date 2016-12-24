@@ -54,7 +54,22 @@ relevance for both Casimir effects, and quantum measurements.
 \section{Casimir Forces}% in general and physical interpretation}
 
 The Casimir force is an attractive force that arises between material bodies due to fluctuations in quantum fields
-that interact with the bodies.
+that interact with the bodies.  It is intimately related to the van der Waals force, where 
+molecules with fluctuating dipole moments are attracted to one another.  Both forces can be attributed 
+to quantum fluctuations --- the Casimir force attributes the fluctuations to the fields, while
+the van der Waals force attributes the fluctuations to interacting dipoles that make up the bodies.  
+This choice of viewpoint is something that will be reprised in more modern treatments of the Casimir effect.  
+
+In 1930\comment{right year?} London computed the attractive potential between induced dipoles in electrically neutral
+atoms via quantum mechanical perturbation theory.  The potential has a characteristic $r^{-6}$ scaling.
+The attraction between molecules was also further studied by Overbeeck~\etal\cite{Overbeeck}.  
+In 1948 Casimir and Polder~\cite{CasimirPolder1948} extended this theory to using Quantum Electrodynamics
+(QED) to account for the retardation due to the finite speed of light.  They found that in the 
+far-field the interatomic potential decays more quickly, as $r^{-7}$.  The change in power law can be 
+attributed to the induced dipoles decorrelating, and having a weaker interaction.  Furthermore,
+they found an attractive force between an atom and perfectly conducting wall, with a $r^{-3}$ scaling
+in the near field (van der Waals) regime, passing over to $r^{-4}$ scaling in the far-field.    
+
 The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
 perfectly conducting plates will attract one another due to their interaction with the quantized 
 electromagnetic (EM) field.  
@@ -69,7 +84,7 @@ be found by consider an energy \emph{difference} between two different configura
 The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
 and will be essential in computations of Casimir quantities.  
 In this case, the energy when the bodies are removed to spatial infinity is subtracted.  
-  The renormalized energy between the plates is
+The renormalized energy between the plates is
 \begin{equation}
   E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
 \end{equation}
@@ -82,26 +97,34 @@ and $d$ is the distance between the plates.
 \label{fig:Casimir_plates}
 \end{figure}
 
+The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
+This was further expanded on by his co-workers and students carefully taking into account the   
+showing the connection between Casimir and the pair-wise van der Waals potentials~
+\cite{Dzyaloshinskii1959,Dzyaloshinskii1961}
+As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, the Lifshitz theory is a classical stochastic electrodynamics theory,
+which attributes the fluctuations as thermal fluctuations of the medium.  
+
+, and extending 
+the results to finite temperature and dispersion~\cite{BarashGinzburg1975}.  
+
+
 \begin{itemize}
-\item Forces between macroscopic bodies, atoms and bodies and between atoms.  
-\item Related to van der Waals forces and London forces, which attribute fluctuations
-    to atomic dipoles, rather than fields.
-\item Historically earlier, London applied interaction dipoles in QM perturbation theory.
-\item Casimir-Polder looking at colloidal suspensions, included retardation due to 
-\item Casimir forces afterwards.  
-\item As a matter of nomenclature we will refer to the whole range phenemena as the Casimir effect,
-in particular referring to the interaction between macroscopic bodies.  
-while referring to atom-surface effects as Casimir-Polder effects.  The near-field limit
-passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
-Distinguish between atomic and macroscopic forces, and in different distance regimes.
-\item Ultimately, same physical origin.  
+% \item Historically earlier, London applied interaction dipoles in QM perturbation theory.
+% \item Casimir-Polder looking at colloidal suspensions, included retardation due to the finite speed 
+%     of light.  
+% \item As a matter of nomenclature we will refer to the whole range phenemena as the Casimir effect,
+% in particular referring to the interaction between macroscopic bodies.  
+% while referring to atom-surface effects as Casimir-Polder effects.  The near-field limit
+% passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
+% Distinguish between atomic and macroscopic forces, and in different distance regimes.
+% \item Ultimately, same physical origin.  
 \end{itemize}
 
 \begin{itemize}
 \item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
   Bordag~\cite{Bordag2009}, Dalvit~\cite{Dalvit2011} recent developments.  
 \item More general books on Casimir and van der Waals forces as they relate to chemistry, 
-  Parsegian~\cite{Parsegian2006}, Israelachivili~\cite{Israelachvili2011}.
+  Parsegian~\cite{Parsegian2006}, Israelachivili~\etal~\cite{Israelachvili2011}.
 \end{itemize}
 
 %\subsection{Casimir-Polder energy}
@@ -116,14 +139,8 @@ In this case, the atom feels an attractive potential to a surface a distance $d$
 V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4}.
 \end{equation}
 
-\comment{Note Dan's notes as example calculations.  }
-
 %\subsection{Van der Waals forces}
 
-The formalism was extended to include dielectric media by Lifshitz~\cite{Lifshitz1956}.
-  \comment{He also worked alongside co-workers Dzayolshinkii and Abrisokov to
- further compute the force from using Feynman diagrammatic methods\cite{Dzyaloshinskii1959,Dzyaloshinskii1961}}.  
-\comment{Point of view: Due to thermal fluctuations in medium.}
 
 Mclachlan\cite{McLachlan1963} cites these guys?
 
@@ -354,18 +371,18 @@ The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the vo
 %\item Cite Casimir/Casimir-Polder and Lifshitz.
 \item Casimir vs Van Der Waals vs London Forces
 
-The Casimir force is intimately related to the van der Waals forces between molecules.
-Van der Waals forces are usually ascribed to the dipole fluctuations of the 
-neutral atoms.
-In the limit where the atoms are far apart retardation becomes important and 
-the force changes decays more quickly as $r^{-7}$, as first found by Casimir and Polder.  
-In this limit the forces are sometimes referred to as London dispersion forces.
-Normally Casimir forces consider the 
+% The Casimir force is intimately related to the van der Waals forces between molecules.
+% Van der Waals forces are usually ascribed to the dipole fluctuations of the 
+% neutral atoms.
+% In the limit where the atoms are far apart retardation becomes important and 
+% the force changes decays more quickly as $r^{-7}$, as first found by Casimir and Polder.  
+% In this limit the forces are sometimes referred to as London dispersion forces.
+% Normally Casimir forces consider the 
 
-Throughout this thesis we shall use Casimir forces to refer to the forces between
-macroscopic bodies, and Casimir-Polder forces to refer to the forces between 
-atoms and macroscopic bodies.  Van der Waals forces are also sometimes referred to as the 
-short-distance limit of the Casimir force, where retardation can be ignored.      
+% Throughout this thesis we shall use Casimir forces to refer to the forces between
+% macroscopic bodies, and Casimir-Polder forces to refer to the forces between 
+% atoms and macroscopic bodies.  Van der Waals forces are also sometimes referred to as the 
+% short-distance limit of the Casimir force, where retardation can be ignored.      
 
 \item Renormalization
 
@@ -433,6 +450,7 @@ Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton}
 \section{Experiments}
 %Lamoreaux
 \subsection{Casimir}
+
 While Casimir predicted an attractive force between neutral metal bodies in 1948,
 it was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}
 Lamoreaux's work spurred a large amount of experimental and theoretical work.  
@@ -451,9 +469,7 @@ above a plate.
 
 Bressi\etal measured the Casimir force between parallel plates~\cite{Bressi2002}.  
 
- Casimir force stiction in MEMS.  device failure, minimum feature size.~\cite{Buks2001}
-
-
+Casimir force stiction in MEMS.  device failure, minimum feature size.~\cite{Buks2001}
 
 \subsection{Casimir-Polder}
 %Skip over names?  
@@ -504,17 +520,51 @@ Drude vs plasma model.
   background dominates~\cite{Rosa2008})
   (Cite Vogel and Welsch chapter for Green function methods.  They cite 
   Feinberg and Sucher (1970) on pg 360 for repulsion)
-\item Modifications to gravity on $1\mu m$ or $1mm$ scale.  Cite Lamoreaux 2000 Paper.  Gervaci?
-Yukawa type forces.  (Carrol's textbook on string theory dilaton.  
- Subtract off Casimir force background.
-  Tino group.
-  Use Casimir shield with fairly thick gold to have same Casimir force, and thne vary the medium behind it.
-  Longer range gravity should lead to 
-Requires very careful measurements, on top of carefully extracting Casimir force.   
+\item Quantum computing devices
+    \begin{itemize}
+      \item Quantum computing offers to make certain computation tasks (most notably factorising 
+        large prime numbers) and simulation taks much more efficient.  
+      \item Large push to develop scalable quantum devices in a number of model systems
+        (NV centers, cold atomic gases).  Atoms provide excellent quantum memory, internal
+        states are well isolated, controllable interactions via lasers.  
+      \item In order to address each atom, and ensure strong interactions, some groups 
+        ar developing microscopic dielectric waveguides to allow trapping, addressing and strongly interacting with a 
+        single atom in a scalable manner~\cite{Hung2013}.  
+      \item In designing these new devices it is essential to compute and account for the Casimir-Polder force
+        the atom's experience when brought close to the dielectric surface.  
+    \end{itemize}
+    
+
+% Modifications to gravity on $1\mu m$ or $1mm$ scale.  Cite Lamoreaux 2000 Paper.  Gervaci?
+% Yukawa type forces.  (Carrol's textbook on string theory dilaton.  
+%  Subtract off Casimir force background.
+%   Tino group.
+%   Use Casimir shield with fairly thick gold to have same Casimir force, and thne vary the medium behind it.
+%   Longer range gravity should lead to 
+% Requires very careful measurements, on top of carefully extracting Casimir force.   
+
+\item The Casimir force is also important for speculative searches for new physics on the millimeter to micron
+scale~\cite{Gervaci}.  The new physics must be shortranged, and is typically modelled as 
+a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$.  
+On this scale however, the Casimir effect is the dominant interaction, and must be 
+carefully subtracted in an experimental procedure.  Typically experiments looking for modifications
+of gravity employ a common gold layer to provide a common short-ranged Casimir interaction, while
+applying a density modulation.  ~\cite{Tino, Gervaci}
+As yet, there are no new forces, and tighter and tigher bounds on the properties of the hypothetical
+Yukawa interaction.  
+
 \end{itemize}
 All of these require one handle material properties reliably, and with arbitrary geometries,
 and possible anisotropies.  Typically working in long-wavelength approximation which neglects strong
 forces binding bodies together.    
+
+A common thread throughout these now classic computations is an emphasis on exactly solvable
+geometries.  With the advent of modern experiments however, it is necessary to be able 
+to compute the Casimir force in arbitrary geometries, with general material properties in order
+to compare theory and experiment.  
+
+
+
 
 % \subsection{Chemistry/Helium/Geckos?}
 

@@ -61,14 +61,21 @@ the van der Waals force attributes the fluctuations to interacting dipoles that 
 This choice of viewpoint is something that will be reprised in more modern treatments of the Casimir effect.  
 
 In 1930\comment{right year?} London computed the attractive potential between induced dipoles in electrically neutral
-atoms via quantum mechanical perturbation theory.  The potential has a characteristic $r^{-6}$ scaling.
-The attraction between molecules was also further studied by Overbeeck~\etal\cite{Overbeeck}.  
+atoms via quantum mechanical perturbation theory~\cite{London1930}.  The potential has a characteristic $r^{-6}$ scaling.
+In essence the fluctuating dipole generates a field which decays as $r^{-3}$.  This field induces another
+dipole in the other molecule.  The combined effect at the original atom scales as $(r^{-3})^2$.  
+
 In 1948 Casimir and Polder~\cite{CasimirPolder1948} extended this theory to using Quantum Electrodynamics
 (QED) to account for the retardation due to the finite speed of light.  They found that in the 
 far-field the interatomic potential decays more quickly, as $r^{-7}$.  The change in power law can be 
 attributed to the induced dipoles decorrelating, and having a weaker interaction.  Furthermore,
 they found an attractive force between an atom and perfectly conducting wall, with a $r^{-3}$ scaling
 in the near field (van der Waals) regime, passing over to $r^{-4}$ scaling in the far-field.    
+In this case, the atom feels an attractive potential to a surface a distance $d$ away,
+\begin{equation}
+  V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
+\end{equation}
+where $\alpha_0$ is the atom's static polarizability.  
 
 The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
 perfectly conducting plates will attract one another due to their interaction with the quantized 
@@ -98,17 +105,18 @@ and $d$ is the distance between the plates.
 \end{figure}
 
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
+In the limit of dilute bodies the Casimir-Polder results for interacting atoms are recovered.  
 This was further expanded on by his co-workers and students carefully taking into account the   
 showing the connection between Casimir and the pair-wise van der Waals potentials~
 \cite{Dzyaloshinskii1959,Dzyaloshinskii1961}
-As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, the Lifshitz theory is a classical stochastic electrodynamics theory,
+As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
+the Lifshitz theory is a classical stochastic electrodynamics theory,
 which attributes the fluctuations as thermal fluctuations of the medium.  
+In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
+discuss the finite temperature effects, dissipation and the relation to the
+microscopic details of the medium~\cite{BarashGinzburg1975}.  
 
-, and extending 
-the results to finite temperature and dispersion~\cite{BarashGinzburg1975}.  
-
-
-\begin{itemize}
+%\begin{itemize}
 % \item Historically earlier, London applied interaction dipoles in QM perturbation theory.
 % \item Casimir-Polder looking at colloidal suspensions, included retardation due to the finite speed 
 %     of light.  
@@ -118,7 +126,7 @@ the results to finite temperature and dispersion~\cite{BarashGinzburg1975}.
 % passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
 % Distinguish between atomic and macroscopic forces, and in different distance regimes.
 % \item Ultimately, same physical origin.  
-\end{itemize}
+%\end{itemize}
 
 \begin{itemize}
 \item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
@@ -129,20 +137,11 @@ the results to finite temperature and dispersion~\cite{BarashGinzburg1975}.
 
 %\subsection{Casimir-Polder energy}
 
-The Casimir force is also important for atoms near surfaces.  
-This variant is known as the Casimir-Polder force, 
-after a paper by Casimir and Polder where they computed the force between an 
-atom and a perfect conductor accounting retardation due to the finite speed 
-of light~\cite{CasimirPolder1948}.  
-In this case, the atom feels an attractive potential to a surface a distance $d$ away,
-\begin{equation}
-V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4}.
-\end{equation}
 
 %\subsection{Van der Waals forces}
 
 
-Mclachlan\cite{McLachlan1963} cites these guys?
+%Mclachlan\cite{McLachlan1963} cites these guys?
 
 %\subsection{Casimir energy}
 
@@ -264,11 +263,22 @@ Mclachlan\cite{McLachlan1963} cites these guys?
 
 \subsection{Scale and Physical Interpretation}
 
+
 \begin{itemize}
-\item Ground state energy or zero point enery.  
-Emphasizes boundary conditions and restricted spectrum of fluctuations.  
-\item Atoms emitting and absorbing virtual photons.  
-\item Feynman Diagram.  
+  \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
+    van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
+  \item Zero-point energy.  
+  \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
+    interacting with matter.
+  \item 
+\end{itemize}
+
+
+\begin{itemize}
+  \item Ground state energy or zero point energy.  
+    Emphasizes boundary conditions and restricted spectrum of fluctuations.  
+  \item Atoms emitting and absorbing virtual photons.  
+  \item Feynman Diagram.  
 Atom-Wall
 \begin{figure}
   \centering
@@ -287,8 +297,15 @@ Atom-Wall
     \fmflabel{$\gamma$}{vt}
   \end{fmfgraph*}
 \end{fmffile}
-\caption{Atom interacting with wall via emitting and absorbing photons.  }
+\caption{Feynman diagram representing an atom interacting with EM field via emitting and absorbing photons.  
+  The wavy line represents the EM Green function in the presence of boundaries --- as opposed to the usual plane 
+  waves exploiting in particle physics.  The atom is excited into intermediate states.}
+\label{fig:feynman_CP}
 \end{figure}
+  \item Fig.~\ref{fig:feynman_CP} represents the perturbation theory computation of 
+    Casimir-Polder shift.  Atom interacting with EM field emits and re-absorbs a photon.  
+    Wavy line re
+
 
 Wall-Wall Effective action.
 
@@ -325,6 +342,9 @@ Wall-Wall Effective action.
 \item Assuming electrically neutral
 \item Far from atomic separations, so continuum approximation acceptable.
 \end{itemize}
+
+\subsection{Distance and Energy Scales}
+\begin{itemize}
 
 \item Casimir forces are short ranged forces and decay away quickly.
   The Coulomb potential between charged particles is behaves as $d^{-1}$,
@@ -392,29 +412,6 @@ removed to spatial infinity.
   In some cases, like spheres we must consider renormalization more carefully.
   In those cases, the formally infinite parameters we get renormalize the 
 physical parameters of the model~\cite{Milton2001}.  
-
-\item Non-additivity of forces:  Reference for this?  What is the typical scale of the correction for non-additivity?
-
-\item Search for repulsive forces
-
-\begin{itemize}
-\item Casimir force important for stiction.
-\item Attracts atoms, sets lower bound for how close you can get particles together.
-\item Search for repulsive forces as possible trapping (Motivation for this?)
-\item Can be found for magnetic media (but typically small).
-  Metamaterials exhibit this for small range of frequencies.
-  But Casimir broadband, and dielectric contribution ends up dominating.
-  (\comment{ Cite Milonni on metametarials}.
-Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
- $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
-\comment{Cite Lifshitz of liquid helium.
-  Cite experiments, and note odd fluids.}.
-   Geometries dependence (\comment{Cite reid paper on needle above hole}).
-\end{itemize}
-\item Dynamical Casimir effect/Unruh Effect?
-\begin{itemize}
-  \item Accelerating plate creates photons.  
-\end{itemize}
 \end{itemize}
 
 % \subsection{Worst prediction in physics}
@@ -587,8 +584,6 @@ to get amplitude to get from one position to another, add up \emph{all} possible
   Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
 \end{itemize}
 
-
-
 \begin{itemize}
 \item Experiments spurred development of theory.  
 \item Prior methods relied on mode-function expansion of fields, which is only possible
@@ -624,7 +619,7 @@ of vanishing curvature, the PFA converges to the correct Casimir force.
 \subsection{Green function methods}
 
 \begin{itemize}
-\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
+%\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
 \item Cite McLachlan~\cite{McLachlan1963}
 \item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
 \item Green tensor methods
@@ -690,7 +685,35 @@ SIE equations and Green's theorem relate surface integrals.
 \item Note success, applicability.  \comment{Cite experimental tylenol pill paper}
 \end{itemize}
 
-\subsection{Worldlines}
+
+\subsection{Modern Directions}
+
+
+\item Non-additivity of forces:  Reference for this?  What is the typical scale of the correction for non-additivity?
+
+\item Search for repulsive forces
+
+\begin{itemize}
+\item Casimir force important for stiction.
+\item Attracts atoms, sets lower bound for how close you can get particles together.
+\item Search for repulsive forces as possible trapping (Motivation for this?)
+\item Can be found for magnetic media (but typically small).
+  Metamaterials exhibit this for small range of frequencies.
+  But Casimir broadband, and dielectric contribution ends up dominating.
+  (\comment{ Cite Milonni on metametarials}.
+Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
+ $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
+\comment{Cite Lifshitz of liquid helium.
+  Cite experiments, and note odd fluids.}.
+   Geometries dependence (\comment{Cite reid paper on needle above hole}).
+\end{itemize}
+\item Dynamical Casimir effect/Unruh Effect?
+\begin{itemize}
+  \item Accelerating plate creates photons.  
+\end{itemize}
+
+
+\section{Scalar Worldline Casimir Energies}
 
 The worldline method is an alternative method for computing Casimir energies.
   The worldline method was initially developed as an alternative method for 

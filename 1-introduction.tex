@@ -301,10 +301,12 @@ The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the vo
 \end{itemize}
 \end{shaded}
 
-\item Casimir forces are short ranged forces and decay away quickly.
-  The Coulomb potential between charged particles is behaves as $d^{-1}$,
- where $d$ is the particles separation.
-  In comparison, the London dispersive force between two atoms decays as $d^{-7}$.
+\item Casimir forces are short ranged forces and decay away quickly --- for example the 
+  London dispersive force between two atoms decays as $d^{-6}$.  In comparison
+    the Coulomb potential between charged particles is behaves as $d^{-1}$,
+    where $d$ is the particles separation.  While the Coulomb potential
+    can be neglected for neutral atoms, it is much more relevant for macroscopic bodies.  
+    
   For macroscopic bodies, the decay is slower, since we can roughly think of
  integrating up the contributions from all of the constituent atoms.
   For Casimir energies, the energy decays as $d^{-3}$.  
@@ -337,6 +339,11 @@ The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the vo
 
 
 \section{Summary of Casimir Experiments}
+
+The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
+Beyond its interest as a fundamental quantum effect, the Casimir force is also important 
+in designing novel physical devices for both atoms.
+
 %Lamoreaux
 \subsection{Casimir}
 An early indirect measurement was liquid Helium flowing up the walls of a container.  
@@ -356,9 +363,10 @@ by Chan~\etal~\cite{Chan2001}.  In this case, the Casimir force is detected by t
 makes to the frequency of a torsional oscillator suspended above a plate.  
 
 The sphere-plate geometry has the experimental advantage of removing the need to carefully
-align the metal plates.  Given the strength of the Casimir force it is hard to 
-keep the plates exactly parallel.  
+align the metal plates. Given the strength of the Casimir force it is hard to keep the plates exactly parallel,
+and separate, which is something that dogged early attempts to measure the Casimir force.
 Despite the aforementioned difficulties, Bressi\etal measured the Casimir force between parallel plates~\cite{Bressi2002}.  
+\comment{Lower precision?}
 
 The Casimir force is also important in applications of microelectromechanical systems (MEMS), 
 as a source of stiction~\cite{Tas1996, Sperry1998, Buks2001}.  This is particularly important
@@ -366,36 +374,58 @@ in free standing structures such as nano-oscillators.
 Given the Casimir force is an attractive potential, if parts of the device get too close to the substrate
 they will permanently stick to one another, leading to device failure.  
 
+Precisely measuring such a small force requires careful calibration of the measurements 
+and removing systematic effects.  Two of the primary experimental errors are due to 
+patch potentials, and surface roughness.  The patch potentials are localized surface 
+charge distributions, which due to the longer range Coulomb interaction swamp the weaker
+Casimir force.  Surface roughness reflects the fact the surfaces are not perfectly smooth,
+and as such the exact distance between bodies is not clear.  While the roughness can be taken into
+account in theory, the surface must also be carefully characterized.  Reviews of these and other 
+difficulties are available from
+
 \subsection{Casimir-Polder}
 %Skip over names?  
 The Casimir-Polder force has been measured in the context of atomic beams, cavity QED, and 
 Bose-Einstein condensates.  
 
 \begin{itemize}
-\item 
-    
+  \item 
+    The first attempts at directly measuring the Casimir-Polder force used atomic beams 
+    near surfaces.  
     Sukenik~\etal made the first modern attempt to measure the Casimir-Polder force~\cite{Sukenik1993}.
     Their experiment passed a hot beam of atoms through an optical cavity and attempted to detect
     the effect by the small phase-shift induced on the atoms.  Unfortunately, their measurement 
-    was not definitive.  
+    was not definitive.
+    More recent experiments by Perrault~\etal\cite{Perrault2005}, and Lonig~\etal\cite{Lonij2009} succed in measuring
+    the Casimir-Polder force with atomic beams.  These experiments passed an atomic beam past grating and 
+    detected the phase-shift by atom interometry.  % These experiments act as precision tests of the theory,
+    % and found that the first principles calculations based on perturbation theory are less successful
+    % than an effective description informed by experimental data.  
 
-\item Cronin \cite{Perreault2005,Lonij2009}  Atom interferometry experiments for atoms near gratings.
-  Pass hot atomic beam through gratings.  Useful as precision tests of theory.  
-  Typically find first-principles theory based on perturbation not working as well,
-  as effective descriptions which rely on experimental computations.  
-\item Measured Casimir-Polder shift in Bose-condensed gas of ultra-cold atoms.
-  Harber\etal\cite{Harber2005} measured the shift in the oscillation frequency
-  of a Bose-Einstein condensate (BEC).  BEC used for enhanced signal, well localized.
-  Casimir force not relevant to coherent aspects of BEC.
-  Obrecht\etal\cite{Obrecht2007}Also measured force in the hard to measure thermal regime.  
-  Can easily vary distance of atom from surface from $1\mu m$ up to $10\mu m$ from surface.
-  Relate to lifshitz formula and cross-over.    
-\item Antezza - chapters in Dalvit.  
-\item Kimble atoms near toroidal resonators.
-  Strongly Couple single atoms to optical field at single photon level.  
-  Apply to toroidal resonators, and dielectric waveguides.  
-  \cite{Alton2011}.
-  Atoms above 1D Microcavity \cite{Hung2013}
+% \item Cronin \cite{Perreault2005,Lonij2009}  Atom interferometry experiments for atoms near gratings.
+%   Pass hot atomic beam through gratings.  Useful as precision tests of theory.  
+%   Typically find first-principles theory based on perturbation not working as well,
+%   as effective descriptions which rely on experimental computations.  
+\item 
+    The Casimir-Polder effect has also been observed in the context of a Bose-Einstein Condensate (BEC)
+    of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  The BEC allows for precise distance control,
+    and can be used in atom interferometry to detect small phase shifts.    
+    The atoms are confined to a harmonic trap, and can be brought near to a surface to probe the Casimir
+    force.  The Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
+    dependent manner.  
+    Furthermore, this technique was able to measure the Casimir force in the thermal regime, which
+    is often difficult since the force is weak at those distance.  In this case it is easy to 
+    vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$ to observe
+    the cross over between the Casimir-Polder and thermal regimes.
+
+% Measured Casimir-Polder shift in Bose-condensed gas of ultra-cold atoms.
+%   Harber\etal\cite{Harber2005} measured the shift in the oscillation frequency
+%   of a Bose-Einstein condensate (BEC).  BEC used for enhanced signal, well localized.
+%   Casimir force not relevant to coherent aspects of BEC.
+  % Obrecht\etal\cite{Obrecht2007}Also measured force in the hard to measure thermal regime.  
+  % Can easily vary distance of atom from surface from $1\mu m$ up to $10\mu m$ from surface.
+  % Relate to lifshitz formula and cross-over.    
+
 \item Atom-chips  Schmiedmeyer\cite{Folman2000,Schneider2003}(?)  
   Trap atoms near surfaces using combination of lasers and magnetic fields from
   wires in surface.  Trap atoms very close to surface.  Relevant to idea of 
@@ -403,6 +433,15 @@ Bose-Einstein condensates.
   Not explicitly using Casimir-Polder forces?  
   In addition, the Casimir force as been taken into account in design 1D atom traps 
     near a nanowire~\cite{Salem2010}, and in design of waveguides for cavity QED~\cite{Hung2013, Goban2014}.
+
+
+
+\item Antezza - chapters in Dalvit.  
+\item Kimble atoms near toroidal resonators.
+  Strongly Couple single atoms to optical field at single photon level.  
+  Apply to toroidal resonators, and dielectric waveguides.  
+  \cite{Alton2011}.
+  Atoms above 1D Microcavity \cite{Hung2013}
 \item Atom-chips and atom-waveguids are attempts towards building scalable 
 architecture for quantum computer using atoms.
 Couple atoms to dielectric waveguides, and get stronger coupling (thus faster operation)
@@ -438,7 +477,6 @@ Drude vs plasma model.
         the atom's experience when brought close to the dielectric surface.  
     \end{itemize}
     
-
 % Modifications to gravity on $1\mu m$ or $1mm$ scale.  Cite Lamoreaux 2000 Paper.  Gervaci?
 % Yukawa type forces.  (Carrol's textbook on string theory dilaton.  
 %  Subtract off Casimir force background.

@@ -3,18 +3,14 @@
 \begin{itemize}
 \item Need to develop methods that can easily generalize to more complicated geometries.
 \item Even if using them to solve known problems.
-\item Like path integral relies on chaining together correct short-time propagator, we 
-  are effectively using planar results at each step, under the assumption that the 
+\item In same fashion path integral relies on chaining together correct short-time propagator, we 
+  are effectively using planar results at each step, under the assumption that the geometry
+    is well-described locally by a single nearby plane.  
 \item Need to study convergence effects carefully.  
-
 \end{itemize}
-
 
 \section{Numerical Methods}
 
-\begin{itemize}
-  \item Governing equations we are simulating.  
-\end{itemize}
 
 
 \subsection{Monte-Carlo sampling}
@@ -254,6 +250,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     and last step are larger than the others.  We choose the size of those steps to be as 
     large as possible, while not interacting much with a the nearest surface.  
 
+    \item Problem with adaptive choice?
 \end{itemize}
 
 \subsubsection{General Method Near Surfaces}
@@ -268,7 +265,6 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     one integrates out further steps, since the Feynman-Kac formulae compose with one another,
     where now the threshold is must balance the path wandering sufficiently far that a simple 
     approximation.
-
 
 
     For example, consider using the Feynman-Kac formula for open loops near a Dirichlet surface, 
@@ -321,7 +317,14 @@ Then expanding these derivatives out (correct expression?)
 \subsubsection{Hermite-Gaussian Sampling}
 
 In order to apply the Hermite-Gaussian method to high order derivatives, it is best to 
-sample from the combined Hermite-Gaussian.  
+sample from the combined Hermite-Gaussian.  The simplest approach uses Gaussian samples, weighted
+by the appropriate Hermite-Gaussian function.  While this is acceptable for the first or second derivatives,
+it breaks down for higher derivatives.  In particular, the Gaussian samples are most likely to be in a narrow
+range $x\in(-3\sigma,3\sigma)$.  The Hermite-Gaussian oscillates in sign in this range, and
+the dominant contributions come from the tails $x\sim \sqrt{n}\sigma$.  So for a finite sample,
+one would see large fluctuations.  
+
+The combined Gaussian steps for both $x_1, x_2$ which are pinned to start at $x_0$ is 
 \begin{align}
   G &= \frac{1}{2\pi T_1T_2}\exp\left[-\frac{(x_0-x_1)^2}{2T_1}-\frac{(x_0-x_2)^2}{2T_2}\right]\\
   % &= \frac{1}{2\pi T_1T_2}\exp\left[-\frac{T_1+T_2}{2T_1T_2}x_0^2 +\left(\frac{x_1}{T_1}+\frac{x_2}{T_2}\right)x_0
@@ -331,29 +334,87 @@ sample from the combined Hermite-Gaussian.
 \end{align}
 After differentiation w.r.t $x_0$, one finds 
 \begin{equation}
-  P:= \partial_0^n G = \frac{1}{\sqrt{2\pi\sigma^2}\sqrt{2\pi(T_1+T_2)}} (2\sigma^2)^{-n/2}H_n\left(\frac{x_0-\mu}{\sqrt{2\sigma^2}} \right)
-  \exp\left[-\frac{(x_0-\mu)^2}{2\sigma^2} - \frac{(x_1-x_2)^2}{2(T_1+T_2)}\right],
+  HG:= \partial_0^n G 
+= \frac{1}{\sqrt{2\pi\sigma^2}\sqrt{2\pi(T_1+T_2)}} 
+(-1)^n(2\sigma^2)^{-n/2}H_n\left(\frac{x_0-\mu_H}{\sqrt{2\sigma_H^2}} \right)
+  \exp\left[-\frac{(x_0-\mu_H)^2}{2\sigma_H^2} - \frac{(x_1-x_2)^2}{2(T_1+T_2)}\right],
 \end{equation}
 where 
 \begin{gather}
-  \sigma^2:= \frac{T_1T_2}{(T_1+T_2)}\\
-  \mu := \frac{x_1T_2+T_1x_2}{T_1+T_2}.
+  \sigma_H^2:= \frac{T_1T_2}{(T_1+T_2)}\\
+  \mu_H := \frac{x_1T_2+T_1x_2}{T_1+T_2}.
 \end{gather}
 In the event that $T_1=T_2$, this simplifies down to 
 \begin{gather}
-  \sigma^2:= \frac{T_1}{2}\\
-  \mu := \frac{x_1+x_2}{2}.
+  \sigma_H^2:= \frac{T_1}{2}\\
+  \mu_H := \frac{x_1+x_2}{2}.
 \end{gather}
-In order to sample $x_1, x_2$ one can sample from both the combined Hermite-Gaussian for $mu=(x_1+x_2)/2$,
-and the difference $\Delta x=x_2-x_1$.  
-The raw positions can be found by inverting the relations,
+In order to make samples that are useful for closed paths one must include 
+the normalization factor for the ``open'' Gaussian bridge that connects the end points $x_1$ and $x_2$
+in time $T-T_1-T_2$.  
+The total distribution for $x_1,x_2$ is 
 \begin{align}
-  \mu &= z+x_1\\
+  HG'(x_1,x_2)&:=\frac{1}{\sqrt{2\pi\sigma^2}\sqrt{2\pi(T_1+T_2)}\sqrt{2\pi(T-T_1-T_2)} }
+  (2\sigma^2)^{-n/2}H_n\left(\frac{x_0-\mu}{\sqrt{2\sigma^2}} \right)\nonumber\\
+  &\hspace{0.5cm}\times\exp\left[-\frac{(x_0-\mu)^2}{2\sigma^2} - \frac{T(x_1-x_2)^2}{2(T-T_1-T_2)(T_1+T_2)}\right],
 \end{align}
-\comment{Solve for $x_1, x_2$ in terms of deviates}
+However, this is not normalized, and can even change sign.  
+The samples must be taken from the absolute value of the integrand, with the sign of the Hermite-Gaussian
+function weighting the samples.
+The sign changes will naturally lead to cancellation.  In the presence of a potential $\Phi[x(t)]$,
+the cancellation is not perfect and the result is non-zero.  
+In order to best carry out the cancellation, and reduce fluctuations one should pair each sample of 
+the Hermite-Gaussian with its negative.  
 
+The probability distribution for the combined steps can be most naturally formulated in terms of the decoupled variables
+\begin{align}
+  \bar{x}:=\frac{x_1+x_2}{2}\\
+  \Delta x := x_2-x_1.
+\end{align}
+The probability distributions for $\bar{x}$ and $\Delta x$ decouple as 
+\begin{align}
+  P_{HG,1}(\bar{x})&:=\frac{1}{\sqrt{2\pi\sigma_H^2}} 
+  \bigg|H_n\bigg(\frac{x_0-\bar{x}}{\sqrt{2\sigma_H^2}} \bigg)\bigg|\nonumber\\
+  &\hspace{0.5cm}\times\exp\left[-\frac{(x_0-\bar{x})^2}{2\sigma_H^2}\right]\\
+  P_{HG,2}(\Delta x) &:=\sqrt{\frac{T}{2\pi(T_1+T_2)(T-T_1-T_2)}}
+  &\hspace{0.5cm}\times\exp\left[- \frac{T(x_1-x_2)^2}{2(T-T_1-T_2)(T_1+T_2)}\right],
+\end{align}
+The numerical average can be computed as 
+\begin{equation}
+  I = \dlangle (-1)^n(2\sigma_H^2)^{-n/2}\eta_Hs_Hf\drangle_{HG},
+\end{equation}
+where $x_1,x_2$ are sampled from $P_{HG}$, and the remaining sub-bridge is sampled via
+the open Gaussian probability distribution.  
+where the normalization $\eta_H$ and sign factor $s_H$ are defined as 
+\begin{align}
+  s_H &:= \sgn\bigg[H_n\left(\frac{x_0-\mu_H}{\sqrt{2\sigma_H^2}} \right)\bigg] \\
+  \eta_H &:=\frac{1}{\sqrt{2\pi T}}\int dy \frac{1}{\sqrt{2\pi\sigma_H^2}}
+  \big|H_n\left(\frac{x_0-y}{\sqrt{2\sigma_H^2}} \right)\big|\nonumber\\
+  &\hspace{0.5cm}\times\exp\left[-\frac{(x_0-y)^2}{2\sigma_H^2}\right],
+\end{align}
 
+It is best to numerically sample from distributions with unit variance, and rescale the deviates 
+by the time.  In which case, $\bar{x}=h\sqrt{2\sigma_H}$, and $\Delta x = \sqrt{2T_1(T-2T_1)/T}z$,
+where $z$ is a standard normal deviate as $h$ is sampled from 
+\begin{align}
+  P'_{HG,1}(h)&:=\frac{1}{\eta'_H\sqrt{\pi} }  \bigg|H_n\bigg(-h\bigg)\bigg|e^{-h^2}\\
+  \eta'_H&=:=\int dh P'_{HG,1}(h).
+\end{align}
 
+The raw deviates will be denoted $h$ and $z$, where 
+\begin{align}
+  \frac{1}{2}(x_1+x_2) &= x_0 + \sqrt{\frac{T_1}{2}}h\\
+  -x_1+x_2 &= \sqrt{\frac{2T_1(T-2T_1)}{T}}z
+\end{align}
+Then solving for $x_1, x_2$, 
+\begin{align}
+  x_1 & = x_0 + \left(\sqrt{\frac{T_1}{2}}h-\sqrt{\frac{T_1(T-2T_1)}{2T}}z\right)\\
+  x_2 & = x_0 + \left(\sqrt{\frac{T_1}{2}}h+\sqrt{\frac{T_1(T-2T_1)}{2T}}z\right)
+\end{align}
+where $h' := h\sqrt{T_1/2}, z' := z\sqrt{\frac{T_1(T-2T_1)}{2T}}$.
+\comment{Note these variables are scaled to agree with Dan, whose code seems to output 
+  $h/\sqrt{2}$ naturally.  Again, he is treating $H_n(x)e^{-x^2}$ as the probability
+  distribution.}
 
 \subsection{Pinning}
 

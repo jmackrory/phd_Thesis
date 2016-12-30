@@ -13,8 +13,8 @@
 \item Cite Gies papers~\cite{Gies2003,Gies2006, Gies2006a} (all of them!) note work on thermal/geometry~\cite{Klingmueller2008,Weber2009, Weber2010}
 \end{itemize}
 
-In this chapter we will review prior work on the worldline method, translated to our terminology.
-We will derive the method, and discuss its advantages and shortcomings.  
+In this chapter we will review prior work on the worldline method, translated to our terminology
+and conventions.  We will derive the method, and discuss its advantages and shortcomings.  
 
 \section{Partition Function to Worldline path integral}
 
@@ -64,8 +64,8 @@ In exactly analogous fashion to quantum mechanics, the overlap between states is
 \end{equation}
     
     We can compute physical quantities of interest such as Casimir energies and forces
-    by taking suitable derivatives of the free energy.  The free energy $\mathcal{F}=-\kb T \log Z$,
-    is in turn given by the partition function $Z$.  
+    by taking suitable derivatives of the free energy.  The free energy $\mathcal{F}=-\kB T \log Z$,
+    is in turn given by the partition function $Z$.  \comment{Cite Brown, Altland-Simons}
 
 The field partition function is 
 \begin{equation}
@@ -74,27 +74,92 @@ The field partition function is
 where we have evaluated the trace over the complete set of field states.  In classic path-integral
 fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
 in both fields and conjugate-momentum fields can be inserted between each piece.  
-\begin{align}
-  Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\langle
-  \rangle\Pi_n| \phi_{n-1}\rangle
-\end{align}
-\comment{Cite Brown, Altland-Simons}
 
+% \begin{align}
+%   Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\rangle
+%   \langle\Pi_n| \phi_{n-1}\rangle
+% \end{align}
 
-
-
+After integrating out the momentum fields, the partition function can be written as 
 \item Euclidean Path integral (Generating Function) 
 \begin{equation}
-  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x \left[ (\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
+  Z = \int D\phi \exp\left\{-\int_0^{\hbar\beta c} d\tau \int d^3x 
+    \left[ \frac{1}{2}(\partial_\tau\phi)^2+\frac{1}{2}(\nabla\phi)^2+V(\vect{x})\phi^2\right]\right\}.
 \end{equation}
-\item Gaussian integral.  Can integrate out $\phi$ to get an effective action for particular geometry of objects.  (Or use Free energy).  
+The functional integral over $\phi$ is Gaussian and can be formally evaluated immediately as a 
+functional determinant, since the differential operator is positive operator.  
+Some care is required in regularizing such infinite determinants.  
+This is done in analogy with finite dimensional Gaussian integrals.  
+We can consider treating the fields as only being evaluated on a finite lattice of space-time points, 
+with the lattice also having a finite extent which bounds all bodies.  We will then take the limit of 
+arbitrarily large volume, and lattice resolution at the end.  The gradient operators 
+can be treated via their finite difference approximations, which can be thought of as sparse matrices.  
+
+For a single real Gaussian integral, one can evaluate it as
 \begin{equation}
-  F = -k_BT\log Z = -k_BT \log\det[-\partial_t^2-\nabla^2-V(\vect{x},t)]
+  I_1=\int dx e^{-\alpha x^2} =\sqrt{\frac{\pi}{\alpha}}.
 \end{equation}
-\item Can use $\tr\log A = \log\det A$, and integral representation of log, 
+Let us now consider the multidimensional Gaussian integral
 \begin{equation}
-  \log A -\log B= -\int_0^\infty \frac{dT}{T} (e^{-AT} - e^{-BT}),
+  I_2=\int \prod_{j=1}^Ndx_j e^{-\vect{x}^T A \vect{x}},
+\end{equation}    
+where there is an implicit sum over $i,j$, and $A$ is a positive matrix, i.e. all of $A$'s eigenvalues $\alpha_j$ 
+are positive.
+    The Gaussian integral can be readily evaluated by changing integration variables $\vect{x}$ to the amplitudes of the 
+    eigenvectors of $A$, $\vect{y}$ via an orthogonal transformation $O$,
+    \begin{equation}
+      \vect{x} = O\vect{y}.
+    \end{equation}
+    The Gaussian integral can be evaluated as
+    \begin{equation}
+      I_2 = \int \prod_{j=1}^N dy_j e^{-\alpha_jy_j^2} \propto \left[ \prod_{j=1}^N\alpha_j \right]^{-1/2}
+      = {\det}^{-1/2} A.
+    \end{equation}
+    \comment{(Cite Srednicki or Brown for their chapter on Gaussian integrals)}
+In an analogous fashion, one can formally evaluate the partition function path integral as a 
+functional determinant, 
+\begin{equation}
+  Z \propto {\det}^{-1/2}\left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})\phi^2\right].
 \end{equation}
+Note that the original computations for the worldline method stressed computing the quantum effective
+action for the scalar field.  This yields essentially the same expression.  
+
+The free energy for the interacting field can be written as 
+\begin{equation}
+  \mathcal{F} = -\kB T\log Z = \frac{1}{2}\kB T \log\det[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})].
+  \label{eq:free-energy-det}
+\end{equation}
+As it stands this expression is divergent, however we will renormalize by subtracting off the 
+same expression with the bodies removed to spatial infinity.  Physically this corresponds to 
+computing energy differences between different configurations.  The renormalization also cancels off 
+the constant normalization factors.  
+
+The free energy can now be converted into a single-particle path integral via some formal 
+manipulations.  First we will use the identity $\log\det A=\tr\log A$, which can be readily
+verified for positive finite matrices.  
+\begin{align}
+  \log\det A &= \log\prod_j \alpha_j%\nonumber\\
+  =\sum_j \log\alpha_j%\nonumber\\
+  = \tr\log A,\label{eq:log-det}
+\end{align}
+    where we used the facts that the trace and determinant of a matrix are given by the sum
+and product of its eigenvalues respectively. \comment{Check Kirsten/Vassilevich for better argument/citation}
+Furthermore, we will use the integral representation of the logarithm,
+\begin{equation}
+  \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}).\label{eq:integral_log}
+\end{equation}
+This expression also relies on a difference of terms to cancel out divergent terms at $T=0$.  The 
+earlier renormalization by subtracting off the vacuum energy provides exactly this subtraction. 
+
+By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(\ref{eq:free-energy-det}),
+ the renormalized free energy can be rewritten as
+\begin{equation}
+  \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
+  \tr\Big[e^{-(\partial_\tau^2+\nabla^2)\cT}\big(e^{-\cT V(\vect{x})}-1\big)\Big].
+\end{equation}
+    
+
+
 \item Worldline path integral
   \begin{equation}
     F = - \int \frac{dT}{T^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
@@ -111,7 +176,7 @@ in both fields and conjugate-momentum fields can be inserted between each piece.
 \item Advantages
   \begin{itemize}
   \item Algorithm is geometry independent, and no spatial grid.
-  \item parallelizable.  Computation time scales as one /resources.  
+  \item Parallelizable.  Computation time scales as inversely with resources.  
   \end{itemize}
 
 \item Shortcomings
@@ -124,11 +189,16 @@ in both fields and conjugate-momentum fields can be inserted between each piece.
 
 
 \begin{shaded}
-  The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.  This follows either from Hormander's argument, that 
+  The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
+  This follows either from Hormander's argument, that 
   \begin{equation}
     \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
   \end{equation}
-where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and $|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.  In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.  If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.  If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
+where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and 
+$|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.
+  In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.
+  If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.
+  If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
 \footnote{See pages 826-828 of Dan's notes.}
 \end{shaded}
 

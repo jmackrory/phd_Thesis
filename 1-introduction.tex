@@ -60,6 +60,15 @@ to quantum fluctuations --- the Casimir force attributes the fluctuations to the
 the van der Waals force attributes the fluctuations to interacting dipoles that make up the bodies.  
 This choice of viewpoint is something that will be reprised in more modern treatments of the Casimir effect.  
 
+\begin{itemize}
+\item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
+  Bordag~\cite{Bordag2009}, Dalvit~\cite{Dalvit2011} recent developments.  
+\item More general books on Casimir and van der Waals forces as they relate to chemistry, 
+  Parsegian~\cite{Parsegian2006}, Israelachivili~\etal~\cite{Israelachvili2011}.
+\end{itemize}
+
+\subsubsection{Atomic Forces: London, Casimir-Polder}
+
 In 1930\comment{right year?} London computed the attractive potential between induced dipoles in electrically neutral
 atoms via quantum mechanical perturbation theory~\cite{London1930}.  The potential has a characteristic $r^{-6}$ scaling.
 In essence the fluctuating dipole generates a field which decays as $r^{-3}$.  This field induces another
@@ -77,76 +86,6 @@ In this case, the atom feels an attractive potential to a surface a distance $d$
 \end{equation}
 where $\alpha_0$ is the atom's static polarizability.  
 
-The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
-perfectly conducting plates will attract one another due to their interaction with the quantized 
-electromagnetic (EM) field.  
-The presence of the conductors forces the electric field to vanish on the surfaces,
-which restricts the allowed modes of the electromagnetic field, as illustrated in Fig.~\ref{fig:Casimir_sketch}.
-Each quantized mode of the electromagnetic field contributes
-to the energy, even in the ground state with zero photons.  Each mode contributes 
-$E_\alpha=\hbar\omega_\alpha/2$ , where $\hbar$ is Planck's  constant, and $\omega_\alpha$ is the frequency of the mode.
-The total energy is found by summing the mode for each energy --- the total energy is
-badly divergent since each term in the sum is positive.  However a finite answer can 
-be found by consider an energy \emph{difference} between two different configurations.  
-The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
-and will be essential in computations of Casimir quantities.  
-In this case, the energy when the bodies are removed to spatial infinity is subtracted.  
-The renormalized energy between the plates is
-\begin{equation}
-  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
-\end{equation}
-where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
-and $d$ is the distance between the plates.  
-\begin{figure}
-\center
-\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
-\caption{Sketch of allowed modes between perfectly conducting plates.}
-\label{fig:Casimir_plates}
-\end{figure}
-
-The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
-In the limit of dilute bodies the Casimir-Polder results for interacting atoms are recovered.  
-This was further expanded on by his co-workers and students carefully taking into account the   
-showing the connection between Casimir and the pair-wise van der Waals potentials~
-\cite{Dzyaloshinskii1959,Dzyaloshinskii1961}
-As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
-the Lifshitz theory is a classical stochastic electrodynamics theory,
-which attributes the fluctuations as thermal fluctuations of the medium.  
-In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
-discuss the finite temperature effects, dissipation and the relation to the
-microscopic details of the medium~\cite{BarashGinzburg1975}.  
-
-%\begin{itemize}
-% \item Historically earlier, London applied interaction dipoles in QM perturbation theory.
-% \item Casimir-Polder looking at colloidal suspensions, included retardation due to the finite speed 
-%     of light.  
-% \item As a matter of nomenclature we will refer to the whole range phenemena as the Casimir effect,
-% in particular referring to the interaction between macroscopic bodies.  
-% while referring to atom-surface effects as Casimir-Polder effects.  The near-field limit
-% passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
-% Distinguish between atomic and macroscopic forces, and in different distance regimes.
-% \item Ultimately, same physical origin.  
-%\end{itemize}
-
-\begin{itemize}
-\item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
-  Bordag~\cite{Bordag2009}, Dalvit~\cite{Dalvit2011} recent developments.  
-\item More general books on Casimir and van der Waals forces as they relate to chemistry, 
-  Parsegian~\cite{Parsegian2006}, Israelachivili~\etal~\cite{Israelachvili2011}.
-\end{itemize}
-
-% This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
-
-\subsection{Physical Interpretation}
-
-\begin{itemize}
-  \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
-    van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
-  \item Zero-point energy.  
-  \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
-    interacting with matter.
-  \item 
-\end{itemize}
 
 
 \begin{itemize}
@@ -183,9 +122,52 @@ Atom-Wall
     \begin{equation}
       V_{CP} = \sum_{m,\vect{k}} \frac{|\langle E_n, 0|  H_{int}|E_m, 1\rangle|^2}{E_n-E_m-\hbar\omega_k}
     \end{equation}
-    
+    The EM field and atomic parts can be split in two.  
+    To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
+    \begin{equation}
+      V_{CP}(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
+    \end{equation}
+    where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
+    tensor.
 
-Wall-Wall Effective action.
+
+\subsubsection{Forces between bodies: Casimir Energy}
+
+The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
+perfectly conducting plates will attract one another due to their interaction with the quantized 
+electromagnetic (EM) field.  
+The presence of the conductors forces the electric field to vanish on the surfaces,
+which restricts the allowed modes of the electromagnetic field, as illustrated in Fig.~\ref{fig:Casimir_sketch}.
+Each quantized mode of the electromagnetic field contributes
+to the energy, even in the ground state with zero photons.  Each mode contributes 
+$E_\alpha=\hbar\omega_\alpha/2$ , where $\hbar$ is Planck's  constant, and $\omega_\alpha$ is the frequency of the mode.
+The total energy is found by summing the mode for each energy --- the total energy is
+badly divergent since each term in the sum is positive.  However a finite answer can 
+be found by consider an energy \emph{difference} between two different configurations.  
+The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
+and will be essential in computations of Casimir quantities.  
+In this case, the energy when the bodies are removed to spatial infinity is subtracted.  
+The renormalized energy between the plates is
+\begin{equation}
+  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
+\end{equation}
+where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
+and $d$ is the distance between the plates.  
+\begin{figure}
+\center
+\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
+\caption{Sketch of allowed modes between perfectly conducting plates.}
+\label{fig:Casimir_plates}
+\end{figure}
+
+The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
+In the limit of dilute bodies the Casimir-Polder results for interacting atoms are recovered.  
+This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
+showed the connection between Casimir force and the pair-wise van der Waals potentials.  
+This work is nicely reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
+
+
+\item Wall-Wall Effective action.
 
 \begin{figure}
 \centering
@@ -193,18 +175,34 @@ Wall-Wall Effective action.
 \begin{fmfgraph}(50,30)
  \fmftop{t0,t1,t2,t3}
  \fmfbottom{b0,b1,b2,b3}
- \fmf{phantom}{t1,v1}
- \fmf{phantom}{t2,v3}
- \fmf{phantom}{b1,v2}
- \fmf{phantom}{b2,v4}
+ \fmf{fermion,tension=0}{t1,v1}
+ \fmf{fermion,tension=0}{t2,v3}
+ \fmf{fermion,tension=0}{b1,v2}
+ \fmf{fermion,tension=0}{b2,v4}
  \fmffreeze
 \fmf{photon}{v1,v3}
 \fmf{photon}{v2,v4}
 \fmf{fermion,tension=0}{v1,v2}
-\fmf{fermion,tension=0,left}{v2,v1}
+%\fmf{fermion,tension=0,left}{v2,v1}
 \fmf{fermion,tension=0}{v3,v4}
-\fmf{fermion,tension=0,right}{v4,v3}
+%\fmf{fermion,tension=0,right}{v4,v3}
 \end{fmfgraph}
+% \begin{fmfgraph}(50,30)
+%  \fmftop{t0,t1,t2,t3}
+%  \fmfbottom{b0,b1,b2,b3}
+%  \fmf{phantom}{t1,v1}
+%  \fmf{phantom}{t2,v3}
+%  \fmf{phantom}{b1,v2}
+%  \fmf{phantom}{b2,v4}
+%  \fmffreeze
+% \fmf{photon}{v1,v3}
+% \fmf{photon}{v2,v4}
+% \fmf{fermion,tension=0}{v1,v2}
+% \fmf{fermion,tension=0,left}{v2,v1}
+% \fmf{fermion,tension=0}{v3,v4}
+% \fmf{fermion,tension=0,right}{v4,v3}
+% \end{fmfgraph}
+
 \end{fmffile}
 \caption{Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media.}
 \end{figure}
@@ -216,33 +214,74 @@ Wall-Wall Effective action.
   Doing perturbation theory on QED.
   $\epsilon$ is linear response of medium to EM field, and working to leading order in $\epsilon$.
   Amounts to $\order(\alpha_0^4)$ diagram for QED with electrons bound via nuclear potential.   (Again, very low energies).
-\begin{itemize}
 \item Assuming electrically neutral
 \item Far from atomic separations, so continuum approximation acceptable.
 \end{itemize}
 
+
+
+% As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
+% the Lifshitz theory is a classical stochastic electrodynamics theory,
+% which attributes the fluctuations as thermal fluctuations of the medium.  
+In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
+discuss the finite temperature effects, dissipation and the relation to the
+microscopic details of the medium~\cite{BarashGinzburg1975}.  
+
+%\begin{itemize}
+% \item Historically earlier, London applied interaction dipoles in QM perturbation theory.
+% \item Casimir-Polder looking at colloidal suspensions, included retardation due to the finite speed 
+%     of light.  
+% \item As a matter of nomenclature we will refer to the whole range phenemena as the Casimir effect,
+% in particular referring to the interaction between macroscopic bodies.  
+% while referring to atom-surface effects as Casimir-Polder effects.  The near-field limit
+% passes over to an instantenous dipole interaction,and will be referred to as the van der Waals regime.  
+% Distinguish between atomic and macroscopic forces, and in different distance regimes.
+% \item Ultimately, same physical origin.  
+%\end{itemize}
+
+
+% This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
+
+% As QED calculation, the Casimir energy is formally divergent and must be renormalized in order to
+% make physical predictions. 
+%  In our case, we typically energy differences when one of the bodies is 
+% removed to spatial infinity.
+%   In some cases, like spheres the renormalization must be carried out more carefully.  
+%   In those cases, the formally infinite parameters renormalize the physical parameters of the model~\cite{Milton2001}.  
+
+\subsection{Physical Interpretation}
+
+\begin{itemize}
+  \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
+    van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
+    Atom/Bodies emitting and re-absorbing virtual photons.  
+  \item Zero-point energy.  
+  \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
+    interacting with matter.
+  \item Emphasizes connection to underlying physics.  
+\end{itemize}
+
+
+
 \subsection{Distance and Energy Scales}
+
 \begin{itemize}
 
-\item Casimir forces are short ranged forces and decay away quickly.
-  The Coulomb potential between charged particles is behaves as $d^{-1}$,
- where $d$ is the particles separation.
-  In comparison, the London dispersive force between two atoms decays as $d^{-7}$.
-  For macroscopic bodies, the decay is slower, since we can roughly think of
- adding up the contributions from all of the constituent atoms.
-  For Casimir energies, the energy decays as $d^{-3}$.  
+  \item Casimir energy at $1\mu m$.  Take a dipole of 1 Debye.    
+    Compare with 
+  \item Casimir pressure  at $1\mu m$
+  \item Cite Milonni for capacitance calculation.  
 
-These considerations are for zero temperature.
-  It turns out that considering the effects of finite temperature, 
-in particular thermal photons, leads to different distance dependence again.
-  The energies typically decay more slowly in the high temperature limit.
-  If the Casimir force decays as $d^{-n}$ at zero temperature, 
-then we typically find that the force decays as $r^{-n+1}$ at high temperatures.  
 
 We can estimate typical distance scales by considering the dominant 
 resonances of the medium, and the thermal wavelength.
   So the Casimir force is typically then important at distances below the
  transition wavelength which is usually around $1\mu m$.    
+
+\item Considering long-wavelength approximation to medium.  Typically interested in forces
+    on the micron-nanometer scale.  Above a few microns the force is too small to observe,
+    while below a nanometer the forces are too strong to reliably isolate the atom 
+    and the continuum approximation starts to break down.  
 
 \item The typical energy scale can also be estimated.
   If we consider an atom with a static polarizability of 
@@ -262,62 +301,70 @@ The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the vo
 \end{itemize}
 \end{shaded}
 
+\item Casimir forces are short ranged forces and decay away quickly.
+  The Coulomb potential between charged particles is behaves as $d^{-1}$,
+ where $d$ is the particles separation.
+  In comparison, the London dispersive force between two atoms decays as $d^{-7}$.
+  For macroscopic bodies, the decay is slower, since we can roughly think of
+ integrating up the contributions from all of the constituent atoms.
+  For Casimir energies, the energy decays as $d^{-3}$.  
+
+
+\item Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
+    of the interacting media, such as the atomic polarizablitiies $\alpha(\omega)$ or the dielectric
+    function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
+    $\omega_T=\kB T/\hbar$.  
+    Given the radiative nature of the Casimir effect, there is a factor $e^{i\omega d/c}$ weighting the 
+    frequency integrals.  This contributes most when its exponent factor is order one.  
+    The Lifshitz integral can be approximated in differing regimes.  
+
+    In the near-field or van der Waals regime, the media are assumed to closer than the 
+    resonant wavelength of the media $d\ll \omega_A/c,\omega_M/c$, the exponential factor 
+    is unity, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
+    dipole interaction between the media, which inspires the name.    
+
+    The so-called Casimir-Polder regime occurs when the atoms are much further than a resonant wavelength 
+    $d\gg \omega_A/c,\omega_M/c$,
+    in which case the dominant contributions come at zero frequency, and the functions can be approximated
+    with their static limit.  This far-field regime typically makes the potential decays more quickly.  
+
+    Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
+    thermal field contribute significantly.  In this regime the field decay is typically slower as $E\sim d^{-3}$,
+    the same as the near-field van der Waals regime.  
+    \comment{table?}
+
 \end{itemize}
 
 
-\begin{itemize}
-%\item Cite Casimir/Casimir-Polder and Lifshitz.
-\item Casimir vs Van Der Waals vs London Forces
-
-% The Casimir force is intimately related to the van der Waals forces between molecules.
-% Van der Waals forces are usually ascribed to the dipole fluctuations of the 
-% neutral atoms.
-% In the limit where the atoms are far apart retardation becomes important and 
-% the force changes decays more quickly as $r^{-7}$, as first found by Casimir and Polder.  
-% In this limit the forces are sometimes referred to as London dispersion forces.
-% Normally Casimir forces consider the 
-
-% Throughout this thesis we shall use Casimir forces to refer to the forces between
-% macroscopic bodies, and Casimir-Polder forces to refer to the forces between 
-% atoms and macroscopic bodies.  Van der Waals forces are also sometimes referred to as the 
-% short-distance limit of the Casimir force, where retardation can be ignored.      
-
-\item Renormalization
-
-As QED calculation, the Casimir energy is formally divergent and must be renormalized. 
- In our case, we typically energy differences when one of the bodies is 
-removed to spatial infinity.
-  In some cases, like spheres we must consider renormalization more carefully.
-  In those cases, the formally infinite parameters we get renormalize the 
-physical parameters of the model~\cite{Milton2001}.  
-\end{itemize}
-
-
-\section{Physical relevance and experimental relevance}
-
-\section{Experiments}
+\section{Summary of Casimir Experiments}
 %Lamoreaux
 \subsection{Casimir}
+An early indirect measurement was liquid Helium flowing up the walls of a container.  
+Lifshitz and co-workers applied the Casimir pressure to explain the phenomenon of liquid helium
+flowing out of a jar.  The presence of the liquid helium crawlign up the surface reduces the Casimir energy,
+so the liquid helium experiences an attractive pressure up the walls.  
 
 While Casimir predicted an attractive force between neutral metal bodies in 1948,
-it was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}
-Lamoreaux's work spurred a large amount of experimental and theoretical work.  
+it was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}.   
+%Lamoreaux's work spurred a large amount of experimental and theoretical work.  
 This experiment measured the Casimir force between a sphere above a metal plate,
-and measured the force by \comment{\ldots}.  
+and measured the force by detecting the change in capacitance of the arrangement.  
 This landmark experiment was closely followed by measurement by Mohideen\etal\cite{Mohideen1998}
 using an atomic force microscope to measure the force in a sphere-plate geometry.  
+The Casimir force has also been directly measured in a nanoelectromechanical (NEMS) system 
+by Chan~\etal~\cite{Chan2001}.  In this case, the Casimir force is detected by the modification it
+makes to the frequency of a torsional oscillator suspended above a plate.  
 
 The sphere-plate geometry has the experimental advantage of removing the need to carefully
 align the metal plates.  Given the strength of the Casimir force it is hard to 
 keep the plates exactly parallel.  
+Despite the aforementioned difficulties, Bressi\etal measured the Casimir force between parallel plates~\cite{Bressi2002}.  
 
-Chan\etal measured the Casimir force in a nanoelectromechanical (NEMS) system~\cite{Chan2001},
-where the Casimir force modifies the frequency of a torsional oscillator suspended
-above a plate.  
-
-Bressi\etal measured the Casimir force between parallel plates~\cite{Bressi2002}.  
-
-Casimir force stiction in MEMS.  device failure, minimum feature size.~\cite{Buks2001}
+The Casimir force is also important in applications of microelectromechanical systems (MEMS), 
+as a source of stiction~\cite{Tas1996, Sperry1998, Buks2001}.  This is particularly important
+in free standing structures such as nano-oscillators.  
+Given the Casimir force is an attractive potential, if parts of the device get too close to the substrate
+they will permanently stick to one another, leading to device failure.  
 
 \subsection{Casimir-Polder}
 %Skip over names?  
@@ -347,6 +394,8 @@ Casimir force stiction in MEMS.  device failure, minimum feature size.~\cite{Buk
   wires in surface.  Trap atoms very close to surface.  Relevant to idea of 
   minaturizing tabletop experiments.  
   Not explicitly using Casimir-Polder forces?  
+  In addition, the Casimir force as been taken into account in design 1D atom traps 
+    near a nanowire~\cite{Salem2010}, and in design of waveguides for cavity QED~\cite{Hung2013, Goban2014}.
 \item Atom-chips and atom-waveguids are attempts towards building scalable 
 architecture for quantum computer using atoms.
 Couple atoms to dielectric waveguides, and get stronger coupling (thus faster operation)
@@ -402,7 +451,8 @@ As yet, there are no new forces, and tighter and tigher bounds on the properties
 Yukawa interaction.  
 
 \end{itemize}
-All of these require one handle material properties reliably, and with arbitrary geometries,
+
+Describing this range of phenomena require that one handle material properties reliably, and with arbitrary geometries,
 and possible anisotropies.  Typically working in long-wavelength approximation which neglects strong
 forces binding bodies together.    
 
@@ -421,19 +471,8 @@ to compare theory and experiment.
 % \item Military applications to mimic at human scale. Cite 2015 paper.   
 % \end{itemize}
 
-\section{Other Computational methods}
+\section{Computational methods}
 
-\begin{itemize}
-\item Add complex amplitudes together.  Take modulus squared to get probabilities.  
-\item Feynman path integral construction of quantum mechanics- 
-to get amplitude to get from one position to another, add up \emph{all} possible paths,
- with a suitable phase, $e^{-i S[x]/\hbar}$, \cite{Feynman1942, Feynman1965}
-\item Found common use in field theory particularly for covariantly quantizing gauge field theories,
- such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
-\item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
-   Can mathematically formulate a path integral as very high-dimensional integral.
-  Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
-\end{itemize}
 
 \begin{itemize}
 \item Experiments spurred development of theory.  
@@ -513,9 +552,8 @@ Numerous authors contributed over decades.
     much more adapted to arbitrary bodies.  
 \item Physical picture is fluctuating currents on bodies.  Interact via EM field.
   Can use Green function as if dielectric suffused all space.  
-SIE equations and Green's theorem relate surface integrals.  
+Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.  
 \end{itemize}
-
 
 \begin{itemize}
 \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
@@ -539,29 +577,26 @@ SIE equations and Green's theorem relate surface integrals.
 
 \subsection{Modern Directions}
 
-
-\item Non-additivity of forces:  Reference for this?  What is the typical scale of the correction for non-additivity?
-
-\item Search for repulsive forces
-
 \begin{itemize}
-\item Casimir force important for stiction.
-\item Attracts atoms, sets lower bound for how close you can get particles together.
-\item Search for repulsive forces as possible trapping (Motivation for this?)
-\item Can be found for magnetic media (but typically small).
-  Metamaterials exhibit this for small range of frequencies.
-  But Casimir broadband, and dielectric contribution ends up dominating.
-  (\comment{ Cite Milonni on metametarials}.
-Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
- $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
-\comment{Cite Lifshitz of liquid helium.
-  Cite experiments, and note odd fluids.}.
-   Geometries dependence (\comment{Cite reid paper on needle above hole}).
-\end{itemize}
+  \item Non-additivity of forces:  Reference for this?  What is the typical scale of the correction for non-additivity?
+
+  \item Search for repulsive forces
+
+  \item Casimir force important for stiction.
+  \item Attracts atoms, sets lower bound for how close you can get particles together.
+  \item Search for repulsive forces as possible trapping (Motivation for this?)
+  \item Can be found for magnetic media (but typically small).
+    Metamaterials exhibit this for small range of frequencies.
+    But Casimir broadband, and dielectric contribution ends up dominating.
+    (\comment{ Cite Milonni on metametarials}.
+    Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
+    $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
+    \comment{Cite Lifshitz of liquid helium.
+    Cite experiments, and note odd fluids.}.
+    Geometries dependence (\comment{Cite reid paper on needle above hole}).
 \item Dynamical Casimir effect/Unruh Effect?
-\begin{itemize}
-  \item Accelerating plate creates photons.  
-\end{itemize}
+    \item Accelerating plate creates photons.  
+  \end{itemize}
 
 
 \section{Scalar Worldline Casimir Energies}

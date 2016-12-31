@@ -118,7 +118,7 @@ Atom-Wall
 \end{figure}
   \item Fig.~\ref{fig:feynman_CP} represents the perturbation theory computation of 
     Casimir-Polder shift.  Atom interacting with EM field emits and re-absorbs a photon.  
-    (See discussion in Steck~\cite{SteckQONotes})
+    (See discussion in Steck~\cite{SteckNotes})
     \begin{equation}
       V_{CP} = \sum_{m,\vect{k}} \frac{|\langle E_n, 0|  H_{int}|E_m, 1\rangle|^2}{E_n-E_m-\hbar\omega_k}
     \end{equation}
@@ -157,7 +157,7 @@ and $d$ is the distance between the plates.
 \center
 \includegraphics[width=10cm]{fig/intro/twoplanes_wave}
 \caption{Sketch of allowed modes between perfectly conducting plates.}
-\label{fig:Casimir_plates}
+\label{fig:Casimir_sketch}
 \end{figure}
 
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
@@ -225,7 +225,7 @@ This work is nicely reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.
 % which attributes the fluctuations as thermal fluctuations of the medium.  
 In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
 discuss the finite temperature effects, dissipation and the relation to the
-microscopic details of the medium~\cite{BarashGinzburg1975}.  
+microscopic details of the medium~\cite{Barash1975}.  
 
 %\begin{itemize}
 % \item Historically earlier, London applied interaction dipoles in QM perturbation theory.
@@ -238,7 +238,6 @@ microscopic details of the medium~\cite{BarashGinzburg1975}.
 % Distinguish between atomic and macroscopic forces, and in different distance regimes.
 % \item Ultimately, same physical origin.  
 %\end{itemize}
-
 
 % This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
 
@@ -337,7 +336,6 @@ The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the vo
 
 \end{itemize}
 
-
 \section{Summary of Casimir Experiments}
 
 The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
@@ -369,7 +367,7 @@ Despite the aforementioned difficulties, Bressi\etal measured the Casimir force 
 \comment{Lower precision?}
 
 The Casimir force is also important in applications of microelectromechanical systems (MEMS), 
-as a source of stiction~\cite{Tas1996, Sperry1998, Buks2001}.  This is particularly important
+as a source of stiction~\cite{Tas1996, Serry1998, Buks2001}.  This is particularly important
 in free standing structures such as nano-oscillators.  
 Given the Casimir force is an attractive potential, if parts of the device get too close to the substrate
 they will permanently stick to one another, leading to device failure.  
@@ -426,6 +424,20 @@ Bose-Einstein condensates.
   % Can easily vary distance of atom from surface from $1\mu m$ up to $10\mu m$ from surface.
   % Relate to lifshitz formula and cross-over.    
 
+\item Quantum computing devices
+    \begin{itemize}
+      \item Quantum computing offers to make certain computation tasks (most notably factorising 
+        large prime numbers) and simulation taks much more efficient.  
+      \item Large push to develop scalable quantum devices in a number of model systems
+        (NV centers, cold atomic gases).  Atoms provide excellent quantum memory, internal
+        states are well isolated, controllable interactions via lasers.  
+      \item In order to address each atom, and ensure strong interactions, some groups 
+        ar developing microscopic dielectric waveguides to allow trapping, addressing and strongly interacting with a 
+        single atom in a scalable manner~\cite{Alton2011, Hung2013, Goban2014}.  
+      \item In designing these new devices it is essential to compute and account for the Casimir-Polder force
+        the atom's experience when brought close to the dielectric surface.  
+    \end{itemize}
+
     The Casimir-Polder effect is also important in the design of devices aiming to trap and interact
     with atoms near surfaces.  While ultra-cold atoms are very clean systems to work with for 
     studying and exploiting quantum effects, they are hard to minaturize and scale up.  In recent
@@ -443,21 +455,13 @@ Bose-Einstein condensates.
     Another direction that has been pursued is strong coupling of atoms to light via cavity 
     quantum electrodynamics (QED).  While originally pursued with high-finesse Fabry-Perot optical
     cavities, this has since been exploring the use of dielectric waveguides
-% \item Atom-chips  Schmiedmeyer(?)  
-%   Trap atoms near surfaces using combination of lasers and magnetic fields from
-%   wires in surface.  Trap atoms very close to surface.  Relevant to idea of 
-%   minaturizing tabletop experiments.  
-%   Not explicitly using Casimir-Polder forces?  
-% , and in design of waveguides for cavity QED~\cite{Hung2013, Goban2014}.
-
-
 
 \item Antezza - chapters in Dalvit.  
-\item Kimble atoms near toroidal resonators.
-  Strongly Couple single atoms to optical field at single photon level.  
-  Apply to toroidal resonators, and dielectric waveguides.  
-  \cite{Alton2011}.
-  Atoms above 1D Microcavity \cite{Hung2013}
+% \item Kimble atoms near toroidal resonators.
+%   Strongly Couple single atoms to optical field at single photon level.  
+%   Apply to toroidal resonators, and dielectric waveguides.  
+%   \cite{Alton2011}.
+%   Atoms above 1D Microcavity \cite{Hung2013}
 \item Atom-chips and atom-waveguids are attempts towards building scalable 
 architecture for quantum computer using atoms.
 Couple atoms to dielectric waveguides, and get stronger coupling (thus faster operation)
@@ -479,19 +483,16 @@ Drude vs plasma model.
   background dominates~\cite{Rosa2008})
   (Cite Vogel and Welsch chapter for Green function methods.  They cite 
   Feinberg and Sucher (1970) on pg 360 for repulsion)
-\item Quantum computing devices
-    \begin{itemize}
-      \item Quantum computing offers to make certain computation tasks (most notably factorising 
-        large prime numbers) and simulation taks much more efficient.  
-      \item Large push to develop scalable quantum devices in a number of model systems
-        (NV centers, cold atomic gases).  Atoms provide excellent quantum memory, internal
-        states are well isolated, controllable interactions via lasers.  
-      \item In order to address each atom, and ensure strong interactions, some groups 
-        ar developing microscopic dielectric waveguides to allow trapping, addressing and strongly interacting with a 
-        single atom in a scalable manner~\cite{Hung2013}.  
-      \item In designing these new devices it is essential to compute and account for the Casimir-Polder force
-        the atom's experience when brought close to the dielectric surface.  
-    \end{itemize}
+  \item Search for repulsive forces as possible trapping (Motivation for this?)
+  \item Can be found for magnetic media (but typically small).
+    Metamaterials exhibit this for small range of frequencies.
+    But Casimir broadband, and dielectric contribution ends up dominating.
+    (\comment{ Cite Milonni on metametarials}.
+    Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
+    $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
+    \comment{Cite Lifshitz of liquid helium.
+    Cite experiments, and note odd fluids.}.
+    Geometries dependence (\comment{Cite reid paper on needle above hole}).
     
 % Modifications to gravity on $1\mu m$ or $1mm$ scale.  Cite Lamoreaux 2000 Paper.  Gervaci?
 % Yukawa type forces.  (Carrol's textbook on string theory dilaton.  
@@ -502,15 +503,17 @@ Drude vs plasma model.
 % Requires very careful measurements, on top of carefully extracting Casimir force.   
 
 \item The Casimir force is also important for speculative searches for new physics on the millimeter to micron
-scale~\cite{Gervaci}.  The new physics must be shortranged, and is typically modelled as 
+scale~\cite{Dimopoulos2003, Bezerra2011}.  The new physics must be shortranged, and is typically modelled as 
 a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$.  
 On this scale however, the Casimir effect is the dominant interaction, and must be 
-carefully subtracted in an experimental procedure.  Typically experiments looking for modifications
-of gravity employ a common gold layer to provide a common short-ranged Casimir interaction, while
-applying a density modulation.  ~\cite{Tino, Gervaci}
-As yet, there are no new forces, and tighter and tigher bounds on the properties of the hypothetical
-Yukawa interaction.  
-
+carefully subtracted in an experimental procedure.  However, one can look for deviations from the expected 
+power laws, which has been used to exclude regions of the parameter space for the hypothetical
+Yukawa interaction~\cite{Lamoreaux1997,Obrecht2007,Bezerra2011}.  
+Experiments searching for modifications of gravity typically employ a thin gold layer over
+a density modulation.  The gold layer provides a common short-ranged Casimir interaction, while the 
+a density modulation allows measuring variations due to gravity~\cite{Sorrentino2009, Geraci2015}.
+Given the difficulties in cleanly measuring the Casimir force, this even more ambitious program has yet 
+to yield results.  
 \end{itemize}
 
 
@@ -595,8 +598,15 @@ Focus on scattering part - renormalization.  $\alpha$ is atomic polarizability t
 
 \subsection{Scattering Approach}
 
-Thus far, the scattering approach is the only general method of computing 
-electromagnetic Casimir forces in general media.  
+The scattering approach is currently the only general method of computing 
+electromagnetic Casimir forces in general media.  The essence of the scattering method 
+is encodes the presence of material bodies by the electric field they scatter.  
+
+While originally developed as an analytical
+technique, the scattering method has also been converted to an efficiency numerical method.  
+
+It has been explored as an analytical technique,
+and further converted to a form 
 \begin{itemize}
 \item EM field depends on scattered field.  Encoded in reflection matrices
 which are related to how EM field scatters from a given surface.  
@@ -617,7 +627,7 @@ Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.
 \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
 \item Cite Lambrecht and French collaborators
   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
-\item Cite Milton
+%\item Cite Milton
 \item Physical Picture based on generalized Green theorem from 
   SIE~\comment{Stratton}\cite{Stratton1941}.
 \item Comment on Emig/Buscher showing you can use homogenous green function.
@@ -632,7 +642,6 @@ Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.
 \item Note success, applicability.  \comment{Cite experimental tylenol pill paper}
 \end{itemize}
 
-
 \subsection{Modern Directions}
 
 \begin{itemize}
@@ -642,16 +651,6 @@ Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.
 
   \item Casimir force important for stiction.
   \item Attracts atoms, sets lower bound for how close you can get particles together.
-  \item Search for repulsive forces as possible trapping (Motivation for this?)
-  \item Can be found for magnetic media (but typically small).
-    Metamaterials exhibit this for small range of frequencies.
-    But Casimir broadband, and dielectric contribution ends up dominating.
-    (\comment{ Cite Milonni on metametarials}.
-    Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
-    $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
-    \comment{Cite Lifshitz of liquid helium.
-    Cite experiments, and note odd fluids.}.
-    Geometries dependence (\comment{Cite reid paper on needle above hole}).
 \item Dynamical Casimir effect/Unruh Effect?
     \item Accelerating plate creates photons.  
   \end{itemize}

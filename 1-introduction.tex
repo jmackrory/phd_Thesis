@@ -153,6 +153,7 @@ The renormalized energy between the plates is
 \end{equation}
 where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
 and $d$ is the distance between the plates.  
+
 \begin{figure}
 \center
 \includegraphics[width=10cm]{fig/intro/twoplanes_wave}
@@ -180,8 +181,8 @@ This work is nicely reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.
  \fmf{fermion,tension=0}{b1,v2}
  \fmf{fermion,tension=0}{b2,v4}
  \fmffreeze
-\fmf{photon}{v1,v3}
-\fmf{photon}{v2,v4}
+\fmf{photon,tension=0}{v1,v3}
+\fmf{photon,tension=0}{v2,v4}
 \fmf{fermion,tension=0}{v1,v2}
 %\fmf{fermion,tension=0,left}{v2,v1}
 \fmf{fermion,tension=0}{v3,v4}
@@ -662,12 +663,12 @@ The worldline method is an alternative method for computing Casimir energies.
   The worldline method was initially developed as an alternative method for 
 carrying out QFT calculations in terms of particle 
 mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.
-  In particular we can compute compute quantum effective actions in terms of
+  In particular the quantum effective actions can be computed in terms of
  the suitable dynamics of a quantum particle.
 \comment{Other references - was one contemporaneous with Strassler? Bern-Kosower}
 
 The basic insight is that for one loop effective actions, 
-we can recast a field path integral calculation in terms of the particle path
+the field path integral calculation can be recast in terms of the particle path
  integral for particles travelling in closed space-time loops.
   This is quite similar to the scalar electrodynamics Feynman explored
  in his Ph.D thesis~\cite{Feynman1942, Brown2005}
@@ -675,20 +676,19 @@ we can recast a field path integral calculation in terms of the particle path
   Higher order loop calculations can also be carried out with more particles, 
 and gauge fields can also be treated~\cite{Schubert2001}.
   For example, the worldline method has been used to compute relativistic
- field effects for QED such as the Lamb shift~\cite{Schmidt1995}.
-  It has also been used as a numerical algorithm\cite{Mazur2014}.
+ field effects for QED such as the Lamb shift~\cite{Schmidt1995}, and as a numerical algorithm~\cite{Mazur2014}.
 
 The worldline method is heavily based on Feynman's path integral method~\cite{Feynman1948,Feynman1965}.
 
-Our primary interest in the worldline method is for computing Casimir energies, which can be cast as effective actions.
-  The worldline was first used for the Casimir energy by Gies\etal~\cite{Gies2003,Gies2006, Gies2006a}.
-  While the initial work focused on the zero temperature limit, 
+Our primary interest in the worldline method is for computing Casimir energies, 
+which was first used to compute scalar Casimir energies by Gies~\etal~\cite{Gies2003,Gies2006, Gies2006a}.
+ While the initial work focused on the zero temperature limit, 
 the worldline method has also been extended to finite temperatures~\cite{Klingmueller2008}.
   This has also been used to study the torsion of inclined planes~\cite{Weber2009},
  and planes and spheres and planes and cylinders~\cite{Weber2010, Weber2010a}.  
 
-We will briefly introduce the method here, and discuss the method at 
-length in Ch.~\ref{ch:scalar_worldlines}.  
+% We will briefly introduce the method here, and discuss the method at 
+% length in Ch.~\ref{ch:scalar_worldlines}.  
 Let the action for the scalar field be given by 
 \begin{equation}
   S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
@@ -700,7 +700,6 @@ where $V(\vect{x},t)$ defines the surfaces of the objects we wish to compute
   In the limit $\lambda\rightarrow\infty$ the potential enforces Dirichlet boundary conditions 
   on the surfaces of the bodies.  In certain geometries this recovers electromagnetic 
 results assuming the surfaces are idealized perfect conductors.  
-This corresponds to assuming the surfaces are idealized perfect conductors.  
 
 We can compute the partition function for the field by Wick rotating to
  imaginary time (or finite temperature), where the partition function is now given by 
@@ -708,7 +707,7 @@ We can compute the partition function for the field by Wick rotating to
   Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x 
     \left[(\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
 \end{equation}
-The Gaussian integration over fields can be carried out as a functional determinant.
+The Gaussian integration over fields can be formally carried out as a functional determinant.
   In order to compute the energy we need the logarithm of the partition function,
  and various derivatives of it.
   The end result of these manipulations is that the renormalized energy can be written as 
@@ -792,6 +791,210 @@ and focusing purely on the electrostatic energy.
  Similar functional determinants to worldline methods are found,
  and are evaluated explicitly using a spacial grid~\cite{Pasquali2008}.  
 
+% \section{Copied}
+% \label{ch:scalar_worldlines}
+% \begin{itemize}
+% \item Cite Schubert~\cite{Schubert2001}, Strassler~\cite{Strassler1992} on general worldline
+% \comment{Other references - was one contemporaneous with Strassler?}
+% \begin{itemize}
+% \item Summarize Strassler.  Can compute QFT effects from worldline path integrals.  
+% \item One loop effective actions can be described as single-particle worldline path integrals.  Can apply for higher order loops, and gauge fields, Cite Schubert.    
+% \item Cite QED at one loop order paper.  Get same results.  
+% \item Note similarity to Schwinger's trick for handling loop integrals in QED.  T is Schwinger's proper time.  
+% \end{itemize}
+% \item Cite QED Worldline paper on numerics?
+% \item Cite Gies papers~\cite{Gies2003,Gies2006, Gies2006a} (all of them!) note work on thermal/geometry~\cite{Klingmueller2008,Weber2009, Weber2010}
+% \end{itemize}
+
+% In this chapter we will review prior work on the worldline method, translated to our terminology
+% and conventions.  We will derive the method, and discuss its advantages and shortcomings.  
+
+\section{Partition Function to Worldline path integral}
+
+\begin{itemize}
+\item Intro
+We consider a scalar field coupled to a background potential $V(\vect{x},t)$.  This potential
+embodies the location of the bodies we are considering.  Starting from the classical action,
+we will derive the Hamiltonian for the fields, and then compute the quantum partition function.  
+The partition function can be written as a path-integral, which is readily evaluated as a functional
+determinant.  Ultimately we want the free energy, which can be further converted into a path integral
+for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
+world line method.   
+
+\item Lagrangian - Hamiltonian
+The Lagrangian for the scalar field is
+\begin{equation}
+  L := \int d^3x \left[ \frac{1}{2}(\partial_t\phi)^2-\frac{1}{2}(\nabla\phi)^2-V(\vect{x},t)\phi^2\right].
+\end{equation}
+In prior work, the potential $V(\vect{x},t)$ encodes the locations of the interacting bodies, with 
+definition
+\begin{equation}
+  V(\vect{x}) = \lambda \sum_r \delta[\sigma_r(\vect{x}-\vect{R}_r)],
+\end{equation}
+    where $\lambda$ is the coupling constant, $\sigma_r(\vect{x})=0$ marks the locations of the surfaces, 
+    and $\vect{R}_r$ marks the center location of each body.  The coupling constant $\lambda$ 
+    is taken to infinity, which corresponds to imposing Dirichlet boundary conditions on the surfaces.
+
+% The conjugate momentum to $\phi$ is given by
+% \begin{equation}
+%   \Pi := \frac{\delta \cL}{\delta(\partial_t\phi)} = \partial_t\phi,
+% \end{equation}
+%     where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative w.r.t. $f(t)$.    
+% The Hamiltonian can then be easily found,
+% \begin{align}
+%   H := \int d^3x\,\Pi\partial_t\phi -  L\\ 
+%   = \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
+% \end{align}
+% We are now in a position to quantize the field by promoting the fields to operators, 
+%     $\phi\rightarrow \op{\phi}, \Pi\rightarrow\op{\Pi}$.
+% The fields can be promoted to operators with equal-time commutation relations
+% \begin{equation}
+%   [\op{\phi}(\vect{x},t),\op{\Pi}(\vect{x'},t)] = i\hbar \delta(\vect{x}-\vect{x'}).
+% \end{equation}
+% In exactly analogous fashion to quantum mechanics, the overlap between states is given by 
+% \begin{equation}
+%   \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3x \phi(\vect{x})\Pi(\vect{x})\bigg].
+% \end{equation}
+    
+    We can compute physical quantities of interest such as Casimir energies and forces
+    by taking suitable derivatives of the free energy.  The free energy $\mathcal{F}=-\kB T \log Z$,
+    is in turn given by the partition function $Z$.  \comment{Cite Brown, Altland-Simons}
+
+The field partition function is 
+\begin{equation}
+  Z = \tr[ e^{-\beta\op{H}}] = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
+\end{equation}
+where we have evaluated the trace over the complete set of field states.  In classic path-integral
+fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
+in both fields and conjugate-momentum fields can be inserted between each piece.  
+
+% \begin{align}
+%   Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\rangle
+%   \langle\Pi_n| \phi_{n-1}\rangle
+% \end{align}
+
+After integrating out the momentum fields, the partition function can be written as 
+\item Euclidean Path integral (Generating Function) 
+\begin{equation}
+  Z = \int D\phi \exp\left\{-\int_0^{\hbar\beta c} d\tau \int d^3x 
+    \left[ \frac{1}{2}(\partial_\tau\phi)^2+\frac{1}{2}(\nabla\phi)^2+V(\vect{x})\phi^2\right]\right\}.
+\end{equation}
+The functional integral over $\phi$ is Gaussian and can be formally evaluated immediately as a 
+functional determinant, since the differential operator is positive operator.  
+Some care is required in regularizing such infinite determinants.  
+This is done in analogy with finite dimensional Gaussian integrals.  
+We can consider treating the fields as only being evaluated on a finite lattice of space-time points, 
+with the lattice also having a finite extent which bounds all bodies.  We will then take the limit of 
+arbitrarily large volume, and lattice resolution at the end.  The gradient operators 
+can be treated via their finite difference approximations, which can be thought of as sparse matrices.  
+
+% For a single real Gaussian integral, one can evaluate it as
+% \begin{equation}
+%   I_1=\int dx e^{-\alpha x^2} =\sqrt{\frac{\pi}{\alpha}}.
+% \end{equation}
+% Let us now consider the multidimensional Gaussian integral
+% \begin{equation}
+%   I_2=\int \prod_{j=1}^Ndx_j e^{-\vect{x}^T A \vect{x}},
+% \end{equation}    
+% where there is an implicit sum over $i,j$, and $A$ is a positive matrix, i.e. all of $A$'s eigenvalues $\alpha_j$ 
+% are positive.
+%     The Gaussian integral can be readily evaluated by changing integration variables $\vect{x}$ to the amplitudes of the 
+%     eigenvectors of $A$, $\vect{y}$ via an orthogonal transformation $O$,
+%     \begin{equation}
+%       \vect{x} = O\vect{y}.
+%     \end{equation}
+%     The Gaussian integral can be evaluated as
+%     \begin{equation}
+%       I_2 = \int \prod_{j=1}^N dy_j e^{-\alpha_jy_j^2} \propto \left[ \prod_{j=1}^N\alpha_j \right]^{-1/2}
+%       = {\det}^{-1/2} A.
+%     \end{equation}
+%     \comment{(Cite Srednicki or Brown for their chapter on Gaussian integrals)}
+In an analogous fashion, one can formally evaluate the partition function path integral as a 
+functional determinant, 
+\begin{equation}
+  Z \propto {\det}^{-1/2}\left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})\right].
+\end{equation}
+Note that the original computations for the worldline method stressed computing the quantum effective
+action for the scalar field.  This yields essentially the same expression.  
+
+The free energy for the interacting field can be written as 
+\begin{equation}
+  \mathcal{F} = -\kB T\log Z = \frac{1}{2}\kB T \log\det[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})].
+  \label{eq:free-energy-det}
+\end{equation}
+As it stands this expression is divergent, however we will renormalize by subtracting off the 
+same expression with the bodies removed to spatial infinity.  Physically this corresponds to 
+computing energy differences between different configurations.  The renormalization also cancels off 
+the constant normalization factors.  
+
+The free energy can now be converted into a single-particle path integral via some formal 
+manipulations.  First we will use the identity $\log\det A=\tr\log A$, which can be readily
+verified for positive finite matrices.  
+\begin{align}
+  \log\det A &= \log\prod_j \alpha_j%\nonumber\\
+  =\sum_j \log\alpha_j%\nonumber\\
+  = \tr\log A,\label{eq:log-det}
+\end{align}
+    where we used the facts that the trace and determinant of a matrix are given by the sum
+and product of its eigenvalues respectively. \comment{Check Kirsten/Vassilevich for better argument/citation}
+Furthermore, we will use the integral representation of the logarithm,
+\begin{equation}
+  \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}).\label{eq:integral_log}
+\end{equation}
+This expression also relies on a difference of terms to cancel out divergent terms at $T=0$.  The 
+earlier renormalization by subtracting off the vacuum energy provides exactly this subtraction. 
+
+By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(\ref{eq:free-energy-det}),
+ the renormalized free energy can be rewritten as
+\begin{equation}
+  \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
+  \tr\Big[e^{-(\partial_\tau^2+\nabla^2)\cT}\big(e^{-\cT V(\vect{x})}-1\big)\Big].
+\end{equation}
+    
+
+
+\item Worldline path integral
+  \begin{equation}
+    F = - \int \frac{dT}{T^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
+  \end{equation}
+  where $\cT$ is the loop proper time, $\langle V\rangle$ is the average of the potential around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble average over Brownian paths.  
+\item Typically take $V = \lambda\delta[\vect{x}-\sigma(\vect{x})]$, where $\sigma(\vect{x})=0$ is a function describing the surfaces.  In the limit $\lambda\rightarrow\infty$ this amounts to enforcing Dirichlet boundary conditions on the fields at the surfaces.  
+\end{itemize}
+
+    \section{Numerical method}
+    \section{Deficiencies of the scalar method}
+\begin{itemize}
+\item Cite Schaden applying to pistons\cite{Schaden2009}
+\item Figure showing loops.  
+\item Advantages
+  \begin{itemize}
+  \item Algorithm is geometry independent, and no spatial grid.
+  \item Parallelizable.  Computation time scales as inversely with resources.  
+  \end{itemize}
+
+\item Shortcomings
+\begin{itemize}
+  \item No coupling of photons to medium.
+  \item A scalar, not vector electromagnetism.
+\end{itemize}
+  
+\end{itemize}
+
+
+\begin{shaded}
+  The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
+  This follows either from Hormander's argument, that 
+  \begin{equation}
+    \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
+  \end{equation}
+where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and 
+$|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.
+  In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.
+  If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.
+  If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
+\footnote{See pages 826-828 of Dan's notes.}
+\end{shaded}
+
 
 \section{Continuous Quantum Measurements}
 
@@ -864,15 +1067,19 @@ somewhat surprising notion that particle reflects from a sufficiently
 strong quantum measurement.
 \end{itemize}
 
-\section{Thesis outline}
+% \section{Thesis outline}
 
-\begin{itemize}
-\item Background for path integrals, scalar worldlines, and EM field quantization.
-\item Cover 
-\item Analytical methods and computations in simple geometries.
-\item General method and numerical results.
-\item Shift to quantum trajectories.  
-\end{itemize}
+% We will cover some background material relating to field quantiuzation, thne proceed to develop the 
+% relevant worldline path integrals.
+
+
+% \begin{itemize}
+% \item Background for path integrals, scalar worldlines, and EM field quantization.
+% \item Cover 
+% \item Analytical methods and computations in simple geometries.
+% \item General method and numerical results.
+% \item Shift to quantum trajectories.  
+% \end{itemize}
 
 
 

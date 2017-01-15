@@ -554,7 +554,8 @@ Now use
 
 Then 
 \begin{align}
-\Aboxed{\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)}
+\Aboxed{\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 
+2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)}
 \end{align}
 
 
@@ -568,11 +569,11 @@ C=&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{1}{r'}-r'\right)\d
 \end{align}
 So this will work.  
 
-
 \begin{align}
-E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right],
+E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\, (p^2-1) 
+\frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right],
 \end{align}
-We can use Eqs.~(\label{eq:CTM}) and (\label{eq:TM_integrate_by_parts}) to integrate with respect to $p$.  
+We can use Eqs.~(\ref{eq:CTM}) and (\ref{eq:TM_integration_by_parts}) to integrate with respect to $p$.  
 \begin{align}
 I_2 =& \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}
 \left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
@@ -714,7 +715,7 @@ F-F_0 & = -k_BT \log \frac{Z_{TE}}{Z_0} \\
 -\log\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
 &=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
 \dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-\label{eq:worldline_partition_function}
+\label{eq:TEworldline_partition_function}
 \end{align}
 where we introduced the path integral.
   In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.
@@ -1143,7 +1144,7 @@ Then renormalized Casimir energy is
 \begin{align}
 E-E_0 & = -k_BT \log \frac{Z_{TM}}{Z_0} \\
 &=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}}
- -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - \frac{T}{2}\langle V_{TM}\rangle}\drangle\label{eq:worldline_partition_function}
+ -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - \frac{T}{2}\langle V_{TM}\rangle}\drangle\label{eq:TMworldline_partition_function}
 \end{align}
 
 \subsection{Casimir-Polder energy}
@@ -1311,9 +1312,12 @@ F-F_0=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsilon(0)-1}{\epsilon(0)+1} 
 
 
  
-    \section{TE/TM Zero temperature atom-plane, plane-plane}
-    \section{TE/TM Zero temperature atom-sphere, atom-cylinder}
-    \section{Finite Temperature}
+    % \section{TE/TM Zero temperature atom-plane, plane-plane}
+    % \section{TE/TM Zero temperature atom-sphere, atom-cylinder}
+    % \section{Finite Temperature}
+
+    % \comment{Maybe I need some words here to avoid weirdness?}
+
 
 %%% Local Variables: 
 %%% mode: latex

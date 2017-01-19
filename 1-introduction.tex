@@ -261,8 +261,6 @@ microscopic details of the medium~\cite{Barash1975}.
   \item Emphasizes connection to underlying physics.  
 \end{itemize}
 
-
-
 \subsection{Distance and Energy Scales}
 
 \begin{itemize}
@@ -527,34 +525,47 @@ to yield results.
 
 \section{Computational methods}
 
-Describing this range of phenomena require that one handle material properties reliably, and with arbitrary geometries,
-and possible anisotropies.  Typically working in long-wavelength approximation which neglects strong
-forces binding bodies together.    
+Although the Casimir force was explored by theorists before precision experiments were available,
+the advent of precision experiments and new technologies has spurred developments in 
+theoretical and computational methods.
+While early work focused on highly symmetric geometries 
+of bodies such as parallel planar bodies~\cite{Casimir1948} or spheres~\cite{Boyer}, 
+current experiments require calculations for arbitrary shapes and arrangements of bodies, 
+which have realistic material properties.  
+This is a difficult task since the Casimir force is a broadband phenomenon, depending on the whole 
+range of frequencies.  Furthermore it depends sensitively on the geometry of the bodies involved, 
+and one must carefully renormalize the results.  
+For a simple, symmetric geometry it is possible to write down tractable analytical expressions for
+the Casimir energy based on expanding the field in mode functions.  However for general geometries 
+such an expansion may not be possible, or converge well.
+These requirements force one to adopt a general numerical approach to computing Casimir forces~\cite{Johnson2009}.
+We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
+or fluctuating surface current approach, and the worldline method.  We will also review notable
+calculational frameworks.  
 
-A common thread throughout these now classic computations is an emphasis on exactly solvable
-geometries.  With the advent of modern experiments however, it is necessary to be able 
-to compute the Casimir force in arbitrary geometries, with general material properties in order
-to compare theory and experiment.  
-
-\begin{itemize}
-\item Experiments spurred development of theory.  
-\item Prior methods relied on mode-function expansion of fields, which is only possible
-for simple geometries.  
-\item Theory must account for material properties.  Surface roughness.  
-\item Need general methods, tend to result in numerical integrals.
-\item Crudest method available is the proximity force approximation.  
-\item Analytical theory based on green function methods.  (Russian school, McLachlan, Schwinger)
-\item Scattering approach.  
-\item Worldline method.  
-\end{itemize}
+% \begin{itemize}
+% %\item Experiments spurred development of theory.  
+% % \item Prior methods relied on mode-function expansion of fields, which is only possible
+% % for simple geometries.  
+% % \item Theory must account for material properties.  Surface roughness.  
+% % \item Need general methods, tend to result in numerical integrals.
+% % \item Crudest method available is the proximity force approximation.  
+% % \item Analytical theory based on green function methods.  (Russian school, McLachlan, Schwinger)
+% % \item Scattering approach.  
+% % \item Worldline method.  
+% \end{itemize}
 
 \subsection{Proximity Force Approximation}
 
-\begin{itemize}
-\item The proximity force approximation (PFA) is an uncontrolled approximation to
+The proximity force approximation (PFA) is an uncontrolled approximation to
 the Casimir force between generally shaped objects.  
-The PFA computes the Casimir force can be found by treating each infinitesimal segment
-of the surfaces as if they were planes, and integrating the force between surface patches.
+The PFA treats each infinitesimal segment of the surfaces as if they were perfectly conducting planes.
+The Casimir force is found under the PFA by integrating the Casimir pressure over the surfaces.
+
+As a 
+
+
+\begin{itemize}
 \item Find first use?  Lamoreaux mentions usage.  Derjaguin?\cite{Derjaguin1956}
 \item Note problem with non-additivity. The PFA explicitly assumes that the force
 can be found by adding up the pair-wise contributions from each surface patch.  

@@ -558,26 +558,43 @@ calculational frameworks.
 \subsection{Proximity Force Approximation}
 
 The proximity force approximation (PFA) is an uncontrolled approximation to
-the Casimir force between generally shaped objects.  
+the Casimir force between generally shaped objects~\cite{Derjaguin1956}.  
 The PFA treats each infinitesimal segment of the surfaces as if they were perfectly conducting planes.
 The Casimir force is found under the PFA by integrating the Casimir pressure over the surfaces.
+The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
+their separation $d$.  It was used by Lamoreaux to estimate the Casimir force between the sphere-plate
+in his landmark experiments, where the radius of the sphere was indeed large compared to the separations explored. 
 
-As a 
+For many years the PFA was the only practical general method of estimating Casimir forces.
+The PFA has the advantage of being straightforward to implement, and functions as an order of magnitude
+estimate for the Casimir force for arbitrary geometries.
+  However it has some prominent limitations.
+  First, it is only valid for vanishing curvature.
+ Second, the PFA assumes that the force can be found by integrating up
+ the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
+of the Casimir force.  Unlike the potential between electric charges where the total potential is
+the sum of the pair-wise potential energies, the Casimir force for an arrangement
+of bodies is not just the sum of the pair-wise energies.  
+(as a quick justification, the Casimir energy
+depends on $\langle H\rangle$ which is quadratic in the fields.  However, in the case of the Casimir-Polder energy one might
+be able to focus on the linear change)
+Finally, the PFA allows only for strictly attractive forces.  
+In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
+such as media with a strong magnetic response, or anisotropic media.
 
-
-\begin{itemize}
-\item Find first use?  Lamoreaux mentions usage.  Derjaguin?\cite{Derjaguin1956}
-\item Note problem with non-additivity. The PFA explicitly assumes that the force
-can be found by adding up the pair-wise contributions from each surface patch.  
-However, the Casimir force is a global phenomenon, and the total Casimir force
-Useful if very limited curvature, or effectively approximate geometry as planar.  
-\item Only attractive.  (real electromagnetic casimir forces have possibility of 
-being repulsive, even if hard to realize in general.)
-\item ever extended to include material properties?
-\item Despite these limitations, the PFA is relatively straightforward to implement,
-and functions as an order of magnitude estimate for the Casimir force.  In the limit
-of vanishing curvature, the PFA converges to the correct Casimir force.  
-\end{itemize}
+% \begin{itemize}
+% %\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
+% % \item Note problem with non-additivity. The PFA explicitly assumes that the force
+% % can be found by adding up the pair-wise contributions from each surface patch.  
+% % However, the Casimir force is a global phenomenon, and the total Casimir force
+% % Useful if very limited curvature, or effectively approximate geometry as planar.  
+% \item Only attractive.  (real electromagnetic casimir forces have possibility of 
+% being repulsive, even if hard to realize in general.)
+% \item ever extended to include material properties?
+% \item Despite these limitations, the PFA is relatively straightforward to implement,
+% and functions as an order of magnitude estimate for the Casimir force.  In the limit
+% of vanishing curvature, the PFA converges to the correct Casimir force.  
+% \end{itemize}
 
 \subsection{Green function methods}
 

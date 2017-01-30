@@ -1,225 +1,225 @@
 \chapter{``Realistic'' Quantum Trajectories for Position Measurements}
+\label{ch:trajectory}
+\section{Position Dependent measurement operators}
 
-      \section{Position Dependent measurement operators}
+\subsection{Initial Setup}
+\begin{itemize}
+  \item Atom emitting light.  Assume dipole transition.
+  \item Assume atom driven by resonant probe beam, while trapped in far off-resonant
+    dipole trap.  This aligns atomic dipoles in particular direction.  
+  \item Atomic Hamiltonian
+    \begin{equation}
+      H = \frac{\vect{p}^2}{2m}+\sum\hbar \omega\sigma_z
+      -\sum_i\vect{d}\cdot\vect{E}_i(\vect{x},t)
+    \end{equation}
+    center-of-mass motion, internal energy levels, and interaction with external fields.  
+  \item Operators defined as 
+    \begin{gather}
+      \sigma = |g\rangle\langle e|\\
+      \sigma^\dag = |e\rangle\langle g|\\
+      \sigma_z = |e\rangle\langle e|-|g\rangle\langle g|
+    \end{gather}
+  \item Commutation relations
+    \begin{gather}
+      [\sigma^\dag,\sigma] 
+      % = [|g\rangle \langle e|, |e\rangle \langle g|]
+      = \sigma_z\\
+      [\sigma, \sigma_z]   = 2\sigma\\
+      [\sigma^\dag, \sigma_z]   = -2\sigma
+    \end{gather}
+  \item Consider spontaneous emission.  
+  \item Stochastic Master Equation (approach heavily influenced by Quantum Optics notes).
+    No conditioning
+    \begin{equation}
+      d\rho = -\frac{i}{\hbar}[H,\rho]dt + \frac{\Gamma}{2} \dec[\sigma e^{i\vect{k\cdot x}}] dt,
+    \end{equation}
+    where decoherence super-operator is 
+    \begin{equation}
+      \dec[A]\rho = 2A\rho A^\dag - A^\dag A\rho - \rho A^\dag A.
+    \end{equation}
+    Density matrix $\rho$ for full center of mass, and internal degrees of freedom.  
+  \item Stochastic increment $df = f(t+dt)-f(t)$.
+  \item For an experiment monitoring the flourescence via angle-resolved emission,
+    we can model the atom's evolution via the following stochastic Master equation (SME)
+    \begin{align}
+      d\rho =& -\frac{i}{\hbar}[H,\rho]dt - \frac{\Gamma}{2}\hom[\sigma^\dag\sigma]\rho dt
+      + \int d\Omega_k \jump[\sigma e^{i\vect{k}\cdot\vect{x}}]\rho dN_k
+    \end{align}
+    where homodyne and jump operators are 
+    \begin{align}
+      \hom[A]\rho = A\rho + \rho A^\dag - \tr[\rho(A+A^\dag)]\rho\\
+      \jump[A]\rho = \frac{ A\rho A^\dag}{\tr[A\rho A^\dag]} - \rho.
+    \end{align}
+    The Poisson increments $dN_k$ have mean rate
+    \begin{equation}
+      dN_k = \Gamma\Tr[\sigma^\dag\sigma\rho] dt.
+    \end{equation}
+    If we account for the dipole emission pattern, assuming the atom's have their dipole preferentially
+    aligned via the effective dipole potential, then 
+    \begin{equation}
+      dN_{k,i} = \Gamma\Tr[\sigma^\dag\sigma\rho]|u_i(\vect{k})|^2 dt.
+    \end{equation}
+    where $u_i(\vect{k})$ is the dipole emission pattern at wave-vector $\vect{k}$.  Normalized
+    so that $\sum_{i=0,\pm}\int d\Omega_k |u_i|^2 = 1$.
 
-      \subsection{Initial Setup}
-      \begin{itemize}
-        \item Atom emitting light.  Assume dipole transition.
-        \item Assume atom driven by resonant probe beam, while trapped in far off-resonant
-          dipole trap.  This aligns atomic dipoles in particular direction.  
-        \item Atomic Hamiltonian
-          \begin{equation}
-            H = \frac{\vect{p}^2}{2m}+\sum\hbar \omega\sigma_z
-            -\sum_i\vect{d}\cdot\vect{E}_i(\vect{x},t)
-          \end{equation}
-          center-of-mass motion, internal energy levels, and interaction with external fields.  
-        \item Operators defined as 
-          \begin{gather}
-            \sigma = |g\rangle\langle e|\\
-            \sigma^\dag = |e\rangle\langle g|\\
-            \sigma_z = |e\rangle\langle e|-|g\rangle\langle g|
-          \end{gather}
-        \item Commutation relations
-          \begin{gather}
-            [\sigma^\dag,\sigma] 
-            %= [|g\rangle \langle e|, |e\rangle \langle g|]
-            = \sigma_z\\
-            [\sigma, \sigma_z]   = 2\sigma\\
-            [\sigma^\dag, \sigma_z]   = -2\sigma
-          \end{gather}
-        \item Consider spontaneous emission.  
-        \item Stochastic Master Equation (approach heavily influenced by Quantum Optics notes).
-          No conditioning
-          \begin{equation}
-            d\rho = -\frac{i}{\hbar}[H,\rho]dt + \frac{\Gamma}{2} \dec[\sigma e^{i\vect{k\cdot x}}] dt,
-          \end{equation}
-          where decoherence super-operator is 
-          \begin{equation}
-            \dec[A]\rho = 2A\rho A^\dag - A^\dag A\rho - \rho A^\dag A.
-          \end{equation}
-          Density matrix $\rho$ for full center of mass, and internal degrees of freedom.  
-          \item Stochastic increment $df = f(t+dt)-f(t)$.
-          \item For an experiment monitoring the flourescence via angle-resolved emission,
-          we can model the atom's evolution via the following stochastic Master equation (SME)
-          \begin{align}
-            d\rho =& -\frac{i}{\hbar}[H,\rho]dt - \frac{\Gamma}{2}\hom[\sigma^\dag\sigma]\rho dt
-            + \int d\Omega_k \jump[\sigma e^{i\vect{k}\cdot\vect{x}}]\rho dN_k
-          \end{align}
-          where homodyne and jump operators are 
-          \begin{align}
-            \hom[A]\rho = A\rho + \rho A^\dag - \tr[\rho(A+A^\dag)]\rho\\
-            \jump[A]\rho = \frac{ A\rho A^\dag}{\tr[A\rho A^\dag]} - \rho.
-          \end{align}
-          The Poisson increments $dN_k$ have mean rate
-          \begin{equation}
-            dN_k = \Gamma\Tr[\sigma^\dag\sigma\rho] dt.
-          \end{equation}
-          If we account for the dipole emission pattern, assuming the atom's have their dipole preferentially
-          aligned via the effective dipole potential, then 
-          \begin{equation}
-            dN_{k,i} = \Gamma\Tr[\sigma^\dag\sigma\rho]|u_i(\vect{k})|^2 dt.
-          \end{equation}
-          where $u_i(\vect{k})$ is the dipole emission pattern at wave-vector $\vect{k}$.  Normalized
-          so that $\sum_{i=0,\pm}\int d\Omega_k |u_i|^2 = 1$.
+  \item Inefficiency handled by introducing a loss-channel, and tracing over events in that 
+    channel.  
 
-          \item Inefficiency handled by introducing a loss-channel, and tracing over events in that 
-          channel.  
+  \item For pure-states undergoing continouus measurement , we can unravel the density matrix as an ensemble of pure states.  
+    \begin{align}
+      d|\psi\rangle = -\frac{i}{\hbar} H|\psi\rangle dt -\frac{\Gamma}{2}
+      \left[\sigma^\dag\sigma-\langle \sigma^\dag\sigma\rangle\right]|\psi\rangle dt 
+      +\bigg( \frac{\sigma e^{-i\vect{k}\cdot\vect{x}}|\psi\rangle}{\langle \sigma^\dag \sigma\rangle ^{1/2}}
+      -1\bigg)dN_k,
+    \end{align}
+    where the Poisson process $dN_k$ has mean rate 
+    \begin{equation}
+      \dlangle dN_k\drangle = \Gamma \langle \sigma^\dag\sigma\rangle |u_i(\vect{k})|^2 dt
+    \end{equation}
+  \item Can also consider mixing signal with local oscillator.  Amplifies signal considerably.
+    Different unravelling (get dipole phase information instead of excited/ground state info)
 
-          \item For pure-states undergoing continouus measurement , we can unravel the density matrix as an ensemble of pure states.  
-          \begin{align}
-            d|\psi\rangle = -\frac{i}{\hbar} H|\psi\rangle dt -\frac{\Gamma}{2}
-            \left[\sigma^\dag\sigma-\langle \sigma^\dag\sigma\rangle\right]|\psi\rangle dt 
-            +\bigg( \frac{\sigma e^{-i\vect{k}\cdot\vect{x}}|\psi\rangle}{\langle \sigma^\dag \sigma\rangle ^{1/2}}
-            -1\bigg)dN_k,
-          \end{align}
-          where the Poisson process $dN_k$ has mean rate 
-          \begin{equation}
-            \dlangle dN_k\drangle = \Gamma \langle \sigma^\dag\sigma\rangle |u_i(\vect{k})|^2 dt
-          \end{equation}
-        \item Can also consider mixing signal with local oscillator.  Amplifies signal considerably.
-          Different unravelling (get dipole phase information instead of excited/ground state info)
+\end{itemize}
+\subsection{Adiabatic Elimination}
+\begin{itemize}
+  \item Adiabatically eliminate atoms internal state.  We assume that the 
+    fluorescence occurs on a much faster time-scale than the atom's motion.  This 
+    is the same logic used in developing the effective atomic-potential.  We assume that 
+    there is a strong, far-off resonant field, and a weak resonant probe.  Far-off resonance
+    field leads to confining potential
+    \begin{equation}
+      V_{\text{dipole}}(x) = \frac{\vect{\Omega}_d(\vect{x})\cdot\vect{\Omega}^*_d(\vect{x})}{\Delta}
+    \end{equation}
+    Formally, can find Heisenberg equations of motion, and solve in ``steady-state''.
+    \begin{itemize}
+      \item Input-output theory equations\cite{Gardiner1985, GardinerZoller2004}
+        \begin{equation}
+          da = -\frac{i}{\hbar}[a,H] -[a,c^\dag]\left(\frac{\gamma}{2}c + \sqrt{\gamma}b_{in}(t)\right)
+          -\left(\frac{\gamma}{2}c^\dag + \sqrt{\gamma}b^\dag_{in}(t)\right)[a,c]
+        \end{equation}
+        where $c$ is the operator coupled to the bath, and $b_in$ in the input noise operator.  
+        In rotating picture for $\sigma$
+        \begin{equation}
+          \dot{\sigma} = -i[\sigma,\omega\sigma_z/2+ \sigma^\dag \alpha]
+          -[\sigma,\sigma^\dag]\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
+        \end{equation}
+        Then use $[\sigma,\sigma^\dag]\sigma = -2\sigma_z\sigma = 2\sigma$
+        \begin{equation}
+          \dot{\sigma} = -(i\omega+\Gamma)\sigma +\sigma_z\alpha + \sigma_z\sqrt{\Gamma}b_{in}
+        \end{equation}
+        \comment{factors in defining Rabi frequency?}
+      \item Also then need equation for $\sigma_z$
+        \begin{align}
+          \dot{\sigma}_z &= -i\left([\sigma_z, \sigma\alpha^*+\sigma^\dag\alpha   \right)
+          -[\sigma_z,\sigma^\dag]\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
+          -\left(\frac{\Gamma}{2}\sigma^\dag + \sqrt{\Gamma}b^\dag_{in}\right)[\sigma_z,\sigma]\\
+          &= i\left(2\sigma\alpha^*-2\sigma^\dag\alpha\right)
+          +(-2)\sigma^\dag\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
+          -\left(\frac{\Gamma}{2}\sigma^\dag + \sqrt{\Gamma}b^\dag_{in}\right)2\sigma
+        \end{align}
+        Now have two coupled SDEs.  
 
-      \end{itemize}
-      \subsection{Adiabatic Elimination}
-      \begin{itemize}
-        \item Adiabatically eliminate atoms internal state.  We assume that the 
-          fluorescence occurs on a much faster time-scale than the atom's motion.  This 
-          is the same logic used in developing the effective atomic-potential.  We assume that 
-          there is a strong, far-off resonant field, and a weak resonant probe.  Far-off resonance
-          field leads to confining potential
-          \begin{equation}
-            V_{\text{dipole}}(x) = \frac{\vect{\Omega}_d(\vect{x})\cdot\vect{\Omega}^*_d(\vect{x})}{\Delta}
-          \end{equation}
-          Formally, can find Heisenberg equations of motion, and solve in ``steady-state''.
-          \begin{itemize}
-            \item Input-output theory equations\cite{Gardiner1985, GardinerZoller2004}
-              \begin{equation}
-                da = -\frac{i}{\hbar}[a,H] -[a,c^\dag]\left(\frac{\gamma}{2}c + \sqrt{\gamma}b_{in}(t)\right)
-                -\left(\frac{\gamma}{2}c^\dag + \sqrt{\gamma}b^\dag_{in}(t)\right)[a,c]
-              \end{equation}
-              where $c$ is the operator coupled to the bath, and $b_in$ in the input noise operator.  
-              In rotating picture for $\sigma$
-              \begin{equation}
-                \dot{\sigma} = -i[\sigma,\omega\sigma_z/2+ \sigma^\dag \alpha]
-                -[\sigma,\sigma^\dag]\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
-              \end{equation}
-              Then use $[\sigma,\sigma^\dag]\sigma = -2\sigma_z\sigma = 2\sigma$
-              \begin{equation}
-                \dot{\sigma} = -(i\omega+\Gamma)\sigma +\sigma_z\alpha + \sigma_z\sqrt{\Gamma}b_{in}
-              \end{equation}
-              \comment{factors in defining Rabi frequency?}
-            \item Also then need equation for $\sigma_z$
-              \begin{align}
-                \dot{\sigma}_z &= -i\left([\sigma_z, \sigma\alpha^*+\sigma^\dag\alpha   \right)
-                -[\sigma_z,\sigma^\dag]\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
-                -\left(\frac{\Gamma}{2}\sigma^\dag + \sqrt{\Gamma}b^\dag_{in}\right)[\sigma_z,\sigma]\\
-                &= i\left(2\sigma\alpha^*-2\sigma^\dag\alpha\right)
-                +(-2)\sigma^\dag\left(\frac{\Gamma}{2}\sigma + \sqrt{\Gamma}b_{in}\right)
-                -\left(\frac{\Gamma}{2}\sigma^\dag + \sqrt{\Gamma}b^\dag_{in}\right)2\sigma
-              \end{align}
-              Now have two coupled SDEs.  
+        \begin{align}
+          \dot{\sigma} &= -(i\omega+\Gamma)\sigma +\sigma_z\alpha + \sigma_z\sqrt{\Gamma}b_{in}\\
+          \dot{\sigma}_z &= -\Gamma(\sigma_z+I)/2 +2i\left(\sigma\alpha^*-\sigma^\dag\alpha\right)
+          -2\sqrt{\Gamma}(\sigma^\dag b_{in}  -b^\dag_{in}2\sigma)
+        \end{align}
+        
+        Solve on average, in steady state. $\dot{f}=0$.
+        \begin{align}
+          \sigma = \frac{\alpha}{i\omega + \Gamma}
+        \end{align}
+        
 
-              \begin{align}
-                \dot{\sigma} &= -(i\omega+\Gamma)\sigma +\sigma_z\alpha + \sigma_z\sqrt{\Gamma}b_{in}\\
-                \dot{\sigma}_z &= -\Gamma(\sigma_z+I)/2 +2i\left(\sigma\alpha^*-\sigma^\dag\alpha\right)
-                -2\sqrt{\Gamma}(\sigma^\dag b_{in}  -b^\dag_{in}2\sigma)
-              \end{align}
-              
-              Solve on average, in steady state. $\dot{f}=0$.
-              \begin{align}
-                \sigma = \frac{\alpha}{i\omega + \Gamma}
-              \end{align}
-              
+    \end{itemize}
+    
 
-          \end{itemize}
-          
-
-          More justified approach, to integrate equations of motion, and solve approximately
-          Then find effective Hamiltonian that reproduces those effective equations of motion.
-          \begin{equation}
-            \sigma\rightarrow \frac{|\vect{\Omega}|}{\Gamma}.
-          \end{equation}
-
-
-      \end{itemize}
-      \subsection{Effective Position Measurement}
-      \begin{itemize}
-        \item No-conditioning
-          \begin{equation}
-            d\rho_{CM} = -i[H_{\text{eff}},\rho_{CM}]dt + \Gamma \int d\Omega_k\dec[|\vect{\Omega} e^{i\vect{k\cdot x}}] dt
-          \end{equation}
-        \item Measurement operators are transformed copies of electric field emitted by atoms.
-          That is combination of atomic dipole pattern, with spatially dependent emission rate.
-          Electric field emitted by atoms is
-          \begin{equation}
-            \mu = e^{i\vect{k}\cdot\vect{x}}E(\vect{x})
-          \end{equation}
-          Transform electric field via propagation and lens system.  Electric field incident 
-          on detector is a linear superposition of emitted fields.  Then apply transformation
-          function on that linear sum.  That is the field at the detector.  
-        \item Note, for resonance fluorescence, one integrates over all emission directions for 
-          full set of emission operators at each position.  
-          Consider lens system as a linear map on electric fields.  
-          \begin{equation}
-            \mu(x) = \int d\Omega_k\,e^{i\vect{k}\cdot\vect{x}}u_i(\vect{k})\alpha(\vect{x})
-          \end{equation}
-          
+    More justified approach, to integrate equations of motion, and solve approximately
+    Then find effective Hamiltonian that reproduces those effective equations of motion.
+    \begin{equation}
+      \sigma\rightarrow \frac{|\vect{\Omega}|}{\Gamma}.
+    \end{equation}
 
 
-      \end{itemize}
+\end{itemize}
+\subsection{Effective Position Measurement}
+\begin{itemize}
+  \item No-conditioning
+    \begin{equation}
+      d\rho_{CM} = -i[H_{\text{eff}},\rho_{CM}]dt + \Gamma \int d\Omega_k\dec[|\vect{\Omega} e^{i\vect{k\cdot x}}] dt
+    \end{equation}
+  \item Measurement operators are transformed copies of electric field emitted by atoms.
+    That is combination of atomic dipole pattern, with spatially dependent emission rate.
+    Electric field emitted by atoms is
+    \begin{equation}
+      \mu = e^{i\vect{k}\cdot\vect{x}}E(\vect{x})
+    \end{equation}
+    Transform electric field via propagation and lens system.  Electric field incident 
+    on detector is a linear superposition of emitted fields.  Then apply transformation
+    function on that linear sum.  That is the field at the detector.  
+  \item Note, for resonance fluorescence, one integrates over all emission directions for 
+    full set of emission operators at each position.  
+    Consider lens system as a linear map on electric fields.  
+    \begin{equation}
+      \mu(x) = \int d\Omega_k\,e^{i\vect{k}\cdot\vect{x}}u_i(\vect{k})\alpha(\vect{x})
+    \end{equation}
+    
+
+
+\end{itemize}
 
 
 
-      \section{Zeno Effect and Strong Measurements}
+\section{Zeno Effect and Strong Measurements}
 
-      \begin{itemize}
-        \item Include figures/simulations showing reflection
-        \item Discuss physics of two decay channels: reflection from re-emission into beams, inference from 
-          detectin emitted photons.
-        \item Similarity to stochastic potential.  
-        \item No net force.  Probability of reflection might approach one, but effect on 
-          state is larger, so $d\langle p\rangle = 0$
-        \item Cite work commenting on our work.  Moving beyond purely perturbative approach.  
-        \item Figure: Reflection as function of $\chi$
-      \end{itemize}
+\begin{itemize}
+  \item Include figures/simulations showing reflection
+  \item Discuss physics of two decay channels: reflection from re-emission into beams, inference from 
+    detectin emitted photons.
+  \item Similarity to stochastic potential.  
+  \item No net force.  Probability of reflection might approach one, but effect on 
+    state is larger, so $d\langle p\rangle = 0$
+  \item Cite work commenting on our work.  Moving beyond purely perturbative approach.  
+  \item Figure: Reflection as function of $\chi$
+\end{itemize}
 
-      \section{Trajectories for EMCCD cameras}
+\section{Trajectories for EMCCD cameras}
 
-      \begin{itemize}
-        \item Handle noise, uncertainty by building model for measurement process
-          including all relevant noise, loss mechanisms.  Build a full, pure 
-          trajectory picture including random processes.
-          Then average over unobservable processes.   Weight each trajectory
-          with Bayesian statistics (re picture of evolution of quantum state). 
-        \item Warzsawski and Wiseman modelling 2-level atom emitting light onto 
-          APD.  Include dark counts, down-time, finite collection efficiency.
-      \end{itemize}
-      
+\begin{itemize}
+  \item Handle noise, uncertainty by building model for measurement process
+    including all relevant noise, loss mechanisms.  Build a full, pure 
+    trajectory picture including random processes.
+    Then average over unobservable processes.   Weight each trajectory
+    with Bayesian statistics (re picture of evolution of quantum state). 
+  \item Warzsawski and Wiseman modelling 2-level atom emitting light onto 
+    APD.  Include dark counts, down-time, finite collection efficiency.
+\end{itemize}
 
-      \subsection{EMCCD Amplification and Noise Processes}
 
-      \begin{itemize}
-        \item Review of useful concepts from Jeremy Thorne's thesis.  
-        \item Camera adds clock-induced charge at given Poissonian rate.
-        \item Amplification process exponentially stretches out $n$ photons.
-        \item Then Gaussian read-out noise.  
-      \end{itemize}
+\subsection{EMCCD Amplification and Noise Processes}
 
-      \begin{itemize}
-          \item In order to build quantum trajectories based on this, exploit Bayesian statistics
-          to weight all trajectories.  
-          \begin{equation}
-            |\psi\rangle = \sum_{\text{traj}} P(\text{traj}|\text{outcome})|\psi_{\text{traj}}\rangle.
-          \end{equation}
-          Find the weighting probability via Bayesian statistics
-          \begin{equation}
-            P(A|B) = \frac{P(B|A)P(A)}{\sum_AP(B|A)P(A)}
-          \end{equation}
-          \item Furthermore, must trace over unobserved quantities, such as clock-induced 
-          charge, spontaneous emission into free-space.  
-      \end{itemize}
+\begin{itemize}
+  \item Review of useful concepts from Jeremy Thorne's thesis.  
+  \item Camera adds clock-induced charge at given Poissonian rate.
+  \item Amplification process exponentially stretches out $n$ photons.
+  \item Then Gaussian read-out noise.  
+\end{itemize}
 
-      
+\begin{itemize}
+  \item In order to build quantum trajectories based on this, exploit Bayesian statistics
+    to weight all trajectories.  
+    \begin{equation}
+      |\psi\rangle = \sum_{\text{traj}} P(\text{traj}|\text{outcome})|\psi_{\text{traj}}\rangle.
+    \end{equation}
+    Find the weighting probability via Bayesian statistics
+    \begin{equation}
+      P(A|B) = \frac{P(B|A)P(A)}{\sum_AP(B|A)P(A)}
+    \end{equation}
+  \item Furthermore, must trace over unobserved quantities, such as clock-induced 
+    charge, spontaneous emission into free-space.  
+\end{itemize}
+
+
 
 %%% Local Variables: 
 %%% mode: latex

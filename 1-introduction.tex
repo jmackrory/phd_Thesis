@@ -710,17 +710,30 @@ be chosen.  For general numerical methods, a triangular mesh is the most flexibl
 The surface currents can also be formally integrated out, leaving the energy proportional 
 to a functional determinant 
 \begin{equation}
-  E = \int_0^\infty d\xi \log-\det\left[\mathbf{M}^{-1}_{\infty}\mathbf{M}\right],
+  E = \int_0^\infty d\xi \log\det\left[\mathbf{M}^{-1}_{\infty}\mathbf{M}\right],
 \end{equation}
-where $\mathbf{M}$ is a matrix where the entires encode the scattering between various surface current 
-elements via the homogenous EM green function.  
+where $\xi$ is the imaginary frequency, 
+and $\mathbf{M}$ is a matrix where the entires encode the scattering between various surface current 
+elements via the homogenous EM green function,  
 \begin{equation}
-  M_{ab} = \int dx dy f_a(x) G_{ab}(x,y)f_b(y)
+  M_{ab} = \int dx dy f_a(x) G_{ab}(x,y)f_b(y).
 \end{equation}
 The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy as the bodies are 
-arbitrarily far apart.  It removes the energy from any self-interactions of the bodies with themselves.
+arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
 
+Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
+an intensive operation.  If a matrix has $N$ non-zero entries, the determinant requires $\order(N^3)$ operations
+\comment{N rows or N entries}.
+While it is possible to parallelize computing the determinant~\cite{Det-GPU}, 
+this is somewhat involved~\comment{barf}.
+However, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
+trivially parallelized.
 
+Thus far, this fluctuating surface current method is the only general method for computing 
+Casimir energies in arbitrary geometries.  Furthermore, it is quite successful,
+for example describing the energy dependence of nanoparticles, which would have been very difficult
+with more traditional methods.  In addition, it correctly captures previous known results
+for Casimir energies, such as plane-plane and sphere-plane energies.  
 
 % \subsection{Modern Directions}
 
@@ -1146,10 +1159,33 @@ somewhat surprising notion that particle reflects from a sufficiently
 strong quantum measurement.
 \end{itemize}
 
-% \section{Thesis outline}
+\section{Thesis outline}
 
-% We will cover some background material relating to field quantiuzation, thne proceed to develop the 
-% relevant worldline path integrals.
+The rest of this thesis is laid out as follows:  In Ch.~\ref{ch:EM_quantization} we formally quantizing
+the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
+We will carry this out both for splitting the EM field into two non-interacting scalar polarizations,
+as well as the fully coupled path integral.
+We will also review others work on quantizing the EM field in media.
+In Ch.~\ref{ch:feynman_kac} we will discuss the general methods of solving single-particle path 
+integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
+ is the solution to a diffusion equation.  In simple cases, the Feynman-Kac formula can be solved,
+and we will derive those solutions for some simple planar geometries. 
+In Ch.~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
+results showing agreement between the worldline method and prior results, at least for planar media.
+We will also discuss the transition between high and low temperature, and near-field within the
+worldline context.  
+In Ch.~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals
+This will includes efficient methods for computing gradients, as well as Monte Carlo sampling methods
+for generating paths. 
+In Ch.~\ref{ch:general} we will discuss the prospects for a general method based on the current
+results and examine both an approximate method coupling the two polarizations together as well
+as the fully coupled path integral method.  (We will test this for a mixed geometry for which
+there are other tested methods to compare the worldline method against. 
+In Ch.~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
+of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
+to account for variable measurement strength, and how to reconstruct the atomic trajectory
+given the output of a realistic camera.  
+Finally, we will summarize our findings in the conclusion.  
 
 
 % \begin{itemize}

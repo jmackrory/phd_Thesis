@@ -39,6 +39,94 @@
   \item Frequency integrals: Can execute in parallel (like picking different $chi$).
 \end{itemize}
 
+
+\subsection{Sampling Times}
+
+For a given discrete Brownian Bridge $\vect{x}_j$, there are a couple ways to sample the times.
+
+\subsubsection{First-touching time}
+
+The simplest method which applies to TE/sojourn integrands is to find the first-touching time, $T_0$
+when the renormalized integrand first takes on a non-zero value.  After that point $T_0$, the
+integrand will slowly increase due to the increased sojourn value as more point pass into the 
+surfaces.  However, there is an additional $1/T^{1+D/2}$ factor which damps these contributions out.
+
+This suggests sampling from a probability distribution 
+\begin{equation}
+  P(T;T_0,m)= \frac{(m-1) T_0^{m-1}}{T^m}\Theta(T-T_0),
+\end{equation}
+where $m>1$ and $T_0>0$.  This requires being able to estimate the value of $T_0$.  For the example
+of paths starting between parallel planes $T_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
+\left(\frac{d_2-x_0}{B_+}\right)^2]$ where $d_1<x_0<d_2$.    
+
+In order to sample from this distribution, we must invert 
+\begin{equation}
+  r=(m-1) T_0^{m-1}\int_{T_0}^T dt\, t^{-m}
+\end{equation}
+where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
+This can be straightforwardly inverted 
+\begin{align}
+  r&=(m-1) T_0^{m-1}\frac{1}{m-1}\left(\frac{1}{T_0^{m-1}}-\frac{1}{T^{m-1}}\right)\\
+%  \left(\frac{T_0}{T}\right)^{m-1}&= (1-r)\\
+ T= \frac{T_0}{u^{1/(m-1)}}
+\end{align}
+we $u=1-r$ is also a uniform random number. 
+
+
+
+\subsubsection{Ensemble Average First-Touching Time}
+
+However for TM integrands this strategy is less useful, since the integrand turns on softly
+due to the presence of the TM potential.  In that case it is better to sample from a distribution
+that better reflects the behaviour of the ensemble.  A better distribution is 
+\begin{equation}
+  P(T;T_0,m) = \frac{T_0^{m-1}}{\Gamma[m-1] T^m}e^{-T_0/T},
+\end{equation}
+where $m>1$ and $T_0>0$.  In most cases of interest, $m=1+D/2$.  The exponential factor effectively models the finite touching 
+probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
+away in time $T$, $P_\text{touch}=e^{-2d^2/T}$.   This distribution can be used to sample times $T$
+even for TE integrands.  In that case however, it is possible the generated path will not
+touch all bodies and merely return zero.    
+
+The normalization factor is determined by
+\begin{align}
+   1&= \int_0^\infty dT e^{-T_0/T} T^{-m}\\
+%  &= \int_0^\infty ds\frac{1}{T_0} e^{-s}\left(\frac{T_0}{s}\right)^{-m+2}
+  &= \eta T_0^{-m+1}\int_0^\infty ds\, e^{-s}s^{m-2}\\
+ \implies \eta &= \frac{T_0^{m-1}}{\Gamma[m-1]}
+\end{align}
+where we changed variable to $s=T_0/T$, so $T=T_0/s$ and $ds=-T_0 dT/T^2$.  
+
+% In order to sample from this distribution, we must invert 
+% \begin{equation}
+%   r=\int_0^T dt e^{-T_0/t}t^{-m}
+% \end{equation}
+% where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
+
+In order to develop deviates we follow Devroye~\cite{Devroye2003}
+Note that $s=T_0/T$ has the form of a Gamma distribution, where the distribution for   
+\begin{equation}
+  f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
+\end{equation}
+We
+where $a>0$ and $b>0$ are the shape and scale parameters respectively.  
+A sum of Gamma deviates $\sum_{i=1}g_i$ with shape parameters $\gamma(a_i)$, is also a Gamma deviate
+with shape parameter $\sum a_i$ (pg 402 of Devroye).  
+In particular, this means the sum of $k$ exponential deviates $e_i=-\log(u_i)$, yields a Gamma 
+deviate gamma(k,1).  Furthermore if $z$ is normally distribed then $z^2/2$ obeys gamma$\left(\frac{1}{2},1\right)$.
+
+So for (low) integer powers 
+\begin{equation}
+  T\sim \frac{T_0}{-\sum_{i=1}^{m}\log u_i},
+\end{equation}
+while for half-integer powers, 
+\begin{equation}
+  T\sim \frac{T_0}{-\sum_{i=1}^{\text{floor}(m)}\log u_i+z^2/2}.
+\end{equation}
+We will be predominantly interested in $m=2$ and $m=3/2$ to account for zero temperature
+and non-zero temperature limits.  There are apparently better algorithms for moderate $m$,
+such as might be required in large derivatives (which I think is a waste of time).
+
 \subsection{Loop generation: TE}
 
 \subsubsection{TE}

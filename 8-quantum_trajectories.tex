@@ -3,7 +3,7 @@
 \section{Position Dependent measurement operators}
 
 \subsection{Initial Setup}
-\begin{itemize}
+\begin{enumerate}
   \item Atom emitting light.  Assume dipole transition.
   \item Assume atom driven by resonant probe beam, while trapped in far off-resonant
     dipole trap.  This aligns atomic dipoles in particular direction.  
@@ -79,9 +79,9 @@
   \item Can also consider mixing signal with local oscillator.  Amplifies signal considerably.
     Different unravelling (get dipole phase information instead of excited/ground state info)
 
-\end{itemize}
+\end{enumerate}
 \subsection{Adiabatic Elimination}
-\begin{itemize}
+\begin{enumerate}
   \item Adiabatically eliminate atoms internal state.  We assume that the 
     fluorescence occurs on a much faster time-scale than the atom's motion.  This 
     is the same logic used in developing the effective atomic-potential.  We assume that 
@@ -91,7 +91,7 @@
       V_{\text{dipole}}(x) = \frac{\vect{\Omega}_d(\vect{x})\cdot\vect{\Omega}^*_d(\vect{x})}{\Delta}
     \end{equation}
     Formally, can find Heisenberg equations of motion, and solve in ``steady-state''.
-    \begin{itemize}
+    \begin{enumerate}
       \item Input-output theory equations\cite{Gardiner1985, GardinerZoller2004}
         \begin{equation}
           da = -\frac{i}{\hbar}[a,H] -[a,c^\dag]\left(\frac{\gamma}{2}c + \sqrt{\gamma}b_{in}(t)\right)
@@ -131,7 +131,7 @@
         \end{align}
         
 
-    \end{itemize}
+    \end{enumerate}
     
 
     More justified approach, to integrate equations of motion, and solve approximately
@@ -141,9 +141,9 @@
     \end{equation}
 
 
-\end{itemize}
+\end{enumerate}
 \subsection{Effective Position Measurement}
-\begin{itemize}
+\begin{enumerate}
   \item No-conditioning
     \begin{equation}
       d\rho_{CM} = -i[H_{\text{eff}},\rho_{CM}]dt + \Gamma \int d\Omega_k\dec[|\vect{\Omega} e^{i\vect{k\cdot x}}] dt
@@ -166,13 +166,13 @@
     
 
 
-\end{itemize}
+\end{enumerate}
 
 
 
 \section{Zeno Effect and Strong Measurements}
 
-\begin{itemize}
+\begin{enumerate}
   \item Include figures/simulations showing reflection
   \item Discuss physics of two decay channels: reflection from re-emission into beams, inference from 
     detectin emitted photons.
@@ -181,11 +181,11 @@
     state is larger, so $d\langle p\rangle = 0$
   \item Cite work commenting on our work.  Moving beyond purely perturbative approach.  
   \item Figure: Reflection as function of $\chi$
-\end{itemize}
+\end{enumerate}
 
 \section{Trajectories for EMCCD cameras}
 
-\begin{itemize}
+\begin{enumerate}
   \item Handle noise, uncertainty by building model for measurement process
     including all relevant noise, loss mechanisms.  Build a full, pure 
     trajectory picture including random processes.
@@ -193,19 +193,19 @@
     with Bayesian statistics (re picture of evolution of quantum state). 
   \item Warzsawski and Wiseman modelling 2-level atom emitting light onto 
     APD.  Include dark counts, down-time, finite collection efficiency.
-\end{itemize}
+\end{enumerate}
 
 
 \subsection{EMCCD Amplification and Noise Processes}
 
-\begin{itemize}
+\begin{enumerate}
   \item Review of useful concepts from Jeremy Thorne's thesis.  
   \item Camera adds clock-induced charge at given Poissonian rate.
   \item Amplification process exponentially stretches out $n$ photons.
   \item Then Gaussian read-out noise.  
-\end{itemize}
+\end{enumerate}
 
-\begin{itemize}
+\begin{enumerate}
   \item In order to build quantum trajectories based on this, exploit Bayesian statistics
     to weight all trajectories.  
     \begin{equation}
@@ -217,7 +217,7 @@
     \end{equation}
   \item Furthermore, must trace over unobserved quantities, such as clock-induced 
     charge, spontaneous emission into free-space.  
-\end{itemize}
+\end{enumerate}
 
 
 

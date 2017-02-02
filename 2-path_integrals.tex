@@ -1,6 +1,6 @@
 \chapter{Path Integrals and Feynman-Kac formulae}
 \label{ch:feynman-kac}
-\begin{itemize}
+\begin{enumerate}
 \item Add complex amplitudes together.  Take modulus squared to get probabilities.  
 \item Feynman path integral construction of quantum mechanics- 
 to get amplitude to get from one position to another, add up \emph{all} possible paths,
@@ -10,7 +10,7 @@ to get amplitude to get from one position to another, add up \emph{all} possible
 \item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
    Can mathematically formulate a path integral as very high-dimensional integral.
   Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -49,7 +49,7 @@ to get amplitude to get from one position to another, add up \emph{all} possible
   %   In field theory offer simple way to quantize Gauge theory, and in statistical and financial 
   %   applications provide a natural way to connect the sample paths, 
     
-%\begin{itemize}
+%\begin{enumerate}
   % \item Path integral method is alternate formulation of quantum mechanics developed by 
   %   Feynman.  
   % \item Mathematical footing.  Kac
@@ -68,7 +68,7 @@ to get amplitude to get from one position to another, add up \emph{all} possible
 %     In addition, the same term is used to refer to particular solutions for given situation.
 %     We will typically employ the term in this second sense to refer to particular
 %     solutions corresponding to path integrals.  
-% \end{itemize}
+% \end{enumerate}
 
 \section{Derivation of Feynman-Kac formula }
 
@@ -204,7 +204,7 @@ term.  Also do the time arguments of $g$ work out?}
 
 
 \subsection{Path Integral without Source}
-\begin{itemize}
+\begin{enumerate}
   \item {Fokker-Planck Equation on Hilbert space.  }
   \item {Split operators into $N$ steps.  Baker-Campbell-Hausdorff}
   %   Then, do the usual path integral tricks:
@@ -243,7 +243,7 @@ term.  Also do the time arguments of $g$ work out?}
 
 % \subsection{Path Integral without Source}
 
-% \begin{itemize}
+% \begin{enumerate}
 %   \item {Integrating factor method for ODE.  (Interaction picture?)}
 %     Consider how to solve: 
 %     \begin{equation}
@@ -321,12 +321,12 @@ term.  Also do the time arguments of $g$ work out?}
   \item Also introduce path-average notation as time integral.
   \item Comment on subscripts denoting types of loops $\dlangle\cdots\drangle_{\vect{x}_0}$
 
-\end{itemize}
+\end{enumerate}
 
 
 \subsection{Solution method}
 
-\begin{itemize}
+\begin{enumerate}
   \item For actual solutions work in steady-state limit.  
   \item {Work with Laplace transform.  }
     Now let us consider steady state, for potentials $V(x,t) = V(x)$.
@@ -351,11 +351,11 @@ term.  Also do the time arguments of $g$ work out?}
     The overall procedure is the same, just the potential changes.
     Later we will have need of these results in our analytical calculations.  The planar open
     path results are essential for numerical techniques.      
-\end{itemize}
+\end{enumerate}
 
 \section{Sojourn Time and One Step Potential }
 
-\begin{itemize}
+\begin{enumerate}
   \item {Take $V=\chi\Theta[x-d]$.}
   \item Quote FPE, with potential.  Note source term for closed loops.  
     We start with a single step, $V = \chi\Theta[x-d]$.  We need to solve the following Fokker-Planck equation 
@@ -472,21 +472,21 @@ term.  Also do the time arguments of $g$ work out?}
     \end{align}
     where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
 
-\end{itemize}
+\end{enumerate}
 
 \subsection{Planar Dirichlet Conditions}
 
-\begin{itemize}
+\begin{enumerate}
   \item (Comment- important to get this correct and simple as this is the template?)
   \item Note connection to Gies work (they don't use this).    Note we will discuss this in
     accelerated convergence techniques.  
   \item Take delta function potential a distance $d$ away.  Use open loops.  
   \item Quote potential
-\end{itemize}
+\end{enumerate}
 
 \section{Two Step Potentials}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Take $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.}
     When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
     We will use exactly the same procedure as above, but with an extra step. 
@@ -546,11 +546,11 @@ term.  Also do the time arguments of $g$ work out?}
       & +\frac{u_1 e^{-2\sqrt{2\lambda}d} - u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})},
     \end{align}
     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
-\end{itemize}
+\end{enumerate}
 
 \section{Feynman-Kac formula for TM Potentials}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Note that TM potential has highly singular potential.  Must be regularized.}
   \item Smooth out contribution by analytically averaging over subpaths.
     In handling the TM case we will first have need to handle that singular potential.
@@ -576,11 +576,11 @@ term.  Also do the time arguments of $g$ work out?}
   \item Outline of next few sections.  Derive boundary conditions for regularized potential.  
   \item Derive Feynman-Kac formula between fixed end points.  Absolutely essential for numerical
     work.
-\end{itemize}
+\end{enumerate}
 
 \subsection{Transfer Layer Boundary conditions for TM Potential}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Quote regularized potential.  Note that it corresponds to exponential interpolation.}
     Here we will be trying to solve
     \begin{equation}
@@ -660,11 +660,11 @@ term.  Also do the time arguments of $g$ work out?}
     \end{align}
     \label{sec:TM boundary condition}
 
-\end{itemize}
+\end{enumerate}
 
 \subsection{Finding the Feynman-Kac formula}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Using above effective BC solve for Feynman-Kac eqn for open bridge.}
     \item Quote form of solution, and PDE it solves.  
     \item Note how to recover various cases by flipping signs etc.  
@@ -744,11 +744,11 @@ term.  Also do the time arguments of $g$ work out?}
       F_{d<0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} -e^{-\Xi/2}] = -\frac{e^\Xi - e^{-\Xi}}{e^\Xi + e^{-\Xi}}
     \end{align}
   \item Figure of TM potential.  Note connection to Neumann BC and reflection.  
-\end{itemize}
+\end{enumerate}
 
 \section{Single TM potential and Step}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Solve FK for TM potential plus step. }
   \item Quote form of solution, and PDE it solves
     Let's now find: 
@@ -797,12 +797,12 @@ term.  Also do the time arguments of $g$ work out?}
     \end{equation}
     where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
     The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
-\end{itemize}
+\end{enumerate}
 
 
 \section{Two TM Step Potentials}
 
-\begin{itemize}
+\begin{enumerate}
   \item {Quote full potential, and note boundary conditions.}
   \item Quote full potential, and PDE.
   \item Comment on how to handle other surface.
@@ -858,35 +858,35 @@ term.  Also do the time arguments of $g$ work out?}
     \end{align}
     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
   \item Comment on divergent parts cancelling out. 
-\end{itemize}
+\end{enumerate}
 
 % \section{Path Integral in Curved Space}
 
-% \begin{itemize}
+% \begin{enumerate}
 %   \item Path integral construction on metric-affine space is surprisingly complicated 
 %     and error-fraught.  
 %   \item Care is required in construction to get all terms.  
 %   \item Similar to multiplicative noise in SDE.
-% \end{itemize}
+% \end{enumerate}
 
-% \begin{itemize}
+% \begin{enumerate}
 %   \item Given analogy of a medium to a curved space. Cite Leonhardt, Gordon  
 %   \item Note general requirement for $\mu=\epsilon$.  Hard to achieve, especially broadband.
 %   \item Application to TM path integral with rescaling $\epsilon$.
-% \end{itemize}
+% \end{enumerate}
 
 % \subsection{Operators in Curved Space}
 
-% \begin{itemize}
+% \begin{enumerate}
 %   \item Quote Position Operator and inner product for spatial wavefunctions.
 %   \item Note only momentum operator consistent with that.
 %   \item Develop path integral
 %   \item Show it obeys the Schrodinger equation (Grosche's test)
-% \end{itemize}
+% \end{enumerate}
 
 % \subsection{Transformation}
 
-% \begin{itemize}
+% \begin{enumerate}
 %   \item Start with flat-space path integral.\cite{Gervais1976, Kleinert2012}
 %   \item Introduce coordinate transformation
 %   \item Choose expansion point, expand consistently to $\order(\Delta T)$.
@@ -896,7 +896,7 @@ term.  Also do the time arguments of $g$ work out?}
 %   \item Convert to terms involving curvature tensors.
 %   \item Simplify down to $1D$
 %   \item Note typically small value of quantum correction.  $\hbar^2$.
-% \end{itemize}
+% \end{enumerate}
 
 
 % \section{Operator Quantization in Curved Space}

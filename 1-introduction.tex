@@ -1,27 +1,33 @@
 \chapter{Introduction}
 
-%The story  I want to tell explains the Casimir force via its historical origins which serve to introduce the big results,
-% while sidestepping weird irrelevant bullshit.
-%  I want to hit the important context for modern scientists and emphasize quantities realted to current experiments.
-%  I also want to outline the currently available most powerful methods to set context for what else is possible,
-% and what its limitations are.  
-
-%I think I can do this with a partial historical introduction.
-
+%suggest some unity to two disparate projects.  
 Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
-the probabilities of events~\cite{Sakurai1994}\comment{Perhaps Peres?}.   
-This implies the results of quantum measurements are generally stochastic quantities which fluctuate.
-Furthermore, quantum fluctuations can lead to novel effects such as the Casimir effect, where
-electrically neutral material bodies are attracted to each other.  
-Through advances in modern experimental technology both of these categories of effect are now 
-directly observable~\cite{WisemanMilburn2010, Dalvit2011}.  
+the probabilities of events~\cite{Sakurai1994}.
+The probability for an event to occur is given by the Born rule, which says the probability is given by 
+the absolute-square of the probability amplitude for that event.  
+If there are multiple pathways by which an event can take place, the total amplitude for an event is 
+the sum over the amplitudes for each possible pathways~\cite{Feynman1965}.  
+These paths encompass paths through abstract spaces, such as the number of excitations in a field.
+In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
+which are referred to as quantum fluctuations.
+This sum over intermediate amplitudes can lead to novel quantum effects such as the Casimir effect,
+where electrically neutral, material bodies are attracted to each other due to the exchange of  virtual photons.
+%\comment{Perhaps Peres?}
 
-This thesis presents theoretical and computational work on two projects which are  
-connected by their quantum mechanical underpinning, the computational methods 
+Alternatively, the probabilistic nature of quantum mechanics implies that the results of quantum measurements 
+are stochastic quantities which fluctuate under repeated measurements.  
+This is particularly relevant as modern experiments can isolate single quantum systems for long 
+periods of time and continuously measure their properties.  One can then think of reconstructing
+the system's trajectory through time as it evolves based on the measurement~\cite{Carmichael1993}.  
+
+This thesis presents two projects reflecting each aspect of quantum fluctuations.  
+The projects are further connected by their quantum mechanical underpinning, the computational methods 
 employed to simulate stochastic processes, and their relevance to modern experiments on atoms.  
 The first project is a method of computing energies related to Casimir effect, while the second project is related to 
 continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
 to the first project, with the second project being discussed in the final chapter.  
+Through advances in modern experimental technology both of these categories of effect are now 
+directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
 
 % The first project relates to computing Casimir forces via the worldline method, and occupies the majority
 % of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
@@ -32,8 +38,8 @@ to the first project, with the second project being discussed in the final chapt
 % Both of these projects are related to fundamental quantum optical phenomena, 
 % that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
 
-The remainder of the introduction will expand on the history, physical origin, techniques and experimental 
-relevance for both Casimir effects, and quantum measurements.  
+The remainder of the introduction will expand on the physical origin, modern experiments, and theoretical
+techniques for computing both Casimir effects, and then continuous quantum measurements.  
 
 % \comment{There are two roles for the randomness here.
 %   From one point of view, the randomness is an intrinsic part of quantum mechanics,

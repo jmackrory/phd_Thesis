@@ -11,7 +11,7 @@ These paths encompass paths through abstract spaces, such as the number of excit
 In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
 which are referred to as quantum fluctuations.
 This sum over intermediate amplitudes can lead to novel quantum effects such as the Casimir effect,
-where electrically neutral, material bodies are attracted to each other due to the exchange of  virtual photons.
+where electrically neutral, material bodies are attracted to each other due to the exchange of virtual photons.
 %\comment{Perhaps Peres?}
 
 Alternatively, the probabilistic nature of quantum mechanics implies that the results of quantum measurements 
@@ -26,8 +26,10 @@ employed to simulate stochastic processes, and their relevance to modern experim
 The first project is a method of computing energies related to Casimir effect, while the second project is related to 
 continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
 to the first project, with the second project being discussed in the final chapter.  
-Through advances in modern experimental technology both of these categories of effect are now 
-directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
+The key results presented in this thesis have been published in~\cite{
+Mackrory2010, Mackrory2016,Mackrory2017a, Mackrory2017b}
+% Through advances in modern experimental technology both of these categories of effect are now 
+% directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
 
 % The first project relates to computing Casimir forces via the worldline method, and occupies the majority
 % of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
@@ -59,25 +61,45 @@ techniques for computing both Casimir effects, and then continuous quantum measu
 
 \section{Casimir Forces}% in general and physical interpretation}
 
-The Casimir force is an attractive force that arises between material bodies due to fluctuations in quantum fields
-that interact with the bodies.  It is intimately related to the van der Waals force, where 
-molecules with fluctuating dipole moments are attracted to one another.  Both forces can be attributed 
-to quantum fluctuations --- the Casimir force attributes the fluctuations to the fields, while
-the van der Waals force attributes the fluctuations to interacting dipoles that make up the bodies.  
-% This is another manifestation of the long running discussion in physics over the primacy of the fields or the particles
-% that comprise them.  
-This choice of viewpoint is something that will be reprised in more modern treatments of the Casimir effect.  
+The Casimir force is a primarily attractive force that arises between material bodies due to fluctuations in 
+quantum fields, where the interacting bodies can be individual atoms, or macroscopic bodies.  
+The most important example of the Casimir effect is due to fluctuations in the electromagnetic (EM) field, 
+where one can think of the electrons in a body emitting and absorbing virtual photons.  
+Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming.  
+This interpretation is intimately related to the van der Waals force, where 
+molecules with fluctuating dipole moments are attracted to one another.
 
-Over the last few decades there have been a numer of references written about Casimir and 
-van der Waals forces. 
-Recent book length surveys of the sweep of modern experiments and theory are given by Bordag~\etal\cite{Bordag2009}
-and the collection editted by Dalvit~\etal\cite{Dalvit2011}.
-In addition there are texts devoted to the theory, such as Milonni~\cite{Milonni1994} and Milton~\cite{Milton2001}
-where Milonni emphasizes clear calculations in quantum electrodynamics, whie Milton discusses
-emphasizes a more sophisticated Green function approach.
-While this thesis emphasizes simple physical applications,
-van der Waals forces are very important in surface physics and chemistry, which is discussed 
-in the books by Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
+The resulting attractive potential for bodies separated by a distance $d$, 
+follows a power-law with scaling varying between $d^{-2}--d^{-3}$ for macroscopic bodies, 
+and $d^{-6}--d^{-7}$ for atoms.  
+The Casimir effect is important at distances around the resonant
+wavelengths of the atom or medium, which are typically on the order of $1\mu$m.  
+The Casimir effect is typically computed in a long-wavelength limit where the bodies can be treated 
+as distinct from one another, or treat the material as being fixed.
+This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
+This approximation starts to break down for distances on the scale of the separation of the constituent atoms,
+which is around $1\mathrm{\AA}$.  In addition, beyond distances of around $10 \mu$m, the Casimir effect is too
+weak to detect.  
+
+For comparison, the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
+However, most bodies are electrically neutral and thus have no long-ranged Coulomb potential, whereas
+the Casimir effect applies even if the bodies have no net charge.
+
+Beyond their importance as manifestations of quantum field theory, Casimir effects are also 
+important to a range of modern experiments and developing technologies.  Some of these experiments 
+will be discussed further in Sec.~\ref{sec:expt_review}.  In order to describe these experiments,
+a number of theoretical and computational approaches have been developed.  The most important of
+these modern methods are the so-called ``scattering method'' and ``worldline methods''.
+To date, the scattering method is the only general purpose numerical method available for computing
+Casimir forces in arbitrary arrangements of bodies, while this thesis aims to expand upon the worldline method.  
+In Sec.~\ref{sec:numerical_review} we will briefly discuss these methods.  
+
+A number of references have been published discussing both experiments and theoretical developments,
+including the books by Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}, Bordag~\etal\cite{Bordag2009}, 
+and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
+While this thesis emphasizes simple physical applications, the application of Casimir or 
+van der Waals forces to problems in surface physics and chemistry, are discussed in the texts by 
+ Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
 
 % \begin{enumerate}
 % \item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
@@ -601,7 +623,7 @@ Although the Casimir force was explored by theorists before precision experiment
 the advent of precision experiments and new technologies has spurred developments in 
 theoretical and computational methods.
 While early work focused on highly symmetric geometries 
-of bodies such as parallel planar bodies~\cite{Casimir1948} or spheres~\cite{Boyer}, 
+of bodies such as parallel planar bodies~\cite{Casimir1948} or spheres~\cite{Boyer1968}, 
 current experiments require calculations for arbitrary shapes and arrangements of bodies, 
 which have realistic material properties.  
 This is a difficult task since the Casimir force is a broadband phenomenon, depending on the whole 
@@ -664,9 +686,6 @@ such as media with a strong magnetic response, or anisotropic media.
 % and functions as an order of magnitude estimate for the Casimir force.  In the limit
 % of vanishing curvature, the PFA converges to the correct Casimir force.  
 % \end{enumerate}
-
-\subsection{Green function methods}
-
 
 \subsection{Scattering Approach}
 
@@ -743,7 +762,7 @@ arbitrarily far apart, which acts to remove the energy from any self-interaction
 Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant requires $\order(N^3)$ operations
 \comment{N rows or N entries}.
-While it is possible to parallelize computing the determinant~\cite{Det-GPU}, 
+While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, 
 this is somewhat involved~\comment{barf}.
 However, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
 trivially parallelized.

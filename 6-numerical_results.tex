@@ -693,8 +693,8 @@ For the worldline path integrals the torque can be written as
 \section{Gradients for Worldline Casimir Energies}
 \label{sec:forces}
 Computing the derivatives of Casimir energies between macroscopic bodies requires a different
-set of methods since the Casimir energy~(\ref{eq:casimir_energy}) is found via an integral over all starting
-point of the path.  
+set of methods since the Casimir energy%~(\ref{eq:casimir_energy})
+ is found via an integral over all starting point of the path.  
 To compute the force, potential curvature and torque in this framework one must differentiate the worldline path integral
 with respect to the distances and angles between the bodies, rather than the starting point over the path.  
 % These  will yield general worldline expressions for the force, potential curvature, and torque.  
@@ -1104,9 +1104,39 @@ where
 In the strong-coupling limit, the potential curvature is dominated by terms with $n=m=0$,
 which correspond to paths that graze both bodies, while not entering either body.  
 
+\subsubsection{Numerical Implementation}
 
+The path integral for the potential curvature in the occupation numbers apporach requires paths 
+that are constrained by $\sigma_1(\vect{x}_j)$ and $\sigma_2(\vect{x}_k)$.  
+There are a couple approaches to take here.  First, we could generate paths and then retroactively
+find points close to the requisite surfaces, and perturb those paths such that the points do touch the 
+surface.  We would then sum over all possible combinations of the indices close to the surfaces.
+In this approach we would sample a position $x_0$, and then a time $\cT$.  Then we would find the 
+near-intersections, and sum the integral over perturbing these.  
 
+Alternatively,  we can enforce the touching constraint directly and make the paths touch the bodies by constructing
+paths which are fixed at steps $j$ and $k$ to touch the surface, and sum over all $j,k\in {1,N}$.  
+Evidently the direct approach will create many paths with small contributions, particular if $j-k \sim 1$.
+This can be made more efficient by exploiting the Gaussian factor as a probability distribution.
 
+In computing the energy the Gaussian is introduced for the purpose of importance sampling, and must
+be factored out.
+In this case, it is already manifest, and should be taken into account.  
+We would sample times from Eq.~\ref{eq:exp_T}, with 
+\begin{equation}
+  T_0 = \frac{N^2d^2}{2k(N-k)}
+\end{equation}
+where $k$ is the difference in indices at the crossing points.
+The result of using this is as our probability distribution is to factour out a normalization constant,
+which leaves the integrand as 
+\begin{equation}
+  c=\left(\frac{N^2d^2}{2k(N-k)}\right)^{-m+1}\frac{N}{2\pi \sqrt{k(N-k)}}
+    =\frac{2^{m-1}}{2\pi d^{2m-2}} [\frac{k(N-k)}{N^2}]^{m-3/2}
+\end{equation}
+where $m=1+D/2+1$, accounting for the path integral normalization and the Gaussian factors of $T$.  
+
+The $k$ values can be sampled via a lookup table.  For moderate $N$, this will be easily computed
+once for each process.  
 
 \section{Results}
     \subsection{Atom-Plates}

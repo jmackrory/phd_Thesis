@@ -9,11 +9,8 @@
 \item Need to study convergence effects carefully.  
 \end{enumerate}
 
-\section{Numerical Methods}
 
-
-
-\subsection{Monte-Carlo sampling}
+\section{Monte-Carlo sampling}
 
 \begin{enumerate}
 \item Need average over ensemble of paths.
@@ -40,11 +37,23 @@
 \end{enumerate}
 
 
-\subsection{Sampling Times}
+\section{Sampling Times}
 
 For a given discrete Brownian Bridge $\vect{x}_j$, there are a couple ways to sample the times.
+THe optimimal way to carry out samples
 
-\subsubsection{First-touching time}
+The rationale for also sampling over times is to allow further ensemble averaging over paths,
+and times.  The original Gies method emphasized computing the total $\cT$ integral for each path.
+For Dirichlet scalar world-lines, this was relatively tractable as it only requires finding the 
+set of times when paths enter the body.  The integrals can be carried out immediately.
+However, for the dielectric integrands we are using, the integrand must be re-evaluated for every time.
+A large amount of computational effort must be expended on even a single path.  Furthermore, at the end 
+of that effort one must still carry out a further ensemble average over paths.  
+However, are free to treat the integrals over the starting position $\vect{x}_0$ and times $\cT$ 
+in a Monte Carlo fashion as well.  This extends the number of independent paths we can average over, which 
+is essential for good convergence.   
+
+\subsection{First-touching time}
 
 The simplest method which applies to TE/sojourn integrands is to find the first-touching time, $T_0$
 when the renormalized integrand first takes on a non-zero value.  After that point $T_0$, the
@@ -72,17 +81,17 @@ This can be straightforwardly inverted
 \end{align}
 we $u=1-r$ is also a uniform random number. 
 
+\subsection{Ensemble Average First-Touching Time}
 
-
-\subsubsection{Ensemble Average First-Touching Time}
-
-However for TM integrands this strategy is less useful, since the integrand turns on softly
-due to the presence of the TM potential.  In that case it is better to sample from a distribution
-that better reflects the behaviour of the ensemble.  A better distribution is 
+However for integrands exploiting Feynman-Kac formulae, such as the TM integrand or 
+the improved Dirichlet integrand, this strategy is less useful, since the integrand turns on softly.
+In that case it is better to sample from a distribution
+that better reflects the behaviour of the ensemble.
+  A better distribution is 
 \begin{equation}
-  P(T;T_0,m) = \frac{T_0^{m-1}}{\Gamma[m-1] T^m}e^{-T_0/T},
+  P_{\text{exp-T}}(T;T_0,s) = \frac{T_0^{s-1}}{\Gamma[s-1] T^s}e^{-T_0/T}\label{eq:expT},
 \end{equation}
-where $m>1$ and $T_0>0$.  In most cases of interest, $m=1+D/2$.  The exponential factor effectively models the finite touching 
+where $s>1$ and $T_0>0$.  In most cases of interest, $s=1+D/2$.  The exponential factor effectively models the finite touching 
 probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
 away in time $T$, $P_\text{touch}=e^{-2d^2/T}$.   This distribution can be used to sample times $T$
 even for TE integrands.  In that case however, it is possible the generated path will not
@@ -90,10 +99,10 @@ touch all bodies and merely return zero.
 
 The normalization factor is determined by
 \begin{align}
-   1&= \int_0^\infty dT e^{-T_0/T} T^{-m}\\
-%  &= \int_0^\infty ds\frac{1}{T_0} e^{-s}\left(\frac{T_0}{s}\right)^{-m+2}
-  &= \eta T_0^{-m+1}\int_0^\infty ds\, e^{-s}s^{m-2}\\
- \implies \eta &= \frac{T_0^{m-1}}{\Gamma[m-1]}
+   1&= \int_0^\infty dT e^{-T_0/T} T^{-s}\\
+%  &= \int_0^\infty ds\frac{1}{T_0} e^{-s}\left(\frac{T_0}{s}\right)^{-s+2}
+  &= \eta T_0^{-s+1}\int_0^\infty d\tau\, e^{-\tau}\tau^{s-2}\\
+ \implies \eta &= \frac{T_0^{s-1}}{\Gamma[s-1]}
 \end{align}
 where we changed variable to $s=T_0/T$, so $T=T_0/s$ and $ds=-T_0 dT/T^2$.  
 
@@ -102,14 +111,18 @@ where we changed variable to $s=T_0/T$, so $T=T_0/s$ and $ds=-T_0 dT/T^2$.
 %   r=\int_0^T dt e^{-T_0/t}t^{-m}
 % \end{equation}
 % where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
-
-In order to develop deviates we follow Devroye~\cite{Devroye2003}
-Note that $s=T_0/T$ has the form of a Gamma distribution, where the distribution for   
+The probability distribution for $u=T_0/T$ is 
+\begin{equation}
+  P_{\text{exp}-1/T}(u;T0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}
+\end{equation}
+where we had to include $du/dT= -(T_0)/T^2=-1/(T_0u^2)$ for the change
+of measure.  
+Note that $u=T_0/T$ has the form of a Gamma distribution, where the distribution for   
 \begin{equation}
   f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
 \end{equation}
-We
 where $a>0$ and $b>0$ are the shape and scale parameters respectively.  
+In order to develop deviates we follow Devroye~\cite{Devroye2003}
 A sum of Gamma deviates $\sum_{i=1}g_i$ with shape parameters $\gamma(a_i)$, is also a Gamma deviate
 with shape parameter $\sum a_i$ (pg 402 of Devroye).  
 In particular, this means the sum of $k$ exponential deviates $e_i=-\log(u_i)$, yields a Gamma 
@@ -117,19 +130,19 @@ deviate gamma(k,1).  Furthermore if $z$ is normally distribed then $z^2/2$ obeys
 
 So for (low) integer powers 
 \begin{equation}
-  T\sim \frac{T_0}{-\sum_{i=1}^{m}\log u_i},
+  T\sim \frac{T_0}{-\sum_{i=1}^{s}\log u_i},
 \end{equation}
 while for half-integer powers, 
 \begin{equation}
-  T\sim \frac{T_0}{-\sum_{i=1}^{\text{floor}(m)}\log u_i+z^2/2}.
+  T\sim \frac{T_0}{-\sum_{i=1}^{\text{floor}(s)}\log u_i+z^2/2}.
 \end{equation}
-We will be predominantly interested in $m=2$ and $m=3/2$ to account for zero temperature
+We will be predominantly interested in $s=1+D/2$ and $m=3/2$ to account for zero temperature
 and non-zero temperature limits.  There are apparently better algorithms for moderate $m$,
-such as might be required in large derivatives (which I think is a waste of time).
+such as might be required in large derivatives.
 
-\subsection{Loop generation: TE}
+\section{Loop generation: TE}
 
-\subsubsection{TE}
+\subsection{TE}
 \begin{enumerate}
 \item Use v-loop algorithm from Gies.  Loops have Gaussian increments, and closed paths
 \item (Derivation for loops)
@@ -137,7 +150,7 @@ such as might be required in large derivatives (which I think is a waste of time
 \item Note connection to Brownian bridge SDE.  
 \end{enumerate}
 
-\subsubsection{TM}
+\subsection{TM}
 \begin{enumerate}
 \item TM potential must also be tracked along a given path.
 ( Explore the potential-only integrand to highlight the issues.)
@@ -158,7 +171,7 @@ inf the form of the normalizations.
 \item Figure: Histograms of normalization.
 \end{enumerate}
 
-\subsection{Gradient Estimation}
+\section{Gradient Estimation}
 
 \begin{enumerate}
   \item Need gradients to compute forces, torques from potential.  Also need it directly
@@ -188,7 +201,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     using the original paths.  
 
 
-\subsubsection{Finite Differences}
+\subsection{Finite Differences}
 
 \begin{enumerate}
   \item Simple to implement.  However, larger fluctuations, and biased. 
@@ -196,7 +209,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
   \item Need to balance choosing $N$, $ds$.  
 \end{enumerate}
 
-\subsubsection{Partial Averaging-Gaussian Paths}
+\subsection{Partial Averaging-Gaussian Paths}
 
 \begin{enumerate}
   \item Consider how to evaluate Gradients with respect to source point of Gaussian 
@@ -341,7 +354,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     \item Problem with adaptive choice?
 \end{enumerate}
 
-\subsubsection{General Method Near Surfaces}
+\subsection{General Method Near Surfaces}
 
      While estimating gradients for the stress-tensor it may be necessary to estimate 
     gradients while close to one surface.  For a renormalized energy, only loops that touch both
@@ -354,15 +367,12 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     where now the threshold is must balance the path wandering sufficiently far that a simple 
     approximation.
 
-
     For example, consider using the Feynman-Kac formula for open loops near a Dirichlet surface, 
     \begin{equation}
       \dlangle e^{-V_D(x-d)}\drangle_{x_{j}\rightarrow x_{j+1}} 
       = \theta[(x_j-d)(x_{j+1}-d)]\left(1-e^{-2(x_j-d)(x_{j+1}-d)/T}\right)
     \end{equation}
     
-
-
 
 \begin{enumerate}
   \item Gradients for atom
@@ -402,7 +412,7 @@ Then expanding these derivatives out (correct expression?)
 
 \end{enumerate}
 
-\subsubsection{Hermite-Gaussian Sampling}
+\subsection{Hermite-Gaussian Sampling}
 
 In order to apply the Hermite-Gaussian method to high order derivatives, it is best to 
 sample from the combined Hermite-Gaussian.  The simplest approach uses Gaussian samples, weighted
@@ -504,7 +514,7 @@ where $h' := h\sqrt{T_1/2}, z' := z\sqrt{\frac{T_1(T-2T_1)}{2T}}$.
   $h/\sqrt{2}$ naturally.  Again, he is treating $H_n(x)e^{-x^2}$ as the probability
   distribution.}
 
-\subsection{Pinning}
+\section{Pinning}
 
 Let's get the $\delta$-function manipulations correct.  
 If we have 
@@ -531,7 +541,7 @@ where we defined the normal vector field
     Any one point saturates the integrand.  Region of available, non-zero $T$ goes to zero.  
     Gies method of parameterizing first touching times directly addresses this.  
   
-  \subsubsection{Potential Curvature}
+  \subsection{Potential Curvature}
     The pinning idea can be extended to a higher derivatives.  
     For a dielectric describing two bodies, we can rewrite derivatives of path-averages using 
     \begin{equation}
@@ -580,7 +590,7 @@ For $d/T$ small, $[k(N-k)]^{-1/2}$ dominates,  While for $d/T\sim 1$ it's more d
 by $k(N-k)$, or a Gaussian.  
 Alternatively, subdivide the region into $N_s$ sub-samples, and uniformly sample from those.  
 
-\subsubsection{Torque}
+\subsection{Torque}
 
 A similar construction can be made to find the torque.  We will consider rotating 
 one of the bodies, an angle $\theta$ about an axis $\vect{n}$ relative to some reference configuration.
@@ -734,9 +744,9 @@ respectively, and $\vect{R}_j$ is the center of that body.
 %   \label{fig:spud_sketch}
 % \end{figure}
 
-\subsection{Pinning Paths to Surfaces}
+\section{Pinning Paths to Surfaces}
 \label{sec:path-pinning}
-\subsubsection{Force}
+\subsection{Force}
 The components of the force on a body can be found by differentiating the energy with respect to the center of that body.
 For example, the force on body $2$, in direction $\hat{x}_i$ is 
 found from the directional derivative of the spatial path integral~(\ref{eq:spatial_path_integral}) with respect to $R_{2,i}$,
@@ -783,7 +793,7 @@ To compute the force it is still necessary to integrate over times $\cT$, with w
 Since different sections of the surface interact with the other body at different times $\cT$, each section's
 contribution to the force will have differing weights, leading to an overall net force.
 
-\subsubsection{Gradient of the Force}
+\subsection{Gradient of the Force}
 This method can be easily extended to the second derivative of the worldline energy, which 
 computes the potential curvature.  
 \begin{equation}
@@ -832,7 +842,7 @@ where
 is the Gaussian normalization factor from fixing $\vect{x}_k$ after $k$ steps, and returning to $\vect{x}_0$
 in $N-k$ steps.  There is no need for any further renormalization, since this expression is only non-zero in the presence 
 of both bodies, and $\mathcal{G}$ exponentially cuts off terms at small $\cT$.    
-\subsubsection{Torque}
+\subsection{Torque}
 The torque on a body can be found from the first order variation in the energy as that body is
 infinitesimally rotated about some axis.  
 For concreteness, consider perturbing the dielectric by rotating the second body about its center
@@ -872,7 +882,7 @@ This has the intuitive interpretation of finding the total torque on the body by
 integrating over its surface and taking the cross-product of the vector from the body's center to a surface
 element with the force density at that surface element.  
 
-\subsubsection{Casimir--Polder Force}
+\subsection{Casimir--Polder Force}
 
 We briefly note that an alternative expression for the Casimir--Polder force on an atom near a surface
 can be found in analogy to the potential curvature in Eq.~(\ref{eq:potential_curvature}).
@@ -905,7 +915,7 @@ In which case after summing over all components the Casimir--Polder force is
 where we have reverted to using $\vect{x}(t)$ paths, 
 and have restored the $\cT$-integral and constants for comparison with earlier results.
 
-\subsection{Occupation Number}
+\section{Occupation Number}
 \label{sec:occupation}
 
 The preceding methods offer an intuitive picture of the Casimir force,
@@ -1087,7 +1097,7 @@ The torque path integral is
 % Only $n=m=0$ contributes in strong-coupling limits.  
 and the potential curvature is given by
 \begin{align}
-  C_{ij} =& \int d\vect{x}_0\biggdlangle 
+  C_{ij} =& \frac{\hbar c}{2(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0\biggdlangle 
   \sum_{j,k=0}^{N-1}\hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_j,\vect{x}_k,k-j)
   \nonumber\\
   &\hspace{1cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
@@ -1104,7 +1114,7 @@ where
 In the strong-coupling limit, the potential curvature is dominated by terms with $n=m=0$,
 which correspond to paths that graze both bodies, while not entering either body.  
 
-\subsubsection{Numerical Implementation}
+\subsection{Numerical Implementation for Potential Curvature}
 
 The path integral for the potential curvature in the occupation numbers apporach requires paths 
 that are constrained by $\sigma_1(\vect{x}_j)$ and $\sigma_2(\vect{x}_k)$.  
@@ -1120,23 +1130,64 @@ Evidently the direct approach will create many paths with small contributions, p
 This can be made more efficient by exploiting the Gaussian factor as a probability distribution.
 
 In computing the energy the Gaussian is introduced for the purpose of importance sampling, and must
-be factored out.
-In this case, it is already manifest, and should be taken into account.  
-We would sample times from Eq.~\ref{eq:exp_T}, with 
+be factored out.  In this case, the Gaussian factor is already manifest, and should be taken into account
+when sampling time.s   
+We would sample times from Eq.~\ref{eq:expT}, with 
 \begin{equation}
-  T_0 = \frac{N^2d^2}{2k(N-k)}
+  T_0 = \frac{N^2d^2}{2\Delta(N-\Delta)} \label{eq:T0_curvature}
 \end{equation}
-where $k$ is the difference in indices at the crossing points.
+where $\Delta$ is the difference in indices at the crossing points.
 The result of using this is as our probability distribution is to factour out a normalization constant,
 which leaves the integrand as 
 \begin{equation}
-  c=\left(\frac{N^2d^2}{2k(N-k)}\right)^{-m+1}\frac{N}{2\pi \sqrt{k(N-k)}}
-    =\frac{2^{m-1}}{2\pi d^{2m-2}} [\frac{k(N-k)}{N^2}]^{m-3/2}
+  c=\frac{N}{\sqrt{2\pi\Delta(N-\Delta)}}\Gamma(s-1)\bigg(\frac{N^2d^2}{2\Delta(N-\Delta)}\bigg)^{-s+1}
+    =\frac{2^{s-1}\Gamma(s-1)}{\sqrt{2\pi} d^{2s-2}}\bigg[\frac{\Delta(N-\Delta)}{N^2}\bigg]^{s-3/2}
 \end{equation}
-where $m=1+D/2+1$, accounting for the path integral normalization and the Gaussian factors of $T$.  
+where the exponent $s=1+(D+1)/2=7/2$ accounts for the path integral normalization and the Gaussian factors of $T$ at
+zero temperature.    
+The values for the difference between the pinning indices $\Delta$ are found by numerical root-finding, using bisection.
+The cumulative probability distribution for $\Delta$ is
+\begin{gather}
+ S_\Delta = \frac{1}{S_{N-1}}\sum_{j=1}^\Delta \bigg[\frac{j(N-j)}{N^2}\bigg]^{s-3/2}
+\end{gather}
+Given a uniform random number $u$, the corresponding index $\Delta$ must satisfy $S_{\Delta-1}<u<S_\Delta$.
+The difference $\Delta$ can be found by bisection and starting with estimates at $S_0$ and $S_{N-1}$.
+The final expression for the potential curvature is
+\begin{align}
+  C_{ij}%   =& \frac{\hbar c}{2(2\pi)^{D/2}}\sum_{j,\Delta>0}\int \frac{d\cT}{\cT^{1+D/2}}\biggdlangle \int d\vect{x}_0
+%   \frac{N^2e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
+%   &\times
+%    \hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_{k})
+%    \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+%    \biggdrangle_{\vect{x}(\cT);{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0}}\\
+% =& \frac{\hbar c}{2(2\pi)^{D/2}}\sum_{j}\int d\vect{x}_0\biggdlangle 
+% \frac{2^{s-1}\Gamma(s-1)S_{N-1}}{\sqrt{2\pi}|\vect{x}_j-\vect{x}_{j+\Delta}|^{2(s-1)}}
+%   \hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_{k})
+%   \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+%   \biggdrangle_{\Delta,\cT,\vect{x}(\cT);{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}},
+=& \frac{\hbar c}{2(2\pi)^{D/2}}\sum_{j}\int d\vect{x}_0\biggdlangle 
+\frac{3S_{N-1}}{|\vect{x}_j-\vect{x}_{j+\Delta}|^{5}}
+  \hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_{k})
+  \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+  \biggdrangle_{\Delta,\cT,\vect{x}(\cT);{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}},
+\end{align}
+where we have used $\dlangle \cdots\drangle_{y; C}$ to denote ensemble averaging over quantities 
+$y$ subject to possible constraints $C$.  The first pinning positions $j$ are uniformly sampled over,
+the second pinnings are sampled from $P_\Delta$ with $k=j+\Delta$, and the times are sampled from
+$P_{\text{exp-T}}(T;T_0,1+(D+1)/2)$, with $T_0$ given by Eq.~(\ref{eq:T0_curvature}).  
+The paths are still then constructed subject to the constraints of touching the bodies at the appropriate
+indices.  The remaining integrand is evaluated for the resulting paths.  
 
-The $k$ values can be sampled via a lookup table.  For moderate $N$, this will be easily computed
-once for each process.  
+We must distinguish between two facets of the different results.
+  One is the choice of starting paths, and the form of the integrand.  In either case, path-pinning
+or occupation, we are free to consider a single-path $\{B_j\}$ starting at $x_0$: $x_j=x_0+\sqrt{T}B_j$.
+The is also an associated family of paths starting at $x_0$ that translate the original Brownian path
+by $-\sqrt{T}B_k$: $x^k_j = x_0+\sqrt{T}(B_j-B_k)$.  This effectively changes which point on that bridge
+corresponds to zero.  
+This choice to average over which point on the path corresponds to zero is indepenent of the choice 
+of the integrand.  
+
+
 
 \section{Results}
     \subsection{Atom-Plates}

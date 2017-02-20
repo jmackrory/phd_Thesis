@@ -100,28 +100,26 @@ In Sec.~\ref{sec:numerical_review} we will briefly discuss these methods.
 
 At the outset, we note that there have been a number of books published on the subject of Casimir forces 
 in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
-well as the advent of new experiments forcing new theoretical methods.  
-Milonni's clear text on QED sets the Casimir force in context as one manifestation of the quantized theory of light~\cite{Milonni1994},
+well as the advent of new experiments which have spurred the development of new theoretical methods.  
+Milonni's clear text on QED sets the Casimir force in context as one manifestation of the quantized theory of light~\cite{Milonni1994}.
 while Milton's text emphasizes using Green function methods for computing a number of consequences for 
-the Casimir effect for various fields, dimensions~\cite{Milton2002}.  While these works discuss the theory, 
-there have also been the books in that discuss the state-of-the-art in both theory and experiments
-by practitioners in the volumes by Bordag~\etal\cite{Bordag2009}, 
+the Casimir effect for various fields, dimensions~\cite{Milton2001}.  There have been more recent
+where the state-of-the-art in both theory and experiments is discussed by practitioners --- 
+notably in the volumes by Bordag~\etal\cite{Bordag2009}, 
 and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
-\todo{Cite Vogel and Welsch.  Also cite Buhmann}
+\todo{Cite Vogel and Welsch~\cite{VogelWelsch2006}.  Also cite Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}}
 While this thesis emphasizes simple physical applications, the application of Casimir or 
-van der Waals forces is important to problems in surface physics and chemistry, are discussed in the texts by 
+van der Waals forces is also important to problems in surface physics and chemistry, as discussed in the texts by 
  Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
 
-% \begin{enumerate}
-% \item General references Cite Books - Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}.
-%   Bordag~\cite{Bordag2009}, Dalvit~\cite{Dalvit2011} recent developments.  
-% \item More general books on Casimir and van der Waals forces as they relate to chemistry, 
-%   Parsegian~\cite{Parsegian2006}, Israelachivili~\etal~\cite{Israelachvili2011}.
-% \end{enumerate}
+The references in the following sections are given to emphasize the important results and calculations
+and set the basic context for Casimir effects.   In addition we will often use these results 
+as checks in our later work.  Broader bibliographic surveys of the (vast) Casimir literature
+are available from Milton~\cite{Milton-bib} and Babb~\cite{Babb-bib}.
 
 \subsection{Atomic Forces}
 
-In his 1873 Ph.~D thesis  van der Waals found deviations from ideal gas behaviour~\cite{vanderWaals}.
+In his 1873 Ph.~D thesis van der Waals found deviations from ideal gas behaviour~\cite{vanderWaals}.
 These deviations can be understood as the atoms possessing a finite size, and experiencing forces between the gas atoms 
 --- this whole class of forces inter-molecular forces are now referred to as van der Waals forces.
 (A fuller account of the scientific history of these forces is discussed in Parsegian~\cite{Parsegian2006}).
@@ -150,19 +148,22 @@ which leads to an attractive potential for the atom,
   V_{CP}(d) =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
 \end{equation}
 where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alpha_0$ is the atom's static polarizability,
-and $\epsilon_0$ is the permittivty of free space.  Throughout this thesis we will refer to these
+and $\epsilon_0$ is the permittivity of free space.  Throughout this thesis we will refer to these
 atom-wall type forces as Casimir-Polder forces.  
 
+We can now present a schematic computation of the Casimir-Polder potential, with an emphasis 
+on the broad techniques, intuition, and connections to other computations~( The discussion here follows Steck~
+\S{9.3} of Ref.\cite{SteckNotes}).  
 This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
 \begin{equation}
-  H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}(\hat{\vect{x}})} + \frac{e^2}{2mc^2}
+  H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}}(\hat{\vect{x}}) + \frac{e^2}{2mc^2}
   |\hat{\vect{A}}(\hat{\vect{x}})|^2
 \end{equation}
 where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
 quantized operator for the EM vector potential at the atom's position $\vect{r}$.  \todo{Expand field operators
 $\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
-(This interaction can often treated instead with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
-these are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
+(This interaction can instead be treated with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
+these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
 To find a non-zero effect one must go to second-order in perturbation theory, which leads to an atomic
 energy shift to state $n$ of 
 \begin{equation}
@@ -171,6 +172,8 @@ energy shift to state $n$ of
 \end{equation}
 where $E_m$ are the atom's energy levels, the photon has energy $\hbar\omega_k$, 
 and $\langle E_n,1_\vect{k}\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$.
+The shift $V\subCP$ can be understood as two transitions - from the ground state with no photons to an excited state with one photon,
+and then transitioning back.  This is further summed over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:Feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
 is a ``virtual'' one, in that these intermediate states are not directly physically observable, 
@@ -203,58 +206,51 @@ field theory calculations where the modes are described by plane waves.
 }
 \label{fig:feynman_CP}
 \end{figure}
-  Fig.~\ref{fig:feynman_CP} represents the perturbation theory computation of 
-    Casimir-Polder shift.  Atom interacting with EM field emits and re-absorbs a photon.  
-    (See discussion in Steck~\cite{SteckNotes})
 
-The EM field and atomic parts can be split in two.  
-    To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
-    \begin{equation}
-      V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
-    \end{equation}
-    where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
-    tensor.  
-
+The Casimir-Polder energy shift can be split into a product of atomic and field pieces.  
+It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
+since on the imaginary frequency axis, most functions are smoothly decaying real functions.
+\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
 \begin{equation}
-  \nabla\times\nabla\times G(\vect{x},\vect{x'}) + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'})  = \delta_{ij}\delta(\vect{x-x'})
+  V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
 \end{equation}
-\item Energy expressions.  
+where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
+tensor~\cite{McLachlan1963, McLachlan1963a}.  The scattering part of the Green function essentially
+subtracts off the vacuum EM Green function $G^{(S)}=G-G^{(0)}$ --- this is essentially renormalizing the energy
+by subtracting off contributions that are independent of the bodies.  
+This has the same from as a linear-response calculation~\cite{Altland2011}, finding the linear-response of the 
+atom to it's interaction with the EM field.  In this case $\alpha_{ij}$ is the susceptibility of the 
+atom responding to perturbations in the EM field.  
+At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
+which satisfies
 \begin{equation}
-  E_{CP} = \int_0^\infty ds \alpha_{ij}(is,\vect{x})G^{(S)}_{ji}(is,\vect{x},\vect{x})
+  \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
+  + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
+  = \omega^2\delta_{ij}\delta(\vect{x-x'}).
 \end{equation}
-Focus on scattering part - renormalization.  $\alpha$ is atomic polarizability tensor,
- $G$ is electromagnetic Green tensor.  
  Evaluate at imaginary frequency. Note fully quantum theory, can account for atomic transitions.
-\item Definition of $\alpha$,$G$ in terms of eigenfunctions, field modes.  
 \begin{equation}
-  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}
+  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}.
 \end{equation}
 
+While we have only given the linear energy shift, there are a number of higher loop contributions
+which can be resummed analytically due to the relative simplicity of the expansion~\cite{Rosa2011}.  
+\todo{Cite Dzyaloshinksii or papers book for resummation?}
+The result of which is 
+\begin{equation}
+  V\subCP(\vect{r}) = \frac{\hbar c}{2\pi}\int_0^\infty ds \tr \log[I - \alpha(is) G^{(S)}(\vect{r},\vect{r})].
+\end{equation}
+\todo{Cite Barton?  Vogel/Welsch and students?}
+This method of computing Casimir--Polder energies via classical Green functions has been expanded upon
+in Ch. 7 of Milonni~\cite{Milonni1994}, Vogel and Welsch~\cite{VogelWelsch2006} and Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}.
 
-
-
-
-
-\begin{enumerate}
-  \item Ground state energy or zero point energy.  
-    Emphasizes boundary conditions and restricted spectrum of fluctuations.  
-  \item Atoms emitting and absorbing virtual photons.  
-  \item Feynman Diagram.  
-Atom-Wall
-
-
-\begin{enumerate}
-%\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
-\item Cite McLachlan~\cite{McLachlan1963}
-\item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
-\item Green tensor methods
-\item Cite Barton
-\item Cite Philbin(?)
-\item Cite Vogel and Welsch
-\item Green function equation
-\item Calculations correspond to given order of perturbation theory in QED hamiltonian.  
-\item Finite temperature.  
-\end{enumerate}
+% \begin{enumerate}
+% %\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
+% \item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
+% \item Green tensor methods
+% \item Cite Barton
+% \end{enumerate}
 
 \subsection{Forces between bodies: Casimir Energy}
 
@@ -277,7 +273,9 @@ The renormalized energy between the plates is
   E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
 \end{equation}
 where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
-and $d$ is the distance between the plates.  
+and $d$ is the distance between the plates.  Note that in this expression there is no
+mention of the material properties of the media --- this is an artifact of imposing Dirichlet
+boundary conditions on the surfaces.  
 
 \begin{figure}
 \center
@@ -287,13 +285,33 @@ and $d$ is the distance between the plates.
 \end{figure}
 
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
-In the limit of dilute bodies the Casimir-Polder results for interacting atoms are recovered.  
+The Casimir force between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
+separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
+\begin{align}
+\frac{F}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty d\xi \xi^3 \epsilon_3^{3/2}
+\int_1^\infty dp\,p^2\bigg[ 
+\frac{r\supTE_{13}r\supTE_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}{1 - r\supTE_{13}r\supTE_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}
++ \frac{r\supTM_{13}r\supTM_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}{1 - r\supTM_{13}r\supTM_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}\bigg],
+\end{align}
+where the electromagnetic reflection coefficients are given by 
+\begin{align}
+  r\supTE_{ij} & = \frac{s_i-s_j}{s_i+s_j}\\
+  r\supTM_{ij} & = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j}
+\end{align}
+where 
+\begin{equation}
+  s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
+\end{equation}
+following Zhou~\cite{Zhou1995}.
+
+The Casimir-Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
+$\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density.  
 This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 showed the connection between Casimir force and the pair-wise van der Waals potentials.  
 This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
 
-
- Wall-Wall Effective action.
+\begin{itemize}
+\item Wall-Wall Effective action.
 
 % \begin{figure}
 % \centering
@@ -332,7 +350,7 @@ This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.
 % \caption{Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media.}
 % \end{figure}
 
-\item Picture of Electrons interacting with EM field.
+ Picture of Electrons interacting with EM field.
   Effective action at some loop order in basic QED.
   Makes contact with fundamental physics.
   Can then make sense of limits in which we are operating.
@@ -341,17 +359,25 @@ This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.
   Amounts to $\order(\alpha_0^4)$ diagram for QED with electrons bound via nuclear potential.   (Again, very low energies).
 \item Assuming electrically neutral
 \item Far from atomic separations, so continuum approximation acceptable.
-\end{enumerate}
+\end{itemize}
+
+The theory can be extended to account for dispersion and finite temperature.  
+Some care is required in quantizing the electromagnetic field within dielectric media,
+since due to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
+The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
+and then trace out, or integrate out, the reservoir.
+It has been phenomenologically observed that one gets the correct answers by a direct substitution
+$\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated in~
+\cite{Barash1975,Rosa2010}.  
 
 
-
-% As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
-% the Lifshitz theory is a classical stochastic electrodynamics theory,
-% which attributes the fluctuations as thermal fluctuations of the medium.  
-% \comment{Does not fit at all}
-% In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
-% discuss the finite temperature effects, dissipation and the relation to the
-% microscopic details of the medium~\cite{Barash1975}.  
+As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
+the Lifshitz theory is a classical stochastic electrodynamics theory,
+which attributes the fluctuations as thermal fluctuations of the medium.  
+\comment{Does not fit at all}
+In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
+discuss the finite temperature effects, dissipation and the relation to the
+microscopic details of the medium~\cite{Barash1975}.  
 
 
 % This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
@@ -725,7 +751,7 @@ estimate for the Casimir force for arbitrary geometries.
  the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
 the sum of the pair-wise potential energies, the Casimir force for an arrangement
-of bodies is not just the sum of the pair-wise energies.\comment{Citation needed}  
+of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4} of \cite{Milonni1994})
 Finally, the PFA allows only for strictly attractive forces.  
 In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
 such as media with a strong magnetic response, or anisotropic media.

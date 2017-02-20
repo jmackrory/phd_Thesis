@@ -61,19 +61,23 @@ techniques for computing both Casimir effects, and then continuous quantum measu
 
 \section{Casimir Forces}% in general and physical interpretation}
 
-The Casimir force is a primarily attractive force that arises between material bodies due to fluctuations in 
-quantum fields, where the interacting bodies can be individual atoms, or macroscopic bodies.  
+The Casimir force is a primarily attractive force that arises between material bodies interacting via 
+quantized fields.
 The most important example of the Casimir effect is due to fluctuations in the electromagnetic (EM) field, 
-where one can think of the electrons in a body emitting and absorbing virtual photons.  
+where one can think of the electrons in a body emitting and absorbing virtual photons that can interact
+with other bodies.  The interacting bodies can be pairs of atoms, 
+macroscopic bodies such as metallic planes, or atoms and macrosopic bodies.
 Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming.  
 This interpretation is intimately related to the van der Waals force, where 
 molecules with fluctuating dipole moments are attracted to one another.
 
-The resulting attractive potential for bodies separated by a distance $d$, 
-follows a power-law with scaling varying between $d^{-2}--d^{-3}$ for macroscopic bodies, 
-and $d^{-6}--d^{-7}$ for atoms.  
+\todo{Seems to choppy - should expand on classic Casimir computation as an example.}
+
+The resulting attractive potential for bodies separated by a distance $d$ is a power law.
+For pairs of macroscopic bodies the energy scales as $d^{-2}--d^{-3}$ for macroscopic bodies, 
+while the energy scales as $d^{-6}--d^{-7}$ for pairs of atoms.  
 The Casimir effect is important at distances around the resonant
-wavelengths of the atom or medium, which are typically on the order of $1\mu$m.  
+wavelengths of the atom or medium, which are typically on the order of $1\mu$m for optical transitions.  
 The Casimir effect is typically computed in a long-wavelength limit where the bodies can be treated 
 as distinct from one another, or treat the material as being fixed.
 This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
@@ -94,11 +98,18 @@ To date, the scattering method is the only general purpose numerical method avai
 Casimir forces in arbitrary arrangements of bodies, while this thesis aims to expand upon the worldline method.  
 In Sec.~\ref{sec:numerical_review} we will briefly discuss these methods.  
 
-A number of references have been published discussing both experiments and theoretical developments,
-including the books by Milonni~\cite{Milonni1994}, Milton~\cite{Milton2001}, Bordag~\etal\cite{Bordag2009}, 
+At the outset, we note that there have been a number of books published on the subject of Casimir forces 
+in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
+well as the advent of new experiments forcing new theoretical methods.  
+Milonni's clear text on QED sets the Casimir force in context as one manifestation of the quantized theory of light~\cite{Milonni1994},
+while Milton's text emphasizes using Green function methods for computing a number of consequences for 
+the Casimir effect for various fields, dimensions~\cite{Milton2002}.  While these works discuss the theory, 
+there have also been the books in that discuss the state-of-the-art in both theory and experiments
+by practitioners in the volumes by Bordag~\etal\cite{Bordag2009}, 
 and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
+\todo{Cite Vogel and Welsch.  Also cite Buhmann}
 While this thesis emphasizes simple physical applications, the application of Casimir or 
-van der Waals forces to problems in surface physics and chemistry, are discussed in the texts by 
+van der Waals forces is important to problems in surface physics and chemistry, are discussed in the texts by 
  Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
 
 % \begin{enumerate}
@@ -108,31 +119,67 @@ van der Waals forces to problems in surface physics and chemistry, are discussed
 %   Parsegian~\cite{Parsegian2006}, Israelachivili~\etal~\cite{Israelachvili2011}.
 % \end{enumerate}
 
-\subsection{Atomic Forces: London, Casimir-Polder}
+\subsection{Atomic Forces}
 
-In 1930\comment{right year?} London computed the attractive potential between induced dipoles in electrically neutral
-atoms via quantum mechanical perturbation theory~\cite{London1930}.  The potential has a characteristic $r^{-6}$ scaling.
-In essence the fluctuating dipole generates a field which decays as $r^{-3}$.  This field induces another
-dipole in the other molecule.  The combined effect at the original atom scales as $(r^{-3})^2$.  
+In his 1873 Ph.~D thesis  van der Waals found deviations from ideal gas behaviour~\cite{vanderWaals}.
+These deviations can be understood as the atoms possessing a finite size, and experiencing forces between the gas atoms 
+--- this whole class of forces inter-molecular forces are now referred to as van der Waals forces.
+(A fuller account of the scientific history of these forces is discussed in Parsegian~\cite{Parsegian2006}).
+While a number of different inter-molecular forces due to permanant
+ or fluctuating electric dipoles are possible~\cite{Israelachvili2011},
+we are primarily interested in forces due to fluctuating dipoles.  
+This forces are typically referred to as London forces in honor of London's work
+ using quantum mechanics to compute the potential between atoms via perturbation theory~\cite{London1930}.  
+The potential has a characteristic $d^{-6}$ scaling.  As a heuristic argument, one can think of
+ the first fluctuating dipole generating an electric field which decays as $d^{-3}$.  This field induces another
+dipole in the other molecule.  The combined effect at the original atom scales as $(d^{-3})^2$.  
 
-In 1948 Casimir and Polder~\cite{CasimirPolder1948} extended this theory to using Quantum Electrodynamics
-(QED) to account for the retardation due to the finite speed of light.  They found that in the 
-far-field the interatomic potential decays more quickly, as $r^{-7}$.  The change in power law can be 
-attributed to the induced dipoles decorrelating, and having a weaker interaction.  Furthermore,
-they found an attractive force between an atom and perfectly conducting wall, with a $r^{-3}$ scaling
-in the near field (van der Waals) regime, passing over to $r^{-4}$ scaling in the far-field.    
-In this case, the atom feels an attractive potential to a surface a distance $d$ away,
+In 1948 Casimir and Polder extended this theory to using Quantum Electrodynamics
+(QED) to account for the retardation due to the finite speed of light~\cite{CasimirPolder1948}. 
+They found that in the far-field 
+(where the transition wavelengths $\omega_A$ exceed the separation of the atoms $d$, $d\gg c/\omega_A$)
+the interatomic potential decays more rapidly as $d^{-7}$.  The change in power law can be 
+attributed to the induced dipoles decorrelating over the time-of-flight of the virtual photon, 
+and thus having a weaker interaction.  
+\todo{Is this from Milonni?}
+Furthermore, they found an attractive force between an atom and perfectly conducting wall, with a $d^{-3}$ scaling
+in the near field (van der Waals) regime, passes over to $d^{-4}$ scaling in the far-field.
+In this case the atom can be thought of as interacting with it's image in the perfect conductor,   
+which leads to an attractive potential for the atom,
 \begin{equation}
-  V_{CP} =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
+  V_{CP}(d) =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
 \end{equation}
-where $\alpha_0$ is the atom's static polarizability.  
+where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alpha_0$ is the atom's static polarizability,
+and $\epsilon_0$ is the permittivty of free space.  Throughout this thesis we will refer to these
+atom-wall type forces as Casimir-Polder forces.  
 
-\begin{enumerate}
-  \item Ground state energy or zero point energy.  
-    Emphasizes boundary conditions and restricted spectrum of fluctuations.  
-  \item Atoms emitting and absorbing virtual photons.  
-  \item Feynman Diagram.  
-Atom-Wall
+This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
+\begin{equation}
+  H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}(\hat{\vect{x}})} + \frac{e^2}{2mc^2}
+  |\hat{\vect{A}}(\hat{\vect{x}})|^2
+\end{equation}
+where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
+quantized operator for the EM vector potential at the atom's position $\vect{r}$.  \todo{Expand field operators
+$\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
+(This interaction can often treated instead with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
+these are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
+To find a non-zero effect one must go to second-order in perturbation theory, which leads to an atomic
+energy shift to state $n$ of 
+\begin{equation}
+  V\subCP = \sum_{m\ne n,\vect{k}} \frac{
+    |\langle E_n, 0|  H_{int}|E_m, 1_{\vect{k}}\rangle\langle E_m, 1_{\vect{k}}|  H_{int}|E_n, 0\rangle}{E_n-E_m-\hbar\omega_k},
+\end{equation}
+where $E_m$ are the atom's energy levels, the photon has energy $\hbar\omega_k$, 
+and $\langle E_n,1_\vect{k}\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$.
+This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:Feynman_CP}, where 
+an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
+is a ``virtual'' one, in that these intermediate states are not directly physically observable, 
+but rather reflect the apparatus of quantum mechanical perturbation theory.
+Note also that the photon is emitted into a mode $k$, 
+where the allowed modes must satisfy the electromagnetic boundary conditions
+on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
+are then sensitive to the arrangements of the bodies.  This is distinct from the case in most 
+field theory calculations where the modes are described by plane waves.  
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
@@ -150,35 +197,24 @@ Atom-Wall
     \fmflabel{$\gamma$}{vt}
   \end{fmfgraph*}
 \end{fmffile}
-\caption{Feynman diagram representing an atom interacting with EM field via emitting and absorbing photons.  
-  The wavy line represents the EM Green function in the presence of boundaries --- as opposed to the usual plane 
-  waves exploiting in particle physics.  The atom is excited into intermediate states.}
+\caption{Feynman diagram representing an atom interacting with electromagnetic field via emitting and absorbing photons.  
+  The wavy line represents the electromagnetic Green function in the presence of boundaries --- as opposed to the usual plane 
+  waves exploiting in field theory computations.  The atom is excited into intermediate states.
+}
 \label{fig:feynman_CP}
 \end{figure}
-  \item Fig.~\ref{fig:feynman_CP} represents the perturbation theory computation of 
+  Fig.~\ref{fig:feynman_CP} represents the perturbation theory computation of 
     Casimir-Polder shift.  Atom interacting with EM field emits and re-absorbs a photon.  
     (See discussion in Steck~\cite{SteckNotes})
-    \begin{equation}
-      V_{CP} = \sum_{m,\vect{k}} \frac{|\langle E_n, 0|  H_{int}|E_m, 1\rangle|^2}{E_n-E_m-\hbar\omega_k}
-    \end{equation}
-    The EM field and atomic parts can be split in two.  
+
+The EM field and atomic parts can be split in two.  
     To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
     \begin{equation}
-      V_{CP}(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
+      V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
     \end{equation}
     where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
-    tensor.
+    tensor.  
 
-
-\begin{enumerate}
-%\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
-\item Cite McLachlan~\cite{McLachlan1963}
-\item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
-\item Green tensor methods
-\item Cite Barton
-\item Cite Philbin(?)
-\item Cite Vogel and Welsch
-\item Green function equation
 \begin{equation}
   \nabla\times\nabla\times G(\vect{x},\vect{x'}) + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'})  = \delta_{ij}\delta(\vect{x-x'})
 \end{equation}
@@ -193,11 +229,32 @@ Focus on scattering part - renormalization.  $\alpha$ is atomic polarizability t
 \begin{equation}
   \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}
 \end{equation}
+
+
+
+
+
+
+\begin{enumerate}
+  \item Ground state energy or zero point energy.  
+    Emphasizes boundary conditions and restricted spectrum of fluctuations.  
+  \item Atoms emitting and absorbing virtual photons.  
+  \item Feynman Diagram.  
+Atom-Wall
+
+
+\begin{enumerate}
+%\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
+\item Cite McLachlan~\cite{McLachlan1963}
+\item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
+\item Green tensor methods
+\item Cite Barton
+\item Cite Philbin(?)
+\item Cite Vogel and Welsch
+\item Green function equation
 \item Calculations correspond to given order of perturbation theory in QED hamiltonian.  
 \item Finite temperature.  
 \end{enumerate}
-
-
 
 \subsection{Forces between bodies: Casimir Energy}
 
@@ -291,10 +348,10 @@ This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.
 % As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
 % the Lifshitz theory is a classical stochastic electrodynamics theory,
 % which attributes the fluctuations as thermal fluctuations of the medium.  
-\comment{Does not fit at all}
-In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
-discuss the finite temperature effects, dissipation and the relation to the
-microscopic details of the medium~\cite{Barash1975}.  
+% \comment{Does not fit at all}
+% In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
+% discuss the finite temperature effects, dissipation and the relation to the
+% microscopic details of the medium~\cite{Barash1975}.  
 
 
 % This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
@@ -874,12 +931,6 @@ and $\langle\cdots\rangle$ denotes the average of a quantity around the loop.
   \item parallelizable.  Computation time scales as one /resources.  
   \end{enumerate}
 
-\item Shortcomings
-\begin{enumerate}
-  \item A scalar, not vector electromagnetism.
-  \item Idealized boundary conditions.  
-\end{enumerate}
-  
 \end{enumerate}
 
 
@@ -1107,6 +1158,14 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
   \item No coupling of photons to medium.
   \item A scalar, not vector electromagnetism.
 \end{enumerate}
+
+\item Shortcomings
+\begin{enumerate}
+  \item A scalar, not vector electromagnetism.
+  \item Idealized boundary conditions.  
+\end{enumerate}
+  
+
   
 \end{enumerate}
 
@@ -1129,10 +1188,6 @@ $|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^
 \section{Continuous Quantum Measurements}
 
 Describe open quantum systems, and include information from continuous measurements. 
-\begin{enumerate}
-  \item 
-\end{enumerate}
-
 
 \subsection{Quantum Trajectories}
 

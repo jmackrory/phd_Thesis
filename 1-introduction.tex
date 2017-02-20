@@ -302,64 +302,35 @@ where
 \begin{equation}
   s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
 \end{equation}
-following Zhou~\cite{Zhou1995}.
+following Zhou~\cite{Zhou1995}.  As intimidating as this expression is, it can be heuristically derived with
+relative ease via the ``argument principle''~\cite{vanKampen1968, Zhou1995}.
+\begin{itemize}
+  \item $E = \sum_k\frac{\hbar \omega_k}{2}$
+  \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
+  \item Only allowed modes contribute.  
+    Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
+    $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
+  \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
+    $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
+  \item So energy can be written as 
+    \begin{equation}
+      E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
+    \end{equation}
+    where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$.
+  \item Now integrate by parts w.r.t. $z$
+    \begin{equation}
+      E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
+    \end{equation}
+  \item Now differentiate w.r.t $d$ to get force, and done.  
+\end{itemize}
+(Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
+in scattering formalism})
 
 The Casimir-Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density.  
 This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 showed the connection between Casimir force and the pair-wise van der Waals potentials.  
 This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
-
-\begin{itemize}
-\item Wall-Wall Effective action.
-
-% \begin{figure}
-% \centering
-% \begin{fmffile}{wall-wall}
-% \begin{fmfgraph}(50,30)
-%  \fmftop{t0,t1,t2,t3}
-%  \fmfbottom{b0,b1,b2,b3}
-%  \fmf{fermion,tension=0.5}{t1,v1}
-%  \fmf{fermion,tension=0.5}{t2,v3}
-%  \fmf{fermion,tension=0.5}{b1,v2}
-%  \fmf{fermion,tension=0.5}{b2,v4}
-%  \fmffreeze
-% \fmf{photon,tension=0}{v1,v3}
-% \fmf{photon,tension=0}{v2,v4}
-% \fmf{fermion,tension=0}{v1,v2}
-% %\fmf{fermion,tension=0,left}{v2,v1}
-% \fmf{fermion,tension=0}{v3,v4}
-% %\fmf{fermion,tension=0,right}{v4,v3}
-% \end{fmfgraph}
-% \begin{fmfgraph}(50,30)
-%  \fmftop{t0,t1,t2,t3}
-%  \fmfbottom{b0,b1,b2,b3}
-%  \fmf{phantom}{t1,v1}
-%  \fmf{phantom}{t2,v3}
-%  \fmf{phantom}{b1,v2}
-%  \fmf{phantom}{b2,v4}
-%  \fmffreeze
-% \fmf{photon}{v1,v3}
-% \fmf{photon}{v2,v4}
-% \fmf{fermion,tension=0}{v1,v2}
-% \fmf{fermion,tension=0,left}{v2,v1}
-% \fmf{fermion,tension=0}{v3,v4}
-% \fmf{fermion,tension=0,right}{v4,v3}
-% \end{fmfgraph}
-% \end{fmffile}
-% \caption{Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media.}
-% \end{figure}
-
- Picture of Electrons interacting with EM field.
-  Effective action at some loop order in basic QED.
-  Makes contact with fundamental physics.
-  Can then make sense of limits in which we are operating.
-  Doing perturbation theory on QED.
-  $\epsilon$ is linear response of medium to EM field, and working to leading order in $\epsilon$.
-  Amounts to $\order(\alpha_0^4)$ diagram for QED with electrons bound via nuclear potential.   (Again, very low energies).
-\item Assuming electrically neutral
-\item Far from atomic separations, so continuum approximation acceptable.
-\end{itemize}
 
 The theory can be extended to account for dispersion and finite temperature.  
 Some care is required in quantizing the electromagnetic field within dielectric media,
@@ -368,26 +339,16 @@ The usual approach to open-systems in quantum mechanics is to couple the system 
 and then trace out, or integrate out, the reservoir.
 It has been phenomenologically observed that one gets the correct answers by a direct substitution
 $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated in~
-\cite{Barash1975,Rosa2010}.  
+\cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
+and relation to the microscopic details of the medium.   
 
-
-As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
-the Lifshitz theory is a classical stochastic electrodynamics theory,
-which attributes the fluctuations as thermal fluctuations of the medium.  
-\comment{Does not fit at all}
-In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
-discuss the finite temperature effects, dissipation and the relation to the
-microscopic details of the medium~\cite{Barash1975}.  
-
-
-% This example calculation is also carried out in the initial chapters of Ref.s~\cite{Milton2001,Bordag2009,Dalvit2011}.
-
-% As QED calculation, the Casimir energy is formally divergent and must be renormalized in order to
-% make physical predictions. 
-%  In our case, we typically energy differences when one of the bodies is 
-% removed to spatial infinity.
-%   In some cases, like spheres the renormalization must be carried out more carefully.  
-%   In those cases, the formally infinite parameters renormalize the physical parameters of the model~\cite{Milton2001}.  
+% As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
+% the Lifshitz theory is a classical stochastic electrodynamics theory,
+% which attributes the fluctuations as thermal fluctuations of the medium.  
+% \comment{Does not fit at all}
+% In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
+% discuss the finite temperature effects, dissipation and the relation to the
+% microscopic details of the medium~\cite{Barash1975}.  
 
 \subsection{Physical Interpretation}
 
@@ -419,15 +380,69 @@ larger than the distances between the constituent particles comprising the bodie
 the bodies as composite objects described by their bulk properties.    
 
 
-\begin{enumerate}
-  \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
-    van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
-    Atom/Bodies emitting and re-absorbing virtual photons.  
-  \item Zero-point energy.  
-  % \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
-  %   interacting with matter.
-  % \item Emphasizes connection to underlying physics.  
-\end{enumerate}
+
+\begin{itemize}
+\item Wall-Wall Effective action.
+
+%  \begin{figure}
+%  \centering
+% % \begin{fmffile}{wall-wall}
+% % \begin{fmfgraph}(50,30)
+% %  \fmftop{t0,t1,t2,t3}
+% %  \fmfbottom{b0,b1,b2,b3}
+% %  \fmf{fermion,tension=0.5}{t1,v1}
+% %  \fmf{fermion,tension=0.5}{t2,v3}
+% %  \fmf{fermion,tension=0.5}{b1,v2}
+% %  \fmf{fermion,tension=0.5}{b2,v4}
+% %  \fmffreeze
+% % \fmf{photon,tension=0}{v1,v3}
+% % \fmf{photon,tension=0}{v2,v4}
+% % \fmf{fermion,tension=0}{v1,v2}
+% % %\fmf{fermion,tension=0,left}{v2,v1}
+% % \fmf{fermion,tension=0}{v3,v4}
+% % %\fmf{fermion,tension=0,right}{v4,v3}
+% % \end{fmfgraph}
+% \begin{fmfgraph}(50,30)
+%  \fmftop{t0,t1,t2,t3}
+%  \fmfbottom{b0,b1,b2,b3}
+%  \fmf{phantom}{t1,v1}
+%  \fmf{phantom}{t2,v3}
+%  \fmf{phantom}{b1,v2}
+%  \fmf{phantom}{b2,v4}
+%  \fmffreeze
+% \fmf{photon}{v1,v3}
+% \fmf{photon}{v2,v4}
+% \fmf{fermion,tension=0}{v1,v2}
+% \fmf{fermion,tension=0,left}{v2,v1}
+% \fmf{fermion,tension=0}{v3,v4}
+% \fmf{fermion,tension=0,right}{v4,v3}
+% \end{fmfgraph}
+% \end{fmffile}
+% \caption{Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media.}
+% \end{figure}
+
+ Picture of Electrons interacting with EM field.
+  Effective action at some loop order in basic QED.
+  Makes contact with fundamental physics.
+  Can then make sense of limits in which we are operating.
+  Doing perturbation theory on QED.
+  $\epsilon$ is linear response of medium to EM field, and working to leading order in $\epsilon$.
+  Amounts to $\order(\alpha_0^4)$ diagram for QED with electrons bound via nuclear potential.   (Again, very low energies).
+\item Assuming electrically neutral
+\item Far from atomic separations, so continuum approximation acceptable.
+\end{itemize}
+
+
+
+% \begin{enumerate}
+%   \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
+%     van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
+%     Atom/Bodies emitting and re-absorbing virtual photons.  
+%   \item Zero-point energy.  
+%   % \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
+%   %   interacting with matter.
+%   % \item Emphasizes connection to underlying physics.  
+% \end{enumerate}
 
 \subsection{Distance and Energy Scales}
 
@@ -444,10 +459,10 @@ resonances of the medium, and the thermal wavelength.
   So the Casimir force is typically then important at distances below the
  transition wavelength which is usually around $1\mu m$.    
 
-\item Considering long-wavelength approximation to medium.  Typically interested in forces
-    on the micron-nanometer scale.  Above a few microns the force is too small to observe,
-    while below a nanometer the forces are too strong to reliably isolate the atom 
-    and the continuum approximation starts to break down.  
+% \item Considering long-wavelength approximation to medium.  Typically interested in forces
+%     on the micron-nanometer scale.  Above a few microns the force is too small to observe,
+%     while below a nanometer the forces are too strong to reliably isolate the atom 
+%     and the continuum approximation starts to break down.  
 
 \item The typical energy scale can also be estimated.
   If we consider an atom with a static polarizability of 
@@ -1095,27 +1110,6 @@ with the lattice also having a finite extent which bounds all bodies.  We will t
 arbitrarily large volume, and lattice resolution at the end.  The gradient operators 
 can be treated via their finite difference approximations, which can be thought of as sparse matrices.  
 
-% For a single real Gaussian integral, one can evaluate it as
-% \begin{equation}
-%   I_1=\int dx e^{-\alpha x^2} =\sqrt{\frac{\pi}{\alpha}}.
-% \end{equation}
-% Let us now consider the multidimensional Gaussian integral
-% \begin{equation}
-%   I_2=\int \prod_{j=1}^Ndx_j e^{-\vect{x}^T A \vect{x}},
-% \end{equation}    
-% where there is an implicit sum over $i,j$, and $A$ is a positive matrix, i.e. all of $A$'s eigenvalues $\alpha_j$ 
-% are positive.
-%     The Gaussian integral can be readily evaluated by changing integration variables $\vect{x}$ to the amplitudes of the 
-%     eigenvectors of $A$, $\vect{y}$ via an orthogonal transformation $O$,
-%     \begin{equation}
-%       \vect{x} = O\vect{y}.
-%     \end{equation}
-%     The Gaussian integral can be evaluated as
-%     \begin{equation}
-%       I_2 = \int \prod_{j=1}^N dy_j e^{-\alpha_jy_j^2} \propto \left[ \prod_{j=1}^N\alpha_j \right]^{-1/2}
-%       = {\det}^{-1/2} A.
-%     \end{equation}
-%     \comment{(Cite Srednicki or Brown for their chapter on Gaussian integrals)}
 In an analogous fashion, one can formally evaluate the partition function path integral as a 
 functional determinant, 
 \begin{equation}
@@ -1169,46 +1163,45 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
 \end{enumerate}
 
     \section{Numerical method}
+
+
     \section{Deficiencies of the scalar method}
 \begin{enumerate}
-\item Cite Schaden applying to pistons\cite{Schaden2009}
-\item Figure showing loops.  
-\item Advantages
-  \begin{enumerate}
-  \item Algorithm is geometry independent, and no spatial grid.
-  \item Parallelizable.  Computation time scales as inversely with resources.  
-  \end{enumerate}
+  \item Cite Schaden applying to pistons\cite{Schaden2009}
+  \item Figure showing loops.  
+  \item Advantages
+    \begin{enumerate}
+      \item Algorithm is geometry independent, and no spatial grid.
+      \item Parallelizable.  Computation time scales as inversely with resources.  
+    \end{enumerate}
 
-\item Shortcomings
-\begin{enumerate}
-  \item No coupling of photons to medium.
-  \item A scalar, not vector electromagnetism.
-\end{enumerate}
+  \item Shortcomings
+    \begin{enumerate}
+      \item No coupling of photons to medium.
+      \item A scalar, not vector electromagnetism.
+    \end{enumerate}
 
-\item Shortcomings
-\begin{enumerate}
-  \item A scalar, not vector electromagnetism.
-  \item Idealized boundary conditions.  
-\end{enumerate}
-  
-
+  \item Shortcomings
+    \begin{enumerate}
+      \item A scalar, not vector electromagnetism.
+      \item Idealized boundary conditions.  
+    \end{enumerate}
   
 \end{enumerate}
 
-
-\begin{shaded}
-  The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
-  This follows either from Hormander's argument, that 
-  \begin{equation}
-    \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
-  \end{equation}
-where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and 
-$|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.
-  In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.
-  If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.
-  If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
-\footnote{See pages 826-828 of Dan's notes.}
-\end{shaded}
+% \begin{shaded}
+%   The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
+%   This follows either from Hormander's argument, that 
+%   \begin{equation}
+%     \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
+%   \end{equation}
+% where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and 
+% $|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.
+%   In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.
+%   If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.
+%   If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
+% \footnote{See pages 826-828 of Dan's notes.}
+% \end{shaded}
 
 
 \section{Continuous Quantum Measurements}

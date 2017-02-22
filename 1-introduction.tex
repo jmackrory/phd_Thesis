@@ -854,12 +854,14 @@ elements via the homogenous EM green function,
 \begin{equation}
   M_{ab} = \int dx dy f_a(x) G_{ab}(x,y)f_b(y).
 \end{equation}
+\comment{Given general form, noting E/M coupling.  Also multiple bodies.  Renormalization kills
+self-energy terms}
 The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy as the bodies are 
 arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
 
 Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant requires $\order(N^3)$ operations
-\comment{N rows or N entries}.
+\comment{N rows or N entries?}.
 While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, 
 this is somewhat involved~\comment{barf}.
 However, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
@@ -888,43 +890,43 @@ for Casimir energies, such as plane-plane and sphere-plane energies.
 \section{Scalar Worldline Casimir Energies}
 
 The worldline method is an alternative method for computing Casimir energies.
-  The worldline method was initially developed as an alternative method for 
-carrying out QFT calculations in terms of particle 
-mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.
-  In particular the quantum effective actions can be computed in terms of
- the suitable dynamics of a quantum particle.
-\comment{Other references - was one contemporaneous with Strassler? Bern-Kosower}
-
-The basic insight is that for one loop effective actions, 
+The worldline method is a descendent of the scalar electrodynamics 
+Feynman explored~\cite{Feynman1950}, where the effect of a quantum
+field is described by summing over the paths of a particle interacting with the other bodies. 
+\comment{Check!}
+The worldline method was later developed as an alternative method for 
+carrying out general quantum field theory calculations in terms of quantum particle 
+mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  
+The worldline method is heavily based on Feynman's path-integral method, where the amplitude
+for a particle to move from one position to another is the sum over all paths between the positions,
+where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
+The basic insight of the worldline method is that for one-loop effective actions, 
 the field path integral calculation can be recast in terms of the particle path
- integral for particles travelling in closed space-time loops.
-  This is quite similar to the scalar electrodynamics Feynman explored
- in his Ph.D thesis~\cite{Feynman1942, Brown2005}
-\comment{Seems to actually be his 1950 QED paper RE Schubert2001}.
+ integral for particles travelling in closed space-time loops or paths.
   Higher order loop calculations can also be carried out with more particles, 
 and gauge fields can also be treated~\cite{Schubert2001}.
   For example, the worldline method has been used to compute relativistic
- field effects for QED such as the Lamb shift~\cite{Schmidt1995}, and as a numerical algorithm~\cite{Mazur2014}.
-
-The worldline method is heavily based on Feynman's path integral method~\cite{Feynman1948,Feynman1965}.
+ field effects for quantum electrodynamics (QED) such as the Lamb shift~\cite{Schmidt1995},
+ and as a numerical algorithm~\cite{Mazur2014}.
 
 Our primary interest in the worldline method is for computing Casimir energies, 
 which was first used to compute scalar Casimir energies by Gies~\etal~\cite{Gies2003,Gies2006, Gies2006a}.
- While the initial work focused on the zero temperature limit, 
-the worldline method has also been extended to finite temperatures~\cite{Klingmueller2008}.
-  This has also been used to study the torsion of inclined planes~\cite{Weber2009},
- and planes and spheres and planes and cylinders~\cite{Weber2010, Weber2010a}.  
+The scalar worldline method has been extended to finite temperatures~\cite{Klingmueller2008},
+and used to study the torsion of inclined planes~\cite{Weber2009},
+and forces in the sphere-plane and cylinder-plane geometries~\cite{Weber2010, Weber2010a}.  
+The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
+based on the geometry of the piston~\cite{Schaden2012}.
 
-% We will briefly introduce the method here, and discuss the method at 
-% length in Ch.~\ref{ch:scalar_worldlines}.  
-Let the action for the scalar field be given by 
+We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
+Consider a scalar field $\phi(vect{r},t)$ interacting with a background potential $V(\vect{r},t)$.  
+The action for the field $\phi$ is given by 
 \begin{equation}
-  S = \int_0^T dt \int d^3x \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{x},t)\phi^2\right],
+  S = \int_0^T dt \int d^{D-1}\vect{r} \left[ (\partial_t\phi)^2-(\nabla\phi)^2-V(\vect{r},t)\phi^2\right],
 \end{equation}
-where $V(\vect{x},t)$ defines the surfaces of the objects we wish to compute
+where $V(\vect{r},t)$ defines the surfaces of the objects we wish to compute
  the Casimir energy between.
-  The potential is typically chosen to be $V(\vect{x},t)=\lambda\delta[\sigma(\vect{x})]$,
- where $\sigma(\vect{x})=0$ defines the surfaces.
+  The potential is typically chosen to be $V(\vect{r},t)=\lambda\delta[\sigma(\vect{r})]$,
+ where $\sigma(\vect{r})=0$ defines the surfaces.
   In the limit $\lambda\rightarrow\infty$ the potential enforces Dirichlet boundary conditions 
   on the surfaces of the bodies.  In certain geometries this recovers electromagnetic 
 results assuming the surfaces are idealized perfect conductors.  
@@ -932,8 +934,8 @@ results assuming the surfaces are idealized perfect conductors.
 We can compute the partition function for the field by Wick rotating to
  imaginary time (or finite temperature), where the partition function is now given by 
 \begin{equation}
-  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3x 
-    \left[(\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{x},t)\phi^2\right]\right\},
+  Z = \int D\phi \exp\left\{-\int_0^T dt \int d^3r 
+    \left[(\partial_t\phi)^2+(\nabla\phi)^2+V(\vect{r},t)\phi^2\right]\right\},
 \end{equation}
 The Gaussian integration over fields can be formally carried out as a functional determinant.
   In order to compute the energy we need the logarithm of the partition function,

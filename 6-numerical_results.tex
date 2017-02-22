@@ -514,335 +514,215 @@ where $h' := h\sqrt{T_1/2}, z' := z\sqrt{\frac{T_1(T-2T_1)}{2T}}$.
   $h/\sqrt{2}$ naturally.  Again, he is treating $H_n(x)e^{-x^2}$ as the probability
   distribution.}
 
-\section{Pinning}
-
-Let's get the $\delta$-function manipulations correct.  
-If we have 
-\begin{equation}
-  \int d^dx \delta(f(\vect{x}))g(\vect{x}) = \int\limits_{f^{-1}=0} d^{d-1}S \frac{1}{|\nabla f(\vect{S})|}g(\vect{x})
-\end{equation}
-where we split $\vect{x}$ into a surface normal, and tangent integrals, using
-coordinates, $\vect{x}=(f,\vect{S})$, where $\vect{S}$ is $(d-1)$-dimensional, and $|\nabla f|$ using the vector norm.  
-Now using the delta-function to limit the integration to lie on the surface we find 
-\begin{align}
-  F_{2,i}&=\frac{\hbar c a}{8\pi^2}\int \frac{dT}{T^3}\int\limits_{S_2} d^{d-1}\vect{x}_0 
-\biggdlangle \frac{\chi_2\hat{R_i}\cdot\hat{n}_2}{\langle\epsr\rangle^{\alpha+1}}\biggdrangle
-\end{align}
-where we defined the normal vector field
-\begin{equation}
-  n_2 = \frac{-\nabla f_2}{|\nabla f_2|}.
-\end{equation}
-
-   Can treat delta-functions as pinning for Brownian bridges.  Then integrate over times.
-   Consider only paths starting on one surface (thus potential must be smooth/regular).
-    Convergence issues: For $\chi/N\gg 1$, the pinning estimate goes to zero.  Increasing 
-    $N$ 
-    Probability of appropriate path is low?
-    Any one point saturates the integrand.  Region of available, non-zero $T$ goes to zero.  
-    Gies method of parameterizing first touching times directly addresses this.  
-  
-  \subsection{Potential Curvature}
-    The pinning idea can be extended to a higher derivatives.  
-    For a dielectric describing two bodies, we can rewrite derivatives of path-averages using 
-    \begin{equation}
-      \nabla_1\langle \epsr\rangle  
-% = \bigg(\sum_k\nabla_k-\nabla_2\bigg)\frac{1}{N}\sum_j
-%       [\epsilon_{\text{r},1}(\vect{x}_j-\vect{R}_1)+\epsilon_{\text{r},2}(\vect{x}_j-\vect{R}_2)],
-= \bigg(\sum_k\nabla_k-\nabla_2\bigg)(\langle \epsilon_1\rangle+\langle\epsilon_2\rangle)
-    \end{equation}
-    where $\nabla_k$ denotes the gradient w.r.t the path-point $\vect{x}_k$, while $\nabla_1,\nabla_2$
-    denote the gradients w.r.t. the body positions $\vect{R}_1$ and $\vect{R}_2$.  
-
-    The gradient of the force, or curvature of the potential is given by 
-    \begin{align}
-      C_{ij} =& -\frac{\partial}{\partial R_{2,j} }F_{2,i}\\
-      =&\frac{\hbar c a}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
-      &\times\biggdlangle \hat{R}_{2,j}\cdot(\sum_k\nabla_k-\nabla_1)
-      \frac{\chi_2\hat{R}_{2,i}\cdot\nabla\theta(\sigma_2)}{\langle\epsr\rangle^{a+1}}\biggdrangle
-    \end{align}
-    If we integrate by parts on the first gradient, the gradients act on the Gaussian probability distribution,
-    and pull down a factor proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
-    For closed paths this sum of increments vanishes, and thus we can drop this term.  
-    \begin{align}
-      C_{ij} 
-      =&\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
-      &\times\biggdlangle (-1)\frac{\chi_1[\hat{R}_{2,j}\cdot\langle \nabla_1\theta(\sigma_1)\rangle]
-      [\chi_2\hat{R}_{2,i}\cdot\langle \nabla\theta(\sigma_2)\rangle]}{\langle\epsr\rangle^{a+2}}\biggdrangle.
-    \end{align}
-    By exploiting the delta functions, and restricting to paths that are constrained to touch both surfaces
-    we can write the potential curvature as 
-\begin{align}
-  C_{ij}&=\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{dT}{T^3}
-\biggdlangle \int_{S_1} dx_0 \sum_{k=1}^{N-1}\frac{1}{N}\int_{S_2} dx_k
-  \nonumber\\
-  &  \frac{\chi_1\chi_2\hat{R}_{2,j}\cdot\hat{n}_1(\vect{x}_0)\hat{R}_{2,i}\cdot\hat{n}_2(\vect{x}_k)}
-  {\langle \epsr(x)\rangle^{a+2}}\frac{e^{-N(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k)\Delta T)}}
-  {(2\pi \Delta T)\sqrt{k (N-k)}}\biggdrangle
-\end{align}
-    As written, there is no need for any further renormalization, since this is only non-zero in the presence 
-    of both bodies.  
-    A similar expression for pinned paths can be developed to compute the force on an atom near
-    a surface.  In that case, we restrict $\vect{x}_0$ to coincide with the atom's position.  
-
-(To numerical sample from the $k$ distribution, we will take sample uniformly
--despite being sub-optimal, the shape depends strongly on how large $d/T$ is.  
-For $d/T$ small, $[k(N-k)]^{-1/2}$ dominates,  While for $d/T\sim 1$ it's more dominated
-by $k(N-k)$, or a Gaussian.  
-Alternatively, subdivide the region into $N_s$ sub-samples, and uniformly sample from those.  
-
-\subsection{Torque}
-
-A similar construction can be made to find the torque.  We will consider rotating 
-one of the bodies, an angle $\theta$ about an axis $\vect{n}$ relative to some reference configuration.
-Then the torque can be written as 
-\begin{equation}
-  K_n = \partial_\theta U[\vect{x}-\vect{R}_1,\mathcal{R}(\vect{x}-\vect{R}_2)]
-\end{equation}
-where $\mathcal{R}= \exp(-\theta n_i \epsilon_{ijk})$ is the rotation operator in 3D, where $\epsilon_{ijk}
-$ is the antisymmetric Levi-Civita tensor, and $\vect{R}_i$ are the respective centers of the bodies, 
-with surfaces defined by $\sigma_i$. \comment{I think this is the torque in the $\vect{n}$ direction.}
-
-For the worldline path integrals the torque can be written as 
-    \begin{equation}
-      K_n = \int d\vect{x_0} \biggdlangle \frac{\partial_\theta[\mathcal{R}_{ij}(\theta)(x_j-R_{2,j})]
-        \partial_i \sigma_2(\vect{x}'-\vect{R}_2')\delta(\sigma_2)}{\langle 1+\chi_1\theta(\sigma_1)+
-        \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
-    \end{equation}
-    introduce rotated coordinates $\vect{x}' = \mathcal{R}\vect{x}$.  
-    \comment{Repeated application of the chain rule.  }
-
- Find that $ \partial_\theta \mathcal{R} = -n_i\epsilon_{ijk}$.
-    \begin{equation}
-      K_n = \int dS_2 \biggdlangle \frac{-n_i\epsilon_{ijk}(x'_k-R_{2,k}')\partial_j \sigma_2'\delta(\sigma_2)}
-      {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
-    \end{equation}
-  Note that our choice of original configuration is arbitrary.  We can choose to set $\theta=0$.  
-    (Derivation Amounts to finding energy shift from infinitesimal rotation.)
-    In this case the axis $\hat{n}$ is also arbitrary, and we can use $K_n=\hat{n}\cdot\vect{K}$,
-    to write the full torque as 
-    \begin{equation}
-      \vect{K} = \int\frac{dT}{T^3}\int dS_2 \biggdlangle \frac{(\vect{x}'-\vect{R}_{2}')\times \hat{n}_2}
-      {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
-    \end{equation}
-
-\section{Strong coupling limits}
-
-  Compute strong coupling potential as based on probability to \emph{not} touch a surface.
-    \begin{equation}
-      \mathcal{M}(\vect{x}(t)) = (1-\prod_k e^{-V_{1,k}})(1-\prod_j e^{-V_{2,j}})
-    \end{equation}
-    In strong coupling we can treat the potential along each step as 
-    \begin{equation}
-    e^{-V_{1,k}} \approx 1 - \theta(\sigma_1(\vect{x}_k-\vect{R}).
-  \end{equation}
-    The total renormalized potential is then 
-    \begin{equation}
-      \mathcal{M}(\vect{x}(t)) = [1-\prod_k (1-\theta_{1,k})][1-\prod_j (1-\theta_{2,j})].
-    \end{equation}
-    This is unity when a given path intersects both body one, and body 2.  This is 
-    a representation of the $\mathcal{M}$ functional from Schafer~\etal\cite{Schafer2016}.
-
-    The worldline path integral can then be written as 
-    \begin{equation}
-      U = \int \frac{dT}{T^3} \int d\vect{x}_0\dlangle \mathcal{M}(\vect{x}) \drangle
-    \end{equation}
-    Under linearity, there are a few choices available for which order to do integrals and ensemble
-    averaging.  Difference shows up when considering gradients.  
-
-  Gies/Weber ordering
-    \begin{equation}
-      U = \dlangle \int d\vect{x}_0 \int \frac{dT}{T^3} \mathcal{M}(\vect{x}) \drangle
-    \end{equation}
-    Determine $\mathcal{M}(t)$ for a given path, and parameterize as function of $x,T$.
-    Then carry out integrals (analytically for simple geometries).  
-    Then average over paths.  
-    \begin{equation}
-      U = \dlangle \int d\vect{x}_0 \sum_{T_k}\int_{T_k}^{T_{k+1}} \frac{dT}{T^3}\drangle,
-    \end{equation}
-    where $T_k=T_k(\vect{x}(t),\sigma_1,\sigma_2)$ are set of crossing times, when path is in contact with both bodies.  
-    Not all points will touch surface.  
-    For planes, this is simple $T_k = \frac{(d-x_0)^2}{B_k^2}$.
-    Can find force via differentiation.  In general complicated relationship. 
-    
-    Note that the prior strong-coupling limit treated the surface as thin plates.  This is recovered 
-    from our formulation 
-
-    Direct differentiation w.r.t. the body position is 
-    \begin{align}
-      \partial_{2,i}\mathcal{M}(\vect{x}(t)) =& (-1)\big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
-      &\times \sum_j\partial_i\sigma_2\delta[\sigma_2(\vect{x}_j-\vect{R}_2)]\prod_{l\ne j}(1-\theta_{2,l}).
-    \end{align}
-
-    Then force worldline path-integral is 
-    \begin{align}
-      \vect{F}_2 =& (-1)^2\frac{\hbar c}{8\pi^2} \int \frac{d\cT}{\cT^3}\int_{S_2} d\vect{x}_0 \biggdlangle 
-      \big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
-      &\times \hat{n}_2\prod_{l\ne 0}(1-\theta_{2,l})\biggdrangle.
-    \end{align}
-    \comment{two negative signs: force= -grad U, and $\partial_r \sigma(x-r) = -sigma'(x-r)$}
-    If naively construct paths pinned to surface, as advocated above, only rare paths
-    that do not enter into body 2 contribute.  Better to think of finding first touching time 
-    for paths: want paths that enter the first body, and just graze the second.  
-    Easiest to generate paths, and find first touching time via root-finding.  
-    This amounts to interpreting $\delta(\vect{x}_j-\vect{R})$ as $\delta[f(T)]$.
-    This is exactly the construction of paths employed by Gies and Weber for the sphere-plate 
-    and cylinder-plate geometries~\cite{Weber2010}.  In that work, they re-center the paths such 
-    that the minimum contact of the path just grazes the plane.
-
-   Contrast to Weber approach\cite{Weber2009, Weber2010}. They take derivatives of worldline properties, and average
-    that expression over worldline ensemble, and positions/times. 
-    Captures first touching times, that would be otherwise rare events for paths starting on
-    surface.  Better suited to Dirichlet Limit. 
-
-    Similar reasoning can be exploited at finite $\chi$.  
-  For a particular path and starting position, Can think of 
-  $\int dT \epsr = \sum_j\int_{T_j}^{T_{j+1}}dt c_j$, where $j$ indexes set of times when a point on 
-  the path lies just on the surface of one of the bodies, with $c_j$ being an appropriate constant.  
-  In this discretization, $T_j$ carry the geometric information.  Under differentiation, these are what change.  
-
-\section{Gradients for Worldline Casimir Energies}
-\label{sec:forces}
-Computing the derivatives of Casimir energies between macroscopic bodies requires a different
-set of methods since the Casimir energy%~(\ref{eq:casimir_energy})
- is found via an integral over all starting point of the path.  
-To compute the force, potential curvature and torque in this framework one must differentiate the worldline path integral
-with respect to the distances and angles between the bodies, rather than the starting point over the path.  
-% These  will yield general worldline expressions for the force, potential curvature, and torque.  
-% points of the paths, a different class of methods must be developed. 
-We will derive two sets of expressions for the relevant derivatives, which correspond to different
-varying the order in which limits are taken, and  have quite different numerical properties.  
-In Sec.~\ref{sec:path-pinning} the first set of expressions emphasize
-pinning the paths to originate on the surface of the bodies, 
-while in Sec.~\ref{sec:occupation}, the emphasis is instead on the times when the number of points inside a body changes.  
-
-It is convenient to decompose the Casimir energy as 
-\begin{equation}
-  E = \frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty \frac{d\cT}{\cT^{1+D/2}} W,
-\end{equation}
-where the spatial path integral $W$ is defined as
-\begin{align}
-  W &:= \int d\vect{x}_0\biggdlangle \frac{1}{\langle\epsr\rangle^\alpha}-\frac{1}{[\epsr(\vect{x}_0)]^\alpha}\biggdrangle,
-  \label{eq:spatial_path_integral}
-\end{align}
-and $\alpha=1/2$.  
-We will focus our development on $W$, as this carries all of the essential spatial
-information, and the full path-integral expressions can be restored by including the $\cT$ integral and constants. 
-
-We consider a general geometry for computing Casimir forces between dielectrics, which is shown in Fig.~\ref{fig:spud_sketch}.
-The dielectric $\epsr(\vect{x})$ is specified by 
-\begin{equation}
-  \epsr(\vect{x}) = 1+\sum_j\chi_j\theta[\sigma_j(\vect{x}-\vect{R}_j)],
-\end{equation}
-where $\chi_j$ is the dielectric susceptibility of body $j$, $\sigma_j(\vect{x})=0$ 
-defines the surface of body $j$, with $\sigma_j>0$ and $\sigma_j<0$ inside and outside the body
-respectively, and $\vect{R}_j$ is the center of that body.  
-% \begin{figure}
-%   \includegraphics[width=\columnwidth]{fig/spud_sketch}
-%   \caption{Geometry for interacting dielectric bodies of susceptibility $\chi_j$, centered at
-%     $\vect{R}_j$ relative to the origin.  The surfaces mark $\sigma_j=0$, and the surface normal vectors $\hat{n}_j$
-%     are also marked.}
-%   \label{fig:spud_sketch}
-% \end{figure}
-
-\section{Pinning Paths to Surfaces}
+\subsection{Surface-Pinned Paths}
 \label{sec:path-pinning}
-\subsection{Force}
-The components of the force on a body can be found by differentiating the energy with respect to the center of that body.
-For example, the force on body $2$, in direction $\hat{x}_i$ is 
-found from the directional derivative of the spatial path integral~(\ref{eq:spatial_path_integral}) with respect to $R_{2,i}$,
+
+\subsubsection{Force}
+The force on a body follows from the gradient of the Casimir energy,
+where the derivatives are taken with respect to the body's 
+position.
+For example, the components of the force on body $2$, expressed
+in the basis $\hat{r}_i$, are
+given by directional derivatives of the path-integral in Eqs.~(\ref{eq:spatial_path_integral}) and 
+(\ref{eq:spatial_path_integralE}) with respect to
+the components of the body position $\mathbf{R}_2$:
 \begin{align}
-  F_{2,i}:=-\frac{\partial W}{\partial R_{2,i}}
-  =-\alpha\int d\vect{x}_0 
-  \biggdlangle \frac{\chi_2\hat{x}_{i}\cdot\langle \nabla\sigma_2\delta(\sigma_2)\rangle}
-  {\langle\epsr\rangle^{\alpha+1}}\biggdrangle.
+  &F_{2,i}:=-\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty \!\!\frac{d\cT}{\cT^{1+D/2}}\change{\hat{r}_i\cdot\nablaR2} W
+  \nonumber\\
+   &\hspace{0.cm}=
+   -\frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}
+   \hat{r}_i\cdot\!\!
+   \int_0^\infty \!\!\!\frac{d\cT}{\cT^{1+D/2}}   \!\int \!d\vect{x}_0\, 
+  \Biggdlangle \frac{
+  \big\langle 
+  \delta(\sigma_2)\,\nabla\sigma_2\big\rangle}
+  {\langle\epsr\rangle^{\alpha+1}}\Biggdrangle_{\!\vect{x}(t)}\!\!\!\!,
+  \label{eq:forcepathint}
 \end{align}
-% where 
-% \begin{equation}
-%   \frac{\partial}{\partial R_{2,i}}\epsr = -\hat{R}_{2,i}\cdot\nabla\sigma_2(\vect{x}-\vect{R}_2)\delta(\sigma_2).
-% \end{equation}
-The force can be simplified by using the path-averaged $\delta$-function to 
-restrict the paths to lie on the surface of the body.  For a generic ensemble-averaged path integral
-integrated against a potential $\vect{g}[\vect{x}(t)]$, integrating out the $\delta$-function and 
-simplifying the path-average yields
+where $\sigma_2 = \sigma_2[\vect{x}(t)-\vect{R}_2]$ in this expression
+\change{, and $\nablaR{i}$ denotes the gradient with
+respect $\vect{R}_i$.}
+The path integration can be simplified by viewing the $\delta$-function,
+whose argument involves $\vect{x}(t)$, as a constraint on the
+source point $\vect{x}_0$ of the paths.
+Writing out the relevant part of the path-integral (\ref{eq:forcepathint}),
+the $\delta$-function reduces the $D$-dimensional integration
+over $\vect{x}_0$ to a $(D-1)$-dimensional integration over
+the surface of body 2:
+\comment{futzed with this - tried to restore}
 \begin{align}
-  &\int d\vect{x}_0\bigdlangle \vect{g}[\vect{x}(t)]\!\cdot\!\langle \nabla\sigma_2\delta(\sigma_2)\rangle\bigdrangle\nonumber\\
-  % &= \int d\vect{x}_0\bigdlangle \vect{g}(\vect{x})\!\cdot\!\langle \nabla\sigma_2\delta(\sigma_2)\rangle\bigdrangle \nonumber\\
-  &\hspace{0.5cm}= \int \!\!d\vect{x}_0\biggdlangle \vect{g}[\vect{x}(t)]\!\cdot\!
-  \frac{\nabla\sigma_2(\x0)}{|\nabla\sigma_2(\x0)|}\biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0},
+  &\int d\vect{x}_0  \Biggdlangle \frac{
+  \big\langle 
+  \delta\big(\sigma_2[\vect{x}(t)-\vect{R}_2]\big)\,\nabla\sigma_2[\vect{x}(t)-\vect{R}_2]\big\rangle}
+  {\langle\epsr\rangle^{\alpha+1}}\Biggdrangle_{\vect{x}(t)} \nonumber\\
+  &\hspace{0.5cm}= 
+  \int d\vect{x}_0  \Biggdlangle \frac{
+  \delta\big(\sigma_2[\vect{x}_0-\vect{R}_2]\big)\,\nabla\sigma_2[\x0-\vect{R}_2]}
+  {\langle\epsr\rangle^{\alpha+1}}\Biggdrangle_{\vect{x}(t)} \nonumber\\
+  &\hspace{0.5cm}= 
+  \oint_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}^{}
+   \hspace{-8ex}dS\hspace{5ex}\biggdlangle 
+  \frac{\nabla\sigma_2(\x0-\vect{R}_2)}
+  {\langle\epsr\rangle^{\alpha+1}|\nabla\sigma_2(\x0-\vect{R}_2)|}\biggdrangle_{\vect{x}(t)},
   \label{eq:delta-normal}
 \end{align}
-where $\dlangle\cdots\drangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}$ denotes the ensemble average over 
-Brownian bridges subject to constraint on that $\vect{x}_0$ lie on the surface of body 2.
-The renormalized force vector can be found by summing over all force components and subtracting off
-the equivalent single-body expression,
+where the final integral (over path source points $\vect{x}_0$)
+is a surface integral over the 
+surface of body 2.  The first equality here can be understood
+in terms of a discrete path (i.e., in a ``time-slicing'' regularization
+of the path-integral), where the path average in the numerator
+amounts to a sum of terms, each involving a $\delta$-function
+involving a path coordinate $\vect{x}_j$.  In the average over all
+paths and sum over all source points $\vect{x}_0$,
+the $\delta$-function is equivalently a function of the
+source point, since $\vect{x}_j$ is the source point
+of another equivalent path.
+The second equality of Eqs~(\ref{eq:delta-normal})
+follows from an application of the H\"ormander formula
+(see Eq.~(22) in Ref.~\cite{Mackrory2016}).
+The renormalized force vector can be found by summing over all force components and subtracting 
+the corresponding single-body energy,
+\change{used ``limit'' on oint to get limits underneath integral}
 \begin{align}
   \vect{F}_{2}&=
-  -\alpha\!\! \int d\vect{x}_0  \chi_2\hat{n}_2(\vect{x}_0) \nonumber\\
+  -\frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}
+\int\limits_0^\infty \!\frac{d\cT}{\cT^{1+D/2}}    
+\hspace{-3ex}
+ \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}^{}
+  \hspace{-4ex} dS\hspace{1ex} 
+  \hat{n}_2(\vect{x}_0) \nonumber\\
   &\hspace{0.5cm}\times 
   \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}
-  \Biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0},
+  \Biggdrangle_{\vect{x}(t)},
   \label{eq:pinning_force}
 \end{align}
-where the unit surface normal vector for body 2 is defined as
+where the unit-normal vector for the surface of body 2 is defined by
 \begin{equation}
   \hat{n}_2(\x0) := -\frac{\nabla \sigma_2(\x0-\vect{R}_2)}{|\nabla \sigma_2(\x0-\vect{R}_2)|}.
 \end{equation}
-The force on a body is found by starting the paths on the surface of that body,
-and weighting the worldline contributions by the surface normal at the starting point.  
-To compute the force it is still necessary to integrate over times $\cT$, with weight $\cT^{1+D/2}$.
-Since different sections of the surface interact with the other body at different times $\cT$, each section's
-contribution to the force will have differing weights, leading to an overall net force.
+Qualitatively, the Casimir force on a body arises from 
+paths that begin (and end) on its surface, with a vector
+path weight
+in the direction of the surface normal at the path source point. 
+Although the surface of an arbitrary body involves surface normals
+pointing in all directions, each surface normal obtains a 
+different geometry-dependent
+weight via the path ensemble.  The result is, in general,
+a nonzero net force.
 
-\subsection{Gradient of the Force}
+\subsubsection{Potential Curvature}
+
 This method can be easily extended to the second derivative of the worldline energy, which 
-computes the potential curvature.  
+computes the potential curvature,  
 \begin{equation}
-  C_{ij} := \frac{\partial^2W}{\partial R_{2,i}\partial R_{2,j}}.
+  C_{ij} := (\hat{r}_i\cdot \nablaR2)(\hat{r}_j\cdot \nablaR2)E.
 \end{equation}
-For a dielectric describing two bodies, the derivatives with respect to $\vect{R}_2$ in direction $\hat{x}_i$, can be rewritten 
+For a dielectric describing two bodies, the derivatives with respect to $\vect{R}_2$ in direction $\hat{r}_i$, can be rewritten 
 in terms of derivatives with respect to the first body's center $\vect{R}_1$, and the loop coordinates $\vect{x}_k$
 \begin{align}
-  \frac{\partial}{\partial R_{2,i}}\langle \epsr\rangle  
-  =& \bigg(\sum_{k=1}^N\frac{\partial}{\partial {x}_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
+  \nablaR2\langle \epsr\rangle  
+  =& \bigg(\sum_{k=1}^N\nablaxk-\nablaR1\bigg)\nonumber\\
   & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
+% \frac{\partial}{\partial R_{2,i}}\langle \epsr\rangle  
+%   =& \bigg(\sum_{k=1}^N\frac{\partial}{\partial {x}_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
+%   & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
   \label{eq:shift_derivative}
 \end{align}
-where $x_{k,i}$ is the $i^\text{th}$ component of the path position $\vect{x}_k$.  
+where $\nablaxk$ is the gradient of the path position $\vect{x}_k$.    
 The first derivative can be carried out as before,
+% \begin{align}
+%   C_{ij} = &
+% \frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
+% \int d\vect{x}_0 \nonumber\\
+% &\hspace{0.05cm}\times\biggdlangle 
+% \hat{r}_{i}\!\cdot\!\bigg(\!\sum_k\nablaxk - \nablaR{1}\!\bigg)
+%   \!
+%   \bigg[
+%   \frac{\hat{r}_{j}\cdot\langle \delta(\sigma_2)\nablaR{2}\sigma_2\rangle}
+%   {\langle\epsr\rangle^{\alpha+1}}\bigg]\biggdrangle_{\vect{x}(t)}.
+% \end{align}
 \begin{align}
-  C_{ij} = &      \alpha\int d\vect{x}_0 \biggdlangle 
-  \hat{x}_{i}\cdot\bigg(\sum_k\frac{\partial}{\partial x_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
-  &\hspace{3cm}\times\bigg[\chi_2
-  \frac{\hat{x}_{j}\cdot\langle \nabla\sigma_2\delta(\sigma_2)\rangle}
-  {\langle\epsr\rangle^{\alpha+1}}\bigg]\biggdrangle.
+  C_{ij} = &
+\frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
+\int d\vect{x}_0 \nonumber\\
+&\hspace{0.05cm}\times\biggdlangle 
+\hat{r}_{i}\!\cdot\!\bigg(\!\sum_k\nablaxk - \nablaR{1}\!\bigg)
+  \!
+(\hat{r}_{j}\cdot\nablaR{2})
+  \frac{1}
+  {\langle\epsr\rangle^{\alpha+1}}\biggdrangle_{\vect{x}(t)}.
 \end{align}
-It is possible to integrate by parts so the derivatives with respect to the path positions $\vect{x}_k$, 
-instead act on the Gaussian probability density,
- which yields a term proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
+It is possible to integrate by parts on the gradients $\nablaxk$, 
+which then act on the Gaussian probability density,
+ and which yields a term proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
 This sum of path increments vanishes for closed paths, and thus this term can be dropped.  
-The remaining derivative can be straightforwardly evaluated,
-and using Eq.~(\ref{eq:delta-normal}), there are now two path-averaged delta-functions which 
-pin the paths to lie on different surfaces.  The first $\delta$-function pins the paths to start on
-the first body, while the second $\delta$-function pins a different point of the path to lie on the second body,
-and averages over which point is pinned.
+The remaining gradient in $\nablaR{1}$ can be straightforwardly evaluated, which yields 
+a second independent path-averaged $\delta$-function.  
+% and using Eq.~(\ref{eq:delta-normal}), there are now two path-averaged delta-functions which 
+% pin the paths to lie on both the first and second surfaces
+One $\delta$-function can be manipulated as in Eq.~(\ref{eq:delta-normal}) to constrain the the paths to start on
+the first body, while the second $\delta$-function-average pins another point of the path to lie on the second body
+and then takes a further averages over which point is pinned.
 The resulting expression for the potential curvature is 
+\comment{kept $\vect{x}(t)$ subscript on ensemble average: Actually what convention do we want with these?
+Sometimes we're adding them, other times we are not}
 \begin{align}
   C_{ij}&=
-  \alpha(\alpha+1)\chi_1\chi_2\int d\vect{x}_0 \sum_{k=1}^{N-1}\frac{1}{N}
-  \mathcal{G}(\vect{x}_0,\vect{x}_k,k)
-  \nonumber\\
-  &\hspace{0.5cm} \times\biggdlangle \frac{[\hat{x}_{i}\cdot\hat{n}_1(\vect{x}_0)][\hat{x}_{j}\cdot\hat{n}_2(\vect{x}_k)]}
-  {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\sigma_1(\vect{x}_0-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}.
+  \frac{\alpha(\alpha+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
+  \hspace{-2ex}
+  \oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0}^{}
+   \hspace{-4ex} dS\hspace{1ex}   \nonumber\\
+  &\hspace{0.5cm} \times\biggdlangle  \sum_{k=1}^{N-1}\frac{1}{N} \mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)\nonumber\\
+  &\hspace{1cm}\times\frac{[\hat{r}_{i}\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_{j}\cdot\hat{n}_2(\vect{x}_k)]}
+  {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\vect{x}(t)|\sigma_2(\vect{x}_k-\vect{R}_2)=0}.
   \label{eq:potential_curvature}
 \end{align}
 where 
+$\dlangle \cdots\drangle_{\vect{x}(t)|\sigma_2(\vect{x}_k-\vect{R}_2)}$ is the ensemble
+average over discrete paths $\vect{x}(t)$ subject to the constraint that $\sigma_2(\vect{x}_k-\vect{R}_2)=0$,
+and 
 \begin{equation}
-  \mathcal{G}(\vect{x}_0,\vect{x}_k,k)=\frac{e^{-N(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k)\Delta \cT)}}{(2\pi \Delta \cT)\sqrt{k (N-k)}}
+  \mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)=\frac{e^{-N^2(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k) \cT)}}{\sqrt{2\pi  \cT k (N-k)/N^2}}
+  \label{eq:Gauss_normalization}
 \end{equation}
 is the Gaussian normalization factor from fixing $\vect{x}_k$ after $k$ steps, and returning to $\vect{x}_0$
-in $N-k$ steps.  There is no need for any further renormalization, since this expression is only non-zero in the presence 
+in $N-k$ steps. 
+There is no need for any further renormalization, since this expression is only non-zero in the presence 
 of both bodies, and $\mathcal{G}$ exponentially cuts off terms at small $\cT$.    
-\subsection{Torque}
+
+\begin{shaded}
+Attempt at Alternative double-pinning notation. 
+\begin{align}
+  C_{ij}&=
+  \frac{\alpha(\alpha+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}\int_0^\cT \frac{d\tau}{\cT}\nonumber\\
+  &\times
+  \oint\limits_{\sigma_1[\vect{x}(0)]}^{}   \hspace{-2ex} dS
+  \oint\limits_{\sigma_2[\vect{x}(\tau)]}^{}  \hspace{-2ex} dS'\hspace{1ex}   
+\mathcal{G}'[\vect{x}(0),\vect{x}(\tau),\tau,\cT]\nonumber\\
+  &\hspace{1cm}\times\biggdlangle\frac{\{\hat{r}_{i}\cdot\hat{n}_1\big[\vect{x}(0)\big]\}
+    \{\hat{r}_{j}\cdot\hat{n}_2\big[\vect{x}(\tau)\big]\}}
+  {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\vect{x'}(t); \vect{x'}(\tau)},
+  \label{eq:potential_curvature}
+\end{align}
+where the ensemble average is over paths $\vect{x'}(\tau)$ that are 
+pinned to lie on surface $\sigma_1, \sigma_2$ at path positions
+$\vect{x}(0), \vect{x}(\tau)$ respectively.  The Gaussian normalization is 
+\begin{equation}
+  \mathcal{G}'[\vect{x}(0),\vect{x}(\tau),\tau,\cT]=\frac{\sqrt{\cT}}{\sqrt{2\pi  \tau(\cT-\tau)}}
+  e^{- \cT[\vect{x}(0)-\vect{x}(\tau)]^2/[2 \tau(\cT-\tau)]}
+\end{equation}
+\begin{itemize}
+\item Use $\vect{x'}$ to distinguish these contrained paths?
+\item Double subscripts on ensemble average to denote paths going from $x(0)$ to $x(\tau)$?
+\item Use only $\sigma_1[\vect{x}]$ to denote surface we seek?  Current notation reflects desire
+ato use sign $\sigma$ in step functions for dielectric, so surface is $\sigma=0$.  Also want
+to emphasize body center $\vect{R}_i$ for rigid translations.
+\item Problems with later occupation number results, where summing over terms leads to explicit factors of 
+$N$.  
+\end{itemize}
+\end{shaded}
+
+\subsubsection{Torque}
 The torque on a body can be found from the first order variation in the energy as that body is
 infinitesimally rotated about some axis.  
 For concreteness, consider perturbing the dielectric by rotating the second body about its center
@@ -855,186 +735,254 @@ by angle $\phi$ about axis $\hat{m}$,
   \epsr(\vect{x}) = 1+\chi_1\theta[\sigma_1(\vect{x}-\vect{R}_1)]
   +\chi_2\theta\big\{\sigma_2[\mathcal{R}(\phi)(\vect{x}-\vect{R}_2)]\big\}.
 \end{equation}
+% where the second body has undergone an infinitesimal rotation 
+% by an angle $\phi$ about an axis $\hat{m}$ about its center.  
 The infinitesimal rotation matrix is given by 
 \begin{equation}
-  \mathcal{R}_{ij}(\phi) = \delta_{ij} - \phi m_k\epsilon_{ijk},
+  \mathcal{R}_{ij}(\phi) = \delta_{ij} - m_k\epsilon_{ijk}\phi ,
 \end{equation}
-where $\epsilon_{ijk}$ is the antisymmetric Levi-Civita tensor, and throughout this subsection
-there are implicit sums over repeated indices.    
-The torque path integral can be written as 
-\begin{equation}
-  K_m = \alpha\chi_2\int d\vect{x_0} \biggdlangle \frac{\langle \partial_\phi[\mathcal{R}_{ij}(\phi)(x_j-R_{2,j})]
-    \partial_i \sigma_2\delta(\sigma_2)\rangle}{\langle \epsr\rangle^{\alpha+1}}\biggdrangle
-\end{equation}
-This can be simplied into a more intuitive form, by pinning the paths to start on the surface of the second body,
-and using the form of the infinitesimal rotation to write the result as a cross-product 
-via $(\vect{a}\wedge\vect{b})_i=\epsilon_{ijk}a_jb_k.$  
-In this case the axis $\hat{m}$ is also arbitrary, and we can use $K_m=\hat{m}\cdot\vect{K}$ to 
-sum over all components of the torque.  
-The full torque worldline path integral is then 
+where $\delta_{ij}$ is the Krocker delta, and $\epsilon_{ijk}$ is the antisymmetric Levi-Civita tensor. 
+Throughout this subsection there are implicit sums over repeated indices.    
+The torque for a rotation about axis $\hat{m}$ can be written as $K_m:=\hat{m}\cdot\vect{K}=-\partial_\phi E$.
+The $\phi$-derivative only acts on the path-averaged dielectric part of the energy integral,
 \begin{align}
-  \vect{K} =& \alpha\chi_2  \int d\vect{x}_0 
-  \biggdlangle \big[(\vect{x}_0-\vect{R}_{2})\wedge \hat{n}_2(\vect{x}_0)\big]\nonumber\\
-  &\hspace{0.5cm}\times \bigg[\frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}
-  -\frac{1}{\langle \epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}\bigg]\biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}.
+  \partial_\phi\langle\epsilon\rangle&=
+  \chi_2\langle \partial_\phi\mathcal{R}_{ij}(\phi)(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
+  &=-\chi_2\langle m_k\epsilon_{kij}(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
+  &=\chi_2\hat{m}\cdot\langle (\vect{x}-\vect{R}_2)\wedge\nabla\theta(\sigma_2)\rangle,
+\end{align}
+where we used the form of the infinitesimal rotation to write the result as a cross-product 
+via $(\vect{a}\wedge\vect{b})_i=\epsilon_{ijk}a_jb_k$.  
+This derivative can be directly substituted into the full torque path-integral, 
+and similar manipulations to Eq.~(\ref{eq:delta-normal}) can be carried out
+to pin the paths to start on the surface of the second body.
+In addition, given the form of $\partial_\phi\langle\epsr\rangle$ the full torque $\vect{K}$
+can be found by identifying $\partial_\phi E=\hat{m}\cdot\vect{K}$.  
+The full renormalized torque worldline path-integral is 
+\begin{align}
+  \vect{K} &= \frac{\alpha\hbar c\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}} 
+  \hspace{-3ex}
+  \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0} 
+   \hspace{-4ex} dS\hspace{1ex}\!\big[(\vect{x}_0-\vect{R}_{2})\! \wedge \!\hat{n}_2(\vect{x}_0)\big]   \nonumber\\
+  &\hspace{0.5cm}\times\biggdlangle 
+\frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}
+  -\frac{1}{\langle \epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}\biggdrangle_{\vect{x}(t)}.
 \end{align}
 This has the intuitive interpretation of finding the total torque on the body by 
 integrating over its surface and taking the cross-product of the vector from the body's center to a surface
 element with the force density at that surface element.  
 
-\subsection{Casimir--Polder Force}
+\subsubsection{Casimir--Polder Force}
 
 We briefly note that an alternative expression for the Casimir--Polder force on an atom near a surface
 can be found in analogy to the potential curvature in Eq.~(\ref{eq:potential_curvature}).
-The force on the atom is $F\subCP = -(\partial E\subCP)/(\partial x_{0,i})$.
-  In Sec.~\ref{sec:partial_average} we took the derivatives of the path integral immediately,
+The force on the atom is $F\subCPi = -\hat{r}_i\cdot\nabla_{\rA}E$.
+  In Sec.~\ref{sec:partial_average} we took the derivatives of the path-integral immediately,
   with the dominant contribution coming from the Gaussian probability distribution.  
-  Instead, one can change the coordinates to $\vect{x}(t)=\vect{x}_0+\vect{y}(t)$, where 
-  $\vect{y}(t)$ is a Brownian bridge starting and returning to the origin, $\vect{y}(0)=\vect{y}(\cT)=0$.
+  Alternatively, one can change the coordinates to $\vect{x}(t)=\rA+\vect{y}(t)$, where 
+  $\vect{y}(t)$ is a Brownian bridge starting and returning to the origin, $\vect{y}(0)=\vect{y}(\cT)=0$,
+  and then take the desired gradients.
   The resulting force expression is
 \begin{align}
-  F_i =&\, -\frac{\hbar c\alpha_0}{4(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}}\biggdlangle 
-  \frac{\partial}{\partial x_{0,i}}\langle\epsr\rangle^{-3/2}
+  F_i\supTE \!=&\! -\frac{\hbar c\alpha_0}{4(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}\biggdlangle 
+  \hat{r}_i\!\cdot\!\nabla_{\rA}\langle\epsr\rangle^{-3/2}
   \biggdrangle_{\vect{y}(t)},
 \end{align}
-where this path integral considers the change in energy as the whole path is translated,
+where this path-integral considers the change in energy as the whole path is translated,
 while the results in Sec.~\ref{sec:partial_average}
 correspond to shifting only the origin of the path, while keeping the rest of the path fixed.
-The derivatives can be carried out, which for step-wise media create delta-functions.  In analogy 
-with the potential curvature, since the starting point is fixed, one must still average over 
-pinning other path points to lie on the dielectric surface.  
-In which case after summing over all components the Casimir--Polder force is 
+The derivatives can be carried out, which for piece-wise constant media create delta-functions.
+In analogy with the potential curvature, since the starting point is fixed, it is necessary to 
+average over pinning other path points to lie on the dielectric surface for each of the bodies.  
+The Casimir--Polder force, after summing over all force components, is 
 \begin{align}
-  \vect{F}\subCP&=-\frac{3\hbar c\alpha_0}{8(2\pi)^{D/2}}
-  \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
+  \vect{F}\supTE\subCP&=-\frac{3\hbar c\alpha_0}{8(2\pi)^{D/2}}
+  \sum_{b=1}^{N_b}\sum_{k=1}^{N-1}\frac{\chi_b}{N}\intzinf \frac{d\cT}{\cT^{1+D/2}}
    \nonumber\\
-   &\hspace{0.5cm} \times   \sum_{j}\sum_{k=1}^{N-1}\frac{\chi_j}{N}\mathcal{G}(\vect{x}_A,\vect{x}_k,k)
-\biggdlangle \frac{\hat{n}_j(\vect{x}_k)}
-  {\langle \epsilon_{\mathrm{r}}\rangle^{5/2}}     \biggdrangle_{\sigma_j(\vect{x}_k-\vect{R}_j)=0},
+   &\hspace{0.5cm} \times \biggdlangle \mathcal{G}(\vect{x}_A,\vect{x}_k,k,\cT)
+   \frac{\hat{n}_b(\vect{x}_k)}
+  {\langle \epsr\rangle^{5/2}}     \biggdrangle_{\vect{x}(t)| \sigma_b(\vect{x}_k-\vect{R}_b)=0},
 \end{align}
-where we have reverted to using $\vect{x}(t)$ paths, 
-and have restored the $\cT$-integral and constants for comparison with earlier results.
+where we have reverted to using $\vect{x}(t)$, $\mathcal{G}$ is given by 
+Eq.~(\ref{eq:Gauss_normalization}), and $b$ indexes each of the $N_b$ dielectric bodies.
+In this method the paths are constrained to touch the bodies, which must be taken into account numerically
+by averaging over paths where each index that is constrained.
+In constrast, the Hermite-Gaussian method discussed in Sec.~\ref{sec:partial_average} 
+uses the same paths regardless of the dielectric background.
+While the path-pinning method requires more complicated path generation,
+it does not suffer from diverging fluctuations as the path resolution is increased.
+The Gaussian factor $\mathcal{G}$ exponentially suppresses contributions from pinning small indices $k$,
+which would be the problematic terms as $\Delta \cT\rightarrow 0$, 
+and thus this method does not require careful handling as $N$ increases.  
 
-\section{Occupation Number}
+\subsection{Occupation Number}
 \label{sec:occupation}
 
 The preceding methods offer an intuitive picture of the Casimir force,
-however they are poorly behaved as one takes the strong coupling limit.  
+however they are poorly behaved in the strong-coupling limit.  
 For a typical path of $N$ steps pinned to the surface, approximately half 
 of the path will lie inside the body.  For $\chi\gg N$, the denominator $\langle\epsr\rangle^{-1/2}$ dominates
-the integrand, so estimate of the derivatives tends to zero as $\chi^{-1/2}$ for almost all paths.  
+the integrand, so the estimated derivatives tend to zero as $\chi^{-1/2}$ for almost all paths.  
 Only rare paths which start on the surface, but do not enter the bulk of the body will contribute significantly.  
 As a result the estimated force goes to zero in the strong-coupling limit.
-In this section we develop an alternative expression which is better behaved in the strong-coupling
+In this section we develop alternative expressions which are better behaved in the strong-coupling
 limit and makes direct contact with prior work on Dirichlet worldlines.  
 
-In a similar fashion to Eq.~(\ref{eq:eps_gamma}), the spatial path integral can be written in exponential form via the Gamma function,
+The spatial path-integral can be written in exponential form via the Gamma function,
 \begin{align}
   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
-  &\hspace{0.5cm}\times\bigdlangle e^{-\langle \sum_r\chi_r\theta_r(\vect{x})\rangle} - e^{-\sum_r\chi_r\theta_r(\vect{x}_0)}\bigdrangle\label{eq:W_exp2}
+  &\hspace{0.5cm}\times\bigdlangle e^{-\langle \sum_b\chi_b\theta_b(\vect{x})\rangle}
+  - e^{-\sum_b\chi_b\theta_b(\vect{x}_0)}\bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
 \end{align}
-where we have introduced a shorthand notation $\theta_r(\vect{x}) = \theta(\sigma_r[\vect{x}-\vect{R}_r])$.
+where we have introduced a shorthand notation $\theta_b(\vect{x}) = \theta(\sigma_b[\vect{x}-\vect{R}_b])$.
 % This exponential form is similar to the approach required to account for non-zero temperature and material
 % dispersion~\cite{Mackrory2016}.  The exponential expression also places the integrand in a suitable form 
 % to exploiting relevant Feynman-Kac formulae.  
-The exponential path-integral for two bodies, after the single-body expressions have been factored out can 
+The exponential spatial path-integral for two bodies, after the single-body expressions have been factored out can 
 be factorized as 
 \begin{align}
   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
   &\hspace{0.5cm}\times\Bigdlangle 
   (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1)\nonumber\\
   &\hspace{1.25cm}
-  -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle\label{eq:W_exp2}
+  -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
 \end{align}
 \comment{Pretty sure a Gies paper does a similar factorization.}
 %\begin{align}
   % &e^{-s}[1+e^{-s\langle \chi_1(\vect{x})+\chi_2(\vect{x})\rangle } 
   % - e^{-s\langle \chi_1(\vect{x})\rangle }-e^{-s\langle \chi_2(\vect{x})\rangle}]\nonumber\\
-
 The exponential of the path-averaged potential can be written as a product of potentials 
 for each increment, and the potential can be simplified for step-function dielectrics,
 \begin{align}
-  e^{-s \langle\chi_r\theta_r(\vect{x})\rangle}= \prod_{k=0}^{N-1}
-  \left[\bar{\theta}_{r,k}+\theta_{r,k}e^{-s\chi_r/N}\right].
+  e^{-s \langle\chi_b\theta_b(\vect{x})\rangle}= \prod_{k=0}^{N-1}
+  \left[\bar{\theta}_{b,k}+\theta_{b,k}e^{-s\chi_b/N}\right].\label{eq:exp_step_limit1}
 \end{align}
-where we introduced $\theta_{r,k} := \theta[\sigma_r(\vect{x}_k-\vect{R}_r)],$ 
-and $\bar{\theta}_{r,k}:=1-\theta_{r,k}$.  The force path integral can be computed by differentiating
-Eq.~(\ref{eq:W_exp2}) with respect to the body position $\vect{R}_2$,
-% \begin{equation}
-%   F_2 = (-1)\alpha\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\dlangle (1-\mathcal{V}_1)\mathcal{W}_2\drangle,
-% \end{equation}
-% where 
-% \begin{align}
-%   \mathcal{W}_r &:= \big(e^{-s\chi_r/N}-1\big)\sum_j\hat{n}_2(\vect{x}_j)\delta_{r,j}\nonumber\\
-%   &\hspace{0.5cm} \times\prod_{k\ne j}\left\{1+\theta_{r,k}\big(e^{-s\chi_r/N}-1\big)\right\},
-% \end{align}
-% where $\delta_{r,j}$ restricts $\sigma_r(\vect{x}_j-\vect{R}_r)=0$.  
-% Full force version with explicit steps. 
+where $\theta_{b,k} := \theta[\sigma_b(\vect{x}_k-\vect{R}_b)],$ 
+and $\bar{\theta}_{b,k}:=1-\theta_{b,k}$.  This way of regularizing the surface leads to 
+a different representation for the gradients of the Casimir energy.
+In this section, we are assuming the step-function is arbitrarily sharp, and taking that limit before any gradients are taken.  
+The gradient for a single position can be computed from Eq.~(\ref{eq:exp_step_limit1}) as
 \begin{align}
-  \vect{F}_2 =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
+  [\nablaxk e^{-s \chi_b\theta_{b,k}/N}]_{\text{occupation}} 
+=& \delta_{b,k}(e^{-s\chi_b/N}-1)\vect{n}_b(\vect{x}_k)
+    \label{eq:occupation-grad}
+\end{align}
+where $\delta_{b,k} := \delta[\sigma_b(\vect{x}_k-\vect{R}_b)]$ and the un-normalized surface normal is
+$\vect{n}_b(\vect{x}_k):=\nabla\sigma_{b}(\vect{x}_k-\vect{R}_b)$.
+The results in Sec.~\ref{sec:path-pinning} can be recovered if the gradient is 
+taken before the step-function limit is taken.  
+In essence, that calculation assumed the step was the limit of a smooth sigmoidal function 
+and that the path had arbitrarily fine resolution on the scale over which the step-function jump occured,
+so that the gradient follows from applying the chain-rule, 
+\begin{align}
+  [\nablaxk e^{-s \chi_b\theta_{b,k}/N}]_{\text{pinning}} 
+ =& \frac{s\chi_b}{N} \delta_{b,k}e^{-s \chi_b\theta_{b,k}/N}\vect{n}_b(\vect{x}_k)
+  \label{eq:pinning-grad}
+\end{align}
+However, throughout this section we will treat using Eq.~(\ref{eq:occupation-grad}) to evaluate gradients,
+and later show how the earlier results are recovered.
+
+The force on the second body can be computed by differentiating
+the energy with respect to the body position $\vect{R}_2$.  The spatial part of the force integral
+can be defined as
+\begin{align}
+  W_{F,2} :=& -\nablaR{2}W\\
+  =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
   \big(e^{-s\chi_2/N}-1\big)\nonumber\\
-  &\times\sum_{j=0}^{N-1}\vect{n}_2(\vect{x}_j)\delta_{2,j}
+  &\times\sum_{j=0}^{N-1}[\vect{n}_2(\vect{x}_j)\delta_{2,j}
   \prod_{k\ne j}\left(\bar\theta_{2,k}+\theta_{2,k}e^{-s\chi_2/N}\right)\nonumber\\
-  &\times\bigg[1-\prod_{n}\left(\bar{\theta}_{1,n}+\theta_{1,n}e^{-s\chi_1/N}\right)\bigg]\biggdrangle,
+  &\times\bigg[1-\prod_{n=0}^{N-1}\left(\bar{\theta}_{1,n}+\theta_{1,n}e^{-s\chi_1/N}\right)\bigg]\biggdrangle_{\vect{x}(t)}.
 \end{align}
-where we have introduced $\delta_{r,j} = \delta[\sigma_r(\vect{x}_j-\vect{R}_r)]$.
-The $s$ integral can be carried out if the integrand is rearranged into terms with 
-a definite number of points inside each body.  
+where the constant term has zero derivative.
+The $s$-integral can be carried out more easily if the integrand is re-arranged into terms with 
+a definite number of points $n$ inside each body $b$.  
 We define the indicator functions
-\begin{equation}
-  \I[r]n:= \sum_{j_1=1}\sum_{j_2>j_1}\cdots\sum_{j_{n}>j_{n-1}}\theta_{r,j_1}\theta_{r,j_2}\cdots\theta_{r,j_n},
-\end{equation}
-where the subscripts $n$ counts the number of points of the path that are inside body $r$,
-and all of the sums terminate at $N$.  There are further restrictions on which of these 
-terms contribute.  Due to the presence of the $\delta$-functions, only $N-1$ points are free to 
-enter the bodies.  This further implies that the number of points inside both bodies must be less than $N-1$. 
-Finally, due to the renormalization only paths with at least one point inside body 1 contribute.  
-The re-arranged force is 
-% \begin{align}
-%   \vect{F}_2 =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
-%   \big(e^{-s\chi_2/N}-1\big)\nonumber\\
-%   &\times\sum_{j=0}^{N-1}\vect{n}_2(\vect{x}_j)\delta_{r,j}\sum_{n=0}^{N-1}e^{-sn\chi_2/N} \I^{(2)}_{n}\nonumber\\
-%   & \bigg(1-\sum_{m=0}^{N-n-1} e^{-s m \chi_1/N} \mathbf{I}^{(1)}_{m}\bigg)
-%   \biggdrangle,
-% \end{align}
-% Restrict sums since one point is fixed to line on body, so $N-1$ points free.  If $n$ points inside
-% one body, at most $N-1-n$ points in second body.  
-% Rearranging, and noting only $m>0$ contributes after renormalization.  
-% Can also write $1 = \sum_{m=0}^N \mathbf{I}_{m,r}$.
 \begin{align}
-  \vect{F}_2 =& (-1)\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle \sum_{j=0}^{N-1}\hat{n}_2(\vect{x}_j)\delta_{r,j}\nonumber\\
-  &\times\sum_{n=0}^{N-1}\I[2]n
-  \big(e^{-s(n+1)\chi_2/N}-e^{-sn\chi_2/N}\big)\nonumber\\
-  &\times \sum_{m=1}^{N-n-1}\big(1- e^{-s m \chi_1/N} \big)\I[1]m
-  \biggdrangle,
+  \I[b]0&:= \prod_{j=0}^{N-1}\bar{\theta}_{r,j}\\
+  \I[b]n&:= \sum_{j_1=1}\sum_{j_2>j_1}\cdots\sum_{j_{n}>j_{n-1}}\theta_{b,j_1}\theta_{b,j_2}\cdots\theta_{b,j_n},
+ \quad n\ge 1,
 \end{align}
-The $s$ integral can be straightforwardly carried out term by term, and the $\delta$-function
-can be used to pin paths onto the surface, with the result
+where $\I[b]n=1$ when there are exactly $n$ points inside body $b$, and zero otherwise;  
+there are $n$ sums over indices $j_{n}$, each of which terminates at $j_n=N$.  
+There are further restrictions on which of these terms contribute in the integrand.
+Due to the presence of the $\delta$-functions, only $N-1$ points are free to 
+enter the bodies.  This further implies that the number of points inside both bodies must be less than $N-1$. 
+Finally, due to the renormalization only paths with at least one point inside the first body contribute.  
+Using the indicator functions, the re-arranged spatial path-integral for the force is 
 \begin{align}
-  \vect{F}_2 =& (-1)\int d\vect{x}_0 \sum_{j=0}^{N-1}\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\nonumber\\
-  &\hspace{0.5cm}\times \bigdlangle\hat{n}_2(\vect{x}_j)
-  \I[1]m\I[2]n f_{m,n}\bigdrangle_{\sigma_2(\vect{x}_j-\vect{R}_2)=0}
+  W_{F,2} =& (-1)\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle \sum_{j=0}^{N-1}\hat{n}_2(\vect{x}_j)\delta_{2,j}\nonumber\\
+  &\times\sum_{n=0}^{N-1}
+  \big(e^{-s(n+1)\chi_2/N}-e^{-sn\chi_2/N}\big)\I[2]n\nonumber\\
+  &\times \sum_{m=1}^{N-n-1}\big(1- e^{-s m \chi_1/N} \big)\I[1]m
+  \biggdrangle_{\vect{x}(t)},
+\end{align}
+The $s$-integral can be carried out term by term, the $\delta$-function can be used to pin paths onto the surface,
+and the cyclic-permutation invariance of the path can be used to remove the path-average over pinning, 
+as in Eq.~(\ref{eq:delta-normal}).
+The full force path-integral is given by 
+\begin{align}
+  \vect{F}_2 =& (-1)\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
+  \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
+\nonumber\\
+  &\hspace{0.5cm}\times \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
+  \I[1]m\I[2]n f_{m,n}\bigdrangle_{\vect{x}(t)}
   \label{eq:occupation_force}
 \end{align}
-where 
+where the material dependence is carried by 
 \begin{align}
-  f_{m,n}&:=c_{m,n}-c_{m,n+1}-c_{0,n}+c_{0,n+1}\\
-  c_{m,n} &:= \bigg( 1 + \frac{m\chi_1+n\chi_2}{N}\bigg)^{-\alpha}.
+  f_{m,n}&:=c_{m,n}-c_{m,n+1}-c_{0,n}+c_{0,n+1},\\
+  c_{m,n} &:= \bigg( 1 + \frac{m\chi_1+n\chi_2}{N}\bigg)^{-\alpha},
 \end{align}
-% \begin{align}
-%   f_{n,m}=& \frac{[1+(m\chi_1+n\chi_2)/N]^{-\alpha} -[1+n\chi_2/N]^{-\alpha}\nonumber\\
-%   &\hspace{0.5cm}-\big\{1+[m\chi_1+(n+1)\chi_2]/N\big\}^\alpha \nonumber\\
-%   &\hspace{0.5cm}+[1+(n+1)\chi_2/N]^{-\alpha}.
-% \end{align}
-In this result the indicator functions carry the position dependence, while $f_{n,m}$ carries
-the dependence on material properties based on the number of points inside each body.  
+which come from computing the change in the renormalized energy integrand as another point enters
+the second body.  When $\chi_2/N\ll 1$, $f_{m,n}$ can be to leading order in $\chi_2/N$, 
+to recover our earlier results for the force.
+% The ensemble average $\dlangle\cdots\drangle_{\vect{x}(t)|\sigma_{2}(\vect{x}_j-\vect{R}_2)}$ should be understood to only allow 
+% paths where $\vect{x}_j$ is restricted to lie on the surface $\sigma_2(\vect{x}_j-\vect{R}_2)=0$.
+% This also applies to the term where $\vect{x}_0$ is fixed, and in that case $\vect{x}_0$ should be restricted to the surface.
+
+In this result the indicator functions carry the position dependence based on whether a given number of points are 
+within each body, while $f_{n,m}$ carries the dependence on material properties based on the number of points inside each body.  
 This expression is well-behaved in the $\chi\rightarrow\infty$ limit, where only 
 the $n=0, m>0$ terms contribute.  In the strong-coupling limit, the main contribution to the 
 force comes from paths that just graze the second surface, while also entering the first body.  
 
-This is exactly the construction of paths employed by Gies and Weber for computing 
-forces in the sphere-plate and cylinder-plate geometries in the Dirichlet limit~\cite{Weber2010}.  
-In that work they shift the paths so that the path just grazes the plane.  The force on the planar
+For completeness we note the analogous expressions for the torque and potential curvature.  
+The manipulations and reasoning used in Sec.~\ref{sec:path-pinning} for the torque and potential curvature
+apply here --- the only difference is the form chosen for the gradient, 
+and using the indicator functions in the integrand.  
+The torque path-integral is 
+\begin{align}
+  \vect{K}_2 =& -\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
+  \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
+  \nonumber\\
+  &\times\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}
+  \Bigdlangle(\vect{x}_0-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_0) \nonumber\\
+  &\hspace{2.5cm} \times\I[1]m \I[2]n  f_{n,m}\Bigdrangle_{\vect{x}(t)}.
+\end{align}
+and the potential curvature is given by
+\begin{align}
+  C_{ij} =& \frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
+  \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS\, \hat{n}_1(\vect{x}_0)
+  \nonumber\\ 
+  &\times\biggdlangle 
+  \sum_{k=0}^{N-1}\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)
+  \nonumber\\
+  &\hspace{0.75cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+  \biggdrangle_{\vect{x}(t)|\sigma_2(\vect{x}_k-\vect{R}_2)=0}
+\end{align}
+where 
+\begin{align}
+  g_{m,n}=c_{m+1,n+1}+c_{m,n}-c_{m+1,n}-c_{m,n+1},
+\end{align}
+accounts for the change in the energy integrand as the number of points in the first and second
+bodies increase.
+In the strong-coupling limit, the potential curvature is dominated by terms with $n=m=0$,
+which correspond to paths that graze both bodies, while not entering either body.  
+
+The formulation for the Casimir force in Eq.~(\ref{eq:occupation_force}) 
+is exactly the construction of paths employed by Gies and Weber for computing 
+forces in the sphere-plane and cylinder-plane geometries in the Dirichlet limit~\cite{Weber2010}.  
+In that work paths are shifted so that the path just grazes the plane.  The force on the planar
 surface is computed by integrating the over the times when the path intersects the spherical or cylindrical surface.
 The expressions presented here extend their results by accounting for finite $\chi$, 
 and are framed in terms of general geometries.  
@@ -1059,60 +1007,607 @@ expressions as $\chi\rightarrow\infty$, as is better suited to a numerical metho
 This method instead highlights finding the times when the number of points inside each body 
 change.  
 
-% Energy
+
+
+% \section{Pinning}
+
+% Let's get the $\delta$-function manipulations correct.  
+% If we have 
 % \begin{equation}
-%   W = \int d\vect{x}_0 \sum_{n+m \le N}\dlangle \mathbf{I}_{n,m}[\vect{x}(t)] w_{n,m}\drangle 
+%   \int d^dx \delta(f(\vect{x}))g(\vect{x}) = \int\limits_{f^{-1}=0} d^{d-1}S \frac{1}{|\nabla f(\vect{S})|}g(\vect{x})
 % \end{equation}
+% where we split $\vect{x}$ into a surface normal, and tangent integrals, using
+% coordinates, $\vect{x}=(f,\vect{S})$, where $\vect{S}$ is $(d-1)$-dimensional, and $|\nabla f|$ using the vector norm.  
+% Now using the delta-function to limit the integration to lie on the surface we find 
+% \begin{align}
+%   F_{2,i}&=\frac{\hbar c a}{8\pi^2}\int \frac{dT}{T^3}\int\limits_{S_2} d^{d-1}\vect{x}_0 
+% \biggdlangle \frac{\chi_2\hat{R_i}\cdot\hat{n}_2}{\langle\epsr\rangle^{\alpha+1}}\biggdrangle
+% \end{align}
+% where we defined the normal vector field
+% \begin{equation}
+%   n_2 = \frac{-\nabla f_2}{|\nabla f_2|}.
+% \end{equation}
+
+%    Can treat delta-functions as pinning for Brownian bridges.  Then integrate over times.
+%    Consider only paths starting on one surface (thus potential must be smooth/regular).
+%     Convergence issues: For $\chi/N\gg 1$, the pinning estimate goes to zero.  Increasing 
+%     $N$ 
+%     Probability of appropriate path is low?
+%     Any one point saturates the integrand.  Region of available, non-zero $T$ goes to zero.  
+%     Gies method of parameterizing first touching times directly addresses this.  
+  
+%   \subsection{Potential Curvature}
+%     The pinning idea can be extended to a higher derivatives.  
+%     For a dielectric describing two bodies, we can rewrite derivatives of path-averages using 
+%     \begin{equation}
+%       \nabla_1\langle \epsr\rangle  
+% % = \bigg(\sum_k\nabla_k-\nabla_2\bigg)\frac{1}{N}\sum_j
+% %       [\epsilon_{\text{r},1}(\vect{x}_j-\vect{R}_1)+\epsilon_{\text{r},2}(\vect{x}_j-\vect{R}_2)],
+% = \bigg(\sum_k\nabla_k-\nabla_2\bigg)(\langle \epsilon_1\rangle+\langle\epsilon_2\rangle)
+%     \end{equation}
+%     where $\nabla_k$ denotes the gradient w.r.t the path-point $\vect{x}_k$, while $\nabla_1,\nabla_2$
+%     denote the gradients w.r.t. the body positions $\vect{R}_1$ and $\vect{R}_2$.  
+
+%     The gradient of the force, or curvature of the potential is given by 
+%     \begin{align}
+%       C_{ij} =& -\frac{\partial}{\partial R_{2,j} }F_{2,i}\\
+%       =&\frac{\hbar c a}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
+%       &\times\biggdlangle \hat{R}_{2,j}\cdot(\sum_k\nabla_k-\nabla_1)
+%       \frac{\chi_2\hat{R}_{2,i}\cdot\nabla\theta(\sigma_2)}{\langle\epsr\rangle^{a+1}}\biggdrangle
+%     \end{align}
+%     If we integrate by parts on the first gradient, the gradients act on the Gaussian probability distribution,
+%     and pull down a factor proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
+%     For closed paths this sum of increments vanishes, and thus we can drop this term.  
+%     \begin{align}
+%       C_{ij} 
+%       =&\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{d\cT}{\cT^3}\int d\vect{x}_0 \nonumber\\
+%       &\times\biggdlangle (-1)\frac{\chi_1[\hat{R}_{2,j}\cdot\langle \nabla_1\theta(\sigma_1)\rangle]
+%       [\chi_2\hat{R}_{2,i}\cdot\langle \nabla\theta(\sigma_2)\rangle]}{\langle\epsr\rangle^{a+2}}\biggdrangle.
+%     \end{align}
+%     By exploiting the delta functions, and restricting to paths that are constrained to touch both surfaces
+%     we can write the potential curvature as 
+% \begin{align}
+%   C_{ij}&=\frac{\hbar c a(a+1)}{8\pi^2}\int \frac{dT}{T^3}
+% \biggdlangle \int_{S_1} dx_0 \sum_{k=1}^{N-1}\frac{1}{N}\int_{S_2} dx_k
+%   \nonumber\\
+%   &  \frac{\chi_1\chi_2\hat{R}_{2,j}\cdot\hat{n}_1(\vect{x}_0)\hat{R}_{2,i}\cdot\hat{n}_2(\vect{x}_k)}
+%   {\langle \epsr(x)\rangle^{a+2}}\frac{e^{-N(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k)\Delta T)}}
+%   {(2\pi \Delta T)\sqrt{k (N-k)}}\biggdrangle
+% \end{align}
+%     As written, there is no need for any further renormalization, since this is only non-zero in the presence 
+%     of both bodies.  
+%     A similar expression for pinned paths can be developed to compute the force on an atom near
+%     a surface.  In that case, we restrict $\vect{x}_0$ to coincide with the atom's position.  
+
+% (To numerical sample from the $k$ distribution, we will take sample uniformly
+% -despite being sub-optimal, the shape depends strongly on how large $d/T$ is.  
+% For $d/T$ small, $[k(N-k)]^{-1/2}$ dominates,  While for $d/T\sim 1$ it's more dominated
+% by $k(N-k)$, or a Gaussian.  
+% Alternatively, subdivide the region into $N_s$ sub-samples, and uniformly sample from those.  
+
+% \subsection{Torque}
+
+% A similar construction can be made to find the torque.  We will consider rotating 
+% one of the bodies, an angle $\theta$ about an axis $\vect{n}$ relative to some reference configuration.
+% Then the torque can be written as 
+% \begin{equation}
+%   K_n = \partial_\theta U[\vect{x}-\vect{R}_1,\mathcal{R}(\vect{x}-\vect{R}_2)]
+% \end{equation}
+% where $\mathcal{R}= \exp(-\theta n_i \epsilon_{ijk})$ is the rotation operator in 3D, where $\epsilon_{ijk}
+% $ is the antisymmetric Levi-Civita tensor, and $\vect{R}_i$ are the respective centers of the bodies, 
+% with surfaces defined by $\sigma_i$. \comment{I think this is the torque in the $\vect{n}$ direction.}
+
+% For the worldline path integrals the torque can be written as 
+%     \begin{equation}
+%       K_n = \int d\vect{x_0} \biggdlangle \frac{\partial_\theta[\mathcal{R}_{ij}(\theta)(x_j-R_{2,j})]
+%         \partial_i \sigma_2(\vect{x}'-\vect{R}_2')\delta(\sigma_2)}{\langle 1+\chi_1\theta(\sigma_1)+
+%         \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+%     \end{equation}
+%     introduce rotated coordinates $\vect{x}' = \mathcal{R}\vect{x}$.  
+%     \comment{Repeated application of the chain rule.  }
+
+%  Find that $ \partial_\theta \mathcal{R} = -n_i\epsilon_{ijk}$.
+%     \begin{equation}
+%       K_n = \int dS_2 \biggdlangle \frac{-n_i\epsilon_{ijk}(x'_k-R_{2,k}')\partial_j \sigma_2'\delta(\sigma_2)}
+%       {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+%     \end{equation}
+%   Note that our choice of original configuration is arbitrary.  We can choose to set $\theta=0$.  
+%     (Derivation Amounts to finding energy shift from infinitesimal rotation.)
+%     In this case the axis $\hat{n}$ is also arbitrary, and we can use $K_n=\hat{n}\cdot\vect{K}$,
+%     to write the full torque as 
+%     \begin{equation}
+%       \vect{K} = \int\frac{dT}{T^3}\int dS_2 \biggdlangle \frac{(\vect{x}'-\vect{R}_{2}')\times \hat{n}_2}
+%       {\langle 1+\chi_1\theta(\sigma_1)+ \chi_2\theta(\sigma_2)\rangle^{a+1}}\biggdrangle
+%     \end{equation}
+
+% \section{Strong coupling limits}
+
+%   Compute strong coupling potential as based on probability to \emph{not} touch a surface.
+%     \begin{equation}
+%       \mathcal{M}(\vect{x}(t)) = (1-\prod_k e^{-V_{1,k}})(1-\prod_j e^{-V_{2,j}})
+%     \end{equation}
+%     In strong coupling we can treat the potential along each step as 
+%     \begin{equation}
+%     e^{-V_{1,k}} \approx 1 - \theta(\sigma_1(\vect{x}_k-\vect{R}).
+%   \end{equation}
+%     The total renormalized potential is then 
+%     \begin{equation}
+%       \mathcal{M}(\vect{x}(t)) = [1-\prod_k (1-\theta_{1,k})][1-\prod_j (1-\theta_{2,j})].
+%     \end{equation}
+%     This is unity when a given path intersects both body one, and body 2.  This is 
+%     a representation of the $\mathcal{M}$ functional from Schafer~\etal\cite{Schafer2016}.
+
+%     The worldline path integral can then be written as 
+%     \begin{equation}
+%       U = \int \frac{dT}{T^3} \int d\vect{x}_0\dlangle \mathcal{M}(\vect{x}) \drangle
+%     \end{equation}
+%     Under linearity, there are a few choices available for which order to do integrals and ensemble
+%     averaging.  Difference shows up when considering gradients.  
+
+%   Gies/Weber ordering
+%     \begin{equation}
+%       U = \dlangle \int d\vect{x}_0 \int \frac{dT}{T^3} \mathcal{M}(\vect{x}) \drangle
+%     \end{equation}
+%     Determine $\mathcal{M}(t)$ for a given path, and parameterize as function of $x,T$.
+%     Then carry out integrals (analytically for simple geometries).  
+%     Then average over paths.  
+%     \begin{equation}
+%       U = \dlangle \int d\vect{x}_0 \sum_{T_k}\int_{T_k}^{T_{k+1}} \frac{dT}{T^3}\drangle,
+%     \end{equation}
+%     where $T_k=T_k(\vect{x}(t),\sigma_1,\sigma_2)$ are set of crossing times, when path is in contact with both bodies.  
+%     Not all points will touch surface.  
+%     For planes, this is simple $T_k = \frac{(d-x_0)^2}{B_k^2}$.
+%     Can find force via differentiation.  In general complicated relationship. 
+    
+%     Note that the prior strong-coupling limit treated the surface as thin plates.  This is recovered 
+%     from our formulation 
+
+%     Direct differentiation w.r.t. the body position is 
+%     \begin{align}
+%       \partial_{2,i}\mathcal{M}(\vect{x}(t)) =& (-1)\big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
+%       &\times \sum_j\partial_i\sigma_2\delta[\sigma_2(\vect{x}_j-\vect{R}_2)]\prod_{l\ne j}(1-\theta_{2,l}).
+%     \end{align}
+
+%     Then force worldline path-integral is 
+%     \begin{align}
+%       \vect{F}_2 =& (-1)^2\frac{\hbar c}{8\pi^2} \int \frac{d\cT}{\cT^3}\int_{S_2} d\vect{x}_0 \biggdlangle 
+%       \big[1-\prod_k (1-\theta_{1,k})\big]\nonumber\\
+%       &\times \hat{n}_2\prod_{l\ne 0}(1-\theta_{2,l})\biggdrangle.
+%     \end{align}
+%     \comment{two negative signs: force= -grad U, and $\partial_r \sigma(x-r) = -sigma'(x-r)$}
+%     If naively construct paths pinned to surface, as advocated above, only rare paths
+%     that do not enter into body 2 contribute.  Better to think of finding first touching time 
+%     for paths: want paths that enter the first body, and just graze the second.  
+%     Easiest to generate paths, and find first touching time via root-finding.  
+%     This amounts to interpreting $\delta(\vect{x}_j-\vect{R})$ as $\delta[f(T)]$.
+%     This is exactly the construction of paths employed by Gies and Weber for the sphere-plate 
+%     and cylinder-plate geometries~\cite{Weber2010}.  In that work, they re-center the paths such 
+%     that the minimum contact of the path just grazes the plane.
+
+%    Contrast to Weber approach\cite{Weber2009, Weber2010}. They take derivatives of worldline properties, and average
+%     that expression over worldline ensemble, and positions/times. 
+%     Captures first touching times, that would be otherwise rare events for paths starting on
+%     surface.  Better suited to Dirichlet Limit. 
+
+%     Similar reasoning can be exploited at finite $\chi$.  
+%   For a particular path and starting position, Can think of 
+%   $\int dT \epsr = \sum_j\int_{T_j}^{T_{j+1}}dt c_j$, where $j$ indexes set of times when a point on 
+%   the path lies just on the surface of one of the bodies, with $c_j$ being an appropriate constant.  
+%   In this discretization, $T_j$ carry the geometric information.  Under differentiation, these are what change.  
+
+% \section{Gradients for Worldline Casimir Energies}
+% \label{sec:forces}
+% Computing the derivatives of Casimir energies between macroscopic bodies requires a different
+% set of methods since the Casimir energy%~(\ref{eq:casimir_energy})
+%  is found via an integral over all starting point of the path.  
+% To compute the force, potential curvature and torque in this framework one must differentiate the worldline path integral
+% with respect to the distances and angles between the bodies, rather than the starting point over the path.  
+% % These  will yield general worldline expressions for the force, potential curvature, and torque.  
+% % points of the paths, a different class of methods must be developed. 
+% We will derive two sets of expressions for the relevant derivatives, which correspond to different
+% varying the order in which limits are taken, and  have quite different numerical properties.  
+% In Sec.~\ref{sec:path-pinning} the first set of expressions emphasize
+% pinning the paths to originate on the surface of the bodies, 
+% while in Sec.~\ref{sec:occupation}, the emphasis is instead on the times when the number of points inside a body changes.  
+
+% It is convenient to decompose the Casimir energy as 
+% \begin{equation}
+%   E = \frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty \frac{d\cT}{\cT^{1+D/2}} W,
+% \end{equation}
+% where the spatial path integral $W$ is defined as
+% \begin{align}
+%   W &:= \int d\vect{x}_0\biggdlangle \frac{1}{\langle\epsr\rangle^\alpha}-\frac{1}{[\epsr(\vect{x}_0)]^\alpha}\biggdrangle,
+%   \label{eq:spatial_path_integral}
+% \end{align}
+% and $\alpha=1/2$.  
+% We will focus our development on $W$, as this carries all of the essential spatial
+% information, and the full path-integral expressions can be restored by including the $\cT$ integral and constants. 
+
+% We consider a general geometry for computing Casimir forces between dielectrics, which is shown in Fig.~\ref{fig:spud_sketch}.
+% The dielectric $\epsr(\vect{x})$ is specified by 
+% \begin{equation}
+%   \epsr(\vect{x}) = 1+\sum_j\chi_j\theta[\sigma_j(\vect{x}-\vect{R}_j)],
+% \end{equation}
+% where $\chi_j$ is the dielectric susceptibility of body $j$, $\sigma_j(\vect{x})=0$ 
+% defines the surface of body $j$, with $\sigma_j>0$ and $\sigma_j<0$ inside and outside the body
+% respectively, and $\vect{R}_j$ is the center of that body.  
+% % \begin{figure}
+% %   \includegraphics[width=\columnwidth]{fig/spud_sketch}
+% %   \caption{Geometry for interacting dielectric bodies of susceptibility $\chi_j$, centered at
+% %     $\vect{R}_j$ relative to the origin.  The surfaces mark $\sigma_j=0$, and the surface normal vectors $\hat{n}_j$
+% %     are also marked.}
+% %   \label{fig:spud_sketch}
+% % \end{figure}
+
+% \section{Pinning Paths to Surfaces}
+% \label{sec:path-pinning}
+% \subsection{Force}
+% The components of the force on a body can be found by differentiating the energy with respect to the center of that body.
+% For example, the force on body $2$, in direction $\hat{x}_i$ is 
+% found from the directional derivative of the spatial path integral~(\ref{eq:spatial_path_integral}) with respect to $R_{2,i}$,
+% \begin{align}
+%   F_{2,i}:=-\frac{\partial W}{\partial R_{2,i}}
+%   =-\alpha\int d\vect{x}_0 
+%   \biggdlangle \frac{\chi_2\hat{x}_{i}\cdot\langle \nabla\sigma_2\delta(\sigma_2)\rangle}
+%   {\langle\epsr\rangle^{\alpha+1}}\biggdrangle.
+% \end{align}
+% % where 
+% % \begin{equation}
+% %   \frac{\partial}{\partial R_{2,i}}\epsr = -\hat{R}_{2,i}\cdot\nabla\sigma_2(\vect{x}-\vect{R}_2)\delta(\sigma_2).
+% % \end{equation}
+% The force can be simplified by using the path-averaged $\delta$-function to 
+% restrict the paths to lie on the surface of the body.  For a generic ensemble-averaged path integral
+% integrated against a potential $\vect{g}[\vect{x}(t)]$, integrating out the $\delta$-function and 
+% simplifying the path-average yields
+% \begin{align}
+%   &\int d\vect{x}_0\bigdlangle \vect{g}[\vect{x}(t)]\!\cdot\!\langle \nabla\sigma_2\delta(\sigma_2)\rangle\bigdrangle\nonumber\\
+%   % &= \int d\vect{x}_0\bigdlangle \vect{g}(\vect{x})\!\cdot\!\langle \nabla\sigma_2\delta(\sigma_2)\rangle\bigdrangle \nonumber\\
+%   &\hspace{0.5cm}= \int \!\!d\vect{x}_0\biggdlangle \vect{g}[\vect{x}(t)]\!\cdot\!
+%   \frac{\nabla\sigma_2(\x0)}{|\nabla\sigma_2(\x0)|}\biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0},
+%   \label{eq:delta-normal}
+% \end{align}
+% where $\dlangle\cdots\drangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}$ denotes the ensemble average over 
+% Brownian bridges subject to constraint on that $\vect{x}_0$ lie on the surface of body 2.
+% The renormalized force vector can be found by summing over all force components and subtracting off
+% the equivalent single-body expression,
+% \begin{align}
+%   \vect{F}_{2}&=
+%   -\alpha\!\! \int d\vect{x}_0  \chi_2\hat{n}_2(\vect{x}_0) \nonumber\\
+%   &\hspace{0.5cm}\times 
+%   \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}
+%   \Biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0},
+%   \label{eq:pinning_force}
+% \end{align}
+% where the unit surface normal vector for body 2 is defined as
+% \begin{equation}
+%   \hat{n}_2(\x0) := -\frac{\nabla \sigma_2(\x0-\vect{R}_2)}{|\nabla \sigma_2(\x0-\vect{R}_2)|}.
+% \end{equation}
+% The force on a body is found by starting the paths on the surface of that body,
+% and weighting the worldline contributions by the surface normal at the starting point.  
+% To compute the force it is still necessary to integrate over times $\cT$, with weight $\cT^{1+D/2}$.
+% Since different sections of the surface interact with the other body at different times $\cT$, each section's
+% contribution to the force will have differing weights, leading to an overall net force.
+
+% \subsection{Gradient of the Force}
+% This method can be easily extended to the second derivative of the worldline energy, which 
+% computes the potential curvature.  
+% \begin{equation}
+%   C_{ij} := \frac{\partial^2W}{\partial R_{2,i}\partial R_{2,j}}.
+% \end{equation}
+% For a dielectric describing two bodies, the derivatives with respect to $\vect{R}_2$ in direction $\hat{x}_i$, can be rewritten 
+% in terms of derivatives with respect to the first body's center $\vect{R}_1$, and the loop coordinates $\vect{x}_k$
+% \begin{align}
+%   \frac{\partial}{\partial R_{2,i}}\langle \epsr\rangle  
+%   =& \bigg(\sum_{k=1}^N\frac{\partial}{\partial {x}_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
+%   & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
+%   \label{eq:shift_derivative}
+% \end{align}
+% where $x_{k,i}$ is the $i^\text{th}$ component of the path position $\vect{x}_k$.  
+% The first derivative can be carried out as before,
+% \begin{align}
+%   C_{ij} = &      \alpha\int d\vect{x}_0 \biggdlangle 
+%   \hat{x}_{i}\cdot\bigg(\sum_k\frac{\partial}{\partial x_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
+%   &\hspace{3cm}\times\bigg[\chi_2
+%   \frac{\hat{x}_{j}\cdot\langle \nabla\sigma_2\delta(\sigma_2)\rangle}
+%   {\langle\epsr\rangle^{\alpha+1}}\bigg]\biggdrangle.
+% \end{align}
+% It is possible to integrate by parts so the derivatives with respect to the path positions $\vect{x}_k$, 
+% instead act on the Gaussian probability density,
+%  which yields a term proportional to $\sum_{k}(2\vect{x}_k-\vect{x}_{k+1}-\vect{x}_{k-1})$.
+% This sum of path increments vanishes for closed paths, and thus this term can be dropped.  
+% The remaining derivative can be straightforwardly evaluated,
+% and using Eq.~(\ref{eq:delta-normal}), there are now two path-averaged delta-functions which 
+% pin the paths to lie on different surfaces.  The first $\delta$-function pins the paths to start on
+% the first body, while the second $\delta$-function pins a different point of the path to lie on the second body,
+% and averages over which point is pinned.
+% The resulting expression for the potential curvature is 
+% \begin{align}
+%   C_{ij}&=
+%   \alpha(\alpha+1)\chi_1\chi_2\int d\vect{x}_0 \sum_{k=1}^{N-1}\frac{1}{N}
+%   \mathcal{G}(\vect{x}_0,\vect{x}_k,k)
+%   \nonumber\\
+%   &\hspace{0.5cm} \times\biggdlangle \frac{[\hat{x}_{i}\cdot\hat{n}_1(\vect{x}_0)][\hat{x}_{j}\cdot\hat{n}_2(\vect{x}_k)]}
+%   {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\sigma_1(\vect{x}_0-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}.
+%   \label{eq:potential_curvature}
+% \end{align}
+% where 
+% \begin{equation}
+%   \mathcal{G}(\vect{x}_0,\vect{x}_k,k)=\frac{e^{-N(\vect{x}_0-\vect{x}_k)^2/(2 k(N-k)\Delta \cT)}}{(2\pi \Delta \cT)\sqrt{k (N-k)}}
+% \end{equation}
+% is the Gaussian normalization factor from fixing $\vect{x}_k$ after $k$ steps, and returning to $\vect{x}_0$
+% in $N-k$ steps.  There is no need for any further renormalization, since this expression is only non-zero in the presence 
+% of both bodies, and $\mathcal{G}$ exponentially cuts off terms at small $\cT$.    
+% \subsection{Torque}
+% The torque on a body can be found from the first order variation in the energy as that body is
+% infinitesimally rotated about some axis.  
+% For concreteness, consider perturbing the dielectric by rotating the second body about its center
+% by angle $\phi$ about axis $\hat{m}$,
+% % \begin{equation}
+% %   K_m = -\partial_\phi W,
+% % \end{equation}
+% %where the perturbed dielectric is 
+% \begin{equation}
+%   \epsr(\vect{x}) = 1+\chi_1\theta[\sigma_1(\vect{x}-\vect{R}_1)]
+%   +\chi_2\theta\big\{\sigma_2[\mathcal{R}(\phi)(\vect{x}-\vect{R}_2)]\big\}.
+% \end{equation}
+% The infinitesimal rotation matrix is given by 
+% \begin{equation}
+%   \mathcal{R}_{ij}(\phi) = \delta_{ij} - \phi m_k\epsilon_{ijk},
+% \end{equation}
+% where $\epsilon_{ijk}$ is the antisymmetric Levi-Civita tensor, and throughout this subsection
+% there are implicit sums over repeated indices.    
+% The torque path integral can be written as 
+% \begin{equation}
+%   K_m = \alpha\chi_2\int d\vect{x_0} \biggdlangle \frac{\langle \partial_\phi[\mathcal{R}_{ij}(\phi)(x_j-R_{2,j})]
+%     \partial_i \sigma_2\delta(\sigma_2)\rangle}{\langle \epsr\rangle^{\alpha+1}}\biggdrangle
+% \end{equation}
+% This can be simplied into a more intuitive form, by pinning the paths to start on the surface of the second body,
+% and using the form of the infinitesimal rotation to write the result as a cross-product 
+% via $(\vect{a}\wedge\vect{b})_i=\epsilon_{ijk}a_jb_k.$  
+% In this case the axis $\hat{m}$ is also arbitrary, and we can use $K_m=\hat{m}\cdot\vect{K}$ to 
+% sum over all components of the torque.  
+% The full torque worldline path integral is then 
+% \begin{align}
+%   \vect{K} =& \alpha\chi_2  \int d\vect{x}_0 
+%   \biggdlangle \big[(\vect{x}_0-\vect{R}_{2})\wedge \hat{n}_2(\vect{x}_0)\big]\nonumber\\
+%   &\hspace{0.5cm}\times \bigg[\frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}
+%   -\frac{1}{\langle \epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}\bigg]\biggdrangle_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}.
+% \end{align}
+% This has the intuitive interpretation of finding the total torque on the body by 
+% integrating over its surface and taking the cross-product of the vector from the body's center to a surface
+% element with the force density at that surface element.  
+
+% \subsection{Casimir--Polder Force}
+
+% We briefly note that an alternative expression for the Casimir--Polder force on an atom near a surface
+% can be found in analogy to the potential curvature in Eq.~(\ref{eq:potential_curvature}).
+% The force on the atom is $F\subCP = -(\partial E\subCP)/(\partial x_{0,i})$.
+%   In Sec.~\ref{sec:partial_average} we took the derivatives of the path integral immediately,
+%   with the dominant contribution coming from the Gaussian probability distribution.  
+%   Instead, one can change the coordinates to $\vect{x}(t)=\vect{x}_0+\vect{y}(t)$, where 
+%   $\vect{y}(t)$ is a Brownian bridge starting and returning to the origin, $\vect{y}(0)=\vect{y}(\cT)=0$.
+%   The resulting force expression is
+% \begin{align}
+%   F_i =&\, -\frac{\hbar c\alpha_0}{4(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}}\biggdlangle 
+%   \frac{\partial}{\partial x_{0,i}}\langle\epsr\rangle^{-3/2}
+%   \biggdrangle_{\vect{y}(t)},
+% \end{align}
+% where this path integral considers the change in energy as the whole path is translated,
+% while the results in Sec.~\ref{sec:partial_average}
+% correspond to shifting only the origin of the path, while keeping the rest of the path fixed.
+% The derivatives can be carried out, which for step-wise media create delta-functions.  In analogy 
+% with the potential curvature, since the starting point is fixed, one must still average over 
+% pinning other path points to lie on the dielectric surface.  
+% In which case after summing over all components the Casimir--Polder force is 
+% \begin{align}
+%   \vect{F}\subCP&=-\frac{3\hbar c\alpha_0}{8(2\pi)^{D/2}}
+%   \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
+%    \nonumber\\
+%    &\hspace{0.5cm} \times   \sum_{j}\sum_{k=1}^{N-1}\frac{\chi_j}{N}\mathcal{G}(\vect{x}_A,\vect{x}_k,k)
+% \biggdlangle \frac{\hat{n}_j(\vect{x}_k)}
+%   {\langle \epsilon_{\mathrm{r}}\rangle^{5/2}}     \biggdrangle_{\sigma_j(\vect{x}_k-\vect{R}_j)=0},
+% \end{align}
+% where we have reverted to using $\vect{x}(t)$ paths, 
+% and have restored the $\cT$-integral and constants for comparison with earlier results.
+
+% \section{Occupation Number}
+% \label{sec:occupation}
+
+% The preceding methods offer an intuitive picture of the Casimir force,
+% however they are poorly behaved as one takes the strong coupling limit.  
+% For a typical path of $N$ steps pinned to the surface, approximately half 
+% of the path will lie inside the body.  For $\chi\gg N$, the denominator $\langle\epsr\rangle^{-1/2}$ dominates
+% the integrand, so estimate of the derivatives tends to zero as $\chi^{-1/2}$ for almost all paths.  
+% Only rare paths which start on the surface, but do not enter the bulk of the body will contribute significantly.  
+% As a result the estimated force goes to zero in the strong-coupling limit.
+% In this section we develop an alternative expression which is better behaved in the strong-coupling
+% limit and makes direct contact with prior work on Dirichlet worldlines.  
+
+% In a similar fashion to Eq.~(\ref{eq:eps_gamma}), the spatial path integral can be written in exponential form via the Gamma function,
+% \begin{align}
+%   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
+%   &\hspace{0.5cm}\times\bigdlangle e^{-\langle \sum_r\chi_r\theta_r(\vect{x})\rangle} - e^{-\sum_r\chi_r\theta_r(\vect{x}_0)}\bigdrangle\label{eq:W_exp2}
+% \end{align}
+% where we have introduced a shorthand notation $\theta_r(\vect{x}) = \theta(\sigma_r[\vect{x}-\vect{R}_r])$.
+% % This exponential form is similar to the approach required to account for non-zero temperature and material
+% % dispersion~\cite{Mackrory2016}.  The exponential expression also places the integrand in a suitable form 
+% % to exploiting relevant Feynman-Kac formulae.  
+% The exponential path-integral for two bodies, after the single-body expressions have been factored out can 
+% be factorized as 
+% \begin{align}
+%   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
+%   &\hspace{0.5cm}\times\Bigdlangle 
+%   (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1)\nonumber\\
+%   &\hspace{1.25cm}
+%   -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle\label{eq:W_exp2}
+% \end{align}
+% \comment{Pretty sure a Gies paper does a similar factorization.}
+% %\begin{align}
+%   % &e^{-s}[1+e^{-s\langle \chi_1(\vect{x})+\chi_2(\vect{x})\rangle } 
+%   % - e^{-s\langle \chi_1(\vect{x})\rangle }-e^{-s\langle \chi_2(\vect{x})\rangle}]\nonumber\\
+
+% The exponential of the path-averaged potential can be written as a product of potentials 
+% for each increment, and the potential can be simplified for step-function dielectrics,
+% \begin{align}
+%   e^{-s \langle\chi_r\theta_r(\vect{x})\rangle}= \prod_{k=0}^{N-1}
+%   \left[\bar{\theta}_{r,k}+\theta_{r,k}e^{-s\chi_r/N}\right].
+% \end{align}
+% where we introduced $\theta_{r,k} := \theta[\sigma_r(\vect{x}_k-\vect{R}_r)],$ 
+% and $\bar{\theta}_{r,k}:=1-\theta_{r,k}$.  The force path integral can be computed by differentiating
+% Eq.~(\ref{eq:W_exp2}) with respect to the body position $\vect{R}_2$,
+% % \begin{equation}
+% %   F_2 = (-1)\alpha\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\dlangle (1-\mathcal{V}_1)\mathcal{W}_2\drangle,
+% % \end{equation}
+% % where 
+% % \begin{align}
+% %   \mathcal{W}_r &:= \big(e^{-s\chi_r/N}-1\big)\sum_j\hat{n}_2(\vect{x}_j)\delta_{r,j}\nonumber\\
+% %   &\hspace{0.5cm} \times\prod_{k\ne j}\left\{1+\theta_{r,k}\big(e^{-s\chi_r/N}-1\big)\right\},
+% % \end{align}
+% % where $\delta_{r,j}$ restricts $\sigma_r(\vect{x}_j-\vect{R}_r)=0$.  
+% % Full force version with explicit steps. 
+% \begin{align}
+%   \vect{F}_2 =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
+%   \big(e^{-s\chi_2/N}-1\big)\nonumber\\
+%   &\times\sum_{j=0}^{N-1}\vect{n}_2(\vect{x}_j)\delta_{2,j}
+%   \prod_{k\ne j}\left(\bar\theta_{2,k}+\theta_{2,k}e^{-s\chi_2/N}\right)\nonumber\\
+%   &\times\bigg[1-\prod_{n}\left(\bar{\theta}_{1,n}+\theta_{1,n}e^{-s\chi_1/N}\right)\bigg]\biggdrangle,
+% \end{align}
+% where we have introduced $\delta_{r,j} = \delta[\sigma_r(\vect{x}_j-\vect{R}_r)]$.
+% The $s$ integral can be carried out if the integrand is rearranged into terms with 
+% a definite number of points inside each body.  
+% We define the indicator functions
+% \begin{equation}
+%   \I[r]n:= \sum_{j_1=1}\sum_{j_2>j_1}\cdots\sum_{j_{n}>j_{n-1}}\theta_{r,j_1}\theta_{r,j_2}\cdots\theta_{r,j_n},
+% \end{equation}
+% where the subscripts $n$ counts the number of points of the path that are inside body $r$,
+% and all of the sums terminate at $N$.  There are further restrictions on which of these 
+% terms contribute.  Due to the presence of the $\delta$-functions, only $N-1$ points are free to 
+% enter the bodies.  This further implies that the number of points inside both bodies must be less than $N-1$. 
+% Finally, due to the renormalization only paths with at least one point inside body 1 contribute.  
+% The re-arranged force is 
+% % \begin{align}
+% %   \vect{F}_2 =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
+% %   \big(e^{-s\chi_2/N}-1\big)\nonumber\\
+% %   &\times\sum_{j=0}^{N-1}\vect{n}_2(\vect{x}_j)\delta_{r,j}\sum_{n=0}^{N-1}e^{-sn\chi_2/N} \I^{(2)}_{n}\nonumber\\
+% %   & \bigg(1-\sum_{m=0}^{N-n-1} e^{-s m \chi_1/N} \mathbf{I}^{(1)}_{m}\bigg)
+% %   \biggdrangle,
+% % \end{align}
+% % Restrict sums since one point is fixed to line on body, so $N-1$ points free.  If $n$ points inside
+% % one body, at most $N-1-n$ points in second body.  
+% % Rearranging, and noting only $m>0$ contributes after renormalization.  
+% % Can also write $1 = \sum_{m=0}^N \mathbf{I}_{m,r}$.
+% \begin{align}
+%   \vect{F}_2 =& (-1)\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle \sum_{j=0}^{N-1}\hat{n}_2(\vect{x}_j)\delta_{r,j}\nonumber\\
+%   &\times\sum_{n=0}^{N-1}\I[2]n
+%   \big(e^{-s(n+1)\chi_2/N}-e^{-sn\chi_2/N}\big)\nonumber\\
+%   &\times \sum_{m=1}^{N-n-1}\big(1- e^{-s m \chi_1/N} \big)\I[1]m
+%   \biggdrangle,
+% \end{align}
+% The $s$ integral can be straightforwardly carried out term by term, and the $\delta$-function
+% can be used to pin paths onto the surface, with the result
+% \begin{align}
+%   \vect{F}_2 =& (-1)\int d\vect{x}_0 \sum_{j=0}^{N-1}\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\nonumber\\
+%   &\hspace{0.5cm}\times \bigdlangle\hat{n}_2(\vect{x}_j)
+%   \I[1]m\I[2]n f_{m,n}\bigdrangle_{\sigma_2(\vect{x}_j-\vect{R}_2)=0}
+%   \label{eq:occupation_force}
+% \end{align}
 % where 
 % \begin{align}
-%   w_{n,m} =& 1+\frac{1}{[1+(n\chi_1+m\chi_2)/N]^\alpha}\nonumber\\
-%   &\hspace{0.5cm}-\frac{1}{(1+n\chi_1/N)^\alpha}-\frac{1}{(1+m\chi_2/N)^\alpha}
+%   f_{m,n}&:=c_{m,n}-c_{m,n+1}-c_{0,n}+c_{0,n+1}\\
+%   c_{m,n} &:= \bigg( 1 + \frac{m\chi_1+n\chi_2}{N}\bigg)^{-\alpha}.
 % \end{align}
-% Note that all of the position dependence is in the indicator function, which serves 
-% as a shorthand for the various combinatorics of step-functions.    
+% % \begin{align}
+% %   f_{n,m}=& \frac{[1+(m\chi_1+n\chi_2)/N]^{-\alpha} -[1+n\chi_2/N]^{-\alpha}\nonumber\\
+% %   &\hspace{0.5cm}-\big\{1+[m\chi_1+(n+1)\chi_2]/N\big\}^\alpha \nonumber\\
+% %   &\hspace{0.5cm}+[1+(n+1)\chi_2/N]^{-\alpha}.
+% % \end{align}
+% In this result the indicator functions carry the position dependence, while $f_{n,m}$ carries
+% the dependence on material properties based on the number of points inside each body.  
+% This expression is well-behaved in the $\chi\rightarrow\infty$ limit, where only 
+% the $n=0, m>0$ terms contribute.  In the strong-coupling limit, the main contribution to the 
+% force comes from paths that just graze the second surface, while also entering the first body.  
 
-For completeness we note the analogous expressions for the torque and potential curvature.  
-The torque path integral is 
-\begin{align}
-  \vect{K}_2 =& (-1)\int d\vect{x}_0 \sum_{j=0}^{N-1}\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\nonumber\\
-  &\hspace{0.5cm}\times \bigdlangle(\vect{x}-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_j)
-  \mathbf{I}_{m,1}\mathbf{I}_{n,2}f_{n,m}\bigdrangle_{\sigma_2(\vect{x}_j-\vect{R}_2)=0}.
-\end{align}
-% Potential curvature
+% This is exactly the construction of paths employed by Gies and Weber for computing 
+% forces in the sphere-plate and cylinder-plate geometries in the Dirichlet limit~\cite{Weber2010}.  
+% In that work they shift the paths so that the path just grazes the plane.  The force on the planar
+% surface is computed by integrating the over the times when the path intersects the spherical or cylindrical surface.
+% The expressions presented here extend their results by accounting for finite $\chi$, 
+% and are framed in terms of general geometries.  
+
+% In general, different classes of paths are important in the finite $\chi$ and strong-coupling 
+% cases.  At small $\chi$, the most important path statistic is the sojourn time within the bodies,
+% while in strong-coupling regime, the first-touching time is the most important statistic.    
+% This is correspondence was previously used to describe the numerical convergence properties of as 
+% the resolution of the paths was varied~\cite{Mackrory2016}.  
+% More practically, this makes it difficult to use a single class of loops to evaluate the potential at all $\chi$:
+% in weak-coupling one wants a path-ensemble that enters all of the bodies, while in strong-coupling
+% it is the paths that just touch the surfaces that are most important.
+
+% The expressions for the force in Eqs.~(\ref{eq:pinning_force}) and (\ref{eq:occupation_force})
+% reflect taking two limits in different orders, namely the taking the large $N$ limit and differentiation.  
+% The first derivation assumed an arbitrarily fine path where $N\gg \chi$ for all $\chi$.  Under
+% differentiation the arbitrarily fine paths can be pinned to the surface, and there is a range of 
+% $\cT$ where the integrand is non-zero.  However for a discrete path of length $N$, for sufficiently large $\chi$, 
+% this range of $\cT$ is inaccessible, and thus the naive numerical estimate fails.    
+% The second derivation instead takes the $N\rightarrow\infty$ expression last, while using well-behaved
+% expressions as $\chi\rightarrow\infty$, as is better suited to a numerical method based on discrete paths.  
+% This method instead highlights finding the times when the number of points inside each body 
+% change.  
+
+% % Energy
+% % \begin{equation}
+% %   W = \int d\vect{x}_0 \sum_{n+m \le N}\dlangle \mathbf{I}_{n,m}[\vect{x}(t)] w_{n,m}\drangle 
+% % \end{equation}
+% % where 
+% % \begin{align}
+% %   w_{n,m} =& 1+\frac{1}{[1+(n\chi_1+m\chi_2)/N]^\alpha}\nonumber\\
+% %   &\hspace{0.5cm}-\frac{1}{(1+n\chi_1/N)^\alpha}-\frac{1}{(1+m\chi_2/N)^\alpha}
+% % \end{align}
+% % Note that all of the position dependence is in the indicator function, which serves 
+% % as a shorthand for the various combinatorics of step-functions.    
+
+% For completeness we note the analogous expressions for the torque and potential curvature.  
+% The torque path integral is 
 % \begin{align}
-%   C_{ij} =& \int d\vect{x}_0\int ds\, s^{\alpha-1}e^{-s}\nonumber\\
-%   &\biggdlangle\big(e^{-s\chi_1/N}-1\big)\big(e^{-s\chi_2/N}-1\big)\nonumber\\
-%   &\times\sum_{j}\hat{n}_1(\vect{x}_j)\delta_{1,j}\prod_{r\ne j}\left[\bar\theta_{1,k}+\theta_{1,k}e^{-s\chi_1/N}\right]\nonumber\\
-%   &\times\sum_{k}\hat{n}_2(\vect{x}_k)\delta_{2,k}\prod_{s\ne k}\left[\bar\theta_{2,k}+\theta_{2,k}e^{-s\chi_2/N}\right]
-%   \biggdrangle
+%   \vect{K}_2 =& (-1)\int d\vect{x}_0 \sum_{j=0}^{N-1}\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\nonumber\\
+%   &\hspace{0.5cm}\times \bigdlangle(\vect{x}-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_j)
+%   \mathbf{I}_{m,1}\mathbf{I}_{n,2}f_{n,m}\bigdrangle_{\sigma_2(\vect{x}_j-\vect{R}_2)=0}.
 % \end{align}
-% Group via indicator function.  
+% % Potential curvature
+% % \begin{align}
+% %   C_{ij} =& \int d\vect{x}_0\int ds\, s^{\alpha-1}e^{-s}\nonumber\\
+% %   &\biggdlangle\big(e^{-s\chi_1/N}-1\big)\big(e^{-s\chi_2/N}-1\big)\nonumber\\
+% %   &\times\sum_{j}\hat{n}_1(\vect{x}_j)\delta_{1,j}\prod_{r\ne j}\left[\bar\theta_{1,k}+\theta_{1,k}e^{-s\chi_1/N}\right]\nonumber\\
+% %   &\times\sum_{k}\hat{n}_2(\vect{x}_k)\delta_{2,k}\prod_{s\ne k}\left[\bar\theta_{2,k}+\theta_{2,k}e^{-s\chi_2/N}\right]
+% %   \biggdrangle
+% % \end{align}
+% % Group via indicator function.  
+% % \begin{align}
+% %   C_{ij} =& \frac{1}{\Gamma}\int d\vect{x}_0\int ds\, s^{\alpha-1}e^{-s}\big(e^{-s\chi_1/N}-1\big)\big(e^{-s\chi_2/N}-1\big)\nonumber\\
+% %   &\biggdlangle
+% %   \sum_{j,k}\vect{n}_1(\vect{x}_j)\vect{n}_2(\vect{x}_k)\delta_{1,j}\delta_{2,k}\nonumber\\
+% %   &\times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m e^{-s(m\chi_1+n\chi_2)/N}
+% %   \biggdrangle
+% % \end{align}
+% % Only $n=m=0$ contributes in strong-coupling limits.  
+% and the potential curvature is given by
 % \begin{align}
-%   C_{ij} =& \frac{1}{\Gamma}\int d\vect{x}_0\int ds\, s^{\alpha-1}e^{-s}\big(e^{-s\chi_1/N}-1\big)\big(e^{-s\chi_2/N}-1\big)\nonumber\\
-%   &\biggdlangle
-%   \sum_{j,k}\vect{n}_1(\vect{x}_j)\vect{n}_2(\vect{x}_k)\delta_{1,j}\delta_{2,k}\nonumber\\
-%   &\times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m e^{-s(m\chi_1+n\chi_2)/N}
-%   \biggdrangle
+%   C_{ij} =& \frac{\hbar c}{2(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0\biggdlangle 
+%   \sum_{j,k=0}^{N-1}\hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_j,\vect{x}_k,k-j)
+%   \nonumber\\
+%   &\hspace{1cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+%   \biggdrangle_{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}
 % \end{align}
-% Only $n=m=0$ contributes in strong-coupling limits.  
-and the potential curvature is given by
-\begin{align}
-  C_{ij} =& \frac{\hbar c}{2(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0\biggdlangle 
-  \sum_{j,k=0}^{N-1}\hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_j,\vect{x}_k,k-j)
-  \nonumber\\
-  &\hspace{1cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
-  \biggdrangle_{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}
-\end{align}
-where 
-\begin{align}
-  g_{m,n}=c_{m+1,n+1}+c_{m,n}-c_{m+1,n}-c_{m,n+1}
-  % c_{n,m}&=\bigg(1+\frac{m+1}{N}\chi_1+\frac{n+1}{N}\chi_2\bigg)^{-\alpha}+\bigg(1+\frac{m}{N}\chi_1+\frac{n}{N}\chi_2\bigg)^{-\alpha}\nonumber\\
-  % &-\bigg(1+\frac{m+1}{N}\chi_1+\frac{n}{N}\chi_2\bigg)^{-\alpha}-\bigg(1+\frac{m}{N}\chi_1+\frac{n+1}{N}\chi_2\bigg)^{-\alpha}
-  % c_{n,m}&=\{1+[(m+1)\chi_1+(n+1)\chi_2]/N\}^{-\alpha} + [1+(m\chi_1+n\chi_2)/N]^{-\alpha}\nonumber\\
-  % &-\{1+[(m+1)\chi_1+n\chi_2]/N\}^{-\alpha}-\{1+[m\chi_1+(n+1)\chi_2]/N\}^{-\alpha}
-\end{align}
-In the strong-coupling limit, the potential curvature is dominated by terms with $n=m=0$,
-which correspond to paths that graze both bodies, while not entering either body.  
+% where 
+% \begin{align}
+%   g_{m,n}=c_{m+1,n+1}+c_{m,n}-c_{m+1,n}-c_{m,n+1}
+%   % c_{n,m}&=\bigg(1+\frac{m+1}{N}\chi_1+\frac{n+1}{N}\chi_2\bigg)^{-\alpha}+\bigg(1+\frac{m}{N}\chi_1+\frac{n}{N}\chi_2\bigg)^{-\alpha}\nonumber\\
+%   % &-\bigg(1+\frac{m+1}{N}\chi_1+\frac{n}{N}\chi_2\bigg)^{-\alpha}-\bigg(1+\frac{m}{N}\chi_1+\frac{n+1}{N}\chi_2\bigg)^{-\alpha}
+%   % c_{n,m}&=\{1+[(m+1)\chi_1+(n+1)\chi_2]/N\}^{-\alpha} + [1+(m\chi_1+n\chi_2)/N]^{-\alpha}\nonumber\\
+%   % &-\{1+[(m+1)\chi_1+n\chi_2]/N\}^{-\alpha}-\{1+[m\chi_1+(n+1)\chi_2]/N\}^{-\alpha}
+% \end{align}
+% In the strong-coupling limit, the potential curvature is dominated by terms with $n=m=0$,
+% which correspond to paths that graze both bodies, while not entering either body.  
 
 \subsection{Numerical Implementation for Potential Curvature}
 

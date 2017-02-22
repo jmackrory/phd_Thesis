@@ -2,6 +2,35 @@
 
 Broad summary text.  Note of future directions and applications.
 
+\begin{itemize}
+  \item Developed scalar worldlines.  
+  \item Goal was for Gaussian, geometry independent, method for computing Casimir energies taking
+    into account dielectric properties.
+    Check against known calculations.
+    
+  \item Really missing on geometry independent, since polarization decomposition is restricted to
+    particular geometries.  Have idea of coupling on each step, with rotation/coupling based on how
+    nearest normal changes direction.
+    Ad-hoc.  Hard to definitively check and debug.
+  \item Carefully studied convergence properties, and developed numerical methods, that while 
+    only tested for planes could generalize as uncontrolled approximations.  (Add fields in quadrature)
+  \item In comparison with Scattering method - that is mature code, that works quickly.
+    It is currently limited to surface integrals, but apparently, can use effective surface currents
+    to capture slower variation.  State of the art actually employed in research groups looking to 
+    compute their Casimir-Polder potential.
+  \item Worldline may be useful companion for very different underpinnings, and convergence properties.
+    Worldline path resolution may be analogous to fine enough tesselation of surfaces.  
+    As yet, neither method can handle anisotropic media.  
+    
+  \item Also developed model for quantum trajectories accounting for camera noise.  
+    May one day be useful to lab in reconstructing atomic trajectories.
+
+  \item Maybe: 
+    Developed CUDA code for both worldlines (path generation, branching) and quantum trajectories
+    (weighting outcomes, FFT for split-operator)
+\end{itemize}
+
+
 
 %%% Local Variables: 
 %%% mode: latex

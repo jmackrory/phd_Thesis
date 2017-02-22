@@ -1219,13 +1219,21 @@ Describe open quantum systems, and include information from continuous measureme
     \begin{equation}
       d|\psi\rangle = -\frac{i}{\hbar}\op{H}|\psi\rangle dt 
       - \frac{\Gamma}{2}(\sigma^\dag\sigma-\langle \sigma^\dag\sigma\rangle)|\psi\rangle dt
-      + \left(\frac{\sigma|\psi\rangle}{\langle \sigma^\dag\sigma\rangle^{1/2}}-|\psi\rangle dN
+      + \left(\frac{\sigma|\psi\rangle}{\langle \sigma^\dag\sigma\rangle^{1/2}}-|\psi\rangle \right)dN
       \end{equation}
-    where $dN$ is Poisson process with mean
+    where $dN$ is Poisson process which is zero or one, with mean rate
     \begin{equation}
-      \dlangle dN\drangle = \Gamma \langle \sigma^\dag\sigma\rangle dt
+      \dlangle dN\drangle = \Gamma \langle \sigma^\dag\sigma\rangle dt.
     \end{equation}
-    Note that using $\dlangle\cdots\drangle$ for ensemble average over stochastic processes,
+    If Poisson process fires then detected emitted photon, which implies atom emitted photon, and should 
+    apply lowering operator.  If no photon detected, then less likely to be in excited state.  
+    Not only possible unravelling.  Can do homodyne detection - interfere light from atom
+    with local oscillator.  Can extract phase info about atomic dipole.  Often necessary since direct
+    detection typically has weak gain.  Interference effect amplifies the signal to detectable levels.
+    However note EMCCD cameras can resolve/detect single photons - will form core of that part of thesis.
+    Aspect of contextuality - type of measurement apparatus determines what can be inferred about the 
+    state of the system.
+ \item   Note that using $\dlangle\cdots\drangle$ for ensemble average over stochastic processes,
     and $\langle A\rangle:=\tr[A\rho]=\sum_i p_i \langle \psi_i|A|\rangle\psi_i\rangle$ 
     for quantum mechnical average.  
     \item Interpret photon detection or non-detection as gaining knowledge about state of system.

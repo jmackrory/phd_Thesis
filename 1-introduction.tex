@@ -2,11 +2,11 @@
 
 %suggest some unity to two disparate projects.  
 Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
-the probabilities of events~\cite{Sakurai1994}.
+the probabilities of events~(\cite{Sakurai1994}).
 The probability for an event to occur is given by the Born rule, which says the probability is given by 
 the absolute-square of the probability amplitude for that event.  
 If there are multiple pathways by which an event can take place, the total amplitude for an event is 
-the sum over the amplitudes for each possible pathways~\cite{Feynman1965}.  
+the sum over the amplitudes for each possible pathways~(\cite{Feynman1965}).  
 These paths encompass paths through abstract spaces, such as the number of excitations in a field.
 In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
 which are referred to as quantum fluctuations.
@@ -186,7 +186,7 @@ field theory calculations where the modes are described by plane waves.
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
-  \begin{fmfgraph*}(100,60)
+  \begin{fmfgraph*}(60,40)
     \fmfleft{i}
     \fmfright{o}
     \fmftop{t}
@@ -210,19 +210,20 @@ field theory calculations where the modes are described by plane waves.
 
 The Casimir-Polder energy shift can be split into a product of atomic and field pieces.  
 It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
-since on the imaginary frequency axis, most functions are smoothly decaying real functions.
+since on the imaginary frequency axis, most functions of interest are smoothly decaying real functions.
 \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
 To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
 \begin{equation}
   V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
 \end{equation}
 where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
-tensor~\cite{McLachlan1963, McLachlan1963a}.  The scattering part of the Green function essentially
-subtracts off the vacuum EM Green function $G^{(S)}=G-G^{(0)}$ --- this is essentially renormalizing the energy
+tensor~\cite{McLachlan1963, McLachlan1963a}.
+The scattering part of the Green function essentially subtracts off the vacuum 
+EM Green function $G^{(S)}=G-G^{(0)}$ --- this is essentially renormalizing the energy
 by subtracting off contributions that are independent of the bodies.  
 This has the same from as a linear-response calculation~\cite{Altland2011}, finding the linear-response of the 
-atom to it's interaction with the EM field.  In this case $\alpha_{ij}$ is the susceptibility of the 
-atom responding to perturbations in the EM field.  
+atom to it's interaction with the EM field.
+In this case $\alpha_{ij}$ is the susceptibility of the atom responding to perturbations in the EM field.  
 At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
 which satisfies
 \begin{equation}
@@ -242,7 +243,7 @@ The result of which is
 \begin{equation}
   V\subCP(\vect{r}) = \frac{\hbar c}{2\pi}\int_0^\infty ds \tr \log[I - \alpha(is) G^{(S)}(\vect{r},\vect{r})].
 \end{equation}
-\todo{Cite Barton?  Vogel/Welsch and students?}
+\todo{Cite Barton?}
 This method of computing Casimir--Polder energies via classical Green functions has been expanded upon
 in Ch. 7 of Milonni~\cite{Milonni1994}, Vogel and Welsch~\cite{VogelWelsch2006} and Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}.
 
@@ -280,8 +281,12 @@ boundary conditions on the surfaces.
 
 \begin{figure}
 \center
-\includegraphics[width=10cm]{fig/intro/twoplanes_wave}
-\caption{Sketch of allowed modes between perfectly conducting plates.}
+\includegraphics[width=6cm]{fig/intro/twoplanes_wave}
+\caption[Allowed modes between parallel plates]
+{Sketch of allowed modes between perfectly conducting plates. 
+ Only waves with a half-integer number of wavelengths fit between the plates.
+Blue modes are only allowed outside the plates, while green modes are allowed inside
+and outside.  Modes have been vertically offset for clarity.  }
 \label{fig:Casimir_sketch}
 \end{figure}
 
@@ -343,97 +348,80 @@ $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in in
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
 
-% As pointed out by Rosa~\etal~\cite{Rosa2010}\comment{right paper?}, 
-% the Lifshitz theory is a classical stochastic electrodynamics theory,
-% which attributes the fluctuations as thermal fluctuations of the medium.  
-% \comment{Does not fit at all}
-% In somewhat later activity from this school, Barash and Ginzburg further extended this work to 
-% discuss the finite temperature effects, dissipation and the relation to the
-% microscopic details of the medium~\cite{Barash1975}.  
-
 \subsection{Physical Interpretation}
 
 % Like many effects in quantum mechanics, one may come up with a number of interpretations for the source
 % of the Casimir effect.  
 
 % However, boundary conditions are idealizations that ignore the structure
-The Casimir effect --- like many quantum effects --- can be made to sound mysterious than it is.
 The Casimir effect naturally fits into the broader context of quantum field theory.  
+It is a natural manifestation of the fact that even in the vacuum state, there is still some
+energy associated with the field. 
+
 The Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
-which interact with one another via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.  
+which interact with one another via the electromagnetic field~(\cite{Jaffe2005, Rahi2009}).  
 This view makes the clearest connection to the underlying physics, rather than emphasizing idealized
 boundary conditions.  
 
-One can derive this as a low energy approximation from the fundamental theory of QED.  
+One can derive this as a low energy approximation from the fundamental theory of QED~(see Appendix A of \cite{Rahi2009}).  
 The material bodies are assumed to be composed on atoms and electrons, bound together via
 the principles of solid state physics.  The fundamental interactions between the particles 
 are electromagnetic in nature.  If we are interested in energies much lower than the binding energies
 of the constituent atoms, we can neglect any changes in this structure, the bulk properties of which determine
 the dielectric properties of the medium.  
 The electrons comprising the body still interact with the EM field, and for low energies and weak fields
-one can approximate this interaction via linear response.  
-The Casimir effect can be thought of as the interaction of electrons on different bodies with one another
-via the electromagnetic field.  
+one can approximate this interaction via the electron's linear response.  
+As Fig.~\ref{fig:Feynman-electron-action}) shows, the Casimir effect can be thought of as the 
+interaction of electrons on different bodies with one another via the electromagnetic field.  
+
+\todo{Effective interaction: expanding out perturbation theory leads to $\langle j_\mu j_\nu\rangle$
+correlation functions.  Via Kubo formalism for linear response, this is related to the conductivity
+tensor $\sigma_{\mu\nu}$, which is in turn related to the dielectric constant $\chi$}
 
 The dominant wavelengths for this interaction are on the order of the distance between the bodies,
 and the resonant wavelengths of the bodies.  The distances between the bodies are typically much
 larger than the distances between the constituent particles comprising the bodies.  As such we can treat
 the bodies as composite objects described by their bulk properties.    
 
-
-
-\begin{itemize}
-\item Wall-Wall Effective action.
-
-%  \begin{figure}
-%  \centering
-% % \begin{fmffile}{wall-wall}
-% % \begin{fmfgraph}(50,30)
-% %  \fmftop{t0,t1,t2,t3}
-% %  \fmfbottom{b0,b1,b2,b3}
-% %  \fmf{fermion,tension=0.5}{t1,v1}
-% %  \fmf{fermion,tension=0.5}{t2,v3}
-% %  \fmf{fermion,tension=0.5}{b1,v2}
-% %  \fmf{fermion,tension=0.5}{b2,v4}
-% %  \fmffreeze
-% % \fmf{photon,tension=0}{v1,v3}
-% % \fmf{photon,tension=0}{v2,v4}
-% % \fmf{fermion,tension=0}{v1,v2}
-% % %\fmf{fermion,tension=0,left}{v2,v1}
-% % \fmf{fermion,tension=0}{v3,v4}
-% % %\fmf{fermion,tension=0,right}{v4,v3}
-% % \end{fmfgraph}
+ \begin{figure}
+ \centering
+ \begin{fmffile}{wall-wall}
 % \begin{fmfgraph}(50,30)
 %  \fmftop{t0,t1,t2,t3}
 %  \fmfbottom{b0,b1,b2,b3}
-%  \fmf{phantom}{t1,v1}
-%  \fmf{phantom}{t2,v3}
-%  \fmf{phantom}{b1,v2}
-%  \fmf{phantom}{b2,v4}
+%  \fmf{fermion,tension=0.5}{t1,v1}
+%  \fmf{fermion,tension=0.5}{t2,v3}
+%  \fmf{fermion,tension=0.5}{b1,v2}
+%  \fmf{fermion,tension=0.5}{b2,v4}
 %  \fmffreeze
-% \fmf{photon}{v1,v3}
-% \fmf{photon}{v2,v4}
+% \fmf{photon,tension=0}{v1,v3}
+% \fmf{photon,tension=0}{v2,v4}
 % \fmf{fermion,tension=0}{v1,v2}
-% \fmf{fermion,tension=0,left}{v2,v1}
+% %\fmf{fermion,tension=0,left}{v2,v1}
 % \fmf{fermion,tension=0}{v3,v4}
-% \fmf{fermion,tension=0,right}{v4,v3}
+% %\fmf{fermion,tension=0,right}{v4,v3}
 % \end{fmfgraph}
-% \end{fmffile}
-% \caption{Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media.}
-% \end{figure}
-
- Picture of Electrons interacting with EM field.
-  Effective action at some loop order in basic QED.
-  Makes contact with fundamental physics.
-  Can then make sense of limits in which we are operating.
-  Doing perturbation theory on QED.
-  $\epsilon$ is linear response of medium to EM field, and working to leading order in $\epsilon$.
-  Amounts to $\order(\alpha_0^4)$ diagram for QED with electrons bound via nuclear potential.   (Again, very low energies).
-\item Assuming electrically neutral
-\item Far from atomic separations, so continuum approximation acceptable.
-\end{itemize}
-
-
+\begin{fmfgraph}(50,30)
+ \fmftop{t0,t1,t2,t3}
+ \fmfbottom{b0,b1,b2,b3}
+ \fmf{phantom}{t1,v1}
+ \fmf{phantom}{t2,v3}
+ \fmf{phantom}{b1,v2}
+ \fmf{phantom}{b2,v4}
+ \fmffreeze
+\fmf{photon}{v1,v3}
+\fmf{photon}{v2,v4}
+\fmf{fermion,tension=0}{v1,v2}
+\fmf{fermion,tension=0,left}{v2,v1}
+\fmf{fermion,tension=0}{v3,v4}
+\fmf{fermion,tension=0,right}{v4,v3}
+\end{fmfgraph}
+\end{fmffile}
+\caption[Casimir Energy in terms of fundamental QED processes. ]
+ {Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media,
+ but still interact with one another via exchanging photons.  The effective interaction of the 
+electrons with the field is described by the dielectric constant.}
+\end{figure}
 
 % \begin{enumerate}
 %   \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
@@ -447,43 +435,61 @@ the bodies as composite objects described by their bulk properties.
 
 \subsection{Distance and Energy Scales}
 
-\begin{enumerate}
 
-  \item Casimir energy at $1\mu m$.  Take a dipole of 1 Debye.    
-    Compare with 
-  \item Casimir pressure  at $1\mu m$
-  \item Cite Milonni for capacitance calculation.  
-
+The Casimir force is typically most important between $1$nm and $10\mu$.  Below a
+nanometer the continuum approximations used in computing the Casimir force begin to break down,
+and a more careful condensed matter treatment would be required.  Above $10\mu m$, the force and 
+energy become too small to measure. 
 
 We can estimate typical distance scales by considering the dominant 
 resonances of the medium, and the thermal wavelength.
   So the Casimir force is typically then important at distances below the
  transition wavelength which is usually around $1\mu m$.    
 
-% \item Considering long-wavelength approximation to medium.  Typically interested in forces
-%     on the micron-nanometer scale.  Above a few microns the force is too small to observe,
-%     while below a nanometer the forces are too strong to reliably isolate the atom 
-%     and the continuum approximation starts to break down.  
-
-\item The typical energy scale can also be estimated.
-  If we consider an atom with a static polarizability of 
-$\comment{polarizability}$, at a distance of $1\mu m$, we find the Casimir-Polder potential is \ldots. 
+The typical Casimir--Polder energy scale can roughly be estimated from dimensional considerations.
+For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
+is then $\alpha/sim \sum_jd_j^2/(\hbar\omega_j)$.
+The Casimir-Polder energy in the far-field is then
+\begin{align}
+  V_{CP} &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}\\
+%  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
+%  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
+  &= -\frac{10^{-31}}{10^{-19}} eV\\
+  &=-10^{-12}eV,
+\end{align}
+which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
+In the near-field, it is necessary to shift over to the van der Waals energy.
+As small as this energy is, it is the only attractive energy shift around for neutral atoms.
+\todo{Tempererature comparison}
 
 For macroscopic bodies we can compare the Casimir energy for perfect 
 metal conductors at a distance $d$ to the energy stored in the capacitance.
-  Note that we compute an energy per unit area.  
-\comment{Milonni makes the comparison to capacitance, \cite{Milonni1994}}
+Note that we compute an energy per unit area.  
 
 The Casimir energy per unit area is $\frac{\hbar c\pi^2}{240 d^3}$, while the voltage for a parallel plate capacitor is.
-\begin{shaded}
 \begin{enumerate}
-\item Capacitance is $V=Q/C$.  
-\item $C = \epsilon_0 A/d$.  
-\item Energy is $\frac{1}{2}CV^2=\frac{Q^2}{2C} $
-\end{enumerate}
-\end{shaded}
+    \item Casimir force per area: $F=\frac{-\pi^2\hbar c}{240d^4}$
+  \item Compare to Coulomb force between (pg. 219 of \cite{Milonni1994}) oppositely charged plates.
+    $F_{C} = 2\pi\sigma^2$.
+    \item Coulomb force for charge densities.  
+    \begin{align}
+      F = \int d^2xd^2y\,\frac{\sigma_1\sigma_2}{4\pi\epsilon_0[d^2+(x-y)^2]}
+    \end{align}
+    \item Go to relative-cylindrical coordinates.
+    \begin{align}
+      F &= -(\int d^2x)2\pi \int_0^y dy\,y\frac{\sigma_1\sigma_2}{4\pi\epsilon_0[d^2+y^2]}\\
+      &= -(\int d^2x)2\pi \frac{\sigma^2}{4\pi\epsilon_0}\int_0^y dy\,\frac{y}{[d^2+y^2]}\\
+      &= -(\int d^2x)2\pi \frac{\sigma^2}{4\pi\epsilon_0}\int_0^\infty dy\,\frac{y}{d^2+y^2}\\
+    \end{align}
 
-\item Casimir forces are short ranged forces and decay away quickly --- for example the 
+    \todo{Size of patch potentials for Lamoreaux}
+\end{enumerate}
+
+
+
+
+
+Casimir forces are short ranged forces and decay away quickly --- for example the 
   London dispersive force between two atoms decays as $d^{-6}$.  
 
   For macroscopic bodies, the decay of the Casimir energy is slower, since we can roughly think of
@@ -503,7 +509,7 @@ In comparison
     
 
 
-\item Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
+ Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
     of the interacting media, such as the atomic polarizablitiies $\alpha(\omega)$ or the dielectric
     function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
     $\omega_T=\kB T/\hbar$.  
@@ -526,7 +532,6 @@ In comparison
     the same as the near-field van der Waals regime.  
     \comment{table?}
 
-\end{enumerate}
 
 \section{Summary of Casimir Experiments}
 \label{sec:expt_review}
@@ -916,7 +921,7 @@ The scalar worldline method has been extended to finite temperatures~\cite{Kling
 and used to study the torsion of inclined planes~\cite{Weber2009},
 and forces in the sphere-plane and cylinder-plane geometries~\cite{Weber2010, Weber2010a}.  
 The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
-based on the geometry of the piston~\cite{Schaden2012}.
+based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
 
 
 We consider a scalar field coupled to a background potential $V(\vect{x},t)$.  This potential
@@ -1098,6 +1103,14 @@ around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble avera
 {Upper loop touches both objects and will contribute to Casimir energy.
   Lower loop only touches one body, and does not contribute to Casimir energy.}
 \end{figure}
+
+\todo{Note connection to semiclassical scattering approach of Schaden, and Scardiccio}.
+\begin{enumerate}
+  \item Semi-classical approach to Casimir force via trace formula~\cite{Schaden1998}
+  \item Also the optical path-integral \cite{Scardicchio2004, Scardicchio2006}.
+\end{enumerate}
+
+
 
 \subsection{Numerical method}
 

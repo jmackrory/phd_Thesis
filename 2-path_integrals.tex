@@ -3,7 +3,7 @@
 \label{ch:feynman_kac}
 
     The path integral was originally developed by Richard Feynman as an alternative formulation of quantum mechanics
-    ~\cite{Feynman1948,Feynman1965}.  
+    ~(\cite{Feynman1948,Feynman1965}).  
     In the path integral, the amplitude for a particle to propagate from one position to another,
     is given by the sum over \emph{all} possible paths between the points.  
     Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path,
@@ -76,11 +76,10 @@ to get amplitude to get from one position to another, add up \emph{all} possible
 
 In this section we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.  Our derivation will stay close in spirit to the 
-one found in Sakurai~\cite{Sakurai1994}.  More formal derivations are available from mathematical~\cite{Cartier2004},
-and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  We will extend the usual quantum derivation to
-including a source term, as is more common in statistics.   
+one found in Sakurai~\cite{Sakurai1994}.  We will extend the usual quantum derivation to
+including a source term, as is more common in statistics.   More formal derivations are available from mathematical~\cite{Cartier2004},
+and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  
 An detailed discussion of the more formal probabilistic derivation is availabble in Steck Sec 17.9~\cite{SteckNotes} .
-
 
 We aim to find a solution $f(x,t)$ to the driven diffusion equation given by 
 \begin{equation}
@@ -106,7 +105,7 @@ where the potential/killing rate is given by $V=V(\vect{x},t)$, and the source t
     \end{equation}
     We also need the position and momentum resolutions of the identity
     \begin{gather}
-      I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \\
+      I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \quad
       I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\rangle \langle \vect{p}|.
     \end{gather}
 The diffusion equation~(\ref{eq:diffusion_equation}) can be written in operator form
@@ -125,18 +124,18 @@ The transformed vectors obey
 \begin{equation}
   \partial_t|\tilde{f}\rangle = U^{-1}(t)|\tilde{g}\rangle.
 \end{equation}
-This equation can be formally integrated with respect to time
-\begin{equation}
-  |\tilde{f}(t)\rangle-|\tilde{f}(0)\rangle = \int_0^t ds |\tilde{g}(s)\rangle.
-\end{equation}
-If we transform back to the original vectors we find
+This equation can be formally integrated with respect to time,
+% \begin{equation}
+%   |\tilde{f}(t)\rangle-|\tilde{f}(0)\rangle = \int_0^t ds |\tilde{g}(s)\rangle.
+% \end{equation}
+and after we transform back to the original vectors we find
 \begin{equation}
   |f(t)\rangle = U(t)|f(0)\rangle + U(t) \int_0^t ds U^{-1}(s)|g(s)\rangle,
 \end{equation}
 where we used $|\tilde{g}(t)\rangle = U^{-1}(t)|g(t)\rangle$.  
 If we assume we can combine  the operators, then 
 \begin{equation}
-  f(x_f,t)\rangle = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
+  f(x_f,t) = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
 \end{equation}
 
 \subsection{Evaluating the matrix element}
@@ -151,10 +150,10 @@ where $U$ is the time-ordered evolution operator (so time increases towards the 
 \end{equation}
 If we insert position/momentum identities between each of these, we have
 \begin{align}
-  M_n &= \langle \vect{x}_f| e^{-\Delta T \op{H}(t_N)}|f\rangle\\
-  &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta T \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
-\prod_{j=1}^{N-1} e^{-\Delta T \op{H}(t_j)}|f\rangle\\
-  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
+  M_n &= \langle \vect{x}_f| e^{-\Delta T \op{H}(t_N)}|f\rangle%\\
+%   &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta T \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
+% \prod_{j=1}^{N-1} e^{-\Delta T \op{H}(t_j)}|f\rangle\\
+  = \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
   \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta T \op{H}(t_k)}|\vect{p}_k\rangle
     \langle \vect{p}_k| \vect{x}_{k}\rangle \right]
   \langle \vect{x}_0| f\rangle
@@ -165,11 +164,12 @@ and momentum pieces
 \begin{equation}
   e^{-\Delta T [\op{p}^2+V(\op{x})]} = e^{-\Delta T V(\op{x})}e^{-\Delta T \op{p}^2} +\order(\Delta T^2).
 \end{equation}
-The operators can then acquire the respective eigenvalues from operating to the left/right respectively.
+The postion and momentum operators then acquire the eigenvalues from operating to the left/right respectively.
+After carrying out the Gaussian momentum integrals, the matrix element is 
 \begin{align}
-  M_n  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
-  \prod_{j=1}^{N} e^{-\Delta T\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
-  f(\vect{x}_0,0)\\
+  M_n %  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
+  % \prod_{j=1}^{N} e^{-\Delta T\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
+  % f(\vect{x}_0,0)\\
 &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}}{(2\pi\Delta T)^{D/2}}
   \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta T)-\Delta T V(\vect{x}_k,t_k)}f(\vect{x}_0,0)
 \end{align}
@@ -179,8 +179,8 @@ by changing integration variables.
 We now define the vector Wiener increments $\Delta \vect{W}_k = \vect{x}_{N-k-1}-\vect{x}_{N-k}$ (note that this
 is backwards labelling from the usual convention).  The Jacobian determinant for this
 transformation is unity. Then we can write the positions in terms of the Brownian motion
-$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.  Since we are treating $\vect{x}_N$ as a fixed point
-(where we will be evaluating the solution) we should reference our points to that point.  
+$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.  Since we are treating $\vect{x}_N$ as a 
+constant position (where we will be evaluating the solution), we should reference our points to that point.  
 We can use
 \begin{equation}
   \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k.
@@ -719,32 +719,36 @@ term.  Also do the time arguments of $g$ work out?}
     which is exactly the factor we isolated in front of $\mathcal{M}$.  
   \item {Final results.  Can now use as basis for numerical methods since depends on loop-time.}
     So we have:
-    \begin{equation}
-      \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} \dlangle e^{-\int_0^T dt V_{TM}(x-d)}\drangle =  \left[\left( \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}}  + \sgn(d)\dfrac{e^{-(2d-c)^2/(2T)}}{\sqrt{2\pi T}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}\right)\theta(|d|-|c|) + \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}}\dfrac{2e^\Xi}{1 + e^{2\Xi}}\theta(|c|-|d|) \right]
-    \end{equation} 
-
-    Dan has:
-    \begin{equation}
-      \dlangle \exp\left[-\int_0^T dt V_{TM}(x-d)\right]\drangle = 1 + \frac{\sinh(\Xi/2)}{\cosh\Xi}[\sgn(d-c)e^{\sgn(d)\Xi/2} + \sgn(d)e^{-\sgn(d)\Xi/2}]e^{\left[c^2-(|d|+|c-d|)^2\right]/2t}.
-    \end{equation}
-    This agrees with my expressions for all cases.  This is useful for our numerical work.  
-    Let us check out the $\Xi$ prefactor against my work.  
     \begin{align}
-      F_{d>0,c<d} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[\sgn(d-c)e^{\sgn(d)\Xi/2} + \sgn(d)e^{-\sgn(d)\Xi/2}]\\
-      =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[e^{\Xi/2} + e^{-\Xi/2}] = \frac{e^{\Xi} - e^{-\Xi}}{e^\Xi+ e^\Xi}  
+      \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} \dlangle e^{-\int_0^T dt V_{TM}(x-d)}\drangle 
+      &=  \bigg( \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} 
+      + \sgn(d)\dfrac{e^{-(2d-c)^2/(2T)}}{\sqrt{2\pi T}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}\bigg)\nonumber\\
+      \theta(|d|-|c|) 
+      &+ \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}}\dfrac{2e^\Xi}{1 + e^{2\Xi}}\theta(|c|-|d|)
     \end{align}
-    works.
-    \begin{align}
-      F_{d>0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} + e^{-\Xi/2}] = -\frac{ e^{-\Xi} + e^{\Xi} -2}{e^\Xi + e^{-\Xi}},
-    \end{align}
-    works, 
-    \begin{align}
-      F_{d<0,c<d} =\frac{\sinh(\Xi/2)}{\cosh\Xi}[e^{-\Xi/2} -e^{\Xi/2}]=\frac{[(e^{\Xi/2}- e^{-\Xi/2})(e^{-\Xi/2} -e^{\Xi/2})]}{e^\Xi + e^{-\Xi}}=-\frac{e^\Xi + e^{-\Xi} -2}{e^\Xi + e^{-\Xi}},
-    \end{align}
-    works, and 
-    \begin{align}
-      F_{d<0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} -e^{-\Xi/2}] = -\frac{e^\Xi - e^{-\Xi}}{e^\Xi + e^{-\Xi}}
-    \end{align}
+    
+    % Dan has:
+    % \begin{equation}
+    %   \dlangle \exp\left[-\int_0^T dt V_{TM}(x-d)\right]\drangle = 1 + \frac{\sinh(\Xi/2)}{\cosh\Xi}[\sgn(d-c)e^{\sgn(d)\Xi/2} + \sgn(d)e^{-\sgn(d)\Xi/2}]e^{\left[c^2-(|d|+|c-d|)^2\right]/2t}.
+    % \end{equation}
+    % This agrees with my expressions for all cases.  This is useful for our numerical work.  
+    % Let us check out the $\Xi$ prefactor against my work.  
+    % \begin{align}
+    %   F_{d>0,c<d} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[\sgn(d-c)e^{\sgn(d)\Xi/2} + \sgn(d)e^{-\sgn(d)\Xi/2}]\\
+    %   =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[e^{\Xi/2} + e^{-\Xi/2}] = \frac{e^{\Xi} - e^{-\Xi}}{e^\Xi+ e^\Xi}  
+    % \end{align}
+    % works.
+    % \begin{align}
+    %   F_{d>0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} + e^{-\Xi/2}] = -\frac{ e^{-\Xi} + e^{\Xi} -2}{e^\Xi + e^{-\Xi}},
+    % \end{align}
+    % works, 
+    % \begin{align}
+    %   F_{d<0,c<d} =\frac{\sinh(\Xi/2)}{\cosh\Xi}[e^{-\Xi/2} -e^{\Xi/2}]=\frac{[(e^{\Xi/2}- e^{-\Xi/2})(e^{-\Xi/2} -e^{\Xi/2})]}{e^\Xi + e^{-\Xi}}=-\frac{e^\Xi + e^{-\Xi} -2}{e^\Xi + e^{-\Xi}},
+    % \end{align}
+    % works, and 
+    % \begin{align}
+    %   F_{d<0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} -e^{-\Xi/2}] = -\frac{e^\Xi - e^{-\Xi}}{e^\Xi + e^{-\Xi}}
+    % \end{align}
   \item Figure of TM potential.  Note connection to Neumann BC and reflection.  
 \end{enumerate}
 

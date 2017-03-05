@@ -15,6 +15,12 @@
 %% acknolwedgement was made optional. Missing periods in list of tables/figures were added. May2014 S.F.
 %% numbered lines in toc and lists were aligned to the left, & reduced the spacing from the numbering. Jun2014 S.F.
 
+
+%% JBM : 
+%% Added subsubsections to contents by changing tocdepth.
+%% Added phantomsection before addcontentsline.  This fixes pdf bookmark hierarchy.
+%% Added fix for lineno and mathmode with "patch".
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uothesis} %[2012/02/08 v2.5.6 Submission to University of Oregon Graduate School]
 \typeout{UO Thesis Class}

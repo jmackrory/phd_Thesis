@@ -135,9 +135,31 @@ where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alp
 and $\epsilon_0$ is the permittivity of free space.  Throughout this thesis we will refer to these
 atom-wall type forces as Casimir-Polder forces.  
 
+\comment{started transferred material}
+This interpretation follows from taking the EM field Hamiltonian to be 
+\begin{equation}
+  E = \sum_k \hbar\omega_k\left(\op{a}^\dag_k \op{a}_k + \frac{1}{2}\right)
+\end{equation}
+where $\op{a}_k$ is the annihilation operator for mode $k$.  In the absence of any excitations only the 
+constant term contributes.  
+The energy can also be recast as 
+\begin{equation}
+  E = \sum_k \frac{\hbar\omega_k}{2}\left(\op{a}^\dag_k \op{a}_k + \op{a}_k\op{a}^\dag_k\right),
+\end{equation}
+where the second term can be interpreted as spontaneous emission and re-absorption
+of a photon.
+The Casimir-Polder energy can also be thought of in terms of emitting and re-absorbing photons.
+In that case the interaction Hamiltonian is
+\begin{equation}
+  H_{\text{int}} = -\vect{d\cdot E} = -\sum_k(\sigma+\sigma^\dag)[a_kf^*_k(\hat{x})+a^\dag_kf_k(\hat{x})]
+\end{equation}
+These terms are normally dropped in the rotating-wave-approximation, as they 
+are typically much smaller than the energy-conserving terms.  
+\comment{dropped in material}
+
 We can now present a schematic computation of the Casimir-Polder potential, with an emphasis 
-on the broad techniques, intuition, and connections to other computations~( The discussion here follows Steck~
-\S{9.3} of Ref.\cite{SteckNotes}.  
+on the broad techniques, intuition, and connections to other computations~(
+ The discussion here follows Steck~\S{9.3} of Ref.\cite{SteckNotes}).  \todo{right period?}
 This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
 \begin{equation}
   H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}}(\hat{\vect{x}}) + \frac{e^2}{2mc^2}
@@ -158,7 +180,7 @@ where $E_m$ are the atom's energy levels, the photon has energy $\hbar\omega_k$,
 and $\langle E_n,1_\vect{k}\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$.
 The shift $V\subCP$ can be understood as two transitions - from the ground state with no photons to an excited state with one photon,
 and then transitioning back.  This is further summed over all possible intermediate states.
-This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:Feynman_CP}, where 
+This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
 is a ``virtual'' one, in that these intermediate states are not directly physically observable, 
 but rather reflect the apparatus of quantum mechanical perturbation theory.
@@ -176,12 +198,12 @@ field theory calculations where the modes are described by plane waves.
     \fmftop{t}
     \fmf{plain}{i,v1}
     \fmf{plain}{v2,o}
-    \fmf{plain,label=$|e\rangle$}{v1,v2}
+    \fmf{plain,label=$|e_j\rangle$}{v1,v2}
     \fmf{photon,left=0.5,tension=.4}{v1,vt,v2}
     \fmf{phantom,tension=1}{t,vt}
     \fmflabel{$|g\rangle$}{i}
     \fmflabel{$|g\rangle$}{o}
-    \fmflabel{$\gamma$}{vt}
+    \fmflabel{$|1_{\vect{k}}\rangle$}{vt}
   \end{fmfgraph*}
 \end{fmffile}
 \caption[Feynman Diagram for Casimir-Polder Energy]
@@ -273,7 +295,8 @@ and outside.  Modes have been vertically offset for clarity.  }
 \label{fig:Casimir_sketch}
 \end{figure}
 
-The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956}.
+The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
+Dzyaloshinskii1959,Dzyaloshinskii1961}.
 The Casimir force between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
 \begin{align}
@@ -301,30 +324,30 @@ energies.  For two plates the allowed modes satisfy the Fabry-Perot condition,
   \Delta = 1 - r_1r_2 e^{2ik d}.
 \end{equation}
 
-% \begin{itemize}
-%   \item $E = \sum_k\frac{\hbar \omega_k}{2}$
-%   \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
-%   \item Only allowed modes contribute.  
-%     Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
-%     $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
-%   \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
-%     $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
-%   \item So energy can be written as 
-%     \begin{equation}
-%       E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
-%     \end{equation}
-%     where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$.
-%   \item Now integrate by parts w.r.t. $z$
-%     \begin{equation}
-%       E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
-%     \end{equation}
-%   \item Now differentiate w.r.t $d$ to get force, and done.  
-% \end{itemize}
-% (Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
-% in scattering formalism})
+\begin{itemize}
+  \item $E = \sum_k\frac{\hbar \omega_k}{2}$
+  \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
+  \item Only allowed modes contribute.  
+    Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
+    $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
+  \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
+    $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
+  \item So energy can be written as 
+    \begin{equation}
+      E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
+    \end{equation}
+    where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$.
+  \item Now integrate by parts w.r.t. $z$
+    \begin{equation}
+      E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
+    \end{equation}
+  \item Now differentiate w.r.t $d$ to get force, and done.  
+\end{itemize}
+(Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
+in scattering formalism})
 
-This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
-showed the connection between Casimir force and the pair-wise van der Waals potentials.  
+% This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
+% showed the connection between Casimir force and the pair-wise van der Waals potentials.  
 This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
 
 The Casimir-Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
@@ -347,25 +370,7 @@ and relation to the microscopic details of the medium.
 % However, boundary conditions are idealizations that ignore the structure
 The Casimir effect naturally fits into the broader context of quantum field theory.  
 Casimir initially framed the effect as a result of the zero-point energy associated with each mode of
-the field.  This interpretation follows from taking the EM field Hamiltonian to be 
-\begin{equation}
-  E = \sum_k \hbar\omega_k\left(\op{a}^\dag_k \op{a}_k + \frac{1}{2}\right)
-\end{equation}
-where $\op{a}_k$ is the annihilation operator for mode $k$.  In the absence of any excitations only the 
-constant term contributes.  
-The energy can also be recast as 
-\begin{equation}
-  E = \sum_k \frac{\hbar\omega_k}{2}\left(\op{a}^\dag_k \op{a}_k + \op{a}_k\op{a}^\dag_k\right),
-\end{equation}
-where the second term can be interpreted as spontaneous emission and re-absorption
-of a photon.
-The Casimir-Polder energy can also be thought of in terms of emitting and re-absorbing photons.
-In that case the interaction Hamiltonian is
-\begin{equation}
-  H_{\text{int}} = -\vect{d\cdot E} = -\sum_k(\sigma+\sigma^\dag)[a_kf^*_k(\hat{x})+a^\dag_kf_k(\hat{x})]
-\end{equation}
-These terms are normally dropped in the rotating-wave-approximation, as they 
-are typically much smaller than the energy-conserving terms.  
+the field.  
 
 The Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.
@@ -711,6 +716,63 @@ to yield results.
 % \item Military applications to mimic at human scale. Cite 2015 paper.   
 % \end{enumerate}
 
+\section{Path Integrals}
+
+In order to discuss the modern methods of computing the Casimir effect it is necessary to introduce
+the path-integral.
+
+The path integral was originally developed by Richard Feynman as an alternative formulation of quantum mechanics
+~(\cite{Feynman1948,Feynman1965}).  
+In the path integral, the amplitude for a particle to propagate from one position to another,
+is given by the sum over \emph{all} possible paths between the points.  
+Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path,
+and $\hbar$ is the reduced Planck constant.   
+
+    \begin{enumerate}
+      \item Note connection - source of framing is Feynman, who used that reasoning to derive path
+        integral
+      \item Path integral is description of stochastic process.  Evolution of distribution described
+        by wave-function.  Can think of randomly sampling from path integral, leading to stochastic 
+        sample paths.  These correspond to Brownian motion for free quantum particle.  
+      \item Brownian motion - non-differentiable, continuous paths.  Introduce Wiener paths.  
+    \end{enumerate}
+    
+    Path integrals have been used extensively in a wide range of theoretical physics~\cite{Kleinert2012}.
+    They form one basis for quantum field theory~\cite{Brown1994}, where they provide a 
+    natural method for quantizing the relativistic gauge-field theories 
+    that underly the Standard Model of particle physics~\cite{Srednicki2008}.
+    In these field theoretic path-integrals, the integral runs over
+    all possible field configurations connecting the initial and final states, and some care is required
+    to handle the redundant degrees of freedom implied by gauge invariance~\cite{Fadeev1991}.
+
+    Mark Kac worked with similar functional integrals, and put the path integral 
+    on firmer mathematical footing~\cite{Kac1949}.  In Kac's work, and much of the mathematical
+    work that followed, one weights each path
+    by with $e^{-S_E[x]}$, where $S_E$ is the so-called Euclidean action.  
+    This amounts to solving a diffusion equation, rather than the Schr\"odinger equation.  
+
+    Path integrals have also been used in mathematics and statistics to describe stochastic 
+    processes~\cite{Durrett1996, Karatzas1991}.  
+    Can mathematically formulate a path integral as very high-dimensional integral.
+    Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
+
+    They have even been used in studying quantum chaos---the study of the quantum analogues 
+    of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
+    where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
+    can be approximated by only considering paths with periodic orbits.  \todo{Gutzwiller trace formula citation}
+
+% \begin{enumerate}
+% \item Found common use in field theory particularly for covariantly quantizing gauge field theories,
+%  such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
+% \item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
+% \end{enumerate}
+  %   \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
+    
+  %   Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
+  %   Replaces oscillating Gaussian integrals for real, decaying ones.
+
+
+
 \section{Computational methods for Casimir Effects}
 \label{sec:numerical_review}
 
@@ -783,6 +845,9 @@ such as media with a strong magnetic response, or anisotropic media.
 % and functions as an order of magnitude estimate for the Casimir force.  In the limit
 % of vanishing curvature, the PFA converges to the correct Casimir force.  
 % \end{enumerate}
+
+
+
 
 \subsection{Scattering Approach}
 
@@ -858,7 +923,7 @@ where $\xi$ is the imaginary frequency,
 and $\mathbf{M}$ is a matrix where the entires encode the scattering between various surface current 
 elements via the homogenous EM green function,  
 \begin{equation}
-  M_{ab} = \int dx dy f_a(x) G_{ab}(x,y)f_b(y).
+  M_{ab} = \int_{S_A} dx \int_{S_B} dy f_a(x) G_{ab}(x,y)f_b(y).
 \end{equation}
 \comment{Given general form, noting E/M coupling.  Also multiple bodies.  Renormalization kills
 self-energy terms}

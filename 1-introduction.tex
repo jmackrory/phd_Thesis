@@ -142,17 +142,13 @@ This interpretation follows from taking the EM field Hamiltonian to be
 \end{equation}
 where $\op{a}_k$ is the annihilation operator for mode $k$.  In the absence of any excitations only the 
 constant term contributes.  
-The energy can also be recast as 
-\begin{equation}
-  E = \sum_k \frac{\hbar\omega_k}{2}\left(\op{a}^\dag_k \op{a}_k + \op{a}_k\op{a}^\dag_k\right),
-\end{equation}
-where the second term can be interpreted as spontaneous emission and re-absorption
-of a photon.
 The Casimir-Polder energy can also be thought of in terms of emitting and re-absorbing photons.
 In that case the interaction Hamiltonian is
 \begin{equation}
   H_{\text{int}} = -\vect{d\cdot E} = -\sum_k(\sigma+\sigma^\dag)[a_kf^*_k(\hat{x})+a^\dag_kf_k(\hat{x})]
 \end{equation}
+\todo{Need free Hamiltonian for atom too.}
+\todo{Also need mode functions}
 These terms are normally dropped in the rotating-wave-approximation, as they 
 are typically much smaller than the energy-conserving terms.  
 \comment{dropped in material}
@@ -1111,16 +1107,16 @@ manipulations.  First we will use the identity $\log\det A=\tr\log A$, which can
 verified for positive finite matrices.  
 \begin{align}
   \log\det A &= \log\prod_j \alpha_j
-  =\sum_j \log\alpha_j%\nonumber\\
+  =\sum_j \log\alpha_j
   = \tr\log A,\label{eq:log-det}
 \end{align}
 where we used the facts that the trace and determinant of a matrix are given by the sum
 and product of its eigenvalues respectively. \comment{Check Kirsten/Vassilevich for better argument/citation}
 Furthermore, we will use the integral representation of the logarithm,
 \begin{equation}
-  \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}).\label{eq:integral_log}
+  \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}),\label{eq:integral_log}
 \end{equation}
-\comment{Need positive operators?}
+where $A$ and $B$ are positive operators (i.e. $A$ and $B$ have strictly positive eigenvalues).
 This expression also relies on a difference of terms to cancel out divergent terms at $T=0$.  The 
 earlier renormalization by subtracting off the vacuum energy provides exactly this subtraction. 
 
@@ -1128,8 +1124,23 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
  the renormalized free energy can be rewritten as
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-  \tr\Big[e^{-(\partial_\tau^2+\nabla^2)\cT}\big(e^{-\cT V(\vect{x})}-1\big)\Big].
+  \tr\Big[e^{(\partial_\tau^2+\nabla^2)\cT}\big(e^{-\cT V(\vect{x})}-1\big)\Big].
 \end{equation}
+At this point, we introduce an $D$-dimensional auxiliary Hilbert space to evaluate the trace, where 
+$\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
+$[\op{x}_i,\op{p}_j]=i\delta_{ij}$.  
+
+\begin{equation}
+  \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
+  \int d\vect{x}_0d\tau_0 \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT}\big(e^{-\cT V(\op{\vect{x}})}-1\big)
+  |\vect{x}_0,\tau_0\rangle.
+\end{equation}
+
+
+
+The free energy is then in the form of the imaginary-time transition amplitude for a quantum particle
+in $D$ space-time dimensions, in a potential $V$.  
+
 \begin{itemize}
   \item Introduce auxiliary hilbert space.
   \item This is exactly the (imaginary-time) transition amplitude for a quantum particle.

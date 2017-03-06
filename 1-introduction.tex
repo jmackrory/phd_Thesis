@@ -135,56 +135,68 @@ where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alp
 and $\epsilon_0$ is the permittivity of free space.  Throughout this thesis we will refer to these
 atom-wall type forces as Casimir-Polder forces.  
 
+\subsubsection{Derivation of the Atom-Perfect Conductor potential}
 \comment{started transferred material}
-This interpretation follows from taking the EM field Hamiltonian to be 
+The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
+in the coupling of the atom to the electromagnetic field.  
+(This derivation is adapted from Ch.~13 of Steck~\cite{SteckNotes}.)\todo{right period?}
+%~( The discussion here follows Steck~\S{9.3} of Ref.\cite{SteckNotes}).  
+The Hamiltonian for the whole atom-field system is given by 
 \begin{equation}
-  E = \sum_k \hbar\omega_k\left(\op{a}^\dag_k \op{a}_k + \frac{1}{2}\right)
+  H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
 \end{equation}
-where $\op{a}_k$ is the annihilation operator for mode $k$.  In the absence of any excitations only the 
-constant term contributes.  
-The Casimir-Polder energy can also be thought of in terms of emitting and re-absorbing photons.
-In that case the interaction Hamiltonian is
-\begin{equation}
-  H_{\text{int}} = -\vect{d\cdot E} = -\sum_k(\sigma+\sigma^\dag)[a_kf^*_k(\hat{x})+a^\dag_kf_k(\hat{x})]
-\end{equation}
-\todo{Need free Hamiltonian for atom too.}
-\todo{Also need mode functions}
-These terms are normally dropped in the rotating-wave-approximation, as they 
-are typically much smaller than the energy-conserving terms.  
-\comment{dropped in material}
-
-We can now present a schematic computation of the Casimir-Polder potential, with an emphasis 
-on the broad techniques, intuition, and connections to other computations~(
- The discussion here follows Steck~\S{9.3} of Ref.\cite{SteckNotes}).  \todo{right period?}
-This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
-\begin{equation}
-  H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}}(\hat{\vect{x}}) + \frac{e^2}{2mc^2}
-  |\hat{\vect{A}}(\hat{\vect{x}})|^2
-\end{equation}
-where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
-quantized operator for the EM vector potential at the atom's position $\vect{r}$.  \todo{Expand field operators
-$\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
-(This interaction can instead be treated with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
-these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
-To find a non-zero effect one must go to second-order in perturbation theory, which leads to an atomic
-energy shift to state $n$ of 
-\begin{equation}
-  V\subCP = \sum_{m\ne n,\vect{k}} \frac{
-    |\langle E_n, 0|  H_{int}|E_m, 1_{\vect{k}}\rangle\langle E_m, 1_{\vect{k}}|  H_{int}|E_n, 0\rangle}{E_n-E_m-\hbar\omega_k},
-\end{equation}
-where $E_m$ are the atom's energy levels, the photon has energy $\hbar\omega_k$, 
-and $\langle E_n,1_\vect{k}\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$.
-The shift $V\subCP$ can be understood as two transitions - from the ground state with no photons to an excited state with one photon,
-and then transitioning back.  This is further summed over all possible intermediate states.
-This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
-an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
-is a ``virtual'' one, in that these intermediate states are not directly physically observable, 
-but rather reflect the apparatus of quantum mechanical perturbation theory.
-Note also that the photon is emitted into a mode $k$, 
-where the allowed modes must satisfy the electromagnetic boundary conditions
+where 
+\begin{gather}
+  H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j  \\
+  H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right)\\
+  H_{\text{int}} = -\vect{d\cdot E} = -\sum_j\sum\subkz
+  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0 V}}(\sigma_j+\sigma_j^\dag)
+  \vect{d}_j[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
+\end{gather}
+The atomic Hamiltonian $H_{\text{atom}}$ is split into a center-of-mass piece, and the internal degrees of freedom,
+described by the atom's quantized energy levels with energy $E_j=\hbar\omega_j$, 
+and $\sigma_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's internal state.  
+The field Hamiltonian sums up the energy for each mode of the electromagnetic field and 
+includes the zero-point energy, $\sum_k\hbar\omega_k/2$.
+For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
+considering the energy differences when the atom is moved to spatial infinity.  
+The interaction Hamiltonian couples the internal state of the atom to the quantized light field,
+where $a\subkz$ is the annihilation operator for mode with wavenumber $k$, and polarization $\zeta$,
+which has spatial mode function $\vect{f}\subkz(\hat{x}).$
+In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
 on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
 are then sensitive to the arrangements of the bodies.  This is distinct from the case in most 
 field theory calculations where the modes are described by plane waves.  
+
+Note that some of the terms in the interaction Hamiltonian violate energy conservation, for example
+$\sigma_j^\dag a^\dag\subkz$ creates a photon and raises the atom from the ground state to the excited state.
+These terms are normally dropped in the rotating-wave-approximation, since they oscillate quickly
+in time as $e^{-i(\omega_j+\omega_k)t}$, and average down to zero on typical atomic timescales.  
+However, these energy non-conserving terms do lead to observable effects at higher order in perturbation theory.
+% This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
+% \begin{equation}
+%   H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}}(\hat{\vect{x}}) + \frac{e^2}{2mc^2}
+%   |\hat{\vect{A}}(\hat{\vect{x}})|^2
+% \end{equation}
+% where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
+% quantized operator for the EM vector potential at the atom's position $\vect{r}$.  \todo{Expand field operators
+% $\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
+% (This interaction can instead be treated with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
+% these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
+In particular, the Casimir--Polder potential emerges when computing the energy-shift from $H_{\text{int}}$ to second order.
+For an atom in it's ground state, the Casimir--Polder potential is given by
+\begin{equation}
+  V\subCP = -\sum_{m\ne n,\vect{k},\zeta} \frac{
+    \langle E_n, 0|  H_{\text{int}}|E_m, 1\subkz\rangle\langle E_m, 1\subkz|  H_{\text{int}}|E_n, 0\rangle}{E_n-E_m-\hbar\omega_k},
+\end{equation}
+where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
+and $|0\rangle$ denotes the vacuum state of the electromagnetic field.  
+The shift $V\subCP$ can be understood as two virtual transitions --- from the ground state with no photons to an excited state with one photon,
+and then transitioning back.  This is further summed over all possible intermediate states.
+This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
+an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
+is a ``virtual'' one, in that these intermediate states are not directly physically observable on a detector, 
+but rather reflect the apparatus of quantum mechanical perturbation theory.
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
@@ -210,10 +222,17 @@ field theory calculations where the modes are described by plane waves.
 \label{fig:feynman_CP}
 \end{figure}
 
+\begin{equation}
+  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}.
+\end{equation}
+
+
 The Casimir-Polder energy shift can be split into a product of atomic and field pieces.  
 It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
-since on the imaginary frequency axis, most functions of interest are smoothly decaying real functions.
-\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+since for causal functions (such as an atom's response to the electromagnetic field), 
+the response is analytic on the imaginary axis.    \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
+integrals with smoothly decaying real functions, that are much more amenable to numerical studies.  
 To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
 \begin{equation}
   V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
@@ -232,10 +251,6 @@ which satisfies
   \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
   + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
   = \omega^2\delta_{ij}\delta(\vect{x-x'}).
-\end{equation}
- Evaluate at imaginary frequency. Note fully quantum theory, can account for atomic transitions.
-\begin{equation}
-  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}.
 \end{equation}
 
 While we have only given the linear energy shift, there are a number of higher loop contributions
@@ -877,13 +892,14 @@ Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.
 \end{enumerate}
 
 \begin{enumerate}
-
 \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
 \item Cite Lambrecht and French collaborators
   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
 %\item Cite Milton
 \item Physical Picture based on generalized Green theorem from 
   SIE~\comment{Stratton}\cite{Stratton1941}.
+  \item Boundary Element Methods in Classical Electromagnetism:
+    For example see Ch. 8 of \cite{Chew1995}.  
 \item Cite Bordag 1985 on quantization with delta functions?  There are others
 Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
 \item Comment on Emig/Buscher showing you can use homogenous green function.

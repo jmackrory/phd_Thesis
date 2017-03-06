@@ -62,9 +62,7 @@
 \def\nablaxk{\nabla_{\vect{x}_k}}
 \def\nablaR#1{\nabla_{\vect{R}_{#1}}}
 
-% set indicator
-\def\I[#1]#2{\mathbbm{1}^{(#1)}_{#2}}
-%\def\I[#1]#2{\mathbf{1}^{(#1)}_{#2}}
+\def\subkz{_{\vect{k},\zeta}}
 
 
 %Calligraphic Shorthands
@@ -114,8 +112,8 @@
 \def\etal{\textit{~et.~al~}}
 
 % set indicator
-\def\I[#1]#2{\ensuremath{\mathbf{I}^{(#1)}_{#2}}}
-
+\def\I[#1]#2{\mathbbm{1}^{(#1)}_{#2}}
+%\def\I[#1]#2{\mathbf{1}^{(#1)}_{#2}}
 
 
 %Double-Angle brackets
@@ -143,13 +141,11 @@
 \def\Bigglinkrangle{{\kern.0em\Bigg\rangle\kern-.22em\scalebox{0.66}[1]{$-$}\kern-.66em\Bigg\rangle\kern.0em}}
 
 
-
 %traces
 \def\tr{\ensuremath{\mathrm{tr}}}
 \def\Tr{\ensuremath{\mathrm{Tr}}}
 \def\order{\ensuremath{\mathcal{O}}}
 \def\kB{\ensuremath{k_{\mathrm{B}}}}
-
 
 %\error function2
 \def\erf{\ensuremath{\mathrm{erf}}}
@@ -169,7 +165,7 @@
 \def\Psibar{\ensuremath{\bar{\Psi}}}
 
 
-\usepackage[bookmarks=true,colorlinks=true,breaklinks=true]{hyperref}
+\usepackage[bookmarks=true,colorlinks=true,breaklinks=true,citecolor=blue]{hyperref}
 
 %%% Local Variables: 
 %%% mode: latex

@@ -213,6 +213,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
 
 \subsection{Partial Averaging-Gaussian Paths}
 
+\label{sec:partial_average}
 \begin{enumerate}
   \item Consider how to evaluate Gradients with respect to source point of Gaussian 
     path integrals of the energy $\epsr$
@@ -518,6 +519,20 @@ where $h' := h\sqrt{T_1/2}, z' := z\sqrt{\frac{T_1(T-2T_1)}{2T}}$.
 \section{Gradients for Casimir Energies}
 \subsection{Surface Pinned Paths}
 \label{sec:path-pinning}
+
+\begin{align}
+  W &:= \int d\vect{x}_0
+  \,\biggdlangle \frac{1}{\langle\epsr\rangle^\alpha}-\frac{1}{[\epsr(\vect{x}_0)]^\alpha}\biggdrangle_{\vect{x}(t)},
+  \label{eq:spatial_path_integral}
+\end{align}
+
+\begin{equation}
+  E = \frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
+  \, W,
+  \label{eq:spatial_path_integralE}
+\end{equation}
+
+
 
 \subsubsection{Force}
 The force on a body follows from the gradient of the Casimir energy,
@@ -1061,9 +1076,6 @@ corresponds to zero.  This sampling is essential for strong-coupling limits wher
 inside the body contribute to the force or potential curvature.  
 This choice to average over which point on the path corresponds to zero is independent of the choice 
 of the integrand.  
-
-
-
 
 % It is convenient to decompose the Casimir energy as 
 % \begin{equation}

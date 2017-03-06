@@ -1,5 +1,5 @@
 \chapter{Introduction}
-
+\label{ch:introduction}
 %suggest some unity to two disparate projects.  
 Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
 the probabilities of events~\cite{Sakurai1994}.
@@ -139,8 +139,7 @@ atom-wall type forces as Casimir-Polder forces.
 \comment{started transferred material}
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the electromagnetic field.  
-(This derivation is adapted from Ch.~13 of Steck~\cite{SteckNotes}.)\todo{right period?}
-%~( The discussion here follows Steck~\S{9.3} of Ref.\cite{SteckNotes}).  
+(This derivation is adapted from Ch.~13 and \S14.3 of Steck~\cite{SteckNotes}.)
 The Hamiltonian for the whole atom-field system is given by 
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
@@ -187,12 +186,12 @@ In particular, the Casimir--Polder potential emerges when computing the energy-s
 For an atom in it's ground state, the Casimir--Polder potential is given by
 \begin{equation}
   V\subCP = -\sum_{m\ne n,\vect{k},\zeta} \frac{
-    \langle E_n, 0|  H_{\text{int}}|E_m, 1\subkz\rangle\langle E_m, 1\subkz|  H_{\text{int}}|E_n, 0\rangle}{E_n-E_m-\hbar\omega_k},
+    \langle g, 0|  H_{\text{int}}|E_n, 1\subkz\rangle\langle E_n, 1\subkz|  H_{\text{int}}|g, 0\rangle}{\hbar(\omega_k+\omega_n)},
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
-and $|0\rangle$ denotes the vacuum state of the electromagnetic field.  
-The shift $V\subCP$ can be understood as two virtual transitions --- from the ground state with no photons to an excited state with one photon,
-and then transitioning back.  This is further summed over all possible intermediate states.
+$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_n=(E_n-E_g)\hbar$.
+The shift $V\subCP$ can be understood as two virtual transitions --- one from the ground state with no photons to an excited state with one photon,
+and then a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
 is a ``virtual'' one, in that these intermediate states are not directly physically observable on a detector, 
@@ -222,46 +221,60 @@ but rather reflect the apparatus of quantum mechanical perturbation theory.
 \label{fig:feynman_CP}
 \end{figure}
 
+At this point, the mode functions for the electric field near a perfectly conducting plane can
+be substituted in(\S 8.4.3 of Steck~\cite{SteckNotes}, or \S3.12 in Milonni~\cite{Milonni1994}), with 
 \begin{equation}
-  \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n}.
-\end{equation}
+  \vect{f}\subkz(\vect{r}) = \sqrt{\frac{2}{V}}\left(\hat{\varepsilon}  \right)
+\end{equation}  
+
+In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
+off the constant, divergent energy associated with an atom infinitely far away from the surface.   
+Throughout this thesis, this simple energy subtraction is the only renormalization we will need. 
+
+% The Casimir--Polder energy can be further factored in terms of atomic polarizabilities,
+% and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
+% The atomic polarizability measures the linear response of an atom to the electromagnetic field,
+% and is given by 
+% \begin{equation}
+%   \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n},
+% \end{equation}
+% where $d_i$ is the $i^\text{th}$ component of the dipole operator $\vect{d}=e\vect{r}$.
+% \todo{What does polarizability look like for a simple atom?}
+% At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
+% which satisfies
+% \begin{equation}
+%   \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
+%   + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
+%   = \omega^2\delta_{ij}\delta(\vect{x-x'}).
+% \end{equation}
 
 
-The Casimir-Polder energy shift can be split into a product of atomic and field pieces.  
 It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
 since for causal functions (such as an atom's response to the electromagnetic field), 
 the response is analytic on the imaginary axis.    \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
 This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
-integrals with smoothly decaying real functions, that are much more amenable to numerical studies.  
-To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
-\begin{equation}
-  V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
-\end{equation}
-where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
-tensor~\cite{McLachlan1963, McLachlan1963a}.
-The scattering part of the Green function essentially subtracts off the vacuum 
-EM Green function $G^{(S)}=G-G^{(0)}$ --- this is essentially renormalizing the energy
-by subtracting off contributions that are independent of the bodies.  
-This has the same from as a linear-response calculation~\cite{Altland2011}, finding the linear-response of the 
-atom to it's interaction with the EM field.
-In this case $\alpha_{ij}$ is the susceptibility of the atom responding to perturbations in the EM field.  
-At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
-which satisfies
-\begin{equation}
-  \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
-  + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
-  = \omega^2\delta_{ij}\delta(\vect{x-x'}).
-\end{equation}
+integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
+% To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
+% \begin{equation}
+%   V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
+% \end{equation}
+% where $\alpha_{ij}$ is the polarizability tensor, $G^{(S)}$ is the scattering part of the EM Green
+% tensor~\cite{McLachlan1963, McLachlan1963a}.
+% The scattering part of the Green function essentially subtracts off the vacuum 
+% EM Green function $G^{(S)}=G-G^{(0)}$ --- this is essentially renormalizing the energy
+% by subtracting off contributions that are independent of the bodies.  
+% This has the same from as a linear-response calculation~\cite{Altland2011}, finding the linear-response of the 
+% atom to it's interaction with the EM field.
 
-While we have only given the linear energy shift, there are a number of higher loop contributions
-which can be resummed analytically due to the relative simplicity of the expansion~\cite{Rosa2011}.  
-\todo{Cite Dzyaloshinksii or papers book for resummation?}
-The result of which is 
-\begin{equation}
-  V\subCP(\vect{r}) = \frac{\hbar c}{2\pi}\int_0^\infty ds \tr \log[I - \alpha(is) G^{(S)}(\vect{r},\vect{r})].
-\end{equation}
-This method of computing Casimir--Polder energies via classical Green functions has been expanded upon
-in Ch. 7 of Milonni~\cite{Milonni1994}, Vogel and Welsch~\cite{VogelWelsch2006} and Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}.
+% While we have only given the linear energy shift, there are a number of higher loop contributions
+% which can be resummed analytically due to the relative simplicity of the expansion~\cite{Rosa2011}.  
+% \todo{Cite Dzyaloshinksii or papers book for resummation?}
+% The result of which is 
+% \begin{equation}
+%   V\subCP(\vect{r}) = \frac{\hbar c}{2\pi}\int_0^\infty ds \tr \log[I - \alpha(is) G^{(S)}(\vect{r},\vect{r})].
+% \end{equation}
+% This method of computing Casimir--Polder energies via classical Green functions has been expanded upon
+% in Ch. 7 of Milonni~\cite{Milonni1994}, Vogel and Welsch~\cite{VogelWelsch2006} and Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}.
 
 % \begin{enumerate}
 % %\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
@@ -385,7 +398,7 @@ the field.
 
 The Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.
-As Fig.~\ref{fig:Feynman-electron-action} shows, the Casimir effect can be thought of as the 
+As Fig.~\ref{fig:electron-effective-interaction} shows, the Casimir effect can be thought of as the 
 interaction of electrons on different bodies with one another via the electromagnetic field.  
 We are interested in energies small relative to the binding energies of the dielectrics, and very weak
 fields.  We can then use an effective description in terms of the coarse-grained linear-response of the 
@@ -437,6 +450,7 @@ tensor $\sigma_{\mu\nu}$, which is in turn related to the dielectric constant $\
  {Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media,
  but still interact with electrons on other bodies by exchanging photons.  The effective interaction of the 
 electrons with the field is described by the dielectric constant.}
+\label{fig:electron-effective-interaction}
 \end{figure}
 
 % \begin{enumerate}

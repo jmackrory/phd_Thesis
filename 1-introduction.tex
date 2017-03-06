@@ -148,8 +148,8 @@ where
 \begin{gather}
   H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j  \\
   H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right)\\
-  H_{\text{int}} = -\vect{d\cdot E} = -\sum_j\sum\subkz
-  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0 V}}(\sigma_j+\sigma_j^\dag)
+  H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
+  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
   \vect{d}_j[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
 \end{gather}
 The atomic Hamiltonian $H_{\text{atom}}$ is split into a center-of-mass piece, and the internal degrees of freedom,
@@ -185,11 +185,11 @@ However, these energy non-conserving terms do lead to observable effects at high
 In particular, the Casimir--Polder potential emerges when computing the energy-shift from $H_{\text{int}}$ to second order.
 For an atom in it's ground state, the Casimir--Polder potential is given by
 \begin{equation}
-  V\subCP = -\sum_{m\ne n,\vect{k},\zeta} \frac{
-    \langle g, 0|  H_{\text{int}}|E_n, 1\subkz\rangle\langle E_n, 1\subkz|  H_{\text{int}}|g, 0\rangle}{\hbar(\omega_k+\omega_n)},
+  V\subCP = -\sum_{n\ne 0,\vect{k},\zeta} \frac{
+    \langle E_0, 0|  H_{\text{int}}|E_n, 1\subkz\rangle\langle E_n, 1\subkz|  H_{\text{int}}|E_0, 0\rangle}{\hbar(\omega_k+\omega_{n0})},
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
-$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_n=(E_n-E_g)\hbar$.
+$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)\hbar$.
 The shift $V\subCP$ can be understood as two virtual transitions --- one from the ground state with no photons to an excited state with one photon,
 and then a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
@@ -199,7 +199,7 @@ but rather reflect the apparatus of quantum mechanical perturbation theory.
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
-  \begin{fmfgraph*}(60,40)
+  \begin{fmfgraph*}(60,30)
     \fmfleft{i}
     \fmfright{o}
     \fmftop{t}
@@ -220,12 +220,56 @@ but rather reflect the apparatus of quantum mechanical perturbation theory.
 }
 \label{fig:feynman_CP}
 \end{figure}
+% \comment{This is rote copying of Dan's notes - pointless!}
+% The Casimir--Polder potential can now be factored into atomic and field pieces~\cite{McLachlan1963}.
+The first is the polarizability for the atom in its ground state is
+\begin{equation}
+  \alpha_{ij}(\omega) = \sum_n 
+  \frac{\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\omega_{n0}^2-\omega^2},
+\end{equation}
+is the susceptibility of the atom to perturbations in the electric field.
+% while the EM Green function is 
+% \begin{equation}
+%   G_{ij}(\vect{r},\vect{r'},\omega) = \sum\subkz \omega_k
+%   \frac{f_{\vect{k},\zeta,i}(\vect{r})f^*_{\vect{k},\zeta,j}(\vect{r'})}{\omega_k^2-\omega^2}.
+% \end{equation}
+% which satisfies
+% \begin{equation}
+%   \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
+%   + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
+%   = \omega^2\delta_{ij}\delta(\vect{x-x'}).
+% \end{equation}
 
-At this point, the mode functions for the electric field near a perfectly conducting plane can
-be substituted in(\S 8.4.3 of Steck~\cite{SteckNotes}, or \S3.12 in Milonni~\cite{Milonni1994}), with 
+After substituting in $H_{\text{int}}$, the Casimir--Polder energy can be written as
+\begin{align}
+  V\subCP % &= -\sum_{m\ne 0,\vect{k},\zeta} \frac{
+    % \langle E_g, 0|d_if_{\vect{k},\zeta,i}a\subkz|E_n, 1\subkz\rangle
+    % \langle E_n, 1\subkz|d_jf^*_{\vect{k},\zeta,i}a^\dag\subkz|E_g, 0\rangle}{\hbar(\omega_k+\omega_{n0})}\\
+% &= -\sum_{m\ne n,\vect{k},\zeta} \frac{\hbar\omega_k}{2\epsilon_0}
+%     \frac{\langle E_0|d_i|E_n\rangle \langle E_n|d_j|E_0\rangle f_{\vect{k},\zeta,i}(\vect{r})f^*_{\vect{k},\zeta,j}(\vect{r})
+%     }{\hbar(\omega_k+\omega_{n0})},\\
+&= -\sum_{m\ne 0,\vect{k},\zeta} \frac{\hbar\omega_k}{6\epsilon_0}
+    \frac{|\langle E_0|\vect{d}|E_n\rangle|^2 |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2
+    }{\hbar(\omega_k+\omega_{n0})},
+\end{align}
+where we substituted the form of $H_{\text{int}}$ and assumed an spherical atom for which all components of dipole matrix elements
+are equal, such that $|\langle E_0|d_i|E_n\rangle|^2=|\langle E_0|\vect{d}|E_n\rangle|^2/3$.
+
+If we assume the atom's distance from the surface $d$ is larger than the atom's dominant wavelength's
+or $d/c\gg \omega_{n0}$, then we can use fact the atom's static (zero frequency) polarizability 
+is given by 
+\begin{equation}
+  \lim_{\omega\rightarrow 0}\alpha(\omega) = \sum_n
+  \frac{|\langle E_0|\vect{d}|E_n\rangle|^2}{3\omega_{n0}},
+\end{equation}
+
+At this point, the mode functions for the electric field near a perfectly conducting plane 
+can be substituted in to the energy.  (\S 8.4.3 of Steck~\cite{SteckNotes}),
+or mode functions for a perfectly conducting box(\S3.12 in Milonni~\cite{Milonni1994}), with 
 \begin{equation}
   \vect{f}\subkz(\vect{r}) = \sqrt{\frac{2}{V}}\left(\hat{\varepsilon}  \right)
 \end{equation}  
+
 
 In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
 off the constant, divergent energy associated with an atom infinitely far away from the surface.   
@@ -235,18 +279,11 @@ Throughout this thesis, this simple energy subtraction is the only renormalizati
 % and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
 % The atomic polarizability measures the linear response of an atom to the electromagnetic field,
 % and is given by 
-% \begin{equation}
-%   \alpha_{ij} = \sum_n\sum_m \frac{\langle E_n | d_i|E_m\rangle \langle E_m| d_j|E_n\rangle}{E_m-E_n},
-% \end{equation}
 % where $d_i$ is the $i^\text{th}$ component of the dipole operator $\vect{d}=e\vect{r}$.
 % \todo{What does polarizability look like for a simple atom?}
 % At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
-% which satisfies
-% \begin{equation}
-%   \nabla\times\nabla\times G(\vect{x},\vect{x'}) 
-%   + \frac{\omega^2}{c^2}\epsilon G(\vect{x},\vect{x'}) 
-%   = \omega^2\delta_{ij}\delta(\vect{x-x'}).
-% \end{equation}
+
+\todo{Fix this fucking mess of a Casimir--Polder calculation}
 
 
 It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
@@ -332,50 +369,82 @@ separated by a gap of thickness filled with permittivity $\epsilon_3$ is given b
 \end{align}
 where the electromagnetic reflection coefficients are given by 
 \begin{align}
-  r\supTE_{ij} & = \frac{s_i-s_j}{s_i+s_j},\quad
-  r\supTM_{ij} & = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j},
+  r\supTE_{ij}  = \frac{s_i-s_j}{s_i+s_j},\quad
+  r\supTM_{ij}  = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j},
 \end{align}
 and
 \begin{equation}
   s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
 \end{equation}
-following Zhou~\cite{Zhou1995}.  As intimidating as this expression is, it can be heuristically derived with
-relative ease via the ``argument principle''~\cite{vanKampen1968}.  
-In essence, since the Casimir energy is the sum of the vacuum energy over all modes, the energy can
-be written as a complex contour integral of the energy against a function with poles at the allowed 
-energies.  For two plates the allowed modes satisfy the Fabry-Perot condition,
-\begin{equation}
-  \Delta = 1 - r_1r_2 e^{2ik d}.
-\end{equation}
+following Zhou~\cite{Zhou1995}. %  As intimidating as this expression is, it can be heuristically derived with
+% relative ease via the ``argument principle''~\cite{vanKampen1968}.  
+% In essence, since the Casimir energy is the sum of the vacuum energy over all modes, the energy can
+% be written as a complex contour integral of the energy against a function with poles at the allowed 
+% energies.  For two plates the allowed modes satisfy the Fabry-Perot condition,
+% \begin{equation}
+%   \Delta = 1 - r_1r_2 e^{2ik d}.
+% \end{equation}
 
+\subsubsection{Derivation of Lifshitz Formula}
+
+The energy in the EM field in vacuum is 
+\begin{equation}
+  E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
+\end{equation}
+where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
+The Casimir energy can be found with an ingenious argument due to van Kampen~\etal
+~\cite{vanKampan1968,Schaden1998}.
+\todo{Sums over $k_x,k_y,\omega$, with $k_z$ given by }
+The mode sum can be recast as a contour integral over a function whose poles occur at the allowed
+frequencies, with residue $\omega_k$:  
+\begin{equation}
+  E = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
+\end{equation}
+where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$. 
+\todo{Variable transformations?  $k$ $\cos\theta?$?}
+If we consider modes between dielectric planar interfaces, the resonant modes must satisfy
+\begin{equation}
+  r^{\zeta}_1r^{\zeta}_2 e^{2ik_z d}=1,
+\end{equation}
+where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$.
+This says that the accumulated round-trip phase (including reflections from both walls) is unity for
+allowed modes.  
+This suggests choosing $\Delta(z) = 1-r^{\zeta}_1r^{\zeta}_2 e^{2ik_z d}$, where the wavenumber $k_z$
+and the reflection coefficients are functions of $z$.  
+
+The energy can be simplified by integrating by parts leading to 
+\begin{equation}
+  E = \frac{\hbar}{4\pi i}\oint dz \, \ln\Delta(z).
+\end{equation}
+\todo{Remaing integrals over transverse $k_T$?}
 \begin{itemize}
-  \item $E = \sum_k\frac{\hbar \omega_k}{2}$
-  \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
-  \item Only allowed modes contribute.  
-    Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
-    $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
+  % \item $E = \sum_k\frac{\hbar \omega_k}{2}$
+  % \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
+  % \item Only allowed modes contribute.  
+    % Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
+    % $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
   \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
     $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
-  \item So energy can be written as 
-    \begin{equation}
-      E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
-    \end{equation}
-    where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$.
-  \item Now integrate by parts w.r.t. $z$
-    \begin{equation}
-      E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
-    \end{equation}
-  \item Now differentiate w.r.t $d$ to get force, and done.  
+  % \item So energy can be written as 
+  %   \begin{equation}
+  %     E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
+  %   \end{equation}
+
+  % \item Now integrate by parts w.r.t. $z$
+  %   \begin{equation}
+  %     E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
+  %   \end{equation}
+  % \item Now differentiate w.r.t $d$ to get force, and done.  
 \end{itemize}
 (Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
 in scattering formalism})
 
 % This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
-This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
+%This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
 
-The Casimir-Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
-$\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density.
+The Casimir--Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
+$\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
 In addition, the perfect-conductor Casimir can be found by taking $r\rightarrow 1$, and evaluating the 
 integrals.
 
@@ -768,7 +837,7 @@ and $\hbar$ is the reduced Planck constant.
     that underly the Standard Model of particle physics~\cite{Srednicki2008}.
     In these field theoretic path-integrals, the integral runs over
     all possible field configurations connecting the initial and final states, and some care is required
-    to handle the redundant degrees of freedom implied by gauge invariance~\cite{Fadeev1991}.
+    to handle the redundant degrees of freedom implied by gauge invariance~\cite{Faddeev1991}.
 
     Mark Kac worked with similar functional integrals, and put the path integral 
     on firmer mathematical footing~\cite{Kac1949}.  In Kac's work, and much of the mathematical

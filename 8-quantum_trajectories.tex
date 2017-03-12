@@ -1,5 +1,106 @@
 \chapter{``Realistic'' Quantum Trajectories for Position Measurements}
 \label{ch:trajectory}
+
+\section{Continuous Quantum Measurements}
+
+Describe open quantum systems, and include information from continuous measurements. 
+
+\begin{enumerate}
+\item Quantum measurements are inherently probabilitistic.  
+\item Thus, sequences of measurements are also inherently random.  
+\item Greater experimental control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
+\item Move beyond simple projective measurements, which cannot describe things like position measurements,
+    or absorbtive measurements like photon detection.  Once photon is measured it is destroyed.
+\item To describe continuously weakly probing a system, also use stochastic processes as part of
+    numerical simulation strategy.
+\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe,
+ for example shining light on the atom. \cite{Carmichael1993}
+\item Simulated trajectories are possible trajectories a system could trace out as we observe.
+  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
+\end{enumerate}
+
+\begin{enumerate}
+\item Cite Carmichael Rice JOSA paper~\cite{Carmichael1989}
+\item Carmichael 1991 ~\cite{Carmichael1991}
+\item Open Systems approach to Quantum Optics\cite{Carmichael1993}
+\begin{enumerate}
+  \item Motivated by photodetection, and modelling experiments developed a new approach to open systems.  
+  \item Sample trajectories then correspond to actually results.
+  \item Naturally fits Bayesian framework for interpretation of quantum state.  
+\end{enumerate}
+
+\item Example: Monitoring State of Two level atom.
+\begin{enumerate}
+  \item Hamiltonian and operators
+  \item  Stochastic Schr\"odinger equation
+    \begin{equation}
+      d|\psi\rangle = -\frac{i}{\hbar}\op{H}|\psi\rangle dt 
+      - \frac{\Gamma}{2}(\sigma^\dag\sigma-\langle \sigma^\dag\sigma\rangle)|\psi\rangle dt
+      + \left(\frac{\sigma|\psi\rangle}{\langle \sigma^\dag\sigma\rangle^{1/2}}-|\psi\rangle \right)dN
+      \end{equation}
+    where $dN$ is Poisson process which is zero or one, with mean rate
+    \begin{equation}
+      \dlangle dN\drangle = \Gamma \langle \sigma^\dag\sigma\rangle dt.
+    \end{equation}
+    If Poisson process fires then detected emitted photon, which implies atom emitted photon, and should 
+    apply lowering operator.  If no photon detected, then less likely to be in excited state.  
+    Not only possible unravelling.  Can do homodyne detection - interfere light from atom
+    with local oscillator.  Can extract phase info about atomic dipole.  Often necessary since direct
+    detection typically has weak gain.  Interference effect amplifies the signal to detectable levels.
+    However note EMCCD cameras can resolve/detect single photons - will form core of that part of thesis.
+    Aspect of contextuality - type of measurement apparatus determines what can be inferred about the 
+    state of the system.
+ \item   Note that using $\dlangle\cdots\drangle$ for ensemble average over stochastic processes,
+    and $\langle A\rangle:=\tr[A\rho]=\sum_i p_i \langle \psi_i|A|\rangle\psi_i\rangle$ 
+    for quantum mechnical average.  
+    \item Interpret photon detection or non-detection as gaining knowledge about state of system.
+  \item Can get regular master equation by finding stochastic master equation, and tracing over noise.
+  \item Crucial to use stochastic calculus to consistently work to $\order(dt)$.
+  \item Path integral interpretation - master equation evolution is given by path integral, sum over all
+    paths.  Monte-Carlo sampling of paths given quantum trajectories. 
+    Note this was pointed out by Howard.  
+\end{enumerate}
+    
+\item Cite Marte, Zoller, Parkins, Gardiner (MCWF)  \cite{Dalibard1992,Dum1992,Gardiner1992}
+\item Cite Holland ~\cite{Holland1996}, Meystre~\cite{Greenwood1997}.
+  Applied to position measurements of atoms by detecting photons.
+  Detection of photons localizes atoms.  
+\item Control Theory.~\cite{Wiseman1993} 
+\begin{enumerate}
+    \item Cite Wiseman book
+   \item Jacobs and Doherty.
+  \item Continuously monitoring system to implement closed-loop feedback control.  
+  \item Feedback control to generate Fock states (Haroche group)
+\end{enumerate}
+\item Quantum Chaos
+\begin{enumerate}
+  \item Idea of exploring quantum-classical transition.
+  Strong measurement is more classical.
+  Can extract Lyupanov exponents for diverging trajectories.
+  \cite{Bhattacharya2000,Habib2002,Habib2006}
+  \cite{Scott2001}
+  \item Theoretically shown.  As yet, this transition  not yet observed.  Need to develop
+    theory in direction of more carefully modelling experiments.  
+\end{enumerate}
+\item Advantages:
+\begin{enumerate}
+  \item Computationally efficient as simulating wave functions.
+  Take ensemble average at the end to get density matrix.  
+  \item Natural form for feedback control and reconstructing trajectory.  
+\end{enumerate}
+\item Comment: Relationship of measurement with state and process tomography?  Any?  
+
+\item Warshawski and Wiseman.
+  Can describe additional uncertainty by including classical Bayesian probabilities for each indistinguishable trajectory.
+  Note thesis of J. Thorne describing model for EMCCD camera.
+  Given number for each pixel have probabilities for each number of photons.
+  Must then incoherently average over all possible detection histories consistent with measured record.
+  \cite{Warszawski2002,Warszawski2003a,Warszawski2003b}
+\item Also cover results for generalized measurement functions and 
+    somewhat surprising notion that particle reflects from a sufficiently
+    strong quantum measurement.~\cite{Mackrory2010}
+\end{enumerate}
+
 \section{Position Dependent measurement operators}
 
 \subsection{Initial Setup}

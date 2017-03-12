@@ -136,7 +136,7 @@ and $\epsilon_0$ is the permittivity of free space.  Throughout this thesis we w
 atom-wall type forces as Casimir-Polder forces.  
 
 \subsubsection{Derivation of the Atom-Perfect Conductor potential}
-\comment{started transferred material}
+\label{sec:CP_calc}
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the electromagnetic field.  
 (This derivation is adapted from Ch.~13 and \S14.3 of Steck~\cite{SteckNotes}.)
@@ -461,13 +461,14 @@ This says that the accumulated round-trip phase (including reflections from both
 allowed modes.  
 This suggests choosing $\Delta(z) = 1-r^{\zeta}_1r^{\zeta}_2 e^{2ik_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $z$.  
+\todo{Barton on surface modes, which are exponential decays.}
 
 The energy can be simplified by integrating by parts leading to 
 \begin{equation}
   E = \frac{\hbar}{16\pi^3 i}\int d^2k_Tk_T\oint dz \, \ln\Delta(z).
 \end{equation}
-\todo{Remaing integrals over transverse $k_T$?}
-\begin{itemize}
+
+%\begin{itemize}
   % \item $E = \sum_k\frac{\hbar \omega_k}{2}$
   % \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
   % \item Only allowed modes contribute.  
@@ -485,7 +486,7 @@ The energy can be simplified by integrating by parts leading to
   %     E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
   %   \end{equation}
   % \item Now differentiate w.r.t $d$ to get force, and done.  
-\end{itemize}
+%\end{itemize}
 (Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
 in scattering formalism})
 
@@ -495,7 +496,7 @@ in scattering formalism})
 
 The Casimir--Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
-In addition, the perfect-conductor Casimir can be found by taking $r\rightarrow 1$, and evaluating the 
+In addition, the perfect-conductor Casimir can be found by taking $r_i\rightarrow 1$, and evaluating the 
 integrals.
 
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
@@ -609,6 +610,8 @@ The Casimir-Polder energy in the far-field is then
 which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
 In the near-field, it is necessary to shift over to the van der Waals energy.
 As small as this energy is, in free-space it is the only attractive energy shift around for neutral atoms.
+
+\todo{Adsorbates on surfaces?  Patch potentials?}
 
 For macroscopic bodies we can compare the Casimir energy for perfect 
 metal conductors at a distance $d$ to the energy stored in the capacitance.
@@ -801,31 +804,81 @@ the atom's experience when brought close to the dielectric surface.
 % Couple atoms to dielectric waveguides, and get stronger coupling (thus faster operation)
 % by moving atoms more closely to couple to evanescent field.  
 % \end{enumerate}
-Challenges:  Need to characterize surface over broad frequency range.
-Need methods with converge well for all geometries.  
+% Challenges:  Need to characterize surface over broad frequency range.
+% Need methods with converge well for all geometries.  
 
 \subsection{Current experimental directions}
-\begin{enumerate}
-\item Thermal casimir force
-Sushkov\cite{Sushkov2011}.
-Fight in literature over exact model used to describe metals at finite temperature.
-Drude vs plasma model.  
- Lamoreaux favors Drude model, Capasso/Mohideen favours plasma model.
-\item Repulsion (Cite Capasso experiment with bromobenzene).  Possibility of stable trapping
-  if one could balance repulsion/attraction.  
- Metamaterials for repulsion.  (Can't work Rosa 2010/2011 since dielectric
-  background dominates~\cite{Rosa2008}
-  (Cite Vogel and Welsch chapter for Green function methods.  They cite 
-  Feinberg and Sucher (1970) on pg 360 for repulsion)
-  \item Search for repulsive forces as possible trapping (Motivation for this?)
-  \item Can be found for magnetic media (but typically small).
-    Metamaterials exhibit this for small range of frequencies.
-    But Casimir broadband, and dielectric contribution ends up dominating.
-    (\comment{ Cite Milonni on metametarials}.
-    Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
-    $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
-    \comment{Cite Lifshitz of liquid helium.
-    Cite experiments, and note odd fluids.}.
+% \subsubsection{Controversies over model}
+
+% There are a couple as-yet unresolved issues in Casimir physics.
+% Two of the leading experimental groups disagree on the appropriate model for the dielectric constant
+% of a realistic metal.  
+% Furthermore, there is also disagreement
+
+% As discussed by van Zwol~\etal~\cite{vanZwol2011}, a great deal of care if required in characterizing
+% the surfaces used in Casimir experiments, since the exact reflection characteristics (which govern the 
+% strength of the Casimir effect) will vary from device to device.  In particular, the thickness and roughness
+% of a surface may vary by up to \todo{Number?}. 
+
+% It is also necessary to extrapolate
+% from existing absorption data in narrow frequency bands to 
+
+%  Thermal casimir force
+% Sushkov\cite{Sushkov2011}.
+% Fight in literature over exact model used to describe metals at finite temperature.
+% Drude vs plasma model.  
+%  Lamoreaux favors Drude model, Capasso/Mohideen favours plasma model.
+
+\subsubsection{Repulsive Casimir Effects}
+
+Given that Casimir effects tend to enforce lower bounds for how close bodies can approach each other,
+there have been a push to search for repulsive Casimir effects.  This would allow open the possibility
+of trapping particles, and allow much smaller devices to be constructed.  
+Unfortunately, these prospects are somewhat limited, due to requiring rare material properties.
+
+From the Lifshitz formula, the sign of the force changes sign if $r_{12}r_{23}<0$.
+This implies Casimir repulsion should be possible if $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad range of frequencies.
+This was experimentally demonstrated for a gold sphere immersed in bromobenzene above a silica plate
+by Munday~\etal\cite{Munday2009}.  However, this is method is little help for Casimir forces between
+identical materials.  
+
+Alternatively, the Casimir force is also repulsive for combinations of dielectric and magnetic materials~\cite{Boyer1974}.  
+Given the strength of electric interactions over magnetic interactions in atoms, this spurred interest
+in exploiting materials with strong magnetic responses~\cite{Kenneth2002}.  
+Since these are relatively rare, there was some interest in exploiting metamaterials (arrays of micropatterned circuits with
+effective magnetic response at certain wavelengths~\cite{Pendry1999}).  However, this was shown to be ineffective
+for Casimir applications since the underlying metallic dielectric response dominates for the most important long wavelengths.
+The metallic response implies an attractive potential, the overall Casimir effect can be attractive~
+\cite{Ianuzzi2003comment,Rosa2008,Pirozhenko2008,Yannopapas2009}.  
+
+While the preceding discussion emphasized varying materials for Casimir applications, it may 
+be possible to exploit similar ideas for repulsive Casimir--Polder effects~\cite{Milton2011,Milton2012},
+since the atom responds to a narrower range of frequencies.  In the far-field, the attractive dielectric
+response may dominate, it might be possible to engineer near-field repulsion.  \comment{bullshitting here}.
+These require an anisotropic response from the atom, which might be possible in the excited state.
+
+Another way towards repulsive effects is by varying the geometry of the bodies.  
+For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
+\cite{Levin2010}.  However, in this example a 
+
+
+
+%\item 
+% Repulsion (Cite Capasso experiment with bromobenzene).  Possibility of stable trapping
+%   if one could balance repulsion/attraction.  
+ % Metamaterials for repulsion.  (Can't work Rosa 2010/2011 since dielectric
+ %  background dominates~\cite{Rosa2008}.
+  % (Cite Vogel and Welsch chapter for Green function methods.  Vogel and Welsch cite 
+  % Feinberg and Sucher (1970) on pg 360 for repulsion)
+  % \item Search for repulsive forces as possible trapping (Motivation for this?)
+  % \item Can be found for magnetic media (but typically small).
+  %   Metamaterials exhibit this for small range of frequencies.
+  %   But Casimir broadband, and dielectric contribution ends up dominating.
+  %   (\comment{ Cite Milonni on metametarials}.
+    % Sufficiently anistropic dielectric media (how anisotropic? \comment{Cite Milton})
+    % $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad enough range of frequencies 
+    % \comment{Cite Lifshitz of liquid helium.
+    % Cite experiments, and note odd fluids.}.
     Geometries dependence (\comment{Cite reid paper on needle above hole}).
     
 % Modifications to gravity on $1\mu m$ or $1mm$ scale.  Cite Lamoreaux 2000 Paper.  Gervaci?
@@ -837,8 +890,9 @@ Drude vs plasma model.
 % Requires very careful measurements, on top of carefully extracting Casimir force.   
 
 
-\end{enumerate}
+%\end{enumerate}
 
+\subsubsection{Searches for new physics}
 The Casimir force is also important for speculative searches for new physics on the millimeter to micron
 scale~\cite{Dimopoulos2003, Bezerra2011}.  The new physics must be shortranged, and is typically modelled as 
 a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$.  
@@ -927,15 +981,22 @@ While early work focused on highly symmetric geometries
 of bodies such as parallel planar bodies~\cite{Casimir1948} or spheres~\cite{Boyer1968}, 
 current experiments require calculations for arbitrary shapes and arrangements of bodies, 
 which have realistic material properties.  
+As the preceding section showed, modern experiments require theoretical and computational methods
+for the Casimir force that can account for a wide variety of material responses, anisotropies
+and the ability to handle arbitrary shapes (which may be rough).  
+
 This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
 range of frequencies.  Furthermore it depends sensitively on the geometry of the bodies involved, 
 and one must carefully renormalize the results.  
-For a simple, symmetric geometry it is possible to write down tractable analytical expressions for
+For a simple, symmetric geometry (like perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
+it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.  However for general geometries 
 such an expansion may not be possible, or converge well.
 These requirements force one to adopt a general numerical approach to computing Casimir forces~\cite{Johnson2011}.
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
+
+
 
 % \begin{enumerate}
 % %\item Experiments spurred development of theory.  

@@ -164,11 +164,11 @@ where $a\subkz$ is the annihilation operator for mode with wavenumber $k$, and p
 which has spatial mode function $\vect{f}\subkz(\hat{x}).$
 In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
 on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
-are then sensitive to the arrangements of the bodies.  This is distinct from the case in most 
-field theory calculations where the modes are described by plane waves.  
+are then sensitive to the arrangements of the bodies.  
+%This is distinct from the case in most field theory calculations where the modes are described by plane waves.  
 
 Note that some of the terms in the interaction Hamiltonian violate energy conservation, for example
-$\sigma_j^\dag a^\dag\subkz$ creates a photon and raises the atom from the ground state to the excited state.
+$\sigma_j^\dag a^\dag\subkz$ creates a photon and raises the atom from the ground state to an excited state.
 These terms are normally dropped in the rotating-wave-approximation, since they oscillate quickly
 in time as $e^{-i(\omega_j+\omega_k)t}$, and average down to zero on typical atomic timescales.  
 However, these energy non-conserving terms do lead to observable effects at higher order in perturbation theory.
@@ -194,8 +194,9 @@ The shift $V\subCP$ can be understood as two virtual transitions --- one from th
 and then a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
-is a ``virtual'' one, in that these intermediate states are not directly physically observable on a detector, 
-but rather reflect the apparatus of quantum mechanical perturbation theory.
+is a ``virtual'' one, since these intermediate states are not directly physically observable on a detector
+%, % but rather reflect the apparatus of quantum mechanical perturbation theory
+.
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
@@ -221,13 +222,7 @@ but rather reflect the apparatus of quantum mechanical perturbation theory.
 \label{fig:feynman_CP}
 \end{figure}
 % \comment{This is rote copying of Dan's notes - pointless!}
-% The Casimir--Polder potential can now be factored into atomic and field pieces~\cite{McLachlan1963}.
-The first is the polarizability for the atom in its ground state is
-\begin{equation}
-  \alpha_{ij}(\omega) = \sum_n 
-  \frac{\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\omega_{n0}^2-\omega^2},
-\end{equation}
-is the susceptibility of the atom to perturbations in the electric field.
+
 % while the EM Green function is 
 % \begin{equation}
 %   G_{ij}(\vect{r},\vect{r'},\omega) = \sum\subkz \omega_k
@@ -242,38 +237,95 @@ is the susceptibility of the atom to perturbations in the electric field.
 
 After substituting in $H_{\text{int}}$, the Casimir--Polder energy can be written as
 \begin{align}
-  V\subCP % &= -\sum_{m\ne 0,\vect{k},\zeta} \frac{
+  V\subCP(\vect{r}) % &= -\sum_{m\ne 0,\vect{k},\zeta} \frac{
     % \langle E_g, 0|d_if_{\vect{k},\zeta,i}a\subkz|E_n, 1\subkz\rangle
     % \langle E_n, 1\subkz|d_jf^*_{\vect{k},\zeta,i}a^\dag\subkz|E_g, 0\rangle}{\hbar(\omega_k+\omega_{n0})}\\
 % &= -\sum_{m\ne n,\vect{k},\zeta} \frac{\hbar\omega_k}{2\epsilon_0}
 %     \frac{\langle E_0|d_i|E_n\rangle \langle E_n|d_j|E_0\rangle f_{\vect{k},\zeta,i}(\vect{r})f^*_{\vect{k},\zeta,j}(\vect{r})
 %     }{\hbar(\omega_k+\omega_{n0})},\\
 &= -\sum_{m\ne 0,\vect{k},\zeta} \frac{\hbar\omega_k}{6\epsilon_0}
-    \frac{|\langle E_0|\vect{d}|E_n\rangle|^2 |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2
-    }{\hbar(\omega_k+\omega_{n0})},
+    \frac{|\langle E_0|\vect{d}|E_n\rangle|^2 |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2}
+    {\hbar(\omega_k+\omega_{n0})},
 \end{align}
 where we substituted the form of $H_{\text{int}}$ and assumed an spherical atom for which all components of dipole matrix elements
 are equal, such that $|\langle E_0|d_i|E_n\rangle|^2=|\langle E_0|\vect{d}|E_n\rangle|^2/3$.
 
-If we assume the atom's distance from the surface $d$ is larger than the atom's dominant wavelength's
-or $d/c\gg \omega_{n0}$, then we can use fact the atom's static (zero frequency) polarizability 
-is given by 
+The Casimir--Polder potential can now be factored into atomic and field pieces~\cite{McLachlan1963}.
+The first is the polarizability for the atom in its ground state is
+\begin{equation}
+  \alpha_{ij}(\omega) = \sum_n 
+  \frac{2\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\hbar(\omega_{n0}^2-\omega^2)},
+\end{equation}
+is the susceptibility of the atom to perturbations in the electric field.
+
+If we assume the atom's distance from the surface $d$ is larger than the atom's dominant emission wavelength,
+then the dominant contribution to the sum will come from frequencies for which $\omega_kd/c\sim 1$.
+$\omega_k\ll \omega_{n0}$.  
+The atomic polarizability can be replaced by the atom's static (zero frequency) polarizability 
 \begin{equation}
   \lim_{\omega\rightarrow 0}\alpha(\omega) = \sum_n
-  \frac{|\langle E_0|\vect{d}|E_n\rangle|^2}{3\omega_{n0}},
+  \frac{2|\langle E_0|\vect{d}|E_n\rangle|^2}{3\hbar\omega_{n0}},
+\end{equation}
+In this far-field limit, the Casimir--Polder energy can be approximated as 
+\begin{equation}
+  V_{CP}(\vect{r})= -\frac{\hbar}{4\epsilon_0}\alpha_0\sum_{\vect{k},\zeta}\omega_k |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2
 \end{equation}
 
 At this point, the mode functions for the electric field near a perfectly conducting plane 
 can be substituted in to the energy.  (\S 8.4.3 of Steck~\cite{SteckNotes}),
-or mode functions for a perfectly conducting box(\S3.12 in Milonni~\cite{Milonni1994}), with 
+or mode functions for a perfectly conducting box(\S3.12 in Milonni~\cite{Milonni1994}).
+The electromagnetic mode functions for perfectly conducting box are given by 
+\begin{align}
+  \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg[&
+  \hat{x}(\hat{\varepsilon}\subkz\cdot\hat{x})\cos(k_xx)\sin(k_y y)\sin(k_zz)\nonumber\\
+  &+\hat{y}(\hat{\varepsilon}\subkz\cdot\hat{y})\sin(k_xx)\cos(k_y y)\sin(k_zz)\nonumber\\
+  &+\hat{z}(\hat{\varepsilon}\subkz\cdot\hat{z})\sin(k_xx)\sin(k_y y)\cos(k_zz)\bigg],
+\end{align}
+where $\hat{\varepsilon}\subkz$ are the polarization unit vectors, and the wavenumbers $k_i=n_i\pi/L$,
+with $n_i$ integers~(\S 8.4.1 of Steck~\cite{SteckNotes}).
+The Casimir--Polder energy for an atom and a perfectly conducting wall is then 
+\begin{align}
+ V\subCP(\vect{r})=-\frac{2\hbar}{\epsilon_0V}\alpha_0\sum_{\vect{k},\zeta} \big[ &
+  (\hat{\varepsilon}\subkz\cdot\hat{x})^2\cos^2(k_xx)\sin^2(k_y y)\sin^2(k_zz)\nonumber\\
+  &+(\hat{\varepsilon}\subkz\cdot\hat{y})^2\sin^2(k_xx)\cos^2(k_y y)\sin^2(k_zz)\nonumber\\
+  &+(\hat{\varepsilon}\subkz\cdot\hat{z})^2\sin^2(k_xx)\sin^2(k_y y)\cos^2(k_zz)\bigg].
+\end{align}
+If we assume that the atom is close to the $z=0$ plane, but far from the other walls, the $x,y$ sinusoids
+can be replaced by their average value of a half, since they will be quickly oscillating.   
+In addition, the polarization vectors form a resolution of the transverse identity (since Gauss's law 
+implies that the electric field is transverse, $\nabla\cdot\vect{E}=0$),
 \begin{equation}
-  \vect{f}\subkz(\vect{r}) = \sqrt{\frac{2}{V}}\left(\hat{\varepsilon}  \right)
-\end{equation}  
-
-
+  \sum_{\zeta} \hat{\varepsilon}\subkz^{i}\hat{\varepsilon}\subkz^{j} = \delta_{ij}-\frac{k_ik_j}{k^2}.
+\end{equation}
+With these simplifications, and taking the limit of a large box to convert the sum over wavevectors into an
+integral, the Casimir--Polder potential is given by 
+\begin{align}
+ V\subCP(\vect{r})=-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k\bigg[ &
+  \bigg(1-\frac{k_x^2}{k^2}\bigg)[1-\cos(2k_zz)]
+  +\bigg(1-\frac{k_y^2}{k^2}\bigg)[1-\cos(2k_zz)]\nonumber\\
+  &+\bigg(1-\frac{k_z^2}{k^2}\bigg)[1+\cos(2k_z z)]\bigg]
+\end{align}
+where we have rewritten the sinusoids using double-angle formulae.  The $z$-independent parts
+lead to a constant, divergent contribution to the energy.  
 In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
-off the constant, divergent energy associated with an atom infinitely far away from the surface.   
+off this constant energy.  This corresponds to considering the energy change as the atom is brought
+close to the surface from spatial infinity.  
 Throughout this thesis, this simple energy subtraction is the only renormalization we will need. 
+
+The renormalized Casimir--Polder energy for an atom-conducting-plane can be evaluated in spherical
+coordinates, although some care is required to regularize these oscillatory integrals --- this can be done by introducing an exponential
+convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end of the computation,
+\begin{align}
+ V\subCP(\vect{r})- V\sup0&=\lim_{a\rightarrow 0}-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k 
+  (-1)\frac{2k_z^2}{k^2}\cos(2k_zz) e^{-ka}\\
+&=\lim_{a\rightarrow 0}\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\int_0^\infty dk \int_0^\pi d\theta\,k^3\sin\theta 
+  \cos^2\theta\cos(2kz\cos\theta) e^{-ka}\\
+&=-\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\frac{3}{2z^4}.
+\end{align}
+While we have emphasized the case of perfectly-conducting planar interfaces, similar computations
+can be carried out for dielectric interfaces and more general shapes of macroscopic bodies.  
+However, this type of calculation relies on having analytical expressions available for the mode functions,
+which limits this approach to highly symmetric geometries.  
 
 % The Casimir--Polder energy can be further factored in terms of atomic polarizabilities,
 % and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
@@ -283,14 +335,6 @@ Throughout this thesis, this simple energy subtraction is the only renormalizati
 % \todo{What does polarizability look like for a simple atom?}
 % At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
 
-\todo{Fix this fucking mess of a Casimir--Polder calculation}
-
-
-It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
-since for causal functions (such as an atom's response to the electromagnetic field), 
-the response is analytic on the imaginary axis.    \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
-This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
-integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
 % To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
 % \begin{equation}
 %   V\subCP(\vect{x}) = -\frac{\hbar c}{2}\int_0^\infty ds \alpha_{jk}(is)G^{(S)}_{kj}(\vect{r},\vect{r},is),
@@ -357,7 +401,8 @@ and outside.  Modes have been vertically offset for clarity.  }
 \end{figure}
 
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
-Dzyaloshinskii1959,Dzyaloshinskii1961}.
+Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
+perfect conductors, and Casimir--Polder forces between atoms' and dielectric surfaces.  
 The Casimir force between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
 \begin{align}
@@ -385,22 +430,27 @@ following Zhou~\cite{Zhou1995}. %  As intimidating as this expression is, it can
 %   \Delta = 1 - r_1r_2 e^{2ik d}.
 % \end{equation}
 
+It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
+since for causal functions (such as an atom's or dielectric's response to the electromagnetic field), 
+the response is analytic on the imaginary axis.    \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
+integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
+
 \subsubsection{Derivation of Lifshitz Formula}
 
-The energy in the EM field in vacuum is 
+The energy for the EM field in its ground state is 
 \begin{equation}
   E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
 \end{equation}
 where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
 The Casimir energy can be found with an ingenious argument due to van Kampen~\etal
-~\cite{vanKampan1968,Schaden1998}.
-\todo{Sums over $k_x,k_y,\omega$, with $k_z$ given by }
-The mode sum can be recast as a contour integral over a function whose poles occur at the allowed
+~\cite{vanKampen1968}.  (Our treatment parallels \S 7.2 in Milonni~\cite{Milonni1994}.)
+The sum over frequencies can be recast as a contour integral over a function whose poles occur at the allowed
 frequencies, with residue $\omega_k$:  
 \begin{equation}
-  E = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
+  E = \frac{L^2}{(2\pi)^2}\int_0^\infty dk_T\,k_T\oint dz\, \frac{\hbar z}{2} \frac{\Delta'(z)}{(2\pi i)\Delta(z)},
 \end{equation}
-where the function $\Delta'/\Delta$ is designed to have unit residue at the zeroes of $\Delta(z)$. 
+where the function $\Delta'(z)/[2\pi i\Delta(z)]$ is designed to have unit residue at the zeroes of $\Delta(z)$. 
 \todo{Variable transformations?  $k$ $\cos\theta?$?}
 If we consider modes between dielectric planar interfaces, the resonant modes must satisfy
 \begin{equation}
@@ -414,7 +464,7 @@ and the reflection coefficients are functions of $z$.
 
 The energy can be simplified by integrating by parts leading to 
 \begin{equation}
-  E = \frac{\hbar}{4\pi i}\oint dz \, \ln\Delta(z).
+  E = \frac{\hbar}{16\pi^3 i}\int d^2k_Tk_T\oint dz \, \ln\Delta(z).
 \end{equation}
 \todo{Remaing integrals over transverse $k_T$?}
 \begin{itemize}
@@ -423,8 +473,8 @@ The energy can be simplified by integrating by parts leading to
   % \item Only allowed modes contribute.  
     % Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
     % $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
-  \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
-    $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
+  % \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
+  %   $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
   % \item So energy can be written as 
   %   \begin{equation}
   %     E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
@@ -940,9 +990,6 @@ such as media with a strong magnetic response, or anisotropic media.
 % of vanishing curvature, the PFA converges to the correct Casimir force.  
 % \end{enumerate}
 
-
-
-
 \subsection{Scattering Approach}
 
 The scattering approach is currently the only general method of computing 
@@ -1328,10 +1375,9 @@ around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble avera
       \item No coupling of photons to medium.
       \item A scalar, not vector electromagnetism.
       \item Idealized boundary conditions.  
-      \item No way to extract atomic energies.  (quick guess of suppressing spatial integral turns 
+      \item No way to extract atomic energies.  (The simplest guess of suppressing spatial integral turns 
         out to be wrong direction).
     \end{enumerate}
-  
 \end{enumerate}
 
 Thus far the worldline method has only been developed for scalar fields, 
@@ -1370,107 +1416,6 @@ As this thesis will show, we have partially met those goals.
 % \footnote{See pages 826-828 of Dan's notes.}
 % \end{shaded}
 
-
-\section{Continuous Quantum Measurements}
-
-Describe open quantum systems, and include information from continuous measurements. 
-
-\begin{enumerate}
-\item Quantum measurements are inherently probabilitistic.  
-\item Thus, sequences of measurements are also inherently random.  
-\item Greater experimental control means we can now probe isolated quantum systems repeatedly and see how they evolve.  
-\item Move beyond simple projective measurements, which cannot describe things like position measurements,
-    or absorbtive measurements like photon detection.  Once photon is measured it is destroyed.
-\item To describe continuously weakly probing a system, also use stochastic processes as part of
-    numerical simulation strategy.
-\item Quantum tajectories correspond to monitoring a quantum system (like an atom) via a probe,
- for example shining light on the atom. \cite{Carmichael1993}
-\item Simulated trajectories are possible trajectories a system could trace out as we observe.
-  Also given a particular measurement record, they correspond to our best estimate of the current state of the system.  
-\end{enumerate}
-
-\begin{enumerate}
-\item Cite Carmichael Rice JOSA paper~\cite{Carmichael1989}
-\item Carmichael 1991 ~\cite{Carmichael1991}
-\item Open Systems approach to Quantum Optics\cite{Carmichael1993}
-\begin{enumerate}
-  \item Motivated by photodetection, and modelling experiments developed a new approach to open systems.  
-  \item Sample trajectories then correspond to actually results.
-  \item Naturally fits Bayesian framework for interpretation of quantum state.  
-\end{enumerate}
-
-\item Example: Monitoring State of Two level atom.
-\begin{enumerate}
-  \item Hamiltonian and operators
-  \item  Stochastic Schr\"odinger equation
-    \begin{equation}
-      d|\psi\rangle = -\frac{i}{\hbar}\op{H}|\psi\rangle dt 
-      - \frac{\Gamma}{2}(\sigma^\dag\sigma-\langle \sigma^\dag\sigma\rangle)|\psi\rangle dt
-      + \left(\frac{\sigma|\psi\rangle}{\langle \sigma^\dag\sigma\rangle^{1/2}}-|\psi\rangle \right)dN
-      \end{equation}
-    where $dN$ is Poisson process which is zero or one, with mean rate
-    \begin{equation}
-      \dlangle dN\drangle = \Gamma \langle \sigma^\dag\sigma\rangle dt.
-    \end{equation}
-    If Poisson process fires then detected emitted photon, which implies atom emitted photon, and should 
-    apply lowering operator.  If no photon detected, then less likely to be in excited state.  
-    Not only possible unravelling.  Can do homodyne detection - interfere light from atom
-    with local oscillator.  Can extract phase info about atomic dipole.  Often necessary since direct
-    detection typically has weak gain.  Interference effect amplifies the signal to detectable levels.
-    However note EMCCD cameras can resolve/detect single photons - will form core of that part of thesis.
-    Aspect of contextuality - type of measurement apparatus determines what can be inferred about the 
-    state of the system.
- \item   Note that using $\dlangle\cdots\drangle$ for ensemble average over stochastic processes,
-    and $\langle A\rangle:=\tr[A\rho]=\sum_i p_i \langle \psi_i|A|\rangle\psi_i\rangle$ 
-    for quantum mechnical average.  
-    \item Interpret photon detection or non-detection as gaining knowledge about state of system.
-  \item Can get regular master equation by finding stochastic master equation, and tracing over noise.
-  \item Crucial to use stochastic calculus to consistently work to $\order(dt)$.
-  \item Path integral interpretation - master equation evolution is given by path integral, sum over all
-    paths.  Monte-Carlo sampling of paths given quantum trajectories. 
-    Note this was pointed out by Howard.  
-\end{enumerate}
-    
-\item Cite Marte, Zoller, Parkins, Gardiner (MCWF)  \cite{Dalibard1992,Dum1992,Gardiner1992}
-\item Cite Holland ~\cite{Holland1996}, Meystre~\cite{Greenwood1997}.
-  Applied to position measurements of atoms by detecting photons.
-  Detection of photons localizes atoms.  
-\item Control Theory.~\cite{Wiseman1993} 
-\begin{enumerate}
-    \item Cite Wiseman book
-   \item Jacobs and Doherty.
-  \item Continuously monitoring system to implement closed-loop feedback control.  
-  \item Feedback control to generate Fock states (Haroche group)
-\end{enumerate}
-\item Quantum Chaos
-\begin{enumerate}
-  \item Idea of exploring quantum-classical transition.
-  Strong measurement is more classical.
-  Can extract Lyupanov exponents for diverging trajectories.
-  \cite{Bhattacharya2000,Habib2002,Habib2006}
-  \cite{Scott2001}
-  \item Theoretically shown.  As yet, this transition  not yet observed.  Need to develop
-    theory in direction of more carefully modelling experiments.  
-\end{enumerate}
-\item Advantages:
-\begin{enumerate}
-  \item Computationally efficient as simulating wave functions.
-  Take ensemble average at the end to get density matrix.  
-  \item Natural form for feedback control and reconstructing trajectory.  
-\end{enumerate}
-\item Comment: Relationship of measurement with state and process tomography?  Any?  
-
-\item Warshawski and Wiseman.
-  Can describe additional uncertainty by including classical Bayesian probabilities for each indistinguishable trajectory.
-  Note thesis of J. Thorne describing model for EMCCD camera.
-  Given number for each pixel have probabilities for each number of photons.
-  Must then incoherently average over all possible detection histories consistent with measured record.
-  \cite{Warszawski2002,Warszawski2003a,Warszawski2003b}
-\item Also cover results for generalized measurement functions and 
-    somewhat surprising notion that particle reflects from a sufficiently
-    strong quantum measurement.~\cite{Mackrory2010}
-\end{enumerate}
-
 \section{Thesis outline}
 
 The rest of this thesis is laid out as follows:  In Ch.~\ref{ch:EM_quantization} we formally quantizing
@@ -1498,7 +1443,6 @@ of single atoms.  We will derive the quantum trajectories for this case, and dev
 to account for variable measurement strength, and how to reconstruct the atomic trajectory
 given the output of a realistic camera.  
 Finally, we will summarize our findings in the conclusion.  
-
 
 % \begin{enumerate}
 % \item Background for path integrals, scalar worldlines, and EM field quantization.

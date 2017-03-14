@@ -1276,7 +1276,7 @@ set of paths.  For two half-spaces this can be constructed by shifting paths so 
 point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.
 We then find the maximum point $B_{\text{max}}$ and consider fixing that to lie on the second surface $d_2$.
 Let us call the index of the maximum location $j$.
-The correction from the starting path is given by 
+The correction from distorting the initial path is given by 
 \begin{equation}  
   P_{\text{pin-corr}} % = \frac{P_{\text{pinned}}}{P_{\text{free}}}
   % =\frac{ e^{-(d-\sqrt{T}B_{j+1})^2/(2\Delta T)-(d-\sqrt{T}B_{j-1})^2/(2\Delta T)  } }
@@ -1285,46 +1285,45 @@ The correction from the starting path is given by
   e^{-[d-\sqrt{\cT}B_j][d-\sqrt{\cT}(B_{j+1}+B_{j-1}-B_j)]/(\cT/N)}
 \end{equation}
 This is largest at the time when the $\cT_*=(d/B_j)^2$, or the path just touches the surface.
-Note that is only appreciable within a small range of times of this time, $T/N$.
-We can capture this dependence by sampling times from 
+Note that is only appreciable within a small range of times of this time, $T/N$.  
+We can capture this dependence by sampling times from a Gaussian in $1/\sqrt{\cT}$ based on 
+$e^{-N(d-\sqrt{\cT}B_j)^2/\cT}$, or
 \begin{equation}
-  P_C(\cT;B_j,d,N) \propto T^{-a}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right)^2\bigg],
+  P_C(\cT;B_j,d,N) = \sqrt{\frac{Nd^2}{\pi}}T^{-3/2}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right)^2\bigg],
 \end{equation}
-where $a$ is to be determined for convenience. 
-The probability distribution can be converted to an exponential distribution via some variable changes.
+for $\cT\in[0,(d/B_j)^2]$, and $a$ is to be determined for convenience. 
+The probability distribution can be converted to an one-sided normal distribution via some variable changes.
 In particular, if we define 
 \begin{equation}
-  s = Nd^2\left(\frac{1}{\sqrt{\cT}}-B_j\right)^2,
+  s = \left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right) \implies
+  \frac{ds}{d\cT} = \frac{-1}{2\cT^{3/2}},
 \end{equation}
-and use 
+then the probability distribution for $s$ is 
 \begin{equation}
-  \frac{ds}{d\cT} = Nd^22\frac{-1}{\cT^{3/2}}\left(\frac{1}{\sqrt{\cT}}-B_j\right)
+  P_C(s;B_j,d,N) = 2\sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2s^2},
 \end{equation}
+for $s\in[0,\infty]$.  The path-times are then given by
 \begin{equation}
-  P_C(s;B_j,d,N) \propto T^{-a}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right)^2\bigg],
+  \cT = \left( \frac{|z|}{d\sqrt{N/2}}+\frac{B_j}{d}\right)^{-2},
 \end{equation}
-
-
+where $z$ is a standard-normal random variable of zero mean, and unit variance.
 The Gaussian pinning factor, and path-distortion factors should be $\order(1)$ at typical times sampled
 from this distribution, since $B_{j-1}-B_j\sim \frac{1}{\sqrt{N}}$, and we anticipate $\Delta\sim N/2$.
 
-
-
-
 In the strong-coupling limit, we sample from a subset of paths that just graze the surface
 \begin{align}
-  C^{(S)}_{ij} =& \frac{\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
-  \frac{N^2e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
-  &\times e^{-[d-\sqrt{\cT}B_\Delta][d-\sqrt{\cT}(B_{\Delta+1}+B_{\Delta-1}-B_\Delta)]/(T/N)}
-   \I[1]0\I[2]0 g_{0,0}
-   \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0}\\
+  C^{(S)}_{ij}%  =& \frac{\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
+  % \frac{N^2e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
+  % &\times e^{-[d-\sqrt{\cT}B_\Delta][d-\sqrt{\cT}(B_{\Delta+1}+B_{\Delta-1}-B_\Delta)]/(T/N)}
+  %  \I[1]0\I[2]0 g_{0,0}
+  %  \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0}\\
 =& \frac{\hbar c N}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
-\bigg(2\cT^{3/2}\sqrt{\frac{\pi}{Nd^2}}\bigg)\bigg(\sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2(B_\Delta/d-1/\sqrt{\cT})^2}\bigg)
-  \frac{N e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
+\bigg(2\cT^{3/2}\sqrt{\frac{\pi}{Nd^2}}\bigg)P_C(\cT;B_j,d,N)
+  \frac{N e^{-N^2d^2/[2 j(N-j)\cT]}}{\sqrt{2\pi \cT j(N-j)}}\nonumber\\
   &\times 
-  e^{-N[d/\sqrt{\cT}-B_\Delta](B_{\Delta+1}+B_{\Delta-1}-2B_\Delta)}
+  e^{-N(d/\sqrt{\cT}-B_j)(2d/\sqrt{\cT}-B_{j+1}-B_{j-1})}
    \I[1]0\I[2]0 g_{0,0}
-   \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0},
+   \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j}-\vect{R}_2)=0},
 \end{align}
 where we have scaled out the divergent cross-sectional area, and accounted for the normalization
 for sampling from a Gaussian in $s=1/\sqrt{T}$.

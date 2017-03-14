@@ -967,32 +967,6 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     Considering their importance to this thesis, we will 
     now derive Feynman's path integral, which will serve as a prototype for all of the path integrals
     that follow.  (Our derivation follows the simple one given in Sakurai~\cite{Sakurai1994}.)
-
-    \subsection{Derivation of Feynman's Path Integral}
-
-    In quantum mechanics, the amplitude for a particle starting at $x_0$ at time $t=0$, and propagating
-    to $x_f$ at time $t_f$ is given by 
-    \begin{equation}
-      \langle x_f,t_f| x_i, t_0\rangle = \langle x_f| e^{-\frac{i}{\hbar}\op{H}t}|x_i\rangle.
-    \end{equation}
-    For a particle in a potential $V(\vect{x})$, the Hamiltonian is 
-    \begin{equation}
-      \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}),
-    \end{equation}
-    where the position and momentum operators obey the following commutation relations,
-    \begin{gather}
-      [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\\
-      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
-    \end{gather}
-    with resolutions of the identity,
-    \begin{gather}
-      I = \int d^Dx |\vect{x}\rangle\langle\vect{x}| = \int d^Dp |\vect{p}\rangle\langle\vect{p}|,
-    \end{gather}
-    and overlap
-    \begin{equation}
-      \langle \vect{x}|\vect{p}\rangle = \exp\left[\frac{i}{\hbar}\vect{x}\cdot\vect{p}\right].
-    \end{equation}
-    
     % They have even been used in studying quantum chaos---the study of the quantum analogues 
     % of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
     % where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
@@ -1008,7 +982,100 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
   %   Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
   %   Replaces oscillating Gaussian integrals for real, decaying ones.
 
+    \subsection{Derivation of Feynman's Path Integral}
 
+    In quantum mechanics, the amplitude for a particle starting at $x_0$ at time $t=0$, and propagating
+    to $x_f$ at time $t_f$ is given by 
+    \begin{equation}
+      \langle x_f,t_f| x_i, t_0\rangle = \langle x_f| e^{-i\op{H}t/\hbar}|x_i\rangle.
+    \end{equation}
+    For a particle in a time-independent potential $V(\vect{x})$, the Hamiltonian is 
+    \begin{equation}
+      \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}),
+    \end{equation}
+    where the position and momentum operators obey the following commutation relations,
+    \begin{gather}
+      [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\\
+      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
+    \end{gather}
+    with resolutions of the identity,
+    \begin{gather}
+      I = \int d^Dx |\vect{x}\rangle\langle\vect{x}| = \int \frac{d^Dp}{(2\pi\hbar)^D} |\vect{p}\rangle\langle\vect{p}|,
+    \end{gather}
+    and overlap
+    \begin{equation}
+      \langle \vect{x}|\vect{p}\rangle = e^{i\vect{p}\cdot\vect{x}/\hbar}.
+    \end{equation}
+    The amplitude to propagate from $x_0$ to $x_f$ can be developed into a path integral in a number of steps.
+    First, split the evolution operator into $N$ pieces, and insert $(N-1)$ resolutions of the $\vect{x}$-identity 
+    and $N$ resolutions of the momentum identity between
+    the pieces
+    \begin{align}
+      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle &= \int \prod_{k=1}^{N-1} d^Dx_k 
+      \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
+      \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
+      \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
+      &=\int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+      \langle \vect{x}_N|\vect{p}_{N}\rangle\langle\vect{p}_{N}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle\nonumber\\
+      & \hspace{0.5cm}\times\langle \vect{x}_{N-1}|\vect{p}_{N-1}\rangle\langle\vect{p}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
+      \cdots \langle \vect{x}_1|\vect{p}_1\rangle\langle \vect{p}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle
+    \end{align}
+    where $\Delta t:=t/N$, and we have introduced $x_N=x_f, x_0=x_i$. 
+    At this point we can note the basic structure: the total amplitude for 
+    the particle to propagate from $x_0$ to $x_f$ is the product of the amplitudes to propagate 
+    from one point to the next, with the total amplitude being the integral (or sum) summed over 
+    such paths.  
+    Each infinitesimal time evolution operator can factored into a kinetic and potential piece, 
+    \begin{equation}
+      e^{-i\op{H}\Delta t/\hbar} = \exp\left(-i\frac{\op{p}^2}{2m\hbar}\Delta t\right)
+      \exp\left(-iV(\op{x})\Delta t\right)+\order(\Delta t^2),
+    \end{equation}
+    where the corrections due to splitting and factorizing the exponential operator are higher order 
+    in $\Delta t$.  
+    (In general, it is crucial to carry out all expansions in path-integrals to $\order(\Delta t)$.  
+    For example, in path integrals in curved space this often requires working to high order in $\Delta x$, 
+    and exploiting the equivalent of the Ito rule $dx^2=dt$~\cite{deWitte1965,Kleinert2012,Grosche1994}.)
+
+    At this point, the quantum operators be replaced by their eigenvalues turning the exponential 
+    operators in numbers, 
+    \begin{align}
+      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle &= 
+      \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=0}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+      \prod_{n=0}^{N-1} \langle \vect{x}_{n+1}|\vect{p}_{n+1}\rangle
+      \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
+        e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\\
+        &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+      \prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
+      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar},
+    \end{align}
+    where we also used the overlap between position and momentum eigenstates.
+    Since the momentum integrals are Gaussian, they can be straighforwardly evaluated
+    \begin{align}
+      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle 
+      &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=0}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+        \prod_{n=0}^{N-1}\bigg\{  \exp\left[-\frac{i\Delta t}{2m\hbar}\left(\vect{p}_{n+1}  
+            -\frac{m}{\Delta t}(\vect{x}_{n+1}-\vect{x}_n)\right)^2\right]\nonumber\\
+        &\hspace{6cm}        \times e^{i m (\vect{x}_{n+1}-\vect{x}_n)^2/(2\Delta t)}e^{ -iV(\vect{x}_n)\Delta t/\hbar}\bigg\}\\
+        &= \int \prod_{k=1}^{N-1} d^Dx_k 
+        \prod_{n=0}^{N-1}\bigg[\bigg(\frac{ m }{2\pi i\hbar\Delta t}\bigg)^{D/2}
+        e^{i m (\vect{x}_{n+1}-\vect{x}_n)^2/(2\Delta t)}e^{ -iV(\vect{x}_n)\Delta t/\hbar}\bigg]\\
+        &= \mathcal{N}\int D\vect{x} 
+        \exp\left\{\frac{i}{\hbar}\int_{t_i}^{t_f} dt\,\left[ \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t)]\right]\right\},
+    \end{align}
+    where in the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
+    \rightarrow d\vect{x}{dt}, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
+    $D\vect{x} = \prod_{k=1}^{N-1}d^Dx_k$.  The phase in exponent is the classical action for a particle
+    in a potential.  
+
+    In this thesis, this type of derivation will be all we require.  For convergence reasons we 
+    will often work with the imaginary time version, which replaces the oscillating exponentials with
+    decaying exponentials.  
+    The extension to field path-integrals over fields is straightforward: the field $\phi(\vect{x})$ 
+    is described by its value at finitely many points $\phi(\vect{x}_k)$, and one integrates over the field values at these 
+    points.  At the end of the calculation, one lets the spacing between grid points go to zero, 
+    and the size of the grid extend to infinity.  
+    We will also only need to consider Gaussian path integrals, of the type considered here.  
+    In a later chapter we will extend this derivation to include sources.
 
 \section{Computational methods for Casimir Effects}
 \label{sec:numerical_review}
@@ -1232,7 +1299,6 @@ and forces in the sphere-plane and cylinder-plane geometries~\cite{Weber2010, We
 The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
 based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
 
-
 We consider a scalar field coupled to a background potential $V(\vect{x},t)$.  This potential
 embodies the location of the bodies we are considering.  % Starting from the classical action,
 % we will derive the Hamiltonian for the fields, and then compute the quantum partition function.  
@@ -1256,18 +1322,17 @@ where $\lambda$ is the coupling constant, $\sigma_r(\vect{x})=0$ marks the locat
 and $\vect{R}_r$ marks the center location of each body.
 In most work on scalar worldlines, the coupling constant $\lambda$ is taken to infinity, 
 which corresponds to imposing Dirichlet boundary conditions on the surfaces. 
-In certain geometries this recovers electromagnetic 
-Casimir results for idealized perfect conductors.  
+For planar geometries, this recovers electromagnetic Casimir results for idealized perfect conductors.  
 
 From the Lagrangian, one can find the Hamiltonian and quantize the theory.
- (While this is a somewhat length procedure, it is the clear formal procedure for quantization,
+(While this is a somewhat length procedure, it is the clear formal procedure for quantization,
  and useful to follow in cases where there may be ambiguities).
 The momentum conjugate to $\phi$ is given by
 \begin{equation}
   \Pi := \frac{\delta \cL}{\delta(\partial_t\phi)} = \frac{1}{c^2}\partial_t\phi,
 \end{equation}
 where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
-The Hamiltonian can then be easily found,
+The Hamiltonian is then given by
 \begin{align}
   H &:= \int d^3x\,(\Pi\partial_t\phi -  L)\\ 
   &= \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
@@ -1349,7 +1414,7 @@ computing energy differences between different configurations.  The renormalizat
 the inifite constant normalization factors.  
 
 The free energy can now be converted into a single-particle path integral via some formal 
-manipulations.  First we will use the identity $\log\det A=\tr\log A$, which can be readily
+manipulations.  First, we will use the identity $\log\det A=\tr\log A$, which can be readily
 verified for positive finite matrices.  
 \begin{align}
   \log\det A &= \log\prod_j \alpha_j
@@ -1381,22 +1446,14 @@ $[\op{x}_i,\op{p}_j]=i\delta_{ij}$.
   \int d\vect{x}_0d\tau_0 \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT}\big(e^{-\cT V(\op{\vect{x}})}-1\big)
   |\vect{x}_0,\tau_0\rangle.
 \end{equation}
-
-
-
 The free energy is then in the form of the imaginary-time transition amplitude for a quantum particle
-in $D$ space-time dimensions, in a potential $V$.  
+in $D$ space-time dimensions, in a potential $V$.  In exactly the same fashion as Sec.~\ref{sec:feynman_path_integral},
+this can be converted into a single-particle path integral.
 
-\begin{itemize}
-  \item Introduce auxiliary hilbert space.
-  \item This is exactly the (imaginary-time) transition amplitude for a quantum particle.
-  \item Same derivation as before.  Operators -> eigenvalues
-  \item Carrying out Gaussian momentum integrals.
-\end{itemize}
     
-Worldline path integral
+Worldline path integral at zero temperature 
   \begin{equation}
-    F = - \int \frac{dT}{T^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
+    F = -\frac{\hbar c}{(2\pi)^{D/2}}\int \frac{d\cT}{\cT^{1+D/2}} \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
   \end{equation}
   where $\cT$ is the loop proper time, $\langle V\rangle$ is the average of the potential 
 around a particular loop, and $\dlangle\cdots\drangle$ denotes an ensemble average over Brownian paths.  

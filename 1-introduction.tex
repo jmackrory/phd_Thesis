@@ -859,7 +859,7 @@ These require an anisotropic response from the atom, which might be possible in 
 
 Another way towards repulsive effects is by varying the geometry of the bodies.  
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
-\cite{Levin2010}.  However, in this example a 
+\cite{Levin2010}.  However, in this example the repulsion is not stable. 
 
 
 
@@ -921,43 +921,82 @@ the path-integral.
 
 The path integral was originally developed by Richard Feynman as an alternative formulation of quantum mechanics
 ~(\cite{Feynman1948,Feynman1965}).  
-In the path integral, the amplitude for a particle to propagate from one position to another,
+In the path integral, the probability amplitude for a particle to propagate from one position to another,
 is given by the sum over \emph{all} possible paths between the points.  
-Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path,
-and $\hbar$ is the reduced Planck constant.   
+Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path.
 
-    \begin{enumerate}
-      \item Note connection - source of framing is Feynman, who used that reasoning to derive path
-        integral
-      \item Path integral is description of stochastic process.  Evolution of distribution described
-        by wave-function.  Can think of randomly sampling from path integral, leading to stochastic 
-        sample paths.  These correspond to Brownian motion for free quantum particle.  
-      \item Brownian motion - non-differentiable, continuous paths.  Introduce Wiener paths.  
-    \end{enumerate}
-    
+    % \begin{enumerate}
+    %   % \item Note connection - source of framing is Feynman, who used that reasoning to derive path
+    %   %   integral
+    %   \item Path integral is description of stochastic process.  Evolution of distribution described
+    %     by wave-function.  Can think of randomly sampling from path integral, leading to stochastic 
+    %     sample paths.  These correspond to Brownian motion for free quantum particle.  
+    %   \item Brownian motion - non-differentiable, continuous paths.  Introduce Wiener paths.  
+    % \end{enumerate}
+
     Path integrals have been used extensively in a wide range of theoretical physics~\cite{Kleinert2012}.
-    They form one basis for quantum field theory~\cite{Brown1994}, where they provide a 
-    natural method for quantizing the relativistic gauge-field theories 
-    that underly the Standard Model of particle physics~\cite{Srednicki2008}.
-    In these field theoretic path-integrals, the integral runs over
-    all possible field configurations connecting the initial and final states, and some care is required
-    to handle the redundant degrees of freedom implied by gauge invariance~\cite{Faddeev1991}.
+    While offering an intuitive picture of quantum mechanics, path integrals form 
+    a natural basis for quantum field theories, where they offer a relativistically covariant
+    quantization procedure that naturally accounts for the symmetries 
+    that underly the Standard Model of particle physics~\cite{Brownn1994,Srednicki2008}.
+    % In these field theoretic path-integrals, the integral runs over
+    % all possible field configurations connecting the initial and final states, and some care is required
+    % to handle the redundant degrees of freedom implied by gauge invariance~\cite{Faddeev1991}.
 
-    Mark Kac worked with similar functional integrals, and put the path integral 
-    on firmer mathematical footing~\cite{Kac1949}.  In Kac's work, and much of the mathematical
-    work that followed, one weights each path
-    by with $e^{-S_E[x]}$, where $S_E$ is the so-called Euclidean action.  
-    This amounts to solving a diffusion equation, rather than the Schr\"odinger equation.  
+    Path-integrals have also been used in mathematics and statistics to describe stochastic 
+    processes~\cite{Kac1949,Durrett1996, Karatzas1991}.  This mathematical work works instead weights each
+    path by $e^{-S_{E}[x]}$, where $S_E$ is the Euclidean action for the path.
+    In this form the path-integral has clearer convergence properties, 
+    since the paths are weighted by real, decaying exponentials, as opposed to the oscillatory integrals
+    in Feynman's path integral.  This amounts to solving a diffusion equation rather than the Schr\"odinger equation
+    --- in essence a diffusion equation is the same as the Schr\"odinger equation under Wick rotation 
+    with the replacement $t\rightarrow -i\tau$.
 
-    Path integrals have also been used in mathematics and statistics to describe stochastic 
-    processes~\cite{Durrett1996, Karatzas1991}.  
-    Can mathematically formulate a path integral as very high-dimensional integral.
-    Can then use Monte-Carlo methods, to randomly sample from most important regions of integral.  
+    The path-integral is one way to view stochastic processes, along side stochastic differential
+    equations and diffusion or Fokker-Planck equations. 
+    The path-integral is an infinite dimensional integral, which is the solution to an associated 
+    diffusion equation.  One can randomly sample from the 
+    dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
+    in turn be described by a stochastic differential equations.  \todo{Gardiner citation for SDE-> PDE}
+        
+    Path integrals underly most of the work carried out in this thesis: we will use path-integrals
+    to quantize the electromagnetic field, the worldline method for computing Casimir energies relies 
+    upon them.  In addition, we will use the connection between path-integrals and diffusion equations
+    to find analytical solutions, and Monte-Carlo sampling of path-integrals is the basis for our numerical
+    method.  
+    Considering their importance to this thesis, we will 
+    now derive Feynman's path integral, which will serve as a prototype for all of the path integrals
+    that follow.  (Our derivation follows the simple one given in Sakurai~\cite{Sakurai1994}.)
 
-    They have even been used in studying quantum chaos---the study of the quantum analogues 
-    of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
-    where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
-    can be approximated by only considering paths with periodic orbits.  \todo{Gutzwiller trace formula citation}
+    \subsection{Derivation of Feynman's Path Integral}
+
+    In quantum mechanics, the amplitude for a particle starting at $x_0$ at time $t=0$, and propagating
+    to $x_f$ at time $t_f$ is given by 
+    \begin{equation}
+      \langle x_f,t_f| x_i, t_0\rangle = \langle x_f| e^{-\frac{i}{\hbar}\op{H}t}|x_i\rangle.
+    \end{equation}
+    For a particle in a potential $V(\vect{x})$, the Hamiltonian is 
+    \begin{equation}
+      \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}),
+    \end{equation}
+    where the position and momentum operators obey the following commutation relations,
+    \begin{gather}
+      [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\\
+      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
+    \end{gather}
+    with resolutions of the identity,
+    \begin{gather}
+      I = \int d^Dx |\vect{x}\rangle\langle\vect{x}| = \int d^Dp |\vect{p}\rangle\langle\vect{p}|,
+    \end{gather}
+    and overlap
+    \begin{equation}
+      \langle \vect{x}|\vect{p}\rangle = \exp\left[\frac{i}{\hbar}\vect{x}\cdot\vect{p}\right].
+    \end{equation}
+    
+    % They have even been used in studying quantum chaos---the study of the quantum analogues 
+    % of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
+    % where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
+    % can be approximated by only considering paths with periodic orbits.  \todo{Gutzwiller trace formula citation}
 
 % \begin{enumerate}
 % \item Found common use in field theory particularly for covariantly quantizing gauge field theories,

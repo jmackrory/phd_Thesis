@@ -1102,6 +1102,13 @@ These requirements force one to adopt a general numerical approach to computing 
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
 
+(We will briefly note methods based on computing van der Waals energies in the static field limit,
+by evaluating functional determinants for discrete spatial grids~\cite{Maggs2006,Pasquali2008}. This approach 
+omits any time evolution, but it does offer a direct method of trying to evaluate the field path integral.
+We will note similarities to our work in Ch.~\ref{ch:quantization})
+
+
+
 % \begin{enumerate}
 % %\item Experiments spurred development of theory.  
 % % \item Prior methods relied on mode-function expansion of fields, which is only possible
@@ -1653,8 +1660,11 @@ which is a transverse vector field.
   Second, it has only been applied for idealized potentials which effectively impose 
 Dirichlet boundary conditions on the surfaces.  As a result it is missing any 
 coupling of the fields to media with realistic properties.
-Finally, the development was initially focused on Casimir energies, with no simple way to 
-extract Casimir--Polder type energies. 
+Finally, the development has been focused on Casimir energies, with no simple way to 
+extract Casimir--Polder energies for atoms near surfaces 
+(although it may be possible to extract these from the stress-energy tensor). 
+Thus far, there has only been speculation on how to extend the worldline method to 
+electromagnetism, without any concrete results~\cite{Aehlig2011}.  
 
     % \begin{enumerate}
     %   \item No coupling of photons to medium.
@@ -1665,14 +1675,6 @@ extract Casimir--Polder type energies.
     % \end{enumerate}
 %\end{enumerate}
 
-Thus far, there has only been speculation on how to extend the worldline method to 
-electromagnetism~\cite{Aehlig2011}.  Somewhat related are direct attempts to evaluate
-the functional determinants by explicitly discretizing the operators
-
-
- Similar functional determinants to worldline methods are found,
- and are evaluated explicitly using a spacial grid~\cite{Pasquali2008}.  
-
 \subsection{Motivation and goal for thesis project}
 
 The goal of this thesis is to extend the scalar worldline method to vector electromagnetism.
@@ -1680,7 +1682,9 @@ Ideally we would retain the attractive features of the method, such as geometry 
 simple path generation, and Monte Carlo sampling, while improving the method to account for the two physical polarization
 states of the EM field, and properly account for the material properties of the medium.  
 
-As this thesis will show, we have partially met those goals.  
+As this thesis will show, we have partially met those goals.  We have developed analytical
+and numerical techniques that can be applied to existing worldline problems and are essential
+for electromagnetic worldlines.  
 % \begin{shaded}
 %   The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
 %   This follows either from Hormander's argument, that 
@@ -1697,26 +1701,33 @@ As this thesis will show, we have partially met those goals.
 
 \section{Thesis outline}
 
-The rest of this thesis is laid out as follows:  In Ch.~\ref{ch:EM_quantization} we formally quantizing
+The rest of this thesis is laid out as follows: 
+
+In Ch.~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
 We will carry this out both for splitting the EM field into two non-interacting scalar polarizations,
 as well as the fully coupled path integral.
-We will also review others work on quantizing the EM field in media.
+%We will also review others work on quantizing the EM field in media.
+
 In Ch.~\ref{ch:feynman_kac} we will discuss the general methods of solving single-particle path 
 integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
  is the solution to a diffusion equation.  In simple cases, the Feynman-Kac formula can be solved,
 and we will derive those solutions for some simple planar geometries. 
+
 In Ch.~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
 We will also discuss the transition between high and low temperature, and near-field within the
 worldline context.  
+
 In Ch.~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals
 This will includes efficient methods for computing gradients, as well as Monte Carlo sampling methods
-for generating paths. 
+for generating paths.  We will examine the convergence of the methods as the path resolution is increased.
+
 In Ch.~\ref{ch:general} we will discuss the prospects for a general method based on the current
 results and examine both an approximate method coupling the two polarizations together as well
-as the fully coupled path integral method.  (We will test this for a mixed geometry for which
-there are other tested methods to compare the worldline method against. 
+as the fully coupled path integral method.  % (We will test this for a mixed geometry for which
+% there are other tested methods to compare the worldline method against. 
+
 In Ch.~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
 of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
 to account for variable measurement strength, and how to reconstruct the atomic trajectory

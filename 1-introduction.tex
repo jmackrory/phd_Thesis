@@ -1165,38 +1165,56 @@ such as media with a strong magnetic response, or anisotropic media.
 \subsection{Scattering Approach}
 
 The scattering approach is currently the only general method of computing 
-electromagnetic Casimir forces betweenin general media.  The essence of the scattering method 
-is encodes the presence of material bodies by the electric field they scatter.  
+electromagnetic Casimir forces betweenin general media.  The scattering method 
+is based on scattering techniques from classical electromagnetic theory and quantum mechanics~\cite{Rahi2009}.
 
-While originally developed as an analytical technique, 
-the scattering method has also been converted to an efficiency numerical method.  
+The roots of the scattering method in Casimir physics go back a number of decades.  
+This method has been developed by a number of groups as an analytical tool~\cite{Lambrecht2006,
+MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  In Casimir physics, one is often interested in the scattered 
+EM field emanating from an object --- the renormalized interaction energies can be thought of as 
+emerging from this scattering.  The scattering method provides a way to describe the scattering of photons
+from one mode and set of basis functions into another~\cite{Rahi2009}.
+Derivations similar to the argument principle can be applied to describe coupling between modes
+for two-body systems such as spheres and planes~\cite{Canaguier-Durand2012}.  Instead of reflection
+coefficients for a surface, one considers the full scattering matrix for each body, which describes the scattering
+between polarizations.  These variants rely on analytical expansions, and while they do offer a general purpose numerical
+method, they may be slow to converge if the choice of basis functions poorly corresponds to the actual
+geometry required.  
 
-\begin{itemize}
-  \item Note source of name - based on using scattering theory techniques for EM field.
-\end{itemize}
+The Johnson group at MIT has developed a better formulation, where instead of decomposing the field 
+using basis functions like spherical harmonics,
+one uses a boundary element method to describe the scattering~
+\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
+The boundary elements are triangles that tesselate the surface, where each triangular patch is 
+thought to have a current on it.  
+These surface patches interact with one another with the homogenous Green function.  
+(This is justified via Surface-Integral-Equations\cite{Stratton1941}, and a variant on Green's theorem~\cite{Emig2004})
+In effect, the surface patches appear to have fluctatuing currents which interact with one another by emitting 
+photons~\cite{Reid2013}.  
+This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
+(At the level of perturbation theory where the Casimir effect is computed, the photon Green function 
+can be described by its classical counterpart.)
 
-It has been explored as an analytical technique,
-and further converted to a form 
-\begin{enumerate}
-\item EM field depends on scattered field.  Encoded in reflection matrices
-which are related to how EM field scatters from a given surface.  
-\item Developed as analytical technique, and developed into general purpose numerical technique.
-Numerous authors contributed over decades.
-\end{enumerate}
+% \begin{enumerate}
+% \item EM field depends on scattered field.  Encoded in reflection matrices
+% which are related to how EM field scatters from a given surface.  
+% \item Developed as analytical technique, and developed into general purpose numerical technique.
+% Numerous authors contributed over decades.
+% \end{enumerate}
 
-\begin{enumerate}
-  \item Developed as general method, for scattering between basis modes.  
-    Initially used with analytical mode expansions.  Can also use finite element basis,
-    much more adapted to arbitrary bodies.  
-\item Physical picture is fluctuating currents on bodies.  Interact via EM field.
-  Can use Green function as if dielectric suffused all space.  
-Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.  
-\end{enumerate}
+% \begin{enumerate}
+%   \item Developed as general method, for scattering between basis modes.  
+%     Initially used with analytical mode expansions.  Can also use finite element basis,
+%     much more adapted to arbitrary bodies.  
+% \item Physical picture is fluctuating currents on bodies.  Interact via EM field.
+%   Can use Green function as if dielectric suffused all space.  
+% Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.  
+% \end{enumerate}
 
 \begin{enumerate}
 \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
-\item Cite Lambrecht and French collaborators
-  \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
+% \item Cite Lambrecht and French collaborators
+%   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
 %\item Cite Milton
 \item Physical Picture based on generalized Green theorem from 
   SIE~\comment{Stratton}\cite{Stratton1941}.
@@ -1207,6 +1225,15 @@ Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
 \item Comment on Emig/Buscher showing you can use homogenous green function.
   Relation to Green's theorem.
 \item Cite Emig,Jaffe,  and others for initial analytical techniques.  Relies on Green theorem.
+\item Emig 2004
+\item Emig 2007
+\item Rahi2009
+\item Rodriguez2007
+\item Rodriguez2007a
+\item Rodriguez2009
+\item Reid2009
+\item Reid2011
+\item Reid2013
 \cite{Emig2004, Emig2007, Rahi2009}
 \cite{Kenneth2006}
   Note use of existent analytical methods and similarities to existent 
@@ -1221,7 +1248,8 @@ energies for piece-wise continuous linear dielectric and magnetic media~\cite{Re
 In essence the method calculates the interaction between electric and magnetic surface currents 
 on different bodies, mediated by the EM field.  Mathematically this is derived 
 from a path integral for the EM field, where the EM boundary conditions are enforced at the 
-surfaces via functional $\delta$-functions.  The $\delta$-functions introduce fields 
+surfaces via functional $\delta$-functions (simpler boundary conditions were handled in this fashion in
+~\cite{Bordag1985,Li1991}.  The $\delta$-functions introduce fields 
 bound to the surfaces, which can be interpreted as surface currents flowing to enforce boundary conditions.
 After integrating out the EM field, these surface currents interact with one another via the EM
 Green function.  Since the method assumes piece-wise, homogenous media and enforces EM boundary

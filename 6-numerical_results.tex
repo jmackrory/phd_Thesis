@@ -1173,8 +1173,9 @@ Recall, the potential curvature is
 \begin{align}
   C_{ij} =& \frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS\, \hat{n}_1(\vect{x}_0)
-  \nonumber\\ 
-  &\times\biggdlangle 
+  %\nonumber\\ 
+%  &\times
+\biggdlangle 
   \sum_{k=0}^{N-1}\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)
   \nonumber\\
   &\hspace{0.75cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
@@ -1187,15 +1188,15 @@ where
 
 That effort scales quite badly roughly as an additional $N^2$.  
 We could pick the a pair of fixed indices based on their probability of occuring?  
-Secondly, we could also 
+Secondly, we could also explicitly sample from the strong-coupling limit.
 
 This integrand is non-zero for paths that touch both bodies.  In the strong-coupling limit,
 only paths that just graze the bodies will contribute.  However at finite $\chi$, all paths 
 are useful since paths with a finite sojourn time contribute significantly.  
 
 This suggests a two-fold approach: generate paths constrained to touch without regard for their
-occupation time (which will capture small $\chi$), and also isolate a subset of patsh which just touch the 
-bodies (which will capture large $\chi$.  
+occupation time (which will capture small $\chi$), and also isolate a subset of pasth which just touch the 
+bodies (which will capture large $\chi$).  
 
 We can either directly generate the paths that obey the constraints, or we can generate 
 generic paths and then check whether these paths touch the desired surfaces.  
@@ -1212,7 +1213,6 @@ for distorting this path point to lie on the surface,
   {e^{-|\vect{x}_{j+1}-\vect{x}_j|^2/(2\Delta T)-|\vect{x}_{j-1}-\vect{x}_j|^2/(2\Delta T)  }},
 \end{equation}
 where $x^*$ is the nearest point to the surface to $\vect{x}_j$.
-
 
 \subsubsection{Direct Construction of constrained paths}
 
@@ -1271,6 +1271,7 @@ The paths are still then constructed subject to the constraints of touching the 
 indices.  The remaining integrand is evaluated for the resulting paths.  
 
 \subsubsection{Strong-Coupling Limits}
+
 In order to capture the strong-coupling dependence it is necessary to also sample from the no-touching
 set of paths.  For two half-spaces this can be constructed by shifting paths so that the minimum
 point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.

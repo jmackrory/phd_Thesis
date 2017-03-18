@@ -1214,6 +1214,94 @@ for distorting this path point to lie on the surface,
 \end{equation}
 where $x^*$ is the nearest point to the surface to $\vect{x}_j$.
 
+
+\subsubsection{ALternative $\delta$ function}
+There is an alternative formulation for handling the $\delta$-function.  Instead of explicitly constructing 
+paths to satisfy the $\delta$-function, we can generate an effective potential.  
+First consider a single integral against a Gaussian distribution, with a $\delta$-function,
+\begin{align}
+  I &= \int dx_j \frac{1}{2\pi\Delta\cT}
+  e^{-(x_{j+1}-x_j)^2/(2\Delta \cT)-(x_{j}-x_{j+1})^2/(2\Delta \cT)} f(x_j)\delta(x_j-d) \\
+&=
+\frac{1}{2\pi\Delta\cT}
+  e^{-(x_{j+1}-d)^2/(2\Delta \cT)-(d-x_{j+1})^2/(2\Delta \cT)} f(d).
+\end{align}
+While this integral can be straightforwardly evaluated, it is inconvenient within the path integral
+to have to sum over explicitly pinned paths for each $x_j$.  We can circumvent this by inserting unity 
+by multiplying and dividing by an integral over the Gaussian probability distribution, 
+\begin{align}
+  I &= \frac{1}{2\pi\Delta\cT}
+  e^{-(x_{j+1}-d)^2/(2\Delta \cT)-(d-x_{j+1})^2/(2\Delta \cT)} f(d)
+  %\nonumber\\  &\times
+\dfrac{\int dy_j (2\pi\Delta\cT)^{-1}
+  e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}}{\int dy_j (2\pi\Delta\cT)^{-1}
+  e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}}\\
+% &= \frac{1}{2\pi\Delta\cT}
+%   e^{-(x_{j+1}-d)^2/(2\Delta \cT)-(d-x_{j+1})^2/(2\Delta \cT)} f(d)
+%   \left[\frac{1}{\sqrt{4\pi\Delta \cT}}e^{-(x_{j+1}-x_{j-1})^2/(4\Delta\cT)}\right]^{-1}
+% \nonumber\\
+% &\times\int dy_j \frac{1}{2\pi\Delta\cT}
+%   e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}\\
+&= \frac{1}{\sqrt{\pi\Delta\cT}}
+  e^{-[d-(x_{j+1}+x_{j-1})/2]^2/\Delta \cT}f(d)
+\int dy_j \frac{1}{2\pi\Delta\cT}
+  e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}.
+\end{align}
+In the path-integral one can then use free paths, where the introduced coordinate
+$y_j$ replaces the constrained $x_j$ coordinate, and is subsumed within the free Gaussian path measure.
+The downside is that the integrand is only non-zero
+for a small range of times and positions, but this can be taken into account in the Monte Carlo sampling
+strategy.  
+
+This can be extended to handle multi-dimensional paths subject to a surface constraint, $\delta[\sigma(\vect{x})]$.
+ In that case 
+one multiplies and divides by the appropriate multi-dimensional Gaussian.  Since each Cartesian dimension
+of the Gaussians decouples from the others, the same manipulations apply dimension-by-dimension, 
+with the result
+\begin{align}
+  I % &= \int_{\sigma(\vect{y})=0}dS\frac{1}{|\nabla\sigma|}\frac{1}{(2\pi\Delta\cT)^D}
+%   e^{-|\vect{x}_{j+1}-\vect{y}|^2/(2\Delta \cT)-|\vect{y}-\vect{x}_{j+1}|^2/(2\Delta \cT)} f(\vect{y})
+%   \nonumber\\  &\times
+% \dfrac{\int d\vect{x}_j \dfrac{1}{(2\pi\Delta\cT)^{D/2}}
+%   e^{-|\vect{x}_{j+1}-\vect{x}_j|^2/(2\Delta \cT)-|\vect{x}_{j}-\vect{x}_{j-1}|^2/(2\Delta \cT)}}
+% {\int d\vect{x}_j \dfrac{1}{(2\pi\Delta\cT)^{D/2}}
+%   e^{-|\vect{x}_{j+1}-\vect{x}_j|^2/(2\Delta \cT)-|\vect{x}_{j}-\vect{x}_{j-1}|^2/(2\Delta \cT)}}\\
+% &= \frac{1}{2\pi\Delta\cT}
+%   e^{-(x_{j+1}-d)^2/(2\Delta \cT)-(d-x_{j+1})^2/(2\Delta \cT)} f(d)
+%   \left[\frac{1}{\sqrt{4\pi\Delta \cT}}e^{-(x_{j+1}-x_{j-1})^2/(4\Delta\cT)}\right]^{-1}
+% \nonumber\\
+% &\times\int dy_j \frac{1}{2\pi\Delta\cT}
+%   e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}\\
+% &= \int_{\sigma(\vect{y})=0}dS\frac{1}{|\nabla\sigma|}\frac{1}{(\pi\Delta\cT)^{D/2}}
+%   e^{-|\vect{x}_{j+1}-\vect{x}_{j-1}|^2/(4\Delta \cT)-|\vect{x}_{j+1}-\vect{y}|^2/(2\Delta \cT)-|\vect{y}-\vect{x}_{j+1}|^2/(2\Delta \cT)} f(\vect{y})\nonumber\\
+%   &\times\int d\vect{x}_j \frac{1}{(2\pi\Delta\cT)^{D/2}}
+%   e^{-|\vect{x}_{j+1}-\vect{x}_j|^2/(2\Delta \cT)-|\vect{x}_{j}-\vect{x}_{j-1}|^2/(2\Delta \cT)}\\
+=& \int_{\sigma(\vect{y})=0}dS\frac{1}{|\nabla\sigma|}\frac{1}{(\pi\Delta\cT)^{D/2}}
+  e^{-|\vect{y}-(\vect{x}_{j+1}+\vect{x}_{j-1})/2|^2/(\Delta \cT)} f(\vect{y})\nonumber\\
+  &\times\int d\vect{x}_j \frac{1}{(2\pi\Delta\cT)^{D/2}}
+  e^{-|\vect{x}_{j+1}-\vect{x}_j|^2/(2\Delta \cT)-|\vect{x}_{j}-\vect{x}_{j-1}|^2/(2\Delta \cT)}.
+\end{align}
+
+This allows us to use paths that are close to the surface, without exactly touching the surface.  
+The integrand is still ony significant for times and paths where this occurs.  For a fixed 
+starting point $\vect{x}_0$, pinning point $\vect{y}$, and path $\vect{x}_j=\vect{x_0}+\sqrt{\cT}\vect{B}_j$,
+this can be converted into a probability distribution for
+the allowed times, $\cT$.    
+\begin{align}
+  \exp\bigg[-\frac{|\vect{y}-(\vect{x}_{j+1}+\vect{x}_{j-1})/2|^2}{\Delta\cT}\bigg]
+  &= \exp\bigg[-\frac{1}{\Delta\cT}|\vect{d}-\sqrt{\cT}\bar{\vect{B}}_{j}|^2\bigg] \\
+  &= \exp\bigg[-N\bigg(\frac{\vect{d}^2}{\cT} -\frac{2\vect{d}\cdot\bar{\vect{B}}_j}{\sqrt{\cT}}
+    + \bar{\vect{B}}_{j}^2\bigg)\bigg] \\
+  &= \exp\bigg[-N|\vect{d}|^2\bigg(\frac{1}{\sqrt{\cT}} -\frac{\vect{d}\cdot\bar{\vect{B}}_j}{|\vect{d}|^2}\bigg)^2
+%  \bigg]  \nonumber\\    &\times\exp\bigg[
+    -N\left(\bar{\vect{B}}_{j}^2-\frac{(\vect{d}\cdot\bar{\vect{B}}_j)^2}{|\vect{d}|^2}\right)\bigg] 
+\end{align}
+where we introduce $\bar{\vect{B}}_j:=(\vect{B}_{j+1}+\vect{B}_{j-1})/2$ and $\vect{d}=\vect{y}-\vect{x}_0$.
+The first factor is effectively Gaussian in $1/\sqrt{\cT}$, while the second factor suppresses terms where the 
+path is orthogonal to line between the path starting point, and the patch on the surface.  
+This second factor could in turn be used to sample from the surface for a given path.  
+
+
 \subsubsection{Direct Construction of constrained paths}
 
 Alternatively,  we can enforce the touching constraint directly and make the paths touch the bodies by constructing
@@ -1277,58 +1365,58 @@ set of paths.  For two half-spaces this can be constructed by shifting paths so 
 point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.
 We then find the maximum point $B_{\text{max}}$ and consider fixing that to lie on the second surface $d_2$.
 Let us call the index of the maximum location $j$.
-The correction from distorting the initial path is given by 
-\begin{equation}  
-  P_{\text{pin-corr}} % = \frac{P_{\text{pinned}}}{P_{\text{free}}}
-  % =\frac{ e^{-(d-\sqrt{T}B_{j+1})^2/(2\Delta T)-(d-\sqrt{T}B_{j-1})^2/(2\Delta T)  } }
-  % { e^{-(\sqrt{T}B_{j}-\sqrt{T}B_{j+1})^2/(2\Delta T)-(\sqrt{T}B_{j}-\sqrt{T}B_{j-1})^2/(2\Delta T)  }}
-  = 
-  e^{-[d-\sqrt{\cT}B_j][d-\sqrt{\cT}(B_{j+1}+B_{j-1}-B_j)]/(\cT/N)}
-\end{equation}
-This is largest at the time when the $\cT_*=(d/B_j)^2$, or the path just touches the surface.
-Note that is only appreciable within a small range of times of this time, $T/N$.  
-We can capture this dependence by sampling times from a Gaussian in $1/\sqrt{\cT}$ based on 
-$e^{-N(d-\sqrt{\cT}B_j)^2/\cT}$, or
+
+
+The leading exponential potential can be converted into a probability distribution for $\cT$ on a 
+path-wise basis if we consider $x_j = x_0+\sqrt{\cT}B_j$, where $B_j$ is the $j$th coordinate of a 
+unit Brownian bridge.   The exponential factor can be written as 
+\begin{align}
+  \exp\bigg\{-\frac{1}{\Delta \cT}[d-(x_{j+1}+x_{j-1})/2]^2/\Delta \cT\bigg\} 
+  &= \exp\bigg\{-Nd^2\bigg[\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\bigg]^2\bigg\},
+\end{align}
+where $\bar{B}_j := (B_{j+1}-B_{j-1})/2$.  This is effectively a Gaussian in $1/\sqrt{\cT}$.  
+The normalized probability distribution is  
 \begin{equation}
-  P_C(\cT;B_j,d,N) = \sqrt{\frac{Nd^2}{\pi}}T^{-3/2}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right)^2\bigg],
+  P_C(\cT;\bar{B}_j,d,N) = 2\sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right)^2\bigg],
 \end{equation}
-for $\cT\in[0,(d/B_j)^2]$, and $a$ is to be determined for convenience. 
-The probability distribution can be converted to an one-sided normal distribution via some variable changes.
-In particular, if we define 
+for $\cT\in[0,(d/\bar{B}_j)^2]$
+The probability distribution can be converted to an one-sided normal distribution by defining
 \begin{equation}
-  s = \left(\frac{1}{\sqrt{\cT}}-\frac{B_j}{d}\right) \implies
+  s = \left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right) \implies
   \frac{ds}{d\cT} = \frac{-1}{2\cT^{3/2}},
 \end{equation}
-then the probability distribution for $s$ is 
+where the probability distribution for $s$ is 
 \begin{equation}
-  P_C(s;B_j,d,N) = 2\sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2s^2},
+  P_C(s;B_j,d,N) = \sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2s^2},
 \end{equation}
 for $s\in[0,\infty]$.  The path-times are then given by
 \begin{equation}
-  \cT = \left( \frac{|z|}{d\sqrt{N/2}}+\frac{B_j}{d}\right)^{-2},
+  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2},
 \end{equation}
 where $z$ is a standard-normal random variable of zero mean, and unit variance.
-The Gaussian pinning factor, and path-distortion factors should be $\order(1)$ at typical times sampled
-from this distribution, since $B_{j-1}-B_j\sim \frac{1}{\sqrt{N}}$, and we anticipate $\Delta\sim N/2$.
-
-In the strong-coupling limit, we sample from a subset of paths that just graze the surface
+In the strong-coupling limit, we sample from a subset of paths that just graze the surface.
+With the above method of handling the $\delta$-function, there is no need for an additional Gaussian
+pinning factor.  
+(For planar surfaces)
 \begin{align}
-  C^{(S)}_{ij}%  =& \frac{\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
-  % \frac{N^2e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
-  % &\times e^{-[d-\sqrt{\cT}B_\Delta][d-\sqrt{\cT}(B_{\Delta+1}+B_{\Delta-1}-B_\Delta)]/(T/N)}
-  %  \I[1]0\I[2]0 g_{0,0}
-  %  \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0}\\
-=& \frac{\hbar c N}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
-\bigg(2\cT^{3/2}\sqrt{\frac{\pi}{Nd^2}}\bigg)P_C(\cT;B_j,d,N)
-  \frac{N e^{-N^2d^2/[2 j(N-j)\cT]}}{\sqrt{2\pi \cT j(N-j)}}\nonumber\\
-  &\times 
-  e^{-N(d/\sqrt{\cT}-B_j)(2d/\sqrt{\cT}-B_{j+1}-B_{j-1})}
+  C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
+  \sum_j  \frac{1}{(\pi\Delta\cT)^{1/2}}
+   e^{-(d-\bar{B}_j)^2/\Delta \cT}\I[1]0\I[2]0 g_{0,0}
+   \biggdrangle_{x(\cT)}\\
+ =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
+  \sum_j   \sqrt{\frac{\pi\cT^3}{4Nd^2}}\sqrt{\frac{N}{\pi\cT}}
    \I[1]0\I[2]0 g_{0,0}
-   \biggdrangle_{\vect{x}(\cT);\sigma_2(\vect{x}_{j}-\vect{R}_2)=0},
+   \biggdrangle_{\vect{x}(\cT), \cT}\\
+ =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+(D/2-1)}}
+  \sum_j  \frac{1}{2d}   \I[1]0\I[2]0 g_{0,0}
+   \biggdrangle_{\vect{x}(\cT), \cT}.
 \end{align}
-where we have scaled out the divergent cross-sectional area, and accounted for the normalization
-for sampling from a Gaussian in $s=1/\sqrt{T}$.
-\comment{scaled out areas}
+Note that there are no explicit restrictions on the paths, but the integral is only significant
+when the paths are pass close to the body.
+(For planar surface, the Gaussian integrals over $\vect{y}$ can be carried out, 
+while it is necessary to factor out the cross-sectional area, and consider the second derivative 
+of the energy per unit area).
+\comment{scaled out areas, and integrated over }
 
 \section{Numerical Results: Casimir-Polder Energies}
 

@@ -283,13 +283,13 @@ The electromagnetic mode functions for perfectly conducting box are given by
 \end{align}
 where $\hat{\varepsilon}\subkz$ are the polarization unit vectors, and the wavenumbers $k_i=n_i\pi/L$,
 with $n_i$ integers~(\S 8.4.1 of Steck~\cite{SteckNotes}).
-The Casimir--Polder energy for an atom and a perfectly conducting wall is then 
-\begin{align}
- V\subCP(\vect{r})=-\frac{2\hbar}{\epsilon_0V}\alpha_0\sum_{\vect{k},\zeta} \big[ &
-  (\hat{\varepsilon}\subkz\cdot\hat{x})^2\cos^2(k_xx)\sin^2(k_y y)\sin^2(k_zz)\nonumber\\
-  &+(\hat{\varepsilon}\subkz\cdot\hat{y})^2\sin^2(k_xx)\cos^2(k_y y)\sin^2(k_zz)\nonumber\\
-  &+(\hat{\varepsilon}\subkz\cdot\hat{z})^2\sin^2(k_xx)\sin^2(k_y y)\cos^2(k_zz)\bigg].
-\end{align}
+% The Casimir--Polder energy for an atom and a perfectly conducting wall is then 
+% \begin{align}
+%  V\subCP(\vect{r})=-\frac{2\hbar}{\epsilon_0V}\alpha_0\sum_{\vect{k},\zeta} \big[ &
+%   (\hat{\varepsilon}\subkz\cdot\hat{x})^2\cos^2(k_xx)\sin^2(k_y y)\sin^2(k_zz)\nonumber\\
+%   &+(\hat{\varepsilon}\subkz\cdot\hat{y})^2\sin^2(k_xx)\cos^2(k_y y)\sin^2(k_zz)\nonumber\\
+%   &+(\hat{\varepsilon}\subkz\cdot\hat{z})^2\sin^2(k_xx)\sin^2(k_y y)\cos^2(k_zz)\bigg].
+% \end{align}
 If we assume that the atom is close to the $z=0$ plane, but far from the other walls, the $x,y$ sinusoids
 can be replaced by their average value of a half, since they will be quickly oscillating.   
 In addition, the polarization vectors form a resolution of the transverse identity (since Gauss's law 
@@ -403,25 +403,7 @@ and outside.  Modes have been vertically offset for clarity.  }
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
 Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
 perfect conductors, and Casimir--Polder forces between atoms' and dielectric surfaces.  
-The Casimir force between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
-separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
-\begin{align}
-\frac{F}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty d\xi \xi^3 \epsilon_3^{3/2}
-\int_1^\infty dp\,p^2\sum_{s=\text{TE, TM}}
- \frac{r^{(s)}_{13}r^{(s)}_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}{1 - r^{(s)}_{13}r^{(s)}_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}
-%\bigg[  \frac{r\supTE_{13}r\supTE_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}{1 - r\supTE_{13}r\supTE_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}
-% + \frac{r\supTM_{13}r\supTM_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}{1 - r\supTM_{13}r\supTM_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}}\bigg],
-\end{align}
-where the electromagnetic reflection coefficients are given by 
-\begin{align}
-  r\supTE_{ij}  = \frac{s_i-s_j}{s_i+s_j},\quad
-  r\supTM_{ij}  = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j},
-\end{align}
-and
-\begin{equation}
-  s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
-\end{equation}
-following Zhou~\cite{Zhou1995}. %  As intimidating as this expression is, it can be heuristically derived with
+%  As intimidating as this expression is, it can be heuristically derived with
 % relative ease via the ``argument principle''~\cite{vanKampen1968}.  
 % In essence, since the Casimir energy is the sum of the vacuum energy over all modes, the energy can
 % be written as a complex contour integral of the energy against a function with poles at the allowed 
@@ -448,25 +430,26 @@ The Casimir energy can be found with an ingenious argument due to van Kampen~\et
 The sum over frequencies can be recast as a contour integral over a function whose poles occur at the allowed
 frequencies, with residue $\omega_k$:  
 \begin{equation}
-  E = \frac{L^2}{(2\pi)^2}\int_0^\infty dk_T\,k_T\oint dz\, \frac{\hbar z}{2} \frac{\Delta'(z)}{(2\pi i)\Delta(z)},
+  E = \frac{L^2}{(2\pi)^2}\int_0^\infty dk_T\,k_T\oint d\xi\, \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta(\xi)}\frac{d\Delta(\xi)}{d\xi},
 \end{equation}
-where the function $\Delta'(z)/[2\pi i\Delta(z)]$ is designed to have unit residue at the zeroes of $\Delta(z)$. 
-\todo{Variable transformations?  $k$ $\cos\theta?$?}
-If we consider modes between dielectric planar interfaces, the resonant modes must satisfy
-\begin{equation}
-  r^{\zeta}_1r^{\zeta}_2 e^{2ik_z d}=1,
-\end{equation}
-where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$.
-This says that the accumulated round-trip phase (including reflections from both walls) is unity for
-allowed modes.  
-This suggests choosing $\Delta(z) = 1-r^{\zeta}_1r^{\zeta}_2 e^{2ik_z d}$, where the wavenumber $k_z$
-and the reflection coefficients are functions of $z$.  
-\todo{Barton on surface modes, which are exponential decays.}
-
+where the function $\Delta'(\xi)/[2\pi i\Delta(\xi)]$ is designed to have unit residue at the zeroes of $\Delta(\xi)$, 
+and $k_T$ is the transverse wavenumber.  
 The energy can be simplified by integrating by parts leading to 
 \begin{equation}
-  E = \frac{\hbar}{16\pi^3 i}\int d^2k_Tk_T\oint dz \, \ln\Delta(z).
+  E = \frac{\hbar}{16\pi^3 i}\int d^2k_Tk_T\oint d\xi \, \ln\Delta(\xi).
 \end{equation}
+The most important modes are the surface modes, since these modes are sensitive to the position of the other body, where
+these modes exponentially decay between the bodies.    The allowed frequencies for these modes must 
+satisfy 
+\begin{equation}
+  r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}=1,
+\end{equation}
+where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$.
+This is suggestive of the requirement that accumulated round-trip phase (including reflections from both walls) is unity for
+allowed modes.  (This interpretation is bolstered by examining the Casimir force between mirrors~\cite{Genet2003,Genet2004}.)
+This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}$, where the wavenumber $k_z$
+and the reflection coefficients are functions of $\xi$.  
+
 
 %\begin{itemize}
   % \item $E = \sum_k\frac{\hbar \omega_k}{2}$
@@ -487,8 +470,23 @@ The energy can be simplified by integrating by parts leading to
   %   \end{equation}
   % \item Now differentiate w.r.t $d$ to get force, and done.  
 %\end{itemize}
-(Similar versions of this are used to derive scattering method results as well \todo{Cite correct Lambrecht paper for 2x2 matrices
-in scattering formalism})
+
+The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
+separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
+\begin{align}
+\frac{E}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty d\xi \xi^2 \epsilon_3
+\int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}\right]
+\end{align}
+where the electromagnetic reflection coefficients are given by 
+\begin{align}
+  r\supTE_{ij}  = \frac{s_i-s_j}{s_i+s_j},\quad
+  r\supTM_{ij}  = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j},
+\end{align}
+and
+\begin{equation}
+  s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
+\end{equation}
+following Zhou~\cite{Zhou1995}. 
 
 % This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
@@ -1174,8 +1172,10 @@ MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  In Casimir physics, one is often i
 EM field emanating from an object --- the renormalized interaction energies can be thought of as 
 emerging from this scattering.  The scattering method provides a way to describe the scattering of photons
 from one mode and set of basis functions into another~\cite{Rahi2009}.
-Derivations similar to the argument principle can be applied to describe coupling between modes
-for two-body systems such as spheres and planes~\cite{Canaguier-Durand2012}.  Instead of reflection
+Derivations similar to the argument principle can be applied to describe coupling between modes,
+where now the reflection coefficients are matrices encoding the scattering between modes.
+This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006}
+and spheres and planes~\cite{Canaguier-Durand2012}.  Instead of reflection
 coefficients for a surface, one considers the full scattering matrix for each body, which describes the scattering
 between polarizations.  These variants rely on analytical expansions, and while they do offer a general purpose numerical
 method, they may be slow to converge if the choice of basis functions poorly corresponds to the actual
@@ -1212,28 +1212,41 @@ can be described by its classical counterpart.)
 % \end{enumerate}
 
 \begin{enumerate}
-\item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.
-% \item Cite Lambrecht and French collaborators
-%   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}
-%\item Cite Milton
-\item Physical Picture based on generalized Green theorem from 
-  SIE~\comment{Stratton}\cite{Stratton1941}.
-  \item Boundary Element Methods in Classical Electromagnetism:
-    For example see Ch. 8 of \cite{Chew1995}.  
+\item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.  Multiple scattering of E and B fields
+near perfect conductors.  First paper seems to be classical EM.  Second paper applies to Casimir effect.
+Studying wrinkling of conductor.  This is an expansion, rather than closed form.  
+ \item Cite Lambrecht and French collaborators
+   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}.
+    Emphasize two-body scattering version between polarizations of EM field.  THen use trace-log=log-det
+    trickery for general form.  Plane-plane, sphere-plane etc.  
+\item Genet2003 gets Casimir force as scattering problem in quantum optics.  
+% \item Physical Picture based on generalized Green theorem from 
+%   SIE~\comment{Stratton}\cite{Stratton1941}.
+%   \item Boundary Element Methods in Classical Electromagnetism:
+%     For example see Ch. 8 of \cite{Chew1995}.  
 \item Cite Bordag 1985 on quantization with delta functions?  There are others
 Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
 \item Comment on Emig/Buscher showing you can use homogenous green function.
   Relation to Green's theorem.
-\item Cite Emig,Jaffe,  and others for initial analytical techniques.  Relies on Green theorem.
-\item Emig 2004
-\item Emig 2007
-\item Rahi2009
+\item Emig 2004.  Boundary conditions via a version of Green's theorem - can use homogenous Green 
+functions given approach current-matching sources.  Introduce delta-functions on \emph{deformed} surfaces.  
+\item Emig 2007.  Introduces basic formalism expanded on in Rahi.  
+\item Rahi2009.  Integrate out path integral.  Get scattering potential provided by dielectrics between
+modes of free geometry.  Lots of basis translations to describe that scattering.  Hubbard-Stratonovich transform
+introduces currents coupled via Green functions.  Mostly analytical approach based on solutios in terms of multipoles.
 \item Rodriguez2007
-\item Rodriguez2007a
+Has sum over frequencies as badly oscillating.  Stress-energy tensor.  Finite Difference, Frequency Domain.(FDFD)
+Explicit inversion for Green function.  Propose moving to Boundary Element methods as faster.
+Also some analysis of worldline methods.
 \item Rodriguez2009
-\item Reid2009
-\item Reid2011
-\item Reid2013
+\item Reid2009.  Expand Partition function in terms of currents interacting with homogenous Green function.
+Carry out integrals using surface-currents.  
+Note $N^3$ operations in worst case, and $N\ln N$ for sparse matrices, iterative solvers.  
+Crossed Capsules, tetrahedral particles.  \cite{Reid2009}
+\item Reid2011.  Follow on from Reid2009.  Introduce magnetic currents and boundary-conditions to get scattering matrices.
+(This is the one to work from)\cite{Reid2011}
+\item Reid2013.  Explication of Reid2011 as both stress-tensor and path integral quantization.  (and showing
+Gauge invariance of results)\cite{Reid2013}
 \cite{Emig2004, Emig2007, Rahi2009}
 \cite{Kenneth2006}
   Note use of existent analytical methods and similarities to existent 
@@ -1273,8 +1286,7 @@ The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy
 arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
 
 Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
-an intensive operation.  If a matrix has $N$ non-zero entries, the determinant requires $\order(N^3)$ operations
-\comment{N rows or N entries?}.
+an intensive operation.  If a matrix has $N$ non-zero entries, the determinant for a dense matrix requires $\order(N^3)$ operations.
 While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, 
 this is difficult.
 However, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
@@ -1283,6 +1295,14 @@ trivially parallelized.
 The fluctuating-surface-current method has been used to 
 for example describing the energy dependence of nanoparticles\todo{Find nanoparticle-scattering method citations}.
 \todo{Note use in Kimble group for computing C-P potential}
+\cite{Levin2010,Rodriguez2013} Also suspension of bodies above metallic holes in fluid.  Studied stability
+Also needle above hole.  
+
+
+
+\cite{Haakh2009} magnetic Casimir--Polder interactions.  Somewhat relevant in ion traps?
+
+
 
 \todo{Shortcomings?}
 

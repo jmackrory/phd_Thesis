@@ -89,7 +89,7 @@
 \iflatedraft\PassOptionsToClass{12pt,draft}{report}\fi
 \ifcommitteedraft\PassOptionsToClass{12pt,draft}{report}\fi
 \ifdraftcopy\PassOptionsToClass{10pt,draft}{report}
-\PassOptionsToClass{draft}{todonotes}\fi
+\PassOptionsToClass{draft,backgroundcolor=white}{todonotes}\fi
 \iffinal
 \ifbound
 \PassOptionsToClass{12pt,twoside}{report}
@@ -105,7 +105,7 @@
 \RequirePackage{xspace}
 \RequirePackage[left,pagewise]{lineno}
 \RequirePackage{layouts}
-\RequirePackage[colorinlistoftodos]{todonotes}
+\RequirePackage[colorinlistoftodos,backgroundcolor=white]{todonotes}
 \RequirePackage{ragged2e}
 \captionsetup{labelsep=space}
 \setlength\RaggedRightRightskip{0pt plus 1cm}

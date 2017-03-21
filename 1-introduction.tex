@@ -1,105 +1,140 @@
 \chapter{Introduction}
 \label{ch:introduction}
-%suggest some unity to two disparate projects.  
-Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
-the probabilities of events~\cite{Sakurai1994}.
-The probability for an event to occur is given by the Born rule, which says the probability is given by 
-the absolute-square of the probability amplitude for that event.  
-If there are multiple pathways by which an event can take place, the total amplitude for an event is 
-the sum over the amplitudes for each possible pathways~\cite{Feynman1965}.  
-These paths encompass paths through abstract spaces, such as the number of excitations in a field.
-In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
-which are referred to as quantum fluctuations.
-This sum over intermediate amplitudes can lead to novel quantum effects such as the Casimir effect,
-where electrically neutral, material bodies are attracted to each other due to the exchange of virtual photons.
-%\comment{Perhaps Peres?}
+% %suggest some unity to two disparate projects.  
+% Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
+% the probabilities of events~\cite{Sakurai1994}.
+% The probability for an event to occur is given by the Born rule, which says the probability is given by 
+% the absolute-square of the probability amplitude for that event.  
+% If there are multiple pathways by which an event can take place, the total amplitude for an event is 
+% the sum over the amplitudes for each possible pathways~\cite{Feynman1965}.  
+% These paths encompass paths through abstract spaces, such as the number of excitations in a field.
+% In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
+% which are referred to as quantum fluctuations.
+% This sum over intermediate amplitudes can lead to novel quantum effects such as the Casimir effect,
+% where electrically neutral, material bodies are attracted to each other due to the exchange of virtual photons.
+% %\comment{Perhaps Peres?}
 
-Alternatively, the probabilistic nature of quantum mechanics implies that the results of quantum measurements 
-are stochastic quantities which fluctuate under repeated measurements.  
-This is particularly relevant as modern experiments can isolate single quantum systems for long 
-periods of time and continuously measure their properties.  One can then think of reconstructing
-the system's trajectory through time as it evolves based on the measurement~\cite{Carmichael1993}.  
+% Alternatively, the probabilistic nature of quantum mechanics implies that the results of quantum measurements 
+% are stochastic quantities which fluctuate under repeated measurements.  
+% This is particularly relevant as modern experiments can isolate single quantum systems for long 
+% periods of time and continuously measure their properties.  One can then think of reconstructing
+% the system's trajectory through time as it evolves based on the measurement~\cite{Carmichael1993}.  
 
-This thesis presents two projects reflecting each aspect of quantum fluctuations.  
-The projects are further connected by their quantum mechanical underpinning, the computational methods 
-employed to simulate stochastic processes, and their relevance to modern experiments on atoms.  
-The first project is a method of computing energies related to Casimir effect, while the second project is related to 
-continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
-to the first project, with the second project being discussed in the final chapter.  
-The key results presented in this thesis have been published in~\cite{
-Mackrory2010, Mackrory2016,Mackrory2017a, Mackrory2017b}
-% Through advances in modern experimental technology both of these categories of effect are now 
-% directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
+% This thesis presents two projects reflecting each aspect of quantum fluctuations.  
+% The projects are further connected by their quantum mechanical underpinning, the computational methods 
+% employed to simulate stochastic processes, and their relevance to modern experiments on atoms.  
+% The first project is a method of computing energies related to Casimir effect, while the second project is related to 
+% continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
+% to the first project, with the second project being discussed in the final chapter.  
+% The key results presented in this thesis have been published in~\cite{
+% Mackrory2010, Mackrory2016,Mackrory2017a, Mackrory2017b}
+% % Through advances in modern experimental technology both of these categories of effect are now 
+% % directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
 
-% The first project relates to computing Casimir forces via the worldline method, and occupies the majority
-% of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
-% via ensembles of closed Brownian paths.  The work presented here extends the method by
-%  developing analytical and numerical techniques to 
+% % The first project relates to computing Casimir forces via the worldline method, and occupies the majority
+% % of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
+% % via ensembles of closed Brownian paths.  The work presented here extends the method by
+% %  developing analytical and numerical techniques to 
 
-% The second theme will be using quantum trajectories to simulate continuous positions measurements on atoms.
-% Both of these projects are related to fundamental quantum optical phenomena, 
-% that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
+% % The second theme will be using quantum trajectories to simulate continuous positions measurements on atoms.
+% % Both of these projects are related to fundamental quantum optical phenomena, 
+% % that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
 
-The remainder of the introduction will expand on the physical origin, modern experiments, and theoretical
-techniques for computing both Casimir effects, and then continuous quantum measurements.  
+% The remainder of the introduction will expand on the physical origin, modern experiments, and theoretical
+% techniques for computing both Casimir effects, and then continuous quantum measurements.  
 
-% \comment{There are two roles for the randomness here.
-%   From one point of view, the randomness is an intrinsic part of quantum mechanics,
-%  and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
-%   Alternatively, if we are considering these calculations for energy or evolution as large integrals,
-%  then we can efficiently compute these integrals by randomly sampling from their dominant regions.
-%   In this sense, the randomness shows up as a calculational tool.}
+% % \comment{There are two roles for the randomness here.
+% %   From one point of view, the randomness is an intrinsic part of quantum mechanics,
+% %  and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
+% %   Alternatively, if we are considering these calculations for energy or evolution as large integrals,
+% %  then we can efficiently compute these integrals by randomly sampling from their dominant regions.
+% %   In this sense, the randomness shows up as a calculational tool.}
 
-% \begin{enumerate}
-% \item General thesis about quantum physics of atoms using computation.  
-% \item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
-% \item First new method for computing electromagnetic Casimir energies.
-% \item Second, continuous position measurements of atoms taking into account experimental constraints.  
-% \item United in perspective of numerical work relying on Monte-Carlo techniques,
-%  to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
-% \end{enumerate}
+% % \begin{enumerate}
+% % \item General thesis about quantum physics of atoms using computation.  
+% % \item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
+% % \item First new method for computing electromagnetic Casimir energies.
+% % \item Second, continuous position measurements of atoms taking into account experimental constraints.  
+% % \item United in perspective of numerical work relying on Monte-Carlo techniques,
+% %  to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
+% % \end{enumerate}
 
-\section{Casimir Forces}% in general and physical interpretation}
+%\section{Casimir Forces}% in general and physical interpretation}
 
-The Casimir force is a primarily attractive force that arises between material bodies interacting via 
-quantized fields.
-The most important example of the Casimir effect is due to fluctuations in the electromagnetic (EM) field, 
-where one can think of the electrons in a body emitting and absorbing virtual photons that can interact
-with other bodies.  The interacting bodies can be pairs of atoms, 
-macroscopic bodies such as metallic planes, or atoms and macrosopic bodies.
-Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming.  
+The Casimir force is a striking manifestation of quantum field theory: a pair of electrically neutral,
+ conducting bodies will be attracted to one another due to their interaction
+with quantized electromagnetic fields, even in the absence of photons~\cite{Casimir1948}.  
+% The Casimir force is a primarily attractive force that arises between material bodies interacting via 
+% quantized fields~\cite{Casimir1948}.
+While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
+the most important example is due to fluctuations in the electromagnetic (EM) field.  The quanta of the 
+EM field, photons, are massless making their interaction long-ranged, and their coupling to matter is much stronger
+than the other long-ranged fundamental force, gravity.  
+In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
+interact with electrons in other bodies.  The interacting bodies can be pairs of atoms~\cite{CasimirPolder1948a}, 
+macroscopic bodies such as metallic planes and dielectric slabs~\cite{Lifshitz1956}, or any combination of these.
+
+Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming in the bodies.  
 This interpretation is intimately related to the van der Waals force, where 
-molecules with fluctuating dipole moments are attracted to one another.
+molecules with fluctuating dipole moments are attracted to one another~\cite{vanderWaals}.
+While the emphasis may differ between Casimir and van der Waals forces, they ultimately describe the 
+same phenomenon, albeit at slightly different distance scales.  
 
-\todo{Seems to choppy - should expand on classic Casimir computation as an example.}
+Despite the prediction of the Casimir force in 1948, precise measurements of the Casimir force were only
+carried out in the late 1990s~\cite{Lamoreaux1997,Mohideen1998}.  Early attempts failed due to the difficulty
+in aligning parallel conducting plates (as in Casimir's first calculation), while these experiments used a
+sphere above a conducting plate.  Experiments have also been
+carried out to measure the forces between atoms and surfaces~\cite{Sukenik1993,Perrault2007,Harber2005}.
 
 Beyond their importance as manifestations of quantum field theory, Casimir effects are also 
-important to a range of modern experiments and developing technologies.  Some of these experiments 
-will be discussed further in Sec.~\ref{sec:expt_review}.  In order to describe these experiments,
-a number of theoretical and computational approaches have been developed.  The most important of
-these modern methods are the so-called ``scattering method'' and ``worldline methods''.
-To date, the scattering method is the only general purpose numerical method available for computing
-Casimir forces in arbitrary arrangements of bodies, while this thesis aims to expand upon the worldline method.  
-In Sec.~\ref{sec:numerical_review} we will briefly discuss these methods.  
+important to a range of modern experiments and developing technologies.
+They are important for microelectromechanical systems (MEMS) where the Casimir attraction between components 
+leads to stiction, where pieces are permanently stuck together~\cite{Buks2001}.  
+Casimir forces are also important for developing technologies using atoms near dielectric surfaces~\cite{Folman2000,Alton2011, Hung2013}.
+In these experiments, the attractive Casimir potential sets a lower bound for how
+close the atoms can be brought to the surface, and as a result must be considered in the engineering 
+of these devices.
 
-At the outset, we note that there have been a number of books published on the subject of Casimir forces 
-in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
-well as the advent of new experiments which have spurred the development of new theoretical methods.  
+The advent of these experiments in complicated arrangements of bodies, has spurred the development
+of a number of theoretical and computational methods for computing Casimir~\cite{Dalvit2011,Bordag2009}. 
+To model these experiments, it is necessary to be able to compute the Casimir effect between arbitrarily shaped bodies, with 
+realistic material properties --- this in general necessitates a numerical approach~\cite{Johnson2011}.
+The most important of these modern methods are the so-called ``scattering method''~\cite{Lambrecht2006,Rahi2009,Reid2009}
+ and ``worldline methods''~\cite{Gies2003}.
+To date, the scattering method is the only general purpose numerical method available for computing
+Casimir forces in arbitrary arrangements of bodies~\cite{Reid2009,Reid2011,Reid2013}.  \todo{Describe 
+physics of scattering method}
+\todo{Introduce worldline method briefly.}
+
+ while this thesis aims to expand upon the worldline method.  
+
+
+
+
+% At the outset, we note that there have been a number of books published on the subject of Casimir forces 
+% in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
+% well as the advent of new experiments which have spurred the development of new theoretical methods.  
 % Milonni's clear text on QED sets the Casimir force in context as one manifestation of the quantized theory of light~\cite{Milonni1994}.
 % while Milton's text emphasizes using Green function methods for computing a number of consequences for 
 % the Casimir effect for various fields, dimensions~\cite{Milton2001}.
-There have been more recent where the state-of-the-art in both theory and experiments is discussed by practitioners --- 
-notably in the volumes by Bordag~\etal\cite{Bordag2009}, 
-and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
+% There have been more recent where the state-of-the-art in both theory and experiments is discussed by practitioners --- 
+% notably in the volumes by Bordag~\etal\cite{Bordag2009}, 
+% and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
 %\todo{Cite Vogel and Welsch~\cite{VogelWelsch2006}.  Also cite Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}}
-While this thesis emphasizes simple physical applications, the application of Casimir or 
-van der Waals forces is also important to problems in surface physics and chemistry, as discussed in the texts by 
- Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
+% While this thesis emphasizes simple physical applications, the application of Casimir or 
+% van der Waals forces is also important to problems in surface physics and chemistry, as discussed in the texts by 
+%  Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
 
 % The references in the following sections are given to emphasize the important results and calculations
 % and set the basic context for Casimir effects.   In addition we will often use these results 
 % as checks in our later work.  % Broader bibliographic surveys of the (vast) Casimir literature
 % % are available from Milton~\cite{Milton-bib} and Babb~\cite{Babb-bib}.
+
+\todo{Outline chapter}
+Some of these experiments 
+will be discussed further in Sec.~\ref{sec:expt_review}.  
+In Sec.~\ref{sec:numerical_review} we will briefly discuss these methods.  
+
 
 \subsection{Atomic Forces}
 

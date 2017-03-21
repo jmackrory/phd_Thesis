@@ -124,10 +124,10 @@ material properties, while attempting to retain as many of its appealing
 properties as possible.    
 
 The rest of this introduction will cover simple examples of Casimir effects, and expand background material.
-In Sec.~\ref{sec:Casimir}, we will introduce some simple calculations for Casimir effects such as
+In Sec.~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
-We will then briefly discuss relevant experiments in Sec.~\ref{sec:experiments}, and expand on our discussion
+We will then briefly discuss relevant experiments in Sec.~\ref{sec:expt_review}, and expand on our discussion
 of the numerical methods in Sec.~\ref{sec:numerical_review}.  
 
 % At the outset, we note that there have been a number of books published on the subject of Casimir forces 
@@ -150,7 +150,7 @@ of the numerical methods in Sec.~\ref{sec:numerical_review}.
 % % are available from Milton~\cite{Milton-bib} and Babb~\cite{Babb-bib}.
 
 \section{Casimir Effect}
-
+\label{sec:casimir}
 As alluded to earlier, Casimir and van der Waals forces are one and the same.  The Casimir
 interpretation ascribes the interaction to fluctuations in the electromagnetic field, while van der 
 Waals forces are ascribed to the molecular dipoles.  
@@ -1225,7 +1225,8 @@ electromagnetic Casimir forces betweenin general media.  The scattering method
 is based on scattering techniques from classical electromagnetic theory and quantum mechanics~\cite{Rahi2009}.
 
 The roots of the scattering method in Casimir physics go back a number of decades.  
-This method has been developed by a number of groups as an analytical tool~\cite{Lambrecht2006,
+This method has been developed by a number of groups as an analytical tool~\cite{Emig2004, Lambrecht2006,
+Kenneth2006, Emig2007,
 MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  In Casimir physics, one is often interested in the scattered 
 EM field emanating from an object --- the renormalized interaction energies can be thought of as 
 emerging from this scattering.  The scattering method provides a way to describe the scattering of photons
@@ -1270,50 +1271,50 @@ can be described by its classical counterpart.)
 % Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.  
 % \end{enumerate}
 
-\begin{enumerate}
-\item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.  Multiple scattering of E and B fields
-near perfect conductors.  First paper seems to be classical EM.  Second paper applies to Casimir effect.
-Studying wrinkling of conductor.  This is an expansion, rather than closed form.  
- \item Cite Lambrecht and French collaborators
-   \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}.
-    Emphasize two-body scattering version between polarizations of EM field.  THen use trace-log=log-det
-    trickery for general form.  Plane-plane, sphere-plane etc.  
-\item Genet2003 gets Casimir force as scattering problem in quantum optics.  
+%\begin{enumerate}
+% \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.  Multiple scattering of E and B fields
+% near perfect conductors.  First paper seems to be classical EM.  Second paper applies to Casimir effect.
+% Studying wrinkling of conductor.  This is an expansion, rather than closed form.  
+%  \item Cite Lambrecht and French collaborators
+%    \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}.
+%     Emphasize two-body scattering version between polarizations of EM field.  THen use trace-log=log-det
+%     trickery for general form.  Plane-plane, sphere-plane etc.  
+% \item Genet2003 gets Casimir force as scattering problem in quantum optics.  
 % \item Physical Picture based on generalized Green theorem from 
 %   SIE~\comment{Stratton}\cite{Stratton1941}.
 %   \item Boundary Element Methods in Classical Electromagnetism:
 %     For example see Ch. 8 of \cite{Chew1995}.  
-\item Cite Bordag 1985 on quantization with delta functions?  There are others
-Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
-\item Comment on Emig/Buscher showing you can use homogenous green function.
-  Relation to Green's theorem.
-\item Emig 2004.  Boundary conditions via a version of Green's theorem - can use homogenous Green 
-functions given approach current-matching sources.  Introduce delta-functions on \emph{deformed} surfaces.  
-\item Emig 2007.  Introduces basic formalism expanded on in Rahi.  
-\item Rahi2009.  Integrate out path integral.  Get scattering potential provided by dielectrics between
-modes of free geometry.  Lots of basis translations to describe that scattering.  Hubbard-Stratonovich transform
-introduces currents coupled via Green functions.  Mostly analytical approach based on solutios in terms of multipoles.
-\item Rodriguez2007
-Has sum over frequencies as badly oscillating.  Stress-energy tensor.  Finite Difference, Frequency Domain.(FDFD)
-Explicit inversion for Green function.  Propose moving to Boundary Element methods as faster.
-Also some analysis of worldline methods.
-\item Rodriguez2009
-\item Reid2009.  Expand Partition function in terms of currents interacting with homogenous Green function.
-Carry out integrals using surface-currents.  
-Note $N^3$ operations in worst case, and $N\ln N$ for sparse matrices, iterative solvers.  
-Crossed Capsules, tetrahedral particles.  \cite{Reid2009}
-\item Reid2011.  Follow on from Reid2009.  Introduce magnetic currents and boundary-conditions to get scattering matrices.
-(This is the one to work from)\cite{Reid2011}
-\item Reid2013.  Explication of Reid2011 as both stress-tensor and path integral quantization.  (and showing
-Gauge invariance of results)\cite{Reid2013}
-\cite{Emig2004, Emig2007, Rahi2009}
-\cite{Kenneth2006}
-  Note use of existent analytical methods and similarities to existent 
-  numerical FTDT techniques on earlier papers.  
-  \cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009}
+% \item Cite Bordag 1985 on quantization with delta functions?  There are others
+% Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
+% \item Comment on Emig/Buscher showing you can use homogenous green function.
+%   Relation to Green's theorem.
+% \item Emig 2004.  Boundary conditions via a version of Green's theorem - can use homogenous Green 
+% functions given approach current-matching sources.  Introduce delta-functions on \emph{deformed} surfaces.  
+% \item Emig 2007.  Introduces basic formalism expanded on in Rahi.  
+% \item Rahi2009.  Integrate out path integral.  Get scattering potential provided by dielectrics between
+% modes of free geometry.  Lots of basis translations to describe that scattering.  Hubbard-Stratonovich transform
+% introduces currents coupled via Green functions.  Mostly analytical approach based on solutios in terms of multipoles.
+% \item Rodriguez2007
+% Has sum over frequencies as badly oscillating.  Stress-energy tensor.  Finite Difference, Frequency Domain.(FDFD)
+% Explicit inversion for Green function.  Propose moving to Boundary Element methods as faster.
+% Also some analysis of worldline methods.
+% \item Rodriguez2009
+% \item Reid2009.  Expand Partition function in terms of currents interacting with homogenous Green function.
+% Carry out integrals using surface-currents.  
+% Note $N^3$ operations in worst case, and $N\ln N$ for sparse matrices, iterative solvers.  
+% Crossed Capsules, tetrahedral particles.  \cite{Reid2009}
+% \item Reid2011.  Follow on from Reid2009.  Introduce magnetic currents and boundary-conditions to get scattering matrices.
+% (This is the one to work from)\cite{Reid2011}
+% \item Reid2013.  Explication of Reid2011 as both stress-tensor and path integral quantization.  (and showing
+% Gauge invariance of results)\cite{Reid2013}
+% \cite{Emig2004, Emig2007, Rahi2009}
+% \cite{Kenneth2006}
+%   Note use of existent analytical methods and similarities to existent 
+%   numerical FTDT techniques on earlier papers.  
+%   \cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009}
 % \item Cite Johnson/Reid for numerical progress.\cite{Reid2009,Reid2011, Reid2013}.
 % \item Note success, applicability.  \comment{Cite experimental tylenol pill paper}
-\end{enumerate}
+%\end{enumerate}
 
 The fluctuating-surface-current formulation is a general method for computing Casimir
 energies for piece-wise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
@@ -1346,10 +1347,12 @@ arbitrarily far apart, which acts to remove the energy from any self-interaction
 
 Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant for a dense matrix requires $\order(N^3)$ operations.
-While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, 
-this is difficult.
-However, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
-trivially parallelized.
+While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, this is difficult.
+However, for a sparse matrix system, it may be possible to make this relatively efficient 
+and only require $\order(N\log N)$ operations~\cite{Reid2009}.
+Further, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
+trivially parallelized, but this may only offer relatively little parallelization for some problems.
+
 
 The fluctuating-surface-current method has been used to 
 for example describing the energy dependence of nanoparticles\todo{Find nanoparticle-scattering method citations}.
@@ -1357,43 +1360,26 @@ for example describing the energy dependence of nanoparticles\todo{Find nanopart
 \cite{Levin2010,Rodriguez2013} Also suspension of bodies above metallic holes in fluid.  Studied stability
 Also needle above hole.  
 
-
-
 \cite{Haakh2009} magnetic Casimir--Polder interactions.  Somewhat relevant in ion traps?
 
-
-
-\todo{Shortcomings?}
-
-% \subsection{Modern Directions}
-
-% \begin{enumerate}
-%   \item Non-additivity of forces:  Reference for this?  What is the typical scale of the correction for non-additivity?
-
-%   \item Search for repulsive forces
-
-%   \item Casimir force important for stiction.
-%   \item Attracts atoms, sets lower bound for how close you can get particles together.
-% \item Dynamical Casimir effect/Unruh Effect?
-%     \item Accelerating plate creates photons.  
-%   \end{enumerate}
-
-% \comment{Vassilevich1998 has consistency conditions for boundary conditions
-% and gauge fixings}
+As we noted, the scattering method is the only available general method for computing Casimir effects.
+However, for any method it is useful to have alternative methods with different computational properties
+and biases, particularly when extending calculations to unexplored domains.  We now turn to the worldline
+method which offers a very different picture and numerical method.  
 
 \section{Scalar Worldline Casimir Energies}
 
 The worldline method is an alternative method for computing Casimir energies.
 The worldline method is a descendent of the scalar electrodynamics 
 Feynman explored~\cite{Feynman1950}, where the effect of a quantum
-field is described by summing over the paths of a particle interacting with the other bodies. 
+field is described by summing over the paths of a virtual particle interacting with the other bodies. 
 \comment{Check!}
 The worldline method was later developed as an alternative method for 
 carrying out general quantum field theory calculations in terms of quantum particle 
 mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  
-The worldline method is heavily based on Feynman's path-integral method, where the amplitude
-for a particle to move from one position to another is the sum over all paths between the positions,
-where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
+% The worldline method is heavily based on Feynman's path-integral method, where the amplitude
+% for a particle to move from one position to another is the sum over all paths between the positions,
+% where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
 The basic insight of the worldline method is that for one-loop effective actions, 
 the field path integral calculation can be recast in terms of the particle path
  integral for particles travelling in closed space-time loops or paths.
@@ -1410,7 +1396,9 @@ and used to study the torsion of inclined planes~\cite{Weber2009},
 and forces in the sphere-plane and cylinder-plane geometries~\cite{Weber2010, Weber2010a}.  
 The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
 based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
-
+Most of this work is for idealized surfaces that imposed Dirichlet boundary conditions.
+There has also been some effort to extend the worldline method to account for Neumann boundary
+conditions~\cite{Fosco2010}.  
 
 \begin{enumerate}
   \item Semi-classical approach to Casimir force via trace formula~\cite{Schaden1998}
@@ -1428,6 +1416,7 @@ based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 (We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies~\etal.)
+
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
 The action for the field $\phi$ is given by 
 \begin{equation}

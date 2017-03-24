@@ -607,8 +607,8 @@ the corresponding single-body energy,
 \hspace{-3ex}
  \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}^{}
   \hspace{-4ex} dS\hspace{1ex} 
-  \hat{n}_2(\vect{x}_0) \nonumber\\
-  &\hspace{0.5cm}\times 
+  \hat{n}_2(\vect{x}_0) % \nonumber\\
+  % &\hspace{0.5cm}\times 
   \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}
   \Biggdrangle_{\vect{x}(t)},
   \label{eq:pinning_force}
@@ -638,8 +638,9 @@ For a dielectric describing two bodies, the derivatives with respect to $\vect{R
 in terms of derivatives with respect to the first body's center $\vect{R}_1$, and the loop coordinates $\vect{x}_k$
 \begin{align}
   \nablaR2\langle \epsr\rangle  
-  =& \bigg(\sum_{k=1}^N\nablaxk-\nablaR1\bigg)\nonumber\\
-  & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
+  =& \bigg(\sum_{k=1}^N\nablaxk-\nablaR1\bigg)% \nonumber\\
+  % & \times
+[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
 % \frac{\partial}{\partial R_{2,i}}\langle \epsr\rangle  
 %   =& \bigg(\sum_{k=1}^N\frac{\partial}{\partial {x}_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
 %   & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
@@ -661,8 +662,9 @@ The first derivative can be carried out as before,
 \begin{align}
   C_{ij} = &
 \frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
-\int d\vect{x}_0 \nonumber\\
-&\hspace{0.05cm}\times\biggdlangle 
+\int d\vect{x}_0 % \nonumber\\
+% &\hspace{0.05cm}\times
+\biggdlangle 
 \hat{r}_{i}\!\cdot\!\bigg(\!\sum_k\nablaxk - \nablaR{1}\!\bigg)
   \!
 (\hat{r}_{j}\cdot\nablaR{2})
@@ -688,9 +690,11 @@ Sometimes we're adding them, other times we are not}
   \frac{\alpha(\alpha+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}
   \oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0}^{}
-   \hspace{-4ex} dS\hspace{1ex}   \nonumber\\
-  &\hspace{0.5cm} \times\sum_{k=1}^{N-1}\frac{1}{N} \biggdlangle  \mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)\nonumber\\
-  &\hspace{1cm}\times\frac{[\hat{r}_{i}\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_{j}\cdot\hat{n}_2(\vect{x}_k)]}
+   \hspace{-4ex} dS\hspace{1ex} %   \nonumber\\
+  % &\hspace{0.5cm} \times 
+  \sum_{k=1}^{N-1}\frac{1}{N} \biggdlangle  \mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)% \nonumber\\
+  % &\hspace{1cm}\times
+  \frac{[\hat{r}_{i}\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_{j}\cdot\hat{n}_2(\vect{x}_k)]}
   {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\vect{x}(t)|\sigma_2(\vect{x}_k-\vect{R}_2)=0}.
   \label{eq:potential_curvature}
 \end{align}
@@ -754,12 +758,13 @@ of both bodies, and $\mathcal{G}$ exponentially cuts off terms at small $\cT$.
 Attempt at Alternative double-pinning notation. 
 \begin{align}
   C_{ij}&=
-  \frac{\alpha(\alpha+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}\int_0^\cT \frac{d\tau}{\cT}\nonumber\\
-  &\times
+  \frac{\alpha(\alpha+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}\int_0^\cT \frac{d\tau}{\cT}% \nonumber\\
+  % &\times
   \oint\limits_{\sigma_1[\vect{x}(0)]}^{}   \hspace{-2ex} dS
   \oint\limits_{\sigma_2[\vect{x}(\tau)]}^{}  \hspace{-2ex} dS'\hspace{1ex}   
-\mathcal{G}'[\vect{x}(0),\vect{x}(\tau),\tau,\cT]\nonumber\\
-  &\hspace{1cm}\times\biggdlangle\frac{\{\hat{r}_{i}\cdot\hat{n}_1\big[\vect{x}(0)\big]\}
+\mathcal{G}'[\vect{x}(0),\vect{x}(\tau),\tau,\cT]% \nonumber\\
+  % &\hspace{1cm}\times
+  \biggdlangle\frac{\{\hat{r}_{i}\cdot\hat{n}_1\big[\vect{x}(0)\big]\}
     \{\hat{r}_{j}\cdot\hat{n}_2\big[\vect{x}(\tau)\big]\}}
   {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\vect{x'}(t); \vect{x'}(\tau)},
   \label{eq:potential_curvature}
@@ -771,15 +776,15 @@ $\vect{x}(0), \vect{x}(\tau)$ respectively.  The Gaussian normalization is
   \mathcal{G}'[\vect{x}(0),\vect{x}(\tau),\tau,\cT]=\frac{\sqrt{\cT}}{\sqrt{2\pi  \tau(\cT-\tau)}}
   e^{- \cT[\vect{x}(0)-\vect{x}(\tau)]^2/[2 \tau(\cT-\tau)]}
 \end{equation}
-\begin{itemize}
-\item Use $\vect{x'}$ to distinguish these contrained paths?
-\item Double subscripts on ensemble average to denote paths going from $x(0)$ to $x(\tau)$?
-\item Use only $\sigma_1[\vect{x}]$ to denote surface we seek?  Current notation reflects desire
-ato use sign $\sigma$ in step functions for dielectric, so surface is $\sigma=0$.  Also want
-to emphasize body center $\vect{R}_i$ for rigid translations.
-\item Problems with later occupation number results, where summing over terms leads to explicit factors of 
-$N$.  
-\end{itemize}
+% \begin{itemize}
+% \item Use $\vect{x'}$ to distinguish these contrained paths?
+% \item Double subscripts on ensemble average to denote paths going from $x(0)$ to $x(\tau)$?
+% \item Use only $\sigma_1[\vect{x}]$ to denote surface we seek?  Current notation reflects desire
+% ato use sign $\sigma$ in step functions for dielectric, so surface is $\sigma=0$.  Also want
+% to emphasize body center $\vect{R}_i$ for rigid translations.
+% \item Problems with later occupation number results, where summing over terms leads to explicit factors of 
+% $N$.  
+% \end{itemize}
 \end{shaded}
 
 \subsubsection{Torque}
@@ -807,9 +812,9 @@ The torque for a rotation about axis $\hat{m}$ can be written as $K_m:=\hat{m}\c
 The $\phi$-derivative only acts on the path-averaged dielectric part of the energy integral,
 \begin{align}
   \partial_\phi\langle\epsilon\rangle&=
-  \chi_2\langle \partial_\phi\mathcal{R}_{ij}(\phi)(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
-  &=-\chi_2\langle m_k\epsilon_{kij}(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
-  &=\chi_2\hat{m}\cdot\langle (\vect{x}-\vect{R}_2)\wedge\nabla\theta(\sigma_2)\rangle,
+  \chi_2\langle \partial_\phi\mathcal{R}_{ij}(\phi)(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle%\nonumber\\
+  =-\chi_2\langle m_k\epsilon_{kij}(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle%\nonumber\\
+  =\chi_2\hat{m}\cdot\langle (\vect{x}-\vect{R}_2)\wedge\nabla\theta(\sigma_2)\rangle,
 \end{align}
 where we used the form of the infinitesimal rotation to write the result as a cross-product 
 via $(\vect{a}\wedge\vect{b})_i=\epsilon_{ijk}a_jb_k$.  
@@ -823,8 +828,9 @@ The full renormalized torque worldline path-integral is
   \vect{K} &= \frac{\alpha\hbar c\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}} 
   \hspace{-3ex}
   \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0} 
-   \hspace{-4ex} dS\hspace{1ex}\!\big[(\vect{x}_0-\vect{R}_{2})\! \wedge \!\hat{n}_2(\vect{x}_0)\big]   \nonumber\\
-  &\hspace{0.5cm}\times\biggdlangle 
+   \hspace{-4ex} dS\hspace{1ex}\!\big[(\vect{x}_0-\vect{R}_{2})\! \wedge \!\hat{n}_2(\vect{x}_0)\big]   % \nonumber\\
+  % &\hspace{0.5cm}\times
+  \biggdlangle 
 \frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}
   -\frac{1}{\langle \epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}\biggdrangle_{\vect{x}(t)}.
 \end{align}
@@ -858,8 +864,9 @@ The Casimir--Polder force, after summing over all force components, is
 \begin{align}
   \vect{F}\supTE\subCP&=-\frac{3\hbar c\alpha_0}{8(2\pi)^{D/2}}
   \sum_{b=1}^{N_b}\sum_{k=1}^{N-1}\frac{\chi_b}{N}\intzinf \frac{d\cT}{\cT^{1+D/2}}
-   \nonumber\\
-   &\hspace{0.5cm} \times \biggdlangle \mathcal{G}(\vect{x}_A,\vect{x}_k,k,\cT)
+   % \nonumber\\
+   % &\hspace{0.5cm} \times 
+   \biggdlangle \mathcal{G}(\vect{x}_A,\vect{x}_k,k,\cT)
    \frac{\hat{n}_b(\vect{x}_k)}
   {\langle \epsr\rangle^{5/2}}     \biggdrangle_{\vect{x}(t)| \sigma_b(\vect{x}_k-\vect{R}_b)=0},
 \end{align}
@@ -890,8 +897,9 @@ limit and makes direct contact with prior work on Dirichlet worldlines.
 
 The spatial path-integral can be written in exponential form via the Gamma function,
 \begin{align}
-  W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
-  &\hspace{0.5cm}\times\bigdlangle e^{-\langle \sum_b\chi_b\theta_b(\vect{x})\rangle}
+  W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}% \nonumber\\
+  % &\hspace{0.5cm}\times
+  \bigdlangle e^{-\langle \sum_b\chi_b\theta_b(\vect{x})\rangle}
   - e^{-\sum_b\chi_b\theta_b(\vect{x}_0)}\bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
 \end{align}
 where we have introduced a shorthand notation $\theta_b(\vect{x}) = \theta(\sigma_b[\vect{x}-\vect{R}_b])$.
@@ -901,10 +909,11 @@ where we have introduced a shorthand notation $\theta_b(\vect{x}) = \theta(\sigm
 The exponential spatial path-integral for two bodies, after the single-body expressions have been factored out can 
 be factorized as 
 \begin{align}
-  W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}\nonumber\\
-  &\hspace{0.5cm}\times\Bigdlangle 
-  (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1)\nonumber\\
-  &\hspace{1.25cm}
+  W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}% \nonumber\\
+  % &\hspace{0.5cm}\times
+  \Bigdlangle 
+  (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1)% \nonumber\\
+  % &\hspace{1.25cm}
   -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
 \end{align}
 \comment{Pretty sure a Gies paper does a similar factorization.}
@@ -983,8 +992,9 @@ The full force path-integral is given by
 \begin{align}
   \vect{F}_2 =& (-1)\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
-\nonumber\\
-  &\hspace{0.5cm}\times \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
+% \nonumber\\
+%   &\hspace{0.5cm}\times 
+  \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
   \I[1]m\I[2]n f_{m,n}\bigdrangle_{\vect{x}(t)}
   \label{eq:occupation_force}
 \end{align}
@@ -1014,20 +1024,24 @@ The torque path-integral is
 \begin{align}
   \vect{K}_2 =& -\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
-  \nonumber\\
-  &\times\sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}
-  \Bigdlangle(\vect{x}_0-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_0) \nonumber\\
-  &\hspace{2.5cm} \times\I[1]m \I[2]n  f_{n,m}\Bigdrangle_{\vect{x}(t)}.
+  % \nonumber\\
+  % &\times
+  \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}
+  \Bigdlangle(\vect{x}_0-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_0) % \nonumber\\
+  % &\hspace{2.5cm} \times
+  \I[1]m \I[2]n  f_{n,m}\Bigdrangle_{\vect{x}(t)}.
 \end{align}
 and the potential curvature is given by
 \begin{align}
   C_{ij} =& \frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS\, \hat{n}_1(\vect{x}_0)
-  \nonumber\\ 
-  &\times\biggdlangle 
+  % \nonumber\\ 
+  % &\times
+  \biggdlangle 
   \sum_{k=0}^{N-1}\hat{n}_2(\vect{x}_k)\mathcal{G}(\vect{x}_0,\vect{x}_k,k,\cT)
-  \nonumber\\
-  &\hspace{0.75cm} \times\sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
+  % \nonumber\\
+  % &\hspace{0.75cm} \times
+  \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
   \biggdrangle_{\vect{x}(t)|\sigma_2(\vect{x}_k-\vect{R}_2)=0}
 \end{align}
 where 
@@ -1148,8 +1162,9 @@ of the integrand.
 \begin{align}
   \vect{F}_2 =& (-1)\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
-\nonumber\\
-  &\hspace{0.5cm}\times \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
+% \nonumber\\
+%   &\hspace{0.5cm}\times
+  \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
   \I[1]m\I[2]n f_{m,n}\bigdrangle_{\vect{x}(t)}
   \label{eq:occupation_force}
 \end{align}

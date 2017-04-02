@@ -61,14 +61,28 @@
 
 %\section{Casimir Forces}% in general and physical interpretation}
 
-The Casimir force is a striking manifestation of quantum field theory: a pair of electrically neutral,
- conducting bodies will be attracted to one another due to their interaction
-with quantized electromagnetic fields, even in the absence of photons~\cite{Casimir1948}.  
+Quantum field theories are the basis for our modern descriptions of fundamental physics.  
+A quantum field theory posits that the physical world is described by continuous fields, where the 
+fields are excited in discrete amounts that we interpret as the particles or quanta of the field.  \todo{Cite Schwinger on Why QFT?}
+Interactions are mediated by exchanging quanta of the appropriate field.
+For example, in electromagnetism charged matter 
+such as protons and electrons interact with one another by emitting and reabsorbing photons which are the quanta of the 
+electromagnetic field.  
+(We will distinguish between real particles, which can be observed on a detector, and virtual particles
+which can interact with other particles, but are not directly observable).
+A consequence of this idea of exchanging quanta is that it provides the opportunity for forces, 
+even when there are no directly physically observable quanta.  While it is expected that charged 
+particles would be attracted to one another via photon emission (leading to the familiar Coulomb interaction),
+the surprising feature of this picture is that it leads to forces even for neutral bodies.
+A pair of electrically neutral, conducting bodies will be attracted to one another due to their interaction
+with quantized electromagnetic fields, even in the absence of external photons~\cite{Casimir1948}---this is
+the Casimir effect.  
+
 % The Casimir force is a primarily attractive force that arises between material bodies interacting via 
 % quantized fields~\cite{Casimir1948}.
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the most important example is due to fluctuations in the electromagnetic (EM) field.  The quanta of the 
-EM field, photons, are massless making their interaction long-ranged, and their coupling to matter is much stronger
+EM field, photons are massless making their interaction long-ranged, and their coupling to matter is much stronger
 than the other long-ranged fundamental force, gravity.  
 In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
 interact with electrons in other bodies.  The interacting bodies can be pairs of atoms~\cite{CasimirPolder1948}, 
@@ -139,7 +153,7 @@ of the numerical methods in Sec.~\ref{sec:numerical_review}.
 % There have been more recent where the state-of-the-art in both theory and experiments is discussed by practitioners --- 
 % notably in the volumes by Bordag~\etal\cite{Bordag2009}, 
 % and the collection editted by Dalvit~\etal\cite{Dalvit2011}.  
-%\todo{Cite Vogel and Welsch~\cite{VogelWelsch2006}.  Also cite Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}}
+%%\todo{Cite Vogel and Welsch~\cite{VogelWelsch2006}.  Also cite Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}}
 % While this thesis emphasizes simple physical applications, the application of Casimir or 
 % van der Waals forces is also important to problems in surface physics and chemistry, as discussed in the texts by 
 %  Parsegian~\cite{Parsegian2006} and Israelachivili~\etal~\cite{Israelachvili2011}.
@@ -179,7 +193,7 @@ They found that in the far-field
 the interatomic potential decays more rapidly as $d^{-7}$.  The change in power law can be 
 attributed to the induced dipoles decorrelating over the time-of-flight of the virtual photon, 
 and thus having a weaker interaction.  
-\todo{Is this from Milonni?}
+%\todo{Is this from Milonni?}
 Furthermore, they found an attractive force between an atom and perfectly conducting wall, with a $d^{-3}$ scaling
 in the near field (van der Waals) regime, passes over to $d^{-4}$ scaling in the far-field.
 In this case the atom can be thought of as interacting with it's image in the perfect conductor,   
@@ -234,10 +248,10 @@ However, these energy non-conserving terms do lead to observable effects at high
 %   |\hat{\vect{A}}(\hat{\vect{x}})|^2
 % \end{equation}
 % where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
-% quantized operator for the EM vector potential at the atom's position $\vect{r}$.  \todo{Expand field operators
+% quantized operator for the EM vector potential at the atom's position $\vect{r}$.  %\todo{Expand field operators
 % $\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
 % (This interaction can instead be treated with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
-% these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.\todo{Find page})
+% these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.%\todo{Find page})
 In particular, the Casimir--Polder potential emerges when computing the energy-shift from $H_{\text{int}}$ to second order.
 For an atom in it's ground state, the Casimir--Polder potential is given by
 \begin{equation}
@@ -388,7 +402,7 @@ which limits this approach to highly symmetric geometries.
 % The atomic polarizability measures the linear response of an atom to the electromagnetic field,
 % and is given by 
 % where $d_i$ is the $i^\text{th}$ component of the dipole operator $\vect{d}=e\vect{r}$.
-% \todo{What does polarizability look like for a simple atom?}
+% %\todo{What does polarizability look like for a simple atom?}
 % At this order of perturbation theory, the EM Green tensor is given by its classical counterpart,
 
 % To linear order in the coupling, the energy can be written on the imaginary frequency $is$ as 
@@ -405,7 +419,7 @@ which limits this approach to highly symmetric geometries.
 
 % While we have only given the linear energy shift, there are a number of higher loop contributions
 % which can be resummed analytically due to the relative simplicity of the expansion~\cite{Rosa2011}.  
-% \todo{Cite Dzyaloshinksii or papers book for resummation?}
+% %\todo{Cite Dzyaloshinksii or papers book for resummation?}
 % The result of which is 
 % \begin{equation}
 %   V\subCP(\vect{r}) = \frac{\hbar c}{2\pi}\int_0^\infty ds \tr \log[I - \alpha(is) G^{(S)}(\vect{r},\vect{r})].
@@ -470,7 +484,7 @@ perfect conductors, and Casimir--Polder forces between atoms' and dielectric sur
 
 It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
 since for causal functions (such as an atom's or dielectric's response to the electromagnetic field), 
-the response is analytic on the imaginary axis.    \todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+the response is analytic on the imaginary axis.    %\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
 This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
 integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
 
@@ -581,7 +595,7 @@ is found from the microscopic theory via linear-response such as the Kubo formul
 This view makes the clearest connection to the underlying physics, rather than emphasizing idealized
 boundary conditions.  
 
-\todo{Details of Kubo?}
+%\todo{Details of Kubo?}
 \comment{Effective interaction: expanding out perturbation theory leads to $\langle j_\mu j_\nu\rangle$
 correlation functions.  Via Kubo formalism for linear response, this is related to the conductivity
 tensor $\sigma_{\mu\nu}$, which is in turn related to the dielectric constant $\chi$}
@@ -665,7 +679,7 @@ which corresponds to a frequency shift on the order of $10$kHz for a generic ato
 In the near-field, it is necessary to shift over to the van der Waals energy.
 As small as this energy is, in free-space it is the only attractive energy shift around for neutral atoms.
 
-\todo{Adsorbates on surfaces?  Patch potentials?}
+%\todo{Adsorbates on surfaces?  Patch potentials?}
 
 For macroscopic bodies we can compare the Casimir energy for perfect 
 metal conductors at a distance $d$ to the energy stored in the capacitance.
@@ -735,7 +749,7 @@ An early indirect measurement was liquid Helium flowing up the walls of a contai
 Lifshitz and co-workers applied the Casimir pressure to explain the phenomenon of liquid helium
 flowing out of a jar.  The presence of the liquid helium crawling up the surface reduces the Casimir energy,
 between the vacuum and the sides of the jar, so the liquid helium experiences an attractive pressure up the walls.  
-\todo{Citation for this?}
+%\todo{Citation for this?}
 
 While Casimir predicted an attractive force between neutral metal bodies in 1948,
 it was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}.   
@@ -756,7 +770,7 @@ Despite the aforementioned difficulties, Bressi\etal measured the Casimir force 
 
 The Casimir force is also important in applications of microelectromechanical systems (MEMS), 
 as a source of stiction~\cite{Tas1996, Serry1998, Buks2001}.  This is particularly important
-in free standing structures such as nano-oscillators.  \todo{Comment on non-linear actuation blah?}
+in free standing structures such as nano-oscillators.  %\todo{Comment on non-linear actuation blah?}
 Given the Casimir force is an attractive potential, if parts of the device get too close to the substrate
 they will permanently stick to one another, leading to device failure.  
 
@@ -837,7 +851,8 @@ the atom's experience when brought close to the dielectric surface.
     to each other, which in turn limits the coupling strength and thus the speed of operation.  
     % In addition, the Casimir force as been taken into account in design 1D atom traps 
     % near a nanowire~\cite{Salem2010}.
-    \todo{How close?  Limitations from CP?}
+    %\todo{Vuletic citations?}
+    %\todo{How close?  Limitations from CP?}
 
     Another direction that has been pursued is strong coupling of atoms to light via cavity 
     quantum electrodynamics (QED).  
@@ -845,7 +860,7 @@ the atom's experience when brought close to the dielectric surface.
     are developing microscopic dielectric waveguides to allow trapping, addressing and strongly interacting with a 
     single atom in a scalable manner~\cite{Alton2011, Hung2013, Goban2014}.  In this case
     the Casimir--Polder potential is explicitly accounted for as part of the trapping potential~\cite{Goban2014}.
-    \todo{More recent Kimble papers on this platform?}
+    %\todo{More recent Kimble papers on this platform?}
     
 % \item Antezza - chapters in Dalvit.  
 % % \item Kimble atoms near toroidal resonators.
@@ -872,7 +887,7 @@ the atom's experience when brought close to the dielectric surface.
 % As discussed by van Zwol~\etal~\cite{vanZwol2011}, a great deal of care if required in characterizing
 % the surfaces used in Casimir experiments, since the exact reflection characteristics (which govern the 
 % strength of the Casimir effect) will vary from device to device.  In particular, the thickness and roughness
-% of a surface may vary by up to \todo{Number?}. 
+% of a surface may vary by up to %\todo{Number?}. 
 
 % It is also necessary to extrapolate
 % from existing absorption data in narrow frequency bands to 
@@ -1010,7 +1025,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     The path-integral is an infinite dimensional integral, which is the solution to an associated 
     diffusion equation.  One can randomly sample from the 
     dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
-    in turn be described by a stochastic differential equations.  \todo{Gardiner citation for SDE-> PDE}
+    in turn be described by a stochastic differential equations.  %\todo{Gardiner citation for SDE-> PDE}
         
     Path integrals underly most of the work carried out in this thesis: we will use path-integrals
     to quantize the electromagnetic field, and the worldline method relies is also based on path integrals.
@@ -1022,7 +1037,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     % They have even been used in studying quantum chaos---the study of the quantum analogues 
     % of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
     % where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
-    % can be approximated by only considering paths with periodic orbits.  \todo{Gutzwiller trace formula citation}
+    % can be approximated by only considering paths with periodic orbits.  %\todo{Gutzwiller trace formula citation}
 
 % \begin{enumerate}
 % \item Found common use in field theory particularly for covariantly quantizing gauge field theories,
@@ -1181,7 +1196,7 @@ We will note similarities to our work in Ch.~\ref{ch:EM_quantization})
 
 The proximity force approximation (PFA) is an uncontrolled approximation to
 the Casimir force between generally shaped objects~\cite{Derjaguin1956}.  
-\todo{Earlier citation is available}
+%\todo{Earlier citation is available}
 The PFA treats each infinitesimal patch of the surfaces as if they were perfectly conducting planes,
 and sums up the pair-wise interactions between different patches.
 The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
@@ -1202,7 +1217,7 @@ of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4
 Finally, the PFA allows only for strictly attractive forces.  
 In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
 such as media with a strong magnetic response, or anisotropic media.
-\todo{PFA with frequency response for material?}
+%\todo{PFA with frequency response for material?}
 
 % \begin{enumerate}
 % %\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
@@ -1285,7 +1300,7 @@ can be described by its classical counterpart.)
 %   \item Boundary Element Methods in Classical Electromagnetism:
 %     For example see Ch. 8 of \cite{Chew1995}.  
 % \item Cite Bordag 1985 on quantization with delta functions?  There are others
-% Kardar and Li too.  \todo{Put in Borday1985, Kardar and Li citations}
+% Kardar and Li too.  %\todo{Put in Borday1985, Kardar and Li citations}
 % \item Comment on Emig/Buscher showing you can use homogenous green function.
 %   Relation to Green's theorem.
 % \item Emig 2004.  Boundary conditions via a version of Green's theorem - can use homogenous Green 
@@ -1355,8 +1370,8 @@ trivially parallelized, but this may only offer relatively little parallelizatio
 
 
 The fluctuating-surface-current method has been used to 
-for example describing the energy dependence of nanoparticles\todo{Find nanoparticle-scattering method citations}.
-\todo{Note use in Kimble group for computing C-P potential}
+for example describing the energy dependence of nanoparticles%\todo{Find nanoparticle-scattering method citations}.
+%\todo{Note use in Kimble group for computing C-P potential}
 \cite{Levin2010,Rodriguez2013} Also suspension of bodies above metallic holes in fluid.  Studied stability
 Also needle above hole.  
 

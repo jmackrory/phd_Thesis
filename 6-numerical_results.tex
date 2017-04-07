@@ -10,6 +10,12 @@
 \end{enumerate}
 
 
+\begin{quote}{We do not dwell with the numerical evaluation of this kind of path integral,
+ which may certainly be more difficult than its local counter part,
+ since the interaction term is not simple the integral 
+of a local function of the time.}
+\end{quote} Fosco, Lombardo, Mazzitelli 2010.
+
 \section{Monte-Carlo sampling}
 
 \begin{enumerate}
@@ -1247,7 +1253,7 @@ by multiplying and dividing by an integral over the Gaussian probability distrib
 \begin{align}
   I &= \frac{1}{2\pi\Delta\cT}
   e^{-(x_{j+1}-d)^2/(2\Delta \cT)-(d-x_{j+1})^2/(2\Delta \cT)} f(d)
-  %\nonumber\\  &\times
+  \nonumber\\  &\times
 \dfrac{\int dy_j (2\pi\Delta\cT)^{-1}
   e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}}{\int dy_j (2\pi\Delta\cT)^{-1}
   e^{-(x_{j+1}-y_j)^2/(2\Delta \cT)-(y_{j}-x_{j+1})^2/(2\Delta \cT)}}\\
@@ -1381,7 +1387,6 @@ point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$
 We then find the maximum point $B_{\text{max}}$ and consider fixing that to lie on the second surface $d_2$.
 Let us call the index of the maximum location $j$.
 
-
 The leading exponential potential can be converted into a probability distribution for $\cT$ on a 
 path-wise basis if we consider $x_j = x_0+\sqrt{\cT}B_j$, where $B_j$ is the $j$th coordinate of a 
 unit Brownian bridge.   The exponential factor can be written as 
@@ -1392,21 +1397,26 @@ unit Brownian bridge.   The exponential factor can be written as
 where $\bar{B}_j := (B_{j+1}-B_{j-1})/2$.  This is effectively a Gaussian in $1/\sqrt{\cT}$.  
 The normalized probability distribution is  
 \begin{equation}
-  P_C(\cT;\bar{B}_j,d,N) = 2\sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right)^2\bigg],
+  P_C(\cT;\bar{B}_j,d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right)^2\bigg],
+\label{eq:time_fix_curve}
 \end{equation}
 for $\cT\in[0,(d/\bar{B}_j)^2]$
 The probability distribution can be converted to an one-sided normal distribution by defining
 \begin{equation}
-  s = \left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right) \implies
-  \frac{ds}{d\cT} = \frac{-1}{2\cT^{3/2}},
+  s = \sqrt{2Nd^2}\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right),
 \end{equation}
-where the probability distribution for $s$ is 
+which has Jacobian (which takes the change of measure into account)
 \begin{equation}
-  P_C(s;B_j,d,N) = \sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2s^2},
+  \frac{ds}{d\cT} = \frac{-\sqrt{2Nd^2}}{2\cT^{3/2}}.
 \end{equation}
-for $s\in[0,\infty]$.  The path-times are then given by
+In that case, $s$ is the absolute value of a standard normal deviate, and 
+% \begin{equation}
+%   P_C(s;B_j,d,N) = \sqrt{\frac{Nd^2}{\pi}}e^{-Nd^2s^2},
+% \end{equation}
+% for $s\in[0,\infty]$. 
+the path-times are then given by
 \begin{equation}
-  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2},
+  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2}\label{eq:cT-s},
 \end{equation}
 where $z$ is a standard-normal random variable of zero mean, and unit variance.
 In the strong-coupling limit, we sample from a subset of paths that just graze the surface.
@@ -1414,18 +1424,25 @@ With the above method of handling the $\delta$-function, there is no need for an
 pinning factor.  
 (For planar surfaces)
 \begin{align}
-  C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
+  C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
   \sum_j  \frac{1}{(\pi\Delta\cT)^{1/2}}
    e^{-(d-\bar{B}_j)^2/\Delta \cT}\I[1]0\I[2]0 g_{0,0}
-   \biggdrangle_{x(\cT)}\\
- =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+D/2}}
-  \sum_j   \sqrt{\frac{\pi\cT^3}{4Nd^2}}\sqrt{\frac{N}{\pi\cT}}
-   \I[1]0\I[2]0 g_{0,0}
+   \biggdrangle_{x(\cT)}
+ \end{align}
+The $\cT$ integral will be solved in Monte Carlo fashion after factoring out the probability density~(\ref{eq:time_fix_curve}),
+and using Eq.~(\ref{eq:cT-s}).  The integral can be cut off at $\cT_0:=(d/\bar{B}_j)^2$, since for $\cT>\cT_0$
+more than one point has definitely entered the bodies. 
+In strong-coupling, only the no-touching terms contribute, and we can use $g_{0,0}=1$.
+\begin{align}
+C^{(S)}_{ij} =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{1+D/2}}
+  \sum_j   \sqrt{\frac{\pi\cT^3}{Nd^2}}\sqrt{\frac{N}{\pi\cT}}
+   \I[1]0\I[2]0 
    \biggdrangle_{\vect{x}(\cT), \cT}\\
- =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int \frac{d\cT}{\cT^{1+(D/2-1)}}
-  \sum_j  \frac{1}{2d}   \I[1]0\I[2]0 g_{0,0}
+ =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{D/2}}
+  \sum_j  \frac{1}{d}   \I[1]0\I[2]0 
    \biggdrangle_{\vect{x}(\cT), \cT}.
 \end{align}
+\comment{Phenomenologically this works relatively well if we include an additional factor of $N$.}
 Note that there are no explicit restrictions on the paths, but the integral is only significant
 when the paths are pass close to the body.
 (For planar surface, the Gaussian integrals over $\vect{y}$ can be carried out, 

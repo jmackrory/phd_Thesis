@@ -725,8 +725,8 @@
   \gdef\@sechack{\vskip\baselineskip\gdef\@sechack{\relax}}}
 \if@gsmodern
 \def\l@section{\@sechack\@dottedtocline{1}{0.5in}{2em}}
-\def\l@subsection{\@sechack\@dottedtocline{2}{0.75in}{3em}}
-\def\l@subsubsection{\@sechack\@dottedtocline{3}{1.0in}{4em}}
+\def\l@subsection{\@sechack\@dottedtocline{2}{1.0in}{3em}}
+\def\l@subsubsection{\@sechack\@dottedtocline{3}{1.5in}{4em}}
 \else
 \if@numsections
 \def\l@section{

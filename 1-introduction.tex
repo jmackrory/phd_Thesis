@@ -61,31 +61,42 @@
 
 %\section{Casimir Forces}% in general and physical interpretation}
 
-Quantum field theories are the basis for our modern descriptions of fundamental physics.  
-A quantum field theory posits that the physical world is described by continuous fields, where the 
-fields are excited in discrete amounts that we interpret as the particles or quanta of the field.  \todo{Cite Schwinger on Why QFT?}
-Interactions are mediated by exchanging quanta of the appropriate field.
-For example, in electromagnetism charged matter 
-such as protons and electrons interact with one another by emitting and reabsorbing photons which are the quanta of the 
-electromagnetic field.  
-(We will distinguish between real particles, which can be observed on a detector, and virtual particles
-which can interact with other particles, but are not directly observable).
-A consequence of this idea of exchanging quanta is that it provides the opportunity for forces, 
-even when there are no directly physically observable quanta.  While it is expected that charged 
-particles would be attracted to one another via photon emission (leading to the familiar Coulomb interaction),
-the surprising feature of this picture is that it leads to forces even for neutral bodies.
-A pair of electrically neutral, conducting bodies will be attracted to one another due to their interaction
-with quantized electromagnetic fields, even in the absence of external photons~\cite{Casimir1948}---this is
-the Casimir effect.  
 
-% The Casimir force is a primarily attractive force that arises between material bodies interacting via 
-% quantized fields~\cite{Casimir1948}.
+% A quantum field theory posits that the physical world is described by continuous fields, where the 
+% fields are excited in discrete amounts that we interpret as the particles or quanta of the field.  \todo{Cite Schwinger on Why QFT?}
+% Interactions between fields are mediated by exchanging quanta of the appropriate field.
+% For example, in electromagnetism charged matter 
+% such as protons and electrons interact with one another by emitting and reabsorbing photons which are the quanta of the 
+% electromagnetic field.  
+% (We will distinguish between real particles which can be observed on a detector, and virtual particles
+% which can interact with other particles, but are not directly observable).
+% Since the electromagnetic field is quantized, 
+
+
+The Casimir effect is one of the more surprising consequences of quantum electrodynamics (QED), the quantum theory
+describing the interaction of electrons and photons\footnote{
+Rejected opening lines: \\
+The Casimir effect is a striking manifestation of quantum field theory.\\
+The van der Waals force is an attractive apparition of discrete meadow speculation.\\
+Ever since I was a little boy, I have dreamed of developing the world's second general method for
+computing Casimir forces.\\
+Since the dawn of time, cavemen have wondered: how do geckos stick to the ceiling?\\
+Why did the gecko cross the ceiling?  To get to the other side.  How did he get there?  Van der Waals.
+}.
+According to QED a pair of  electrically neutral, conducting bodies will be attracted to one another due to their mutual interaction
+with the quantized electromagnetic field, even if the electromagnetic field is in it's vacuum state~\cite{Casimir1948}.  
+In brief, the total energy of the fields is decreased if the bodies are brought closer together 
+since the presence of the conducting bodies restricts the allowed modes of the electromagnetic field,
+and since in QED each mode carries a certain amount of energy (even in the vacuum).
+
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
-the most important example is due to fluctuations in the electromagnetic (EM) field.  The quanta of the 
-EM field, photons are massless making their interaction long-ranged, and their coupling to matter is much stronger
-than the other long-ranged fundamental force, gravity.  
+the electromagnetic Casimir effect is the most important example.  
+The quanta of the electromagnetic field, photons are massless making their interaction long-ranged, 
+and the coupling of electromagnetism to matter is much stronger than gravity, the only other long-ranged fundamental force.  
 In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
-interact with electrons in other bodies.  The interacting bodies can be pairs of atoms~\cite{CasimirPolder1948}, 
+interact with electrons in other bodies.  The fluctuating electric dipoles in the bodies then become correlated with one
+another, which leads to an attractive force.
+The interacting bodies can be pairs of atoms~\cite{CasimirPolder1948}, 
 macroscopic bodies such as metallic planes and dielectric slabs~\cite{Lifshitz1956}, or any combination of these.
 
 Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming in the bodies.  
@@ -100,11 +111,11 @@ in aligning parallel conducting plates (as in Casimir's first calculation), whil
 sphere above a conducting plate.  Experiments have also been
 carried out to measure the forces between atoms and surfaces~\cite{Sukenik1993,Perreault2005,Harber2005}.
 
-Beyond their importance as manifestations of quantum field theory, Casimir effects are also 
+Beyond their importance as observable consequences of quantum field theory, Casimir effects are also 
 important to a range of modern experiments and developing technologies.
 They are important for microelectromechanical systems (MEMS) where the Casimir attraction between components 
 leads to stiction, where pieces are permanently stuck together~\cite{Buks2001}.  
-Casimir forces are also important for developing technologies using atoms near dielectric surfaces~\cite{Folman2000,Alton2011, Hung2013}.
+Casimir forces are also important for technologies using atoms near dielectric surfaces~\cite{Folman2000,Alton2011, Hung2013}.
 In these experiments, the attractive Casimir potential sets a lower bound for how
 close the atoms can be brought to the surface, and as a result must be considered in the engineering 
 of these devices.
@@ -137,7 +148,7 @@ This requires accounting for the vector nature of the EM field, and including re
 material properties, while attempting to retain as many of its appealing
 properties as possible.    
 
-The rest of this introduction will cover simple examples of Casimir effects, and expand background material.
+The rest of this introduction will cover simple examples of Casimir effects, and expand on background material.
 In Sec.~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
@@ -394,8 +405,15 @@ convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end o
 \end{align}
 While we have emphasized the case of perfectly-conducting planar interfaces, similar computations
 can be carried out for dielectric interfaces and more general shapes of macroscopic bodies.  
-However, this type of calculation relies on having analytical expressions available for the mode functions,
+In the case of an atom near a dielectric interface, the Casimir--Polder potential is 
+\begin{equation}
+  V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0z^4}\eta(\chi),
+\end{equation}
+where $\chi$ is the static polarizability of the medium, and the efficiency factor $\eta$ approaches zero
+as $\chi\rightarrow 0$, and unity as $\chi\rightarrow\infty$.  
+Note that this style of calculation relies on having analytical expressions available for the mode functions,
 which limits this approach to highly symmetric geometries.  
+\todo{Note change for dielectric: $0<\eta(\chi)<1$.}
 
 % The Casimir--Polder energy can be further factored in terms of atomic polarizabilities,
 % and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
@@ -428,9 +446,7 @@ which limits this approach to highly symmetric geometries.
 % in Ch. 7 of Milonni~\cite{Milonni1994}, Vogel and Welsch~\cite{VogelWelsch2006} and Buhmann~\cite{Buhmann2012-vol1,Buhmann2012-vol2}.
 
 % \begin{enumerate}
-% %\item Cite Lifshitz, Dzyaloshinski, Abrisokov.
 % \item Cite Schwinger~\cite{Schwinger1978, Milton1978}  Scalar green functions.  
-% \item Green tensor methods
 % \item Cite Barton
 % \end{enumerate}
 
@@ -455,9 +471,9 @@ The renormalized energy between the plates is
   E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
 \end{equation}
 where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
-and $d$ is the distance between the plates.  Note that in this expression there is no
-mention of the material properties of the media --- this is an artifact of imposing Dirichlet
-boundary conditions on the surfaces.  
+and $d$ is the distance between the plates.  % Note that in this expression there is no
+% mention of the material properties of the media --- this is an artifact of imposing Dirichlet
+% boundary conditions on the surfaces.  
 
 \begin{figure}
 \center
@@ -473,6 +489,9 @@ and outside.  Modes have been vertically offset for clarity.  }
 The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
 Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
 perfect conductors, and Casimir--Polder forces between atoms' and dielectric surfaces.  
+We will quickly sketch the derivation of the Lifshitz formula (which we will require later),
+since this can naturally also compute the Casimir energy.
+
 %  As intimidating as this expression is, it can be heuristically derived with
 % relative ease via the ``argument principle''~\cite{vanKampen1968}.  
 % In essence, since the Casimir energy is the sum of the vacuum energy over all modes, the energy can
@@ -490,13 +509,13 @@ integrals with smoothly decaying real functions, that are much more amenable to 
 
 \subsubsection{Derivation of Lifshitz Formula}
 
+The Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
+(Our treatment parallels \S 7.2 in Milonni~\cite{Milonni1994}, and Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
 \begin{equation}
   E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
 \end{equation}
 where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
-The Casimir energy can be found with an ingenious argument due to van Kampen~\etal
-~\cite{vanKampen1968}.  (Our treatment parallels \S 7.2 in Milonni~\cite{Milonni1994}.)
 The sum over frequencies can be recast as a contour integral over a function whose poles occur at the allowed
 frequencies, with residue $\omega_k$:  
 \begin{equation}
@@ -506,7 +525,7 @@ where the function $\Delta'(\xi)/[2\pi i\Delta(\xi)]$ is designed to have unit r
 and $k_T$ is the transverse wavenumber.  
 The energy can be simplified by integrating by parts leading to 
 \begin{equation}
-  E = \frac{\hbar}{16\pi^3 i}\int d^2k_Tk_T\oint d\xi \, \ln\Delta(\xi).
+  E = \frac{\hbar}{16\pi^3 i}\int dk_Tk_T\oint d\xi \, \ln\Delta(\xi).
 \end{equation}
 The most important modes are the surface modes, since these modes are sensitive to the position of the other body, where
 these modes exponentially decay between the bodies.    The allowed frequencies for these modes must 
@@ -516,30 +535,9 @@ satisfy
 \end{equation}
 where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$.
 This is suggestive of the requirement that accumulated round-trip phase (including reflections from both walls) is unity for
-allowed modes.  (This interpretation is bolstered by examining the Casimir force between mirrors~\cite{Genet2003}.)
+allowed modes (this interpretation is bolstered by examining the Casimir force between mirrors~\cite{Genet2003}).
 This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $\xi$.  
-
-
-%\begin{itemize}
-  % \item $E = \sum_k\frac{\hbar \omega_k}{2}$
-  % \item Should insert sum over transverse momenta.  This sum runs over all modes, not just frequency.
-  % \item Only allowed modes contribute.  
-    % Between two plates, the allowed modes must satisfy the Fabry-Perot criterion: 
-    % $\Delta = 1- r_1r_2e^{2ik_3d} =0$.
-  % \item Use fact that in complex analysis integrating function in closed loop in complex plane gets
-  %   $\oint dz f(z) = 2\pi i\sum_{\text{poles} z_i}\text{Res} f(z_i)$.
-  % \item So energy can be written as 
-  %   \begin{equation}
-  %     E = \sum_k \frac{\hbar \omega_k}{2} = \oint dz \frac{\hbar z}{2(2\pi i)} \frac{\Delta'(z)}{\Delta(z)},
-  %   \end{equation}
-
-  % \item Now integrate by parts w.r.t. $z$
-  %   \begin{equation}
-  %     E = \oint dz \frac{\hbar}{2(2\pi i)} \log\Delta(z).
-  %   \end{equation}
-  % \item Now differentiate w.r.t $d$ to get force, and done.  
-%\end{itemize}
 
 The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
@@ -556,39 +554,41 @@ and
 \begin{equation}
   s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
 \end{equation}
-following Zhou~\cite{Zhou1995}. 
+following Zhou~\cite{Zhou1995}. The perfect-conductor Casimir can be found by taking $r^{(\zeta)}_i\rightarrow 1$,
+and evaluating the integrals.
 
 % This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
 %This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
 
-The Casimir--Polder results for interacting atoms are recovered from the Lifshitz formula by taking the limit of dilute bodies,
+The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
-In addition, the perfect-conductor Casimir can be found by taking $r_i\rightarrow 1$, and evaluating the 
-integrals.
 
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
 Some care is required in quantizing the electromagnetic field within dielectric media,
 since due to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
 The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
-and then trace out, or integrate out, the reservoir.
-It has been phenomenologically observed that one gets the correct answers by a direct substitution
+and integrate out the reservoir.  
+However, it has been phenomenologically observed that one gets the correct answers by a direct substitution
 $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated in~
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
 
 \subsection{Physical Interpretation}
 
+\comment{This should go first!  What is it, how big is it, how does it compare to other effects.}
+
 % However, boundary conditions are idealizations that ignore the structure
 The Casimir effect naturally fits into the broader context of quantum field theory.  
 Casimir initially framed the effect as a result of the zero-point energy associated with each mode of
-the field.  
+the field.  This framing emphasizes the fields, and the constraints imposed via idealized boundary conditions.
+However, this view obscures the connection to the fundamental physics of electrons interacting with photons.
 
 The Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.
 As Fig.~\ref{fig:electron-effective-interaction} shows, the Casimir effect can be thought of as the 
 interaction of electrons on different bodies with one another via the electromagnetic field.  
-We are interested in energies small relative to the binding energies of the dielectrics, and very weak
+We are interested in small energies relative to the binding energies of the dielectrics, and very weak
 fields.  We can then use an effective description in terms of the coarse-grained linear-response of the 
 medium to electromagnetic fields described by susceptibility $\chi$.  The susceptibility $\chi$
 is found from the microscopic theory via linear-response such as the Kubo formula.
@@ -635,34 +635,27 @@ tensor $\sigma_{\mu\nu}$, which is in turn related to the dielectric constant $\
 \end{fmfgraph}
 \end{fmffile}
 \caption[Casimir Energy in terms of fundamental QED processes. ]
- {Casimir Energy in terms of fundamental QED processes.  Electrons are considered bound within their respective media,
- but still interact with electrons on other bodies by exchanging photons.  The effective interaction of the 
-electrons with the field is described by the dielectric constant.}
+ {Casimir Energy in terms of fundamental QED processes.  The electrons are considered bound within their respective media,
+ but still interact with electrons on other bodies by exchanging photons.  Any self-interactions are removed 
+by renormalization via considering energy differences.  The effective interaction of the 
+electron current with the field is described by the dielectric constant.}
 \label{fig:electron-effective-interaction}
 \end{figure}
 
-% \begin{enumerate}
-%   \item A number of interpretations.  Can attribute fluctuations to medium or fields.  
-%     van der Waals fluctuating dipoles vs Casimir fluctuating EM fields.  
-%     Atom/Bodies emitting and re-absorbing virtual photons.  
-%   \item Zero-point energy.  
-%   % \item Clearest physical picture is effective action from long-wavelength EM fluctuations 
-%   %   interacting with matter.
-%   % \item Emphasizes connection to underlying physics.  
-% \end{enumerate}
+\subsection{Comparison with other forces}
 
-\subsection{Distance and Energy Scales}
+Casimir or van der Waals forces, are the dominant forces for electrically neutral bodies.  
+The resulting power law potentials are relatively short-ranged power laws compared to the Coulomb potential 
+between charged particles which decays $d^{-1}$. 
+This becomes more of an issue for experiments attempting to isolate the Casimir effect from stray
+fields.  A similar comparison is the interaction between molecular dipoles.  
 
-The Casimir force is typically most important between $1$nm and $10\mu$.  Below a
-nanometer the continuum approximations used in computing the Casimir force begin to break down,
-and a more careful condensed matter treatment would be required.  Above $10\mu m$, the force and 
-energy become too small to measure. 
 
 \subsubsection{Energy Scales}
 We will compare the size of the Casimir force to typical Coulomb energies.  While 
 the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
 However, most bodies are electrically neutral and thus have no long-ranged Coulomb potential, whereas
-the Casimir effect applies even if the bodies have no net charge.
+the Casimir effect applies even if the bodies have no net charge.  
 
 The typical Casimir--Polder energy scale can roughly be estimated from dimensional considerations.
 For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
@@ -673,10 +666,11 @@ The Casimir-Polder energy in the far-field is then
 %  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
 %  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
 %  &= -\frac{10^{-31}}{10^{-19}} eV\\
-  &\approx -10^{-12}eV,
+  \approx -10^{-12}eV,
 \end{align}
 which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
-In the near-field, it is necessary to shift over to the van der Waals energy.
+In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
+with its image dipole.
 As small as this energy is, in free-space it is the only attractive energy shift around for neutral atoms.
 
 %\todo{Adsorbates on surfaces?  Patch potentials?}
@@ -684,7 +678,7 @@ As small as this energy is, in free-space it is the only attractive energy shift
 For macroscopic bodies we can compare the Casimir energy for perfect 
 metal conductors at a distance $d$ to the energy stored in the capacitance.
 The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
-This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.
+This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
 For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
 between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
 vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
@@ -698,44 +692,48 @@ the more interesting Casimir energy.
 
 \subsubsection{Distance Scales}
 
-The resulting attractive potential for bodies separated by a distance $d$ is a power law.
+The Casimir energy for bodies separated by a distance $d$, can be written as a power law
+in certain limits.
+The distance scaling depends on the size of the bodies, and the relative sizes of the distance to the 
+relevant wavelengths in the problem.  
 For pairs of macroscopic bodies the energy scales as $d^{-2}$--$d^{-3}$ for macroscopic bodies, 
 while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.  
-The Casimir effect is important at distances around the resonant
-wavelengths of the atom or medium, which are typically on the order of $1\mu$m for optical transitions.  
+
+The Casimir effect is important at distances around the resonant wavelengths of the atom or medium,
+ which are typically on the order of $1\mu$m for optical transitions.  
 The Casimir effect is typically computed in a long-wavelength limit where the bodies can be treated 
-as distinct from one another, or treat the material as being fixed.
+as distinct from one another.
 This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
 This approximation starts to break down for distances on the scale of the separation of the constituent atoms,
-which is around $1$nm.  In addition, beyond distances of around $10 \mu$m, the Casimir effect is too
-weak to detect.  
+which is around $1\AA$, where exchange effects and other quantum interactions become important.
+At the other limit, for distances beyond $10 \mu$m, the Casimir effect is too weak to detect.  
 
 We can estimate typical distance scales by considering the dominant 
 resonances of the medium, and the thermal wavelength.
  So the Casimir force is typically then important at distances below the
  transition wavelength which is usually around $1\mu m$.    
     
-    Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
-    of the interacting media, such as the atomic polarizablitiies $\alpha(\omega)$ or the dielectric
-    function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
-    $\omega_T=\kB T/\hbar$.  
-    Given the radiative nature of the Casimir effect, there is a factor $e^{i\omega d/c}$ weighting the 
-    frequency integrals.  This contributes most when its exponent factor is order one, and   
-    the Lifshitz integral can be approximated in differing regimes.  
+ Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
+ of the interacting media, such as the atomic polarizablitiies $\alpha(\omega)$ or the dielectric
+ function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
+ $\omega_T=\kB T/\hbar$.  
+ Given the radiative nature of the Casimir effect, there is a factor $e^{i\omega d/c}$ weighting the 
+ frequency integrals.  This contributes most when its exponent factor is order one, and   
+ the Lifshitz integral can be approximated in differing regimes.  
 
-    In the near-field or van der Waals regime, the media are assumed to closer than the 
-    resonant wavelength of the media $d\ll \omega_A/c,\omega_M/c$, the exponential factor 
-    is unity, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
-    dipole interaction between the media.    
+ In the near-field or van der Waals regime, the separation of the bodies is less than any of the 
+ resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$, the exponential factor 
+ is unity, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
+ dipole interaction between the media.    
 
-    The so-called Casimir-Polder regime occurs when the atoms are much further than a resonant wavelength 
-    $d\gg \omega_A/c,\omega_M/c$,
-    in which case the dominant contributions come at zero frequency, and the functions can be approximated
-    with their static limit.  This far-field regime typically makes the potential decays more quickly.  
+ The so-called Casimir-Polder regime occurs when the atoms are much further than a resonant wavelength 
+ $d\gg \omega_A/c,\omega_M/c$,
+ in which case the dominant contributions come at zero frequency, and the functions can be approximated
+ with their static limit.  This far-field regime typically makes the potential decays more quickly.  
 
-    Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
-    thermal field contribute significantly.  In this regime the field decay is typically slower as $E\sim d^{-3}$,
-    the same as the near-field van der Waals regime.  
+ Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
+ thermal field contribute significantly.  In this regime the field decay is typically slower as $E\sim d^{-3}$,
+ the same as the near-field van der Waals regime.  
 
 \section{Summary of Casimir Experiments}
 \label{sec:expt_review}
@@ -745,7 +743,7 @@ in designing novel physical devices for both atoms.
 
 %Lamoreaux
 \subsection{Casimir}
-An early indirect measurement was liquid Helium flowing up the walls of a container.  
+An early indirect measurement was liquid Helium flowing up the walls of a container.  \todo{Citations!  Lifshitz/Dzyaloshinskii}
 Lifshitz and co-workers applied the Casimir pressure to explain the phenomenon of liquid helium
 flowing out of a jar.  The presence of the liquid helium crawling up the surface reduces the Casimir energy,
 between the vacuum and the sides of the jar, so the liquid helium experiences an attractive pressure up the walls.  
@@ -780,7 +778,8 @@ patch potentials, and surface roughness.  The patch potentials are localized sur
 charge distributions, which due to the longer range Coulomb interaction swamp the weaker
 Casimir force.  Surface roughness reflects the fact the surfaces are not perfectly smooth,
 and as such the exact distance between bodies is not clear.  While the roughness can be taken into
-account in theory, the surface must also be carefully characterized.  Reviews of these and other 
+account in making theoretical predictions, the surface must also be carefully characterized~\cite{vanZwol}.
+  Reviews of these and other 
 difficulties are available~(for example, \cite{Dalvit2011}).
 
 \subsection{Casimir-Polder}
@@ -790,28 +789,28 @@ Bose-Einstein condensates.
 In recent years technical advances and control over atomic systems have allowed the Casimir-Polder
 force to be measured precisely.  
 
-    The first attempts at directly measuring the Casimir-Polder force used atomic beams 
-    near surfaces.  
-    Sukenik~\etal made the first modern attempt to measure the Casimir-Polder force~\cite{Sukenik1993}.
-    Their experiment passed a hot beam of atoms through an optical cavity and attempted to detect
-    the effect by the small phase-shift induced on the atoms.  Unfortunately, their measurement 
-    was not definitive.
-    More recent experiments by Perreault~\etal\cite{Perreault2005}, and Lonig~\etal\cite{Lonij2009} succed in measuring
-    the Casimir-Polder force with atomic beams.  These experiments passed an atomic beam past grating and 
-    detected the phase-shift by atom interometry.  % These experiments act as precision tests of the theory,
-    % and found that the first principles calculations based on perturbation theory are less successful
-    % than an effective description informed by experimental data.  
+The first attempts at directly measuring the Casimir-Polder force used atomic beams 
+near surfaces.  
+Sukenik~\etal made the first modern attempt to measure the Casimir-Polder force~\cite{Sukenik1993}.
+Their experiment passed a hot beam of atoms through an optical cavity and attempted to detect
+the effect by the small phase-shift induced on the atoms.  Unfortunately, their measurement 
+was not definitive.
+More recent experiments by Perreault~\etal\cite{Perreault2005}, and Lonig~\etal\cite{Lonij2009} succed in measuring
+the Casimir-Polder force with atomic beams.  These experiments passed an atomic beam past grating and 
+detected the phase-shift by atom interometry.  % These experiments act as precision tests of the theory,
+% and found that the first principles calculations based on perturbation theory are less successful
+% than an effective description informed by experimental data.  
 
-    The Casimir-Polder effect has also been observed in the context of a Bose-Einstein Condensate (BEC)
-    of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  The BEC allows for precise distance control,
-    and can be used in atom interferometry to detect small phase shifts.    
-    The atoms are confined to a harmonic trap, and can be brought near to a surface to probe the Casimir
-    force.  The Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
-    dependent manner.  
-    Furthermore, this technique was able to measure the Casimir force in the thermal regime, which
-    is often difficult since the force is weak at those distance.  In this case it is easy to 
-    vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$ to observe
-    the cross over between the Casimir-Polder and thermal regimes.
+The Casimir-Polder effect has also been observed in the context of a Bose-Einstein Condensate (BEC)
+of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  The BEC allows for precise distance control,
+and can be used in atom interferometry to detect small phase shifts.    
+The atoms are confined to a harmonic trap, and can be brought near to a surface to probe the Casimir
+force.  The Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
+dependent manner.  
+Furthermore, this technique was able to measure the Casimir force in the thermal regime, which
+is often difficult since the force is weak at those distance.  In this case it is easy to 
+vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$ to observe
+the cross over between the Casimir-Polder and thermal regimes.
 
 The Casimir-Polder force is also important in developing atomic technologies.  
 There is a large effort across many fields to harness quantum technologies to develop scalable 
@@ -831,11 +830,11 @@ Atoms can also be cooled and trapped.
     %   \item 
     % \end{enumerate}
 
-    The Casimir-Polder effect is also important in the design of devices aiming to trap and interact
-    with atoms near surfaces.  While ultra-cold atoms are very clean systems to work with for 
-    studying and exploiting quantum effects, they are hard to minaturize and scale up.  In recent
-    years there has been a concerted push to develop technology to regain the appealing features 
-    of cold atoms in a scalable architecture. 
+The Casimir-Polder effect is also important in the design of devices aiming to trap and interact
+with atoms near surfaces.  While ultra-cold atoms are very clean systems to work with for 
+studying and exploiting quantum effects, they are hard to minaturize and scale up.  In recent
+years there has been a concerted push to develop technology that retains the appealing features 
+of cold atoms in a scalable architecture. 
 
 The desire to get strong-coupling between the atom and light fields, addressable qubits, and a scalable
 architecture has pushed groups towards developing atomic traps that capture atoms close to dielectric surfaces.  
@@ -930,16 +929,9 @@ Another way towards repulsive effects is by varying the geometry of the bodies.
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
 \cite{Levin2010}.  However, in this example the repulsion is not stable. 
 
-
-
 %\item 
-% Repulsion (Cite Capasso experiment with bromobenzene).  Possibility of stable trapping
-%   if one could balance repulsion/attraction.  
- % Metamaterials for repulsion.  (Can't work Rosa 2010/2011 since dielectric
- %  background dominates~\cite{Rosa2008}.
   % (Cite Vogel and Welsch chapter for Green function methods.  Vogel and Welsch cite 
   % Feinberg and Sucher (1970) on pg 360 for repulsion)
-  % \item Search for repulsive forces as possible trapping (Motivation for this?)
   % \item Can be found for magnetic media (but typically small).
   %   Metamaterials exhibit this for small range of frequencies.
   %   But Casimir broadband, and dielectric contribution ends up dominating.
@@ -962,6 +954,7 @@ For example, the Casimir effect is repulsive in certain regimes for an elongated
 %\end{enumerate}
 
 \subsubsection{Searches for new physics}
+
 The Casimir force is also important for speculative searches for new physics on the millimeter to micron
 scale~\cite{Dimopoulos2003, Bezerra2011}.  The new physics must be shortranged, and is typically modelled as 
 a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$.  
@@ -983,7 +976,93 @@ to yield results.
 % \item Military applications to mimic at human scale. Cite 2015 paper.   
 % \end{enumerate}
 
-\section{Path Integrals}
+
+\section{Computational methods for Casimir Effects}
+\label{sec:numerical_review}
+
+Although the Casimir force was explored by theorists before precision experiments were available,
+the advent of precision experiments and new technologies has spurred developments in 
+theoretical and computational methods.
+While early work focused on highly symmetric geometries 
+of bodies such as parallel planar bodies~\cite{Casimir1948,Lifshitz1956} or spheres~\cite{Boyer1968}, 
+current experiments require calculations for arbitrary shapes and arrangements of bodies, 
+which have realistic material properties.  
+As Sec.~\ref{sec:expt_review} showed, modern experiments require theoretical and computational methods
+for the Casimir force that can account for a wide variety of material responses, anisotropies
+and the ability to handle arbitrary shapes.  
+
+This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
+range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
+and one must carefully renormalize the results to avoid infinite answers.  
+For a simple, symmetric geometry (like perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
+it is possible to write down tractable analytical expressions for
+the Casimir energy based on expanding the field in mode functions.  However for general geometries 
+such an expansion may not be possible, or converge well.
+These requirements force one to adopt a general numerical approach to computing Casimir forces~\cite{Johnson2011}.
+We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
+or fluctuating surface current approach, and the worldline method.
+
+(We will briefly note methods based on computing van der Waals energies in the static field limit,
+by evaluating functional determinants for discrete spatial grids~\cite{Maggs2006,Pasquali2008}. This approach 
+omits any time evolution, but it does offer a direct method of trying to evaluate the field path integral.
+We will note similarities to our work in Ch.~\ref{ch:EM_quantization})
+
+
+
+% \begin{enumerate}
+% %\item Experiments spurred development of theory.  
+% % \item Prior methods relied on mode-function expansion of fields, which is only possible
+% % for simple geometries.  
+% % \item Theory must account for material properties.  Surface roughness.  
+% % \item Need general methods, tend to result in numerical integrals.
+% % \item Crudest method available is the proximity force approximation.  
+% % \item Analytical theory based on green function methods.  (Russian school, McLachlan, Schwinger)
+% % \item Scattering approach.  
+% % \item Worldline method.  
+% \end{enumerate}
+
+\subsection{Proximity Force Approximation}
+
+The proximity force approximation (PFA) is an uncontrolled approximation to
+the Casimir force between generally shaped objects~\cite{Derjaguin1956}.  
+%\todo{Earlier citation is available}
+The PFA treats each infinitesimal patch of the surfaces as if they were perfectly conducting planes,
+and sums up the pair-wise interactions between different patches.
+The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
+their separation $d$.  
+For many years the PFA was the only practical general method of estimating Casimir forces.
+The PFA has the advantage of being straightforward to implement, and functions as an order of magnitude
+estimate for the Casimir force for arbitrary geometries.
+It was used by Lamoreaux to estimate the Casimir force between the sphere-plate
+in his landmark experiments, where the radius of the sphere was indeed large compared to the separations explored. 
+
+However it has some prominent limitations.
+First, it is only valid for vanishing curvature.
+Second, the PFA assumes that the force can be found by integrating up
+the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
+of the Casimir force.  Unlike the potential between electric charges where the total potential is
+the sum of the pair-wise potential energies, the Casimir force for an arrangement
+of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4} of \cite{Milonni1994})
+Finally, the PFA allows only for strictly attractive forces.  
+In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
+such as media with a strong magnetic response, or anisotropic media.
+%\todo{PFA with frequency response for material?}
+
+% \begin{enumerate}
+% %\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
+% % \item Note problem with non-additivity. The PFA explicitly assumes that the force
+% % can be found by adding up the pair-wise contributions from each surface patch.  
+% % However, the Casimir force is a global phenomenon, and the total Casimir force
+% % Useful if very limited curvature, or effectively approximate geometry as planar.  
+% \item Only attractive.  (real electromagnetic casimir forces have possibility of 
+% being repulsive, even if hard to realize in general.)
+% \item ever extended to include material properties?
+% \item Despite these limitations, the PFA is relatively straightforward to implement,
+% and functions as an order of magnitude estimate for the Casimir force.  In the limit
+% of vanishing curvature, the PFA converges to the correct Casimir force.  
+% \end{enumerate}
+
+\subsection{Path Integrals}
 \label{sec:feynman_path_integral}
 In order to discuss the modern methods of computing the Casimir effect it is necessary to introduce
 the path-integral. The path integral was originally developed by Richard Feynman as an alternative formulation of quantum mechanics
@@ -1049,7 +1128,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
   %   Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
   %   Replaces oscillating Gaussian integrals for real, decaying ones.
 
-    \subsection{Derivation of Feynman's Path Integral}
+    \subsubsection{Derivation of Feynman's Path Integral}
 
     Let us consider the quantum mechanical treatment of a particle in a time-independent potential $V(\vect{x})$, with Hamiltonian 
     \begin{equation}
@@ -1148,90 +1227,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     We will also only need to consider Gaussian path integrals, of the type considered here.  
     In a later chapter we will extend this derivation to include sources.
 
-\section{Computational methods for Casimir Effects}
-\label{sec:numerical_review}
 
-Although the Casimir force was explored by theorists before precision experiments were available,
-the advent of precision experiments and new technologies has spurred developments in 
-theoretical and computational methods.
-While early work focused on highly symmetric geometries 
-of bodies such as parallel planar bodies~\cite{Casimir1948,Lifshitz1956} or spheres~\cite{Boyer1968}, 
-current experiments require calculations for arbitrary shapes and arrangements of bodies, 
-which have realistic material properties.  
-As Sec.~\ref{sec:expt_review} showed, modern experiments require theoretical and computational methods
-for the Casimir force that can account for a wide variety of material responses, anisotropies
-and the ability to handle arbitrary shapes.  
-
-This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
-range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
-and one must carefully renormalize the results to avoid infinite answers.  
-For a simple, symmetric geometry (like perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
-it is possible to write down tractable analytical expressions for
-the Casimir energy based on expanding the field in mode functions.  However for general geometries 
-such an expansion may not be possible, or converge well.
-These requirements force one to adopt a general numerical approach to computing Casimir forces~\cite{Johnson2011}.
-We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
-or fluctuating surface current approach, and the worldline method.
-
-(We will briefly note methods based on computing van der Waals energies in the static field limit,
-by evaluating functional determinants for discrete spatial grids~\cite{Maggs2006,Pasquali2008}. This approach 
-omits any time evolution, but it does offer a direct method of trying to evaluate the field path integral.
-We will note similarities to our work in Ch.~\ref{ch:EM_quantization})
-
-
-
-% \begin{enumerate}
-% %\item Experiments spurred development of theory.  
-% % \item Prior methods relied on mode-function expansion of fields, which is only possible
-% % for simple geometries.  
-% % \item Theory must account for material properties.  Surface roughness.  
-% % \item Need general methods, tend to result in numerical integrals.
-% % \item Crudest method available is the proximity force approximation.  
-% % \item Analytical theory based on green function methods.  (Russian school, McLachlan, Schwinger)
-% % \item Scattering approach.  
-% % \item Worldline method.  
-% \end{enumerate}
-
-\subsection{Proximity Force Approximation}
-
-The proximity force approximation (PFA) is an uncontrolled approximation to
-the Casimir force between generally shaped objects~\cite{Derjaguin1956}.  
-%\todo{Earlier citation is available}
-The PFA treats each infinitesimal patch of the surfaces as if they were perfectly conducting planes,
-and sums up the pair-wise interactions between different patches.
-The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
-their separation $d$.  
-For many years the PFA was the only practical general method of estimating Casimir forces.
-The PFA has the advantage of being straightforward to implement, and functions as an order of magnitude
-estimate for the Casimir force for arbitrary geometries.
-It was used by Lamoreaux to estimate the Casimir force between the sphere-plate
-in his landmark experiments, where the radius of the sphere was indeed large compared to the separations explored. 
-
-However it has some prominent limitations.
-First, it is only valid for vanishing curvature.
-Second, the PFA assumes that the force can be found by integrating up
-the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
-of the Casimir force.  Unlike the potential between electric charges where the total potential is
-the sum of the pair-wise potential energies, the Casimir force for an arrangement
-of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4} of \cite{Milonni1994})
-Finally, the PFA allows only for strictly attractive forces.  
-In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
-such as media with a strong magnetic response, or anisotropic media.
-%\todo{PFA with frequency response for material?}
-
-% \begin{enumerate}
-% %\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
-% % \item Note problem with non-additivity. The PFA explicitly assumes that the force
-% % can be found by adding up the pair-wise contributions from each surface patch.  
-% % However, the Casimir force is a global phenomenon, and the total Casimir force
-% % Useful if very limited curvature, or effectively approximate geometry as planar.  
-% \item Only attractive.  (real electromagnetic casimir forces have possibility of 
-% being repulsive, even if hard to realize in general.)
-% \item ever extended to include material properties?
-% \item Despite these limitations, the PFA is relatively straightforward to implement,
-% and functions as an order of magnitude estimate for the Casimir force.  In the limit
-% of vanishing curvature, the PFA converges to the correct Casimir force.  
-% \end{enumerate}
 
 \subsection{Scattering Approach}
 
@@ -1559,7 +1555,7 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
  the renormalized free energy can be rewritten as
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-  \tr\Big[e^{(\partial_\tau^2+\nabla^2)\cT/2}\big(e^{-\cT V(\vect{x})}-1\big)\Big].
+  \tr\Big[e^{[(\partial_\tau^2+\nabla^2)/2-V(\vect{x})]\cT}-e^{(\partial_\tau^2+\nabla^2)\cT/2}\Big].
 \end{equation}
 At this point, we introduce an $D$-dimensional auxiliary Hilbert space to evaluate the trace, where 
 $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
@@ -1685,33 +1681,41 @@ off a pro-rated fraction of the final position from each increment.  % So if we 
 % \begin{equation}
 %   B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.
 % \end{equation}
-This algorithm has the virtue of simplicity, but it does require that one know the whole path ahead of 
-time.  
-
+This algorithm has the virtue of simplicity, but it does require that one know the whole Brownian path 
+in order to construct the closed version.
 Gies~\etal developed an improved algorithm, the so-called ``v-loop'' algorithm for generating
 Brownian paths\cite{Gies2003}. 
-This algorithm decouples the Gaussian probability density of $N$ steps that must return
-to their origin into $N-1$ independent Gaussian random variables, 
-by essentially completing the square sequentially starting at $x_{N-1}$ and working downwards. 
-A Brownian bridge can be constructed as 
-\begin{equation}
-  B_k = c_k B_{k-1} + \sqrt{c_k} \Delta W_k,
-\end{equation}
-where 
-\begin{equation}
-  c_k = \frac{N-k}{N-k+1}, \quad k=1,\cdots,N-1.
-\end{equation}
+% This algorithm decouples the Gaussian probability density of $N$ steps that must return
+% to their origin into $N-1$ independent Gaussian random variables, 
+% by essentially completing the square sequentially starting at $x_{N-1}$ and working downwards. 
+% A Brownian bridge can be constructed as 
+% \begin{equation}
+%   B_k = c_k B_{k-1} + \sqrt{c_k} \Delta W_k,
+% \end{equation}
+% where 
+% \begin{equation}
+%   c_k = \frac{N-k}{N-k+1}, \quad k=1,\cdots,N-1.
+% \end{equation}
 Since we will use the v-loop algorithm in our own simulations, 
 we will discuss this algorithm further in Ch.~\ref{ch:numerical}. 
 
+Having constructed a path, it is then necessary to compute the worldline integrand $e^{-\cT\langle V\rangle}-1$ along that path.
+If any point along the path intersects one of the surfaces, then potential $V=\lambda\delta[\sigma(\vect{x})]$
+is non-zero.  
+In the strong-coupling, or Dirichlet limit $\lambda\rightarrow \infty$, the path-averaged potential also
+diverges to infinity, and as a result the worldline integrand goes to negative one.  
+If however, no points on the path intersect a surface, then the potential is zero, and the renormalize
+worldline integrand is also zero.  
+
+
 Once a particular random path has been constructed, it is necessary to integrate over the starting
 point $\vect{x}_0$, and the path-time $\cT$.  
-At small times, the paths will note intersect any of the bodies so that the potential is zero,
-and the renormalized energy integrand $e^{-\cT\langle V\rangle}-1\rightarrow 0$.
-At later times, the paths will intersect the bodies, and the potential will be non-zero.
-In most work on worldlines, the potential is assumed
-to saturate so that $e^{-\cT\langle V\rangle}\rightarrow 0$ if any part of the path intersects one of
-the bodies, so the renormalized integrand $e^{-\cT\langle V\rangle}-1\rightarrow -1$.
+% At small times, the paths will note intersect any of the bodies so that the potential is zero,
+% and the renormalized energy integrand $e^{-\cT\langle V\rangle}-1\rightarrow 0$.
+% At later times, the paths will intersect the bodies, and the potential will be non-zero.
+% In most work on worldlines, the potential is assumed
+% to saturate so that $e^{-\cT\langle V\rangle}\rightarrow 0$ if any part of the path intersects one of
+% the bodies, so the renormalized integrand $e^{-\cT\langle V\rangle}-1\rightarrow -1$.
 Thus the worldline algorithm relies on finding the times $\cT$ when at least one path point intersects
 the bodies, and integrating over those times.  This must further be integrated over each path starting point.
 For simple geometries, these touching times can be found analytically for a particular random path,
@@ -1792,10 +1796,19 @@ The goal of this thesis is to extend the scalar worldline method to vector elect
 Ideally we would retain the attractive features of the method, such as geometry independence of the paths,
 simple path generation, and Monte Carlo sampling, while improving the method to account for the two physical polarization
 states of the EM field, and properly account for the material properties of the medium.  
-
+\begin{itemize}
+  \item The paths should be simple Brownian motions.
+  \item The algorithm should be independent of the geometry.
+  \item The potential should emerge from the dielectric properties of the medium
+  \item The physical degrees of freedom should be correctly accounted for
+  \item The method must agree with other calculations where the solution is known.    
+\end{itemize}
 As this thesis will show, we have partially met those goals.  We have developed analytical
-and numerical techniques that can be applied to existing worldline problems and are essential
-for electromagnetic worldlines.  
+and numerical techniques that can be applied to improving existing worldline algorithms.
+This thesis focuses primarily on solving the planar problem ---- although this is well-studied,
+it is a good platform for exploring and testing worldline methods.  
+The methods we develop here could be used as uncontrolled approximations in general geometries, but with
+no guarantee of correctness.  
 % \begin{shaded}
 %   The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
 %   This follows either from Hormander's argument, that 

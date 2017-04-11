@@ -1,0 +1,345 @@
+\chapter{Review of Scattering Method}
+
+\cite{Reid2009},\cite{Reid2011}, \cite{Reid2013} 
+Note success, applicability.  \comment{Cite experimental tylenol pill paper}
+
+This numerical approach is related to prior multipole scattering approach~\cite{Rahi2009}.
+Earlier work chose to expand the scattering amplitudes in terms of mode function
+solutions.  In contrast, this work expands the fields at the surfaces using 
+boundary elements - in particular triangles.  
+This avoids some of the issues of poorly converging summations of solutions that occured in
+the multipole method.  Get very similar results, but different choice of basis for calculations.
+Multipoles exploit symmetry, while boundary elements are generally applicable, make no assumptions 
+about surface.  Other than the bodies are piece-wise continuous.  
+
+Naturally decomposes separate frequencies into independent integral.  Could parallelize that way.
+Still have to handle large matrices.  Freely available as ScuffEM package maintained by
+ Homer Reid~\cite{ScuffEM2016}.  
+
+\subsection{Reid 2013-Trimmed}
+
+\subsubsection{Intro}
+
+Interaction of effective currents on surfaces.  Get energies/forces/torques from
+this matrix, and appropriate derivatives.  Derive things two ways:
+i) stress-tensor, ii) path-integral expression.  Get to the same place both ways.  
+
+Point out derivation holds for general temperatures, cite Philbin and Pitaevskii
+as pointing out doubts about the canonical case.  
+
+Note use of special function methods that work great when well-suited basis is 
+available.  
+
+Reid2013 eliminates the volume integral for a surface integral, where surface currents
+enter as fixing EM boundary conditions on some bounding surface.    
+
+The basic formulae are: 
+\begin{gather}
+  \mathcal{E} = \frac{\hbar}{2\pi}\int_0^\infty d\xi \ln\frac{\det\mathbf{M}(\xi)}{\det\mathbf{M}_\infty(\xi)}
+  \\
+  \mathcal{F}_i = -\frac{\hbar}{2\pi}\int_0^\infty d\xi \tr\left[\mathbf{M}^{-1}(\xi)
+\frac{\partial}{\partial \vect{r}_i}\mathbf{M}(\xi)\right]\\
+  \mathcal{T}_i = -\frac{\hbar}{2\pi}\int_0^\infty d\xi \tr\left[\mathbf{M}^{-1}(\xi)
+\frac{\partial}{\partial \theta_i}\mathbf{M}(\xi)\right]
+\end{gather}
+$\xi$ Integrals run over imaginary axis.  Trace runs over all scattering matrix elements.  
+Similarity to Rahi work in the matrices.  The meaning however is coupling/scattering between
+different bases.  Here it is coupling between surface current elementss.  There it was 
+between different field modes.  
+
+Point out their method is more general than mode-function version, 
+and better adapted when basis is not good.
+
+Can also use coupling between Homogenous Green functions (re Stratton, and Emig2004 ).
+
+This paper is theoretical - numerical details discussed elsewhere. 
+
+\subsection{Path Integral Derivation}
+
+Do gauge-fixing method of quantization of path integral.
+Assuming linear coupling, at zero temperature.  
+
+In contrast with taking ``Weyl gauge'' $A_0=0$, or in terms of Electric fields.    
+
+(Cites a 1985 Bordag Ann. Phys Paper for similarities explicit independence of Fadeev-Popov
+gauge fixing).
+
+The action is 
+\begin{equation}
+  S = \frac{1}{2}\int\frac{d\omega}{2\pi}\int d^3x\,\left[ 
+    \epsilon(\omega,\vect{x})|\vect{E}(\omega,\vect{x})|^2 - \mu(\omega,\vect{x})|\vect{H}(\omega,\vect{x})|^2\right]
+\end{equation}
+Then rewriting $\vect{E},\vect{H}$ in terms of the 4-potentials, the initial Lagrangian density is 
+\begin{equation}
+ \mathcal{L}= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\left[ 
+    \epsilon(\omega,\vect{x})(\partial_i A^0+i\omega A^i)(\partial_i {A^0}^*-i\omega A^i)
+- \frac{1}{\mu}(\epsilon_{ijk}\partial_jA^k\epsilon_{imn}\partial_mA^n)\right]
+\end{equation}
+\begin{shaded}
+This follows since if we Fourier expand the real-valued time version of this we have 
+\begin{equation}
+  \int_{0}^T dt e^{i(\omega_n+\omega_mt)}A_nA_m = A_nA_m^*\delta_{n,-m}
+\end{equation}
+Since the fields are real, $A_n^* = A_{-n}$.  If we take the limit $T\rightarrow\infty$,
+the Fourier series is replaced by a sum.  (This will recur again when we confront finite temperature.)
+\end{shaded}
+
+Note that this derivation proceeds under the assumption that we will  explicitly enforce 
+EM boundary conditions at all surfaces.  Thus we can neglect and ignore any terms involving
+$\partial_i\epsilon$.   This stands in contrast to our approach which would attempt to retain 
+all such terms.  Our attempts at this path integral for the worldline method would retain these
+terms to enforce boundary conditions, and to scale the gradients to be in flat space.  
+
+Now integrate by parts, and Wick rotate to Euclidean space with 
+$\{\omega, A^0, {A^0}^*\}\rightarrow \{i\xi,iA_0,iA_0^*\}$.
+% \begin{align}
+%  \mathcal{L}&= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+%     \epsilon(\omega,\vect{x})(\partial_i A^0\partial_i {A^0}^*+i\omega A^i\partial_i {A^0}^*
+%     -i\omega\partial_iA^0{A^i}^* +\omega^2A^i {A^i}^*)\nonumber\\
+%     &- \frac{1}{\mu}(\partial_jA^k\partial_jA^k-\partial_jA^k\partial_kA^j)\big]\\
+% % &= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+% %     \epsilon(\omega,\vect{x})( A^0(-\partial_i\partial^i) {A^0}^*+i\omega A^i\partial_i {A^0}^*
+% %     -i\omega\partial_iA^0{A^i}^*+\omega^2A^i {A^i}^*)\nonumber\\
+% %     &+ \frac{1}{\mu}(A^k\partial_j\partial_jA^k-A^k\partial_j\partial_kA^j) 
+% %     -A^0(\partial_i\epsilon)\partial_iA^{0*} +A^k(\partial_j\frac{1}{\mu})(\partial_jA^k-\partial_kA^j)\big]
+% &= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\big[ 
+%     \epsilon(\omega,\vect{x})( A^{0,*}(-\partial_i\partial^i) A^0-i\omega {A^0}^*(\partial_iA^i+A^i\partial_i\epsilon)
+%     -i\omega\partial_iA^0{A^i}^*+\omega^2A^i {A^i}^*)\nonumber\\
+%     &+ \frac{1}{\mu}(A^k\partial_j\partial_jA^k-A^k\partial_j\partial_kA^j) 
+%     -A^0(\partial_i\epsilon)\partial_iA^{0*} +A^k(\partial_j\frac{1}{\mu})(\partial_jA^k-\partial_kA^j)\big]
+% \end{align}
+
+Then split the Lagrangian into: 
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} \bigg[\left(-\epsilon\xi^2+\frac{1}{\mu}\nabla^2\right)\delta_{\mu\nu} 
+  - \alpha_\mu\alpha_\nu\bigg]\tilde{A}^\nu,
+\end{equation}
+where $(\tilde{A}^0,\tilde{A}^j) = (\sqrt{\epsilon\mu}A^0,\vect{A})$, 
+and $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$.
+The pieces in $\alpha_\mu$ are pure gauge degrees of freedom.  Since the boundary conditions will be explicitly
+enforced elsewhere, the spatial dependence of $\epsilon$,$\mu$ can be ignored.  
+
+We can equivalently write this as 
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu} - \alpha_\mu\alpha_\nu]\tilde{A}^\nu,
+\end{equation}
+which transparently has the form of a transverse projector.  
+This has a null eigenvalue along $\alpha_\mu$, which corresponds to gauge-transformations.  
+The null eigenvalue is normally removed within path integrals by using the Fadeev-Popov method for gauge fixing. 
+We will discuss gauge-fixing in greater detail later.  
+While Fadeev-Popov gauge fixing runs into issues in Non-Abelian theories at very large field strengths,
+we are only going to use it for perturbative QED computations, well inside its range of validity.
+They then link up with the Fadeev-Popov method by noting that the Fadeev-Popov method handles gauge-fixing by introducing 
+\begin{equation}
+  1 = \int d\omega \exp\left[-\int_0^{\hbar\beta}d\tau\,\frac{\omega^2}{2} \right]
+  \det\bigg[-\frac{\delta G}{\delta f}\bigg]\delta[G(a,f)-\omega]
+\end{equation}
+There are two factors of unity in this expression.  First, the $\delta$-function and functional
+ determinant restrict the integrals to fields with $G(a)=\omega$, while giving each of them equal weight.
+Second, there is a Gaussian integral over $\omega$, which is constructed to put the gauge-fixing 
+terms in the action in the exponential.
+
+If we use a generalized Lorentz gauge 
+\begin{equation}
+  G[\tilde{A}^0,\tilde{A}^j] = i\omega \tilde{A}^0 + \partial_j \tilde{A}^j,
+\end{equation}
+then under the gauge transformation
+\begin{equation}
+  (\tilde{A}^0,A^j)\rightarrow  (\tilde{A}^0,A^j) + (i\omega,\partial^j)f,
+\end{equation}
+we can find the functional derivative, 
+\begin{equation}
+  \frac{\delta G}{\delta f} = \frac{G[A^0+i\omega f,A^j+\partial^jf]  -[A^0,A^j]}{f}
+  = (-\omega^2 +\partial_j^2)
+\end{equation}
+Note that framed in these variables the are no boundary terms at discontinuities.  
+This functional determinant is constant, and does not depend on the geometry at all.  
+
+The gauge-fixed Lagrangian is given by
+\begin{equation}
+  \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu}
+  -(1-\alpha^{-1}_{FP})\alpha_\mu\alpha_\nu]\tilde{A}^\nu
+=\tilde{\vect{A}}^{*}[\mathfrak{D}_1-\mathfrak{D}_2]\tilde{\vect{A}},
+\end{equation}
+where $\alpha_{FP}=1$ corresponds to so-called Feynman gauge, and $\alpha_{FP}=\infty$ is Landau gauge.
+
+The claim is that the partition function is given by 
+\begin{equation}
+  Z_{EM} = \int [D\tilde{A}]_C e^{-\frac{\beta}{2}\int d\vect{x} \mathcal{L}},
+\end{equation}
+where $[D\tilde{A}]_C$ integrates over all field conditions that satisfy the boundary conditions.
+The boundary conditions will be explicitly enforced via functional delta-functions.  
+
+\subsubsection{EM Boundary Conditions}
+
+Recall that Maxwell's equations in media are:
+\begin{align}
+  \nabla\cdot\vect{D} =\rho  &\qquad  \nabla\times \vect{E} =-\partial_t \vect{B}\\
+ \nabla\cdot\vect{B}=0&\qquad   \nabla\times\vect{H} = -\partial_t \vect{D} +\vect{j} 
+\end{align}
+In the absence of any free charges or currents, the electromagnetic boundary conditions are given by 
+\begin{gather}
+  \vect{E}^\|_1 =\vect{E}^\|_2 \qquad  \vect{H}^\|_1 =\vect{H}^\|_2 \\
+  B_1^\perp = B_2^\perp\qquad   D_1^\perp = D_2^\perp,
+\end{gather}
+where the $1,2$ subscripts denote the media the fields are evaluated in.  
+These boundary conditions can be enforced by introducing functional $\delta$-functions,
+% We can enforce boundary conditions in path integrals via functional delta functions using
+% the Fourier representation of the delta function 
+% (Cites Bordag, and Kardar and Li)
+\begin{equation}
+  \delta(\vect{E}^\|_1-\vect{E}^\|_2) = \int D\vect{K} e^{i\int_{\partial \mathcal{O}} d^3\vect{x}\,
+    \vect{K}\cdot(\vect{E}^\|_1-\vect{E}^\|_2)},
+\end{equation}
+where the integral takes place over the interface/boundary of the object~\cite{Bordag1985, Li1992}.
+There is a similar expression for the magnetic fields $\vect{H}$, with $\vect{N}$ as the multiplier.  
+These Lagrange multiplier fields correspond to the fluctuating surface currents, as they 
+are just the currents one must have to enforce the boundary conditions.  
+
+The boundary conditions can be recast in terms of the gauge fields by introducing an appropriate
+derivative operators $L^{E,r}$ and $L^{M,r}$.  These operators represent the usual 
+relations between the physical fields $\vect{E},\vect{H}$ and the gauge potentials.  
+
+In piece-wise constant media the operators are given by
+\begin{equation}
+  E_j:=L^{E,r}_{j\mu}\tilde{A}^\mu = -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_j \tilde{A}^0+i\xi A^j
+  H_j:=L^{M,r}_{j\mu}\tilde{A}^\mu = \frac{1}{\mu^r}\epsilon_{jkl}\partial_k A^l
+\end{equation}
+In matrix form
+\begin{gather}
+  L^{E,r} = \left( \begin{array}{cccc} 
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_x & i\xi & 0 & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_y & 0 &i\xi & 0\\
+      -\frac{1}{\sqrt{\epsilon^r\mu^r}}\partial_z & 0 & 0 & i\xi
+    \end{array}
+  \right)\\
+  L^{M,r} = \frac{1}{\mu_r}\left( \begin{array}{cccc} 
+      0 & 0 & -\partial_z & \partial_y\\
+      0 & \partial_z & 0 & -\partial_x\\
+      0 & -\partial_y & \partial_x & 0
+    \end{array}
+  \right)
+  \end{gather}
+Note that the piece-wise continuous media assumption lets you commute derivatives and 
+material functions with impunity. 
+
+\subsubsection{Integrating out the photon field}
+
+The constrained path integral is meant to only include fields which satisfy the boundary conditions.
+This restriction is carried out by inserting the functional delta functions.  The
+ resulting path integral over the potential $A^\mu$ is then Gaussian, the integral can be formally carried 
+out readily.  This will leave us with a picture of interacting surface currents.  
+\begin{align}
+  Z_{TE} &= \int D\tilde{A}^\mu \prod_rD\vect{K}_rD\vect{N}_r\exp\bigg\{-\frac{\beta}{2}\int d^3\vect{x}\,
+    \tilde{\vect{A}}^{*} [\mathfrak{D}_1 -\mathfrak{D}_2]\tilde{\vect{A}}\nonumber\\
+    &\hspace{1cm}  +i\sum_{r} \int_{\partial\mathcal{O}_r}d\vect{x}\,\vect{K}\cdot(
+    \vect{L}^{E,r}\tilde{\vect{A}}^{r}-\vect{L}^{E,e}\tilde{\vect{A}}^e)\nonumber\\
+    &\hspace{1cm}  +i\sum_{r} \int_{\partial\mathcal{O}_r}d\vect{x}\,\vect{N}\cdot(
+    \vect{L}^{M,r}\tilde{\vect{A}}^{r}-\vect{L}^{M,e}\tilde{\vect{A}}^e)\bigg\}
+\end{align}
+where we use $r$ to denote the body at position $\vect{x}$, and $e$ to denote the exterior.
+Note that both the operators, and fields depend on material constants, resulting in a somewhat
+overburdened notation.  We have introduced bold-face to denote both vectors and matrices.
+
+We are then free to evaluate the Gaussian integral over $\vect{A}$ in each region, using
+\begin{equation}
+  \int D\phi e^{-\frac{\beta}{2}\int d^3\vect{x}\, [\phi^i \mathcal{L}_{ij}\phi^j +i+\psi^k\phi_k]}
+= e^{-\frac{1}{2\beta}\int d^3\vect{x}\,\psi^k G_{km} \psi^m},
+\end{equation}
+where $\mathcal{L}_{ij}G^{jm} = \delta_{i}^m$, and $G$ is the Green function corresponding to $L$.
+The partition function can be slightly re-arranged to a more suitable form,
+\begin{align}
+  Z_{TE} &= \int D\tilde{A}^\mu \prod_rD\vect{K}_rD\vect{N}_re^{-S_{A,e}-\sum_rS_{A,r}+i\sum_rC_r-iC_e}
+\end{align}
+where 
+\begin{align}
+  S_{A,e}&=\frac{\beta}{2}\int_e d^3\vect{x}\,  \tilde{\vect{A}}^{e,*} \mathfrak{D}^e\tilde{\vect{A}}^e \\
+ S_{A,r}&=\frac{\beta}{2}\int_r d^3\vect{x}\, \tilde{\vect{A}}^{r,*} \mathfrak{D}^r\tilde{\vect{A}}^r\\
+ C_r &=\int_{\partial\mathcal{O}_r}d\vect{x}\,
+ (\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r})\cdot\tilde{\vect{A}}^r\\
+ C_e&=\sum_{r}\int_{\partial\mathcal{O}_r}d\vect{x}\,
+ (\vect{K}^r\cdot\vect{L}^{E,e} + \vect{N}^r\cdot\vect{L}^{M,e})\cdot\tilde{\vect{A}}^e
+\end{align}
+At this point, the integral over fields internal to the bodies $\tilde{\vect{A}}^r$, and fields 
+external to all bodies, $\tilde{\vect{A}}^e$ is carried out.  The internal integral couples the currents
+on the same body to one another, while the external integral couples currents on different bodies together.
+The resulting path integral is
+\begin{align}
+  Z_{TE} &= \int \prod_rD\vect{K}_rD\vect{N}_re^{-S_e[\vect{K}_r,\vect{N}_r] - S_r[\vect{K}_r,\vect{N}_r] }
+\end{align}
+where the external and internal effective actions are given by 
+\begin{align}
+  S_e&:=\frac{1}{2\beta}\sum_{r,r'}
+  \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\, 
+  (\vect{K}^r\cdot\vect{L}^{E,e} + \vect{N}^r\cdot\vect{L}^{M,e})(x)\cdot\vect{G}^e\cdot
+  (\vect{K}^{r'}\cdot\vect{L}^{E,e} + \vect{N}^{r'}\cdot\vect{L}^{M,e})(x')\\
+  S_r&:= \frac{1}{2\beta}\sum_{r}\int_{\partial\mathcal{O}_r}d\vect{x}\int_{\partial\mathcal{O}_r}d\vect{x'}\,
+    [\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r}](x)\cdot
+    \vect{G}^r\cdot[\vect{K}^r\cdot\vect{L}^{E,r} + \vect{N}^r\cdot\vect{L}^{M,r}](x')\bigg\}.
+\end{align}
+Note that the $S_r$ correspond to body self-energies, as do terms with $r=r'$ from $S_e$.
+(Note you don't carry out renormalization yet - this is added to interaction terms.  WHen we compute
+the determinant these do not cleanly decouple, thus you can't just throw this away.)
+
+% Both of these correspond to photon exchange from patches on the same body.  
+% These terms renormalize out if we consider energy differences between configurations where the 
+% bodies are removed to spatial infinity.  These terms are independent of all other positioning
+% of the bodies, and amount to additive constants to the action.  In the partition function
+% they are multiplicative constants, $Z_{TE,r}$, where we can also use
+% $ Z_{TE,\infty} = \prod_r Z_{TE,r}$, since there are no interactions between the bodies in this limit.
+Focusing on the interaction terms, the effective interaction integrand of the path integral 
+can be written as 
+\begin{align}
+  S_{e}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r\ne r'}
+  \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\, 
+\left(\hspace{-0.1cm} \begin{array}{cc} 
+    \vect{K}^r(x) &   \vect{N}^r(x)
+  \end{array}
+\hspace{-0.1cm}
+\right)
+\left(\begin{array}{cc} 
+    \vect{L}^{E,e}\vect{G}\vect{L}^{E,e} &\vect{L}^{E,e}\vect{G}\vect{L}^{M,e}\\
+    \vect{L}^{M,e}\vect{G}\vect{L}^{E,e} &\vect{L}^{M,e}\vect{G}\vect{L}^{M,e}\\
+  \end{array}
+  \right)
+\left(\hspace{-0.1cm} \begin{array}{c} 
+    \vect{K}^{r'}(x') \\   \vect{N}^{r'}(x')
+  \end{array}
+\hspace{-0.1cm}
+\right)
+\end{align}
+The corresponding interior term is replaces $L$ and $G$ with their interior equivalents.  
+
+It turns out that the combined matrices $L^P G L^Q$ correspond exactly to the usual homogenous Green function
+dyadics, $\Gamma^{PQ}$ for $P, Q\in\{E,M\}$.  In addition, the gauge-pieces do not contribute at all.  
+
+First, we need the Green function $\mathbf{G}$ corresponding to $\mathcal{D} =\mathcal{D}_1-\mathcal{D}_2$.
+Fortunately, give the projector structure this is easy to derive.  Recall that
+\begin{align}
+  \mathfrak{D} = \alpha^2[P_T +\alpha^{-1}_{FP}P_L]
+\end{align}
+where $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$, and we introduced
+the projection operators which the following properties
+\begin{gather}
+  P_L+P_T = I\\
+  P_L = \frac{\alpha^\mu\alpha^\nu}{\alpha^2}\\
+  P_T = \delta_{\mu\nu}-\frac{\alpha^\mu\alpha^\nu}{\alpha^2}.
+\end{gather}
+(Reid points out that manipulating these things is actually easiest in momentum space.  We can use
+\begin{equation}
+  \int d\vect{x} F(\vect{x})D(\partial_i)G(\vect{x}) = \int \frac{d\vect{q}}{(2\pi)^d}
+  F(\vect{q})D(i q_j)G(-\vect{q}).
+\end{equation}
+Then we can find the Fourier-space green function using 
+$\alpha(q) = i(\sqrt{\epsilon}\xi,\frac{\vect{q}}{\sqrt{\mu}})$
+\begin{align}
+  I &=\mathfrak{D}G \\
+  &=\alpha^2[P_T -\alpha^{-1}_{FP}P_L](a G_T+bG_L)\\
+  \rightarrow \vect{G}& = \frac{1}{\alpha^2}(P_T - \alpha_{FP}P_L)
+   = -\frac{\mu_r}{\kappa^2+\vect{q}^2}[\delta^{\mu\nu}
+  + \frac{\mu_r(1-\alpha_{FP})}{\kappa^2+\vect{q}^2}\alpha^\mu\alpha^\nu],
+\end{align}
+where we used $\alpha^2 = -\epsilon_r\mu_r\xi^2-\vect{q}^2$,  and defined 
+$\kappa = \sqrt{\epsilon\mu}\xi$.
+None of the longitudinal components of $\alpha^\mu\alpha^\nu$ contribute to the path 
+integral, since under the appropriate differentiation, they all vanish.  

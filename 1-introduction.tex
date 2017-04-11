@@ -177,7 +177,7 @@ to the atoms possessing a finite size and to experiencing interatomic forces~\ci
 Lodon descrbied these interatomic forces in terms of fluctuating, induced dipoles using quantum mechanical perturbation
  theory~\cite{London1930}.  This work leads to an interatomic potential with a characteristic $d^{-6}$ scaling.
 While this scaling is similar to the other possible dipole-dipole interactions, these dispersion forces are often the dominant contribution
-to intermolecular forces~\cite{Israelchivili2011}.
+to intermolecular forces~\cite{Israelachvili2011}.
 
 London's perturbation theory assumes that the dipole interact with another instantaneuously, which
 ignores the finite speed of light.  Casimir and Polder extended this calculation to quantum elecrodynamics,
@@ -192,7 +192,7 @@ stands in constrast to the van der Waals/London forces determined by pair-wise i
 
 This was followed by later work by Lifshitz and co-workers on the Casimir effect between dielectric bodies~\cite{Lifshitz1956}.
 This is particularly relevant since some of their later work showed that the Casimir effect can be derived 
-from the pair-wise van der Waals interactions of all of the constituent parts~\cite{Dzyaloshinski1961}.  
+from the pair-wise van der Waals interactions of all of the constituent parts~\cite{Dzyaloshinskii1961}.  
 
 Given that background, we will typically refer to the Casimir effect as the umbrella term for all of these
 vacuum fluctuation forces.  Near-field forces where the interactions can be considered as instantaneous
@@ -472,7 +472,7 @@ the energy difference between two different configurations.
 In this case, the energy is renormalized by subtracting the energy when the bodies are removed to spatial infinity.  
 The renormalized energy between the plates is
 \begin{equation}
-  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
+  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},\label{eq:Casimir_energy}
 \end{equation}
 where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
 and $d$ is the distance between the plates.  % Note that in this expression there is no
@@ -576,15 +576,17 @@ and
 \begin{equation}
   \kappa_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}.
 \end{equation}
-following Zhou~\cite{Zhou1995}.  The variables have been adjusted to agree with Lifshitz original calculation,
-by defining 
+following Zhou~\cite{Zhou1995}.
+  The variables have been adjusted to agree with Lifshitz original calculation, by defining 
 \begin{align}
   k_T &= \sqrt{\epsilon_3}\frac{s}{c}\sqrt{(p^2-1)}.
 \end{align}
-
 In general, this integral form is the simplest expression for the Casimir energy between dielectrics. 
-The perfect-conductor Casimir (\ref{eq:Casimir_energy})can be found by taking the strong-coupling limit, $r^{(\zeta)}_i\rightarrow 1$
-, and evaluating the integrals.  
+As intimidating as this expression may be, it is a necessary touchstone for later comparison, and it allows 
+us to examine the different scaling regimes at different distances.  
+The perfect-conductor Casimir (\ref{eq:Casimir_energy})can be found by taking the strong-coupling limit,
+ $r^{(\zeta)}_i\rightarrow 1$ , and evaluating the integrals.  
+
 
 % This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
@@ -599,17 +601,15 @@ since due to the Kramers-Kr\"onig relations, the presence of dispersion implies 
 % The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
 % and integrate out the reservoir.  
 However, it has been phenomenologically observed that one gets the correct answers by a direct substitution
-$\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated in~
+$\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated more carefullyin~
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
 
 % It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
 % since for causal functions (such as an atom's or dielectric's response to the electromagnetic field), 
 % the response is analytic on the imaginary axis.    %\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
-This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
-integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
-
-
+% This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
+% integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
 
 \subsection{Physical Interpretation}
 
@@ -858,7 +858,7 @@ patch potentials, and surface roughness.  The patch potentials are localized sur
 charge distributions, which due to the longer range Coulomb interaction swamp the weaker
 Casimir force.  Surface roughness reflects the fact the surfaces are not perfectly smooth,
 and as such the exact distance between bodies is not clear.  While the roughness can be taken into
-account in making theoretical predictions, the surface must also be carefully characterized~\cite{vanZwol}.
+account in making theoretical predictions, the surface must also be carefully characterized~\cite{vanZwol2011}.
   Reviews of these and other 
 difficulties are available~(for example, \cite{Dalvit2011}).
 
@@ -1927,10 +1927,10 @@ results and examine both an approximate method coupling the two polarizations to
 as the fully coupled path integral method.  % (We will test this for a mixed geometry for which
 % there are other tested methods to compare the worldline method against. 
 
-In Ch.~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
-of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
-to account for variable measurement strength, and how to reconstruct the atomic trajectory
-given the output of a realistic camera.  
+% In Ch.~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
+% of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
+% to account for variable measurement strength, and how to reconstruct the atomic trajectory
+% given the output of a realistic camera.  
 Finally, we will summarize our findings in the conclusion.  
 
 % \begin{enumerate}

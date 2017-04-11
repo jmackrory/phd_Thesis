@@ -72,7 +72,6 @@
 % which can interact with other particles, but are not directly observable).
 % Since the electromagnetic field is quantized, 
 
-
 The Casimir effect is one of the more surprising consequences of quantum electrodynamics (QED), the quantum theory
 describing the interaction of electrons and photons\footnote{
 Rejected opening lines: \\
@@ -87,7 +86,7 @@ According to QED a pair of  electrically neutral, conducting bodies will be attr
 with the quantized electromagnetic field, even if the electromagnetic field is in it's vacuum state~\cite{Casimir1948}.  
 In brief, the total energy of the fields is decreased if the bodies are brought closer together 
 since the presence of the conducting bodies restricts the allowed modes of the electromagnetic field,
-and since in QED each mode carries a certain amount of energy (even in the vacuum).
+and each mode carries a energy proportional to its frequency (even in the ground state).
 
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the electromagnetic Casimir effect is the most important example.  
@@ -121,39 +120,35 @@ close the atoms can be brought to the surface, and as a result must be considere
 of these devices.
 
 The advent of these experiments in complicated arrangements of bodies, has spurred the development
-of a number of theoretical and computational methods for computing Casimir~\cite{Dalvit2011,Bordag2009}. 
+of a number of theoretical and computational methods for computing Casimir effects~\cite{Dalvit2011,Bordag2009}. 
 To model these experiments, it is necessary to be able to compute the Casimir effect between arbitrarily shaped bodies, with 
 realistic material properties --- this in general necessitates a numerical approach~\cite{Johnson2011}.
 The most important of these modern methods are the so-called ``scattering method''~\cite{Lambrecht2006,Rahi2009,Reid2009}
- and ``worldline methods''~\cite{Gies2003}.
-
-To date, the scattering method is the only general purpose numerical method available for computing
+ and ``worldline methods''~\cite{Gies2003}.  To date, the scattering method is the only general purpose numerical method available for computing
 Casimir forces in arbitrary arrangements of bodies~\cite{Reid2009,Reid2011,Reid2013}.  
 In this method, one considers fluctuating currents confined to the surfaces of the interacting bodies,
-where the currents at each patch of surface interact with one another via the appropriate EM Green functions,
-which can be thought of as photons.  One finds the Casimir energy by taking the determinant 
-of the (large) scattering matrix for all of these patches~\cite{Reid2011}.  
-
-The worldline method is a promising alternative method for computing Casimir energies~\cite{Gies2003}.  
-The worldline method computes the Casimir energy by considering an ensemble of closed 
+where the currents at each patch of surface interact with one another via emitting and reabsorbing photons.
+ One finds the Casimir energy by taking the determinant of the (large) scattering matrix for all of these patches~\cite{Reid2011}.  
+The worldline method is another promising method for calculating Casimir energies~\cite{Gies2003},
+which computes the Casimir energy by considering an ensemble of closed 
 Brownian paths propagating through space.  The presence of bodies is encoded in a potential which is
-accumulated along the path based on whether the Brownian paths intersect any of the bodies.  One can
-intuitively consider these paths as being the space-time path of a virtual particle.  
+accumulated along the path based on whether the Brownian paths intersect any of the bodies.
+One can intuitively consider these paths as being the space-time path of a virtual particle.  
 The worldline method has only been developed for scalar fields interacting with idealized surfaces.
 In contrast to the scattering method, the worldline method is a Monte Carlo method which makes it 
 easy to parallelize.  
 
 It is the goal of this thesis to extend the worldline method to computing electromagnetic Casimir effects.
-This requires accounting for the vector nature of the EM field, and including realistic coupling to 
-material properties, while attempting to retain as many of its appealing
-properties as possible.    
+This requires accounting for the vector nature of the electromagnetic field, and including realistic coupling to 
+material properties, while attempting to retain as many of its appealing properties as possible.    
 
 The rest of this introduction will cover simple examples of Casimir effects, and expand on background material.
 In Sec.~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
-We will then briefly discuss relevant experiments in Sec.~\ref{sec:expt_review}, and expand on our discussion
-of the numerical methods in Sec.~\ref{sec:numerical_review}.  
+In Sec.~\ref{sec:expt_review} we will briefly survey recent experiments on the Casimir effect.
+In Sec.~\ref{sec:numerical_review} we will cover the most prominent numerical methods for computing the Casimir effect.
+In particular we will introduce the Feynman path integral, and discuss the scalar worldline method.  
 
 % At the outset, we note that there have been a number of books published on the subject of Casimir forces 
 % in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
@@ -179,9 +174,9 @@ of the numerical methods in Sec.~\ref{sec:numerical_review}.
 Casimir and van der Waals forces are intimately related, and describe the same basic quantum mechanical force. 
 Van der Waals forces were first discovered as deviations from ideal gas behaviour, which can be attributed 
 to the atoms possessing a finite size and to experiencing interatomic forces~\cite{vanderWaals,Parsegian2006}.
-These interatomic forces were described in terms fluctuating, induced dipoles using quantum mechanical perturbation
+Lodon descrbied these interatomic forces in terms of fluctuating, induced dipoles using quantum mechanical perturbation
  theory~\cite{London1930}.  This work leads to an interatomic potential with a characteristic $d^{-6}$ scaling.
-While this is similar to the other possible dipole-dipole interactions, these dispersion forces are often the dominant contribution
+While this scaling is similar to the other possible dipole-dipole interactions, these dispersion forces are often the dominant contribution
 to intermolecular forces~\cite{Israelchivili2011}.
 
 London's perturbation theory assumes that the dipole interact with another instantaneuously, which
@@ -189,8 +184,8 @@ ignores the finite speed of light.  Casimir and Polder extended this calculation
 where they accounted for the retardation due to the finite speed of light, 
 which causes the potential to decay more quickly at larger distances~\cite{CasimirPolder1948}.  
 
-Casimir then showed that neutral, conducting plates would be attracted together~\cite{Casimir1948}.  This arises 
-since the total energy in the quantized electromagnetic field is reduced due to the field's interaction
+Casimir then showed that neutral, conducting plates would be attracted together~\cite{Casimir1948}.
+This arises since the total energy in the quantized electromagnetic field is reduced due to the field's interaction
 with the conducting plates.  This calculation emphasizes the fluctuations in the fields, and 
 a global interaction due to the effective boundary conditions imposed by the plates.  This
 stands in constrast to the van der Waals/London forces determined by pair-wise interactions between induced dipoles.
@@ -211,17 +206,19 @@ As a result, we start our discussion with their work.
 
 \subsection{Casimir--Polder Forces}
 
-In 1948 Casimir and Polder extended this theory to using Quantum Electrodynamics
-(QED) to account for the retardation due to the finite speed of light~\cite{CasimirPolder1948}. 
+In 1948 Casimir and Polder computed the energy between atoms, and for atoms and conducting walls 
+using non-relativistic Quantum Electrodynamics (QED) to account for the retardation due to the finite speed of light~\cite{CasimirPolder1948}. 
 They found that in the far-field 
 (where the transition wavelengths $c/\omega_A$ exceed the separation of the atoms $d$, $d\gg c/\omega_A$)
-the interatomic potential decays more rapidly as $d^{-7}$.  The change in power law can be 
+the interatomic potential decays more rapidly as $d^{-7}$, instead of the typical $d^{-6}$ scaling for London forces.
+ The change in power law can be 
 attributed to the induced dipoles decorrelating over the time-of-flight of the virtual photon, 
-and thus having a weaker interaction.  
+and thus having a weaker interaction.
+  
 %\todo{Is this from Milonni?}
 Furthermore, they found an attractive force between an atom and perfectly conducting wall, with a $d^{-3}$ scaling
-in the near field (van der Waals) regime, passes over to $d^{-4}$ scaling in the far-field.
-In this case the atom can be thought of as interacting with it's image in the perfect conductor,   
+in the near field (van der Waals) regime, that passes over to $d^{-4}$ scaling in the far-field.
+In this case the atom can be thought of as interacting with its negative image in the perfect conductor,   
 which leads to an attractive potential for the atom,
 \begin{equation}
   V_{CP}(d) =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
@@ -233,28 +230,36 @@ atom-wall type forces as Casimir-Polder forces.
 \subsubsection{Derivation of the Atom-Perfect Conductor potential}
 \label{sec:CP_calc}
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
-in the coupling of the atom to the electromagnetic field.  
+in the coupling of the atom to the electromagnetic field.  We will consider the attraction between
+an atom and a perfectly conducting wall.  
 (This derivation is adapted from Ch.~13 and \S14.3 of Steck~\cite{SteckNotes}.)
 The Hamiltonian for the whole atom-field system is given by 
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
 \end{equation}
-where 
+where we have split the energy into energy for atom, the electromagnetic field, and a term describing their
+interaction.  
+The atomic Hamiltonian is 
 \begin{gather}
-  H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j  \\
-  H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right)\\
-  H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
-  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
-  \vect{d}_j[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
+  H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j 
 \end{gather}
-The atomic Hamiltonian $H_{\text{atom}}$ is split into a center-of-mass piece, and the internal degrees of freedom,
-described by the atom's quantized energy levels with energy $E_j=\hbar\omega_j$, 
+where the first term is the kinetic energy, and the second term gives the atom's internal 
+electronic energy; the atom's quantized energy levels are given by $E_j=\hbar\omega_j$, 
 and $\sigma_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's internal state.  
-The field Hamiltonian sums up the energy for each mode of the electromagnetic field and 
-includes the zero-point energy, $\sum_k\hbar\omega_k/2$.
-For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
+The field Hamiltonian 
+\begin{equation}
+  H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right),
+\end{equation}
+sums up the energy for each mode of the electromagnetic field, where modes vary by wavenumber and polarization.
+This field energy also includes the zero-point energy, $\sum_k\hbar\omega_k/2$, which will be important 
+in the Casimir effect proper.  For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
 considering the energy differences when the atom is moved to spatial infinity.  
-The interaction Hamiltonian couples the internal state of the atom to the quantized light field,
+Finally, the interaction Hamiltonian couples the internal state of the atom to the quantized light field,
+\begin{equation}
+H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
+  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
+  \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
+\end{equation}
 where $a\subkz$ is the annihilation operator for mode with wavenumber $k$, and polarization $\zeta$,
 which has spatial mode function $\vect{f}\subkz(\hat{x}).$
 In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
@@ -289,9 +294,8 @@ The shift $V\subCP$ can be understood as two virtual transitions --- one from th
 and then a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
-is a ``virtual'' one, since these intermediate states are not directly physically observable on a detector
-%, % but rather reflect the apparatus of quantum mechanical perturbation theory
-.
+is a ``virtual'' one, since these intermediate transitions violate energy conservation, and these 
+intermediate states are not directly physically observable on a detector.
 \begin{figure}
   \centering
 \begin{fmffile}{atom-loop}
@@ -316,6 +320,7 @@ is a ``virtual'' one, since these intermediate states are not directly physicall
 }
 \label{fig:feynman_CP}
 \end{figure}
+
 After substituting in $H_{\text{int}}$, the Casimir--Polder energy can be written as
 \begin{align}
   V\subCP(\vect{r}) 
@@ -345,22 +350,21 @@ with $n_i$ integers~(\S 8.4.1 of Steck~\cite{SteckNotes}).
 %   &+(\hat{\varepsilon}\subkz\cdot\hat{y})^2\sin^2(k_xx)\cos^2(k_y y)\sin^2(k_zz)\nonumber\\
 %   &+(\hat{\varepsilon}\subkz\cdot\hat{z})^2\sin^2(k_xx)\sin^2(k_y y)\cos^2(k_zz)\bigg].
 % \end{align}
-If the atom is close to the $z=0$ plane, but very far from the other walls, the $x,y$ sinusoids
+The square-modulus $|\vect{f}\subkz(\vect{r})|^2$ can be simplified under a couple limits.  
+If the atom is close to the $z=0$ plane, but very far from the other walls, the squared-sinusoids in $x$ and $y$
 can be replaced by their average value of a half, since they will be quickly oscillating.   
 In addition, the polarization vectors form a resolution of the transverse identity (since Gauss's law 
 implies that the electric field is transverse, $\nabla\cdot\vect{E}=0$),
 \begin{equation}
   \sum_{\zeta} \hat{\varepsilon}\subkz^{i}\hat{\varepsilon}\subkz^{j} = \delta_{ij}-\frac{k_ik_j}{k^2}.
 \end{equation}
-
-The Casimir--Polder potential can now be factored into atomic and field pieces~\cite{McLachlan1963}.
-The first is the polarizability for the atom in its ground state is
+%The Casimir--Polder potential can now be factored into atomic and field pieces~\cite{McLachlan1963}.
+The sum over dipole matrix elements can also be rewritten in terms of the atom's ground-state polarizability,  
+%The first is the polarizability for the atom in its ground state is
 \begin{equation}
   \alpha_{ij}(\omega) = \sum_n 
-  \frac{2\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\hbar(\omega_{n0}^2-\omega^2)},
+  \frac{2\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\hbar(\omega_{n0}^2-\omega^2)}.
 \end{equation}
-is the susceptibility of the atom to perturbations in the electric field.
-
 If we assume the atom's distance from the surface $d$ is larger than the atom's dominant emission wavelength,
 then the dominant contribution to the sum will come from frequencies for which $\omega_kd/c\sim 1$.
 $\omega_k\ll \omega_{n0}$.  
@@ -371,10 +375,8 @@ The atomic polarizability can be replaced by the atom's static (zero frequency) 
 \end{equation}
 In this far-field limit, the Casimir--Polder energy can be approximated as 
 \begin{equation}
-  V_{CP}(\vect{r})= -\frac{\hbar}{4\epsilon_0}\alpha_0\sum_{\vect{k},\zeta}\omega_k |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2
+  V_{CP}(\vect{r})= -\frac{\hbar}{4\epsilon_0}\alpha_0\sum_{\vect{k},\zeta}\omega_k |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2.
 \end{equation}
-
-
 With these simplifications, and taking the limit of a large box to convert the sum over wavevectors into an
 integral, the Casimir--Polder potential is given by 
 \begin{align}
@@ -386,7 +388,8 @@ integral, the Casimir--Polder potential is given by
 where we have rewritten the sinusoids using double-angle formulae.  The $z$-independent parts
 lead to a constant, divergent contribution to the energy.  
 In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
-off this constant energy.  This corresponds to considering the energy change as the atom is brought
+off this constant energy.  
+This corresponds to considering the energy change as the atom is brought
 close to the surface from spatial infinity.  
 Throughout this thesis, this simple energy subtraction is the only renormalization we will need. 
 
@@ -660,10 +663,15 @@ between charged particles which decays $d^{-1}$.
 This becomes more of an issue for experiments attempting to isolate the Casimir effect from stray
 fields.  A similar comparison is the interaction between molecular dipoles.  
 
-
 \subsubsection{Energy Scales}
-We will compare the size of the Casimir force to typical Coulomb energies.  While 
-the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
+
+On this short scale, the dominant backgrounds are electrostatic effects arising from stray charges,
+or static potentials.
+We will compare the size of the Casimir force to typical Coulomb energies that arise in experiments.
+We will also compare the Casimir--Polder energy to the typical trapping potentials used to trap atoms.
+  
+
+While the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
 However, most bodies are electrically neutral and thus have no long-ranged Coulomb potential, whereas
 the Casimir effect applies even if the bodies have no net charge.  
 
@@ -672,7 +680,7 @@ For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The stati
 is then $\alpha/sim \sum_jd_j^2/(\hbar\omega_j)$.
 The Casimir-Polder energy in the far-field is then
 \begin{align}
-  V_{CP} &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
+  V\subCP &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
 %  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
 %  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
 %  &= -\frac{10^{-31}}{10^{-19}} eV\\
@@ -682,32 +690,46 @@ which corresponds to a frequency shift on the order of $10$kHz for a generic ato
 In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
 with its image dipole.
 
-\todo{Compare to adatom force for adsorbed atomic dipole polarizing another atom.
-Note: real atomic dipole inducing another one.  Casimir--Polder is atom interacting with it's own 
-fluctuating dipole image.}
+As comparison, a typical trapping potential using far detuned lasers is 
 
-\todo{Patch potentials due to variations in work function of metal (different crystalline axes have different work functions),
-leads to localized distributions of charge.  Get $1/r$ sort of force background.  Longer-ranged
-than Casimir force. }
+% As an example, atoms near a conducting surface can adsorb onto the surface, and form ionic bonds with a large dipole 
+% moment.  This permanent dipole polarizes the atom, leading to an atttractive potential~\cite{McGuirk2004}.  
+% The resulting potential can be written in terms of the atomic polarizability $\alpha$,
+% \begin{equation}
+%   V_{\text{ad}}(\vect{r}) = -\frac{\alpha_0}{2}|\vect{E}(\vect{r})|^2,
+% \end{equation}
+% where $\vect{E}$ is the field from the adatom dipole.  
+% The electric field for a dipole at the origin of dipole moment $\vect{d}$ is 
+% \begin{equation}
+%   \vect{E}(\vect{r})=\frac{1}{4\pi\epsilon_0|\vect{r}|^3}[3(\vect{d}\cdot \hat{r})\hat{r}-\vect{d}]. 
+% \end{equation}
+% The square of the electric field is 
+% \begin{equation}
+%   |\vect{E}(\vect{r})|^2% =\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}
+%   % [9(\vect{p}\cdot \hat{r})^2-6(\vect{p}\cdot\hat{r})^2+\vect{p}^2]
+% =\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}  [3(\vect{d}\cdot \hat{r})^2+\vect{d}^2]
+% \end{equation}
+% So for order of magnitude estimates, the interaction potential is approximately
+% \begin{equation}
+%   V_{\text{ad}}(\vect{r}) \sim -\frac{\alpha_0}{2}\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}\vect{d}^2
+% \end{equation}
 
-%\todo{Adsorbates on surfaces?  Patch potentials?}
+For macroscopic bodies we can compare the Casimir energy for perfect 
+metal conductors at a distance $d$ to the energy stored in the capacitance.
+The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
+This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
+For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
+between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
+vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
+The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu m$
+this corresponds to a voltage of $17 mV$.  
+Given that some experiments detect the Casimir force by balancing voltages, it is  quite important
+to avoid even small voltages.  For conducting bodies, such potentials can emerge from variations in the work function
+of the metal~\cite{Lamoreaux2011}.   If the Fermi surface dips below the surface of the metal, a localized electric
+charge can build up.  This is one of the dominant backgrounds in Casimir experiments, and must be either avoided
+or subtracted off to extract the Casimir energy.    
 
-% For macroscopic bodies we can compare the Casimir energy for perfect 
-% metal conductors at a distance $d$ to the energy stored in the capacitance.
-% The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
-% This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
-% For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
-% between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
-% vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
-% The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu m$
-% this corresponds to a voltage of $17 mV$.  
-% Given that some experiments detect the Casimir force by balancing voltages, it is  quite important
-% to avoid even small voltages.  For conducting bodies there tend to be small fixed random distributions 
-% of localized electrical charge on the surface known as patch potentials.  For Casimir experiments, the patch potentials 
-% act as a long-ranged background that must be accounted for and subtracted away to extract
-% the more interesting Casimir energy.  
-
-\subsubsection{Distance Regimes}
+\subsection{Different Distance Scaling Regimes}
 
 The Casimir energy for bodies separated by a distance $d$, can be written as a power law
 in certain limits.
@@ -718,12 +740,12 @@ while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.
 
 The Casimir effect is important at distances around the resonant wavelengths of the atom or medium,
  which are typically on the order of $1\mu$m for optical transitions.  
-The Casimir effect is typically computed in a long-wavelength limit where the bodies can be treated 
-as distinct from one another.
+The Casimir effect is typically computed in a long-wavelength limit where the constituents of the bodies can be treated 
+as a continuum.
 This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
-This approximation starts to break down for distances on the scale of the separation of the constituent atoms,
+This approximation starts to break down when the distances between bodies approach the separation of the constituent atoms.
 which is around $1\AA$, where exchange effects and other quantum interactions become important.
-At the other limit, for distances beyond $10 \mu$m, the Casimir effect becomes too weak to detect.  
+At the other limit, for distances beyond $100 \mu$m, the Casimir effect becomes too weak to detect.  
 
 The typical distance scales can be estimated by considering the dominant 
 resonances of the medium, and the thermal wavelength.
@@ -750,13 +772,15 @@ resonances of the medium, and the thermal wavelength.
 
  Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
  thermal field contribute significantly.  In this regime the field decay is typically slower as $E\sim d^{-3}$,
- the same as the near-field van der Waals regime.  
+ the same as the near-field van der Waals regime.  At room temperature, the thermal wavelength is
+$\lambda_T=2\pi\hbar c/(\kB T)~50\mu m$.
 
 \section{Summary of Casimir Experiments}
 \label{sec:expt_review}
 The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
 Beyond its interest as a fundamental quantum effect, the Casimir force is also important 
-in designing novel physical devices for both atoms.
+in designing novel physical devices for both atoms.  This section provides a brief overview 
+of the board catergories of experiments where the Casimir effect is relevant.  
 
 %Lamoreaux
 \subsection{Casimir}
@@ -859,7 +883,7 @@ The desire to get strong-coupling between the atom and light fields, addressable
 architecture has pushed groups towards developing atomic traps that capture atoms close to dielectric surfaces.  
 In this limit, the Casimir--Polder force is the dominant force, which can only be partially mitigated
 by using laser fields to generate repulsive potentials.
-  In designing these new devices it is essential to compute and account for the Casimir-Polder force
+In designing these new devices it is essential to compute and account for the Casimir-Polder force
 the atom's experience when brought close to the dielectric surface.  
 
     One direction that has been pursued is the so-called atom-chip~\cite{Folman2000,Schneider2003},
@@ -968,7 +992,6 @@ For example, the Casimir effect is repulsive in certain regimes for an elongated
 %   Use Casimir shield with fairly thick gold to have same Casimir force, and thne vary the medium behind it.
 %   Longer range gravity should lead to 
 % Requires very careful measurements, on top of carefully extracting Casimir force.   
-
 
 %\end{enumerate}
 

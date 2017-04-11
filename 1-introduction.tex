@@ -242,6 +242,7 @@ interaction.
 The atomic Hamiltonian is 
 \begin{gather}
   H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j 
+  \label{eq:Hatom}
 \end{gather}
 where the first term is the kinetic energy, and the second term gives the atom's internal 
 electronic energy; the atom's quantized energy levels are given by $E_j=\hbar\omega_j$, 
@@ -249,6 +250,7 @@ and $\sigma_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's int
 The field Hamiltonian 
 \begin{equation}
   H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right),
+  \label{eq:Hfield}
 \end{equation}
 sums up the energy for each mode of the electromagnetic field, where modes vary by wavenumber and polarization.
 This field energy also includes the zero-point energy, $\sum_k\hbar\omega_k/2$, which will be important 
@@ -259,6 +261,7 @@ Finally, the interaction Hamiltonian couples the internal state of the atom to t
 H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
   \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
   \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
+  \label{eq:Hint}
 \end{equation}
 where $a\subkz$ is the annihilation operator for mode with wavenumber $k$, and polarization $\zeta$,
 which has spatial mode function $\vect{f}\subkz(\hat{x}).$
@@ -403,9 +406,9 @@ convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end o
   \cos^2\theta\cos(2kz\cos\theta) e^{-ka}\\
 &=-\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\frac{3}{2z^4}.
 \end{align}
-While we have emphasized the case of perfectly-conducting planar interfaces, similar computations
+While we have carried out the calculation for the case of perfectly-conducting planar interfaces, similar computations
 can be carried out for dielectric interfaces and more general shapes of macroscopic bodies.  
-In the case of an atom near a dielectric interface, the Casimir--Polder potential is 
+In the case of an atom near a planar, dielectric interface the Casimir--Polder potential is 
 \begin{equation}
   V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0z^4}\eta(\chi),
 \end{equation}
@@ -413,7 +416,6 @@ where $\chi$ is the static polarizability of the medium, and the efficiency fact
 as $\chi\rightarrow 0$, and unity as $\chi\rightarrow\infty$.  
 Note that this style of calculation relies on having analytical expressions available for the mode functions,
 which limits this approach to highly symmetric geometries.  
-\todo{Note change for dielectric: $0<\eta(\chi)<1$.}
 
 % The Casimir--Polder energy can be further factored in terms of atomic polarizabilities,
 % and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
@@ -458,14 +460,16 @@ electromagnetic (EM) field.
 The presence of the conductors forces the electric field to vanish on the surfaces,
 which restricts the allowed modes of the electromagnetic field, as illustrated in Fig.~\ref{fig:Casimir_sketch}.
 Each quantized mode of the electromagnetic field contributes
-to the energy, even in the ground state with zero photons.  Each mode contributes 
-$E_\alpha=\hbar\omega_\alpha/2$ , where $\hbar$ is Planck's  constant, and $\omega_\alpha$ is the frequency of the mode.
-The total energy is found by summing the mode for each energy --- the total energy is
-badly divergent since each term in the sum is positive.  However a finite answer can 
-be found by consider an energy \emph{difference} between two different configurations.  
-The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
-and will be essential in computations of Casimir quantities.  
-In this case, the energy when the bodies are removed to spatial infinity is subtracted.  
+to the energy, even in the ground state with zero photons.
+  The total ground state energy in the electromagnetic field is 
+\begin{equation}
+  E=\sum_\alpha\frac{\hbar\omega_{\alpha}}{2}
+\end{equation}
+While the total energy is badly divergent, a finite answer can be found by considering 
+the energy difference between two different configurations.  
+% The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
+% and will be essential in computations of Casimir quantities.  
+In this case, the energy is renormalized by subtracting the energy when the bodies are removed to spatial infinity.  
 The renormalized energy between the plates is
 \begin{equation}
   E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},
@@ -501,61 +505,86 @@ since this can naturally also compute the Casimir energy.
 %   \Delta = 1 - r_1r_2 e^{2ik d}.
 % \end{equation}
 
-It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
-since for causal functions (such as an atom's or dielectric's response to the electromagnetic field), 
-the response is analytic on the imaginary axis.    %\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
-This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
-integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
 
 \subsubsection{Derivation of Lifshitz Formula}
 
 The Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
-(Our treatment parallels \S 7.2 in Milonni~\cite{Milonni1994}, and Lambrecht\etal\cite{Lambrecht2011}.)
+(This derivation is taken from \S 7.2 in Milonni~\cite{Milonni1994}.
+A similar result emerges from the scattering approach as discussed by Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
 \begin{equation}
   E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
 \end{equation}
 where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
+In this case, the  non-zero contribution to the Casimir effect comes from surface plasmon modes, which propagate along the surfaces
+and decay exponentially away from the bodies.  
 The sum over frequencies can be recast as a contour integral over a function whose poles occur at the allowed
 frequencies, with residue $\omega_k$:  
 \begin{equation}
-  E = \frac{L^2}{(2\pi)^2}\int_0^\infty dk_T\,k_T\oint d\xi\, \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta(\xi)}\frac{d\Delta(\xi)}{d\xi},
+  E = \frac{L^2}{(2\pi)^2}\sum_{\zeta}\int_0^\infty dk_T\,k_T\oint d\xi\, 
+  \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta^{(\zeta)}(\xi)}\frac{d\Delta^{(\zeta)}(\xi)}{d\xi},
 \end{equation}
 where the function $\Delta'(\xi)/[2\pi i\Delta(\xi)]$ is designed to have unit residue at the zeroes of $\Delta(\xi)$, 
-and $k_T$ is the transverse wavenumber.  
+and $k_T$ is the transverse wavenumber.  The factor of $L^2$ is accounted for by considering the energy 
+per unit area.  
 The energy can be simplified by integrating by parts leading to 
 \begin{equation}
-  E = \frac{\hbar}{16\pi^3 i}\int dk_Tk_T\oint d\xi \, \ln\Delta(\xi).
+  \frac{E}{A} = \frac{\hbar}{16\pi^3 i}\sum_{\zeta}\int_0^\infty dk_Tk_T\oint d\xi \, \ln\Delta^{(\zeta)}(\xi).
 \end{equation}
 The most important modes are the surface modes, since these modes are sensitive to the position of the other body, where
-these modes exponentially decay between the bodies.    The allowed frequencies for these modes must 
-satisfy 
+these modes exponentially decay between the bodies.
+The allowed frequencies for these modes must satisfy 
 \begin{equation}
   r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}=1,
 \end{equation}
-where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$.
-This is suggestive of the requirement that accumulated round-trip phase (including reflections from both walls) is unity for
-allowed modes (this interpretation is bolstered by examining the Casimir force between mirrors~\cite{Genet2003}).
+where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$ and\
+the wavenumber is given by $k_z=\sqrt{k_T^2-\epsilon(\omega)\omega^2/c^2}$.  The reflection coefficients
+are given by 
+\begin{equation}
+  r^{(TE)}_{12} = \frac{k_{z,1}-k_{z,3}}{k_{z,1}+k_{z,3}} \qquad 
+  r^{(TM)}_{12} = \frac{\epsilon_3k_{z,1}-\epsilon_1k_{z,3}}{\epsilon_3k_{z,1}+\epsilon_1k_{z,3}}.
+\end{equation}
+The frequency condition is suggestive of the requirement that accumulated round-trip phase 
+(including reflections from both walls) is unity for
+allowed modes (this interpretation is bolstered by considering the Casimir force between mirrors~\cite{Genet2003}).
 This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $\xi$.  
 
-The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1,\epsilon_2$
+The complex contour integral can be split into two pieces: the integral over the right semi-cicrcle 
+is apparently independent of $d$, and can be ignored.  This leaves the integral along the imaginary 
+frequency axis, $\omega=is$.  
+It turns out Casimir effects are most naturally discussed along the imaginary frequency axis.  
+Due to the causal nature of the dielectric response functions, the dielectric function is a 
+smooth, real function on the imaginary axis.  This also means that the $z$-wavenumber is also real,
+with $k_z=\sqrt{k_T^2+\epsilon(is)s^2/c^2}$, 
+and the plane wave factors are real, decaying exponentials rather than oscillating functions.  
+Both of these features are extremely attractive for numerical methods, and so this is also
+often used in numerical methods~\cite{Johnson2011}.
+
+The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1, \epsilon_2$
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
 \begin{align}
-\frac{E}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty d\xi \xi^2 \epsilon_3
-\int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}p\xi d/c}\right]
+\frac{E}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty ds\, s^2 \epsilon_3
+\int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}ps d/c}\right],
 \end{align}
 where the electromagnetic reflection coefficients are given by 
 \begin{align}
-  r\supTE_{ij}  = \frac{s_i-s_j}{s_i+s_j},\quad
-  r\supTM_{ij}  = \frac{\epsilon_j s_i - \epsilon_i s_j}{\epsilon_j s_i + \epsilon_i s_j},
+  r\supTE_{ij}  = \frac{\kappa_i-\kappa_j}{\kappa_i+\kappa_j},\quad
+  r\supTM_{ij}  = \frac{\epsilon_j \kappa_i - \epsilon_i \kappa_j}{\epsilon_j \kappa_i + \epsilon_i \kappa_j},
 \end{align}
 and
 \begin{equation}
-  s_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}
+  \kappa_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}.
 \end{equation}
-following Zhou~\cite{Zhou1995}. The perfect-conductor Casimir can be found by taking $r^{(\zeta)}_i\rightarrow 1$,
-and evaluating the integrals.
+following Zhou~\cite{Zhou1995}.  The variables have been adjusted to agree with Lifshitz original calculation,
+by defining 
+\begin{align}
+  k_T &= \sqrt{\epsilon_3}\frac{s}{c}\sqrt{(p^2-1)}.
+\end{align}
+
+In general, this integral form is the simplest expression for the Casimir energy between dielectrics. 
+The perfect-conductor Casimir (\ref{eq:Casimir_energy})can be found by taking the strong-coupling limit, $r^{(\zeta)}_i\rightarrow 1$
+, and evaluating the integrals.  
 
 % This was further expanded on by Dzyaloshinskii~\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
@@ -567,12 +596,20 @@ $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is th
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
 Some care is required in quantizing the electromagnetic field within dielectric media,
 since due to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
-The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
-and integrate out the reservoir.  
+% The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
+% and integrate out the reservoir.  
 However, it has been phenomenologically observed that one gets the correct answers by a direct substitution
 $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated in~
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
+
+% It is often convenient for calculations to write the energy in terms of the imaginary frequency, $\omega = -is$,
+% since for causal functions (such as an atom's or dielectric's response to the electromagnetic field), 
+% the response is analytic on the imaginary axis.    %\todo{Cite Johnson for benefits?  Kramers-Kr\"onig relations.}
+This procedure avoids the poles along the real-frequency axis, and instead replaces oscillatory
+integrals with smoothly decaying real functions, that are much more amenable to numerical studies~\cite{Johnson2011}.
+
+
 
 \subsection{Physical Interpretation}
 

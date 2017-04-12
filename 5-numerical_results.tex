@@ -1,20 +1,50 @@
 \chapter{Electromagnetic Worldlines - Numerical Methods and Results}
 \label{ch:numerical}
-\begin{enumerate}
-\item Need to develop methods that can easily generalize to more complicated geometries.
-\item Even if using them to solve known problems.
-\item In same fashion path integral relies on chaining together correct short-time propagator, we 
-  are effectively using planar results at each step, under the assumption that the geometry
-    is well-described locally by a single nearby plane.  
-\item Need to study convergence effects carefully.  
-\end{enumerate}
 
+The ultimate goal of this project is to build a general numerical method. In order to test results 
+it is necessary to test smaller cases carefully first.  Despite the focus on planar geometries
+we have tried to develop methods that would be well suited to more complicated geometries,
+and test them in the simple geometry.  In this case we can carefully test their convergence properties
+as the path resolution is increased.  
 
+Even in a planar geometry we have had to develop an array of tools to make the worldline methods tractable.
+The TM polarization is by far the hardest to deal with, and has prompted most of these developments.
+That said, the same developments can be used to enhance the TE polarization, as well as existing Dirichlet
+worldline methods.
+
+In particular we will discuss techniques path construction, Monte Carlo sampling of both starting points
+and path-times.  In the case of the TE polarization, these are all quite straightforward.  
+The TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
+used to construct the paths.  The essence of these methods is importance sampling, beyond what is manifestly
+obvious from the form of the path integral.    
+
+Our tests are checking how well we can reproduce the distance dependence for the Casimir effect,
+as well as the efficiencies $\eta(\chi),\gamma(\chi)$.
+Most of our tests assume a medium with a fixed susceptibility $\chi$, and reproduce the known 
+efficiencies $\eta(\chi), \gamma(\chi)$.  As discussed in the previous chapter, each frequency 
+contributes separately to the Casimir effect. 
+Since the susceptibility of conductors at low frequencies diverges, it is necessary to test the convergence 
+of the worldline method for large, fixed $\chi$ as a simple proxy for frequency dependent calculations.
+
+% \begin{enumerate}
+% \item Need to develop methods that can easily generalize to more complicated geometries.
+% \item Even if using them to solve known problems.
+% \item In same fashion path integral relies on chaining together correct short-time propagator, we 
+%   are effectively using planar results at each step, under the assumption that the geometry
+%     is well-described locally by a single nearby plane.  
+% \item Need to study convergence effects carefully.  
+% \end{enumerate}
+
+This difficulty with the TM polarization is not unprecedented.  In a paper on applying
+worldline methods to imposing Neumann boundary conditions, Fosco\etal make the following 
+remark:
 \begin{quote}{We do not dwell with the numerical evaluation of this kind of path integral,
  which may certainly be more difficult than its local counter part,
- since the interaction term is not simple the integral 
-of a local function of the time.}
+ since the interaction term is not simple the integral of a local function of the time.}
 \end{quote} Fosco, Lombardo, Mazzitelli 2010.
+We presennt our work on the TM polarization as one way of numerically approaching the limit
+of Neumann boundary conditions.  As the effort expended shows, this is indeed much more difficult
+than the Dirichlet or even TE worldline methods.  
 
 \section{Monte-Carlo sampling}
 
@@ -60,29 +90,33 @@ is essential for good convergence.
 
 \subsection{First-touching time}
 
-The simplest method which applies to TE/sojourn integrands is to find the first-touching time, $T_0$
-when the renormalized integrand first takes on a non-zero value.  After that point $T_0$, the
+The simplest method which applies to TE or sojourn integrands is to find the first-intersection time, $T_0$
+when the renormalized integrand first takes on a non-zero value\footnote{For a Brownian motion $\vect{x}(t)$,
+the first-touching time is reserved for the first time $t_0$ along a path that a Brownian bridge intersects a surface. 
+This is distinct from the first path-time $\cT$ when any section of the scaled path intersects a surface.
+}.
+ After that point $T_0$, the
 integrand will slowly increase due to the increased sojourn value as more point pass into the 
-surfaces.  However, there is an additional $1/T^{1+D/2}$ factor which damps these contributions out.
+surfaces.  However, there is an additional $\cT^{-(1+D/2)}$ factor which damps these contributions out.
 
 This suggests sampling from a probability distribution 
 \begin{equation}
-  P(T;T_0,m)= \frac{(m-1) T_0^{m-1}}{T^m}\Theta(T-T_0),
+  P(\cT;\cT_0,m)= \frac{(m-1) \cT_0^{m-1}}{\cT^m}\Theta(\cT-\cT_0),
 \end{equation}
-where $m>1$ and $T_0>0$.  This requires being able to estimate the value of $T_0$.  For the example
-of paths starting between parallel planes $T_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
+where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of $\cT_0$.  For the example
+of paths starting between parallel planes $\cT_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
 \left(\frac{d_2-x_0}{B_+}\right)^2]$ where $d_1<x_0<d_2$.    
 
 In order to sample from this distribution, we must invert 
 \begin{equation}
-  r=(m-1) T_0^{m-1}\int_{T_0}^T dt\, t^{-m}
+  r=(m-1) \cT_0^{m-1}\int_{\cT_0}^\cT dt\, t^{-m}
 \end{equation}
-where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
+where $r\in [0,1]$ is a uniform random number and $\cT$ is the desired deviate.    
 This can be straightforwardly inverted 
 \begin{align}
-  r&=(m-1) T_0^{m-1}\frac{1}{m-1}\left(\frac{1}{T_0^{m-1}}-\frac{1}{T^{m-1}}\right)\\
-%  \left(\frac{T_0}{T}\right)^{m-1}&= (1-r)\\
- T= \frac{T_0}{u^{1/(m-1)}}
+  r&=(m-1) \cT_0^{m-1}\frac{1}{m-1}\left(\frac{1}{\cT_0^{m-1}}-\frac{1}{\cT^{m-1}}\right)\\
+%  \left(\frac{\cT_0}{\cT}\right)^{m-1}&= (1-r)\\
+ \cT= \frac{\cT_0}{u^{1/(m-1)}}
 \end{align}
 we $u=1-r$ is also a uniform random number. 
 
@@ -94,35 +128,35 @@ In that case it is better to sample from a distribution
 that better reflects the behaviour of the ensemble.
   A better distribution is 
 \begin{equation}
-  P_{\text{exp-T}}(T;T_0,s) = \frac{T_0^{s-1}}{\Gamma[s-1] T^s}e^{-T_0/T}\label{eq:expT},
+  P_{\text{exp-\cT}}(\cT;\cT_0,s) = \frac{\cT_0^{s-1}}{\Gamma[s-1] \cT^s}e^{-\cT_0/\cT}\label{eq:expT},
 \end{equation}
-where $s>1$ and $T_0>0$.  In most cases of interest, $s=1+D/2$.  The exponential factor effectively models the finite touching 
+where $s>1$ and $\cT_0>0$.  In most cases of interest, $s=1+D/2$.  The exponential factor effectively models the finite touching 
 probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
-away in time $T$, $P_\text{touch}=e^{-2d^2/T}$.   This distribution can be used to sample times $T$
+away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$.   This distribution can be used to sample times $\cT$
 even for TE integrands.  In that case however, it is possible the generated path will not
 touch all bodies and merely return zero.    
 
 The normalization factor is determined by
 \begin{align}
-   1&= \int_0^\infty dT e^{-T_0/T} T^{-s}\\
+   1&= \int_0^\infty d\cT e^{-\cT_0/\cT} \cT^{-s}\\
 %  &= \int_0^\infty ds\frac{1}{T_0} e^{-s}\left(\frac{T_0}{s}\right)^{-s+2}
-  &= \eta T_0^{-s+1}\int_0^\infty d\tau\, e^{-\tau}\tau^{s-2}\\
- \implies \eta &= \frac{T_0^{s-1}}{\Gamma[s-1]}
+  &= \eta \cT_0^{-s+1}\int_0^\infty d\tau\, e^{-\tau}\tau^{s-2}\\
+ \implies \eta &= \frac{\cT_0^{s-1}}{\Gamma[s-1]}
 \end{align}
-where we changed variable to $s=T_0/T$, so $T=T_0/s$ and $ds=-T_0 dT/T^2$.  
+where we changed variable to $s=\cT_0/\cT$, so $\cT=\cT_0/s$ and $ds=-\cT_0 d\cT/\cT^2$.  
 
 % In order to sample from this distribution, we must invert 
 % \begin{equation}
 %   r=\int_0^T dt e^{-T_0/t}t^{-m}
 % \end{equation}
 % where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
-The probability distribution for $u=T_0/T$ is 
+The probability distribution for $u=\cT_0/\cT$ is 
 \begin{equation}
-  P_{\text{exp}-1/T}(u;T0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}
+  P_{\text{exp}-1/\cT}(u;\cT0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}
 \end{equation}
-where we had to include $du/dT= -(T_0)/T^2=-1/(T_0u^2)$ for the change
+where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
 of measure.  
-Note that $u=T_0/T$ has the form of a Gamma distribution, where the distribution for   
+Note that $u=\cT_0/\cT$ has the form of a Gamma distribution, where the distribution for   
 \begin{equation}
   f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
 \end{equation}
@@ -135,17 +169,17 @@ deviate gamma(k,1).  Furthermore if $z$ is normally distribed then $z^2/2$ obeys
 
 So for (low) integer powers 
 \begin{equation}
-  T\sim \frac{T_0}{-\sum_{i=1}^{s}\log u_i},
+  \cT\sim \frac{\cT_0}{-\sum_{i=1}^{s}\log u_i},
 \end{equation}
 while for half-integer powers, 
 \begin{equation}
-  T\sim \frac{T_0}{-\sum_{i=1}^{\text{floor}(s)}\log u_i+z^2/2}.
+  \cT\sim \frac{\cT_0}{-\sum_{i=1}^{\text{floor}(s)}\log u_i+z^2/2}.
 \end{equation}
 We will be predominantly interested in $s=1+D/2$ and $m=3/2$ to account for zero temperature
 and non-zero temperature limits.  There are apparently better algorithms for moderate $m$,
 such as might be required in large derivatives.
 
-\section{Loop generation}
+\section{Path generation}
 
 \subsection{TE}
 \begin{enumerate}
@@ -165,7 +199,7 @@ such as might be required in large derivatives.
 \item Large fluctuations indicate a poor choice of probability distribution, and we should
   adjust our choice.
 \item Two methods to incorporate the potential into the probability distribution.
-  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta T)}e^{-\VTM}$.
+  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
   Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  FOr differences of Gaussians,
   use rejection to sample the deviates.  
   2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
@@ -214,7 +248,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
   \item Need to balance choosing $N$, $ds$.  
   \item However difference-of-ensembles has better behaviour than 
     ensemble-of-differences.  Some ordering of operations noticeably superior.  
-    Essentially passes finite difference onto $1/T^3$, which is nice and smooth.
+    Essentially passes finite difference onto $1/\cT^3$, which is nice and smooth.
 \end{enumerate}
 
 \subsection{Partial Averaging-Gaussian Paths}
@@ -1235,8 +1269,7 @@ for distorting this path point to lie on the surface,
 \end{equation}
 where $x^*$ is the nearest point to the surface to $\vect{x}_j$.
 
-
-\subsubsection{ALternative $\delta$ function}
+\subsubsection{Softened $\delta$-function}
 There is an alternative formulation for handling the $\delta$-function.  Instead of explicitly constructing 
 paths to satisfy the $\delta$-function, we can generate an effective potential.  
 First consider a single integral against a Gaussian distribution, with a $\delta$-function,
@@ -1449,6 +1482,24 @@ when the paths are pass close to the body.
 while it is necessary to factor out the cross-sectional area, and consider the second derivative 
 of the energy per unit area).
 \comment{scaled out areas, and integrated over }
+
+\section{Path Construction Revisited: Path-Pinning as Importance Sampling}
+
+In the curvature numerics, the forces emerged from paths constrained to touch the surfaces 
+of the interacting bodies.  While this is a necessity for forces, constrained paths can also be used
+to compute Casimir energies.
+Although the Casimir energies do not require such constraints, the renormalized 
+integrand is only non-zero for paths that touch both surfaces.
+This suggest using paths constrained to touch both surfaces by construction.  This is a form of importance
+sampling, beyond what is suggested by the Gaussian measure of the worldline path integral.
+We would construct paths that are constrained to touch both surfaces, and correct for this modification
+to the path integral.  In the TM Casimir energy, this is very useful, since the birth-death method 
+causes many paths to be created, and ideally most of these new paths would also contribute to the path 
+integral.  
+In the absence of such a bias, a large number of paths are created near one surface, and if these paths
+do not intersect the other body, a large amount of computational effort is wasted.  
+
+
 
 \section{Numerical Results: Casimir-Polder Energies}
 

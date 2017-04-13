@@ -1,0 +1,178 @@
+ % \addtolength{\oddsidemargin}{-0.2\textwidth}%\oddsidemargin}
+ % \addtolength{\evensidemargin}{-0.2\textwidth}
+ % \addtolength{\voffset}{-0.1\textheight}
+ % \addtolength{\marginparwidth}{-0.1\textwidth}
+ % \addtolength{\textwidth}{0.4\textwidth}
+ % \addtolength{\textheight}{0.2\textheight}
+
+\usepackage{fullpage}
+\usepackage{natbib}
+%packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epigraph}
+%\usepackage{simplewick}
+\usepackage{framed}
+\usepackage{slashed}
+\usepackage{mathtools}
+\usepackage{todonotes}
+%\usepackage{makeidx}
+%\usepackage{showidx}
+
+
+% \usepackage{tikz}
+% \usetikzlibrary{shapes,arrows}
+%\usepackage{feynmf}
+%\DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{feynmp-auto}
+\unitlength = 1mm
+
+
+
+
+
+\def\etal{~\textit{et~al.}}
+\definecolor{darkgreen}{rgb}{0.05, .65, 0.05}
+
+\def\comment#1{{\color{darkgreen}\textbf{#1}}}
+
+\newcommand{\changee}[1]{%
+  {\color{red}%
+    \ensuremath{\clubsuit\!\!\triangleright}#1%
+    \ensuremath{\triangleleft\!\!\clubsuit}}%
+}
+
+\newcommand{\change}[1]{%
+ 	{\color{blue}%
+    \ensuremath{\blacktriangleright\!}%
+    #1%
+    \ensuremath{\!\blacktriangleleft}%
+  } }
+
+\def\units#1{{\color{darkgreen}\textbf{#1}}}
+
+\definecolor{shadecolor}{rgb}{0.85, .85, 0.85}
+
+\def\op#1{\ensuremath{\hat{#1}}}
+%\newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}}
+\def\vect#1{\ensuremath{\mathbf{#1}}}
+\def\mat#1{\ensuremath{\underbar{#1}}}
+
+%Gradients
+\def\nablaxk{\nabla_{\vect{x}_k}}
+\def\nablaR#1{\nabla_{\vect{R}_{#1}}}
+
+\def\subkz{_{\vect{k},\zeta}}
+\def\sup0{^{(0)}}
+
+
+%Calligraphic Shorthands
+\def\vtA{\ensuremath{\widetilde{\mathbf{A}}}}
+\def\tA{\ensuremath{\widetilde{A}}}
+
+\def\cN{\ensuremath{\mathcal{N}}}
+\def\jumpN{\ensuremath{\mathcal{G}}}
+\def\jump{\ensuremath{\mathcal{J}}}
+\def\hom{\ensuremath{\mathcal{H}}}
+\def\dec{\ensuremath{\mathcal{D}}}
+\def\liov{\ensuremath{\mathcal{L}}}
+
+\def\cH{\ensuremath{\mathcal{H}}}
+\def\cL{\ensuremath{\mathcal{L}}}
+
+\def\Lg{\ensuremath\mathcal{L}}
+\def\Hg{\ensuremath\mathcal{H}}
+\def\vA{\ensuremath\mathbf{A}}
+\def\vx{\ensuremath\mathbf{x}}
+\def\vk{\ensuremath\mathbf{k}}
+
+\def\intinf{\int_{-\infty}^\infty\!\!}
+\def\intzinf{\int_{0}^\infty\!\!}
+
+
+\def\cT{\ensuremath{\mathcal{T}}}
+\def\xA{\ensuremath{\mathbf{x}_\mathrm{\scriptscriptstyle A}}}
+\def\rA{\ensuremath{\mathbf{r}_\mathrm{\scriptscriptstyle A}}}
+\def\x0{\ensuremath{\mathbf{x}_\mathrm{0}}}
+\def\epsr{\ensuremath{\epsilon_{\mathrm{r}}}}
+\def\mur{\ensuremath{\mu_{\mathrm{r}}}}
+\def\subEM{_\mathrm{\scriptscriptstyle EM}}
+\def\subTE{_\mathrm{\scriptscriptstyle TE}}
+\def\subTM{_\mathrm{\scriptscriptstyle TM}}
+\def\subCP{_\mathrm{\scriptscriptstyle CP}}
+\def\supTE{^\mathrm{\scriptscriptstyle (TE)}}
+\def\supTM{^\mathrm{\scriptscriptstyle (TM)}}
+\def\subCPi{_{\mathrm{\scriptscriptstyle CP},i}}
+
+\def\ZTE{\ensuremath{Z\subTE}}
+\def\VTE{\ensuremath{V\subTE}}
+\def\ETE{\ensuremath{E\subTE}}
+\def\ZTM{\ensuremath{Z\subTM}}
+\def\VTM{\ensuremath{V\subTM}}
+\def\ETM{\ensuremath{E\subTM}}
+\def\etal{\textit{~et.~al~}}
+
+% set indicator
+\def\I[#1]#2{\mathbbm{1}^{(#1)}_{#2}}
+%\def\I[#1]#2{\mathbf{1}^{(#1)}_{#2}}
+
+
+%Double-Angle brackets
+\def\dlangle{\left\langle\!\left\langle}
+\def\drangle{\right\rangle\!\right\rangle}
+\def\bigdlangle{{\big\langle\kern-.23em\big\langle}}
+\def\bigdrangle{{\big\rangle\kern-.23em\big\rangle}}
+\def\Bigdlangle{{\Big\langle\kern-.35em\Big\langle}}
+\def\Bigdrangle{{\Big\rangle\kern-.35em\Big\rangle}}
+\def\biggdlangle{{\bigg\langle\kern-.35em\bigg\langle}}
+\def\biggdrangle{{\bigg\rangle\kern-.35em\bigg\rangle}}
+\def\Biggdlangle{{\Bigg\langle\kern-.35em\Bigg\langle}}
+\def\Biggdrangle{{\Bigg\rangle\kern-.35em\Bigg\rangle}}
+
+%Dan's Linked brackets
+\def\linklangle{{\langle\kern-.28em\scalebox{0.35}[1]{$-$}\kern-.18em\langle}}
+\def\linkrangle{{\rangle\kern-.18em\scalebox{0.35}[1]{$-$}\kern-.28em\rangle}}
+\def\biglinklangle{{\kern.23em\big\langle\kern-.59em\scalebox{0.35}[1]{$-$}\kern-.38em\big\langle\kern.23em}}
+\def\biglinkrangle{{\kern.23em\big\rangle\kern-.38em\scalebox{0.35}[1]{$-$}\kern-.59em\big\rangle\kern.23em}}
+\def\Biglinklangle{{\kern.0em\Big\langle\kern-.49em\scalebox{0.38}[1]{$-$}\kern-.18em\Big\langle\kern.0em}}
+\def\Biglinkrangle{{\kern.0em\Big\rangle\kern-.18em\scalebox{0.38}[1]{$-$}\kern-.49em\Big\rangle\kern.0em}}
+\def\bigglinklangle{{\kern.0em\bigg\langle\kern-.62em\scalebox{0.54}[1]{$-$}\kern-.18em\bigg\langle\kern.0em}}
+\def\bigglinkrangle{{\kern.0em\bigg\rangle\kern-.18em\scalebox{0.54}[1]{$-$}\kern-.62em\bigg\rangle\kern.0em}}
+\def\Bigglinklangle{{\kern.0em\Bigg\langle\kern-.66em\scalebox{0.66}[1]{$-$}\kern-.22em\Bigg\langle\kern.0em}}
+\def\Bigglinkrangle{{\kern.0em\Bigg\rangle\kern-.22em\scalebox{0.66}[1]{$-$}\kern-.66em\Bigg\rangle\kern.0em}}
+
+
+%traces
+\def\tr{\ensuremath{\mathrm{tr}}}
+\def\Tr{\ensuremath{\mathrm{Tr}}}
+\def\order{\ensuremath{\mathcal{O}}}
+\def\kB{\ensuremath{k_{\mathrm{B}}}}
+
+%\error function2
+\def\erf{\ensuremath{\mathrm{erf}}}
+\def\erfc{\ensuremath{\mathrm{erfc}}}
+%\sinc function
+\def\sinc{\ensuremath{\mathrm{sinc}}}
+\def\sech{\ensuremath{\mathrm{sech}}}
+\def\csch{\ensuremath{\mathrm{csch}}}
+\def\sgn{\ensuremath{\mathrm{sgn}}}
+\def\Li{\ensuremath{\mathrm{Li}}}
+
+\def\epsvx{\ensuremath{\epsilon(\mathbf{x})}}
+\def\vPi{\ensuremath\mathbf{\Pi}}
+\def\CIC{\ensuremath{\mathrm{CIC}}}
+
+%QFT shortcuts
+\def\Psibar{\ensuremath{\bar{\Psi}}}
+
+
+\usepackage[bookmarks=true,colorlinks=true,breaklinks=true,citecolor=blue]{hyperref}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+

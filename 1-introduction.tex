@@ -1240,59 +1240,49 @@ method which offers a very different picture and numerical method.
 In order to discuss the modern methods of computing the Casimir effect it is necessary to introduce
 the path-integral.  The path integral was originally developed by Richard Feynman as an alternative 
 formulation of quantum mechanics~\cite{Feynman1948,Feynman1965}.
-  
 In the path integral, the probability amplitude for a particle to propagate from one position to another,
-is given by the sum over \emph{all} possible paths between the points.  
+is given by the sum over \emph{all} possible paths between the points.
+(In fact the path integral can be derived as the propagator from more traditional operator quantum mechanics~\cite{Sakurai1994}.)
 Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path.
-
+For a free particle, the allowed paths are Brownian motions, or diffusive in nature.  
 
     Path integrals have been used extensively in a wide range of theoretical physics~\cite{Kleinert2012}.
     While offering an intuitive picture of quantum mechanics, they are much harder to use 
     than typical operator mechanics for anything other than the simplest problems~\cite{Feynman1965}.
     However, path integrals form a natural basis for quantum field theories, where they offer a relativistically covariant
-    quantization procedure that naturally accounts for the symmetries 
+    quantization procedure that naturally accounts for the gauge symmetries 
     that underly the Standard Model of particle physics~\cite{Brown1994,Srednicki2008}.
     % In these field theoretic path-integrals, the integral runs over
     % all possible field configurations connecting the initial and final states, and some care is required
     % to handle the redundant degrees of freedom implied by gauge invariance~\cite{Faddeev1991}.
 
     Path-integrals have also been used in mathematics and statistics to describe stochastic 
-    processes~\cite{Kac1949,Durrett1996, Karatzas1991}.  This mathematical work works weights each
-    path by $e^{-S_{E}[x]}$, where $S_E$ is the real-valued Euclidean action for the path.
+    processes~\cite{Kac1949,Durrett1996, Karatzas1991}.  Rather than solving the Schr\"odinger equation, 
+    this path integral is solves a diffusion equation --- this effectively passes over to ``imaginary time'',
+    since after the Wick rotation which replaces, $t\rightarrow -i \tau$, the Schr\"odinger equation is a diffusion equation.
+    This mathematical path integral weights each path by $e^{-S_{E}[x]}$, where $S_E$ is the real-valued Euclidean action for the path.
     In this form the path-integral has clearer convergence properties, 
     since the paths are weighted by real, decaying exponentials, as opposed to the oscillatory integrals
-    in Feynman's path integral.  This amounts to solving a diffusion equation rather than the Schr\"odinger equation
-    --- in essence a diffusion equation is the same as the Schr\"odinger equation under Wick rotation 
-    with the replacement $t\rightarrow -i\tau$.
+    in Feynman's path integral.  
 
-    The path-integral is one way to view stochastic processes, along side stochastic differential
-    equations and diffusion or Fokker-Planck equations. 
-    The path-integral is an infinite dimensional integral, which is the solution to an associated 
-    diffusion equation.  One can randomly sample from the 
-    dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
-    in turn be described by a stochastic differential equations.  %\todo{Gardiner citation for SDE-> PDE}
+    % The path-integral is one way to view stochastic processes, along side stochastic differential
+    % equations and diffusion or Fokker-Planck equations. 
+    % The path-integral is an infinite dimensional integral, which is the solution to an associated 
+    % diffusion equation.  One can randomly sample from the 
+    % dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
+    % in turn be described by a stochastic differential equations.  %\todo{Gardiner citation for SDE-> PDE}
         
     Path integrals underly most of the work carried out in this thesis: we will use path-integrals
-    to quantize the electromagnetic field, and the worldline method relies is also based on path integrals.
+    to quantize the electromagnetic field, and the worldline method relies heavily on path integrals.
     In addition, we will use the connection between path-integrals and diffusion equations
-    to find analytical solutions, and Monte-Carlo sampling of path-integrals is the basis for our numerical
-    method.      Considering their importance to this thesis, we will 
+    to verify analytically that the worldline path integral gives the correct results, and enhance our numerical
+    calculations.  Considering their importance to this thesis, we will 
     now derive Feynman's path integral, which will serve as a prototype for all of the path integrals
     that follow.  (Our derivation follows the simple one given in Sakurai~\cite{Sakurai1994}.)
     % They have even been used in studying quantum chaos---the study of the quantum analogues 
     % of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
     % where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
     % can be approximated by only considering paths with periodic orbits.  %\todo{Gutzwiller trace formula citation}
-
-% \begin{enumerate}
-% \item Found common use in field theory particularly for covariantly quantizing gauge field theories,
-%  such as the Standard Model (cite Weinberg).  Integrate over all field configurations.  
-% \item  Also related to stochastic processes, like Brownian motion \cite{Karatzas1991}.
-% \end{enumerate}
-  %   \comment{Should also cite Cecile Morette-deWitt, Kleinert and Grosche}.
-    
-  %   Wick-rotate Schr\"odinger equation to imaginary time, to get diffusion equation.
-  %   Replaces oscillating Gaussian integrals for real, decaying ones.
 
     \subsubsection{Derivation of Feynman's Path Integral}
 
@@ -1314,7 +1304,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       \langle \vect{x}|\vect{p}\rangle = e^{i\vect{p}\cdot\vect{x}/\hbar}.
     \end{equation}
 
-    In quantum mechanics, the amplitude for a particle starting at $x_0$ at time $t=0$, and propagating
+    In quantum mechanics, the amplitude for a particle starting at $x_i$ at time $t=0$, and propagating
     to $x_f$ at time $t$ is given by 
     \begin{equation}
       \langle x_f,t| x_i, t_0\rangle = \langle x_f| e^{-i\op{H}t/\hbar}|x_i\rangle.
@@ -1327,7 +1317,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
       \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
-      &=\int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+      &=\int \prod_{k=1}^{N-1} d^Dx_k \prod_{j=0}^{N-1} \frac{d^Dp_j }{(2\pi\hbar)^D}
       \langle \vect{x}_N|\vect{p}_{N}\rangle\langle\vect{p}_{N}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle\nonumber\\
       & \hspace{0.5cm}\times\langle \vect{x}_{N-1}|\vect{p}_{N-1}\rangle\langle\vect{p}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       \cdots \langle \vect{x}_1|\vect{p}_1\rangle\langle \vect{p}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle
@@ -1353,7 +1343,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     state-overlap can be used to write,
     \begin{align}
       \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle &= 
-      \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=0}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
+      \int \prod_{k=1}^{N-1} d^Dx_k \prod_{j=0}^{N-1} \frac{d^Dp_j }{(2\pi\hbar)^D}
       \prod_{n=0}^{N-1} \langle \vect{x}_{n+1}|\vect{p}_{n+1}\rangle
       \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
         e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\\
@@ -1377,11 +1367,15 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     where in the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
     \rightarrow d\vect{x}/dt, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
     $D\vect{x} = \prod_{k=1}^{N-1}d^Dx_k$.  The phase in exponent is the classical action for a particle
-    in a potential.
-    One can think of the integral as summing over all possible paths $\vect{x}(t)$
-    between points $x_0$ and $x_f$ weighted by their classical action.  This also suggests a number 
-    of semi-classical expansions, such as considering the limit when $\hbar\rightarrow 0$ to derive 
-    the classical limit, or in work on chaotic systems~\cite{Gutzwiller1990}.
+    in a potential.  Paths with the same phase will add together constructively, while 
+    paths in regions where the phase is quickly varying will cancel one another out.  
+    This leads to the classical limit where only the paths of stationary phase where $\delta S[x(t)]=0$
+    contribute.
+
+    % One can think of the integral as summing over all possible paths $\vect{x}(t)$
+    % between points $x_0$ and $x_f$ weighted by their classical action.  This also suggests a number 
+    % of semi-classical expansions, such as considering the limit when $\hbar\rightarrow 0$ to derive 
+    % the classical limit, or in work on chaotic systems~\cite{Gutzwiller1990}.
 
     In this thesis, this simple type of derivation will be all we require.  We 
     will often work with the imaginary time version, which replaces the oscillating exponentials with
@@ -1392,8 +1386,6 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     and the size of the grid extend to infinity.  
     We will also only need to consider Gaussian path integrals, of the type considered here.  
     In a later chapter we will extend this derivation to include sources.
-
-
 
 \section{Scalar Worldline Casimir Energies}
 
@@ -1426,7 +1418,7 @@ The worldline method has also been applied to the Casimir piston, where there ar
 based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
 Most of this work is for idealized surfaces that imposed Dirichlet boundary conditions.
 There has also been some effort to extend the worldline method to account for Neumann boundary
-conditions~\cite{Fosco2010}.  
+conditions~\cite{Fosco2010}.
 
 \begin{enumerate}
   \item Semi-classical approach to Casimir force via trace formula~\cite{Schaden1998}

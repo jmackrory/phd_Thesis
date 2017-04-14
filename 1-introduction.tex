@@ -1444,7 +1444,7 @@ and did not have concrete, correct results.
 % determinant.  Ultimately we want the free energy, which can be further converted into a path integral
 % for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
 % world line method.   
-
+\subsection{Derivation of the Scalar Casimir Worldline Path Integral}
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 (We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies\etal.)  
@@ -1523,10 +1523,24 @@ The functional integral over $\phi$ is Gaussian and can be formally evaluated im
 functional determinant, since the differential operator is positive operator.  
 Some care is required in regularizing such infinite determinants.
 This is done in analogy with finite dimensional Gaussian integrals.  
-The fields can be considered as only being evaluated on a finite lattice of space-time points, 
+The fields can be considered as only being evaluated on a finite lattice of space-time points,
 with the lattice also having a finite extent which bounds all bodies.  
 The gradient operators can be treated via their finite difference approximations, 
 which can be thought of as sparse matrices.
+For example, $\partial_x^2\phi(x_k) \approx [\phi(x_k+\Delta)-2\phi(x_k)+\phi(x_k-\Delta)]/\Delta^2$
+In that case the partition function is a large, finite Gaussian integral of the form, 
+\begin{equation}
+  Z_{\text{reg}} = \int d\phi_k\exp\left\{-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right\}.
+\end{equation}
+where the labels over positions have been labelled with indices and the matrix $A$ represents the differential
+operator.  
+This regularized expression can be integrated, under the assumption that the eigenbasis of $A$ can be found, i.e.
+where $A_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_k$.  In that case, each Gaussian integral decouples and the 
+regularized partition function can be written as 
+\begin{equation}
+   Z_{\text{reg}} = C \prod_k \lambda_{(n)}^{-1/2} = C \det[A],
+\end{equation}
+where the determinant is understood to be the product of the eigenvalues of the operator $A$.
 The limit of an arbitrarily large volume, and lattice resolution can be taken after integration.
 
 In an analogous fashion, one can formally evaluate the partition function path integral as a 
@@ -1547,11 +1561,10 @@ The free energy for the interacting field can be written as
   \label{eq:free-energy-det}
 \end{equation}
 where $C$ is a constant.  
-As it stands this expression is divergent, but we can find finite results by subtracting off the 
-free energy when the bodies removed to spatial infinity.  Physically this corresponds to 
-computing energy differences between different configurations.  The renormalization also cancels off 
-the infinite constant normalization factors.  
-
+As it stands this functional determinant is divergent, but finite results can be found by subtracting off the 
+free energy when the bodies are removed to spatial infinity.  Physically this corresponds to 
+computing energy differences between different configurations of bodies.  % The renormalization also cancels off 
+% the infinite constant normalization factors.  
 The renormalized free energy can now be converted into a single-particle path integral via some formal 
 manipulations.  First, we will use the identity $\log\det A=\tr\log A$, which can be readily
 verified for positive finite matrices.  
@@ -1562,7 +1575,7 @@ verified for positive finite matrices.
 \end{align}
 where we used the facts that the trace and determinant of a matrix are given by the sum
 and product of its eigenvalues respectively. 
-Second, we will use the integral representation of the logarithm,
+Second, the logarithm can be rewritten in an integral representation,
 \begin{equation}
   \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}),\label{eq:integral_log}
 \end{equation}
@@ -1576,12 +1589,12 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
   \tr\Big[e^{[(\partial_\tau^2+\nabla^2)/2-V(\vect{x})]\cT}-e^{(\partial_\tau^2+\nabla^2)\cT/2}\Big].
 \end{equation}
-At this point, we introduce an $D$-dimensional auxiliary Hilbert space to evaluate the trace, where 
+The trace can be evaluted by introducing a $D$-dimensional auxiliary Hilbert space, where 
 $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
 $[\op{x}_i,\op{p}_j]=i\delta_{ij}$, with the result that 
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-  \int d\vect{x}_0d\tau_0 \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2}\big(e^{-\cT V(\op{\vect{x}})}-1\big)
+  \int d\vect{x}_0d\tau_0 \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2 -\cT V(\op{\vect{x}})}-e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2}\big)
   |\vect{x}_0,\tau_0\rangle.
 \end{equation}
 The free energy is then in the form of the imaginary-time transition amplitude for a quantum particle
@@ -1590,25 +1603,26 @@ in $D$ space-time dimensions, in a potential $V$.
 this can be converted into a single-particle path integral, although 
 there are some minor differences.  First, the starting and ending points are the same,
 so the random paths form closed loops.  
-In addition, the time parameter $\cT$ is a fictitious parameter, with dimension of $L^2$, rather
+Second, the time parameter $\cT$ is a fictitious parameter, with dimension of $L^2$, rather
 than the physical time between events.
-
 The resulting worldline path-integral for the free energy at zero temperature  is
   \begin{align}
     \mathcal{F}-\mathcal{F}_0 
     =&  -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-    \int d\vect{x}_0  d\tau_0 \int \prod_{k=1}^Nd\vect{x}_k d\tau_k \bigg[\frac{1}{(2\pi\Delta\cT)^{D/2}}
+    \int d\vect{x}_0  d\tau_0 \int \prod_{k=1}^Nd\vect{x}_k d\tau_k \nonumber\\
+    &\times\prod_{k=0}^{N-1}\bigg[\frac{1}{(2\pi\Delta\cT)^{D/2}}
     e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}e^{-(\tau_{k+1}-\tau_k)^2/(2\Delta \cT)}\bigg]\nonumber\\
-    &\times \big(\prod_{j=1}^Ne^{-\Delta\cT V(\vect{x}_j)}-1\big)\delta(\vect{x}_N-\vect{x}_0)
+    &\times \bigg(\prod_{j=1}^Ne^{-\Delta\cT V(\vect{x}_j)}-1\bigg)\delta(\vect{x}_N-\vect{x}_0)
     \delta(\tau_N-\tau_0).
   \end{align}
-The intermediate Gaussian integrals over $\tau_k$ can be carried out, we note that the final integral 
-$\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
+The intermediate Gaussian integrals over $\tau_k$ can be carried out immediately, since the potential
+is independent of $\tau$.  
+In addition, the final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
 % (A more careful derivation for non-zero temperature handles the $\tau$ direction via a Fourier transform,
 % which introduces the Matsubara frequencies, $s_n = 2\pi n/(\beta \hbar)$.  
 In addition, there is a normalization constant of $(2\pi\cT)^{-1/2}$ for each dimension due to the loop 
 closure condition.  This can be thought of as the total normalization for $N$ Gaussian steps of length 
-$\Delta \cT= \cT/N$, subject to the loop-closure requirement so that $x_0=x_N$.
+$\Delta \cT= \cT/N$, subject to the loop-closure requirement $x_0=x_N$.
 % The normalization can be understood from manipulations on the $\delta$-function, where 
 % we require the multidimensional version of 
 % \begin{equation}
@@ -1625,10 +1639,11 @@ $\Delta \cT= \cT/N$, subject to the loop-closure requirement so that $x_0=x_N$.
 % \begin{equation}
 %   \tau_0 - \tau_N = \sum_{k}\Delta \tau_k = 0.
 % \end{equation}
-Furthermore, we can consider the coupled Gaussians as being the probability distribution for 
-paths through space-time.  Each path-increment is Gaussian with zero mean and variance $\Delta \cT$, 
-and the resulting paths must close on themselves.  Brownian motions of with fixed end points are 
-referred to as Brownian bridges in the statistics literature.  
+The free energy can be written in a more intuitive form, better suited to numerical calculations,
+if we consider the coupled Gaussians as the probability distribution for paths through space-time.
+Each path increment $\Delta \vect{x}_k=\vect{x}_{k+1}-\vect{x}_k$ is Gaussian with zero mean and variance $\Delta \cT$.
+In addition, the resulting paths must close on themselves ---such Brownian motions with fixed end points are 
+referred to as Brownian bridges in the statistics literature~\cite{Karatzas1991}.  
 The result of these manipulations is 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\frac{\hbar c}{2}\int \frac{d\cT}{(2\pi\cT)^{D/2}\cT} \int d\vect{x}_0
@@ -1657,6 +1672,13 @@ the vacuum energy cuts off the divergent $\cT$ integral as small $\cT$.
 At later times $\cT$, these paths would have larger extent, and both would contribute, but due 
 to the $\cT^{-(1+D/2)}$ dependence, the lower-path would have a smaller contribution.  
 
+The distance dependence can also be read off.  The typical extent of a Brownian motion of path-time
+$\cT$ is $\sqrt{\cT}$. The average time a path touches the surface a distance $d$ away, is then $\cT\sim d^2$.
+Since the integral is only non-zero after a path intersects the bodies, and the integrand is unit otherwise,
+the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D/2}$.  
+After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
+space-time dimensions.
+
 \begin{figure}
 \center
 \includegraphics[width=10cm]{fig/intro/hit_strong_coupling}
@@ -1674,10 +1696,13 @@ which expanding the fields in a Fourier series, with the Matsubara frequencies $
 where each Fourier component contributes independently.  The same sort of manipulations
 can be carried out with the result 
 \begin{align}
-  \mathcal{F}-\mathcal{F}_0 =& -\kB T \sum'_n\int \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0
-  e^{-s_n^2\cT/(2c^2)}\dlangle e^{-\cT\langle V\rangle} - 1\drangle.
+  \mathcal{F}-\mathcal{F}_0 =& -\kB T {\sum_{n=0}^\infty}'\int \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0
+  e^{-s_n^2\cT/(2c^2)}\dlangle e^{-\cT\langle V\rangle} - 1\drangle,
 \end{align}
-As a result, the $\cT$ dependence differs, which implies differing distance dependence at finite temperature.
+where the prime on the sum means that the $n=0$ term is multiplied by a half.  
+As a result, the $\cT$ dependence differs, which implies that the distance dependence differs at nonzero temperature.
+Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)/2}$,
+which means the renormalized energy scales as $d^{-2}$ in four space-time dimensions.
 % In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
 % can be replaced by a Riemann sum, and the prior zero-temperature results
 

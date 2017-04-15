@@ -511,7 +511,7 @@ since this can naturally also compute the Casimir energy.
 \subsubsection{Derivation of Lifshitz Formula}
 
 The Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
-(This derivation is taken from \S 7.2 in Milonni~\cite{Milonni1994}.
+(This derivation parallels those is taken from \S 7.2 in Milonni~\cite{Milonni1994} and Ch.12 of Bordag\etal\cite{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
 \begin{equation}
@@ -580,7 +580,7 @@ and
   \kappa_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}.
 \end{equation}
 following Zhou~\cite{Zhou1995}.
-  The variables have been adjusted to agree with Lifshitz original calculation, by defining 
+The variables have been adjusted to agree with Lifshitz original calculation, by defining 
 \begin{align}
   k_T &= \sqrt{\epsilon_3}\frac{s}{c}\sqrt{(p^2-1)}.
 \end{align}
@@ -589,14 +589,12 @@ As intimidating as this expression may be, it is a necessary touchstone for late
 us to examine the different scaling regimes at different distances.  
 The perfect-conductor Casimir (\ref{eq:Casimir_energy})can be found by taking the strong-coupling limit,
  $r^{(\zeta)}_i\rightarrow 1$ , and evaluating the integrals.  
-
+The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
+$\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
 
 % This was further expanded on by Dzyaloshinskii\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
 % showed the connection between Casimir force and the pair-wise van der Waals potentials.  
 %This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
-
-The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
-$\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
 
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
 Some care is required in quantizing the electromagnetic field within dielectric media,
@@ -607,6 +605,26 @@ However, it has been phenomenologically observed that one gets the correct answe
 $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated more carefully in~
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
+
+At non-zero temperature it is necessary to also include the effects of real thermally excited photons,
+by accounting for the mean number of excited photons.
+At inverse temperature $\beta=(\kB T)^{-1}$, for a 
+frequency $\omega$, the mean number of photons is $\bar{n}(\omega) = \coth(\beta\hbar \omega/2)$.  
+Note that $\coth(i x)$ has simple poles at $x=\pm n \pi$ for $n$ integer. 
+Exactly the same style of argument can be used to find the thermal Casimir force, 
+but now due to the presence of $\coth(is)$, the integral over imaginary frequency picks up the residues of the integrand at the 
+Matsubara frequencies $s_n:= 2\pi n/(\beta\hbar)$.
+The resulting free energy per unit area is 
+\begin{align}
+  \frac{\mathcal{F}}{L^2} =& \frac{\kB T}{2\pi}{\sum_{n=0}^\infty}' s_n^2 \epsilon_3
+  \int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}(is_n)r^{(\zeta)}_{23}(is_n)e^{-2\sqrt{\epsilon_3}ps_n d/c}\right],
+  \label{eq:lifshitz_finite_temp}
+\end{align}
+where the primed sum gives half the weight to the $n=0$ term, and all functions of frequency are evaluated at $s_n.$ 
+At zero temperature, this result passes over to the previous one, 
+by transforming the sum over frequencies into an integral.  This is the most general form of the Lifshitz
+formula, and can recover all of the limiting behaviours at close distance, far field, and perfect conducting
+media, and rarefied media.
 
 \subsection{Physical Interpretation}
 
@@ -690,8 +708,8 @@ Casimir or van der Waals forces, are the dominant forces for electrically neutra
 However, they can be screened by other electrostatic forces in some circumstances, particularly if one is 
 considering metal bodies~\cite{Lamoreaux2011}.  
 These electrostatic forces typically have a longer ranged force law than the Casimir effect, 
-and unless carefully removed, can swamp measurements of the Casimir effect. 
-In order to detect the classic Casimir force between conducting bodies, it is however necessary to carefully 
+with a similar order of magnitude. 
+In order to detect the classic Casimir force between conducting bodies, it is then necessary to carefully 
 remove any stray background fields.  These arise from patch potentials (localized distributions of electric charge
 on a conductors surface), stray charges, or adsorbed atoms.  
 
@@ -773,21 +791,22 @@ At the other limit, for distances beyond $100 \mu$m, the Casimir effect becomes 
 
 The Casimir energy for bodies separated by a distance $d$, can be written as a power law
 in certain limits.
-The distance scaling depends on the nature of the bodies, and the how large the separation is in comparison to 
-relevant wavelengths in the problem.  
-For pairs of macroscopic slabs the energy scales as $d^{-2}$--$d^{-3}$, depending on the separation, 
-while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.  
-
- Since the Casimir force is a broadband phenomenon, it depends on the resonant frequencies 
- of the interacting media, such as the atomic polarizabilities $\alpha(\omega)$ or the dielectric
+The differing scaling emerges by approximating the integrals in the Lifshitz formula~(\ref{eq:lifshitz_temperature}) in various limits.  
+% The distance scaling depends on the nature of the bodies, and the how large the separation is in comparison to 
+% relevant wavelengths in the problem.  
+% For pairs of macroscopic slabs the energy scales as $d^{-2}$--$d^{-3}$, depending on the separation, 
+% while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.  
+In particular, one must compare the separation of the bodies $d$ to the resonant wavelengths or frequencies of 
+ of the interacting media.  
+This requires some knowledge of the peak frequencies $\omega_A$ of the atomic polarizabilities $\alpha(\omega)$ or the dielectric
  function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
- $\omega_T=\kB T/\hbar$.  The different scaling behaviors emerge from differing approximations to the 
-integrals in the Lifshitz formula~(\ref{eq:lifshitz}) in various limits.  
+ $\omega_T=\kB T/\hbar$.  One can estimate the most important frequencies by examining $\alpha(is),\epsilon(is),e^{-2pd\xi/c}$
+and approximating the integral in various limits. 
 
  In the near-field or van der Waals regime, the separation of the bodies is less than any of the 
- resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$, the exponential factor 
- is unity, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
- dipole interaction between the media.   So for the atom-wall interaction, the potential shows a $d^{-3}$ scaling. 
+ resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$, the exponential factor $e^{-2pd\xi/c}$
+ is unity for all relevant frequencies, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
+ dipole interaction between the media.  For example the atom-wall potential shows a $d^{-3}$ scaling. 
 
  The retarded or Casimir-Polder regime occurs when the atoms are much further than a resonant wavelength 
  $d\gg \omega_A/c,\omega_M/c$.  In that case the dominant contributions come at zero frequency, 
@@ -798,7 +817,7 @@ as $d^{-4}$ for an atom-wall interaction
 
  Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
  thermal field contribute significantly to polarizing the atom.  At room temperature, the thermal wavelength is
- $\lambda_T=2\pi\hbar c/(\kB T)~50\mu m$.  In this regime the potential falls off more slowly as $E\sim d^{-3}$,
+ $\lambda_T=\hbar c/(\kB T)~10\mu m$.  In this regime the potential falls off more slowly as $E\sim d^{-3}$,
  the same as the near-field van der Waals regime.  
 
 \section{Summary of Casimir Experiments}
@@ -980,9 +999,8 @@ These require an anisotropic response from the atom, which might be possible in 
 
 Another way towards repulsive effects is by varying the geometry of the bodies.  
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
-\cite{Levin2010}.  However, in this example the repulsion is unstable. 
-In fact, it seems that it is impossible to get stable levitation
-for similar bodies via Casimir forces alone~\cite{Rahi2010}.
+\cite{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
+In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\cite{Rahi2010}.
 
 \subsubsection{Searches for new physics}
 
@@ -1092,98 +1110,46 @@ of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4
 The scattering approach is currently the only general method of computing 
 electromagnetic Casimir forces between general media.  The scattering method 
 is based on scattering techniques from classical electromagnetic theory and quantum mechanics~\cite{Rahi2009}.
-
-The roots of the scattering method in Casimir physics go back a number of decades.  
-This method has been developed by a number of groups as an analytical tool~\cite{Emig2004, Lambrecht2006,
+%The roots of the scattering method in Casimir physics go back a number of decades.  
+This method has been developed by a number of groups as an analytical method for general geometries~\cite{Emig2004, Lambrecht2006,
 Kenneth2006, Emig2007,
-MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  In Casimir physics, one is often interested in the scattered 
-EM field emanating from an object --- the renormalized interaction energies can be thought of as 
-emerging from this scattering.  The scattering method provides a way to describe the scattering of photons
-from one mode and set of basis functions into another~\cite{Rahi2009}.
-Derivations similar to the argument principle can be applied to describe coupling between modes,
----instead of reflection
-coefficients for a surface, one considers the full scattering matrix for each body, which describes the scattering
-between polarizations.
-This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006}
+MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  
+% In Casimir physics, one is often interested in the scattered 
+% EM field emanating from an object --- the renormalized interaction energies can be thought of as 
+% emerging from this scattering.  
+The Casimir energy can be written as 
+\begin{equation}
+  E = \frac{\hbar c}{2\pi}\int_{0}^\infty d\xi \log\det[\mathbb{M}\mathbb{M}^{-1}_{\infty}]
+  \label{eq:scattering}
+\end{equation}
+where $\mathbb{M}$ is the scattering matrix describing scattering between the free modes of the electromagnetic
+field induced by the presence of bodies~\cite{Rahi2009}.  The energy is renormalized via $\mathbb{M}^{-1}_\infty$,
+which is the scattering matrix as the bodies are removed to spatial infinity, this basically removes any
+coupling between bodies and serves to remove any self-interactions. 
+The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
+%Since different bodies have different shapes, it is necessary t be able to transform basis.  
+Derivations similar to the argument principle used in Sec.~\ref{sec:lifshitz} can be applied to describe the scattering between modes,
+---instead of reflection coefficients for a surface, one considers the full scattering matrix for each body,
+where matrix indices run over the labels (such as wavenumber, polarization) for the modes.
+This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006},
 and spheres and planes~\cite{Canaguier-Durand2012}.   
- These variants rely on analytical expansions, and while they do offer a general purpose numerical
-method, they may be slow to converge if the choice of basis functions poorly corresponds to the actual
+These variants rely on scattering between mode functions suited to analytical expansions,
+ and while they in principle offer a general purpose numerical method, 
+the simulations may be slow to converge if the choice of basis functions is poorly suited to the actual
 geometry required.  
 
-The Johnson group at MIT has developed a formulation better suited to numerical applications.
-Instead of decomposing the field using basis functions like spherical harmonics,
-one uses a boundary element method to describe the scattering~
-\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
-The boundary elements are triangles that tessellate the surface, where each triangular patch is 
-thought to have a current on it.  
-These surface patches interact with one another with the homogeneous Green function.  
-(This is justified via Surface-Integral-Equations\cite{Stratton1941}, and a variant on Green's theorem~\cite{Emig2004})
-In effect, the surface patches appear to have fluctuating currents which interact with one another by emitting 
-photons~\cite{Reid2013}.  
-This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
+The Johnson group at MIT has developed a formulation of the scattering method that is better suited to numerical 
+applications for piecewise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
+Instead of describing the scattering from one mode into another, one can describe the scattering 
+locally at each patch of a surface.  
+The scattering between objects is described by coupling different surface patches together via the
+free-space Green functions.  
+This has justification from the Surface Integral Equations used in classical electromagnetism 
+~\cite{Stratton1941}, and a variant on Green's theorem~\cite{Emig2004},
+where one can describe the field in each region by its free-space analogue, and couple it along the surface.
 (At the level of perturbation theory where the Casimir effect is computed, the photon Green function 
 can be described by its classical counterpart.)
-
-% \begin{enumerate}
-% \item EM field depends on scattered field.  Encoded in reflection matrices
-% which are related to how EM field scatters from a given surface.  
-% \item Developed as analytical technique, and developed into general purpose numerical technique.
-% Numerous authors contributed over decades.
-% \end{enumerate}
-
-% \begin{enumerate}
-%   \item Developed as general method, for scattering between basis modes.  
-%     Initially used with analytical mode expansions.  Can also use finite element basis,
-%     much more adapted to arbitrary bodies.  
-% \item Physical picture is fluctuating currents on bodies.  Interact via EM field.
-%   Can use Green function as if dielectric suffused all space.  
-% Surface-Integral Equations (SIE) and Green's theorem relate surface integrals.  
-% \end{enumerate}
-
-%\begin{enumerate}
-% \item Cite Balian and Duplantier \cite{Balian1977, Balian1978}.  Multiple scattering of E and B fields
-% near perfect conductors.  First paper seems to be classical EM.  Second paper applies to Casimir effect.
-% Studying wrinkling of conductor.  This is an expansion, rather than closed form.  
-%  \item Cite Lambrecht and French collaborators
-%    \cite{Lambrecht2006, MaiaNeto2008,Canaguier-Durand2012}.
-%     Emphasize two-body scattering version between polarizations of EM field.  THen use trace-log=log-det
-%     trickery for general form.  Plane-plane, sphere-plane etc.  
-% \item Genet2003 gets Casimir force as scattering problem in quantum optics.  
-% \item Physical Picture based on generalized Green theorem from 
-%   SIE~\comment{Stratton}\cite{Stratton1941}.
-%   \item Boundary Element Methods in Classical Electromagnetism:
-%     For example see Ch. 8 of \cite{Chew1995}.  
-% \item Cite Bordag 1985 on quantization with delta functions?  There are others
-% Kardar and Li too.  %\todo{Put in Borday1985, Kardar and Li citations}
-% \item Comment on Emig/Buscher showing you can use homogenous green function.
-%   Relation to Green's theorem.
-% \item Emig 2004.  Boundary conditions via a version of Green's theorem - can use homogenous Green 
-% functions given approach current-matching sources.  Introduce delta-functions on \emph{deformed} surfaces.  
-% \item Emig 2007.  Introduces basic formalism expanded on in Rahi.  
-% \item Rahi2009.  Integrate out path integral.  Get scattering potential provided by dielectrics between
-% modes of free geometry.  Lots of basis translations to describe that scattering.  Hubbard-Stratonovich transform
-% introduces currents coupled via Green functions.  Mostly analytical approach based on solutios in terms of multipoles.
-% \item Rodriguez2007
-% Has sum over frequencies as badly oscillating.  Stress-energy tensor.  Finite Difference, Frequency Domain.(FDFD)
-% Explicit inversion for Green function.  Propose moving to Boundary Element methods as faster.
-% Also some analysis of worldline methods.
-% \item Rodriguez2009
-% \item Reid2009.  Expand Partition function in terms of currents interacting with homogenous Green function.
-% Carry out integrals using surface-currents.  
-% Note $N^3$ operations in worst case, and $N\ln N$ for sparse matrices, iterative solvers.  
-% Crossed Capsules, tetrahedral particles.  \cite{Reid2009}
-% \item Reid2011.  Follow on from Reid2009.  Introduce magnetic currents and boundary-conditions to get scattering matrices.
-% (This is the one to work from)\cite{Reid2011}
-% \item Reid2013.  Explication of Reid2011 as both stress-tensor and path integral quantization.  (and showing
-% Gauge invariance of results)\cite{Reid2013}
-% \cite{Emig2004, Emig2007, Rahi2009}
-% \cite{Kenneth2006}
-%   Note use of existent analytical methods and similarities to existent 
-%   numerical FTDT techniques on earlier papers.  
-%   \cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009}
-% \item Cite Johnson/Reid for numerical progress.\cite{Reid2009,Reid2011, Reid2013}.
-% \item Note success, applicability.  \comment{Cite experimental tylenol pill paper}
-%\end{enumerate}
+This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
 
 The fluctuating-surface-current formulation is a general method for computing Casimir
 energies for piece-wise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
@@ -1196,24 +1162,26 @@ bound to the surfaces, which can be interpreted as surface currents flowing to e
 After integrating out the EM field, these surface currents interact with one another via the EM
 Green function.  Since the method assumes piece-wise, homogeneous media and enforces EM boundary
 conditions, it is the relatively simple homogeneous EM Green function that appears in these expressions.
-In order to discretize the method for numerical computations, a basis set to express the currents must
-be chosen.  For general numerical methods, a triangular mesh is the most flexible.
-The surface currents can also be formally integrated out, leaving the energy proportional 
-to a functional determinant 
-\begin{equation}
-  E = \int_0^\infty d\xi \log\det\left[\mathbf{M}^{-1}_{\infty}\mathbf{M}\right],
-\end{equation}
-where $\xi$ is the imaginary frequency, 
-and $\mathbf{M}$ is a matrix where the entries encode the scattering between various surface current 
-elements via the homogeneous EM green function,  
-\begin{equation}
-  M_{ab} = \int_{S_A} dx \int_{S_B} dy f_a(x) G_{ab}(x,y)f_b(y).
-\end{equation}
-\comment{Given general form, noting E/M coupling.  Also multiple bodies.  Renormalization kills
-self-energy terms}
-The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy as the bodies are 
-arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
+The surface currents can also be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
+where now the matrix elements $\mathbb{M}_{ab}$ describe the coupling between surface-patches.
 
+This is particularly adaptable as the basis patches can be chosen to cover an arbitary body easily---
+in particular a triangular mesh is the most flexible.
+% The surface currents can also be formally integrated out, leaving the energy proportional 
+% to a functional determinant 
+% \begin{equation}
+%   E = \int_0^\infty d\xi \log\det\left[\mathbf{M}^{-1}_{\infty}\mathbf{M}\right],
+% \end{equation}
+% where $\xi$ is the imaginary frequency, 
+% and $\mathbf{M}$ is a matrix where the entries encode the scattering between various surface current 
+% elements via the homogeneous EM green function,  
+% \begin{equation}
+%   M_{ab} = \int_{S_A} dx \int_{S_B} dy f_a(x) G_{ab}(x,y)f_b(y).
+% \end{equation}
+% \comment{Given general form, noting E/M coupling.  Also multiple bodies.  Renormalization kills
+% self-energy terms}
+% The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy as the bodies are 
+% arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
 Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant for a dense matrix requires $\order(N^3)$ operations.
 While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, this is difficult.
@@ -1223,10 +1191,13 @@ Further, since each frequency $\xi$ contributes independently, the integral over
 trivially parallelized, but this may only offer relatively little parallelization for some problems.
 
 The fluctuating-surface-current method has been used to 
-for example describing the energy dependence of nanoparticles%\todo{Find nanoparticle-scattering method citations}.
-%\todo{Note use in Kimble group for computing C-P potential}
-\cite{Levin2010,Rodriguez2013} Also suspension of bodies above metallic holes in fluid.  Studied stability
-Also needle above hole.  
+for example describing the energy dependence of tetrahedral nanoparticles, capsules, and other  
+geometries~\cite{Reid2009,Reid2011,Rodriguez2010}.  It has also been used to find cases 
+where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, altough the repulsion
+is not stable\cite{Levin2010,Rodriguez2013} .  
+The scattering method has also been used in the design of atomic traps near dielectric waveguides, where the Casimir--Polder
+force is an essential component of the trap.  
+
 
 As we noted, the scattering method is the only available general method for computing Casimir effects.
 However, it is useful to have multiple methods with different computational properties
@@ -1744,13 +1715,10 @@ Since we will use the v-loop algorithm in our own simulations,
 we will discuss this algorithm further in Ch.~\ref{ch:numerical}. 
 
 Having constructed a path, it is then necessary to compute the worldline integrand $e^{-\cT\langle V\rangle}-1$ along that path.
-If any point along the path intersects one of the surfaces, then potential $V=\lambda\delta[\sigma(\vect{x})]$
-is non-zero.  
-In the strong-coupling, or Dirichlet limit $\lambda\rightarrow \infty$, the path-averaged potential also
-diverges to infinity, and as a result the worldline integrand goes to negative one.  
-If however, no points on the path intersect a surface, then the potential is zero, and the renormalize
+If any point along the path intersects one of the surfaces, then in the strong coupling limit the 
+potential $V=\lambda\delta[\sigma(\vect{x})]$ saturates, and as a result the worldline integrand goes to negative one.  
+If however, no points on the path intersect a surface, then the potential is zero, and the renormalized
 worldline integrand is also zero.  
-
 
 Once a particular random path has been constructed, it is necessary to integrate over the starting
 point $\vect{x}_0$, and the path-time $\cT$.  
@@ -1765,18 +1733,18 @@ the bodies, and integrating over those times.  This must further be integrated o
 For simple geometries, these touching times can be found analytically for a particular random path,
 which simplifies the method further~\cite{Weber2009,Weber2010}.
 
-\begin{itemize}
-  % \item Generate ensemble of closed Brownian paths.
-  % \item Can be done by decoupling Gaussian integrals - so-called ``v-loop'' algorithm.
-  % \item Can also create open Brownian walk, then force to close by pro-rating final position around walk.
-  \item Corresponds to IR vs BT?
+% \begin{itemize}
+%   % \item Generate ensemble of closed Brownian paths.
+%   % \item Can be done by decoupling Gaussian integrals - so-called ``v-loop'' algorithm.
+%   % \item Can also create open Brownian walk, then force to close by pro-rating final position around walk.
+%   \item Corresponds to IR vs BT?
 
-%  \item Due to renormalization, integrand is only non-zero if touch both bodies.
-  % \item In strong coupling limit (which is typically all that is explored) integrand goes to one if touch
-  %   both bodies.  
-  % \item For given unit path, and position $x_0$ can find first touching time.  Then integrate over 
-  %   positions and times.  For simple geometries this can be done analytically.  
-\end{itemize}
+% %  \item Due to renormalization, integrand is only non-zero if touch both bodies.
+%   % \item In strong coupling limit (which is typically all that is explored) integrand goes to one if touch
+%   %   both bodies.  
+%   % \item For given unit path, and position $x_0$ can find first touching time.  Then integrate over 
+%   %   positions and times.  For simple geometries this can be done analytically.  
+% \end{itemize}
 
   \subsection{Advantages and shortcomings of the scalar method}
 

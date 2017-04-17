@@ -430,7 +430,7 @@ since this can naturally also compute the Casimir energy.
 
 
 \subsubsection{Derivation of Lifshitz Formula}
-
+\label{sec:lifshitz}
 The Lifshitz formula for the Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
 In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants $\epsilon_1,\epsilon_2$
 separated by a medium with dielectric constant $\epsilon_3$.  
@@ -927,7 +927,7 @@ The metallic response implies an attractive potential, with the result that the 
 While the preceding discussion emphasized varying materials for Casimir applications, it may 
 be possible to exploit similar ideas for repulsive Casimir--Polder effects~\cite{Milton2011,Milton2012},
 since the atom responds to a narrower range of frequencies.  In the far-field, the attractive dielectric
-response may dominate, it might be possible to engineer near-field repulsion.  \comment{bullshitting here}.
+response may dominate, it might be possible to engineer near-field repulsion.  
 These require an anisotropic response from the atom, which might be possible in the excited state.
 
 Another way towards repulsive effects is by varying the geometry of the bodies.  
@@ -1232,14 +1232,15 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     At this point, the position and momentum operators can be replaced by their eigenvalues, and the
     state-overlap can be used to write,
     \begin{align}
-      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle &= 
-      \int \prod_{k=1}^{N-1} d^Dx_k \prod_{j=0}^{N-1} \frac{d^Dp_j }{(2\pi\hbar)^D}
-      \prod_{n=0}^{N-1} \langle \vect{x}_{n+1}|\vect{p}_{n+1}\rangle
-      \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
-        e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\\
-        &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
-      \prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
-      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}.
+      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle 
+      % &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{j=0}^{N-1} \frac{d^Dp_j }{(2\pi\hbar)^D}
+      % \nonumber\\
+      % \prod_{n=0}^{N-1}\bigg[\langle \vect{x}_{n+1}|\vect{p}_{n+1}\rangle
+      % \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
+      %   e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\bigg]\\
+        &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}\nonumber\\
+      &\times\bigg[\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
+      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg].
     \end{align}
     Since the momentum integrals are Gaussian, they can be straightforwardly evaluated
     \begin{align}
@@ -1255,7 +1256,7 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
         \exp\left\{\frac{i}{\hbar}\int_{0}^{t} dt'\,\left[ \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right]\right\},
     \end{align}
     where in the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
-    \rightarrow d\vect{x}/dt, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
+    \rightarrow \dot{\vect{x}}, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
     $D\vect{x} = \prod_{k=1}^{N-1}d^Dx_k$.  The phase in exponent is the classical action for a particle
     in a potential.  Paths with the same phase will add together constructively, while 
     paths in regions where the phase is quickly varying will cancel one another out.  
@@ -1283,7 +1284,6 @@ The worldline method is an alternative method for computing Casimir energies.
 The worldline method is a descendant of the scalar electrodynamics 
 Feynman explored~\cite{Feynman1950}, where the effect of a quantum
 field is described by summing over the paths of a virtual particle interacting with the other bodies. 
-\comment{Check!}
 The worldline method was later developed as an alternative method for 
 carrying out general quantum field theory calculations in terms of single particle 
 quantum mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  
@@ -1298,22 +1298,24 @@ and gauge fields can also be treated~\cite{Schubert2001}.
 For example, the worldline method has been used to compute relativistic
 field effects for quantum electrodynamics (QED) such as the Lamb shift~\cite{Schmidt1995},  
 It has also been used as a numerical algorithm for computing these relativistic QED effects~\cite{Mazur2014}---
-however, these methods were developed for free-space interactions at high energy.
+however, these methods were developed for free-space interactions at high energy, rather than the 
+low energy Casimir phenomena we desire to describe.  
 
 The worldline method was first used to compute scalar Casimir energies by Gies\etal~\cite{Gies2003,Gies2006, Gies2006a}.
 The scalar worldline method has been extended to finite temperatures~\cite{Klingmueller2008},
  used to study the torsion of inclined planes~\cite{Weber2009},
 and forces in the sphere-plane and cylinder-plane geometries~\cite{Weber2010, Weber2010a}.  
-In these non-trivial geometries the worldline method also examines the failure of the proximity force approximation.
+In these non-trivial geometries the worldline method has also been used to examine the failure of the proximity force approximation.
 More recent work has focused on computing the stress-energy tensor~\cite{Schafer2012, Schafer2016},
-with a view to exploring how the Casimir energy violates certain energy conditions (violations of which are required for exotic physics).
+with a view to exploring how the Casimir energy violates certain energy conditions (violations of which are required for certain exotic physics).
 
 The scalar worldline is also related to some semiclassical expansions for the Casimir energy.  
 In particular, it is a direct numerical method for computing the so-called optical path integral
 \cite{Scardicchio2005, Scardicchio2006}.  The sum over intersecting paths is also reminiscent 
-for the semiclassical approach to the Casimir force by Schaden\etal\cite{Schaden1998} that evaluates 
-the Casimir energy by summing over all periodic orbits of light.  Both of these approximate techniques
-rely on a path integral expression for the Casimir energy that approximates electromagnetism as a
+for the semiclassical approach to the Casimir force by Schaden and Spruch\cite{Schaden1998} that evaluates 
+the Casimir energy by summing over all periodic orbits of light.  This latter work is particularly 
+related to other work on the semiclassical limits of path integrals involving chaos~\cite{Gutzwiller1990}.
+Both of these approximate techniques rely on a path integral expression for the Casimir energy that approximates electromagnetism as a
 scalar field, and the worldline provides a general purpose way of evaluating those path integrals.   
 
 The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
@@ -1340,6 +1342,7 @@ and did not have concrete, correct results.
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 (We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies\etal.)  
+
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
 The action for the field $\phi$ is given by 
 \begin{equation}
@@ -1348,17 +1351,17 @@ The action for the field $\phi$ is given by
 \end{equation}
 where $V(\vect{r},t)$ defines the surfaces of the interacting objects
 \begin{equation}
-  V(\vect{r}) := \lambda \sum_r \delta[\sigma_r(\vect{x}-\vect{R}_r)],
+  V(\vect{r}) := \lambda \sum_r \delta[\sigma_r(\vect{r}-\vect{R}_r)],
 \end{equation}
-where $\lambda$ is the coupling constant, $\sigma_r(\vect{x})=0$ marks the locations of the surfaces, 
+where $\lambda$ is the coupling constant, $\sigma_r(\vect{r})=0$ marks the locations of the surfaces, 
 and $\vect{R}_r$ marks the center location of each body.
 In most work on scalar worldlines, the coupling constant $\lambda$ is taken to infinity, 
 which corresponds to imposing Dirichlet boundary conditions on the surfaces. 
 For planar geometries, this recovers electromagnetic Casimir results for idealized perfect conductors.  
 
 From the Lagrangian, one can find the Hamiltonian and quantize the theory.
-(While this is a somewhat length procedure, it is the clear formal procedure for quantization,
- and useful to follow in cases where there may be ambiguities).
+% (While this is a somewhat length procedure, it is the clear formal procedure for quantization,
+%  and useful to follow in cases where there may be ambiguities).
 The momentum conjugate to $\phi$ is given by
 \begin{equation}
   \Pi := \frac{\delta \cL}{\delta(\partial_t\phi)} = \frac{1}{c^2}\partial_t\phi,
@@ -1366,17 +1369,17 @@ The momentum conjugate to $\phi$ is given by
 where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
 The Hamiltonian is then given by
 \begin{align}
-  H &:= \int d^3x\,(\Pi\partial_t\phi -  L)= \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
+  H &:= \int d^3r\,(\Pi\partial_t\phi -  L)= \int d^3r\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r},t)\phi^2\bigg].  
 \end{align}
 We are now in a position to quantize the theory by promoting the classical fields to quantum operators, 
 $\phi\rightarrow \op{\phi},\, \Pi\rightarrow\op{\Pi}$.
 The fields can be promoted to operators with equal-time commutation relations
 \begin{equation}
-  [\op{\phi}(\vect{x},t),\op{\Pi}(\vect{x'},t)] = i\hbar \delta(\vect{x}-\vect{x'}).
+  [\op{\phi}(\vect{r},t),\op{\Pi}(\vect{r'},t)] = i\hbar \delta(\vect{r}-\vect{r'}).
 \end{equation}
 In exactly analogous fashion to quantum mechanics, the overlap between states is given by 
 \begin{equation}
-  \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3x \phi(\vect{x})\Pi(\vect{x})\bigg].
+  \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3r \phi(\vect{r})\Pi(\vect{r})\bigg].
 \end{equation}
 
 We can compute physical quantities of interest such as Casimir energies and forces
@@ -1437,7 +1440,7 @@ The limit of an arbitrarily large volume, and lattice resolution can be taken af
 In an analogous fashion, one can formally evaluate the partition function path integral as a 
 functional determinant, 
 \begin{equation}
-  Z \propto {\det}^{-1/2}\left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})\right].
+  Z \propto {\det}^{-1/2}\left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right].
 \end{equation}
 % The original computations for the worldline method stressed computing the quantum effective
 % action for the scalar field.  This yields essentially the same expression.  This expression has
@@ -1448,7 +1451,7 @@ be divided out in the renormalization process.
 The free energy for the interacting field can be written as 
 \begin{equation}
   \mathcal{F} = -\kB T\log Z = \frac{1}{2}\kB T 
-\log\det\bigg[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{x})\bigg]+C,
+\log\det\bigg[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\bigg]+C,
   \label{eq:free-energy-det}
 \end{equation}
 where $C$ is a constant.  
@@ -1480,7 +1483,7 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
   \tr\Big[e^{[(\partial_\tau^2+\nabla^2)/2-V(\vect{x})]\cT}-e^{(\partial_\tau^2+\nabla^2)\cT/2}\Big].
 \end{equation}
-The trace can be evaluted by introducing a $D$-dimensional auxiliary Hilbert space, where 
+The trace can be evaluated by introducing a $D$-dimensional auxiliary Hilbert space, where 
 $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
 $[\op{x}_i,\op{p}_j]=i\delta_{ij}$, with the result that 
 \begin{equation}
@@ -1508,10 +1511,10 @@ The resulting worldline path-integral for the free energy at zero temperature  i
   \end{align}
 The intermediate Gaussian integrals over $\tau_k$ can be carried out immediately, since the potential
 is independent of $\tau$.  
-In addition, the final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
+The final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
 % (A more careful derivation for non-zero temperature handles the $\tau$ direction via a Fourier transform,
 % which introduces the Matsubara frequencies, $s_n = 2\pi n/(\beta \hbar)$.  
-In addition, there is a normalization constant of $(2\pi\cT)^{-1/2}$ for each dimension due to the loop 
+There is also a normalization constant of $(2\pi\cT)^{-1/2}$ for each dimension due to the loop 
 closure condition.  This can be thought of as the total normalization for $N$ Gaussian steps of length 
 $\Delta \cT= \cT/N$, subject to the loop-closure requirement $x_0=x_N$.
 % The normalization can be understood from manipulations on the $\delta$-function, where 
@@ -1533,12 +1536,13 @@ $\Delta \cT= \cT/N$, subject to the loop-closure requirement $x_0=x_N$.
 The free energy can be written in a more intuitive form, better suited to numerical calculations,
 if we consider the coupled Gaussians as the probability distribution for paths through space-time.
 Each path increment $\Delta \vect{x}_k=\vect{x}_{k+1}-\vect{x}_k$ is Gaussian with zero mean and variance $\Delta \cT$.
-In addition, the resulting paths must close on themselves ---such Brownian motions with fixed end points are 
+In addition, the resulting paths must close on themselves --- such Brownian motions with fixed end points are 
 referred to as Brownian bridges in the statistics literature~\cite{Karatzas1991}.  
 The result of these manipulations is 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\frac{\hbar c}{2}\int \frac{d\cT}{(2\pi\cT)^{D/2}\cT} \int d\vect{x}_0
   \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
+  \label{eq:scalar_worldline}
 \end{align}
  where $\dlangle\cdots\drangle$ denotes an ensemble average over closed Brownian bridges $\vect{x}(t)$
 starting at $\vect{x}_0$ and returning with $\vect{x}_N=\vect{x}_0$, and 
@@ -1563,7 +1567,7 @@ the vacuum energy cuts off the divergent $\cT$ integral as small $\cT$.
 At later times $\cT$, these paths would have larger extent, and both would contribute, but due 
 to the $\cT^{-(1+D/2)}$ dependence, the lower-path would have a smaller contribution.  
 
-The distance dependence can also be read off.  The typical extent of a Brownian motion of path-time
+The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).  The typical extent of a Brownian motion of path-time
 $\cT$ is $\sqrt{\cT}$. The average time a path touches the surface a distance $d$ away, is then $\cT\sim d^2$.
 Since the integral is only non-zero after a path intersects the bodies, and the integrand is unit otherwise,
 the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D/2}$.  
@@ -1583,15 +1587,16 @@ space-time dimensions.
 
 The worldline method has also been extended to non-zero temperatures~\cite{Klingmueller2008}.
 The generalization is straightforward --- in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
-which expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
-where each Fourier component contributes independently.  The same sort of manipulations
+since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace.  This motivates
+expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
+where each Fourier component contributes independently of the others.  The same sort of manipulations
 can be carried out with the result 
 \begin{align}
-  \mathcal{F}-\mathcal{F}_0 =& -\kB T {\sum_{n=0}^\infty}'\int \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0
+  \mathcal{F}-\mathcal{F}_0 =& -\kB T {\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0
   e^{-s_n^2\cT/(2c^2)}\dlangle e^{-\cT\langle V\rangle} - 1\drangle,
 \end{align}
 where the prime on the sum means that the $n=0$ term is multiplied by a half.  
-As a result, the $\cT$ dependence differs, which implies that the distance dependence differs at nonzero temperature.
+Since the $\cT$ dependence differs, there is also a different distance dependence.
 Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)/2}$,
 which means the renormalized energy scales as $d^{-2}$ in four space-time dimensions.
 % In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
@@ -1657,13 +1662,6 @@ which simplifies the method further~\cite{Weber2009,Weber2010}.
 %   % \item Can also create open Brownian walk, then force to close by pro-rating final position around walk.
 %   \item Corresponds to IR vs BT?
 
-% %  \item Due to renormalization, integrand is only non-zero if touch both bodies.
-%   % \item In strong coupling limit (which is typically all that is explored) integrand goes to one if touch
-%   %   both bodies.  
-%   % \item For given unit path, and position $x_0$ can find first touching time.  Then integrate over 
-%   %   positions and times.  For simple geometries this can be done analytically.  
-% \end{itemize}
-
   \subsection{Advantages and shortcomings of the scalar method}
 
 The worldline method has a number of attractive features.  
@@ -1672,7 +1670,7 @@ of virtual particles.  In this picture, one thinks of the random paths as being 
 of a virtual particle, where the potential gives the energy cost for a particle entering certain regions.
 
 Second, it offers a geometry independent method of handling Casimir forces.  The paths are 
-created without reference to the underlying body geometry, so the method can be easily applied to arbitrarily
+created without reference to the underlying body geometry or a spatial grid, so the method can be easily applied to arbitrarily
 complicated arrangements of bodies.  The only requirement would be that the paths are fine enough
 to resolve the structure of the surfaces.  
 
@@ -1681,7 +1679,7 @@ can be handled by a separate computing process, without any requirement that the
 with one another.  This has the advantage of exploiting the growth of computing clusters with many nodes,
 where that power can be harnessed with minimal effort: once the algorithm works on a single computer,
 it can be easily extended to arbitrarily many computers to increase the size of the ensemble sampled
-from, or the time to reach a given accuracy.  
+from, or reduce the time required to reach a given accuracy.  
 
 % \begin{enumerate}
 %   % \item Advantages
@@ -1724,7 +1722,7 @@ electromagnetism, without any concrete results~\cite{Aehlig2011}.
 
 The goal of this thesis is to extend the scalar worldline method to vector electromagnetism.
 Ideally we would retain the attractive features of the method, such as geometry independence of the paths,
-only needing an ensemble of simple Brownian motions, and Monte Carlo sampling.
+and only needing an ensemble of simple Brownian motions.
 In addition, we aim to improve the method to account for the two physical polarization
 states of the EM field, and properly account for the material properties of the medium.  
 Finally, the method must agree with known results in simple geometries.  
@@ -1736,7 +1734,7 @@ Finally, the method must agree with known results in simple geometries.
 %   \item The method must agree with other calculations where the solution is known.    
 % \end{itemize}
 
-As this thesis will show, we have partially met those goals.  We have developed analytical
+As later chapters in this thesis will show, we have partially met those goals.  We have developed analytical
 and numerical techniques that can be applied to improving existing worldline algorithms.
 This thesis focuses primarily on solving the planar problem ---- although this is well-studied,
 it is a good platform for exploring and testing worldline methods.  

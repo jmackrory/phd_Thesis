@@ -377,25 +377,25 @@ which limits this approach to highly symmetric geometries.
 
 \subsection{Forces between bodies: Casimir Energy}
 
-The classic example due to Casimir~\cite{Casimir1948} predicts that a pair of electrically neutral,
-perfectly conducting plates will attract one another due to their interaction with the quantized 
-electromagnetic (EM) field.  
-The presence of the conductors forces the electric field to vanish on the surfaces,
-which restricts the allowed modes of the electromagnetic field, as illustrated in Fig.~\ref{fig:Casimir_sketch}.
+We now turn our attention to the Casimir effect where macroscopic bodies are attracted to 
+one another via their interaction with the quantized electromagnetic (EM) field~\cite{Casimir1948}.  
+The presence of the bodies restricts the allowed modes of the electric field, 
+which is illustrated for perfectly conducting planes in Fig.~\ref{fig:Casimir_sketch}.
 Each quantized mode of the electromagnetic field contributes
 to the energy, even in the ground state with zero photons.
-  The total ground state energy in the electromagnetic field is 
+The total ground state energy in the electromagnetic field is 
 \begin{equation}
-  E=\sum_\alpha\frac{\hbar\omega_{\alpha}}{2}
+  E=\sum_\alpha\frac{\hbar\omega_{\alpha}}{2},
 \end{equation}
+where $\alpha$ indexes all possible modes.  
 While the total energy is badly divergent, a finite answer can be found by considering 
-the energy difference between two different configurations.  
+the energy difference between two different configurations of bodies.  
 % The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
 % and will be essential in computations of Casimir quantities.  
 In this case, the energy is renormalized by subtracting the energy when the bodies are removed to spatial infinity.  
-The renormalized energy between the plates is
+For example, the renormalized energy between two perfectly conducting plates is
 \begin{equation}
-  E-E_0 = -\frac{\hbar c}{240\pi^2 d^3},\label{eq:Casimir_energy}
+  E-E_0 = -\frac{\hbar c}{720\pi^2 d^3},\label{eq:Casimir_energy}
 \end{equation}
 where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
 and $d$ is the distance between the plates.  % Note that in this expression there is no
@@ -413,10 +413,10 @@ and outside.  Modes have been vertically offset for clarity.  }
 \label{fig:Casimir_sketch}
 \end{figure}
 
-The theory was extended by Lifshitz to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
+The theory was extended by Lifshitz and coworkers to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
 Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
 perfect conductors, and Casimir--Polder forces between atoms' and dielectric surfaces.  
-We will quickly sketch the derivation of the Lifshitz formula (which we will require later),
+We will sketch the derivation of the Lifshitz formula (which we will require later),
 since this can naturally also compute the Casimir energy.
 
 %  As intimidating as this expression is, it can be heuristically derived with
@@ -431,7 +431,9 @@ since this can naturally also compute the Casimir energy.
 
 \subsubsection{Derivation of Lifshitz Formula}
 
-The Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
+The Lifshitz formula for the Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
+In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants $\epsilon_1,\epsilon_2$
+separated by a medium with dielectric constant $\epsilon_3$.  
 (This derivation parallels those is taken from \S 7.2 in Milonni~\cite{Milonni1994} and Ch.12 of Bordag\etal\cite{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
@@ -439,10 +441,10 @@ The energy for the EM field in its ground state is
   E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
 \end{equation}
 where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
-In this case, the  non-zero contribution to the Casimir effect comes from surface plasmon modes, which propagate along the surfaces
+In this case, the  non-zero contribution to the Casimir effect comes from surface plasmon modes, which propagate along the interfaces
 and decay exponentially away from the bodies.  
-The sum over frequencies can be recast as a contour integral over a function whose poles occur at the allowed
-frequencies, with residue $\omega_k$:  
+The sum over frequencies can be recast as a contour integral over complex frequency $\xi$, against a function $\Delta^{(\zeta)}$,
+ whose poles occur at the allowed frequencies, with residue $\omega_k$:  
 \begin{equation}
   E = \frac{L^2}{(2\pi)^2}\sum_{\zeta}\int_0^\infty dk_T\,k_T\oint d\xi\, 
   \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta^{(\zeta)}(\xi)}\frac{d\Delta^{(\zeta)}(\xi)}{d\xi},
@@ -458,19 +460,19 @@ The most important modes are the surface modes, since these modes are sensitive 
 these modes exponentially decay between the bodies.
 The allowed frequencies for these modes must satisfy 
 \begin{equation}
-  r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}=1,
+  r^{\zeta}_{13}r^{\zeta}_{23} e^{-2k_z d}=1,
 \end{equation}
 where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$ and\
 the wavenumber is given by $k_z=\sqrt{k_T^2-\epsilon(\omega)\omega^2/c^2}$.  The reflection coefficients
 are given by 
 \begin{equation}
-  r^{(TE)}_{12} = \frac{k_{z,1}-k_{z,3}}{k_{z,1}+k_{z,3}} \qquad 
-  r^{(TM)}_{12} = \frac{\epsilon_3k_{z,1}-\epsilon_1k_{z,3}}{\epsilon_3k_{z,1}+\epsilon_1k_{z,3}}.
+  r^{(TE)}_{13} = \frac{k_{z,1}-k_{z,3}}{k_{z,1}+k_{z,3}} \qquad 
+  r^{(TM)}_{13} = \frac{\epsilon_3k_{z,1}-\epsilon_1k_{z,3}}{\epsilon_3k_{z,1}+\epsilon_1k_{z,3}}.
 \end{equation}
 The frequency condition is suggestive of the requirement that accumulated round-trip phase 
 (including reflections from both walls) is unity for
 allowed modes (this interpretation is bolstered by considering the Casimir force between mirrors~\cite{Genet2003}).
-This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_1r^{\zeta}_2 e^{-2k_z d}$, where the wavenumber $k_z$
+This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_{13}r^{\zeta}_{23} e^{-2k_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $\xi$.  
 
 The complex contour integral can be split into two pieces: the integral over the right semi-circle 
@@ -480,7 +482,7 @@ It turns out Casimir effects are most naturally discussed along the imaginary fr
 Due to the causal nature of the dielectric response functions, the dielectric function is a 
 smooth, real function on the imaginary axis.  This also means that the $z$-wavenumber is also real,
 with $k_z=\sqrt{k_T^2+\epsilon(is)s^2/c^2}$, 
-and the plane wave factors are real, decaying exponentials rather than oscillating functions.  
+and that oscillatory functions like plane wave factors are replaced with real, decaying exponentials.  
 Both of these features are extremely attractive for numerical methods, and so this is also
 often used in numerical methods~\cite{Johnson2011}.
 
@@ -503,13 +505,16 @@ and
 following Zhou~\cite{Zhou1995}.
 The variables have been adjusted to agree with Lifshitz original calculation, by defining 
 \begin{align}
-  k_T &= \sqrt{\epsilon_3}\frac{s}{c}\sqrt{(p^2-1)}.
+  k_T &= \frac{s}{c}\sqrt{\epsilon_3(p^2-1)}.
 \end{align}
 In general, this integral form is the simplest expression for the Casimir energy between dielectrics. 
-As intimidating as this expression may be, it is a necessary touchstone for later comparison, and it allows 
-us to examine the different scaling regimes at different distances.  
-The perfect-conductor Casimir (\ref{eq:Casimir_energy})can be found by taking the strong-coupling limit,
- $r^{(\zeta)}_i\rightarrow 1$ , and evaluating the integrals.  
+% As intimidating as this expression may be, it is a necessary touchstone for later comparison, and it allows 
+% us to examine the different scaling regimes at different distances.  
+The perfect-conductor Casimir energy result (\ref{eq:Casimir_energy}) can be found by taking the strong-coupling limit,
+ $r^{(\zeta)}_i\rightarrow 1$, and setting $\epsilon_3=1$.  and evaluating the integrals using 
+\begin{equation}
+  \int_0^\infty ds\,s^2 \int_1^{\infty} dp\,p \log[1 - e^{-2 s p d/c}] = -\frac{c^3 \pi^4}{360 d^3}.
+\end{equation}
 The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
 
@@ -532,7 +537,7 @@ by accounting for the mean number of excited photons.
 At inverse temperature $\beta=(\kB T)^{-1}$, for a 
 frequency $\omega$, the mean number of photons is $\bar{n}(\omega) = \coth(\beta\hbar \omega/2)$.  
 Note that $\coth(i x)$ has simple poles at $x=\pm n \pi$ for $n$ integer. 
-Exactly the same style of argument can be used to find the thermal Casimir force, 
+Exactly the same style of argument can be used to find the thermal Casimir energy between dielectrics, 
 but now due to the presence of $\coth(is)$, the integral over imaginary frequency picks up the residues of the integrand at the 
 Matsubara frequencies $s_n:= 2\pi n/(\beta\hbar)$.
 The resulting free energy per unit area is 
@@ -549,32 +554,28 @@ media, and rarefied media.
 
 \subsection{Physical Interpretation}
 
-\comment{This should go first!  What is it, how big is it, how does it compare to other effects.}
-
-% However, boundary conditions are idealizations that ignore the structure
-% The Casimir effect naturally fits into the broader context of quantum field theory.  
-% Casimir initially framed the effect as a result of the zero-point energy associated with each mode of
-% the field.  This framing emphasizes the fields, and the constraints imposed via idealized boundary conditions.
-% However, this view obscures the connection to the fundamental physics of electrons interacting with photons.
-
-Casimir's original calculation vividly shows the importance of vacuum fields.  
-No mention is made of any interactions, just fields with imposed boundary conditions.  
-However, this obscures the physics that went into creating the boundary conditions, and makes it harder
- to connect the Casimir effect to other fundamental interactions.
-
+Casimir's original calculation vividly shows the importance of vacuum fields, and is said to show the reality 
+of the vacuum field.  This is due to the emphasis given to the imposed boundary conditions,
+which are emphasized over the matter that created the boundary conditions~\cite{Jaffe2005}.  
 It is the author's opinion that the Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.  This picture is also
 analogous to the intuitive photon exchange picture used to explain the Casimir--Polder potential.
-This view makes the clearest connection to the underlying fundamental physics, rather than emphasizing idealized
-boundary conditions.  Fig.~\ref{fig:electron-effective-interaction} shows a term contributing to the Casimir effect where 
-electrons on different bodies interact with one another via the electromagnetic field.  The solid lines should
+% This view makes the clearest connection to the underlying fundamental physics, rather than emphasizing idealized
+% boundary conditions.
+  Fig.~\ref{fig:electron-effective-interaction} shows a term contributing to the Casimir effect where 
+electrons on different bodies interact with one another via the electromagnetic field.
+  The solid lines should
 be understood as the current operators for the electrons bound to a particular, separate media, while the 
-wavy lines are the EM green functions describing the photon.  
+wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles'',
+one can recover the full Casimir force results --- as was done by Dzyaloshinskii\etal in resumming a field 
+theoretic expansion~\cite{Dzyaloshinskii1961}.  
 In that case the closed electron loops should be understood as current-current correlation functions,
-$\langle j_\mu j_\nu\rangle$, where under a linear response theory, this correlation function is related to the conductivity
+$\langle j_\mu j_\nu\rangle$, where under linear response theory, this correlation function is related to the conductivity
 tensor $\sigma_{\mu\nu}$~\cite{Kubo1957,Altland2011}.  The conductivity tensor is in turn related to the dielectric tensor, $\epsilon_{ij}$
 via Ohm's Law $j_i=\sigma_{ij}E_j,$ which makes the connection between this condensed matter physics,
-and the material functions used in the Casimir effect.  
+and the material functions used in the Casimir effect\footnote{
+  This relationship was pointed out by Rahi\etal\cite{Rahi2009}, as a justification for their starting point
+  in quantizing the electromagnetic field in media.}.
 
 %\todo{Details of Kubo?}
 % \comment{Effective interaction: expanding out perturbation theory leads to $\langle j_\mu j_\nu\rangle$

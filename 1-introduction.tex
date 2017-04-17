@@ -1,76 +1,5 @@
 \chapter{Introduction}
 \label{ch:introduction}
-% %suggest some unity to two disparate projects.  
-% Quantum mechanics is fundamentally a statistical theory, in that it only makes predictions for 
-% the probabilities of events~\cite{Sakurai1994}.
-% The probability for an event to occur is given by the Born rule, which says the probability is given by 
-% the absolute-square of the probability amplitude for that event.  
-% If there are multiple pathways by which an event can take place, the total amplitude for an event is 
-% the sum over the amplitudes for each possible pathways~\cite{Feynman1965}.  
-% These paths encompass paths through abstract spaces, such as the number of excitations in a field.
-% In this case, the intermediate particles correspond to are referred to as ``virtual particles'', 
-% which are referred to as quantum fluctuations.
-% This sum over intermediate amplitudes can lead to novel quantum effects such as the Casimir effect,
-% where electrically neutral, material bodies are attracted to each other due to the exchange of virtual photons.
-% %\comment{Perhaps Peres?}
-
-% Alternatively, the probabilistic nature of quantum mechanics implies that the results of quantum measurements 
-% are stochastic quantities which fluctuate under repeated measurements.  
-% This is particularly relevant as modern experiments can isolate single quantum systems for long 
-% periods of time and continuously measure their properties.  One can then think of reconstructing
-% the system's trajectory through time as it evolves based on the measurement~\cite{Carmichael1993}.  
-
-% This thesis presents two projects reflecting each aspect of quantum fluctuations.  
-% The projects are further connected by their quantum mechanical underpinning, the computational methods 
-% employed to simulate stochastic processes, and their relevance to modern experiments on atoms.  
-% The first project is a method of computing energies related to Casimir effect, while the second project is related to 
-% continuous quantum position measurements of atoms.  The majority of this thesis will be devoted
-% to the first project, with the second project being discussed in the final chapter.  
-% The key results presented in this thesis have been published in~\cite{
-% Mackrory2010, Mackrory2016,Mackrory2017a, Mackrory2017b}
-% % Through advances in modern experimental technology both of these categories of effect are now 
-% % directly observable.%~\cite{WisemanMilburn2010, Dalvit2011}.  
-
-% % The first project relates to computing Casimir forces via the worldline method, and occupies the majority
-% % of this thesis.  In brief, the worldline method is a Monte Carlo method for computing Casimir energies
-% % via ensembles of closed Brownian paths.  The work presented here extends the method by
-% %  developing analytical and numerical techniques to 
-
-% % The second theme will be using quantum trajectories to simulate continuous positions measurements on atoms.
-% % Both of these projects are related to fundamental quantum optical phenomena, 
-% % that we will explore using stochastic calculus, and Monte-Carlo methods for numerical simulations.  
-
-% The remainder of the introduction will expand on the physical origin, modern experiments, and theoretical
-% techniques for computing both Casimir effects, and then continuous quantum measurements.  
-
-% % \comment{There are two roles for the randomness here.
-% %   From one point of view, the randomness is an intrinsic part of quantum mechanics,
-% %  and thus naturally shows up in fluctuation phenomena like the Casimir effect, or in quantum measurements.
-% %   Alternatively, if we are considering these calculations for energy or evolution as large integrals,
-% %  then we can efficiently compute these integrals by randomly sampling from their dominant regions.
-% %   In this sense, the randomness shows up as a calculational tool.}
-
-% % \begin{enumerate}
-% % \item General thesis about quantum physics of atoms using computation.  
-% % \item Thesis covers numerical monte-carlo techniques, where random numbers used in simulation.
-% % \item First new method for computing electromagnetic Casimir energies.
-% % \item Second, continuous position measurements of atoms taking into account experimental constraints.  
-% % \item United in perspective of numerical work relying on Monte-Carlo techniques,
-% %  to explore quantum phenomena relevant to modern experiments and pushes toward future technology  
-% % \end{enumerate}
-
-%\section{Casimir Forces}% in general and physical interpretation}
-
-
-% A quantum field theory posits that the physical world is described by continuous fields, where the 
-% fields are excited in discrete amounts that we interpret as the particles or quanta of the field.  \todo{Cite Schwinger on Why QFT?}
-% Interactions between fields are mediated by exchanging quanta of the appropriate field.
-% For example, in electromagnetism charged matter 
-% such as protons and electrons interact with one another by emitting and reabsorbing photons which are the quanta of the 
-% electromagnetic field.  
-% (We will distinguish between real particles which can be observed on a detector, and virtual particles
-% which can interact with other particles, but are not directly observable).
-% Since the electromagnetic field is quantized, 
 
 The Casimir effect is one of the more surprising consequences of quantum electrodynamics (QED), the quantum theory
 describing the interaction of electrons and photons\footnote{
@@ -90,15 +19,13 @@ and each mode carries a energy proportional to its frequency (even in the ground
 
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the electromagnetic Casimir effect is the most important example.  
-The quanta of the electromagnetic field, photons are massless making their interaction long-ranged, 
+This is because photons, the quanta of the electromagnetic field, are massless which makes their interaction long-ranged, 
 and the coupling of electromagnetism to matter is much stronger than gravity, the only other long-ranged fundamental force.  
 In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
-interact with electrons in other bodies.  The fluctuating electric dipoles in the bodies then become correlated with one
-another, which leads to an attractive force.
+interact with electrons in other bodies. %  The fluctuating electric dipoles in the bodies then become correlated with one
+% another, which leads to an attractive force.
 The interacting bodies can be pairs of atoms~\cite{CasimirPolder1948}, 
 macroscopic bodies such as metallic planes and dielectric slabs~\cite{Lifshitz1956}, or any combination of these.
-
-
 
 Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming in the bodies.  
 This interpretation is intimately related to the van der Waals force, where 
@@ -133,9 +60,10 @@ where the currents at each patch of surface interact with one another via emitti
  One finds the Casimir energy by taking the determinant of the (large) scattering matrix for all of these patches~\cite{Reid2011}.  
 The worldline method is another promising method for calculating Casimir energies~\cite{Gies2003},
 which computes the Casimir energy by considering an ensemble of closed 
-Brownian paths propagating through space.  The presence of bodies is encoded in a potential which is
+Brownian paths propagating through space.
+ One can intuitively consider these paths as being the space-time path of a virtual particle.
+ The presence of bodies is encoded in a potential which is
 accumulated along the path based on whether the Brownian paths intersect any of the bodies.
-One can intuitively consider these paths as being the space-time path of a virtual particle.  
 The worldline method has only been developed for scalar fields interacting with idealized surfaces.
 In contrast to the scattering method, the worldline method is a Monte Carlo method which makes it 
 easy to parallelize.  
@@ -144,13 +72,13 @@ It is the goal of this thesis to extend the worldline method to computing electr
 This requires accounting for the vector nature of the electromagnetic field, and including realistic coupling to 
 material properties, while attempting to retain as many of its appealing properties as possible.    
 
-The rest of this introduction will cover simple examples of Casimir effects, and expand on background material.
+The rest of this chapter will cover simple examples of Casimir effects, and expand on background material.
 In Sec.~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
 In Sec.~\ref{sec:expt_review} we will briefly survey recent experiments on the Casimir effect.
 In Sec.~\ref{sec:numerical_review} we will cover the most prominent numerical methods for computing the Casimir effect.
-In particular we will introduce the Feynman path integral, and discuss the scalar worldline method.  
+In particular we will introduce the Feynman path integral and the scalar worldline method at length.  
 
 % At the outset, we note that there have been a number of books published on the subject of Casimir forces 
 % in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
@@ -1140,32 +1068,145 @@ geometry required.
 
 The Johnson group at MIT has developed a formulation of the scattering method that is better suited to numerical 
 applications for piecewise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
-Instead of describing the scattering from one mode into another, one can describe the scattering 
-locally at each patch of a surface.  
-The scattering between objects is described by coupling different surface patches together via the
-free-space Green functions.  
-This has justification from the Surface Integral Equations used in classical electromagnetism 
-~\cite{Stratton1941}, and a variant on Green's theorem~\cite{Emig2004},
-where one can describe the field in each region by its free-space analogue, and couple it along the surface.
-(At the level of perturbation theory where the Casimir effect is computed, the photon Green function 
-can be described by its classical counterpart.)
-This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
-
+% Instead of describing the scattering from one mode into another, one can describe the scattering 
+% locally at each patch of a surface.  
+% The scattering between objects is described by coupling different surface patches together via the
+% free-space Green functions.  
+% This has justification from the Surface Integral Equations used in classical electromagnetism 
+% ~\cite{Stratton1941}, and a variant on Green's theorem~\cite{Emig2004},
+% where one can describe the field in each region by its free-space analogue, and couple it along the surface.
+% (At the level of perturbation theory where the Casimir effect is computed, the photon Green function 
+% can be described by its classical counterpart.)
+% This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
 The fluctuating-surface-current formulation is a general method for computing Casimir
 energies for piece-wise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
 In essence the method calculates the interaction between electric and magnetic surface currents 
-on different bodies, mediated by the EM field.  Mathematically this is derived 
-from a path integral for the EM field, where the EM boundary conditions are enforced at the 
+on different bodies, mediated by the electromagnetic field.  Mathematically this is derived 
+from a path integral for the electromagnetic field, where the fields are restricted to obeying EM boundary conditions at the 
 surfaces via functional $\delta$-functions (simpler boundary conditions were handled in this fashion in
-~\cite{Bordag1985,Li1991}.  The $\delta$-functions introduce fields 
+~\cite{Bordag1985,Li1991}).  The $\delta$-functions introduce fields 
 bound to the surfaces, which can be interpreted as surface currents flowing to enforce boundary conditions.
-After integrating out the EM field, these surface currents interact with one another via the EM
-Green function.  Since the method assumes piece-wise, homogeneous media and enforces EM boundary
+After integrating out the EM field in the interior and exterior regions, 
+these surface currents interact with one another via the electromagnetic Green function.
+Since the method assumes piece-wise, homogeneous media and enforces EM boundary
 conditions, it is the relatively simple homogeneous EM Green function that appears in these expressions.
+For example, the electric field Green function responding to electric sources at imaginary frequency is 
+$\Gamma^{EE}(\vect{x},\vect{x'})=e^{-\kappa|\vect{x}-\vect{x'}|}/(4\pi|\vect{x}-\vect{x'}|)$.  Similarly simple expressions
+exist for the other combinations of electric/magnetic responses to electric or magnetic sources.
 The surface currents can also be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
-where now the matrix elements $\mathbb{M}_{ab}$ describe the coupling between surface-patches.
+where now the matrix elements $\mathbb{M}_{ab}$ describe the coupling between surface-patches induced
+by the Green function.  (An expanded derivation is given in App.~\ref{app:scattering}.)
 
-This is particularly adaptable as the basis patches can be chosen to cover an arbitary body easily---
+%\subsubsection{Sketch of derivation}
+
+% This appendix briefly reviews the derivation of the fluctuating surface current method,
+% and comments on the simplifications that enforcing the boundary conditions offer.
+% % This numerical approach is related to prior multipole scattering approach~\cite{Rahi2009}.
+% % Earlier work chose to expand the scattering amplitudes in terms of mode function
+% % solutions.  In contrast, this work expands the fields at the surfaces using 
+% % boundary elements - in particular triangles.  
+% The following is adapted from calculations Homer Reid's thesis, and published as Ref~\cite{Reid2013}.
+% The numerical package is freely available as ScuffEM package maintained by Homer Reid~\cite{ScuffEM2016}.  
+% The appendix is provided for the purposes of examining the differences from the worldline 
+% approach to the same calculation, and numerical concerns. 
+
+% The classical action is 
+% \begin{equation}
+%   S = \frac{1}{2}\int\frac{d\omega}{2\pi}\int d^3x\,\left[ 
+%     \epsilon(\omega,\vect{x})|\vect{E}(\omega,\vect{x})|^2 - \mu(\omega,\vect{x})|\vect{H}(\omega,\vect{x})|^2\right],
+% \end{equation}
+% where the fields have already been written in their Fourier components to better handle dispersion.  
+% The fields $\vect{E},\vect{H}$ can be rewritten in terms of the standard potentials, $\phi,\vect{A}$
+% where the initial Lagrangian density is 
+% \begin{equation}
+%  \mathcal{L}= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\left[ 
+%     \epsilon(\omega,\vect{x})(\partial_i A^0+i\omega A^i)(\partial_i {A^0}^*-i\omega A^i)
+% - \frac{1}{\mu}(\epsilon_{ijk}\partial_jA^k\epsilon_{imn}\partial_mA^n)\right]
+% \end{equation}
+% After the Wick rotation, and integration by parts, the Lagrangian density can be written as
+% \begin{equation}
+%   \mathcal{L}=\tilde{A}^{\mu,*} \bigg[\left(-\epsilon\xi^2+\frac{1}{\mu}\nabla^2\right)\delta_{\mu\nu} 
+%   - \alpha_\mu\alpha_\nu\bigg]\tilde{A}^\nu,
+% \end{equation}
+% where $(\tilde{A}^0,\tilde{A}^j) = (\sqrt{\epsilon\mu}A^0,\vect{A})$, 
+% and $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$.
+% The terms in $(\alpha_\mu\tilde{A}^\mu)^2$ correspond to pure gauge degrees of freedom, and thus 
+% are irrelevant to physical states.  Since the boundary conditions will be explicitly
+% enforced elsewhere, the spatial dependence of $\epsilon, \mu$ can be ignored and these can be commuted
+% past differential operators with impunity.   As a result, the Lagrangian is
+% \begin{equation}
+%   \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu} - \alpha_\mu\alpha_\nu]\tilde{A}^\nu,
+% \end{equation}
+% where the matrix has the form of a transverse projector in $\alpha^\mu$.  Note that this is proceeding
+% in exact analogy with path integral quantization of the electromagnetic field in free space.  
+% The matrix has a null eigenvalue along $\alpha_\mu$, which corresponds to gauge-transformations.  
+% The null eigenvalue is normally removed within path integrals by using the Fadeev-Popov method for gauge fixing,
+% by introducing  
+
+% The gauge-fixed partition function is
+% \begin{equation}
+%   Z_{EM} = \int [D\tilde{A}]_C e^{-\frac{\beta}{2}\int d\vect{x} \mathcal{L}},
+% \end{equation}
+% where $[D\tilde{A}]_C$ integrates over all field conditions that satisfy the boundary conditions.
+% The boundary conditions will be explicitly enforced via functional delta-functions.  
+
+% In the absence of any free charges or currents, the electromagnetic boundary conditions are given by 
+% \begin{gather}
+%   \vect{E}^\|_1 =\vect{E}^\|_2 \qquad  \vect{H}^\|_1 =\vect{H}^\|_2 \\
+%   B_1^\perp = B_2^\perp\qquad   D_1^\perp = D_2^\perp,
+% \end{gather}
+% where the $1,2$ subscripts denote the media the fields are evaluated in.  
+% These boundary conditions can be enforced by introducing functional $\delta$-functions,
+% % We can enforce boundary conditions in path integrals via functional delta functions using
+% % the Fourier representation of the delta function 
+% % (Cites Bordag, and Kardar and Li)
+% \begin{equation}
+%   \delta(\vect{E}^\|_1-\vect{E}^\|_2) = \int D\vect{K} e^{i\int_{\partial \mathcal{O}} d^3\vect{x}\,
+%     \vect{K}\cdot(\vect{E}^\|_1-\vect{E}^\|_2)},
+% \end{equation}
+
+% The resulting path integral is
+% \begin{align}
+%   Z_{TE} &= \int \prod_rD\vect{K}_rD\vect{N}_re^{-S_e[\vect{K}_r,\vect{N}_r] - S_r[\vect{K}_r,\vect{N}_r] }
+% \end{align}
+% where the external and internal effective actions are given by 
+% \begin{align}
+%   S_{e}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r\ne r'}
+%   \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\,  Q_i^r(x)M_{ij}^eQ_j^{r'}(x')\\
+%   S_{r}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r}
+%   \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r}}d\vect{x'}\,  Q_i^r(x)M_{ij}^rQ_j^r(x').
+% \end{align}
+% In this expression the combined six-dimensional current vector is $\vect{Q}(x) =\big[\vect{K}^r(x),\vect{N}^r(x)\big]$ 
+% and the matrix operator $M$ for both external and internal integrals is given by 
+% \begin{equation}
+%   M^{(e)}_{ij}=\left(\begin{array}{cc} 
+%     \underline{L}^{E,e}\underline{G}\underline{L}^{E,e} &\underline{L}^{E,e}\underline{G}\underline{L}^{M,e}\\
+%     \underline{L}^{M,e}\underline{G}\underline{L}^{E,e} &\underline{L}^{M,e}\underline{G}\underline{L}^{M,e}\\
+%   \end{array}
+%   \right)=
+%   \left(\begin{array}{cc} 
+%       \underline{\Gamma}_e^{EE} &\underline{\Gamma}_e^{EM}\\
+%       \underline{\Gamma}_e^{ME} &\underline{\Gamma}_e^{MM}
+%   \end{array}
+%   \right),
+% \end{equation}
+% where $\Gamma_e^{PQ}$ is the classical Green tensor for the response of the field $P$ to a source of 
+% type $Q$ in a region characterized by constants $\epsilon_e,\mu_e$.  The Green tensors are explicitly given 
+% by
+% \begin{align}
+%   \underline{\Gamma}_r^{EE} = -\mu_r\xi \underline{G}\qquad
+%   \underline{\Gamma}_r^{EM} = \underline{\Gamma}_r^{ME}=v_r\xi \underline{C}\qquad
+%   \underline{\Gamma}_r^{MM} = =-\epsilon_r\xi\underline{G},
+% \end{align}
+% where the free Green functions $\underline{G}, \underline{C}$ are given by 
+% \begin{align}
+%   G_{ij} = \left[\delta_{ij}-\frac{1}{v_r^2\xi^2}\partial_i\partial_j\right]G_0,\qquad
+%   C_{ij} = -\frac{1}{v_r\xi}\epsilon_{ijk}\partial_k G_0\qquad
+%   G_0 = \frac{e^{-v_r\xi|\vect{x-x'}|}}{4\pi|\vect{x-x'}|}.
+% \end{align}
+
+This method and alternative choice of basis is particularly adaptable as the basis patches can 
+be chosen to cover an arbitary body easily---
 in particular a triangular mesh is the most flexible.
 % The surface currents can also be formally integrated out, leaving the energy proportional 
 % to a functional determinant 
@@ -1196,8 +1237,7 @@ geometries~\cite{Reid2009,Reid2011,Rodriguez2010}.  It has also been used to fin
 where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, altough the repulsion
 is not stable\cite{Levin2010,Rodriguez2013} .  
 The scattering method has also been used in the design of atomic traps near dielectric waveguides, where the Casimir--Polder
-force is an essential component of the trap.  
-
+force is an essential component of the trap~\cite{Hung2013}.  
 
 As we noted, the scattering method is the only available general method for computing Casimir effects.
 However, it is useful to have multiple methods with different computational properties
@@ -1261,8 +1301,7 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     \end{equation}
     where the position and momentum operators obey the following commutation relations,
     \begin{gather}
-      [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\\
-      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
+      [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\qquad      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
     \end{gather}
     with resolutions of the identity,
     \begin{gather}
@@ -1282,10 +1321,10 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     First, split the evolution operator into $N$ pieces, and insert $(N-1)$ resolutions of the $\vect{x}$-identity 
     and $N$ resolutions of the $\vect{p}$-identity between    the pieces
     \begin{align}
-      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle &= \int \prod_{k=1}^{N-1} d^Dx_k 
-      \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
-      \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
-      \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
+      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle % &= \int \prod_{k=1}^{N-1} d^Dx_k 
+      % \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
+      % \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
+      % \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
       &=\int \prod_{k=1}^{N-1} d^Dx_k \prod_{j=0}^{N-1} \frac{d^Dp_j }{(2\pi\hbar)^D}
       \langle \vect{x}_N|\vect{p}_{N}\rangle\langle\vect{p}_{N}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle\nonumber\\
       & \hspace{0.5cm}\times\langle \vect{x}_{N-1}|\vect{p}_{N-1}\rangle\langle\vect{p}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
@@ -1445,8 +1484,7 @@ The momentum conjugate to $\phi$ is given by
 where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
 The Hamiltonian is then given by
 \begin{align}
-  H &:= \int d^3x\,(\Pi\partial_t\phi -  L)\\ 
-  &= \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
+  H &:= \int d^3x\,(\Pi\partial_t\phi -  L)= \int d^3x\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{x},t)\phi^2\bigg].  
 \end{align}
 We are now in a position to quantize the theory by promoting the classical fields to quantum operators, 
 $\phi\rightarrow \op{\phi},\, \Pi\rightarrow\op{\Pi}$.
@@ -1679,8 +1717,6 @@ which means the renormalized energy scales as $d^{-2}$ in four space-time dimens
 
 \subsection{Numerical method}
 
-\subsubsection{Path generation}
-
 In order to numerically evaluate the worldline Casimir energy, it is necessary to generate 
 an ensemble of closed, Brownian paths.  Given the probability for a free Brownian motion to close 
 on itself after $N$ steps is negligible, it is essential to force the closure constraint when
@@ -1806,15 +1842,18 @@ electromagnetism, without any concrete results~\cite{Aehlig2011}.
 
 The goal of this thesis is to extend the scalar worldline method to vector electromagnetism.
 Ideally we would retain the attractive features of the method, such as geometry independence of the paths,
-simple path generation, and Monte Carlo sampling, while improving the method to account for the two physical polarization
+only needing an ensemble of simple Brownian motions, and Monte Carlo sampling.
+In addition, we aim to improve the method to account for the two physical polarization
 states of the EM field, and properly account for the material properties of the medium.  
-\begin{itemize}
-  \item The paths should be simple Brownian motions.
-  \item The algorithm should be independent of the geometry.
-  \item The potential should emerge from the dielectric properties of the medium
-  \item The physical degrees of freedom should be correctly accounted for
-  \item The method must agree with other calculations where the solution is known.    
-\end{itemize}
+Finally, the method must agree with known results in simple geometries.  
+% \begin{itemize}
+%   \item The paths should be simple Brownian motions.
+%   \item The algorithm should be independent of the geometry.
+%   \item The potential should emerge from the dielectric properties of the medium
+%   \item The physical degrees of freedom should be correctly accounted for
+%   \item The method must agree with other calculations where the solution is known.    
+% \end{itemize}
+
 As this thesis will show, we have partially met those goals.  We have developed analytical
 and numerical techniques that can be applied to improving existing worldline algorithms.
 This thesis focuses primarily on solving the planar problem ---- although this is well-studied,

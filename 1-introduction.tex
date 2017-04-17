@@ -13,13 +13,17 @@ Why did the gecko cross the ceiling?  To get to the other side.  How did he get 
 }.
 According to QED a pair of  electrically neutral, conducting bodies will be attracted to one another due to their mutual interaction
 with the quantized electromagnetic field, even if the electromagnetic field is in it's vacuum state~\cite{Casimir1948}.  
-In brief, the total energy of the fields is decreased if the bodies are brought closer together 
-since the presence of the conducting bodies restricts the allowed modes of the electromagnetic field,
-and each mode carries a energy proportional to its frequency (even in the ground state).
+In brief, the total energy of in the field is the sum of the energies of each of the field modes, 
+where each mode has energy proportional to its frequency.   
+Since the presence of the conducting bodies restricts the electric field on the plates, this enforces 
+boundary conditions, and restricts the allowed modes of the electromagnetic field to have a half-integer 
+number of wavelengths between the plates.  
+As the plates are brought closer together, this total vacuum energy is reduced, leading to an attractive force
+between the plates.  
 
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the electromagnetic Casimir effect is the most important example.  
-This is because photons, the quanta of the electromagnetic field, are massless which makes their interaction long-ranged, 
+This is because photons (the quanta of the electromagnetic field) are massless which makes their interaction long-ranged, 
 and the coupling of electromagnetism to matter is much stronger than gravity, the only other long-ranged fundamental force.  
 In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
 interact with electrons in other bodies. %  The fluctuating electric dipoles in the bodies then become correlated with one
@@ -549,7 +553,7 @@ The resulting free energy per unit area is
 where the primed sum gives half the weight to the $n=0$ term, and all functions of frequency are evaluated at $s_n.$ 
 At zero temperature, this result passes over to the previous one, 
 by transforming the sum over frequencies into an integral.  This is the most general form of the Lifshitz
-formula, and can recover all of the limiting behaviours at close distance, far field, and perfect conducting
+formula, and can recover all of the limiting behaviors at close distance, far field, and perfect conducting
 media, and rarefied media.
 
 \subsection{Physical Interpretation}
@@ -567,7 +571,7 @@ electrons on different bodies interact with one another via the electromagnetic 
   The solid lines should
 be understood as the current operators for the electrons bound to a particular, separate media, while the 
 wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles'',
-one can recover the full Casimir force results --- as was done by Dzyaloshinskii\etal in resumming a field 
+one can recover the full Casimir force results --- as was done by Dzyaloshinskii\etal in re-summing a field 
 theoretic expansion~\cite{Dzyaloshinskii1961}.  
 In that case the closed electron loops should be understood as current-current correlation functions,
 $\langle j_\mu j_\nu\rangle$, where under linear response theory, this correlation function is related to the conductivity
@@ -1077,7 +1081,7 @@ the simulations may be slow to converge if the choice of basis functions is poor
 geometry required.  
 
 The Johnson group at MIT has developed a formulation of the scattering method that is better suited to numerical 
-applications for piecewise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
+applications for piece-wise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
 % Instead of describing the scattering from one mode into another, one can describe the scattering 
 % locally at each patch of a surface.  
 % The scattering between objects is described by coupling different surface patches together via the
@@ -1116,7 +1120,7 @@ trivially parallelized, but this may only offer relatively little parallelizatio
 The fluctuating-surface-current method has been used to 
 for example describing the energy dependence of tetrahedral nanoparticles, capsules, and other  
 geometries~\cite{Reid2009,Reid2011,Rodriguez2010}.  It has also been used to find cases 
-where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, altough the repulsion
+where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, although the repulsion
 is not stable~\cite{Levin2010,Rodriguez2013} .  
 The scattering method has also been used in the design of atomic traps near dielectric waveguides, where the Casimir--Polder
 force is an essential component of the trap~\cite{Hung2013}.  
@@ -1309,10 +1313,10 @@ In these non-trivial geometries the worldline method has also been used to exami
 More recent work has focused on computing the stress-energy tensor~\cite{Schafer2012, Schafer2016},
 with a view to exploring how the Casimir energy violates certain energy conditions (violations of which are required for certain exotic physics).
 
-The scalar worldline is also related to some semiclassical expansions for the Casimir energy.  
+The scalar worldline is also related to some semi-classical expansions for the Casimir energy.  
 In particular, it is a direct numerical method for computing the so-called optical path integral
 \cite{Scardicchio2005, Scardicchio2006}.  The sum over intersecting paths is also reminiscent 
-for the semiclassical approach to the Casimir force by Schaden and Spruch\cite{Schaden1998} that evaluates 
+for the semi-classical approach to the Casimir force by Schaden and Spruch\cite{Schaden1998} that evaluates 
 the Casimir energy by summing over all periodic orbits of light.  This latter work is particularly 
 related to other work on the semiclassical limits of path integrals involving chaos~\cite{Gutzwiller1990}.
 Both of these approximate techniques rely on a path integral expression for the Casimir energy that approximates electromagnetism as a
@@ -1426,7 +1430,7 @@ In that case the partition function is a large, finite Gaussian integral of the 
 \begin{equation}
   Z_{\text{reg}} = \int d\phi_k\exp\left\{-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right\}.
 \end{equation}
-where the labels over positions have been labelled with indices and the matrix $A$ represents the differential
+where the labels over positions have been labeled with indices and the matrix $A$ represents the differential
 operator.  
 This regularized expression can be integrated, under the assumption that the eigenbasis of $A$ can be found, i.e.
 where $A_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_k$.  In that case, each Gaussian integral decouples and the 

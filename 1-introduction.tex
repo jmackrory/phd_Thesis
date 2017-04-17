@@ -104,8 +104,9 @@ In particular we will introduce the Feynman path integral and the scalar worldli
 Casimir and van der Waals forces are intimately related, and describe the same basic quantum mechanical force. 
 Van der Waals forces were first discovered as deviations from ideal gas behavior, which can be attributed 
 to the atoms possessing a finite size and to experiencing inter-atomic forces~\cite{vanderWaals,Parsegian2006}.
-London described these inter-atomic forces in terms of fluctuating, induced dipoles using quantum mechanical perturbation
- theory~\cite{London1930}.  This work leads to an inter-atomic potential with a characteristic $d^{-6}$ scaling.
+London gave these interatomic forces a theoretical underpinning in terms of fluctuating, induced dipoles using quantum mechanical perturbation
+ theory~\cite{London1930}.
+  This work leads to an interatomic potential with a characteristic $d^{-6}$ scaling.
 While this scaling is similar to the other possible dipole-dipole interactions, these dispersion forces are often the dominant contribution
 to inter-molecular forces~\cite{Israelachvili2011}.
 
@@ -114,9 +115,11 @@ ignores the finite speed of light.  Casimir and Polder extended this calculation
 where they accounted for the retardation due to the finite speed of light, 
 which causes the potential to decay more quickly at larger distances~\cite{CasimirPolder1948}.  
 
-Casimir then showed that neutral, conducting plates would be attracted together~\cite{Casimir1948}.
-This arises since the total energy in the quantized electromagnetic field is reduced due to the field's interaction
-with the conducting plates.  This calculation emphasizes the fluctuations in the fields, and 
+Casimir then showed that uncharged, conducting plates would be attracted together by their mutual
+interaction with the quantized electromagnetic field~\cite{Casimir1948}.
+% This arises since the total energy in the quantized electromagnetic field is reduced due to the field's interaction
+% with the conducting plates.
+This calculation emphasizes the role played by the fields, and suggests
 a global interaction due to the effective boundary conditions imposed by the plates.  This
 stands in contrast to the van der Waals/London forces determined by pair-wise interactions between induced dipoles.
 
@@ -127,16 +130,15 @@ from the pair-wise van der Waals interactions of all of the constituent parts~\c
 Given that background, we will typically refer to the Casimir effect as the umbrella term for all of these
 vacuum fluctuation forces.  Near-field forces where the interactions can be considered as instantaneous
 dipole interactions will be referred to as van der Waals forces.  In honor of Casimir and Polder's work
-we will refer to forces between atoms and forces as Casimir--Polder forces, as opposed to the Casimir 
+we will refer to forces between atoms and macroscopic bodies as Casimir--Polder forces, in distinction to the Casimir 
 forces between macroscopic bodies.    
 
-However, the Casimir effect was framed in the more modern language of quantum field theory, 
-which more naturally encompasses van der Waals forces between molecules.  
-As a result, we start our discussion with their work.  
+We will start our development from Casimir and Polder's work, since that was framed in the more modern language of quantum field theory, 
+and naturally encompasses all of the limiting cases.  
 
 \subsection{Casimir--Polder Forces}
 
-In 1948 Casimir and Polder computed the energy between atoms, and for atoms and conducting walls 
+In 1948 Casimir and Polder computed the energy between pairs of atoms, and for atoms and conducting walls 
 using non-relativistic Quantum Electrodynamics (QED) to account for the retardation due to the finite speed of light~\cite{CasimirPolder1948}. 
 They found that in the far-field 
 (where the transition wavelengths $c/\omega_A$ exceed the separation of the atoms $d$, $d\gg c/\omega_A$)
@@ -146,12 +148,12 @@ attributed to the induced dipoles decorrelating over the time-of-flight of the v
 and thus having a weaker interaction.
   
 %\todo{Is this from Milonni?}
-Furthermore, they found an attractive force between an atom and perfectly conducting wall, with a $d^{-3}$ scaling
-in the near field (van der Waals) regime, that passes over to $d^{-4}$ scaling in the far-field.
+They also found an attractive force between an atom and perfectly conducting wall, with a $d^{-3}$ scaling
+in the near field regime, that passes over to $d^{-4}$ scaling in the far field.
 In this case the atom can be thought of as interacting with its negative image in the perfect conductor,   
 which leads to an attractive potential for the atom,
 \begin{equation}
-  V_{CP}(d) =-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0 d^4},
+  V_{CP}(d) =-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4},
 \end{equation}
 where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alpha_0$ is the atom's static polarizability,
 and $\epsilon_0$ is the permittivity of free space.  Throughout this thesis we will refer to these
@@ -163,7 +165,7 @@ The Casimir--Polder potential between an atom in its ground state and a surface 
 in the coupling of the atom to the electromagnetic field.  We will consider the attraction between
 an atom and a perfectly conducting wall.  
 (This derivation is adapted from Ch.~13 and \S14.3 of Steck~\cite{SteckNotes}.)
-The Hamiltonian for the whole atom-field system is given by 
+The Hamiltonian for the whole atom-field system is
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
 \end{equation}
@@ -177,12 +179,13 @@ The atomic Hamiltonian is
 where the first term is the kinetic energy, and the second term gives the atom's internal 
 electronic energy; the atom's quantized energy levels are given by $E_j=\hbar\omega_j$, 
 and $\sigma_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's internal state.  
-The field Hamiltonian 
+The field Hamiltonian is
 \begin{equation}
   H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right),
   \label{eq:Hfield}
 \end{equation}
-sums up the energy for each mode of the electromagnetic field, where modes vary by wavenumber and polarization.
+where $a\subkz$ is the annihilation operator for the EM field mode with wavenumber $k$, and polarization $\zeta$,
+which has spatial mode function $\vect{f}\subkz(\hat{x}).$
 This field energy also includes the zero-point energy, $\sum_k\hbar\omega_k/2$, which will be important 
 in the Casimir effect proper.  For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
 considering the energy differences when the atom is moved to spatial infinity.  
@@ -190,39 +193,29 @@ Finally, the interaction Hamiltonian couples the internal state of the atom to t
 \begin{equation}
 H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
   \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
-  \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})]
+  \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})].
   \label{eq:Hint}
 \end{equation}
-where $a\subkz$ is the annihilation operator for mode with wavenumber $k$, and polarization $\zeta$,
-which has spatial mode function $\vect{f}\subkz(\hat{x}).$
 In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
 on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
 are then sensitive to the arrangements of the bodies.  
 %This is distinct from the case in most field theory calculations where the modes are described by plane waves.  
 
-Note that some of the terms in the interaction Hamiltonian violate energy conservation, for example
-$\sigma_j^\dag a^\dag\subkz$ creates a photon and raises the atom from the ground state to an excited state.
+Note that some of the terms in the interaction Hamiltonian violate energy conservation. 
+For example
+$\sigma_j^\dag a^\dag\subkz$ creates a photon with frequency $\omega_k$ and raises the atom from the ground state to an excited state
+with energy $\hbar\omega_j$.
 These terms are normally dropped in the rotating-wave-approximation, since they oscillate quickly
-in time as $e^{-i(\omega_j+\omega_k)t}$, and average down to zero on typical atomic timescales.  
+in time as $e^{i(\omega_j+\omega_k)t}$, and average down to zero on typical atomic timescales.  
 However, these energy non-conserving terms do lead to observable effects at higher order in perturbation theory.
-% This theory treats the interaction of the atoms with the light field via the interaction Hamiltonian
-% \begin{equation}
-%   H_{\text{int}} = -\frac{e}{mc}\hat{\vect{p}}\cdot\hat{\vect{A}}(\hat{\vect{x}}) + \frac{e^2}{2mc^2}
-%   |\hat{\vect{A}}(\hat{\vect{x}})|^2
-% \end{equation}
-% where $\hat{\vect{p}}$ is the quantum momentum operator for the atom, and $\hat{\vect{A}}$ is the 
-% quantized operator for the EM vector potential at the atom's position $\vect{r}$.  %\todo{Expand field operators
-% $\op{A}(\vect{x},t) = \sum_k a_k e^{-i\omega_k t} f_k(\vect{x}) + \text{h.c}$}
-% (This interaction can instead be treated with $H_{\text{int}} = -\op{\vect{d}}\cdot \op{\vect{E}}$ where
-% these Hamiltonians are connected by the Power-Zienau transformation~\cite{SteckNotes}.%\todo{Find page})
-In particular, the Casimir--Polder potential emerges when computing the energy-shift from $H_{\text{int}}$ to second order.
-For an atom in it's ground state, the Casimir--Polder potential is given by
+In particular, the Casimir--Polder potential emerges when computing the energy shift for the atom from $H_{\text{int}}$ to second order.
+For an atom in its ground state, the Casimir--Polder potential is given by
 \begin{equation}
   V\subCP = -\sum_{n\ne 0,\vect{k},\zeta} \frac{
     \langle E_0, 0|  H_{\text{int}}|E_n, 1\subkz\rangle\langle E_n, 1\subkz|  H_{\text{int}}|E_0, 0\rangle}{\hbar(\omega_k+\omega_{n0})},
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
-$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)\hbar$.
+$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)/\hbar$.
 The shift $V\subCP$ can be understood as two virtual transitions --- one from the ground state with no photons to an excited state with one photon,
 and then a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
@@ -261,12 +254,13 @@ After substituting in $H_{\text{int}}$, the Casimir--Polder energy can be writte
     \frac{|\langle E_0|\vect{d}|E_n\rangle|^2 |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2}
     {\hbar(\omega_k+\omega_{n0})},
 \end{align}
-where we substituted the form of $H_{\text{int}}$ and assumed an spherical atom for which all components of dipole matrix elements
-are equal, such that $|\langle E_0|d_i|E_n\rangle|^2=|\langle E_0|\vect{d}|E_n\rangle|^2/3$.
+where we substituted the form of $H_{\text{int}}$ and assumed a spherical atom, 
+$|\langle E_0|d_i|E_n\rangle|^2=|\langle E_0|\vect{d}|E_n\rangle|^2/3$,
+which corresponds to assuming that all components of dipole matrix elements are equal.
 
-At this point, the mode functions for the electric field near a perfectly conducting plane 
-can be substituted in to the energy.  (\S 8.4.3 of Steck~\cite{SteckNotes}),
-or mode functions for a perfectly conducting box(\S3.12 in Milonni~\cite{Milonni1994}).
+The mode functions for the electric field near a perfectly conducting plane 
+can be substituted in to the energy.  Following Milonni, we assume the atom is close to one wall 
+of a perfectly conducting box, but far from all other walls (see \S3.12 in Milonni~\cite{Milonni1994}).
 The electromagnetic mode functions for perfectly conducting box are given by 
 \begin{align}
   \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg[&
@@ -298,12 +292,11 @@ The sum over dipole matrix elements can also be rewritten in terms of the atom's
   \alpha_{ij}(\omega) = \sum_n 
   \frac{2\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\hbar(\omega_{n0}^2-\omega^2)}.
 \end{equation}
-If we assume the atom's distance from the surface $d$ is larger than the atom's dominant emission wavelength,
-then the dominant contribution to the sum will come from frequencies for which $\omega_kd/c\sim 1$.
-$\omega_k\ll \omega_{n0}$.  
-The atomic polarizability can be replaced by the atom's static (zero frequency) polarizability 
+If we assume the atom's distance from the surface $d$ is larger than the atom's dominant emission wavelength,$\omega_{n0}$
+then the dominant contribution to the sum will come from frequencies for which $\omega_k\sim \frac{c}{d}\ll \omega_{n0}$.
+In that limit, the atomic polarizability can be replaced by the atom's static (zero frequency) polarizability 
 \begin{equation}
-  \lim_{\omega\rightarrow 0}\alpha(\omega) = \sum_n
+  \alpha_0=\lim_{\omega\rightarrow 0}\alpha(\omega) = \sum_n
   \frac{2|\langle E_0|\vect{d}|E_n\rangle|^2}{3\hbar\omega_{n0}},
 \end{equation}
 In this far-field limit, the Casimir--Polder energy can be approximated as 
@@ -313,12 +306,12 @@ In this far-field limit, the Casimir--Polder energy can be approximated as
 With these simplifications, and taking the limit of a large box to convert the sum over wavevectors into an
 integral, the Casimir--Polder potential is given by 
 \begin{align}
- V\subCP(\vect{r})=-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k\bigg[ &
+ V\subCP(\vect{r})=-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int_{k_z>0} d^3k\,\omega_k\bigg[ &
   \bigg(1-\frac{k_x^2}{k^2}\bigg)[1-\cos(2k_zz)]
   +\bigg(1-\frac{k_y^2}{k^2}\bigg)[1-\cos(2k_zz)]\nonumber\\
-  &+\bigg(1-\frac{k_z^2}{k^2}\bigg)[1+\cos(2k_z z)]\bigg]
+  &+\bigg(1-\frac{k_z^2}{k^2}\bigg)[1+\cos(2k_z z)]\bigg],
 \end{align}
-where we have rewritten the sinusoids using double-angle formulae.  The $z$-independent parts
+where the sinusoids have been rewritten using double-angle formulae, and only .  The $z$-independent parts
 lead to a constant, divergent contribution to the energy.  
 In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
 off this constant energy.  
@@ -332,15 +325,15 @@ convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end o
 \begin{align}
  V\subCP(\vect{r})- V\sup0&=\lim_{a\rightarrow 0}-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k 
   (-1)\frac{2k_z^2}{k^2}\cos(2k_zz) e^{-ka}\\
-&=\lim_{a\rightarrow 0}\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\int_0^\infty dk \int_0^\pi d\theta\,k^3\sin\theta 
+&=\lim_{a\rightarrow 0}\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\int_0^\infty dk \int_0^{\pi/2} d\theta\,k^3\sin\theta 
   \cos^2\theta\cos(2kz\cos\theta) e^{-ka}\\
-&=-\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\frac{3}{2z^4}.
+  &=-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 z^4}.
 \end{align}
 While we have carried out the calculation for the case of perfectly-conducting planar interfaces, similar computations
 can be carried out for dielectric interfaces and more general shapes of macroscopic bodies.  
 In the case of an atom near a planar, dielectric interface the Casimir--Polder potential is 
 \begin{equation}
-  V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0z^4}\eta(\chi),
+  V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0z^4}\eta(\chi),
 \end{equation}
 where $\chi$ is the static polarizability of the medium, and the efficiency factor $\eta$ approaches zero
 as $\chi\rightarrow 0$, and unity as $\chi\rightarrow\infty$.  

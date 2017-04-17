@@ -652,8 +652,9 @@ This can be can be compared to the energy in a parallel-plate capacitor (pg. 219
 For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
 between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
 vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
-The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu m$
-this corresponds to a voltage of $17 mV$.  In experiments, exactly this size of voltage is observed~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
+The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu$m
+this corresponds to a voltage of $17$mV.  
+In experiments, voltages of this magnitude are observed from electrostatic sources~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
 
 For conducting bodies, such stray potentials can emerge from variations in the work function
 of the metal~\cite{Lamoreaux2011}.
@@ -678,7 +679,7 @@ which corresponds to a frequency shift on the order of $10$kHz for a generic ato
 % In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
 % with its image dipole.
 In comparison, a far-off resonant light beam can create an all optical trap with a depth of $10^{-9} eV$
-\footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV}$}
+\footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV$}
 So at a distance of $1\mu$m from a surface, it may be possible to trap an atom, but at a tenth of that distance the Casimir--Polder
 attraction would overcome the optical trapping potential.
 
@@ -716,9 +717,9 @@ This approximation starts to break down when the distances between bodies approa
 which is around $1\AA$, where exchange effects and other physics becomes important.
 At the other limit, for distances beyond $100 \mu$m, the Casimir effect becomes too weak to detect.  
 
-The Casimir energy for bodies separated by a distance $d$, can be written as a power law
-in certain limits.
-The differing scaling emerges by approximating the integrals in the Lifshitz formula~(\ref{eq:lifshitz_temperature}) in various limits.  
+The distance scaling of the Casimir energy for bodies separated by a distance $d$, can be found by approximating 
+the Lifshitz integral~(\ref{eq:lifshitz_finite_temp}) in certain limits.
+%The differing scaling emerges by approximating the integrals in the Lifshitz formula~(\ref{eq:lifshitz_temperature}) in various limits.  
 % The distance scaling depends on the nature of the bodies, and the how large the separation is in comparison to 
 % relevant wavelengths in the problem.  
 % For pairs of macroscopic slabs the energy scales as $d^{-2}$--$d^{-3}$, depending on the separation, 
@@ -726,28 +727,29 @@ The differing scaling emerges by approximating the integrals in the Lifshitz for
 In particular, one must compare the separation of the bodies $d$ to the resonant wavelengths or frequencies of 
  of the interacting media.  
 This requires some knowledge of the peak frequencies $\omega_A$ of the atomic polarizabilities $\alpha(\omega)$ or the dielectric
- function $\epsilon(\omega)$.  Furthermore at nonzero temperature, there is a thermal wavelength,
+ function $\epsilon(\omega)$.  At nonzero temperature, there is another distance scale given by the thermal wavelength,
  $\omega_T=\kB T/\hbar$.  One can estimate the most important frequencies by examining $\alpha(is),\epsilon(is),e^{-2pd\xi/c}$
 and approximating the integral in various limits. 
 
- In the near-field or van der Waals regime, the separation of the bodies is less than any of the 
- resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$, the exponential factor $e^{-2pd\xi/c}$
- is unity for all relevant frequencies, and each frequency contributes equally.  In essence, the interaction is an instantaneous 
+ In the near field or van der Waals regime, the separation of the bodies is less than any of the 
+ resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$.  In that limit $\epsilon(i\omega)$ serves to cut off 
+ the frequency integral, and the exponential factor $e^{-2pd\xi/c}$
+ is unity for all relevant frequencies.  In essence, the interaction is an instantaneous 
  dipole interaction between the media.  For example the atom-wall potential shows a $d^{-3}$ scaling. 
 
- The retarded or Casimir-Polder regime occurs when the atoms are much further than a resonant wavelength 
+ In the retarded or Casimir-Polder regime, the atoms are much further than a resonant wavelength 
  $d\gg \omega_A/c,\omega_M/c$.  In that case the dominant contributions come at zero frequency, 
 and the functions can be approximated with their static limit.
  This typically occurs for distances greater than a micron.
- In this far-field regime, the potential typically decays more quickly,
-as $d^{-4}$ for an atom-wall interaction
+ In this far field regime, the potential typically decays more quickly.  For example, the  atom-wall
+potentials shows a $d^{-4}$ scaling in this limit.
 
- Even further away from the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
+At even greater separations between the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
  thermal field contribute significantly to polarizing the atom.  At room temperature, the thermal wavelength is
  $\lambda_T=\hbar c/(\kB T)~10\mu m$.  In this regime the potential falls off more slowly as $E\sim d^{-3}$,
  the same as the near-field van der Waals regime.  
 
-\section{Summary of Casimir Experiments}
+\section{Overview of Casimir Experiments}
 \label{sec:expt_review}
 
 The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
@@ -757,7 +759,7 @@ The following is intended as a broad survey, since the full literature on the Ca
 effects is quite large.  
 
 %Lamoreaux
-\subsection{Casimir}
+\subsection{Experiments on Casimir Forces}
 
 %\todo{Citation for this?}
 
@@ -782,7 +784,7 @@ The Casimir force has also been directly measured in a nanoelectromechanical (NE
 by Chan\etal~\cite{Chan2001}.  In this case, the Casimir force is detected by the modification it
 makes to the frequency of a torsional oscillator suspended above a plate.  
 The sphere-plate and oscillator geometries have the experimental advantage of removing the need to carefully
-align the metal plates. % Given the strength of the Casimir force it is hard to keep the plates exactly parallel,
+align the parallel metal plates. % Given the strength of the Casimir force it is hard to keep the plates exactly parallel,
 % and separate, which is something that dogged early attempts to measure the Casimir force.
 Despite the aforementioned difficulties, the Casimir force between parallel plates was measured precisely by Bressi\etal~\cite{Bressi2002}.  
 
@@ -799,15 +801,17 @@ patch potentials, and surface roughness.  The patch potentials are localized sur
 charge distributions, which due to the longer range Coulomb interaction must be subtracted off to extract the weaker
 Casimir force~\cite{Sushkov2011}.  The fact that the thin metallic films and surfaces used in these 
 experiments are not perfectly smooth is referred to as surface roughness, and is one of 
-the primary sources of error in these experiments.
- In addition, the optical properties of the surface must also be carefully characterized~\cite{vanZwol2011}.
+the main theoretical sources of error in these experiments.  
+In addition, the optical properties of the surface must also be carefully characterized, since the 
+optical properties of a coating can vary significantly.  Another difficulty in predicting the size of the 
+Casimir effect is that the optical properties must be interpolated from data for other experiments~\cite{vanZwol2011}.
 
-\subsection{Casimir-Polder}
+\subsection{Experiments on Casimir-Polder Forces}
 
 Van der Waals and Casimir--Polder forces were first observed experimentally in molecules, 
 which prompted the further development of theory to explain the effects.  
 Beyond those early experiments, Casimir--Polder forces have also been measured precisely in more modern experiments  
-involving atomic beams, cavity QED, and Bose-Einstein condensates.  
+using isolated atoms in experiments using atomic beams, cavity QED, and Bose-Einstein condensates.  
 
 The first modern attempts at directly measuring the Casimir-Polder force used atomic beams 
 near surfaces.  Sukenik\etal made the first modern attempt to measure the Casimir-Polder force~\cite{Sukenik1993}.
@@ -819,26 +823,29 @@ the Casimir-Polder force with atomic beams.  These experiments passed an atomic 
 detected the phase-shift by atom interferometry.  
 
 The Casimir-Polder effect has also been observed in the context of a Bose-Einstein Condensate (BEC)
-of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  The BEC allows for precise distance control,
-and can be used in atom interferometry to detect small phase shifts.    
+of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  % The BEC allows for precise distance control,
+% and can be used in atom interferometry to detect small phase shifts.    
 The atoms are confined to a harmonic trap, and can be brought near to a surface to probe the Casimir
-force.  The Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
-dependent manner.  
+force, where the Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
+dependent manner.  % These experiments were able to measure the Casimir--Polder force in the thermal regime,
+% vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$
 % This technique was able to measure the Casimir force in the thermal regime, which
 % is often difficult since the force is weak at those distance, but was accessible here due to the stability of the BEC.
-% In this case it was ``easy'' to vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$ to observe
+% In this case it was ``easy'' to  to observe
 % the cross over between the Casimir-Polder and thermal regimes.
 
 The Casimir-Polder force is also important in developing atomic technologies.  
-There is a large effort across many fields to harness quantum technologies to develop scalable 
-quantum devices for computation and simulation of quantum systems~\cite{Kimble2008}.  
 Atoms are an attractive platform for a number of reasons:
-Each atom of the same species is identical (unlike some other candidate systems); atoms have 
-well-defined transitions that can be used to control their motion, internal state and coupling; and they 
-have internal states that are long-lived, which is important in storing information.
+Each atom of the same species is identical; 
+atoms have readily accessible, well-defined transitions that can be used to control their motion
+, internal state and interactions; and atoms
+have internal states that are long-lived, which would be important in storing information.
 
 In recent years there has been a concerted push to develop technology that retains the appealing features 
-of cold atoms in an architecture that can be scaled up to having large numbers of addressable atoms.
+of cold atoms in an architecture that can be scaled up to having large numbers of addressable atoms
+~\cite{Kimble2008}.  
+% There is a large effort across many fields to harness quantum technologies to develop scalable 
+% quantum devices for computation and simulation of quantum systems
 The desire to get strong-coupling between the atom and light fields, addressable qubits, and a scalable
 architecture has pushed groups towards developing atomic traps that capture atoms close to dielectric surfaces.  
 In this limit, the Casimir--Polder force is the dominant force, which can only be partially mitigated
@@ -846,9 +853,9 @@ by using laser fields to generate repulsive potentials.
 In designing these new devices it is essential to compute and account for the Casimir-Polder force
 the atom's experience when brought close to the dielectric surface.  
 
-One direction that has been pursued is the so-called atom-chip~\cite{Folman2000,Schneider2003,Salem2010},
-where atoms are trapped near surfaces via a combination of lasers and magnetic fields from wires embedded in
-the surface.  The atoms are typically trapped within a micron of the surface.  
+One direction that has been pursued is the atom-chip~\cite{Folman2000,Schneider2003,Salem2010},
+where atoms are trapped within a few microns of the surface via a combination of lasers and magnetic fields from wires embedded in
+the surface.  %The atoms are typically trapped within a micron of the surface.  
 In most applications the Casimir effect acts as a lower bound on how close bodies can be brought 
 to each other, which in turn limits the coupling strength, as well as how small devices can be made.
 In the atom-chip example bringing the atoms closer than a micron lead to most of the atoms escaping the 
@@ -902,7 +909,6 @@ Given that Casimir effects tend to enforce lower bounds for how close bodies can
 there have been a push to search for repulsive Casimir effects.  This would allow open the possibility
 of trapping particles, and allow much smaller devices to be constructed.  
 Unfortunately, these prospects are somewhat limited, due to requiring rare material properties.
-
 From the Lifshitz formula, the sign of the force changes sign if $r_{12}r_{23}<0$.
 This implies Casimir repulsion should be possible if $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad range of frequencies.
 This was experimentally demonstrated for a gold sphere immersed in bromobenzene above a silica plate
@@ -932,14 +938,15 @@ In fact, it seems that it is impossible to get stable levitation for similar bod
 \subsubsection{Searches for new physics}
 
 The Casimir force is also important for speculative searches for new physics on the millimeter to micron
-scale~\cite{Dimopoulos2003, Bezerra2011}.  The new physics must be short-ranged, and is typically modeled as 
-a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$.  
+scale~\cite{Dimopoulos2003, Bezerra2011}.  Since the new physics must be relatively short-ranged, 
+it is typically modeled with a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$,
+which models the interaction with a new massive particle.    
 On the micron scale however, the Casimir effect is the dominant interaction between neutral bodies,
  and must be carefully subtracted in an experimental procedure.
  Experiments then look for deviations from the expected Casimir effect, which means that the 
 theory and experiment must be good agreement with one another.  
 This approach has already been used to exclude regions of the parameter space for the hypothetical
-Yukawa interaction~\cite{Lamoreaux1997,Obrecht2007,Bezerra2011}.  
+Yukawa interaction~\cite{Obrecht2007,Bezerra2011}.  
 Experiments searching for modifications of gravity typically employ a thin gold layer over
 a density modulation.  The gold layer provides a common short-ranged Casimir interaction, while the 
 a density modulation allows measuring variations due to gravity~\cite{Sorrentino2009, Geraci2015}.
@@ -967,15 +974,16 @@ and the ability to handle arbitrary shapes.
 % of bodies such as parallel planar bodies~\cite{Casimir1948,Lifshitz1956} or spheres~\cite{Boyer1968}, 
 % current experiments require calculations for arbitrary shapes and arrangements of bodies, 
 % which have realistic material properties.  
-This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
-range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
-and one must carefully renormalize the results to avoid infinite answers.  
+% This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
+% range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
+% and one must carefully renormalize the results to avoid infinite answers.  
 For a simple, symmetric geometry (like perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
 it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.
-  However for general geometries 
-such an expansion may not be possible, or converge well.
-These requirements force one to adopt a general numerical approach to computing Casimir forces~\cite{Johnson2011}.
+%   However for general geometries 
+% such an expansion may not be possible, or converge well.
+However, for completely general geometries these requirements force one to adopt a general 
+numerical approach to computing Casimir forces~\cite{Johnson2011}.
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
 
@@ -1000,7 +1008,7 @@ The PFA treats each infinitesimal patch of the surfaces as if they were planar b
 and sums up the pair-wise interactions between different patches.
 The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
 their separation $d$.  
-For many years the PFA was the only practical general method of estimating Casimir forces.
+For many years the PFA was the only practical general method of estimating Casimir forces in arbitrary geometries.
 The PFA has the advantage of being straightforward to implement, and functions as an order of magnitude
 estimate for the Casimir force for arbitrary geometries.
 % It was used by Lamoreaux to estimate the Casimir force between the sphere-plate
@@ -1012,6 +1020,8 @@ the pair-wise Casimir forces between each pair of surface patches.  This ignores
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
 the sum of the pair-wise potential energies, the Casimir force for an arrangement
 of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4} of \cite{Milonni1994})
+As a crude justification, the Casimir energy involves the square of the electric field, which responds 
+non-linearly as more bodies are added.  
 % Finally, the PFA allows only for strictly attractive forces.  
 % In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
 % such as media with a strong magnetic response, or anisotropic media.
@@ -1050,17 +1060,18 @@ The Casimir energy can be written as
   \label{eq:scattering}
 \end{equation}
 where $\mathbb{M}$ is the scattering matrix describing scattering between the free modes of the electromagnetic
-field induced by the presence of bodies~\cite{Rahi2009}.  The energy is renormalized via $\mathbb{M}^{-1}_\infty$,
+field induced by the presence of bodies, and $\xi$ is the imaginary frequency~\cite{Rahi2009}.
+The energy is renormalized via $\mathbb{M}^{-1}_\infty$,
 which is the scattering matrix as the bodies are removed to spatial infinity, this basically removes any
 coupling between bodies and serves to remove any self-interactions. 
 The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
 %Since different bodies have different shapes, it is necessary t be able to transform basis.  
 Derivations similar to the argument principle used in Sec.~\ref{sec:lifshitz} can be applied to describe the scattering between modes,
----instead of reflection coefficients for a surface, one considers the full scattering matrix for each body,
+--- instead of reflection coefficients for a surface, one considers the full scattering matrix for each body,
 where matrix indices run over the labels (such as wavenumber, polarization) for the modes.
-This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006},
+This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006}, surface roughness, 
 and spheres and planes~\cite{Canaguier-Durand2012}.   
-These variants rely on scattering between mode functions suited to analytical expansions,
+This subclass of these methods rely on scattering between mode functions suited to analytical expansions,
  and while they in principle offer a general purpose numerical method, 
 the simulations may be slow to converge if the choice of basis functions is poorly suited to the actual
 geometry required.  
@@ -1089,152 +1100,24 @@ After integrating out the EM field in the interior and exterior regions,
 these surface currents interact with one another via the electromagnetic Green function.
 Since the method assumes piece-wise, homogeneous media and enforces EM boundary
 conditions, it is the relatively simple homogeneous EM Green function that appears in these expressions.
-For example, the electric field Green function responding to electric sources at imaginary frequency is 
-$\Gamma^{EE}(\vect{x},\vect{x'})=e^{-\kappa|\vect{x}-\vect{x'}|}/(4\pi|\vect{x}-\vect{x'}|)$.  Similarly simple expressions
-exist for the other combinations of electric/magnetic responses to electric or magnetic sources.
-The surface currents can also be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
-where now the matrix elements $\mathbb{M}_{ab}$ describe the coupling between surface-patches induced
-by the Green function.  (An expanded derivation is given in App.~\ref{app:scattering}.)
+These surface integrals are then discretized by splitting the surface into a finite number of patches.
+All of the surface currents can then be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
+where now the matrix elements $\mathbb{M}$ describe the coupling between different surface-patches induced
+by the Green function.  (An expanded presentation is given in App.~\ref{app:scattering}.)
 
-%\subsubsection{Sketch of derivation}
-
-% This appendix briefly reviews the derivation of the fluctuating surface current method,
-% and comments on the simplifications that enforcing the boundary conditions offer.
-% % This numerical approach is related to prior multipole scattering approach~\cite{Rahi2009}.
-% % Earlier work chose to expand the scattering amplitudes in terms of mode function
-% % solutions.  In contrast, this work expands the fields at the surfaces using 
-% % boundary elements - in particular triangles.  
-% The following is adapted from calculations Homer Reid's thesis, and published as Ref~\cite{Reid2013}.
-% The numerical package is freely available as ScuffEM package maintained by Homer Reid~\cite{ScuffEM2016}.  
-% The appendix is provided for the purposes of examining the differences from the worldline 
-% approach to the same calculation, and numerical concerns. 
-
-% The classical action is 
-% \begin{equation}
-%   S = \frac{1}{2}\int\frac{d\omega}{2\pi}\int d^3x\,\left[ 
-%     \epsilon(\omega,\vect{x})|\vect{E}(\omega,\vect{x})|^2 - \mu(\omega,\vect{x})|\vect{H}(\omega,\vect{x})|^2\right],
-% \end{equation}
-% where the fields have already been written in their Fourier components to better handle dispersion.  
-% The fields $\vect{E},\vect{H}$ can be rewritten in terms of the standard potentials, $\phi,\vect{A}$
-% where the initial Lagrangian density is 
-% \begin{equation}
-%  \mathcal{L}= \int\frac{1}{2}\int\frac{d\omega}{2\pi}\,\left[ 
-%     \epsilon(\omega,\vect{x})(\partial_i A^0+i\omega A^i)(\partial_i {A^0}^*-i\omega A^i)
-% - \frac{1}{\mu}(\epsilon_{ijk}\partial_jA^k\epsilon_{imn}\partial_mA^n)\right]
-% \end{equation}
-% After the Wick rotation, and integration by parts, the Lagrangian density can be written as
-% \begin{equation}
-%   \mathcal{L}=\tilde{A}^{\mu,*} \bigg[\left(-\epsilon\xi^2+\frac{1}{\mu}\nabla^2\right)\delta_{\mu\nu} 
-%   - \alpha_\mu\alpha_\nu\bigg]\tilde{A}^\nu,
-% \end{equation}
-% where $(\tilde{A}^0,\tilde{A}^j) = (\sqrt{\epsilon\mu}A^0,\vect{A})$, 
-% and $\alpha_\mu=(i\sqrt{\epsilon}\xi,\frac{1}{\sqrt{\mu}}\nabla)$.
-% The terms in $(\alpha_\mu\tilde{A}^\mu)^2$ correspond to pure gauge degrees of freedom, and thus 
-% are irrelevant to physical states.  Since the boundary conditions will be explicitly
-% enforced elsewhere, the spatial dependence of $\epsilon, \mu$ can be ignored and these can be commuted
-% past differential operators with impunity.   As a result, the Lagrangian is
-% \begin{equation}
-%   \mathcal{L}=\tilde{A}^{\mu,*} [\alpha_\rho\alpha^\rho\delta_{\mu\nu} - \alpha_\mu\alpha_\nu]\tilde{A}^\nu,
-% \end{equation}
-% where the matrix has the form of a transverse projector in $\alpha^\mu$.  Note that this is proceeding
-% in exact analogy with path integral quantization of the electromagnetic field in free space.  
-% The matrix has a null eigenvalue along $\alpha_\mu$, which corresponds to gauge-transformations.  
-% The null eigenvalue is normally removed within path integrals by using the Fadeev-Popov method for gauge fixing,
-% by introducing  
-
-% The gauge-fixed partition function is
-% \begin{equation}
-%   Z_{EM} = \int [D\tilde{A}]_C e^{-\frac{\beta}{2}\int d\vect{x} \mathcal{L}},
-% \end{equation}
-% where $[D\tilde{A}]_C$ integrates over all field conditions that satisfy the boundary conditions.
-% The boundary conditions will be explicitly enforced via functional delta-functions.  
-
-% In the absence of any free charges or currents, the electromagnetic boundary conditions are given by 
-% \begin{gather}
-%   \vect{E}^\|_1 =\vect{E}^\|_2 \qquad  \vect{H}^\|_1 =\vect{H}^\|_2 \\
-%   B_1^\perp = B_2^\perp\qquad   D_1^\perp = D_2^\perp,
-% \end{gather}
-% where the $1,2$ subscripts denote the media the fields are evaluated in.  
-% These boundary conditions can be enforced by introducing functional $\delta$-functions,
-% % We can enforce boundary conditions in path integrals via functional delta functions using
-% % the Fourier representation of the delta function 
-% % (Cites Bordag, and Kardar and Li)
-% \begin{equation}
-%   \delta(\vect{E}^\|_1-\vect{E}^\|_2) = \int D\vect{K} e^{i\int_{\partial \mathcal{O}} d^3\vect{x}\,
-%     \vect{K}\cdot(\vect{E}^\|_1-\vect{E}^\|_2)},
-% \end{equation}
-
-% The resulting path integral is
-% \begin{align}
-%   Z_{TE} &= \int \prod_rD\vect{K}_rD\vect{N}_re^{-S_e[\vect{K}_r,\vect{N}_r] - S_r[\vect{K}_r,\vect{N}_r] }
-% \end{align}
-% where the external and internal effective actions are given by 
-% \begin{align}
-%   S_{e}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r\ne r'}
-%   \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r'}}d\vect{x'}\,  Q_i^r(x)M_{ij}^eQ_j^{r'}(x')\\
-%   S_{r}[\vect{K},\vect{N}] &= \frac{1}{2\beta}\sum_{r}
-%   \int\limits_{\partial\mathcal{O}_r}d\vect{x}\int\limits_{\partial\mathcal{O}_{r}}d\vect{x'}\,  Q_i^r(x)M_{ij}^rQ_j^r(x').
-% \end{align}
-% In this expression the combined six-dimensional current vector is $\vect{Q}(x) =\big[\vect{K}^r(x),\vect{N}^r(x)\big]$ 
-% and the matrix operator $M$ for both external and internal integrals is given by 
-% \begin{equation}
-%   M^{(e)}_{ij}=\left(\begin{array}{cc} 
-%     \underline{L}^{E,e}\underline{G}\underline{L}^{E,e} &\underline{L}^{E,e}\underline{G}\underline{L}^{M,e}\\
-%     \underline{L}^{M,e}\underline{G}\underline{L}^{E,e} &\underline{L}^{M,e}\underline{G}\underline{L}^{M,e}\\
-%   \end{array}
-%   \right)=
-%   \left(\begin{array}{cc} 
-%       \underline{\Gamma}_e^{EE} &\underline{\Gamma}_e^{EM}\\
-%       \underline{\Gamma}_e^{ME} &\underline{\Gamma}_e^{MM}
-%   \end{array}
-%   \right),
-% \end{equation}
-% where $\Gamma_e^{PQ}$ is the classical Green tensor for the response of the field $P$ to a source of 
-% type $Q$ in a region characterized by constants $\epsilon_e,\mu_e$.  The Green tensors are explicitly given 
-% by
-% \begin{align}
-%   \underline{\Gamma}_r^{EE} = -\mu_r\xi \underline{G}\qquad
-%   \underline{\Gamma}_r^{EM} = \underline{\Gamma}_r^{ME}=v_r\xi \underline{C}\qquad
-%   \underline{\Gamma}_r^{MM} = =-\epsilon_r\xi\underline{G},
-% \end{align}
-% where the free Green functions $\underline{G}, \underline{C}$ are given by 
-% \begin{align}
-%   G_{ij} = \left[\delta_{ij}-\frac{1}{v_r^2\xi^2}\partial_i\partial_j\right]G_0,\qquad
-%   C_{ij} = -\frac{1}{v_r\xi}\epsilon_{ijk}\partial_k G_0\qquad
-%   G_0 = \frac{e^{-v_r\xi|\vect{x-x'}|}}{4\pi|\vect{x-x'}|}.
-% \end{align}
-
-This method and alternative choice of basis is particularly adaptable as the basis patches can 
-be chosen to cover an arbitary body easily---
-in particular a triangular mesh is the most flexible.
-% The surface currents can also be formally integrated out, leaving the energy proportional 
-% to a functional determinant 
-% \begin{equation}
-%   E = \int_0^\infty d\xi \log\det\left[\mathbf{M}^{-1}_{\infty}\mathbf{M}\right],
-% \end{equation}
-% where $\xi$ is the imaginary frequency, 
-% and $\mathbf{M}$ is a matrix where the entries encode the scattering between various surface current 
-% elements via the homogeneous EM green function,  
-% \begin{equation}
-%   M_{ab} = \int_{S_A} dx \int_{S_B} dy f_a(x) G_{ab}(x,y)f_b(y).
-% \end{equation}
-% \comment{Given general form, noting E/M coupling.  Also multiple bodies.  Renormalization kills
-% self-energy terms}
-% The $\mathbf{M}^{-1}_\infty$ term is a renormalization that subtracts the energy as the bodies are 
-% arbitrarily far apart, which acts to remove the energy from any self-interactions of the bodies with themselves.
-Numerically, this method comes down to computing the determinant of a large sparse matrix, which is 
+Numerically, this method comes down to computing the determinant of a large matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant for a dense matrix requires $\order(N^3)$ operations.
 While it is possible to parallelize computing the determinant~\cite{Beliakov2013}, this is difficult.
 However, for a sparse matrix system, it may be possible to make this relatively efficient 
 and only require $\order(N\log N)$ operations~\cite{Reid2009}.
-Further, since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
+Since each frequency $\xi$ contributes independently, the integral over $\xi$ could be
 trivially parallelized, but this may only offer relatively little parallelization for some problems.
 
 The fluctuating-surface-current method has been used to 
 for example describing the energy dependence of tetrahedral nanoparticles, capsules, and other  
 geometries~\cite{Reid2009,Reid2011,Rodriguez2010}.  It has also been used to find cases 
 where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, altough the repulsion
-is not stable\cite{Levin2010,Rodriguez2013} .  
+is not stable~\cite{Levin2010,Rodriguez2013} .  
 The scattering method has also been used in the design of atomic traps near dielectric waveguides, where the Casimir--Polder
 force is an essential component of the trap~\cite{Hung2013}.  
 

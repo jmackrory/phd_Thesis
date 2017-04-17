@@ -628,7 +628,7 @@ electron current with the field is described by the dielectric constant.}
 
 Casimir or van der Waals forces, are the dominant forces for electrically neutral bodies.  
 However, they can be screened by other electrostatic forces in some circumstances, particularly if one is 
-considering metal bodies~\cite{Lamoreaux2011}.  
+considering metal bodies~\cite{Lamoreaux2011,Bordag2009}.  
 These electrostatic forces typically have a longer ranged force law than the Casimir effect, 
 with a similar order of magnitude. 
 In order to detect the classic Casimir force between conducting bodies, it is then necessary to carefully 
@@ -653,18 +653,19 @@ For a parallel-plate capacitor, with surface charge density $\sigma$, the attrac
 between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
 vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
 The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu m$
-this corresponds to a voltage of $17 mV$.  
-Given that some experiments detect the Casimir force by balancing voltages, it is  quite important
-to avoid even small voltages.  For conducting bodies, such potentials can emerge from variations in the work function
-of the metal~\cite{Lamoreaux2011}.   If the Fermi surface dips below the surface of the metal, a localized electric
-charge can build up.  This is one of the dominant backgrounds in Casimir experiments, and must be either avoided
-or subtracted off to extract the Casimir effect.  These various electrostatic potentials are random and show a $d^{-1}$ power law
+this corresponds to a voltage of $17 mV$.  In experiments, exactly this size of voltage is observed~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
+
+For conducting bodies, such stray potentials can emerge from variations in the work function
+of the metal~\cite{Lamoreaux2011}.
+If the Fermi surface dips below the surface of the metal, a localized electric charge can build up.
+This is one of the dominant backgrounds in Casimir experiments, and must be subtracted off to extract the Casimir effect.
+These various electrostatic potentials are randomly distributed and show a $d^{-1}$ power law
 contribution to the force~\cite{Sushkov2011}, as opposed to the faster $d^{-2}--d^{-3}$ behavior expected
 from the Casimir force.  
 
-The typical Casimir--Polder energy scale can roughly be estimated from dimensional considerations.
+The typical Casimir--Polder energy scale can be estimated from dimensional considerations.
 For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
-is then $\alpha/sim \sum_jd_j^2/(\hbar\omega_j)$.
+is then $\alpha\sim \sum_jd_j^2/(\hbar\omega_j)$.
 The Casimir-Polder energy in the far-field is then
 \begin{align}
   V\subCP &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
@@ -674,8 +675,12 @@ The Casimir-Polder energy in the far-field is then
   \approx -10^{-12}eV,
 \end{align}
 which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
-In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
-with its image dipole.
+% In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
+% with its image dipole.
+In comparison, a far-off resonant light beam can create an all optical trap with a depth of $10^{-9} eV$
+\footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV}$}
+So at a distance of $1\mu$m from a surface, it may be possible to trap an atom, but at a tenth of that distance the Casimir--Polder
+attraction would overcome the optical trapping potential.
 
 %As comparison, a typical trapping potential using far detuned lasers is 
 % As an example, atoms near a conducting surface can adsorb onto the surface, and form ionic bonds with a large dipole 

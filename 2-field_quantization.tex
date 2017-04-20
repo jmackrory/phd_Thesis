@@ -61,6 +61,9 @@ which corresponds to the electron loop in Fig.~\ref{fig:electron-effective-inter
 These current fluctuations on different bodies then interact with one another via photons, which are 
 described by the electromagnetic Green function.  
 
+Hertz potentials.  useful in spherical geometries.  
+However, naive application leads to fourth order differential operators!
+
 \section{Classical Lagrangian and Hamiltonian Formulation of Electromagnetism}
 
 Maxwell's equations in a dielectric, non magnetic medium, without sources  are
@@ -124,7 +127,7 @@ L &= \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\b
 The momentum fields conjugate to the potential fields $A^\mu = (\phi,\vect A)$ are
 \begin{align}
 \Pi_0 & = \frac{\delta L}{\delta (\partial_t\phi)} = 0 \label{eq:Pi0}\\
-\vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsvx(\nabla\phi+\partial_t\vect A).
+\vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsr(\vect{r})(\nabla\phi+\partial_t\vect A).
 \end{align}
 Note that $\vect{\Pi}=-\vect{D}$, i.e. the momentum field conjugate to $\vect{A}$ is the electric displacement.
 Since $\Pi_0=0$ for all times, this must be preserved, which implies a constraint. Since the constraint
@@ -146,8 +149,8 @@ The Hamiltonian for the classical fields is given by
 \begin{align}
 H &= \int d^3x\,[ \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L}]\\
 % & = \int d^3x \, \vect \Pi\cdot\left(\frac{\vect{\Pi}}{\epsilon_0\epsvx}-\nabla\phi\right)
-% -\frac{\vect \Pi^2}{2\epsilon_0\epsvx} + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2\\
-& = \int d^3x\,\bigg[  \frac{\vect \Pi^2}{2\epsilon_0\epsvx}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
+% -\frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})} + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2\\
+& = \int d^3x\,\bigg[  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
 -\vect{\Pi}\cdot\nabla\phi \bigg].
 \end{align}
 The equations of motion can be derived from the Hamiltonian. %  In particular, the requirement that the first constraint holds 
@@ -206,7 +209,7 @@ which is Gauss's law in the absence of charges.
 
 We can equally well write the Hamiltonian as 
 \begin{align}
-  H& = \int d^3r\bigg[\frac{\vect{\Pi}^2}{2\epsilon_0\epsvx}+\phi(\nabla\cdot\vect{\Pi})
+  H& = \int d^3r\bigg[\frac{\vect{\Pi}^2}{2\epsilon_0\epsr(\vect{r})}+\phi(\nabla\cdot\vect{\Pi})
 + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2 + f\Pi_0 + g(\nabla\cdot\vect{\Pi})\bigg]
 \end{align}
 where $f$ and $g$ are arbitrary functions.  In this case $f$ and $g$ serve as arbitrary or gauge degrees of freedom.
@@ -296,7 +299,7 @@ Using the Fourier representation of the delta function, we can write one of thos
 =
 % \int\! d\vect{\Pi}_\beta \int\! D\varphi_\beta\exp\bigg[ \int d^3x \,
 % -\frac{i}{\hbar}\varphi_\beta(\nabla\cdot\vect{\Pi}_\beta) +\frac{i}{\hbar}\left(\vect A_{\beta+d\beta}
-% -\vect A_{\beta}\right)\cdot\vect{\Pi}_\beta  -d\beta\left( \ frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsvx}
+% -\vect A_{\beta}\right)\cdot\vect{\Pi}_\beta  -d\beta\left( \ frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})}
 % +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\right)\bigg]\\
 & \int\! d\vect{\Pi}_\beta \int\!D\varphi\,e^{ -d\beta\int d^3x 
 \big[ \mathcal{H}_\beta-i\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta + \nabla\varphi_\beta)/\hbar 
@@ -304,7 +307,7 @@ Using the Fourier representation of the delta function, we can write one of thos
 \end{align}
 where
 \begin{align}
-  \mathcal{H}_\beta = \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsvx} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2
+  \mathcal{H}_\beta = \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2
 \end{align}
 %   We will be subtracting off the vacuum energy, so we will be sloppy over keeping track of any constant normalization factors.
 %   We will need to be careful over constants with position dependence, 
@@ -317,26 +320,26 @@ where
 The momentum integrals are Gaussian, and can be carried out immediately, with the result that
 \begin{multline}
 \langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| \exp[-d\beta \hat{H}]|\phi_\beta, \vect A_\beta\rangle\\
-%  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3x \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsvx} 
+%  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3x \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
 % -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\varphi_\beta) \right] 
-\propto   \det[\epsvx]^{3/2}\exp \left\{ -\frac{\epsilon_0d\beta}{2\hbar^2}
-  \int d^3x\,\bigg[ \epsvx(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
+\propto   \det[\epsr(\vect{r})]^{3/2}\exp \left\{ -\frac{\epsilon_0d\beta}{2\hbar^2}
+  \int d^3x\,\bigg[ \epsr(\vect{r})(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
   +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\}.
 \end{multline}
-Initially I missed the factor of $\epsvx^{3/2}$, which I discovered by reading a paper by
+Initially I missed the factor of $\epsr(\vect{r})^{3/2}$, which I discovered by reading a paper by
  Bordag on path integral quantization in dielectric media \cite{Bordag1998}.
 
 % We are integrating over all field configurations, and at all points in space.
 We will introduce a notation
 \begin{equation}
-\int D \vect{A} D\varphi |\epsvx|^{3/2} = \prod_{i=1}^N\prod_{x_k}\int d\vect{A}(\vect{x}_k,\beta)
+\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{x_k}\int d\vect{A}(\vect{x}_k,\beta)
 \int d\varphi(\vect{x}_k,\beta)\det[\epsilon^{3/2}(\vect{x}_k)],
 \end{equation}
 where the product $\vect{x}_k$ runs over all positions $\vect{x}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
 
 If we take the product of all of the matrix elements, then the total path integral is given by 
 % \begin{equation}
-% Z = \int D\vect A D\varphi\, \epsvx^{3/2}\exp\left[-\frac{\epsilon_0}{2\hbar^2}\int d^3x\int_0^\beta d\beta\,
+% Z = \int D\vect A D\varphi\, \epsr(\vect{r})^{3/2}\exp\left[-\frac{\epsilon_0}{2\hbar^2}\int d^3x\int_0^\beta d\beta\,
 % \epsr(\vect{r})\left(\partial_\beta\vect A-\nabla\varphi\right)^2+\hbar^2c^2(\nabla\times\vect A)^2\right].  
 % \end{equation}
 We can change variables to $x_4=\beta\hbar c$, and $A_4 = \varphi/\hbar c$, and rescale all of the fields
@@ -344,14 +347,14 @@ to eliminate the constants out front.  These rescaling cancel out under renormal
 %Note that $A_4$ has the same dimensions as $\vect{A}$.
 We can also see that $x_4$ is proportional to the thermal de-Broglie wavelength, up to a factor of $2\pi$.  
 \begin{equation}
-Z = \int D^4A\, \epsvx^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} dx_4\,
+Z = \int D^4A\, \epsr(\vect{r})^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} dx_4\,
  \bigg[ \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect A)^2\bigg]\right\}.
 \end{equation}
 We will compare this partition function to the case when the objects are infinitely far apart,
  which we will denote as $Z_0$.
 The objects will still be present in the space, but they will be too far away to interact significantly.  
 
-We can write the $\epsvx$ term as a functional determinant,
+We can write the $\epsr(\vect{r})$ term as a functional determinant,
  since it is a product, $\det|\epsr(\vect{r})|=\prod_{r_k}\epsr(r_k)$.
  If we move the objects far apart from each other, 
  the $\epsr$-determinant will not change value since we are assuming the amount of material 
@@ -365,7 +368,7 @@ renormalization.
 We can then ignore drop these constant determinants and consider 
 \begin{equation}
   Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4x\,
-  \epsvx\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
+  \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
 \end{equation}
 \comment{also dropped A0 integrals}
 
@@ -724,6 +727,15 @@ The potentials $V_4$ and $V^{(A)}_{ij}$, and the operator $u_{ij}$, are defined 
   u_{ij}&=\frac{1}{2}(\partial_i\log\epsr)\partial_j -\frac{1}{2}(\partial_j\log\epsr)\partial_i
 \end{align}
 \comment{right signs/powers of epsilon?}
+Note that these potentials are highly singular for discontinuous media.  If we model the discontinuities
+with a step-function $\theta(x)$, then potentials scale as 
+\begin{equation}
+  [\partial_x\theta(x)]^2-\partial_x^2\theta(x)\sim \delta(x)^2 - \delta'(x),
+\end{equation}
+which is horrificly singular.  
+These expressions must be suitable regularized by smoothing out the step, and taking the limit at 
+the end of the calculation.  Amazingly enough, finite results can be recovered from this, provided 
+one uses the correct machinery, as discussed in Ch.~\ref{ch:feynman-kac}.    
 
 The worldline path integral for this can be computed straightforwardly, and read off from the functional
 determinants.  Each determinant contributes separately to an independent path integral.  
@@ -733,8 +745,8 @@ functional determinant of a matrix operator does not provide any problems.  This
 since extra terms can appear in such matrix functional determinants in a regularization dependent manner.
 Even greater care is required in treating matrix functional determinants of matrix differential operators.
 While $\det(AB)=\det(A)\det(B)$ for finite matrices, for infinite matrices this is not strictly true. 
-Instead, a regularization dependent factor can arise, known as the ``multiplicative anomaly''~\cite{Parker1998}.
-This is important for so-called $\zeta$-function regularization, which is closely allied with the worldline method.
+Instead, a regularization dependent factor can arise, known as the ``multiplicative anomaly''~\cite{McKenzieSmith1998}.
+This is important for $\zeta$-function regularization of functional determinants, which is closely allied with the worldline method.
 
 This gauge theory path integral has a number of worrisome features.
 First, it is not clear how the two physical degrees of freedom emerge from that path integral.
@@ -759,16 +771,105 @@ is perpendicular to the plane of incidence.
 In the each case a scalar field theory can be developed.  For the TE polarization the electric
 field behaves as a scalar throughout the problem: while its magnitude may vary, its direction does not.
 The same is true for the magnetic field in the TM polarization.  
+In this case, the two fields will turn out to mirror each other under a duality transformation exchanging
+electric and magnetic properties of both fields and matter.  
 
-(Material and quantization discussed in Mackrory2016)
+The following work is expanded from the presentation in Ref.~\ref{Mackrory2016}.\footnote{
+The original impetus for this work was to find a scalar model that mimiced the vector wave equations electrodynamics
+and see if I could get \emph{anything} to yield known results.  This was motivated by months of repeated
+failures to make sense of the matrix path integral.}
 
+Consider a medium which varies in only one Cartesian direction $z$.
+The material properties $\epsr(z)$,$\mur(z)$ also only vary in this direction, which implies 
+that the fields have the same dependence.  
+In this case the action for the vector electromagnetic can be split into two non-interacting scalar fields.
 
+From Maxwell's equations the electric and magnetic fields can be split into two sets: $(E_y, B_x, B_z)$
+and $(B_y,E_x,E_z)$.
 
+Recall that the classical action is given by 
+\begin{equation}
+  S = \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
+\end{equation}
 
+\subsection{TE Partition Function}
 
+The action for the TE scalar is 
+\begin{equation}
+  S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg),
+\end{equation}
+where $\vect{E}= \partial_t\phi\hat{y}$.  The partition can be found via the same procedure 
+we used for the Dirichlet scalar, and full four-potential.  However, we will just skip to the final
+result in terms of the partition function with the Euclidean action.
+The partition function in terms of the scalar $\phi:=\phi(\vect{r},\tau)$ is 
+\begin{equation}
+  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
+    \bigg(\epsr(\vect{r})(\partial_\tau\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg)\right].
+\end{equation}
+The field $\phi$ can be rescaled as $\tilde{\phi}:=\sqrt{\mur}\phi$ for the same reasons to the matrix path integral.  
+The scaled field yields a Gaussian probability density in the worldline, 
+and sidesteps any possible issues related to quantizing a field on a curved manifold.
+The path integral can be rewritten in terms of these new variables, and after an integration by parts is written
+\begin{equation}
+  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
+    \,\phi\bigg(-\epsr(\vect{r})\mur(\vect{r})\partial^2_\tau 
+    - \sqrt{\mur}\nabla\cdot\frac{1}{\mur(\vect{r})}\nabla\sqrt{\mur}\bigg)\phi\right].
+\end{equation}
+The gradients can be expanded out in the same fashion as Eq.~(\ref{eq:TM_potential_derivatives}), which
+yields an additional potential, 
+\begin{equation}
+  V\subTE(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\mur})^2-\partial_z^2\log\sqrt{\mur}\big].
+\end{equation}
+The Gaussian integral over $\phi$ can be carried out immediately, with the result
+\begin{equation}
+  Z\subTE = \det\bigg\{-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z)  \bigg\}^{-1/2}.
+\end{equation}
 
+\subsection{TM Partition Function}
 
+A similar derivation is possible for fields where $\vect{H}:=\partial_t\psi\hat{y}$.
 
+In that case electromagnetic duality can be exploited to rewrite our results.
+Maxwell's equations are invariant under the following duality transformation in the absence of sources:
+$\epsr\Leftrightarrow \mu, \vect{D}\Leftrightarrow \vect{B}, \vect{E}\Leftrightarrow-\vect{H}$.
+As one might expect, this field theory can be naturally formulated in terms of the dual potentials, 
+subject to ``dual Coulomb gauge'', $\nabla\cdot\vect{C}=0$.
+
+Exactly the same manipulations as the TE case can be carried out, but with $\epsr$ and $\mur$ exchanged.
+The TM partition function is 
+\begin{equation}
+  Z\subTM = \det\bigg\{-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTM(z)  \bigg\}^{-1/2},
+\end{equation}
+where the potential is 
+\begin{equation}
+  V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big].
+\end{equation}
+Note that the potential depends on the dielectric function in this case, and will play a much larger
+role for most media.  
+The simplicity of this derivation is one reason for working with both magnetic and dielectric media in this geometry.  
+Given the rarity of magnetic media in quantum optical situations,  we will often set $\mur=1$.
+
+\subsection{TE Polarization Worldline}
+
+It is a straightforward matter to develop the TE worldline path-integral.  In the same fashion
+as the Dirichlet scalar method in Sec.~\ref{sec:dirichlet_worldline}, one uses two formal identities to rewrite the free energy in exponential form.
+The renormalized TE free energy is 
+\begin{align}
+  \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2}[\log\det \op{D}\subTE -\log \det \op{D}\sup0],
+\end{align}
+where the partition functions $Z\subTE$ were rewritten as the functional determinant of a differential operator. 
+The differential operators are 
+\begin{align}
+  \op{D}\subTE&:=-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z) \\
+  \op{D}\sup0&:=-\frac{1}{2}[\partial_\tau^2+\nabla^2].
+\end{align}
+The vacuum operator $\op{D}\sup0$ is the same for both polarization and is determined by setting $\epsr=\mur=1$ everywhere.  
+The free energy can be written using the $\log-\det$ goes to $\tr-\log$ rule~(\ref{eq:log-det}),
+and the integral representation of the logarithm~(\ref{eq:integral_log}), with the result
+\begin{align}
+    \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2} \tr(\log \op{D}\subTE -\log \op{D})\\
+    &= -\frac{\kB T}{2} \int_0^\infty \frac{d\cT}{\cT}\tr\big[ \exp(-\op{D}\subTE\cT) -\exp(-\op{D}\sup0\cT)\big].
+\end{align}
 
 
 

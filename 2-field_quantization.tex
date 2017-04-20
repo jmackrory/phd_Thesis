@@ -115,8 +115,6 @@ Note that the fields are unchanged if we make the following gauge transformation
 % \nabla\times\nabla\times\vect A +\mu_0\epsilon_0\epsvx\partial_t\left(\nabla\phi+\partial_t\vect A\right)&=0.
 % \end{align}
 
-\section{Classical Lagrangian Formulation}
-
 Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.
 We will initially work with a spatially varying, but frequency independent dielectric.
 \begin{align}
@@ -225,7 +223,7 @@ rather than the operators.
 
 The equal-time commutation relations are now 
 \begin{equation}
-[A_\mu(\vect{x},t),\Pi_\nu(\vect{x'},t)] = i\hbar g_{\mu\nu}\delta^{3}(\vect{x-x'}),
+[A_\mu(\vect{x},t),\Pi_\nu(\vect{x'},t)] = i\hbar \eta_{\mu\nu}\delta^{3}(\vect{x-x'}),
 \end{equation}
 and the allowed states must obey:
 \begin{equation}
@@ -237,8 +235,8 @@ V_\mathrm{gauge} &= \int d^3\vect A d\phi\,|\phi,\vect A\rangle\langle \phi,\vec
 1 &= \int d^4\Pi\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi})\delta(\Pi_0) 
 = \int d^3\vect{\Pi}\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi})
 \end{align}
-The volume shows up because we are integrating over equivalent physical states that are related by gauge transformations.
-  We won't care about this, since the volume only adds a constant to the energy.
+% The volume shows up because we are integrating over equivalent physical states that are related by gauge transformations.
+%   We won't care about this, since the volume only adds a constant to the energy.
   The delta function in the momentum states ensures that we only include states that obey the constraints.
 %  We are ignoring any determinant that arising from changing measure, or rather assuming that it is already correctly accounted for.  
 
@@ -386,52 +384,49 @@ S_E[\vect{A},\phi] = \frac{1}{2} \int d^4x\, \bigg[
 \epsr(\vect{r})\left( \partial_4\vect{A}-\nabla A_4\right)^2
 +\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
 \end{equation}
-This change of variable was necessary after the integral over the conjugate momentum fields.
-We have already used all of the constraints on the fields to write the equations in this form. 
-We are using the euclidean path integral, with $x_4=\beta$.
+% This change of variable was necessary after the integral over the conjugate momentum fields.
+% We have already used all of the constraints on the fields to write the equations in this form. 
+% We are using the euclidean path integral, with $x_4=\beta$.
 
 \subsection{Fadeev-Popov Gauge Fixing}
-~\cite{Faddeev1991}
+
 We need to enforce a gauge condition, since currently the path integral runs over all field configurations.
 The integral includes physically equivalent states that are related to each other by a gauge transformation.
 We will then only integrate over one point from the gauge fibre by enforcing a delta-function constraint.  
 
 The gauge transformation can be written as 
 \begin{equation}
-A'^\mu \rightarrow A^\mu +\partial^\mu\alpha,
+A^\mu \rightarrow A^\mu +\partial^\mu\alpha,
 \end{equation}
 where $\alpha$ is an arbitrary function.
-This change of variables does not change the value of the path integral, but it will yield divergent 
+This change of variables does not change the value of the path integral, and it will yield divergent 
 results if it is not removed from the path integral.  
-We only want to sum over one of each physical configuration, so we can imagine integrating over the redundant $\alpha$ variables.  
+In order to extract finite results from the path integral, it is necessary to restrict this gauge degree of freedom.
+This gauge-fixing is carried out by introducing a gauge-fixing function $G[A]$ inside a functional $\delta$-function.
 
-If we start with a gauge constraint $G[A^\mu]$, we can write this in terms of the $A^\mu$ and $\alpha$ as $G[A^\mu+\partial^\mu\alpha]$.
-To get the correct measure after integrating over all $\alpha$
- we must use the functional generalization of the change of variable for a single delta function:
+The Jacobian factor associated with the gauge-fixing can be constructed in analogy
+ with the change of variable for a single delta function:
 \begin{equation}
-\int dx \delta(f(x)) = \int df \frac{1}{|\partial_xf|}\delta(f).
+\int dx\, \delta[f(x)] = \int df \frac{1}{|\partial_xf|}\delta(f).
 \end{equation}
-Since we will integrate over all redundant alpha we need to cancel off that Jacobian factor.
-We will use the following delta-function for the integral over $A$
+In order to fix the gauge, and assign each state equal weight, the inverse Jacobian factor should be introduced
+alongside the functional $\delta$-function.  
+One further trick is often used in gauge-fixing the path integral.  Instead of fixing a gauge with
+$G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is an otherwise free parameter,
+we can integrate it against a Gaussian density,
 \begin{equation}
-  \delta(G[A])\det\left(\frac{\delta G[A]}{\delta\alpha}\right).
+  1 = \int D\gamma \exp\left[-\frac{1}{2}\int d^4x\,\gamma^2(x)\right].
 \end{equation}
-The path integral becomes 
-\begin{equation}
-  Z = \int D\vect{A} DA_4\, \det \frac{\delta G}{\delta \alpha} e^{-S_E}.
- \end{equation}
-We can put this in the usual form with yet another trick.
-Let us choose a gauge where $G[A]-\omega(x) =0$.
-We can also insert unity in the form of a Gaussian integral:
-\begin{equation}
-  1 = \int D\omega \exp\left[-\int d^4x\, \omega^2(x)\right],
-\end{equation}
-where any constant factors are assumed to be absorbed into the normalization of the path integral.
-  The gauge-fixed path integral finally becomes
-\begin{equation}
- Z = \int D\vect{A} DA_4\, \det \frac{\delta G}{\delta \alpha} 
-\exp\left[-S_E-\frac{1}{2}\int d^4x\, G^2\right].
-\end{equation}
+Such factors are unity in the path integral sense that any constants will cancel out when considering
+physical energies, which require renormalization.
+Finally, the gauge-fixed partition function is
+\begin{align}
+ Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
+ \exp\left[-S_E-\frac{1}{2}\int d^4x\, \gamma^2(x)\right]\nonumber\\
+ &= \int D\vect{A} DA_4\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
+ \exp\left[-S_E-\frac{1}{2}\int d^4x\, G^2\right],
+\end{align}
+where we carried out the integral over $\gamma$ in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
 %  anti-commuting Grassman variables \cite{Srednicki2008}.  This allows the Feynman rules to be extended
 % to account for the gauge-fixing, since the gauge transformation is non-linear in the fields.  
@@ -466,15 +461,21 @@ However, it is not a complete gauge fixing so we will not pursue it any further.
 Finally, there is a generalized Lorenz gauge
 $\frac{1}{\epsilon}\nabla\cdot\epsilon\vect A + \epsilon\partial A_4=0$, 
 introduced by Bordag\etal\cite{Bordag1998}.  This gauge allows the derivation to proceed in close parallel
-with the case with no media.  
-It removes any coupling between the scalar and vector degrees of freedom, and is well-suited to the worldline.
+with the case with no media\footnote{A similar gauge was fixed by Reid\etal\cite{Reid2013} in their development of the 
+  numerical scattering method.  However, that work explicitly relies on fixing electromagnetic boundary conditions at surfaces.
+That work then proceded using \emph{homogeneous} formula for all quantities and ignoring any singularities 
+arising at interfaces.  
+In work on the worldline, it is more natural to keep these singularities, anticipating that they will act as effective boundary conditions.
+}
+This gauge removes any coupling between the scalar and vector degrees of freedom.  In addition, 
+once the gradients have been expanded out in the path integral, the leading terms have no $\epsilon$-dependence,
+which makes worldline calculations simpler.  
 However, Bordag\etal found the disquieting feature that the longitudinal and scalar degrees of freedom do not
-cancel out the ``ghost'' degrees of freedom.  This perhaps suggests that quantizing and gauge-fixing 
-    the effective field theory has problems, and it may be better to proceed directly via linear-response theory.
-%    This gauge choice has the advantage of also removing any coupling between $\vect A$ and $A_4$.
-    In addition, when expanding the gradients out, the leading terms have no $\epsilon$-dependence
-    ---which makes worldline-quantization much more straightforward.  
-    The resulting functional determinant from gauge-fixing depends on $\epsilon$, so we cannot drop the determinant.  
+cancel out the ``ghost'' degrees of freedom~\cite{Bordag1998}.  A later calculation adapted to spherical
+geometries found that using the dual potentials led to more physical results, at least when $\epsr-1$ is small.
+This perhaps suggests that quantizing and gauge-fixing 
+the effective field theory has problems, and it may be better to proceed directly via linear-response theory.
+The resulting functional determinant from gauge-fixing depends on $\epsilon$, so we cannot drop the determinant.  
 
 % \item Generalized Lorenz Gauge: $\nabla\cdot\epsilon\vect A + \partial A_4=0$.
 %   This removes the coupling between $\vect{A}$ and $A_4$.
@@ -482,45 +483,204 @@ cancel out the ``ghost'' degrees of freedom.  This perhaps suggests that quantiz
 %   It also gives the same functional determinant as the $A_4$ integral, which allows a partial cancellation of terms.  
 % \end{enumerate}
 
-There is a perplexing array of gauge-fixings available to us in this computation.
-Even with the requirements that the leading coeffients be free-space-like, and the coupling between
-the scalar and vector fields cancel, there is still a residual freedom in fixing gauge.  
+% There is a perplexing array of gauge-fixings available to us in this computation.
+% Even with the requirements that the leading coeffients be free-space-like, and the coupling between
+% the scalar and vector fields cancel, there is still a residual freedom in fixing gauge.  
+
+% \section{Gauge-Fixing: Generalized Lorenz Gauge}
+
+% Of these gauges, the generalized Lorenz gauge is best suited to the full gauge theory path integral.  
+% (In later work on the scalar path integrals in planar geometries, Coulomb gauge can be used to naturally.)
+
+% We will enforce a generalized Lorenz gauge,
+% \begin{equation}
+%   G[A]=\frac{1}{\epsr(\vect{r})\sqrt{\mur(\vect{r})}}\nabla\cdot\epsr(\vect{r})\vect{A}+\epsr(\vect{r})\sqrt{\mur(\vect{r})}\partial_4A_4 = 0,
+% \end{equation}
+% which elminates the cross coupling between the $A_4$ and the vector potential $\vect{A}$; it also eliminates
+% the longitudinal projector part of $(\partial_iA_i)^2$, at the cost of extra terms involving derivatives of the 
+% dielectric.  
+
+% To carry out the Faddeev-Popov gauge fixing, we need the functional derivative
+% of the gauge-fixing function with respect to gauge transformations:
+% The functional derivative can be read off as the linear term in $\alpha$ after  making a gauge transformation on the gauge condition,
+% \begin{equation}
+%   G[A^\mu+\partial^\mu \alpha] = \frac{1}{\epsr(\vect{r})}\nabla\cdot[\epsr(\vect{r})(\vect{A}+\nabla\alpha)].
+%   +\epsr(\vect{r})\partial_4(A_4+\partial_4\alpha).
+% \end{equation}
+% % \begin{equation}
+% % \frac{\delta G}{\delta \alpha} = \frac{1}{\epsr(\vect{x})}\nabla\cdot\epsr(\vect{x})\nabla + \epsr(\vect{r})\partial_4^2.
+% % \end{equation}
+% The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, cancelling terms, and integrating-by-parts, becomes 
+% \begin{align}
+%   S_E &=\frac{1}{2}\int d^3r d\tau\,\bigg[ A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg],
+% \end{align}
+% where we have momentarily suppressed the spatial arguments of the dielectric functions, and started using the 
+% Einstein summation convention (where repeated latin and greek indices are summed over).
+% The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by 
+% \begin{align}
+%   L^{(4)} &=-\epsr^2\mur\partial_\tau^2-\partial_k\epsr\partial_k\\
+%   L^{(V)}_{ij} &=-\epsr\partial_\tau^2\delta_{ij}-\partial_k\cdot\frac{1}{\mur}\partial_k\delta_{ij}+\partial_j\frac{1}{\mu_r}\partial_i
+%   -\epsr\partial_i\frac{1}{\epsr^2\mur}\partial_j\epsr.
+% \end{align}
+
+% \comment{Multiplicative anomaly}\footnote{
+% Even greater care is required in treating matrix functional determinants of matrix differential operators.
+% While $\det(AB)=\det(A)\det(B)$ for finite matrices, for infinite matrices, there is a regularization
+% factor, known as the ``multiplicative anomaly''.
+% This is important for so-called $\zeta$-function regularization, which is closely allied with the worldline method.
+% }
+
+% At this point, we choose to rescale the fields, 
+% \begin{equation}
+%   A_4=: \frac{1}{\sqrt{\epsr}}\tilde{A}_4, \qquad \vect{A}=\sqrt{\mur}\tilde{\vect{A}}.
+% \end{equation}
+% These field scalings are chosen to simplify the worldline path integrals.  
+% In the worldline path integral, operators like $\partial_x^2$ lead to Gaussian probability densities, while
+% % it is simplest to handle differential operators like $-partial_x^2$ instead of $\partial_x\epsilon\partial_x$,
+% % since the latter yields a Gaussian probability density.
+% The operators like $\partial_x\epsilon\partial_x$ will lead to a non-Gaussian probability density, which is
+% harder to numerically sample from.
+% In rescaled form, operators $\epsr^{-1/2}\partial_x\epsr\partial_x\epsr^{-1/2}\rightarrow \partial_x^2+V$,
+% where $V$ arises from commuting spatially-dependent dielectric functions past the derivatives.
+% The cost of field rescaling is that extra potential terms arise, but this might be more tractable.  
+% The field rescaling also leads to functional determinants $|\mur|,|\epsr|$, but these cancel out under
+% renormalization.  
+
+
+% The Gaussian integrals can at least be formally carried out, with the result that 
+% % The term in $\tilde{A}_4$ can be rewritten as 
+% % \begin{equation}
+% % \int d^4x [\partial_4A_4]^2+\epsilon|\nabla A_4|^2 = \int d^4x\, A_4\left(-\nabla\cdot\epsilon\nabla-\partial_4^2\right)A_4,
+% % \end{equation}
+% % at the cost of some boundary terms which are assumed to vanish.  
+% % \begin{align}
+% %  \int D \tilde{A}_4 &\exp\left[-\int d^4x \,\tilde{A}_4\left(
+% % -\frac{1}{\sqrt{\epsr}}\nabla\cdot\epsr\nabla\frac{1}{\sqrt{\epsr}}-\espr\mur\partial_4^2\right)\tilde{A}_4\right] \nonumber\\
+% % &\propto \det{}^{-1/2}
+% % \left(-\epsr\mur\partial_4^2-\frac{1}{\sqrt{\epsr}}\nabla\cdot\epsr\nabla\frac{1}{\sqrt{\epsr}}\right).
+% % \end{align}
+% % which is similar, but not identical to the term in the Faddeev-Popov determinant.
+% %   This result follows from thinking about the following finite dimensional Gaussian integral,
+% % \begin{align}
+% % \int d\vect{y} \exp[ -\vect{y}^TM\vect{y}] = \int d\vect{z} \det[O] \exp[-\vect{z}^TO^TMOz]
+% % \end{align}
+% % If we assume $M$ is Hermitian, we can find its eigenvalues and eigenvectors.
+% %   If we choose $O$ to diagonalize $M$, we have decomposed $\vect{y}$ into the eigenvectors of $M$.
+% %   This is an orthogonal transformation, and the determinant $\det O$ is unity.
+% %   The eigenvectors are orthogonal, so they decouple and the integral becomes a product of simple Gaussian integrals.   
+% % \begin{align}
+% % \int d\vect{z}\exp[-\vect{z}^T\varphi\vect{z}]=\prod_k\int dz_k \exp[ -\lambda_kz_k^2] =  \prod_k \sqrt{\frac{\pi}{\lambda_k}},
+% % \end{align}
+% % where we have defined the diagonal matrix $\varphi=O^TMO$.
+% %    The determinant of $\varphi$ is just the product of its diagonal elements - which is exactly what we found as the result of the integral.  We can now invert the orthogonal transformations to write 
+% % \begin{equation}
+% % \int d\vect{y} \exp[ -\vect{y}^TM\vect{y}] \propto \det{}^{-1/2}M
+% % \end{equation}
+
+% % \begin{align} \int d^3\vect{x}\,
+% % \bigg[\left(\nabla\times\frac{\vect{A}}{\sqrt{\epsilon}}\right)^2
+% % +(\nabla\cdot\sqrt{\epsilon}\vect{A})^2 &= 
+% % \int d^3\vect{x}\,A_i\left[
+% %   -\frac{1}{\sqrt{\epsilon}}(\delta_{ij}\nabla^2-\partial_i\partial_j)\frac{1}{\sqrt{\epsilon}}
+% %   -\sqrt{\epsilon}\partial_i\partial_j\sqrt{\epsilon} \right] A_j
+% % \end{align}
+% So the partition function now becomes:
+% \begin{align}
+% Z%  &= \int D\vect{A} DA_4\, \det[-\partial_4^2-\nabla\cdot\epsilon\nabla]
+%  % \exp\left[-\int d^4x \mathcal{L}\right]\\
+% &\propto\det\left[\left(-\epsr\mur\partial_4^2-\frac{1}{\sqrt{\epsr}}\nabla\cdot\epsr\nabla\frac{1}{\sqrt{\epsr}}\right)\right]^{1/2}
+% \det\left[-(\epsr\mur\partial_4^2+\nabla^2)\delta_{ij}-V_\mu
+%  + \frac{1}{\sqrt{\epsilon}}\partial_i\partial_j\frac{1}{\sqrt{\epsilon}}
+% -\sqrt{\epsilon}\partial_i\partial_j\sqrt{\epsilon} \right]^{-1/2},
+%  \end{align}
+% where $C$ absorbs all of the constant pieces.  
+
 
 \section{Gauge-Fixing: Generalized Lorenz Gauge}
+
+Of these gauges, the generalized Lorenz gauge is best suited to the full gauge theory path integral.  
+(In later work on the scalar path integrals in planar geometries, Coulomb gauge can be used to naturally.)
+
+At this point, we will start using the Einstein summation convention,  repeated indices imply a sum.
+
+\comment{SET $\mu=1$.  UTTERLY HORRENDOUS OTHERWISE}
+
 We will enforce a generalized Lorenz gauge,
 \begin{equation}
-G[A]=\nabla\cdot\epsilon(\vect{x})\vect{A}+\partial_4A_4 = 0
+  G[A]=\frac{1}{\epsr(\vect{r})}\nabla\cdot\epsr(\vect{r})\vect{A}+\epsr(\vect{r})\partial_4A_4 = 0,
 \end{equation}
-in the path integral.  Let us make a gauge transformation on this,
-\begin{equation}
-G[A+\partial \alpha] = \nabla\cdot[\epsilon(\vect{x})(\vect{A}+\nabla\alpha)]+\partial_4(A_4+\partial_4\alpha).
-\end{equation}
-We can then read off the functional derivative:
-\begin{equation}
-\frac{\delta G}{\delta \alpha} = \nabla\cdot\epsilon(\vect{x})\nabla + \partial_4^2.
-\end{equation}
+which elminates the cross coupling between the $A_4$ and the vector potential $\vect{A}$; it also eliminates
+the longitudinal projector part of $(\partial_iA_i)^2$, at the cost of extra terms involving derivatives of the 
+dielectric.  
 
-The gauge-fixed Euclidean action becomes 
+To carry out the Faddeev-Popov gauge fixing, we need the functional derivative
+of the gauge-fixing function with respect to gauge transformations:
+The functional derivative can be read off as the linear term in $\alpha$ after  making a gauge transformation on the gauge condition,
 \begin{align}
-S_E % &= \frac{\epsilon_0 c}{2\hbar}\int d^4x
-% \left(\partial_4\vect{A} - \sqrt{\epsilon}\nabla A_4\right)^2
-%  + \left(\nabla\times\frac{\vect{A}}{\sqrt{\epsilon}}\right)^2
-% +\left(\partial_4A_4+\nabla\cdot\sqrt{\epsilon}\vect{A}\right)^2\\
-&=\frac{\epsilon_0 c}{2\hbar}\int d^4x\,|\partial_4\vect{A}|^2 
-+(\nabla\cdot\sqrt{\epsilon}\vect{A})^2 +[\partial_4A_4]^2+\epsilon|\nabla A_4|^2
- + \left(\nabla\times\frac{\vect{A}}{\sqrt{\epsilon}}\right)^2
+  G[A^\mu+\partial^\mu \alpha] &= \frac{1}{\epsr(\vect{r})}\nabla\cdot[\epsr(\vect{r})(\vect{A}+\nabla\alpha)]
+  +\epsr(\vect{r})\partial_4(A_4+\partial_4\alpha)\nonumber\\
+&=G[A^\mu]+\bigg[\frac{1}{\epsr(\vect{r})}\nabla\cdot[\epsr(\vect{r})\nabla+\epsr(\vect{r})\partial_4^2\bigg]\alpha).
 \end{align}
-The term in $A_4$ can be rewritten as 
+The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, cancelling terms, and integrating-by-parts, becomes 
+\begin{align}
+  S_E &=\frac{1}{2}\int d^3r d\tau\,\bigg[ A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg],
+\end{align}
+where we have momentarily suppressed the spatial arguments of the dielectric functions, and started using the 
+Einstein summation convention (where repeated latin and greek indices are summed over).
+The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by 
+\begin{align}
+  L^{(4)} &=-\epsr^2\partial_\tau^2-\partial_k\epsr\partial_k\\
+  L^{(V)}_{ij} &=-\epsr\partial_\tau^2\delta_{ij}-\partial_k\partial_k\delta_{ij}+\partial_j\partial_i
+  -\epsr\partial_i\frac{1}{\epsr^2}\partial_j\epsr.\label{eq:matrix_operator_A}
+\end{align}
+
+
+At this point, we choose to rescale the scalar field, 
 \begin{equation}
-\int d^4x [\partial_4A_4]^2+\epsilon|\nabla A_4|^2 = \int d^4x\, A_4\left(-\nabla\cdot\epsilon\nabla-\partial_4^2\right)A_4,
+  A_4=: \frac{1}{\sqrt{\epsr}}\tilde{A}_4.
 \end{equation}
-at the cost of some boundary terms which are assumed to vanish.  
-We can now (at least formally) evaluate the Gaussian integral over $A_4$ and write 
+These field scalings are chosen to simplify the worldline path integrals.  
+In the worldline path integral, operators like $\partial_x^2$ lead to Gaussian probability densities, while
+% it is simplest to handle differential operators like $-partial_x^2$ instead of $\partial_x\epsilon\partial_x$,
+% since the latter yields a Gaussian probability density.
+The operators like $\partial_x\epsilon\partial_x$ will lead to a non-Gaussian probability density, which is
+harder to numerically sample from.
+In rescaled form, operators $\epsr^{-1/2}\partial_x\epsr\partial_x\epsr^{-1/2}\rightarrow \partial_x^2+V$,
+where $V$ arises from commuting spatially-dependent dielectric functions past the derivatives.
+The cost of field rescaling is that extra potential terms arise, but this might be more tractable.  
+The field rescaling also leads to functional determinants $|\mur|,|\epsr|$, but these cancel out under
+renormalization.  
+The differential operators between the rescaled field $\tilde{A}_4$ is
 \begin{equation}
-\int D A_4 \exp\left[-\int d^4x \,A_4\left(-\nabla\cdot\epsilon\nabla-\partial_4^2\right)A_4\right] \propto \det{}^{-1/2}
-\left(-\nabla\cdot\epsilon\nabla-\partial_4^2\right).
+  \tilde{L}_4 = -\epsr\partial_\tau^2-\frac{1}{\sqrt{\epsr}}\partial_k\epsr\partial_k\frac{1}{\sqrt{\epsr}}.\label{eq:scalar_operator}
 \end{equation}
-will is identical to the term in the functional determinant from normalizing the functional delta function.
+The combination of functions of the form $f^{-1/2}(x)\partial_if(x)\partial_jf^{-1/2}(x)$,will recur multiple 
+times in handling worldline path integrals.  This can be written out as a second derivative with an
+additional potential in terms of derivatives of $F_i:=\partial_i\log\sqrt{f}$.
+The derivatives can be expanded out as follows,
+\begin{align}
+  [f^{-1/2}(x)\partial_if(x)\partial_jf^{-1/2}(x)]\psi &= (f^{-1/2}(x)\partial_if^{1/2})( f^{1/2}\partial_jf^{-1/2})\psi\nonumber\\
+  &= (F_i+\partial_i)(-F_j+\partial_j)\psi\nonumber\\
+  &= [-F_iF_j+(\partial_iF_j)-F_j\partial_i+F_i\partial_j+\partial_i\partial_j]\psi,
+\label{eq:TM_potential_derivatives}
+\end{align}
+for an unspecified function $\psi$. The $\partial_i F_j$ term is understood as a function rather than a differential
+operator, while the other derivatives are still operators acting to the right.  
+This result is needed in both the scalar and matrix differential operators.  
+
+The Gaussian integrals can at least be formally carried out, with the result that 
+% The term in $\tilde{A}_4$ can be rewritten as 
+% \begin{equation}
+% \int d^4x [\partial_4A_4]^2+\epsilon|\nabla A_4|^2 = \int d^4x\, A_4\left(-\nabla\cdot\epsilon\nabla-\partial_4^2\right)A_4,
+% \end{equation}
+% at the cost of some boundary terms which are assumed to vanish.  
+% \begin{align}
+%  \int D \tilde{A}_4 &\exp\left[-\int d^4x \,\tilde{A}_4\left(
+% -\frac{1}{\sqrt{\epsr}}\nabla\cdot\epsr\nabla\frac{1}{\sqrt{\epsr}}-\espr\mur\partial_4^2\right)\tilde{A}_4\right] \nonumber\\
+% &\propto \det{}^{-1/2}
+% \left(-\epsr\mur\partial_4^2-\frac{1}{\sqrt{\epsr}}\nabla\cdot\epsr\nabla\frac{1}{\sqrt{\epsr}}\right).
+% \end{align}
+% which is similar, but not identical to the term in the Faddeev-Popov determinant.
 %   This result follows from thinking about the following finite dimensional Gaussian integral,
 % \begin{align}
 % \int d\vect{y} \exp[ -\vect{y}^TM\vect{y}] = \int d\vect{z} \det[O] \exp[-\vect{z}^TO^TMOz]
@@ -537,41 +697,83 @@ will is identical to the term in the functional determinant from normalizing the
 % \begin{equation}
 % \int d\vect{y} \exp[ -\vect{y}^TM\vect{y}] \propto \det{}^{-1/2}M
 % \end{equation}
-Now note that the result of the $A_4$ integral is the same as the functional determinant 
-from fixing the gauge - this is the reason for choosing to use a slightly different gauge to Bordag.
- 
-Similarly, the terms involving $\epsilon\vect{A}$ now become
-\begin{align} \int d^3\vect{x}\,
-\bigg[\left(\nabla\times\frac{\vect{A}}{\sqrt{\epsilon}}\right)^2
-+(\nabla\cdot\sqrt{\epsilon}\vect{A})^2 &= 
-\int d^3\vect{x}\,A_i\left[
-  -\frac{1}{\sqrt{\epsilon}}(\delta_{ij}\nabla^2-\partial_i\partial_j)\frac{1}{\sqrt{\epsilon}}
-  -\sqrt{\epsilon}\partial_i\partial_j\sqrt{\epsilon} \right] A_j
-\end{align}
+
+% \begin{align} \int d^3\vect{x}\,
+% \bigg[\left(\nabla\times\frac{\vect{A}}{\sqrt{\epsilon}}\right)^2
+% +(\nabla\cdot\sqrt{\epsilon}\vect{A})^2 &= 
+% \int d^3\vect{x}\,A_i\left[
+%   -\frac{1}{\sqrt{\epsilon}}(\delta_{ij}\nabla^2-\partial_i\partial_j)\frac{1}{\sqrt{\epsilon}}
+%   -\sqrt{\epsilon}\partial_i\partial_j\sqrt{\epsilon} \right] A_j
+% \end{align}
 So the partition function now becomes:
 \begin{align}
 Z%  &= \int D\vect{A} DA_4\, \det[-\partial_4^2-\nabla\cdot\epsilon\nabla]
  % \exp\left[-\int d^4x \mathcal{L}\right]\\
-&=C\det\left[-\partial_4^2-\nabla\cdot\epsilon\nabla\right]^{1/2}
-\det\left[-\left(\partial_4^2+\frac{1}{\sqrt{\epsilon}}\nabla^2\frac{1}{\sqrt{\epsilon}}\right)\delta_{ij}
- + \frac{1}{\sqrt{\epsilon}}\partial_i\partial_j\frac{1}{\sqrt{\epsilon}}
--\sqrt{\epsilon}\partial_i\partial_j\sqrt{\epsilon} \right]^{-1/2},
+&\propto
+\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)+V_4\right]^{-1/2}\nonumber\\
+&\times\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)\delta_{ij} -u_{ij} +V^{(A)}_{ij}
+ \right]^{-1/2}\nonumber\\
+&\times\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)-\frac{1}{2}(\nabla\log\epsr)\cdot\nabla \right]
  \end{align}
-where $C$ absorbs all of the constant pieces.  
+where the first determinant comes from the scalar potential path integral, the second comes from
+the vector potential, and the final determinant comes is the Faddeev-Popov gauge-fixing determinant.
+The potentials $V_4$ and $V^{(A)}_{ij}$, and the operator $u_{ij}$, are defined as 
+\begin{align}
+  V_4 & = \frac{1}{2}|\nabla\log\sqrt{\epsr}|^2-\frac{1}{2}\nabla^2\log\sqrt{\epsr}\\
+  V^{(A)}_{ij} &= \frac{1}{2}|\nabla\log(\epsr^{-1})|^2-\frac{1}{2}\nabla^2\log (\epsr^{-1})\\
+  u_{ij}&=\frac{1}{2}(\partial_i\log\epsr)\partial_j -\frac{1}{2}(\partial_j\log\epsr)\partial_i
+\end{align}
+\comment{right signs/powers of epsilon?}
 
-% We can recover the vacuum result by setting $\epsilon=1$ everywhere.  This yields
-% \begin{equation}
-% Z_0 = C\det\left[-(\partial_4^2+\nabla^2)\right]^{1/2}
-% \det\left[-\left(\partial_4^2+\nabla^2\right)\delta_{ij} \right]^{-1/2}
-% \end{equation}
-% If we now use $\det{A\delta_{ij}} = [\det{A}]^3$, we see that 
-% \begin{equation}
-% Z_0 = -\det[-(\partial_4^2+\nabla^2)],
-% \end{equation}
-% which is twice the energy of a free massless scalar field.
-%   This makes sense, a free electromagnetic field has two massles degrees of freedom that obey the Klein-Gordon equation, so you'd expect twice the vacuum energy.  
+The worldline path integral for this can be computed straightforwardly, and read off from the functional
+determinants.  Each determinant contributes separately to an independent path integral.  
+
+All of the free gradient operators pass over to momentum operators.  We also assume that the 
+functional determinant of a matrix operator does not provide any problems.  This is a large assumption,
+since extra terms can appear in such matrix functional determinants in a regularization dependent manner.
+Even greater care is required in treating matrix functional determinants of matrix differential operators.
+While $\det(AB)=\det(A)\det(B)$ for finite matrices, for infinite matrices this is not strictly true. 
+Instead, a regularization dependent factor can arise, known as the ``multiplicative anomaly''~\cite{Parker1998}.
+This is important for so-called $\zeta$-function regularization, which is closely allied with the worldline method.
+
+This gauge theory path integral has a number of worrisome features.
+First, it is not clear how the two physical degrees of freedom emerge from that path integral.
+In vacuum, this derivation shows that the energy of the electromagnetic field is twice the energy 
+of a free scalar field.  This correspondence tallies with the notion that there are two physical 
+polarizations of the electromagnetic field. 
+In general dielectrics it is not clear how this combination of factors conspires to yield two physical
+degrees of freedom.  
+As written, there are three interacting vector degrees of freedom, a scalar, and a subtraction from
+the gauge-fixing.  Investigations by Bordag\etal found that the ghost (gauge-fixing) degrees of freedom
+did not cancel off the longitudinal and scalar degrees of freedom.  
+
+While it may be possible this complicated mess yields the correct answer, we have developed an 
+alternative method explicitly focussing on the two physical degrees of freedom in a simple geometry.  
 
 \section{Scalar Decomposition for Planar Geometries}
+
+The EM field can be split into two non-interacting polarizaitons for media that only vary in one Cartesian dimension in one dimension.
+These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.  In the TE polarization,
+the electric field is perpendicular to the plane of incidence, while in the TM polarization the magnetic field
+is perpendicular to the plane of incidence.
+In the each case a scalar field theory can be developed.  For the TE polarization the electric
+field behaves as a scalar throughout the problem: while its magnitude may vary, its direction does not.
+The same is true for the magnetic field in the TM polarization.  
+
+(Material and quantization discussed in Mackrory2016)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % \section{Quantization with Harmonic Medium and Linear Response}

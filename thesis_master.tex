@@ -1,10 +1,11 @@
 % \documentclass[dissertation,justified,numbers,sort&compress,gsmodern]{uothesis}
-\documentclass[dissertation,latedraft,notables,numbers,justified,sort&compress,gsmodern]{uothesis}
+\documentclass[dissertation,final,notables,numbers,justified,sort&compress,gsmodern]{uothesis}
 
 %THESIS FRONT MATTER
 %TITLES.
-\covertitle{Electromagnetic Casimir Worldlines and Realistic Quantum Position Measurements}
-\abstracttitle{Electromagnetic Casimir Worldlines and \\ Realistic Quantum Position Measurements}
+\covertitle{The Worldline Method for Electromagnetic Casimir Energies}
+\abstracttitle{The Worldline Method for Electromagnetic Casimir Energies}
+%\abstracttitle{Electromagnetic Casimir Worldlines and \\ Realistic Quantum Position Measurements}
 %AUTHOR
 \author{Jonathan B. Mackrory}
 %DEPARTMENT
@@ -23,13 +24,13 @@ Michael Kellman & Outside\\
 }
 \graddean{Scott L. Pratt}
 %CURRICULUM VITAE
-\include{cv}
-%ACKNOWLEDGEMENTS
-\include{acknowledgements}
-%DEDICATION (optional)
-\include{thesis_dedication}
-% ABSTRACT
-\include{abstract}
+ \include{cv}
+% %ACKNOWLEDGEMENTS
+ \include{acknowledgements}
+% %DEDICATION (optional)
+ \include{thesis_dedication}
+% % ABSTRACT
+ \include{abstract}
 
 %packages
 
@@ -38,14 +39,13 @@ Michael Kellman & Outside\\
 \date{2016}
 %shortcuts and length/page changes
 \input{shortcuts.tex}
-% \includeonly{1-introduction}
+% \includeonly{1-introduction,A4-MIT}
 \begin{document}
 \maketitle
 \tableofcontents
 \include{1-introduction}
 \include{2-field_quantization}
 \include{3-path_integrals}
-%%%\include{3-scalar_worldlines}
  \include{4-analytical_results}
  \include{5-numerical_results}
  \include{6-general_results}

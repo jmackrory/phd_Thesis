@@ -42,7 +42,7 @@ remark:
  which may certainly be more difficult than its local counter part,
  since the interaction term is not simple the integral of a local function of the time.}
 \end{quote} Fosco, Lombardo, Mazzitelli 2010.
-We presennt our work on the TM polarization as one way of numerically approaching the limit
+We present our work on the TM polarization as one way of numerically approaching the limit
 of Neumann boundary conditions.  As the effort expended shows, this is indeed much more difficult
 than the Dirichlet or even TE worldline methods.  
 
@@ -126,9 +126,9 @@ However for integrands exploiting Feynman-Kac formulae, such as the TM integrand
 the improved Dirichlet integrand, this strategy is less useful, since the integrand turns on softly.
 In that case it is better to sample from a distribution
 that better reflects the behaviour of the ensemble.
-  A better distribution is 
+A better distribution is 
 \begin{equation}
-  P_{\text{exp-\cT}}(\cT;\cT_0,s) = \frac{\cT_0^{s-1}}{\Gamma[s-1] \cT^s}e^{-\cT_0/\cT}\label{eq:expT},
+  P_{\text{exp-T}}(\cT;\cT_0,s) = \frac{\cT_0^{s-1}}{\Gamma[s-1] \cT^s}e^{-\cT_0/\cT}\label{eq:expT},
 \end{equation}
 where $s>1$ and $\cT_0>0$.  In most cases of interest, $s=1+D/2$.  The exponential factor effectively models the finite touching 
 probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
@@ -558,7 +558,6 @@ where $h' := h\sqrt{T_1/2}, z' := z\sqrt{\frac{T_1(T-2T_1)}{2T}}$.
   $h/\sqrt{2}$ naturally.  Again, he is treating $H_n(x)e^{-x^2}$ as the probability
   distribution.}
 
-
 \section{Gradients for Casimir Energies}
 \subsection{Surface Pinned Paths}
 \label{sec:path-pinning}
@@ -808,7 +807,6 @@ Attempt at Alternative double-pinning notation.
   \biggdlangle\frac{\{\hat{r}_{i}\cdot\hat{n}_1\big[\vect{x}(0)\big]\}
     \{\hat{r}_{j}\cdot\hat{n}_2\big[\vect{x}(\tau)\big]\}}
   {\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+2}}     \biggdrangle_{\vect{x'}(t); \vect{x'}(\tau)},
-  \label{eq:potential_curvature}
 \end{align}
 where the ensemble average is over paths $\vect{x'}(\tau)$ that are 
 pinned to lie on surface $\sigma_1, \sigma_2$ at path positions
@@ -955,7 +953,7 @@ be factorized as
   \Bigdlangle 
   (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1) \nonumber\\
    &\hspace{1.25cm}
-  -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
+  -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}
 \end{align}
 %\begin{align}
   % &e^{-s}[1+e^{-s\langle \chi_1(\vect{x})+\chi_2(\vect{x})\rangle } 
@@ -1199,6 +1197,7 @@ of the integrand.
 % change.  
 
 \subsection{Numerical Implementation of TE Casimir Forces}
+
 \begin{align}
   \vect{F}_2 =& (-1)\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}\oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}  \hspace{-4ex} dS
@@ -1206,7 +1205,6 @@ of the integrand.
 %   &\hspace{0.5cm}\times
   \sum_{n=0}^{N-1}\sum_{m=1}^{N-n-1}\bigdlangle\hat{n}_2(\vect{x}_0)
   \I[1]m\I[2]n f_{m,n}\bigdrangle_{\vect{x}(t)}
-  \label{eq:occupation_force}
 \end{align}
 where the material dependence is carried by 
 \begin{align}
@@ -1499,46 +1497,96 @@ integral.
 In the absence of such a bias, a large number of paths are created near one surface, and if these paths
 do not intersect the other body, a large amount of computational effort is wasted.  
 
-Consider a path integral,
+Consider a Gaussian path integral,
 \begin{equation}
-  I=\int d\vect{x} f(\vect{x})P(\vect{x}),
+  I_k=\int \frac{d\cT}{(2\pi)^{D/2}\cT^{1+D/2}}\int d\vect{x}\, f(\vect{x})P(\vect{x}),
 \end{equation}
-where $P$ is the coupled Gaussian probability density and $f$ is some function of the path.  
-Instead of just taking $P$ as the probability density, let us consider using $Q=P(\vect{x})|_{x_k=d}$,
-where one point is fixed.  The resulting Monte Carlo samples would be given by
+where $f$ is some function of the whole path that is only non-zero if the path enters a given region.
+The $D-1$-dimensional probability density is given by,
 \begin{equation}
-  I = \dlangle \int d\vect{x}_k \frac{P(\vect{x})}{Q(\vect{x})} f(\vect{x})\drangle.
+  P(\{\vect{x}\}) = (2\pi\cT)^{(D-1)/2}\prod_{k=0}^{N-1} \frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta\cT)},
+\end{equation}
+Instead of just taking $P$ as the probability density, let us consider using $Q=P(\vect{x})|_{x_k=d}$,
+where one point is fixed on the surface of the region
+\begin{align}
+  Q(\{\vect{x}\}) =& (2\pi\cT)^{(D-1)/2}\cN_Q^{-1}\prod_{j=0}^{N-1}
+ \frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}e^{-(\vect{x}_{j+1}-\vect{x}_j)^2/(2\Delta\cT)}\bigg|_{x_k=\vect{d}},
+  \end{align}
+  where the normalization constant is
+\begin{equation}
+\cN_Q=\bigg[\frac{N^2}{2\pi k(N-k)\cT}\bigg]^{(D-1)/2}
+e^{-N^2(\vect{d}-\vect{x}_0)^2/[2k(N-k)\cT]}
 \end{equation}
 The ratio of the probability densities is 
 \begin{align}
-  \frac{P}{Q} &= \frac{\exp\left[-\frac{(\vect{x}_{k-1}-\vect{x}_k)^2}{2\Delta \cT}
+  \frac{P}{Q} &= \cN_Q\frac{\exp\left[-\frac{(\vect{x}_{k-1}-\vect{x}_k)^2}{2\Delta \cT}
       -\frac{(\vect{x}_{k}-\vect{x}_{k+1})^2}{2\Delta \cT}\right]}
-{\exp\left[-\frac{(\vect{x}_{k-1}-\vect{d})^2}{2\Delta \cT}
-      -\frac{(\vect{d}-\vect{x}_{k+1})^2}{2\Delta \cT}\right]}\\
-  &= \exp\left[-\frac{(\vect{x}_{k}-\bar{\vect{x}})^2}{\Delta \cT}
+  {\exp\left[-\frac{(\vect{x}_{k-1}-\vect{d})^2}{2\Delta \cT}
+      -\frac{(\vect{d}-\vect{x}_{k+1})^2}{2\Delta \cT}\right]}
+%  \\  &
+= \cN_Q\exp\left[-\frac{(\vect{x}_{k}-\bar{\vect{x}})^2}{\Delta \cT}
       +\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}\right].
 \end{align}
-Note that the paths are constructed to ensure $\vect{x}_0\rightarrow\vect{d}$.  There is still one 
-remaining integral which can also be sampled from in determining the integrand, but this sampled $\vect{x}_k$
-does not alter the path.  
+% Note that the paths are constructed to ensure $\vect{x}_0\rightarrow\vect{d}$.  There is still one 
+% remaining integral which can also be sampled from in determining the integrand, but this sampled $\vect{x}_k$
+% does not alter the path.  
 
-The normalization for path subject to a single constraint is 
+The resulting integrand could be built up from Monte Carlo samples 
 \begin{equation}
-  \mathcal{N}_1=\mathcal{G}\big[\vect{x}_0,\vect{d},k(N-k)\cT/N^2\big],
+  I_k = \int \frac{d\cT}{(2\pi)^{D/2}\cT^{1+D/2}}\int d\vect{x}_k\, \cN_Q e^{-\frac{(\vect{x}_{k}-\bar{\vect{x}})^2}{\Delta \cT}
+      +\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})Q(\vect{x})
 \end{equation}
-exactly as emerged for the potential curvature.  We will use this to sample times
-as described in Sec.~\ref{sec:expT-sampling}.
+The normalization $\cN_Q$ can be used to sample the times, with $s=D/2$ and $\cT_0=N^2|\vect{d-x}_0|^2/[2k(N-k)]$ as the distribution
+parameters.
+The remaining $\vect{x}_k$ integral can be evaluated by using the Gaussian.
+However, those sampled values of $\vect{x}_k$ are not the path values, rather they are sampled after
+the path is constructed subject to the pinning requirement.    
+The appropriate integrand for Monte carlo in pinned paths, $\vect{x}_k$ and times $\cT$ is 
+\begin{align}
+  I_k &= \dlangle \frac{\Gamma[D/2]}{\cT_0^{D/2}}\bigg(\frac{N}{2\pi k (N-k)\Delta\cT}\bigg)^{(D-1)/2}
+  (\pi \Delta\cT)^{(D-1)/2} e^{\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})\drangle_{\{\vect{x}\}',\vect{x}_k,\cT}\nonumber\\
+   % &= \dlangle \Gamma[D/2] \left(\frac{2k(N-k)}{N^2\vect{|d-x_0|}^2}\right)^{D/2} \frac{N^{n/2}}{[2k(N-k)]^{n/2}}
+   %  e^{\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})\drangle_{\{\vect{x}\}',\vect{x}_k}\\
+   &= \dlangle \Gamma[D/2] \frac{[2k(N-k)]^{(D-n)/2}}{N^{D-n/2}\vect{|d-x_0|}^D}   
+   e^{\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})\drangle_{\{\vect{x}\}',\vect{x}_k,\cT}.
+ \end{align}
 
-The normalization for the $Q$ probability distribution is 
-\begin{equation}
-  \cN =\frac{1}{[2\pi k \Delta \cT]^{D/2}[2\pi (N-k)\Delta \cT]^{D/2}}
-    e^{-(\vect{x}_0-\vect{d})^2/(2k\Delta \cT)}e^{-(\vect{x}_0-\vect{d})^2/[2(N-k)\Delta \cT]}
-\end{equation}
-(a factor of $[2\pi\cT]^{D/2}$ mutliplies this if that is factored out for the usual Brownian bridge
-normalization).  This is the probability we must factor out to sample bridges for where the $k^{\text{th}}$ point
-is fixed.  
+Of course, if the pinned point is also integrated over (such as the transverse dimensions for a planar medium),
+ then a different distance dependence.
+  In that case, only one dimension remains to be evaluated in the path-integral,
+% \begin{align}
+%   I   &= \dlangle \Gamma[D/2] \frac{[2k(N-k)]^{(D-1)/2}}{N^{D-1/2}|d-x_0|^D}   
+%   e^{\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})\drangle_{\{\vect{x}\}',\vect{x}_k,\cT}.
+% \end{align}
+The result can be written out explicitly for $D=4$
+\begin{align}
+  I   &= \dlangle  \frac{[2k(N-k)]^{3/2}}{N^{2}N^{3/2}|d-x_0|^4}   
+  e^{\frac{(\vect{d}-\bar{\vect{x}})^2}{\Delta \cT}} f(\vect{x})\drangle_{\{\vect{x}\}',\vect{x}_k,\cT}.
+\end{align}
 
-Then combine with $P/Q$, and normalization for using $exp-T$
+The above development fixed one particular index $k$.  This index $k$ can also be sampled over to vary
+which points are pinned to the surface.  We propose using $P_k= 6 k(N-k)/N^2$, as this is simple to sample
+from and is not too sharpled peaked around $k=N/2$.
+\comment{need to integrate over surface, changes normalization, changes dimension of normalization $\implies$
+  leftover $k$ dependence}
+
+% The normalization for path subject to a single constraint is 
+% \begin{equation}
+%   \mathcal{N}_1=\mathcal{G}\big[\vect{x}_0,\vect{d},k(N-k)\cT/N^2\big],
+% \end{equation}
+% exactly as emerged for the potential curvature.  We will use this to sample times
+% as described in Sec.~\ref{sec:expT-sampling}.
+
+% The normalization for the $Q$ probability distribution is 
+% \begin{equation}
+%   \cN =\frac{1}{[2\pi k \Delta \cT]^{D/2}[2\pi (N-k)\Delta \cT]^{D/2}}
+%     e^{-N^2(\vect{x}_0-\vect{d})^2/(2k(N-k) \cT)}
+% \end{equation}
+% (a factor of $[2\pi\cT]^{D/2}$ mutliplies this if that is factored out for the usual Brownian bridge
+% normalization).  This is the probability we must factor out to sample bridges for where the $k^{\text{th}}$ point
+% is fixed.  
+% Use that as basis to sample times, and indices.
+
 
 
 \section{Numerical Results: Casimir-Polder Energies}
@@ -1551,7 +1599,6 @@ Then combine with $P/Q$, and normalization for using $exp-T$
     \end{enumerate}
 
     \subsection{TE Polarization - Atom-Plane Gradients}
-
     
     \subsection{TM Polarization}
 
@@ -1566,16 +1613,35 @@ Then combine with $P/Q$, and normalization for using $exp-T$
 
 \section{Numerical Results: Casimir Energies}
 
-\subsection{TE Casimir Energies - Plane-Plane}
+\subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
+\begin{figure}
+  \centering
+ \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_atom_wall}
+  \caption{\comment{TEMPORARY!} Convergence planar Casimir--Polder energy as function of $\chi$}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_2wall}
+  \caption{\comment{TEMPORARY!} Convergence planar Casimir energy as function of $\chi$}
+\end{figure}
 
 \subsubsection{Scaling with N}
 
 
-\subsection{TE Casimir Gradients - Plane-Plane}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/temp/conv_TEatomN3}
+  \caption{\comment{TEMPORARY!} Convergence of planar Casimir--Polder energy  as function of $N$}
+\end{figure}
 
 
-
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/temp/conv_TE2wallN3}
+  \caption{\comment{TEMPORARY!} Convergence planar Casimir energy as function of $N$}
+\end{figure}
 
 \subsection{TM Casimir Energies - Plane-Plane}
 

@@ -28,18 +28,25 @@ the basis for our later work.
 (As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
  and $\vect{x}$, the coordinate of a path integral)
 
-\section{Approaches to in Quantizing Electromagnetism in Media}
+\section{Approaches to Quantizing Electromagnetism in Media}
 
-Quantization of the electromagnetic field inside dielectric media has been considered
-by a number of authors~\cite{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
-There are some differences from the quantization procedure employed in free space.
+Quantization of the electromagnetic field inside dielectric media provides a number of challenges 
+beyond quantization in vacuum~\cite{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
  First, a dielectric is spatially varying, which makes it much harder to develop the requisite mode 
  functions.  It is possible to write down the equations the modes must obey, and quantize the amplitudes
  in analogy with free space~\cite{Glauber1991}.
  Ideally, our procedure will not make any reference to a specific geometry or spatial dependence of the dielectric,
  nor require that we solve the mode functions.   
 
-Second, since the dielectric has some frequency response or dispersion, the Kramers-Kr\"onig relations 
+Second, the dielectric complicates the choice of gauge-fixing.  (We will discuss this at length in Sec.~\ref{sec:gauge_fixing}.)
+In brief, electromagnetism has a gauge symmetry, or has redundant degrees of freedom, which must be 
+removed in the quantization procedure.  One must fix the gauge by imposing a subsidiary or gauge condition
+on the fields.  In free space this is typically done by fixing Coulomb or Lorenz gauge, which have the 
+decouple the radiative and static charge problems, or maintaining relativistic invariance.
+However inside a dielectric (starting at the level of macroscopic fields) the usual gauge-fixings lose these nice
+features, and must be replaced by a dielectric dependent condition.  
+
+Third, since the dielectric has some frequency response or dispersion, the Kramers-Kr\"onig relations 
 require that there is also loss or dissipation.
 In a quantum theory, dissipation is usually handled by coupling the system to a bath, and then
 integrating out the bath degrees of freedom~\cite{Huttner1992,Dung1998,Bechler1999}. 
@@ -48,57 +55,104 @@ as a bath of harmonic oscillators.
 The dielectric medium is in turn coupled to a bath of harmonic oscillators, which provide the damping.
 Integrating out the bath yields the required dispersion and dissipation for the medium, 
 while integrating out the medium's harmonic oscillators yields a frequency dependent dielectric constant.
+The damping also implies dissipation via the fluctuation-dissipation theorem.  
+Some quantization procedure's lead to fluctuating noise currents which provide the dissipation~\cite{Dung1998}.
 
-Some care is required to handle dispersion, since the Kramers-Kr\"onig relations
- imply this also requires dissipation.  
-This is typically handled by coupling the electromagnetic field to an idealized
- medium, which is in turn coupled to a bath of oscillators that models
- dissipation~\cite{Huttner1992,Dung1998}.
+% Some care is required to handle dispersion, since the Kramers-Kr\"onig relations
+%  imply this also requires dissipation.  
+% This is typically handled by coupling the electromagnetic field to an idealized
+%  medium, which is in turn coupled to a bath of oscillators that models
+%  dissipation~\cite{Huttner1992,Dung1998}.
 
-This linear coupling to oscillators is not strictly necessary.  The dielectric function can be understood
-in terms of the linear-response of the underlying medium to the electromagnetic field~(\cite{Altland2011,Rahi2009}).
+It is not strictly necessary to assume linear coupling of the fields to harmonic oscillators. 
+The dielectric function can be understood in terms of the linear-response of the underlying 
+medium to the electromagnetic field~(\cite{Altland2011}).
 Instead of restricting the model to explicitly linear harmonic media, the connection to linear response
 theory allows one to find the effective linear model for whatever material is under consideration.
+This approach is more general, since it yields the effective linear response, 
+without being restricted to assuming a linear model from the outset.  This was used to 
+motivate the effective Lagrangian description in terms of macroscopic fields by Rahi\etal in their 
+work on the scattering method~\cite{Rahi2009}.    From this starting point Reid\etal was able to 
+quantize the EM field, under the assumption of piecewise constant dielectric media, where the EM
+boundary conditions are explicitly enforced at the interfaces.
+\comment{Expanding on Bordag's 2007 effort to fix boundary conditions at surfaces for scalar problems.)}
+Enforcing those boundary conditions allows the remaining computations to proceed
+ as if the media were homogenous and filled all of space, based on a version of Green's theorem~\cite{Emig2004}.
 
 Fewer authors have considered path integral quantization of the EM field inside a dielectric.
-Bechler carried this out the quantization.
-
 Bechler has carried out path integral quantization for a harmonic medium 
 including dispersion, and shown agreement with previous results in terms 
-of noise operators~(\cite{Bechler1999}).  
-The primary results were the form of the propagator, and showing consistency with the 
-other approaches, rather than computations exploiting the propagator.
- There has been some work attempting to develop path integral quantization of
- the field inside dielectric neglecting dispersion~\cite{Bordag1998}.
+of noise operators~(\cite{Bechler1999,Bechler2006}).  
+The field action is quadratic in the fields, and there are only linear couplings between other
+harmonic fields, the resulting path integrals are also Gaussians.  Such Gaussian path integrals 
+are straightforward to evaluate (certainly in comparison with the nonlinear field theories condensed
+in condensed matter and high energy physics where perturbation theory is the only recourse.)
+The primary results in Bechler's work were finding the form of the field propagator, and showing consistency with the 
+other approaches by Huttner and Barnett~\cite{Huttner1992} and Langevin equations by Dung\etal\cite{Dung1998},
+ rather than new computations exploiting the propagator.    The results were all framed in terms of the 
+Fourier decompositions of the fields in terms of wavenumber, which is unsuitable for a worldline procedure.
+
+ Bordag and others also carried out path integral quantization of
+ the EM field inside a spatially varying dielectric neglecting dispersion, starting from the 
+effective Lagrangian description for the macroscopic fields~\cite{Bordag1998}.
+They fix a generalized Lorenz gauge, and set about deriving the Heat Kernel.
+  The primary focus here was to explore the divergence structure of the theory (i.e. how does QED in media
+behave at high frequencies and small wavelengths).
+The Heat Kernel expansion, corresponds to the small time expansion of a worldline path integral.
+(In most work on worldline path integrals these high energy efects (corresponding to short path times)
+ are renormalized away by subtracting off the vacuum path integral.)
   Unfortunately, these results are hard to interpret given that the non-physical
  degrees of freedom for the field do not cleanly decouple, as opposed to the 
 usual situation in free space QED.
-  The primary focus here was to explore the divergence structure of the theory
- via the Heat Kernel expansion, which corresponds to the small time expansion
- of a worldline path integral.
- We choose to avoid this issue by focusing on improved scalar models, 
-that also correspond to the physical degrees of freedom for the field in certain geometries.  
+A later paper considering the quantization for EM in a spherical dielectric ball found better 
+results by exploiting the dual potentials~\cite{Bordag1999}.  Even so, the majority of the work considered high energy
+limits, and formal matters such as the divergences of the theory.  
 
 (We will briefly note methods based on computing van der Waals energies in the static field limit,
 by evaluating functional determinants for discrete spatial grids~\cite{Maggs2006,Pasquali2008}. This approach 
-omits any time evolution, but it does offer a direct method of trying to evaluate the field path integral.)
+omits any time evolution of the fields, but it does offer a direct method of trying to evaluate the field path integral.
+That work relied on direct spatial discretization to evaluate the functional determinants, which limits
+the size of medium that can be considered.)
 
 %copied from Intro.  
 We are interested in small energies relative to the binding energies of the dielectrics, and very weak
-fields.  In this limit, the effect of the electromagnetic field on the matter can be described 
- by the linear susceptibility $\chi$.  The susceptibility $\chi$
-is found from the microscopic theory via linear-response such as the Kubo formula~\cite{Rahi2009,Altland2011}.
-The Kubo formula relates the conductivity tensor of the medium to the current-current correlation function,
-which corresponds to the electron loop in Fig.~\ref{fig:electron-effective-interaction}.
-These current fluctuations on different bodies then interact with one another via photons, which are 
-described by the electromagnetic Green function.  
+fields.
+In this limit, the effect of the electromagnetic field on the matter can be described 
+by the linear susceptibility $\chi$.
+The susceptibility $\chi$ is found from the microscopic theory via linear-response such as the Kubo formula~\cite{Rahi2009,Altland2011}.
 
-Hertz potentials.  useful in spherical geometries.  
-However, naive application leads to fourth order differential operators!
+In a sense these difficulties could be circumvented.  We are merely considering QED in a linear approximation
+in the interaction between matter and the EM field (while $\epsr$ is some unspecified function of space),
+and in a long wavelength approximation to the matter.  
+Gauge fixing is no problem at all for electrons and photons in this limit.  
+Perhaps a better procedure is 
+Considering the difficulties with carrying out this path integral quantization with the macroscopic fields,
 
-Considering there are numerous analogies between the metric tensor of general relativity, 
-and the dielectric and magnetic response 
 
+There is another approach to classical electromagnetic scattering, which explicitly focuses on 
+the two physical degrees of freedom.
+The Hertz potentials writes the electromagnetic radiation field in terms of two scalar fields, where 
+there is one special direction. \comment{Cite Hertz} The Hertz potentials were first introduced to discuss EM scattering 
+in spherical geometries~\cite{Nisbet1955,Nisbet1957}. 
+They have also been used in the Casimir context for a cylindrical geometry~\cite{Dalvit}.
+Unfortunately, the wave equations for the Hertz potentials when used in the EM lagrangian 
+lead to fourth order differential operators.  This is unsuitable for a worldline method 
+where we expect second order differential operators to find Gaussian paths.
+
+Another potentially fruitful analogy exists between the curved space of general relativity, 
+and the fact that light bends in spatially varying dielectrics~\cite{Leonhardt}.  Electromagnetism can be 
+quantized on a curved background without much difficulty.
+One merely replaces all derivatives by their covariant counterparts, which include correction terms
+based on the metric.
+This analogy has been exploited by Leonhardt in particular to propose technology such as optical 
+black holes, cloaking fields, perfect lenses, and more.  
+Unfortunately, this analogy is only exact when $\epsilon=\mu$, which is typically not found in nature.
+It is possible to mock it up in a narrow frequency range using metamaterials, with some demonstration 
+experiments.  So while there are a number of similarities between a dielectric medium and a metric,
+those similarities do not extend to an immediate shortcut past all of these issues.
+
+We choose to avoid this issue by focusing on improved scalar models, 
+that also correspond to the physical degrees of freedom for the field in certain geometries.  
 
 \section{Classical Field Theory}
 

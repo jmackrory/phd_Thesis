@@ -1,57 +1,69 @@
-\chapter{Path Integrals and Feynman-Kac formulae}
+\chapter{Path Integrals and Feynman--Kac formulae}
 
 \label{ch:feynman_kac}
 
-A path integral is a sum over an infinity of possible paths a system might explore.
+A path integral is a sum over all possible paths a system might explore.
+The path integral is a powerful way to represent stochastic processes, and path integals have been used
+extensively in statistics~\cite{Karatszas1991, Durrett1996,DelMoral2004}.  
+Although path integrals are primarily used in a perturbative sense within physics, 
+they can be solved exactly in some geometries.
+These analytical solutions are particularly useful in accelerating numerical methods relying 
+on stochastic simulations, such as occur in finance.  
 
+In honor of the pioneering work by Feynman~\cite{Feynman1950} and Kac~\cite{Kac1950}, the fact that path integrals
+act as the solutions to diffusion or Schrodinger equations is referred to as the Feynman-Kac 
+formula.  This thesis will also sometimes use the same label to refer to the analytical
+result for a particular path integral.  
 
-    In honor of the pioneering work by Feynman and Kac, the fact that path integrals
-    act as the solutions to diffusion/Schrodinger equations is referred to as the Feynman-Kac 
-    formula.  In our parlance, this connection is also used to refer to the exact analytical
-    result for a given path integral.  
-    This chapter is devoted to deriving the Feynman-Kac formula, and then solving
-    it for some simple geometries.  These results will be used in our analytical and numerical
-    calculations of the Casimir force.  
+This chapter is devoted to deriving the Feynman--Kac formula, and then solving
+it for planar geometries that are useful for both TE and TM polarizations.
+These analytical formulae will be used in Ch.~\ref{ch:analytical} to show agreement 
+with other results for both Casimir and Casimir--Polder energies.
+The Feynman--Kac formula is also essential for handling the singular potentials.  
+In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
 
-\section{Derivation of Feynman-Kac formula }
+\section{Derivation of the Feynman-Kac formula }
 
 In this section we will derive the path integral as the solution to a diffusion equation,
-using techniques from quantum mechanics.  Our derivation will stay close in spirit to the 
-one found in Sakurai~\cite{Sakurai1994}.  We will extend the usual quantum derivation to
-including a source term, as is more common in statistics.   More formal derivations are available from mathematical~\cite{Cartier2004},
+using techniques from quantum mechanics.
+Our derivation will stay close in spirit to the  one found in Sakurai~\cite{Sakurai1994}.
+But, we will extend the usual quantum derivation to including a source term, as is more common in statistics.
+More formal derivations are available from mathematical~\cite{Cartier2004},
 and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  
-An detailed discussion of the more formal probabilistic derivation is availabble in Steck Sec 17.9~\cite{SteckNotes} .
+A detailed discussion of the more formal probabilistic derivation is available in Steck \S 17.9~\cite{SteckNotes}.
 
-We aim to find a solution $f(x,t)$ to the driven diffusion equation given by 
+We aim to find a solution $f(x,t)$ to the driven diffusion equation
 \begin{equation}
   \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,\label{eq:diffusion_equation}
 \end{equation}
 where the potential/killing rate is given by $V=V(\vect{x},t)$, and the source term is $g=g(\vect{x},t)$.  
-    In this form $f$ corresponds to the probability distribution for a diffusing particle with a source
-    of particles $g$, with spatially dependent killing rate $V$.  If we take $\tau\rightarrow -it$,
-    we recover the Schr\"odinger equation. 
+In this form $f$ corresponds to the probability distribution for a diffusing particle with a source
+of particles $g$, with spatially dependent killing rate $V$.  
+The Schr\"odinger equation is recovered under the $\tau\rightarrow -it$ substitution.
     We can use techniques from quantum mechanics, and introduce a Hilbert space with operators.
-    The differential equation can be written in operator form using 
-    \begin{gather}
-      \langle \vect{x}|\op{x}_i|f\rangle = x_if(\vect{x})\\
-      \langle \vect{x}|\op{p}_i|f\rangle = -i\partial_if(\vect{x}),
-    \end{gather}
-    The position and momentum operators have commutation relations
-    \begin{gather}
-      [\op{x}_i,\op{p}_j]=i\delta_{ij},
-    \end{gather}
-    and overlap 
-    \begin{equation}
-      \langle \vect{x}|\vect{p}\rangle = e^{i\vect{x\cdot p}}.
-    \end{equation}
-    We also need the position and momentum resolutions of the identity
-    \begin{gather}
-      I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \quad
-      I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\rangle \langle \vect{p}|.
-    \end{gather}
+    The differential equation can be written in operator form using the same Hilbert space 
+    conventions~(\ref{eq:commutation})--(\ref{eq:identity}) we have used for the worldline path integrals.
+    Note however that we will consider a Hilbert space with $\hbar=1$ in all operator equations.
+    % \begin{gather}
+    %   \langle \vect{x}|\op{x}_i|f\rangle = x_if(\vect{x})\qquad
+    %   \langle \vect{x}|\op{p}_i|f\rangle = -i\partial_if(\vect{x}),
+    % \end{gather}
+    % The position and momentum operators have commutation relations
+    % \begin{gather}
+    %   [\op{x}_i,\op{p}_j]=i\delta_{ij},
+    % \end{gather}
+    % and overlap 
+    % \begin{equation}
+    %   \langle \vect{x}|\vect{p}\rangle = e^{i\vect{x\cdot p}}.
+    % \end{equation}
+    % We also need the position and momentum resolutions of the identity
+    % \begin{gather}
+    %   I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \quad
+    %   I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\rangle \langle \vect{p}|.
+    % \end{gather}
 The diffusion equation~(\ref{eq:diffusion_equation}) can be written in operator form
 \begin{equation}
-  \langle \vect{x}|\partial_t |f(t)\rangle = -\langle \vect{x}|
+  \partial_t\langle \vect{x}| |f(t)\rangle = -\langle \vect{x}|
   \left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}},t)+\lambda\right]|f(t)\rangle +\langle \vect{x}|g(t)\rangle.
 \end{equation}
 We can solve this by introducing the evolution operator,
@@ -69,14 +81,14 @@ This equation can be formally integrated with respect to time,
 % \begin{equation}
 %   |\tilde{f}(t)\rangle-|\tilde{f}(0)\rangle = \int_0^t ds |\tilde{g}(s)\rangle.
 % \end{equation}
-and after we transform back to the original vectors we find
+and after transforming back to the original vectors we find
 \begin{equation}
-  |f(t)\rangle = U(t)|f(0)\rangle + U(t) \int_0^t ds U^{-1}(s)|g(s)\rangle,
+  |f(t)\rangle = U(t)|f(0)\rangle + U(t) \int_0^t ds\, U^{-1}(s)|g(s)\rangle,
 \end{equation}
-where we used $|\tilde{g}(t)\rangle = U^{-1}(t)|g(t)\rangle$.  
+where $|\tilde{g}(t)\rangle = U^{-1}(t)|g(t)\rangle$.  
 If we assume we can combine  the operators, then 
 \begin{equation}
-  f(x_f,t) = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
+  f(\vect{x}_f,t) = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
 \end{equation}
 
 \subsection{Evaluating the matrix element}
@@ -87,76 +99,138 @@ We can now evaluate the matrix elements for each piece.  In particular,
 \end{equation}
 where $U$ is the time-ordered evolution operator (so time increases towards the left.)
 \begin{equation}
-  U(t) = T\exp\left[-\int_0^t du H(u) \right] = \prod_{n=1}^N e^{-\Delta T \op{H}(n\Delta T)}
+  U(t) = T\exp\left[-\int_0^t du\, H(u) \right] = \prod_{n=1}^N e^{-\Delta t \op{H}(n\Delta t)}
 \end{equation}
+The path integral litany of 1) splitting evolution operator into short-time evolution operators,
+2) inserting identities, 3) splitting position and momentum operators, 4) replacing operators with eigenvalues
+5) integrating out momenta 
+can be followed once again. 
 If we insert position/momentum identities between each of these, we have
 \begin{align}
-  M_n &= \langle \vect{x}_f| e^{-\Delta T \op{H}(t_N)}|f\rangle%\\
-%   &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta T \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
-% \prod_{j=1}^{N-1} e^{-\Delta T \op{H}(t_j)}|f\rangle\\
-  = \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
-  \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta T \op{H}(t_k)}|\vect{p}_k\rangle
+  M_n %&= \langle \vect{x}_f| e^{-\Delta t \op{H}(t_N)}|f\rangle%\\
+%   &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta t \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
+% \prod_{j=1}^{N-1} e^{-\Delta t \op{H}(t_j)}|f\rangle\\
+  = e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
+  \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta t \op{H}(t_k)}|\vect{p}_k\rangle
     \langle \vect{p}_k| \vect{x}_{k}\rangle \right]
   \langle \vect{x}_0| f\rangle
 \end{align}
-\comment{Do we need to consider how the ket's evolve?}
-We use the Baker-Campbell-Hausdorff theorem to split the exponential operator into a position
-and momentum pieces
+(Note that since $\lambda$ in constant, $e^{-\lambda \cT}$ can be factored out immediately)
+The exponential operator is split into position and momentum pieces using the Baker-Campbell-Hausdorff theorem,
 \begin{equation}
-  e^{-\Delta T [\op{p}^2+V(\op{x})]} = e^{-\Delta T V(\op{x})}e^{-\Delta T \op{p}^2} +\order(\Delta T^2).
+  e^{-\Delta t \op{p}^2+V(\op{x})} = e^{-\Delta t V(\op{x})}e^{-\Delta t \op{p}^2} +\order(\Delta t^2).
 \end{equation}
-The postion and momentum operators then acquire the eigenvalues from operating to the left/right respectively.
+The position and momentum operators then acquire the eigenvalues from operating to the left and right respectively.
 After carrying out the Gaussian momentum integrals, the matrix element is 
 \begin{align}
   M_n %  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
-  % \prod_{j=1}^{N} e^{-\Delta T\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
+  % \prod_{j=1}^{N} e^{-\Delta t\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
   % f(\vect{x}_0,0)\\
-&= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}}{(2\pi\Delta T)^{D/2}}
-  \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta T)-\Delta T V(\vect{x}_k,t_k)}f(\vect{x}_0,0)
+&= e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}}{(2\pi\Delta t)^{D/2}}
+  \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta t)-\Delta t V(\vect{x}_k,t_k)}f(\vect{x}_0,0)
 \end{align}
-This is the fairly traditional form of the euclidean path integral.  We can transform it 
-to look like the mathematical version, stressing the connection to Brownian motion
-by changing integration variables.  
-We now define the vector Wiener increments $\Delta \vect{W}_k = \vect{x}_{N-k-1}-\vect{x}_{N-k}$ (note that this
-is backwards labelling from the usual convention).  The Jacobian determinant for this
-transformation is unity. Then we can write the positions in terms of the Brownian motion
-$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.  Since we are treating $\vect{x}_N$ as a 
-constant position (where we will be evaluating the solution), we should reference our points to that point.  
-We can use
+This is the traditional discrete form of the euclidean path integral.
+  We can transform it to look like the mathematical version, 
+stressing the connection to Brownian motion by changing integration variables.  
+We define the vector Wiener increments $\Delta \vect{W}_k = \vect{x}_{N-k-1}-\vect{x}_{N-k}$ 
+(note that this is labelling moves backwards in time from the usual convention).  
+Then we can write the positions in terms of the Brownian motion
+$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.
+Note that evaluate the solutions at a constant fixed position $\vect{x}_N=\vect{x}_f$
+So our coordinates should be defined relative to that point, which prompts defining
 \begin{equation}
-  \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k.
+%  \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow 
+\vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k= \vect{x}_N+\vect{W}_j
 \end{equation}
-In terms of the Wiener increments the path integral is
+where in the second equality we defined the Wiener process as $\vect{W}_j:=\sum_{k=0}^{N-j} \Delta \vect{W_j}$.
+In terms of the Wiener paths, the path integral is
 \begin{align}
-  M_n  &= \int \prod_{k=0}^{N-1}\frac{d\Delta \vect{W}_{k}}{(2\pi\Delta T)^{D/2}}
-  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta T)-\Delta T V(\vect{x}_N+\sum_{j=0}^{N-k}\Delta \vect{W}_j,t_k)}
-  f(\vect{x}_N+\sum_{j=0}^{N-j}\Delta \vect{W}_j,0)\\
-&= \int \prod_{k=0}^{N-1}\frac{d\Delta \vect{W}_{k}}{(2\pi\Delta T)^{D/2}}
-  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta T)-\Delta T V(\vect{x}_N+\vect{W}_{N-k},t_k)}
-  f(\vect{x}_N+\vect{W}_{N},0)
+  M_n %  &= \int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
+  % \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta t)-\Delta t V(\vect{x}_N+\sum_{j=0}^{N-k}\Delta \vect{W}_j,t_k)}
+  % f\big(\vect{x}_N+\sum_{j=0}^{N-j}\Delta \vect{W}_j,0\big)\\
+&= e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
+  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta t)-\Delta t V(\vect{x}_N+\vect{W}_{N-k},t_k)}
+  f(\vect{x}_N+\vect{W}_{N},0).
 \end{align}
-where in the second equality we defined the Wiener process as $\vect{W}_k=\sum_{j=0}^{k} \Delta \vect{W_j}$, then we can write 
-If we pass over to continuum language, where the Riemann sum becomes an integral, and $\vect{W}_k=\vect{W}(t_k)$,
-(we will also define $\vect{x}=\vect{x}_N$
+After taking the continuum limit $N\rightarrow\infty$, where the Riemann sum becomes an integral, and 
+the stochastic paths $\vect{W}_k=\vect{W}(t_k)$ are continuously varying stochastic processes 
  is a continuous process we can write
 \begin{align}
-  M_n  &= \biggdlangle e^{-\int\limits_0^t du V(\vect{x}+\vect{W}(t-u),u)} f(\vect{x}+\vect{W}(t),0)\biggdrangle
+  M_n  &= \biggdlangle \exp\bigg[-\lambda t-\int_0^t du\, V(\vect{x}+\vect{W}(t-u),u)\bigg] f(\vect{x}+\vect{W}(t),0)\biggdrangle
 \end{align}
 The same style of reasoning can be used for both pieces.  \comment{Note however change in time limits on $g$
 term.  Also do the time arguments of $g$ work out?}
 
+After plugging this result back in to the evolution operator, the solution to the diffusion equation is 
+\begin{align}
+  f(\vect{x},t) = &\biggdlangle \exp\bigg[-\lambda t -\int_0^t du\, V[\vect{x}+\vect{W}(t-u),u]\bigg] f[\vect{x}+\vect{W}(t),0]\biggdrangle\nonumber\\
+  &+\int_0^t ds\,\biggdlangle \exp\bigg[-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u),u]\bigg] g[\vect{x}+\vect{W}(s),s]\biggdrangle
+  \label{eq:feynman-kac}
+\end{align}
 
-\subsection{Path Integral without Source}
-\begin{enumerate}
-  \item {Fokker-Planck Equation on Hilbert space.  }
-  \item {Split operators into $N$ steps.  Baker-Campbell-Hausdorff}
+\subsection{Steady State Brownian Bridge Path Integral}
+
+In worldline path integrals such as Eq.~(\ref{eq:TE_worldline}), the Brownian motions are pinned to close on themselves.
+We will follow a solution outline used by Hooghiemstra~\cite{Hooghiemstra2002}, 
+and expanded upon and explained by Steck in \S 17.9 -- \S 17.11~\cite{SteckNotes}.
+
+An analytical form for the path integral can be derived in conjunction with the diffusion equation.  
+In what may seem like circular logic, the diffusion equation can be solved, and by 
+the Feynman-Kac formula that solution is an analytical expression for a path integral.  
+These results from simple planar geometries form a possible basis for more complicated geometries,
+since they can be chained together in a spatially dependent manner.  
+
+In the worldline path integral, we require path integrals for path-averaged potentials with closed paths.
+The solution to the diffusion equation can be converted into the right form with some manipulation.
+
+First, take the $t\rightarrow\infty$ limit.  In the steady state limit, the initial
+condition is irrelevant, so for simplicity it can be set to zero.
+Second, the source function can be used to construct the path pinning by setting $g(\vect{x})=\delta(\vect{x}-\vect{c})$, so
+that only paths at satisfying $\vect{x}(t)=c$ contribute.  After those manipulations, the general solution is
+\begin{align}
+  f(\vect{x}) = \int_0^{\infty} ds\,
+  \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] e^{-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u),u]}\biggdrangle,
+  \label{eq:f_soln}
+\end{align}
+which has the form of a Laplace transform in $\lambda$.  
+The $\delta$-function selects out paths that satisfy $\vect{W}(s)=\vect{c-x}$. In order to select
+out Brownian paths starting from $\vect{x}=0$ and propagating to $\vect{x}=\vect{c}$, we should 
+consider the solution at the origin $f(\vect{x}=0)$.  
+
+While the full path integral is concerned with closed paths where $\vect{c}=0$, 
+these path integral expressions will also be used to
+accelerate convergence for discrete steps along a path, from one discrete position $\vect{x}_{k}$ to 
+another $\vect{x}_{k+1}$.  That corresponds requires shifting all coordinates in the problem so that 
+$\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.  
+
+The path integral (\label{eq:f_soln}) satisfies the following steady-state diffusion equation
+\begin{equation}
+  0 = \frac{1}{2}\nabla^2f(x) - (V+\lambda)f + \delta(\vect{x}-\vect{c}),
+\end{equation}
+which for simple geometries can be solved analytically.  The closed form for the path
+integral is then found by inverting the Laplace transform in Eq.~(\ref{eq:f_soln}).
+
+This might seem circular having passed from wave equations we cannot solve, to path integrals,
+and back to diffusion equations we can only solve in particular geometries.
+However, our goal with the path integral is to stitch together results for 
+simple geometries together to handle more complicated geometries.
+For example, the notion of locally planar could be defined in terms of the nearest surface-normal.  
+This is not the same approximation as the proximity force approximation, 
+which approximates the bodies \emph{globally} by their planes.
+This is a local approximation based on a particular point in space, 
+and varies as the path moves through space.
+
+
+
+%  \item {Fokker-Planck Equation on Hilbert space.  }
+%  \item {Split operators into $N$ steps.  Baker-Campbell-Hausdorff}
   %   Then, do the usual path integral tricks:
   %   \begin{align}
   %     \langle x_N|f(t)\rangle =& \langle x_N|\exp\left[-t\frac{\op{p}^2}{2}-tV(\op{x})\right]|f\rangle \\
   %     % =& \langle x_N|\prod_{k=1}^N\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
   %     % =& \langle x_N|\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})] \ldots \exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
   %     % =& \int \prod_{k=0}^{N-1}dx_k \langle x_N|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_{N-1}\rangle\langle x_{N-1}| \ldots \langle x_1|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_0\rangle\langle x_0|f\rangle \\
-  %     % =& \int \prod_{k=1}^N\frac{dx_{k-1}dp_k}{(2\pi)}\prod_{j=1}^N e^{-\frac{\Delta T}{2}p_j^2 +ip_j(x_j-x_{j-1}) - V(x_j)\Delta T}\langle x_0|f\rangle \\
+  %     % =& \int \prod_{k=1}^N\frac{dx_{k-1}dp_k}{(2\pi)}\prod_{j=1}^N e^{-\frac{\Delta t}{2}p_j^2 +ip_j(x_j-x_{j-1}) - V(x_j)\Delta t}\langle x_0|f\rangle \\
   %     =& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}}e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)
   %   \end{align}
   %   Now somehow transform this to something like $f(x_n + \sum_{j}dW_j)$ to get the same form as Dan?
@@ -171,335 +245,321 @@ term.  Also do the time arguments of $g$ work out?}
   %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k\Delta t V(x_N-\sum_{j=k}^{N-1}dW_j)}f(x_N-\sum_{j=0}^{N-1}dW_j)\\
   %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k \Delta t V(x_N+\sum_{j=0}^{k}dW_j)}f(x_N+\sum_{j=0}^{N-1}dW_j),
   %   \end{align}
-    or in continuous language:
-    \begin{equation}
-      f(x,t)= \dlangle e^{-\int_0^t dt'  V[x+W(t')]}f_0[x+W(t)]\drangle
-    \end{equation}
-  \item Note time-ordered product.
-    Note that in the case of $V(x,t)$ the exponential is really the time ordered product of these things.
-  \item $\delta$-pinning at $x=0$.  
-    Then if we take $g(x) = \delta(x)$, then the Brownian walks will be restricted to return to the origin.
-    Note that I think this definition also assumes that the brownian walks are starting from the origin.  
-  \item Discuss notions of Brownian motion, Brownian bridges.  Specify in terms of increments,
+  %   or in continuous language:
+  %   \begin{equation}
+  %     f(x,t)= \dlangle e^{-\int_0^t dt'  V[x+W(t')]}f_0[x+W(t)]\drangle
+  %   \end{equation}
+  % \item Note time-ordered product.
+  %   Note that in the case of $V(x,t)$ the exponential is really the time ordered product of these things.
+  % \item $\delta$-pinning at $x=0$.  
+  %   Then if we take $g(x) = \delta(x)$, then the Brownian walks will be restricted to return to the origin.
+  %   Note that I think this definition also assumes that the brownian walks are starting from the origin.  
+   Discuss notions of Brownian motion, Brownian bridges.  Specify in terms of increments,
     final positions.  Introduce measures like correlation?
 
+  % \item For actual solutions work in steady-state limit.  
+  % \item {Work with Laplace transform.  }
+  %   Now let us consider steady state, for potentials $V(x,t) = V(x)$.
+  %   In this case, we can drop the initial condition, and take $f(x,t=0)=0$, as the steady state is insensitive to the initial condition.
+  %   In addition, we take $g(x,t)=g(x)$.   then as $t\rightarrow \infty$ we have 
+  %   \begin{equation}
+  %     f(x) = \dlangle \int_0^\infty ds\,g(x) e^{-\lambda s-\int_0^s du V[x(s)]} \drangle,\label{eq:path_int_solution}
+  %   \end{equation}
+  %   which satisfies 
+  % \item Take $g(x)=\delta(x)$.
+  % \item Solve associated diffusion equation.  (So works for separable geometries.  But foundational
+  %   for approximations suited step-wise basis.)
+  % \item Identify value of $f(x=0)$ as path integral.  Different location choices will yield different
+  %   functions.  
+   % Particularly interested in methods that could serve as approximations beyond PFA.  
+   %  Interested in results that can serve as \emph{local} approximations exploiting planes.  
 
-% \subsection{Path Integral without Source}
+   % From here on, this is mostly a collection of solutions to Fokker Plank equations with various potentials,
+   %  notably steps, and sundry gradients of steps.
+   %  The overall procedure is the same, just the potential changes.
+   %  Later we will have need of these results in our analytical calculations.  The planar open
+   %  path results are essential for numerical techniques.      
 
-% \begin{enumerate}
-%   \item {Integrating factor method for ODE.  (Interaction picture?)}
-%     Consider how to solve: 
-%     \begin{equation}
-%       \partial_t f = -\alpha(t) f + g(t)
-%     \end{equation}
-%     This can be solved via an integrating factor.  Let's introduce $h = e^{\int_0^t dt' \alpha(t')} f$.  then 
-%     \begin{equation}
-%       \partial_t h = e^{\int_0^t dt'\alpha(t')} [\partial_t f +\alpha(t)f(t) ] = e^{\int_0^t dt'\alpha(t')} g(t),
-%     \end{equation}
-%     where we used the differential equation for $f$.  This differential equation in $h$ has a solution
-%     \begin{equation}
-%       h(t) = h_0 + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}.  
-%     \end{equation}
-%     Then reverting the transformation to $h$ back to $f$, and using $f(t=0)=f_0=h_0$,  we have: 
-%     \begin{align}
-%       f(t) &= e^{-\int_0^t dt' \alpha(t')}h(t)  \\
-% %      &= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{\int_0^{s} du \alpha(u)}e^{-\int_0^t dt' \alpha(t')}  \\
-%       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t ds\, g(s) e^{-\int_s^t du \alpha(u)}.
-%     \end{align}
-%     Now take $s \rightarrow t-v$, and $u \rightarrow t-u$.    
-%     \begin{align}
-%       f(t)&= f_0e^{-\int_0^t dt' \alpha(t')} + \int_0^t dv\, g(t-v) e^{-\int_{0}^v du \alpha(t-u)},
-%     \end{align}
-
-%   \item Integrating factor for PDE
-
-%     Now imagine applying the same path integral procedure, but you're just careful to keep the operator ordering clear.  
-
-%     So let's do the quantum mechanical approach to this.  We start from 
-%     \begin{equation}
-%       \partial_t f = \frac{1}{2}\partial_x^2 f - V f + g, 
-%     \end{equation}
-%     \todo{Sort out sign conventions for diffusion!}
-%     this can be turned into an operator equation: 
-%     \begin{equation}
-%       \partial_t\langle x |f\rangle = -\langle x|\left[\frac{\op{p}^2}{2}+V(\op{x})\right]|f\rangle + \langle x|g\rangle,
-%     \end{equation}
-%     Then let us introduce
-%     \begin{equation}
-%       U(t) =  T \exp\left[-\int_0^t dt'\frac{\op{p}^2}{2} +V(\op{x})\right]
-%       = \prod_{k=1}^N \exp\left[ -\Delta t\frac{p^2}{2}-\Delta tV(x_k)\right]
-%     \end{equation}
-%     (literally a path integral)?
-
-%   \item Let us shift to an interaction picture using 
-%     \begin{equation}
-%       H_0 = \frac{\op{\vect{p}}^2}{2}+V(\op{x})
-%     \end{equation}
-%     with states transforming to $|\tilde{\psi}\rangle = e^{-H t}|\psi\rangle$. 
-%     \todo{Time ordered product in evolution operator - check Sakurai}
-%     The transformed states obey 
-%     \begin{equation}
-%       \partial_t|\tilde{\psi}\rangle = |\tilde{g}(t)\rangle = e^{-Ht}|g\rangle
-%     \end{equation}
-%     This can be formally integrated over time.  
-%     \begin{equation}
-%       |\tilde{\psi}(t)\rangle-|\tilde{\psi}(0)\rangle = \int_0^t ds e^{-Hs}|g\rangle
-%     \end{equation}
-%     Or 
-%     \begin{equation}
-%       |\psi(t)\rangle = e^{Ht}|\psi(0)\rangle +\int_0^t ds e^{-H(s-t)}|g(s)\rangle
-%     \end{equation}
-  \item Need careful time ordering.  
-    For example,
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f  - [V(x,t)+\lambda]f +g(x,t) ,
-    \end{equation}
-    has the solution
-    \begin{equation}
-      f(x,t) = \dlangle  f[x_0+x(t)] e^{-\lambda t - \int_0^t dt'\,V[x(t')]} + 
-      \int_0^t ds\,g(x,t-s) e^{-\lambda s-\int_0^s du V(x,t-u)} \drangle 
-    \end{equation}
-    with initial condition $f(x,t=0)= f_0(x)$, and $\dlangle \cdots\drangle$ denotes the ensemble average over Brownian walks.
-  \item Introduce double angle bracket notation, and relate to typically path integral notation.
-  \item Also introduce path-average notation as time integral.
-  \item Comment on subscripts denoting types of loops $\dlangle\cdots\drangle_{\vect{x}_0}$
-
-\end{enumerate}
-
-
-\subsection{Solution method}
-
-\begin{enumerate}
-  \item For actual solutions work in steady-state limit.  
-  \item {Work with Laplace transform.  }
-    Now let us consider steady state, for potentials $V(x,t) = V(x)$.
-    In this case, we can drop the initial condition, and take $f(x,t=0)=0$, as the steady state is insensitive to the initial condition.
-    In addition, we take $g(x,t)=g(x)$.   then as $t\rightarrow \infty$ we have 
-    \begin{equation}
-      f(x) = \dlangle \int_0^\infty ds\,g(x) e^{-\lambda s-\int_0^s du V[x(s)]} \drangle,\label{eq:path_int_solution}
-    \end{equation}
-    which satisfies 
-    \begin{equation}
-      0 = \frac{1}{2}\partial_x^2f(x) - (V+\lambda)f + g(x).  
-    \end{equation}
-  \item Take $g(x)=\delta(x)$.
-  \item Solve associated diffusion equation.  (So works for separable geometries.  But foundational
-    for approximations suited step-wise basis.)
-  \item Identify value of $f(x=0)$ as path integral.  Different location choices will yield different
-    functions.  
-  \item Particularly interested in methods that could serve as approximations beyond PFA.  
-    Interested in results that can serve as \emph{local} approximations exploiting planes.  
-  \item From here on, this is mostly a collection of solutions to Fokker Plank equations with various potentials,
-    notably steps, and sundry gradients of steps.
-    The overall procedure is the same, just the potential changes.
-    Later we will have need of these results in our analytical calculations.  The planar open
-    path results are essential for numerical techniques.      
-\end{enumerate}
-
+    The remainder of this chapter is devoted to solving the diffusion equation~(\ref{eq:diffusion_eq})
+    for some simple planar geometries.
+    These geometries are important for analytically calculating Casimir and Casimir--Polder
+    energies from the worldline path integrals.  
+    
 \section{Sojourn Time and One Step Potential }
 
-\begin{enumerate}
-  \item {Take $V=\chi\Theta[x-d]$.}
-  \item Quote FPE, with potential.  Note source term for closed loops.  
-    We start with a single step, $V = \chi\Theta[x-d]$.  We need to solve the following Fokker-Planck equation 
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2 f - (\chi\Theta(x-d)+\lambda)f + \delta(x).
-    \end{equation}
-    where $g$ will act as the source which pins the solutions to a particular point, $x_0$.
-  \item Note using explicit delta function, rather than unified Fourier representation.  
-    While it is possible to solve this using the Fourier representation of the delta function, 
-    I found it more transparent to use an explicit delta function and explicitly handle the cases where the pole is in different places.  
-    Cite Steck, and Hooghiemstra
-  \item Quote Laplace-transformed solution, and appropriate PDE. 
-    Now from Eq.~(\ref{eq:path_int_solution}) we have 
-    \begin{equation}
-      f(x) = \dlangle  \int_0^\infty ds\,\delta(x) e^{-\lambda s-\int_0^s du\,\chi\Theta[x(u)-d]} \drangle,
-    \end{equation}
-    is the solution to 
-    \begin{equation}
-      \partial_x^2 f = 2(\chi\Theta(x-d)+\lambda)f - 2\delta(x).  
-    \end{equation}
-  \item Quote general form of solution, note choosing bounded solution
-    In general the solutions are of the form, 
-    \begin{equation}
-      f(x) = A e^{\kappa x} + B e^{-\kappa x},
-    \end{equation}
-    where we will fix $\kappa$ appropriately, and choose the bounded solution.
-  \item Quote boundary conditions.  
-    We also have to take care with the boundary conditions at surfaces.
-    At the jump discontinuity at $x=d$ we have 
-    \begin{equation}
-      \partial_xf(d+\epsilon) - \partial_x f(d-\epsilon) = 0, \qquad f(d+\epsilon)-f(d-\epsilon) = 0.  
-    \end{equation}
-    For the boundary conditions at the delta function we have 
-    \begin{equation}
-      \partial_xf(\epsilon) -\partial_x f(-\epsilon) = -2 , \qquad f(d+\epsilon)-f(d-\epsilon) = 0,
-    \end{equation}
-    where both of these relations follow from integrating the PDE across the discontinuity.  
-    
-    \item Quote general form of solution for $d>0$.  
-    Then for $d>0$ have 
-    \begin{equation}
-      f(x) =\left\{ 
-        \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
-          B e^{\sqrt{2\lambda}x} + Ce^{-\sqrt{2\lambda}x} & \hspace{2cm} & 0<x<d\\
-          D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>d
-        \end{array}
-      \right.
-    \end{equation}
-    where the coefficients are fixed by matching the boundary conditions together.
-    This was done using Mathematica to speed up the tedious algebraic work.  
-    \item{Note for $d>0$ need $A$}
-    We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.  
-    It turns out that 
-    \begin{equation}
-      A = \frac{1}{\sqrt{2\lambda}} - u\,e^{-2\sqrt{2\lambda}d},\end{equation}
-    where
-    \begin{equation}
-      u = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}},
-    \end{equation}
-  \item Note reflection coefficient similarity.  
-    plays a similar role to the $TE$ reflection coefficient.
-    Considering we are solving a nearly identical differential equation this is not much of a surprise.  
-  \item For $d<0$, can get similar result from $D$, if $\lambda \leftrightarrow \lambda+\chi$.
-  \item Final result for all cases.  
-    Ultimately, we find that 
-    \begin{equation}
-      \int_0^\infty dt e^{-\lambda t} \dlangle \frac{e^{-s \theta[x(t)-d]}}{\sqrt{2\pi t}}\drangle  
-      = \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right],
-      \label{eq:Feynman-Kac TE one step}
-    \end{equation}
-    where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
-  \item Note normalization factor
-    The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
-  \item For $d<0$, note we can use symmetry and substitutions. 
-    \subsection{$d<0$}
-    We can go through the same procedure for $d<0$.
-    This extra effort will be necessary for the Casimir energy where we will have to apply these formulae over all space.    
-    Then for $d>0$ have 
-    \begin{equation}
-      f(x) =\left\{ 
-        \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<d\\
-          B e^{\sqrt{2(\lambda+\chi)}x} + Ce^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & d<x<0\\
-          D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>0
-        \end{array}
-      \right.
-    \end{equation}
-    where the coefficients are fixed by matching the boundary conditions together.
-    This was done using Mathematica to speed up the tedious algebraic work.  
+As a first example, consider a step potential $V=\chi\Theta(x-d)$, where $\Theta(x)$ is the Heaviside step
+function.  The Heaviside step function $\Theta(x)$ is unity for positive arguments, zero for negative arguments 
+and takes a value of $1/2$ at the origin.
+The step potential will be useful in computing the Casimir--Polder energy for an atom 
+above a dielectric half-space in the worldline formalism.
+It is also related to the Sojourn time statistic, which measures the time a Brownian motion $x(t)$ spends 
+beyond a certain point $d$,
+\begin{equation}
+  T_S:= \int_0^T dt\,\Theta[x(t)-d].
+\end{equation}
+(The following is a much briefer discussion of the sojourn time, 
+which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
+we follow~\cite{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
+in \S17.10 of Steck~\cite{SteckNotes}.)
 
-    We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $D$ for this case.
-    It turns out that 
+First we must solve
+\begin{equation}
+  0 = \frac{1}{2}\partial_x^2 f - [\chi\Theta(x-d)+\lambda]f + \delta(x).
+\end{equation}
+We initially assume that the surface is to the right of the origin, $d>0$.
+In this work we will use an explicit delta function, rather than a Fourier representation.
+
+In general the solutions are of the form, 
+\begin{equation}
+  f(x) = A e^{\kappa x} + B e^{-\kappa x},
+\end{equation}
+where $\kappa$ will be determined to satisfy the equation in each region, and $A$ and $B$ will be determined by 
+the boundary conditions.
+At step discontinuities (such as at $x=d)$ the solution and its derivative must be continuous across the surface,
     \begin{equation}
-      D = \frac{1}{\sqrt{2\lambda}} + u e^{2\sqrt{2\lambda}d}.
+      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0, \qquad f(d+0_+)-f(d-0_+) = 0,  
     \end{equation}
-    \item Final results.
-    We can pull these results together to write
+    where $0_+$ is a small positive real number.
+At a $\delta$-function singularity the derivative of the solution is discontinuous, but the function
+is continuous.
     \begin{equation}
-      f_{TE,1}(x) = \left\{\begin{array}{lcr} 
-          \dfrac{1}{\sqrt{2\lambda}}\left[1+ u e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
-        \end{array} \right. 
+      \partial_xf(0_+) -\partial_x f(-0_+) = -2 , \qquad f(d+0_+)-f(d-0_+) = 0.
     \end{equation}
+Both of these relations follow from integrating the diffusion equation across the relevant discontinuity.  
+Then for $d>0$, taking the bounded solution in each region, we have 
+\begin{equation}
+  f(x) =\left\{ 
+    \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
+      B e^{\sqrt{2\lambda}x} + Ce^{-\sqrt{2\lambda}x} & \hspace{2cm} & 0<x<d\\
+      D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>d
+    \end{array}
+  \right.
+\end{equation}
+where the coefficients are fixed by matching the boundary conditions together at the interfaces at
+$x=0$ and $x=d$.  This was done using Mathematica to speed up the tedious algebraic work.  
+We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.
+Algebra, or a suitable software package such as Mathematica, shows that 
+\begin{equation}
+  A = \frac{1}{\sqrt{2\lambda}} - u\,e^{-2\sqrt{2\lambda}d},
+\end{equation}
+where
+\begin{equation}
+  u = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}}.
+\end{equation}
+The reflection coefficient $u$ plays the same role as the TE-reflection coefficients in the Lifshitz 
+formula.  
+A similar computation can be carried out for $d<0$, which corresponds to finding the solution inside
+the medium.
+For $d<0$, can get similar result from $D$, if $\lambda \leftrightarrow \lambda+\chi$.
+Ultimately, we find that 
+We can pull these results together to write
+\begin{equation}
+  f_{TE,1}(x) = \left\{\begin{array}{lcr} 
+      \dfrac{1}{\sqrt{2\lambda}}\left[1+ u\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
+      \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
+    \end{array} \right. 
+\end{equation}
+The subscript deontes the relevance of this solution to a single body in the TE polarization.  
+Ultimately, we need to relate the solution to the diffusion equation back to the path integral via
+\begin{equation}
+ f\subTE= \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \delta(x)e^{-\chi \theta[x(\cT)-d]}\biggdrangle_{W(t)}  
+ = \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \frac{e^{-\chi \int_0^\cT dt\,\theta[x(\cT)-d]}}{\sqrt{2\pi \cT}}\biggdrangle_{x(\cT)}  
+  \label{eq:Feynman-Kac TE one step}
+\end{equation}
+where the first ensemble average is over free Wiener paths, while the second is over Brownian bridges that satisfy $x(0)=x(\cT)=0$.
+The factor of $(2\pi T)^{-1/2}$ is normalization for the use of closed Brownian bridges.  
+In this case, we will not undo the Laplace transform, since later results can convert the relevant 
+Casimir energies to exploit this form of the energy. 
 
-  \item Identify similarity to reflection coefficients
-  \item {Quote result for integration over surface.}
+It is possible to generalize this calculation to compute the equivalent formulae for open Brownian
+bridges from $0\rightarrow c$, as discussed in App. B of Ref.~\cite{Mackrory2016}.
+These formulae may be useful in accelerating numerical techniques, with relatively coarse bridges.
+However the formulae are quite complicated and involve diverging integrands, which makes it difficult to implement them 
+efficient.
 
-    We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$.
-    The integrals over position is 
-    \begin{align}
-      I_{TE,1} &= \int_{-\infty}^h dx_0 \frac{1}{\sqrt{2(\lambda+\chi_1)}}\left(1 - u_1e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} \right) 
-      + \int_h^\infty dx_0 \frac{1}{\sqrt{2\lambda}}\left(1 + u_1 e^{2\sqrt{2\lambda}(h-x_0)}\right) \\
-      % &= \int_h^\infty dx_0[(2\lambda)^{-1/2}+(2\kappa)^{-1/2}]  -  \int_{-\infty}^0  dx_0 \frac{1}{\sqrt{2\kappa_1}}u_1e^{2\sqrt{2\kappa_1}x_0} + \int_0^\infty dx_0 \frac{1}{\sqrt{2\lambda}}u_1 e^{-2\sqrt{2\lambda}x_0}\\
-      &= I^{(1)}_{div}  +   \left(\frac{1}{4\lambda}- \frac{1}{4(\lambda+\chi_1)}\right)u_1,
-    \end{align}
-    where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
+   % Identify similarity to reflection coefficients
+   % {Quote result for integration over surface.}
 
-\end{enumerate}
+   %  We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.
+   % Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$.
+   %  The integrals over position is 
+   %  \begin{align}
+   %    I_{TE,1} &= \int_{-\infty}^h dx_0 \frac{1}{\sqrt{2(\lambda+\chi_1)}}\left(1 - u_1e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} \right) 
+   %    + \int_h^\infty dx_0 \frac{1}{\sqrt{2\lambda}}\left(1 + u_1 e^{2\sqrt{2\lambda}(h-x_0)}\right) \\
+   %    % &= \int_h^\infty dx_0[(2\lambda)^{-1/2}+(2\kappa)^{-1/2}]  -  \int_{-\infty}^0  dx_0 \frac{1}{\sqrt{2\kappa_1}}u_1e^{2\sqrt{2\kappa_1}x_0} + \int_0^\infty dx_0 \frac{1}{\sqrt{2\lambda}}u_1 e^{-2\sqrt{2\lambda}x_0}\\
+   %    &= I^{(1)}_{div}  +   \left(\frac{1}{4\lambda}- \frac{1}{4(\lambda+\chi_1)}\right)u_1,
+   %  \end{align}
+   %  where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
+
 
 \subsection{Planar Dirichlet Conditions}
 
-\begin{enumerate}
-  \item (Comment- important to get this correct and simple as this is the template?)
-  \item Note connection to Gies work (they don't use this).    Note we will discuss this in
-    accelerated convergence techniques.  
-  \item Take delta function potential a distance $d$ away.  Use open loops.  
-  \item Quote potential
-\end{enumerate}
+It is possible to take the strong-coupling limit where $\chi\rightarrow \infty$. 
+In that Dirichlet limit, the reflection coefficient goes to -1.
+The path integral solution is
+\begin{equation}
+  f_{TE,1}(x) = \left\{\begin{array}{lcr} 
+      \dfrac{1}{\sqrt{2\lambda}}\left[1 - e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
+      0 & \hspace{2cm} & d>0\\
+    \end{array} \right. 
+\end{equation}
+The path integral can be converted back to the time domain by inverting the Laplace transform with
+\begin{equation}
+  \mathcal{L}^{-1}\bigg(\frac{1}{\sqrt{2\lambda}}e^{-2\sqrt{2\lambda}d}\bigg) 
+  = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.
+\end{equation}
+
+This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
+\comment{so do that?}
+The solution is  
+\begin{equation}
+  f_{TE,1}(x,y) = \left\{\begin{array}{lcr} 
+      \dfrac{e^{-(x-y)^2/(2t)}}{\sqrt{2\pi t}}\left[1 - e^{-2(d-x)(d-y)/t}\right]  & \hspace{0.5cm} & (x-d)(y-d)>0\\
+      0 & \hspace{0.5cm} & (x-d)(y-d)<0\\
+    \end{array} \right. 
+\end{equation}
+The lower solution applies when $x$ and $y$ are on different sides of the surface and the path 
+must cross through.  The upper solution applies when the points are both on the same side.
+As the points $x,y$ get closer to the surface, the probability of touching the surface increases, and the amplitude
+decreases.
+
+This analytical could be applied to enhance Dirichlet worldline methods with little cost,
+since path resolution is one of the dominant sources of error in numerical worldlines~\cite{Mackrory2016}.
+
+% \begin{enumerate}
+%   \item Note connection to Gies work (they don't use this).    Note we will discuss this in
+%     accelerated convergence techniques.  
+%   \item Take delta function potential a distance $d$ away.  Use open loops.  
+%   \item Quote potential
+% \end{enumerate}
 
 \section{Two Step Potentials}
 
+The next case of importance is for two step potentials, where $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.
+The bodies are separated by a distance $d=d_2-d_1$.
+This potential is useful for analytically calculating the Casimir energy between two dielectric half-spaces,
+or the Casimir--Polder energy for an atom between two half-spaces.
+The same procedure as one half-space can be used, albeit with another set of boundary conditions to manage.   
+The solution must be continuous at both surfaces $x=d_1,d_2$, and have continuous first derivative.
+
+    % When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
+    % We will use exactly the same procedure as above, but with an extra step. 
+
+    % Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
+
+
+% For the case of 
+%     We have solutions, 
+%     \begin{equation}
+%       f(x) = \left\{ \begin{array}{lcr}
+%           A e^{\sqrt{2(\lambda+\chi_1)}x}   & \hspace{1cm} & x<0\\
+%           B e^{\sqrt{2(\lambda+\chi_1)}x} + C e^{-\sqrt{2(\lambda+\chi_1)}x}  & \hspace{1cm} & 0<x<h\\
+%           D e^{\sqrt{2\lambda}x} + F e^{-\sqrt{2\lambda}x}  & \hspace{1cm} & h<x<h+d\\
+%           G e^{-\sqrt{2(\lambda+\chi_2)}x} & \hspace{1cm} & x>d_2
+%         \end{array}
+%       \right.
+%     \end{equation}
+%     We will take $d_1 = h, d_2 = d+h$.
+%     We can then check that our final solutions are independent of $h$ once we have integrated over position.
+%     We would expect the Casimir energy to only depend on $d$ in this case.   
+
+Skipping what is some tedious algebra, the solution for closed Brownian paths can be be written 
+in each of three regions.  First, for paths starting inside the left hand body, when $d_1>x_0$, 
+\begin{equation}
+  f_{\text{TE},12}^{(I)}(x_0)= \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} 
+  + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}
+  {\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+\end{equation}
+where the reflection coefficients are given by
+\begin{equation}
+  u_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
+\end{equation}
+In between the half-spaces the solution is 
+\begin{equation}
+  f^{(II)}_{\text{TE},12}(x_0)=\frac{1}{\sqrt{2\lambda}} 
+  + \dfrac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
+    +u_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+\end{equation}
+Finally, in the right hand planar body, for $d_2<0$, the solution is 
+\begin{equation}
+  f^{(III)}_{\text{TE},12}(x_0) = 
+  \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} 
+  + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u_1 e^{-2\sqrt{2\lambda}d}-u_2)}
+  {\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}.
+\end{equation}
+We will not attempt to invert the Laplace transform for these two-body formulae.  
+Note the presence of $1-u_1u_2e^{-2\sqrt{2\lambda}d}$ in the denominators.  Given we are solving essentially the same
+problem as when we derived the Lifshitz formula in Sec.~\ref{sec:lifshitz}, this is perhaps not surprising. 
+However, in this case there is no need to make any conditions on which modes contribute.  
+Later we will convert the worldline energy into a suitable form to use these results as written.  
+
+The ``12'' subscript denotes that both left and right or first and second bodies are present.
+The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
+be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.  
+
+\section{Feynman-Kac formula for Singular Potentials}
+
+The preceding has been a prelude for the truly important work of this method.
+Exactly the same methods can be used to yield sensible, finite results for the path integral 
+against singular potentials.  This is particularly true for $V\subTE$ and $V\subTM$, where 
+\begin{equation}
+  V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
+\end{equation}
+(We will focus on $V\subTM$, since $\mu=1$ for almost all materials.)
+If we consider a dielectric with a step-function discontuity, $\epsr = 1+\chi\Theta(x-d)$, the resulting
+potential is highly singular.  
+The first derivative of a step-function is a $\delta$-function, and 
+the second derivative is $\delta'$.  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, so that we can write
+$\log\sqrt{\epsr}(x) = \Xi\theta(x-d)$, and the potential is
+\begin{equation}
+  V\subTM(x) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big].
+\end{equation}
+As written this is horrifically divergent, and does not make sense (what is the effect of $\delta^2$ under an integral?). 
+The only way to make sense of this is to regularize the singularity in the step-function,
+and take the limit of vanishing regularization at the end of the computation. 
+
+We will consider an exponential interpolation of the dielectric between the two values $1$ and $1+\chi$,
+over a distance $a$,
+\begin{equation}
+  \epsr\supa(x)= \left\{\begin{array}{ccr} 
+      1 & \hspace{0.5cm} &x<d\\ 
+      e^{2\Xi (x-d)/a} & \hspace{0.5cm}&d<x<d+a\\
+      1+\chi & \hspace{0.5cm}&x>d+a
+    \end{array}.
+  \right.
+\end{equation}
+The logarithm of the dielectric can then be written
+\begin{equation}
+  \log\sqrt{\epsr\supa}(x)  
+= \left\{\begin{array}{ccr} 
+      0 & \hspace{0.5cm} &x<d\\ 
+      \frac{\Xi}{a}(x-d)& \hspace{0.5cm}&d<x<d+a\\
+      \Xi & \hspace{0.5cm}&x>d+a
+    \end{array}.
+  \right.
+\end{equation}
+The regularized TM potential is now given by 
+\begin{equation}
+  V\subTM\supa(x) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)\big].
+\end{equation}
+The worst singularity present are the $\delta$-functions from the second derivative.
+While the potential is still horribly singular, and cannot be handled nicely for just a single path, the ensemble
+averaged expression over many such paths is well behaved.  And that ensemble averaged expression can be
+found by solving the associated diffusion equation.  Fortunately, this is smooth enough to get sensible results.
+
+
+\begin{figure}
+  \hspace{2cm} FIGURE FROM POSTER
+  \caption[Regularized TM Potential]{Schematic drawing of a regularized TM potential at a surface. 
+    Vertical arrows denote $\delta$-functions.}
+\end{figure}
+
 \begin{enumerate}
-  \item {Take $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.}
-    When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
-    We will use exactly the same procedure as above, but with an extra step. 
-
-    Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
-    We have solutions, 
-    \begin{equation}
-      f(x) = \left\{ \begin{array}{lcr}
-          A e^{\sqrt{2(\lambda+\chi_1)}x}   & \hspace{1cm} & x<0\\
-          B e^{\sqrt{2(\lambda+\chi_1)}x} + C e^{-\sqrt{2(\lambda+\chi_1)}x}  & \hspace{1cm} & 0<x<h\\
-          D e^{\sqrt{2\lambda}x} + F e^{-\sqrt{2\lambda}x}  & \hspace{1cm} & h<x<h+d\\
-          G e^{-\sqrt{2(\lambda+\chi_2)}x} & \hspace{1cm} & x>d_2
-        \end{array}
-      \right.
-    \end{equation}
-    We will take $d_1 = h, d_2 = d+h$.
-    We can then check that our final solutions are independent of $h$ once we have integrated over position.
-    We would expect the Casimir energy to only depend on $d$ in this case.   
-  \item {Solve in each region, (quote results)}
-    We then need 
-    \begin{equation}
-      f_{TE,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
-          \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
-          \frac{1}{\sqrt{2\lambda}} + \dfrac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{(u_1 e^{-2\sqrt{2\lambda}d}-u_2)}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
-        \end{array}
-      \right.
-    \end{equation}
-    with 
-    \begin{equation}
-      u_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}},
-    \end{equation}
-  \item Identify similarity to reflection coefficients/ Fabry-Perot resonance condition.
-  \item Leave in Laplace transformed version for analytical comparisons.    
-  \item {Carry out integral over position. Note divergent terms, these are cancelled out by 
-    suitable renormalization.}
-    We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$. 
-    First up we need $I_{12}=\int dx_0 f_{12}[x-(h-x_0)]$
-    \begin{align}
-      I_{TE,12} %=& \int_{-\infty}^h  dx_0  f_{x_0<h} + \int_{h}^{h+d}  dx_0  f_{h<x_0<h+d} + \int_{h+d}^\infty dx_0 f_{x_0>h+d}\\
-      =&\int_{-\infty}^h dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right] \nonumber\\
-      & +\int_{h}^{h+d}dx_0\left[\frac{1}{\sqrt{2\lambda}} + \frac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} \right]\nonumber\\
-      &+ \int_{h+d}^\infty dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right]
-    \end{align}
-
-     We need 
-    \begin{gather}
-      \int_{-\infty}^h dx_0 e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} = \int_{-\infty}^0 dx_0 e^{2\sqrt{2(\lambda+\chi_1)}(x_0)} = \frac{1}{2\sqrt{2(\lambda+\chi_1)}}\\
-      \int_{h+d}^\infty dx_0 e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))} = \int_0^\infty e^{-2\sqrt{2(\lambda+\chi_2)}x_0} = \frac{1}{2\sqrt{2(\lambda+\chi_2)}}\\
-      \int_{h}^{h+d} dx_0 e^{-2\sqrt{2\lambda}(x_0-h)} = \int_0^d  dx_0 e^{-2\sqrt{2\lambda}x_0} = \frac{1 - e^{-2\sqrt{2\lambda}d}}{2\sqrt{2\lambda}}\\
-      \int_{h}^{h+d} dx_0 e^{2\sqrt{2\lambda}(x_0-d-h)} = \int_{-d}^0  dx_0 e^{2\sqrt{2\lambda}x_0} = \frac{1 - e^{-2\sqrt{2\lambda}d}}{2\sqrt{2\lambda}}
-    \end{gather}
-   \item Final integrated value
-    So that we get:
-    \begin{align}
-      I_{TE,12} =& -I_{div} + \dfrac{u_2 e^{-2\sqrt{2\lambda}d}-u_1}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u_1u_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} + (u_1+u_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u_1u_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
-      & +\frac{u_1 e^{-2\sqrt{2\lambda}d} - u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})},
-    \end{align}
-    where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
-\end{enumerate}
-
-\section{Feynman-Kac formula for TM Potentials}
-
-\begin{enumerate}
-  \item {Note that TM potential has highly singular potential.  Must be regularized.}
-  \item Smooth out contribution by analytically averaging over subpaths.
-    In handling the TM case we will first have need to handle that singular potential.
-  \item We shall do this first on it's own, since we will have to use those results in any numerical method.
-    In addition, it vastly simplifies down.
-    We will find that the potential enforces a boundary condition.  
+  % \item Smooth out contribution by analytically averaging over subpaths.
+  %   In handling the TM case we will first have need to handle that singular potential.
+  % \item We shall do this first on it's own, since we will have to use those results in any numerical method.
+  %   In addition, it vastly simplifies down.
+  %   We will find that the potential enforces a boundary condition.  
 
   \item Quote PDE, and exact form of the potential
     We will find the solution to 
@@ -507,110 +567,123 @@ term.  Also do the time arguments of $g$ work out?}
       \partial_t f = \frac{1}{2}\partial_x^2f -V_{TM} f - \lambda f + \delta(x-c)
     \end{equation}
     where 
-    \begin{equation}
-      V_{TM}(x) = \frac{\Xi^2}{2}[\delta(x)]^2 - \frac{\Xi}{2}\delta'(x).
-    \end{equation}
-  \item Introduce regularized version.  
-    Since that is highly singular, we will instead deal with 
-    \begin{equation}
-      \mathfrak{M}(x) = \lim_{a\rightarrow 0} \frac{\Xi^2}{2a^2}\Theta(a/2-|x|) - \frac{\Xi}{2a}[\delta(x)-\delta(x-a)],
-    \end{equation}
-    which corresponds to the gradients of a suitably regularized version of $\epsilon_r = 1+\chi\Theta(x)$.  
-  \item Outline of next few sections.  Derive boundary conditions for regularized potential.  
-  \item Derive Feynman-Kac formula between fixed end points.  Absolutely essential for numerical
-    work.
 \end{enumerate}
 
 \subsection{Transfer Layer Boundary conditions for TM Potential}
 
-\begin{enumerate}
-  \item {Quote regularized potential.  Note that it corresponds to exponential interpolation.}
-    Here we will be trying to solve
-    \begin{equation}
-      \partial_x^2f =\frac{\Xi^2}{a^2}\Theta(a/2-|x-d|) - \frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)]f
-    \end{equation}
-    which arises as the TM potential for crossing the surface associated with $\epsilon_r = 1+\chi\Theta(x-d)$.  We will try to solve this in the limit $a\rightarrow 0$, so we have dropped the other terms.  
-    As usual, the solutions will be of the form $f = \alpha_+ e^{\kappa x}+\alpha_- e^{-\kappa x}$, where $\kappa$ is chosen to satisy the differential equation, and $\alpha_\pm$ are fixed by the boundary conditions.  Note that we have three delta functions to handle here.  At each delta function $\gamma \delta(x-s)$ we have the following boundary conditions:
-    \begin{equation}
-      f'(s+\epsilon)-f'(s-\epsilon) = \gamma f(s),\qquad f(s+\epsilon)-f(s-\epsilon) = 0.
-    \end{equation}
+As a first step, we will show that the TM potential imposes an effective boundary condition at the interface. 
+The diffusion equation can be solved inside the boundary layer $x\in(d,d+a)$, and all references 
+to the interior can be eliminated.  We will then have conditions relating the solution and its derivatives
+on either side of the surface.  Since we will eventually consider the surface to be infinitesimally thin,
+we will not consider pinning a point inside the surface.  
 
-  \item {Can find BC's due to this regularized surface.}
-  \item Eliminate middle region using continuity conditions.  
-  \item Write out form of solutions
-    Let us see if we can solve this by eliminating all reference to the middle region.  
+The analytical solutions for the path integral obey
+\begin{equation}
+  \frac{1}{2}\partial_x^2f =\frac{1}{2}\bigg[\lambda+\frac{\Xi^2}{a^2}\Theta(x-d)\Theta(d+a-x)
+  - \frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)]\bigg]f
+\end{equation}
+Since $a$ is small, $\Xi/a$ is large relative to $\lambda$, which can be ignored in the thin-surface limit.    
+As with the other cases, the solutions are exponentials of the form $f = \alpha_+ e^{\kappa x}+\alpha_- e^{-\kappa x}$, 
+where $\kappa$ is chosen to satisy the differential equation, and $\alpha_\pm$ are fixed by the boundary conditions.
+At each delta function $(\Xi/a)\delta(x-s)$, the solution $f$ has a jump in the derivative, but is still continuous
+\begin{equation}
+  f'(s+\epsilon)-f'(s-\epsilon) = \frac{\Xi}{a} f(s),\qquad f(s+\epsilon)-f(s-\epsilon) = 0.
+\end{equation}
+
+Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,   
     \begin{align}
-      f_{\text{mid}} =& Be^{\sqrt{2\lambda + \Xi^2/a^2}x} + C e^{-\sqrt{2\lambda + \Xi^2/a^2}x}\\
-      =& Be^{\Xi x/a} + C e^{-\Xi x/a}
+      f_{\text{mid}} %=& Be^{\sqrt{2\lambda + \Xi^2/a^2}x} + C e^{-\sqrt{2\lambda + \Xi^2/a^2}x}\\
+      =& Be^{\Xi x/a} + C e^{-\Xi x/a}.
     \end{align}
-  \item Write out continuity conditions
-    and boundary conditions, 
+    Our goal is to derive the effective conditions imposed on the solutions just outside the surface.
+    Let the solutions from the left be $f_1:=f(d-0_+)$, and the gradient $f_1:=f'(d-0_+)$,
+    with corresponding solutions on the right $f_2:=f(d+a+0_+)$, $f_2':=f(d+a+0_+)$.  As far as this 
+    calculation is concerned, these are unspecified real constants. 
+
+    The continuity conditions at $x=d$ and $x=d+a$ require that
     \begin{subequations}
       \begin{align}
-        f(d + \epsilon)-f(d -\epsilon) =& 0\\
-        f(d+a+\epsilon)- f(d+a-\epsilon)=& 0\\
-        f'(d + \epsilon) -f'(d -\epsilon)=& -2\sigma f(d)\\
-        f'(d+a+\epsilon) -f'(d+a-\epsilon)=& +2\sigma f(d+a)
+        f_{\text{mid}}(d)-f_1 &= 0\\
+        f_2- f_{\text{mid}}(d+a)&= 0\\
+        f_{\text{mid}}'(d) -f_1'&= -\frac{\Xi}{a} f_1\\
+        f_2' -f'_{\text{mid}}(d+a)&= +\frac{\Xi}{a} f_2.
       \end{align}
     \end{subequations}
-  \item Find relations between $f(d\pm \epsilon)$ and $f'(d\pm \epsilon)$.
-    We will solve for $f(d+a+\epsilon)$, and $f'(d+a+\epsilon)$, trying to eliminate $B$ and $C$, which we will fix in terms of $f(d-\epsilon),f'(d-\epsilon)$.  We will thus have derived the relation between $f$ and its derivatives on both sides of the potential.      
-    Our first conditions are
+   These equations can be solved for the internal parameters $B$ and $C$, as well as two of the external 
+   parameters, $f_2$ and $f_2'$.  As a result, there will be simple effective boundary conditions between
+   the field values on either side of the boundary layer.  
+   Given this calculation's importance to our subsequent, we will actually go through the elementary algebra.  
+
+   % Find relations between $f(d\pm \epsilon)$ and $f'(d\pm \epsilon)$.
+   %  We will solve for $f(d+a+\epsilon)$, and $f'(d+a+\epsilon)$,
+   %  trying to eliminate $B$ and $C$, which we will fix in terms of $f(d-\epsilon),f'(d-\epsilon)$.
+   %  We will thus have derived the relation between $f$ and its derivatives on both sides of the potential.      
+    The continuity conditions on $f_1$ and $f_2$ require that
     \begin{align}
-      f(d+\epsilon) - f(d-\epsilon) =& 0\\
-      \rightarrow f(d-\epsilon) = Be^{\Xi d/a} + C e^{-\Xi d/a}\label{eq:M c1}
+%      f(d+\epsilon) - f(d-\epsilon) =& 0\\
+%      \rightarrow 
+      f_1 &= Be^{\Xi d/a} + C e^{-\Xi d/a}\label{eq:M c1}\\
+    % \end{align}
+    % Similarly, at the second edge  we find that 
+    % \begin{align}
+    %   f(d+a+\epsilon) - f(d+a-\epsilon) =& 0\\
+    %   \rightarrow 
+      f_2 &= Be^{\Xi d/a+\Xi} + C e^{-\Xi d/a-\Xi}\label{eq:M c2}.
     \end{align}
-    Similarly, at the second edge  we find that 
+    The derivative conditions then require that
     \begin{align}
-      f(d+a+\epsilon) - f(d+a-\epsilon) =& 0\\
-      \rightarrow f(d+a-\epsilon) = Be^{\Xi d/a+\Xi} + C e^{-\Xi d/a-\Xi}\label{eq:M c2}
+%      f'(d +\epsilon)-f'(d-\epsilon) =& -\frac{\Xi}{a}f(d)\\
+%      \rightarrow f'_1%=& \frac{\Xi}{a}\left(Be^{\Xi d/a} + C e^{-\Xi d/a}\right) + \frac{\Xi}{a}\left(Be^{\Xi d/a} - C e^{-\Xi d/a}\right)\\
+      f_1'&= 2\frac{\Xi}{a}Be^{\Xi d/a} \label{eq:M d1}\\
+    % \end{align}
+    % And the derivative conditions at $d+a$ yield 
+    % \begin{align}
+       % f'(d+a+\epsilon) -f'(d+a-\epsilon)=& \frac{\Xi}{a}f(d+a)\\
+      % \rightarrow f'(d+a+\epsilon)=&\frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} + C e^{-\Xi (d+a)/a} \right)+ \frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} - C e^{-\Xi (d+a)/a} \right)\\
+      f_2'&=2\frac{\Xi}{a}Be^{\Xi d/a}e^{\Xi}\label{eq:M d2}
     \end{align}
-    Now the derivative conditions at $d$
-    \begin{align}
-      f'(d +\epsilon)-f'(d-\epsilon) =& -\frac{\Xi}{a}f(d)\\
-      \rightarrow f'(d-\epsilon)=& \frac{\Xi}{a}\left(Be^{\Xi d/a} + C e^{-\Xi d/a}\right) + \frac{\Xi}{a}\left(Be^{\Xi d/a} - C e^{-\Xi d/a}\right)\\
-      =& 2\frac{\Xi}{a}Be^{\Xi d/a} \label{eq:M d1}
-    \end{align}
-    And the derivative conditions at $d+a$ yield 
-    \begin{align}
-      f'(d+a+\epsilon) -f'(d+a-\epsilon)=& \frac{\Xi}{a}f(d+a)\\
-      \rightarrow f'(d+a+\epsilon)=&\frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} + C e^{-\Xi (d+a)/a} \right)+ \frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} - C e^{-\Xi (d+a)/a} \right)\\
-      =&2\frac{\Xi}{a}Be^{\Xi d/a}e^{\Xi}\label{eq:M d2}
-    \end{align}
-  \item Solve for B/C.
-    Eq.~(\ref{eq:M d1}) fixes $B$, which we can use in to Eq.~(\ref{eq:M d2}), so that 
+    From the derivative conditions, $f_1'$ and $f_2'$ can be related to one another as follows
+%    Eq.~(\ref{eq:M d1}) fixes $B$, which we can use in to Eq.~(\ref{eq:M d2}), so that 
     \begin{equation}
-      f'(d+a+\epsilon) = e^{\Xi}f'(d-\epsilon).
+      f'_2 = e^{\Xi}f'_1.
     \end{equation}
-    So far so good.  Next up the normal continuity condition.  
-    \begin{align}
-      f(d-\epsilon) =& B e^{\Xi d/a} + C e^{-\Xi d/a}\\
-      =& \frac{a}{2\Xi} f' + C e^{-\Xi d/a} = C e^{-\Xi d/a},
-    \end{align}
-    which says that $B\sim a$, so we will drop it from this part of the calculation.  
-    Now use this in Eq.~(\ref{eq:M d2}) to find
+    In addition, under the assumption that the external gradients $f_1'$, $f_2'$ are order one,
+    that also implies that $B\sim\order(a)$.  That implies that in the continuity conditions 
+    $B$ can be dropped relative to $C$ which must also be order one.  On setting $B=0$, it is clear 
+    from Eqs.~(\ref{eq:M c1})-(\ref{eq:M c2}) that 
+% Next up the normal continuity condition.  
+%     \begin{align}
+%       f_1 =& B e^{\Xi d/a} + C e^{-\Xi d/a}\\
+%       =& \frac{a}{2\Xi} f' + C e^{-\Xi d/a} = C e^{-\Xi d/a},
+%     \end{align}
+%     which says that $B\sim a$, so we will drop it from this part of the calculation.  
+%     Now use this in Eq.~(\ref{eq:M d2}) to find
     \begin{equation}
-      f(d+a+\epsilon) = C e^{-\Xi d/a} e^{-\Xi} =  e^{-\Xi} f(d-\epsilon).  
+      f_2 =  e^{-\Xi} f_1.  
     \end{equation}
-  \item Eliminate references to internal state.  Take limit of regularization going to zero.
-  \item {Quote final boundary conditions.}
-    We can now take $a\rightarrow 0 $ everywhere.  So we have the following boundary conditions due to an interface $\mathfrak{M}$:
+    At this point, the conditions between the solutions outside the boundary layer have been derived,
+    and the  $a\rightarrow 0$ limit can be taken everywhere.  
+   % Eliminate references to internal state.  Take limit of regularization going to zero.
+   % {Quote final boundary conditions.}
+   %  We can now take $a\rightarrow 0 $ everywhere. 
+    
+    The regularized dielectric step produces the following effective boundary matching conditions at an interface
     \begin{align}
       \Aboxed{
-        f(d-\epsilon) =& e^{\Xi}f(d+\epsilon), \qquad
-        f'(d -\epsilon)= e^{-\Xi}f'(d+\epsilon)
+        f(d+0_+) =& e^{-\Xi}f(d-0_+), \qquad
+        f'(d+0_+)= e^{\Xi}f'(d-0_+)
       }
     \end{align}
     \label{sec:TM boundary condition}
-
-\end{enumerate}
+    These boundary conditions can then be used to find the ensemble average solution.  This is essential
+    to take into account analytically, since the chance that a randomly drawn path will satisfy these conditions 
+    is negligible.  
 
 \subsection{Finding the Feynman-Kac formula}
 
-\begin{enumerate}
-  \item {Using above effective BC solve for Feynman-Kac eqn for open bridge.}
-    \item Quote form of solution, and PDE it solves.  
-    \item Note how to recover various cases by flipping signs etc.  
+  {Using above effective BC solve for Feynman-Kac eqn for open bridge.}
+    Quote form of solution, and PDE it solves.  
+    Note how to recover various cases by flipping signs etc.  
     We are now in position to derive an expression the ensemble average of paths going from $0\rightarrow c$ through $V_{TM}$. 
     \begin{equation}
       f_{0\rightarrow c}=\int_0^\infty dt e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-s\int_0^T dt V_{TM}}\drangle.
@@ -620,7 +693,8 @@ term.  Also do the time arguments of $g$ work out?}
       0 = \frac{1}{2} \partial_x^2 f - V_{TM}f - \lambda f + \delta(x-c)
     \end{equation}
     We will find the solutions for the case where $0<c<d$.  From this we can see how we need to change the signs to recover the other cases.  Note that the boundary conditions at $x=c$ are: ${f(c+\epsilon)=f(c-\epsilon)}, {f(c+\epsilon)-f(c-\epsilon)= -2}$.  As we found in Sec.~(\ref{sec:TM boundary condition}), at $x=d$ we need $f(d-\epsilon) = e^{\Xi}f(d+\epsilon),f'(d -\epsilon)= e^{-\Xi}f'(d+\epsilon)$.  
-  \item Form of solutions in each region, and fixing values via BCs from previous section
+  
+ Form of solutions in each region, and fixing values via BCs from previous section
     For example, with $c<d$ we have 
     \begin{equation}
       f  = \left\{\begin{array}{ccr} A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<c\\
@@ -631,17 +705,17 @@ term.  Also do the time arguments of $g$ work out?}
     \end{equation}
     In the case where $d>0$, we will need $f(0) = A$.  In the other case where $d<0$, we will need $f(0) = D$.  
     Mathematica when asked to solve the boundary conditions finds that 
-    \begin{equation}
-      f = \left\{ \begin{array}{ccr} 
-          \dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \dfrac{e^{-\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}  &   \hspace{2cm}  & d>c,  d>0\\
-          \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & d>c,d<0 \\
-          \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & c>d,d>0 \\
-          \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} - \dfrac{e^{\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi}+1} & \hspace{2cm} & c>d, d<0
-          \\
-        \end{array}
-      \right.
-    \end{equation}
-    \item Simplify down to crossing/no-crossing cases.
+    % \begin{equation}
+    %   f = \left\{ \begin{array}{ccr} 
+    %       \dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \dfrac{e^{-\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}  &   \hspace{2cm}  & d>c,  d>0\\
+    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & d>c,d<0 \\
+    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & c>d,d>0 \\
+    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} - \dfrac{e^{\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi}+1} & \hspace{2cm} & c>d, d<0
+    %       \\
+    %     \end{array}
+    %   \right.
+    % \end{equation}
+     Simplify down to crossing/no-crossing cases.
     That seems complicated, but we can note that if there is a crossing ($|c|<|d|$) then we get 
     \begin{equation}
       f_{nc}=\dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \sgn(d)\dfrac{e^{-\sqrt{2\lambda}|2d-c|}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}
@@ -650,7 +724,7 @@ term.  Also do the time arguments of $g$ work out?}
     \begin{equation}
       f_c = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
     \end{equation}
-  \item {Invert Laplace transform to get real-time version.}
+   {Invert Laplace transform to get real-time version.}
 
     Ultimately, we will want to isolate the potential term.  
     If we use 
@@ -658,7 +732,7 @@ term.  Also do the time arguments of $g$ work out?}
       \mathcal{L}^{-1}\left[ \frac{e^{-\sqrt{2\lambda}x}}{\sqrt{2\lambda}}   \right] = \frac{e^{-x^2/(2t)}}{\sqrt{2\pi t}},
     \end{equation}
     which is exactly the factor we isolated in front of $\mathcal{M}$.  
-  \item {Final results.  Can now use as basis for numerical methods since depends on loop-time.}
+   {Final results.  Can now use as basis for numerical methods since depends on loop-time.}
     So we have:
     \begin{align}
       \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} \dlangle e^{-\int_0^T dt V_{TM}(x-d)}\drangle 
@@ -668,6 +742,13 @@ term.  Also do the time arguments of $g$ work out?}
       &+ \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}}\dfrac{2e^\Xi}{1 + e^{2\Xi}}\theta(|c|-|d|)
     \end{align}
     
+    \begin{figure}
+      \hspace{2cm}
+      PLOT OF TM SOLUTION
+      \caption[Plot of TM Solution]{Plot of path-averaged TM solution for various ending points}
+    \end{figure}
+    
+
     % Dan has:
     % \begin{equation}
     %   \dlangle \exp\left[-\int_0^T dt V_{TM}(x-d)\right]\drangle = 1 + \frac{\sinh(\Xi/2)}{\cosh\Xi}[\sgn(d-c)e^{\sgn(d)\Xi/2} + \sgn(d)e^{-\sgn(d)\Xi/2}]e^{\left[c^2-(|d|+|c-d|)^2\right]/2t}.
@@ -690,8 +771,6 @@ term.  Also do the time arguments of $g$ work out?}
     % \begin{align}
     %   F_{d<0,d<c} =&\frac{\sinh(\Xi/2)}{\cosh\Xi}[-e^{\Xi/2} -e^{-\Xi/2}] = -\frac{e^\Xi - e^{-\Xi}}{e^\Xi + e^{-\Xi}}
     % \end{align}
-  \item Figure of TM potential.  Note connection to Neumann BC and reflection.  
-\end{enumerate}
 
 \section{Single TM potential and Step}
 

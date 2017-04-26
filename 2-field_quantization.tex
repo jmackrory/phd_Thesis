@@ -69,6 +69,7 @@ The dielectric function can be understood in terms of the linear-response of the
 medium to the electromagnetic field~(\cite{Altland2011}).
 Instead of restricting the model to explicitly linear harmonic media, the connection to linear response
 theory allows one to find the effective linear model for whatever material is under consideration.
+Similar reasoning has been used for the Casimir effect between graphene sheets~\cite{Bordag2009a,Fialkovsky2011}.
 This approach is more general, since it yields the effective linear response, 
 without being restricted to assuming a linear model from the outset.  This was used to 
 motivate the effective Lagrangian description in terms of macroscopic fields by Rahi\etal in their 
@@ -91,6 +92,16 @@ The primary results in Bechler's work were finding the form of the field propaga
 other approaches by Huttner and Barnett~\cite{Huttner1992} and Langevin equations by Dung\etal\cite{Dung1998},
  rather than new computations exploiting the propagator.    The results were all framed in terms of the 
 Fourier decompositions of the fields in terms of wavenumber, which is unsuitable for a worldline procedure.
+
+\begin{itemize}
+  \item Dalton Multipolar quantization. \cite{Dalton1996}.  Mostly concerned with light interacting with 
+    atoms in media.
+  \item Knoell, Vogel and Gunnar-Wesch~\cite{Knoell1987}.  Frequency independent dielectric quantization.
+    Field operators etc, canonical quantization.  
+  \item Philbin canonical quantization for operators in spatially dependent dielectric at macroscopic level.
+    \cite{Philbin2010}.   Results used in Casimir work~\cite{Philbin2011}.
+  \item Raabe~\cite{Raabe2006}.  Continuation of langevin noise source approach to quantization.  
+\end{itemize}
 
  Bordag and others also carried out path integral quantization of
  the EM field inside a spatially varying dielectric neglecting dispersion, starting from the 
@@ -120,7 +131,7 @@ fields.
 In this limit, the effect of the electromagnetic field on the matter can be described 
 by the linear susceptibility $\chi$.
 The susceptibility $\chi$ is found from the microscopic theory via linear-response such as the Kubo formula~\cite{Rahi2009,Altland2011}.
-
+The linear response tensor is also directly related to the polarization tensor for the field~\cite{Bordag2009, Abrisokov}
 In a sense these difficulties could be circumvented.  We are merely considering QED in a linear approximation
 in the interaction between matter and the EM field (while $\epsr$ is some unspecified function of space),
 and in a long wavelength approximation to the matter.  
@@ -128,31 +139,44 @@ Gauge fixing is no problem at all for electrons and photons in this limit.
 Perhaps a better procedure is 
 Considering the difficulties with carrying out this path integral quantization with the macroscopic fields,
 
-
 There is another approach to classical electromagnetic scattering, which explicitly focuses on 
 the two physical degrees of freedom.
-The Hertz potentials writes the electromagnetic radiation field in terms of two scalar fields, where 
+The Hertz potentials express the electromagnetic radiation field in terms of two scalar fields, where 
 there is one special direction. \comment{Cite Hertz} The Hertz potentials were first introduced to discuss EM scattering 
 in spherical geometries~\cite{Nisbet1955,Nisbet1957}. 
-They have also been used in the Casimir context for a cylindrical geometry~\cite{Dalvit}.
+They have also been used in the Casimir context for a cylindrical geometry~\cite{Crocce2005}.
 Unfortunately, the wave equations for the Hertz potentials when used in the EM lagrangian 
 lead to fourth order differential operators.  This is unsuitable for a worldline method 
 where we expect second order differential operators to find Gaussian paths.
 
 Another potentially fruitful analogy exists between the curved space of general relativity, 
-and the fact that light bends in spatially varying dielectrics~\cite{Leonhardt}.  Electromagnetism can be 
-quantized on a curved background without much difficulty.
+and the fact that light bends in spatially varying dielectrics~\cite{Leonhardt2000}. 
+ Electromagnetism can be quantized on a curved background without much difficulty.
 One merely replaces all derivatives by their covariant counterparts, which include correction terms
-based on the metric.
-This analogy has been exploited by Leonhardt in particular to propose technology such as optical 
-black holes, cloaking fields, perfect lenses, and more.  
-Unfortunately, this analogy is only exact when $\epsilon=\mu$, which is typically not found in nature.
-It is possible to mock it up in a narrow frequency range using metamaterials, with some demonstration 
-experiments.  So while there are a number of similarities between a dielectric medium and a metric,
+based on the metric~\cite{Carroll2004}.
+The analogy between gravity and dielectrics has been exploited by Leonhardt in particular to propose technology such as optical 
+black holes, cloaking fields, perfect lenses, and more~\cite{Leonhardt2006}.  
+Unfortunately, this analogy is only exact when $\epsilon=\mu$~\cite{Leonhardt2000}, 
+which most materials do not satisfy.
+It is possible to mock the $\epsilon=\mu$ condition over a narrow frequency range using metamaterials, 
+as some experiments have demonstrated~\cite{Leonhardt2006}.  
+So while there are a number of similarities between a dielectric medium and a metric,
 those similarities do not extend to an immediate shortcut past all of these issues.
 
 We choose to avoid this issue by focusing on improved scalar models, 
 that also correspond to the physical degrees of freedom for the field in certain geometries.  
+The scalars we develop correspond with the Hertz potentials for the plane, and in fact the TE/TM decomposition 
+is commonly exploited in planar geometries \comment{Cite Bordag for planar paper and projection}
+
+We have some proposals for general methods, but I have not seen how to convert between
+basis so as to stitch together a global atlas from local polarization charts.  (The comparison with 
+the language of differential geometry is deliberate.  In differential geometry a manifold can be covered with 
+coordinates by the union of coordinate charts, which are local maps of the manifold to $\mathbb{R}^n$.  
+Where the charts overlap, the coordinate maps must be consistently mapped into one another.)
+While it might not be possible to cover the whole space globally with a single set of polarizations, 
+it may be possible to do so locally.  For example, one could use the nearest surface 
+normal to define a plane to define the TE/TM polarizations.  As the path propagates, it would be 
+necessary to update the polarizations, and convert the amplitudes into the new coordinates.
 
 \section{Classical Field Theory}
 
@@ -168,9 +192,6 @@ where the fields obey the constitutive relations $\vect{D}=\epsilon\vect{E}$, $\
 Here we will ignore the frequency dependence and dispersion.
   We are implicitly assuming a monochromatic field.
   Later, we will extend this work to handle frequency dependence in the dielectric.
-  Dealing with dispersion also forces us to deal with dissipation.
-  Quantization with a dielectric medium has been done by Huttner and Barnett~\cite{Huttner1992}, 
-  and in the Casimir context by Rosa~\textit{et.~al.}~\cite{Rosa2010}.  
 
 % For a linear medium we can write 
 % \begin{equation}
@@ -211,13 +232,10 @@ The Levi Civita densitiy, $\epsilon_{\mu\nu\rho\sigma}$ is the fully antisymmetr
 where $\epsilon_{0123}=1$ any even permutation of indices; it picks up a negative sign for any odd permutation;
 and it vanishes if any indices are repeated.  
 
-
 The starting Lagrangian for electromagnetism in vacuum is 
 \begin{equation}
   L=-\frac{1}{4}\int d^3\vect{x}\, F_{\mu\nu}F^{\mu\nu} = =-\frac{1}{2}\int d^3\vect{x}\, (|\vect{E}|^2-|\vect{B}|^2).
 \end{equation}
-
-
 
 Note that the fields are unchanged if we make the following gauge transformation $(\phi,\vect A)\rightarrow(\phi',\vect A')$.  
 \begin{align}
@@ -1131,6 +1149,116 @@ The better derivation works with the Matsubara frequencies.  In the above workin
 where each separate Matsubara frequency contributes separately.  At the end of the calculation the zero-temperature
 limit can be taken to convert the sum over Matsubara frequencies into an integral.  The integral over the frequency
 yields the answer quoted above.  
+
+\section{Nonzero temperature Worldline Path Integrals}
+
+Let us change to using $\tau = \beta \hbar c$ as our temperature coordinate.  Then   
+\begin{equation}
+  Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
+    \left( \epsr(\vect{r})(\partial_{\tau}\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\right)\right].
+\end{equation}
+
+Since the path integral is periodic for $\tau\in[0,\beta\hbar c]$, the fields can be expanded 
+in a Fourier series,
+\begin{equation}
+  \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}).
+\end{equation}
+Here the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
+the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation,
+\begin{equation}
+\int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau} = \beta\hbar c \delta_{n,-m},
+\end{equation}
+where $\phi_n^* = \phi_{-n}$ since $\phi^*(\beta, \vect{r}) = \phi(\beta, \vect{r})$.  
+
+% \begin{shaded}
+% \comment{See Dec 2012 notes for how to handle the variable counting from doubling the number of variables}
+% I'm just trying to figure out the factors of 2 here - just think of the transform to Matsubara 
+% frequencies as a ordinary change of variables.
+%   In December I had completely reduced the problem to a discrete problem in $\beta$ as well.
+%   Say I have $N_\beta$ initial time-steps.
+%   I have $N_\beta$ real variables.
+%   If I introduce a Fourier series, then I now have $N-2$ complex variables for $0<n<N_\beta/2$, and 2 real variables at $n=0, N_\beta/2$.
+%   Furthermore we know that $\phi_n^* = \phi_{-n}$.
+%   So from the Gaussian structure of the integrals over $\phi_n$, each of these $(N-2)$ integrals over $\phi_n$ is equal.
+%   When I carry out the integrals I have 
+% \begin{equation}
+% \prod_{n=-N_\beta/2}^{N_\beta/2-1}\int D\phi_n e^{-A_n|\phi_n|^2} 
+% = C\left( \frac{1}{\sqrt{A_0}}\frac{1}{\sqrt{A_{N_\beta/2}}}\prod_{n>0}\frac{1}{A_n}\right),
+% \end{equation}
+% where I have used 
+% \begin{equation}
+% \int D\phi_nD\phi_n^* e^{-A_n|\phi_n|^2} = \int D\phi_r D\phi_ie^{-A_n(\phi_r^2+\phi_n^2)} = \frac{1}{A_n}, 
+% \end{equation}
+% where $\phi_n = \phi_r + i \phi_i$.
+%   We then consider the limit where $N_\beta\rightarrow \infty$.  
+% \end{shaded}
+
+We assume that the appropriate frequency dependent path integral is 
+\begin{equation}
+Z_{TE} = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
+  \int d^3r\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},s_n)\frac{s_n^2}{c^2} 
+    -\nabla\cdot\frac{1}{\mur(\vect{r},s_n)}\nabla\right)\phi_n(\vect{r})\right] .
+\end{equation}
+
+%Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
+The same field rescalings can be carried out as for the frequency independent case.  
+The Gaussian integrals for each $\phi_n$ can be carried out, so that the free energy can be written
+% This idea is following Rahi's derivation where $\epsilon$ is treated as an effective action 
+% where the effect of the electron field has been intregrated out.  
+as
+\begin{equation}
+-\kB T\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left[
+\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right],
+\end{equation}
+where prime on the sum indicates that the $n=0$ is multiplied by a half and
+\begin{equation}
+  V^{(n)}\subTE(z) := \frac{1}{2}\big[\big(\partial_z\log\sqrt{\mur(z,is_n)}\big)^2-\partial_z^2\log\sqrt{\mur(z,is_n)}\big].
+\end{equation}
+The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
+% \begin{equation}
+% \log Z_{TE} -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ 
+% \frac{1}{2}\left(\epsilon(is_n,\vect{\vect{r}})\frac{s_n^2}{c^2} -\nabla^2\right)\right] 
+% - \log\det\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}
+% \end{equation}
+Note that the zero frequency contribution vanishes if $\lim_{\omega\rightarrow 0}\omega^2\epsr(\omega)=0$, 
+and $\mur=1$.  This is related to the dispute over the role of the zero frequency pole in the dielectric
+response of a metal.  
+
+% for $n=0$ the Matsubara frequency $s_n=0$, so we have 
+% \begin{align}
+%   \log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{\vect{r}})\frac{s_0^2}{c^2} -\nabla^2\right)\right]
+%  - \log\det\left[ \frac{1}{2}\left(\frac{s_0^2}{c^2} -\nabla^2\right)\right] = 0.
+% \end{align}
+% This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, 
+% such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
+
+The nonzero temperature TE worldline path integral can be developed as before.  In this case only
+a $(D-1)$-dimensional Hilbert space is needed to evaluate the trace, since the thermal dimension is 
+handled with the Matsubara frequencies.
+\begin{align}
+\cF-\cF_0 %& = -k_BT \log \frac{Z_{TE}}{Z_0} \\
+% & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
+%     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
+% -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
+=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+&\times\dlangle e^{-s_n^2\cT /(2c^2)} -  e^{-s_n^2\langle\epsr(\vect{x},is_n)\mur(\vect{x},is_n)\rangle\cT /(2c^2)}
+e^{-\cT\langle V\subTE^{(n)}(\vect{x})\rangle}\drangle,
+\label{eq:TEworldline_partition_function}
+\end{align}
+where the paths are $D-1$ dimensional spatial paths.  
+% where we introduced the path integral.
+%   In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.
+%   So we also only use the normalization for 3D.
+This scaling with $\cT$ also reflects the different scaling behaviours in the near-field, 
+thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
+
+The zero-temperature limit can be recovered by converting the Matsubara sum into a frequency integral.
+In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi n)/\beta \hbar\rightarrow 0$.
+If we treat the material responses as being frequency independent, then the integral over frequency
+is Gaussian, and the zero temperature worldline (\ref{eq:TE_worldline}) is recovered.
+
+The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
+employ in the next chapter.  
 
 
 % \section{Quantization with Harmonic Medium and Linear Response}

@@ -1188,14 +1188,17 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     where the position and momentum operators obey the following commutation relations,
     \begin{gather}
       [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\qquad      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
+      \label{eq:commutation}
     \end{gather}
     with resolutions of the identity,
     \begin{gather}
       I = \int d^Dx |\vect{x}\rangle\langle\vect{x}| = \int \frac{d^Dp}{(2\pi\hbar)^D} |\vect{p}\rangle\langle\vect{p}|,
+      \label{eq:identity}
     \end{gather}
     and state overlap
     \begin{equation}
       \langle \vect{x}|\vect{p}\rangle = e^{i\vect{p}\cdot\vect{x}/\hbar}.
+      \label{eq:overlap}
     \end{equation}
 
     In quantum mechanics, the amplitude for a particle starting at $x_i$ at time $t=0$, and propagating
@@ -1346,6 +1349,10 @@ and did not have concrete, correct results.
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 (We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies\etal.)  
+
+\change{See also Ch 20 of Steck's Quantum Optics notes for an alternative perspective on this work, including
+some of the analytical techniques we will use later.}
+
 
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
 The action for the field $\phi$ is given by 

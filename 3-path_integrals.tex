@@ -340,13 +340,13 @@ $x=0$ and $x=d$.  This was done using Mathematica to speed up the tedious algebr
 We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.
 Algebra, or a suitable software package such as Mathematica, shows that 
 \begin{equation}
-  A = \frac{1}{\sqrt{2\lambda}} - u\,e^{-2\sqrt{2\lambda}d},
+  A = \frac{1}{\sqrt{2\lambda}} - u\supTE\,e^{-2\sqrt{2\lambda}d},
 \end{equation}
 where
 \begin{equation}
-  u = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}}.
+  u\supTE = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}}.
 \end{equation}
-The reflection coefficient $u$ plays the same role as the TE-reflection coefficients in the Lifshitz 
+The reflection coefficient $u\supTE$ plays the same role as the TE-reflection coefficients in the Lifshitz 
 formula.  
 A similar computation can be carried out for $d<0$, which corresponds to finding the solution inside
 the medium.
@@ -355,8 +355,8 @@ Ultimately, we find that
 We can pull these results together to write
 \begin{equation}
   f_{TE,1}(x) = \left\{\begin{array}{lcr} 
-      \dfrac{1}{\sqrt{2\lambda}}\left[1+ u\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-      \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
+      \dfrac{1}{\sqrt{2\lambda}}\left[1+ u\supTE\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
+      \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u\supTE\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
     \end{array} \right. 
 \end{equation}
 The subscript deontes the relevance of this solution to a single body in the TE polarization.  
@@ -467,35 +467,43 @@ Skipping what is some tedious algebra, the solution for closed Brownian paths ca
 in each of three regions.  First, for paths starting inside the left hand body, when $d_1>x_0$, 
 \begin{equation}
   f_{\text{TE},12}^{(I)}(x_0)= \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} 
-  + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}
-  {\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+  + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}
+  {\sqrt{2(\lambda+\chi_1)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
 \end{equation}
 where the reflection coefficients are given by
 \begin{equation}
-  u_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
+  u\supTE_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
 \end{equation}
 In between the half-spaces the solution is 
 \begin{equation}
   f^{(II)}_{\text{TE},12}(x_0)=\frac{1}{\sqrt{2\lambda}} 
-  + \dfrac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
-    +u_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+  + \dfrac{2u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d} + u\supTE_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
+    +u\supTE_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
 \end{equation}
 Finally, in the right hand planar body, for $d_2<0$, the solution is 
 \begin{equation}
   f^{(III)}_{\text{TE},12}(x_0) = 
   \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} 
-  + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u_1 e^{-2\sqrt{2\lambda}d}-u_2)}
-  {\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}.
+  + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
+  {\sqrt{2(\lambda+\chi_2)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}.
 \end{equation}
+The ``12'' subscript denotes that both left and right or first and second bodies are present.
+The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
+be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.  
+
 We will not attempt to invert the Laplace transform for these two-body formulae.  
-Note the presence of $1-u_1u_2e^{-2\sqrt{2\lambda}d}$ in the denominators.  Given we are solving essentially the same
+Note the presence of $1-u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.  Given we are solving essentially the same
 problem as when we derived the Lifshitz formula in Sec.~\ref{sec:lifshitz}, this is perhaps not surprising. 
 However, in this case there is no need to make any conditions on which modes contribute.  
 Later we will convert the worldline energy into a suitable form to use these results as written.  
 
-The ``12'' subscript denotes that both left and right or first and second bodies are present.
-The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
-be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.  
+In the strong coupling ($u\supTE_i\rightarrow 1$) limit, 
+the Laplace transform can be inverted by expanding the denominator of these expressions using 
+$(1-s)^{-1}=\sum_{n}(-1)^n s^n$ for $s<1$.  The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
+from the far surface and the governing exponential term would be of the form $e^{-2\sqrt{2\lambda}(n+1)d}$.
+After inverting the Laplace transforms, each Gaussian in the sum would be of the form $\exp[-2(n+1)^2d^2/t]$, corresponding
+to the probability for a Brownian path to bounce $n$ times between points a distance $d$ apart.
+This naturally goes over to the reflection picture discussed in \S21.1.5.3 of Steck~\cite{Steck}.
 
 \section{Feynman-Kac formula for Singular Potentials}
 
@@ -814,107 +822,136 @@ side of the surface,  and when they are on different sides.
 
 \section{Single TM potential and Step}
 
-Beyond the results, we can also consider a dielectric step combined with a TM boundary condition.  
+Next, we consider a dielectric step combined with a TM boundary condition.  
 This is directly relevant to analytically computing the TM component of the Casimir--Polder energy for an atom near a
-dielectric half-space.  In this case we only require the results for closed paths.  
+dielectric half-space.  We will only develop the solution for closed paths.
 
-    Let's now find: 
+The path integral
     \begin{equation}
-      f = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x,d) + \chi\Theta(x-d)]}\bigdrangle 
+      f = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x,d) + \chi\Theta(x-d)]}\bigdrangle ,
     \end{equation}
-    This is the steady-state solution to 
+    is the steady-state solution to 
     \begin{equation}
       \partial_t f = \frac{1}{2}\partial_x^2f -(V_{TM} + s\Theta(x-d)+\lambda)f +\delta(x). 
     \end{equation}
-
-    This problem can be solved in exactly the same fashion as the equivalent TE problems.
-    Perhaps unsurprisingly, you find that the two slab results can also be ported over, but with their TM reflection coefficients.  
-
-   {Leave as Laplace-transform.  Note integral identities mean we can apply this for analytical
-    result analytically.  }
+    The analytical expression is found by solving the diffusion equation directly, with 
+    TM boundary conditions at $x=d$ and $\delta$-function boundary conditions at $x=0$.
+    The solution for a single TM body is 
   \begin{equation}
       f_{TM,1}(x) = \left\{\begin{array}{lcr} 
-          \dfrac{1}{\sqrt{2\lambda}}\left[1+ u' e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u' e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
+          \dfrac{1}{\sqrt{2\lambda}}\left[1+ u\supTM e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
+          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u\supTM e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
         \end{array} \right. 
     \end{equation}
     where
     \begin{equation}
-      u' = \frac{\sqrt{\lambda}e^{2\Xi} -\sqrt{\lambda+\chi}}{\sqrt{\lambda}e^{2\Xi} + \sqrt{\lambda+\chi}},
+      u\supTM = \frac{\sqrt{\lambda}e^{2\Xi} -\sqrt{\lambda+\chi}}{\sqrt{\lambda}e^{2\Xi} + \sqrt{\lambda+\chi}}.
     \end{equation}
-    plays a similar role to the $TM$ reflection coefficient, since $e^{2\Xi} = (1+\chi)$.   
-   Final result.  
+    The reflection coefficient $u\supTM$ corresponds to the TM reflection coefficient 
+    used in Sec.~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
+    This calculation can also be naturally extended to include a magnetic response.
+    The parameter $\Xi$ is defined in relation to the boundary condition, while $\chi$ relates to the 
+    step discontinuity.  To describe the TM potential, one could take $\chi\rightarrow (\epsr\mur-1)$
+    and $\Xi\rightarrow \log\sqrt{\epsr}$, where $\epsr$ and $\mur$ denote the permittivity and permeability inside the medium.
+
     Ultimately, we find that 
-    \begin{equation}
-      \int_0^\infty dT e^{-\lambda T} \dlangle \frac{e^{-\int_0^T dt V_{TM}+s\theta[x(t)-d]}}{\sqrt{2\pi T}}\drangle  =
-      \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u' e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right],\label{eq:Feynman-Kac TM one step}
-    \end{equation}
+    \begin{align}
+      &\int_0^\infty dT e^{-\lambda T} \dlangle \frac{1}{\sqrt{2\pi T}}
+      \exp\left(-\int_0^T dt \{V\subTM[x(t)]+s\theta[x(t)-d]\}\right)\drangle\nonumber\\
+      &\hspace{1cm}=
+      \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u\supTM e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right],\label{eq:Feynman-Kac TM one step}
+    \end{align}
     where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
     The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
 
 
-
 \section{Two TM Step Potentials}
 
-\begin{enumerate}
-  \item {Quote full potential, and note boundary conditions.}
-  \item Quote full potential, and PDE.
-  \item Comment on how to handle other surface.
-    When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
-    We will use exactly the same procedure as above, but with an extra step. 
+The preceding calculations for can be easily adapted to handle two planar half-spaces subject to 
+TM boundary conditions. This time consider the path integral solution for a potential
+\begin{equation}
+  V = \chi_1\Theta(-d/2-x)+\chi_2\Theta(x-d/2)+V\subTM(-\Xi_1,-d/2)+V\subTM(\Xi_2,d/2)
+\end{equation}
+In this case a little care is needed in defined the boundary conditions at the left hand surface.
+Since the left body has the opposite orientation (the permittivity decreases at $x=-d/2$)
+the correct TM potential for the left body has $Xi\rightarrow-\Xi_1$ everywhere.
+This change reverses the nature of the discontinuities from passing through the surface: if passing 
+through the surface decreases the function, and increases the gradient, then traversing the surface in the   
+opposite direction should have the opposite effect.  
 
-    The potential is then 
+  % \item {Quote full potential, and note boundary conditions.}
+  % \item Quote full potential, and PDE.
+  % \item Comment on how to handle other surface.
+  %   When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
+  %   We will use exactly the same procedure as above, but with an extra step. 
+
+  %   The potential is then 
+  %   \begin{equation}
+  %     V = \chi_1\Theta(h-x) + \chi_2\Theta(x-h-d) + \mathfrak{M}(-\Xi,h) + \mathfrak{M}(\Xi,h+d),
+  %   \end{equation}
+  %   where we took $\Xi \rightarrow -\Xi$ on one step since $\partial^2_x\theta(-x) = -\delta'$.  
+  % \item Exploit symmetry of effective boundary conditions.  
+  % \item {Quote results.  Note that $r\rightarrow r'$.}
+
+%     We then need to solve this for the various cases of $h,h+d $ on each side of $x=0$:
+%     \begin{equation}
+%       f_{TM,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
+%           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}
+% \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
+%           \frac{1}{\sqrt{2\lambda}} + 
+%           \dfrac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}(h-x_0)} +u\supTM_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}
+%           {\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
+%           \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}
+%           \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
+%         \end{array}
+%       \right.
+%     \end{equation}
+%     \item {Quote various limits for $h,h+d$ on either side of 0}
+The resulting solutions have the same form and structure as the TE solutions, but with 
+the TE reflection coefficients replaced by their TM counterparts.  
+
+For paths starting in the left body, $x_0<d_1$ the solution is
+    \begin{align}
+      f^{(\text{I})}\subTMtwo(x) &=
+           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
+ \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
+% =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
+%       \frac{u\supTM_2 e^{-2\sqrt{2\lambda}d}-u\supTM_1 }{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}.
+    \end{align}
+    where the TM reflection coefficients for each body are given by 
     \begin{equation}
-      V = \chi_1\Theta(h-x) + \chi_2\Theta(x-h-d) + \mathfrak{M}(-\Xi,h) + \mathfrak{M}(\Xi,h+d),
+      u\supTM_i = \frac{e^{2\Xi}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
     \end{equation}
-    where we took $\Xi \rightarrow -\Xi$ on one step since $\partial^2_x\theta(-x) = -\delta'$.  
-  \item Exploit symmetry of effective boundary conditions.  
-  \item {Quote results.  Note that $r\rightarrow r'$.}
-
-    We then need to solve this for the various cases of $h,h+d $ on each side of $x=0$:
+    For paths starting in the middle, $d_1<x_0<d_2$, the solution is
     \begin{equation}
-      f_{TM,12}[x-(h-x_0)] = \left\{ \begin{array}{ccr}
-          \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}
-\dfrac{u'_2 e^{-2\sqrt{2\lambda}d} - u'_1}{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h>x_0\\
+      f^{(\text{II})}\subTMtwo(x)= %= \frac{1}{\sqrt{2\lambda}} + \frac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}h} +u\supTM_2 e^{-2\sqrt{2\lambda}(d+h)}}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
           \frac{1}{\sqrt{2\lambda}} + 
-          \dfrac{2u'_1u'_2 e^{-2\sqrt{2\lambda}d} + u'_1 e^{2\sqrt{2\lambda}(h-x_0)} +u'_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}
-          {\sqrt{2\lambda}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h<x_0<h+d\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}
-          \dfrac{(u'_1 e^{-2\sqrt{2\lambda}d}-u'_2)}{\sqrt{2(\lambda+\chi_2)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} & \hspace{1cm} & h+d<x_0
-        \end{array}
-      \right.
+          \dfrac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}(d_1-x_0)} +u\supTM_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}
+          {\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
     \end{equation}
-    \item {Quote various limits for $h,h+d$ on either side of 0}
-    For have $h,h+d>0$
-    \begin{align}
-      f(x) =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}h}
-      \frac{u'_2 e^{-2\sqrt{2\lambda}d}-u'_1 }{\sqrt{2(\lambda+\chi_1)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})}
-    \end{align}
-
-    For $h<0, h+d>0$ we need 
+    and  for paths starting in the right hand body, $d_2<x_0$, the solution is
     \begin{equation}
-      f(x) = \frac{1}{\sqrt{2\lambda}} + \frac{2u'_1u'_2 e^{-2\sqrt{2\lambda}d} + u'_1 e^{2\sqrt{2\lambda}h} +u'_2 e^{-2\sqrt{2\lambda}(d+h)}}{\sqrt{2\lambda}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})}
+            f^{(\text{III})}\subTMtwo(x)= %=  \frac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d+h)}(u\supTM_1 e^{-2\sqrt{2\lambda}d} - u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
+          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}
+          \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} .
     \end{equation}
+%   \item {Integrate over position}
+%     In exactly the same fashion, we can integrate over position.  
+%     \begin{align}
+%       I_{TM,12} =& -I_{div} + \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d}-u\supTM_1}{4(\lambda+\chi_1)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u\supTM_1u\supTM_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} + (u\supTM_1+u\supTM_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
+%       & +\frac{u\supTM_1 e^{-2\sqrt{2\lambda}d} - u\supTM_2}{4(\lambda+\chi_2)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
+%     \end{align}
+%     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
+%   \item Comment on divergent parts cancelling out. 
+% \end{enumerate}
+This result contains all of the previous results for closed paths.  By taking $\Xi\rightarrow 0$, the TE results are covered.
+In taking $\chi\rightarrow 0$, the steps can be ignored, and this is the two body TM 
+The equivalent single body results can be found by taking the far body to $x=\pm\infty$.  
 
-    Finally, for $h,h+d<0$ we get 
-    \begin{equation}
-      f(x) =  \frac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d+h)}(u'_1 e^{-2\sqrt{2\lambda}d} - u'_2)}{\sqrt{2(\lambda+\chi_2)}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})},
-    \end{equation}
-    with 
-    \begin{equation}
-      u'_i = \frac{e^{2\Xi}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}},
-    \end{equation}
-  \item {Integrate over position}
-    In exactly the same fashion, we can integrate over position.  
-    \begin{align}
-      I_{TM,12} =& -I_{div} + \dfrac{u'_2 e^{-2\sqrt{2\lambda}d}-u'_1}{4(\lambda+\chi_1)(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u'_1u'_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})} + (u'_1+u'_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u'_1u'_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
-      & +\frac{u'_1 e^{-2\sqrt{2\lambda}d} - u'_2}{4(\lambda+\chi_2)(1-u'_1u'_2 e^{-2\sqrt{2\lambda}d})},
-    \end{align}
-    where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
-  \item Comment on divergent parts cancelling out. 
-\end{enumerate}
-
-
+These intimidating formulae are most useful for showing the analytical agreement with existing 
+Casimir energy results.  As such it is best to leave them in this Laplace-transformed form.  
+The next chapter uses the results from this chapter to rederive known analytical results for both 
+polarizations for Casimir and Casimir--Polder energies.  
 
 %%% Local Variables: 
 %%% mode: latex

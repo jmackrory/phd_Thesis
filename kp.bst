@@ -106,8 +106,8 @@ FUNCTION {output.check}
 }
 
 FUNCTION {blank.sep}
-{ after.quote 'output.state :=
-}
+{ after.quote 'output.state := 
+} 
 
 FUNCTION {fin.entry}
 { output.state after.quoted.block =
@@ -771,11 +771,11 @@ FUNCTION {article}
 						% { format.date "year" output.check
 						% }
 %						{ 
-							blank.sep
+%							blank.sep
 							format.volume output
-							blank.sep 
+%							blank.sep 
 							format.pages.nopp output
-							blank.sep
+%							blank.sep
 							format.date.paren "year"  output.check
 %						}
 %					if$

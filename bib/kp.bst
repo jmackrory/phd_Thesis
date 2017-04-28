@@ -759,8 +759,8 @@ FUNCTION {article}
   format.authors "author" output.check
   format.title   "title" output.check
   blank.sep
-  %crossref missing$
-		 journal missing$   
+  crossref missing$
+		 {journal missing$   
 				{ eprint missing$ 
 						{ format.date output }
 						{blank.sep}
@@ -789,12 +789,12 @@ FUNCTION {article}
         {format.eprint output}
         {blank.sep format.report output format.eprint output}
       if$
-  %  }
-  %   { format.article.crossref output.nonnull
-  %     format.pages output
-  %     format.eprint output
-  %   }
-  % if$
+   }
+    { format.article.crossref output.nonnull
+      format.pages output
+      format.eprint output
+    }
+  if$
   note output
   new.sentence
   format.citation output

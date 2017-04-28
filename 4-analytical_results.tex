@@ -1,22 +1,52 @@
 \chapter{Electromagnetic Worldlines - Analytical Results}
 \label{ch:analytical}
-\section{Extracting Energies}
 
-Let us think a bit about how to extract the energies we want.
-  We will consider two cases: 
- One, finding the interaction energy of a microscopic test particle with some set of bodies,
- and the interaction energy between a set of macroscopic bodies. 
+This chapter will show that the worldline path integrals yield the same results as the simpler 
+calculations outlined in Ch.~\ref{introduction}.  
+We will show how to extract the Casimir--Polder energy via suitable functional derivatives of the free energy.
+The analytical energies can be derived by substituting in the Feynman-Kac formulae for the relevant path integrals.
+In order to put the Casimir energies in the right form the Gamma function is used, and the Laplace-Mellin
+transform is introduced.  The integrals are then transformed to yield known results in planar geometries.
+Finally, we examine the results in the case of non-zero temperature, and show how known results for 
+the near-field and high temperature results emerge from this formalism.    
+The work presented on the TE polarization has been published in Ref.~\ref{Mackrory2016}.
 
-All of these results will start by computing the mean energy based on 
+\section{Extracting Casimir--Polder Energies}
+
+The Casimir--Polder energy for an atom interacting with macroscopic bodies can be derived 
+by treating the atom as a perturbation to the permittivity and permeability.  
+The atom is located at $\xA$, and has polarizability $\alpha$ and magnetizability $\beta$.
+The atom is interacting with a fixed background permittivity $\epsr(\vect{x})$, and permeability $\mur(\vect{x})$.
+
+The full Casimir energy for TE and TM polarizations was derived as the free energy in Ch.~\ref{ch:EM_quantization},
+which we quote again here
 \begin{equation}
-\langle E\rangle = -\partial_\beta\log Z
-\end{equation}
-(Note that this procedure in terms of partition functions and derivatives lends itself to also calculating fluctuations).  
+    \cF\subTE-\cF\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+    \biggdlangle
+    \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTE(z)\rangle\cT}-1
+    \biggdrangle_{\vect{x}(t)}.
+  \end{equation}
+The Casimir--Polder energy comes from expanding the free energy to linear order in the $\alpha$ and $\beta$.
+This expansion corresponds to extracting the lowest order linear response.
+The expansion must be carried out in both the path-averaged speed of light, and the potential $V\subTE$.
+Considering the similarities between the polarizations, we will carry these expansions out for only
+one polarization, since the others follow by duality.  
 
-We can try to handle the atom-body case by taking $\epsilon \rightarrow \epsilon + \alpha\delta$.
-  The fundamental question in all of these cases is: what energy are you calculating, 
+It is important be clear about exactly what the energy is, and how it is computed.  
+As discussed in \S 4.7 of Jackson~\cite{Jackson1998}, the electrostatic energy for a system depends on the 
+manner in which the system was arranged.  Different energies are found if the free charge or potential
+are specified.  The same is true of magnetostatic systems: are the potentials on the boundaries, or the free 
+currents specified.  
+
+These considerations suggest that in order to extract the energy for a polarizing an atom, one should take the 
+following functional derivatives...
+
+
+
+We can try to handle the atom-body case by taking $\epsilon \rightarrow \epsilon + \alpha\delta(\vect{x}-\xA)$.
+The fundamental question in all of these cases is: what energy are you calculating, 
 and what physical procedure are you using to generate some configuration.
-  The subtleties here tend to introduce various negative signs when you consider slightly different ways of achieving the same result.  
+The subtleties here tend to introduce various negative signs when you consider slightly different ways of achieving the same result.  
 
 However, let's charge ahead, and use: 
 \begin{equation}

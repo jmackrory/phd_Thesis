@@ -4,13 +4,13 @@
 
 A path integral is a sum over all possible paths a system might explore.
 The path integral is a powerful way to represent stochastic processes, and path integals have been used
-extensively in statistics~\cite{Karatszas1991, Durrett1996,DelMoral2004}.  
+extensively in statistics~\cite{Karatzas1991, Durrett1996,DelMoral2004}.  
 Although path integrals are primarily used in a perturbative sense within physics, 
 they can be solved exactly in some geometries.
 These analytical solutions are particularly useful in accelerating numerical methods relying 
 on stochastic simulations, such as occur in finance.  
 
-In honor of the pioneering work by Feynman~\cite{Feynman1950} and Kac~\cite{Kac1950}, the fact that path integrals
+In honor of the pioneering work by Feynman~\cite{Feynman1950} and Kac~\cite{Kac1949}, the fact that path integrals
 act as the solutions to diffusion or Schrodinger equations is referred to as the Feynman-Kac 
 formula.  This thesis will also sometimes use the same label to refer to the analytical
 result for a particular path integral.  
@@ -398,7 +398,7 @@ It is possible to take the strong-coupling limit where $\chi\rightarrow \infty$.
 In that Dirichlet limit, the reflection coefficient goes to -1.
 The path integral solution is
 \begin{equation}
-  f_{TE,1}(x) = \left\{\begin{array}{lcr} 
+  f_{D,1}(x) = \left\{\begin{array}{lcr} 
       \dfrac{1}{\sqrt{2\lambda}}\left[1 - e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
       0 & \hspace{2cm} & d>0\\
     \end{array} \right. 
@@ -406,14 +406,14 @@ The path integral solution is
 The path integral can be converted back to the time domain by inverting the Laplace transform with
 \begin{equation}
   \mathcal{L}^{-1}\bigg(\frac{1}{\sqrt{2\lambda}}e^{-2\sqrt{2\lambda}d}\bigg) 
-  = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.
+  = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.\label{eq:Laplace_Gaussian}
 \end{equation}
 
 This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
 \comment{so do that?}
 The solution is  
 \begin{equation}
-  f_{TE,1}(x,y) = \left\{\begin{array}{lcr} 
+  f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
       \dfrac{e^{-(x-y)^2/(2t)}}{\sqrt{2\pi t}}\left[1 - e^{-2(d-x)(d-y)/t}\right]  & \hspace{0.5cm} & (x-d)(y-d)>0\\
       0 & \hspace{0.5cm} & (x-d)(y-d)<0\\
     \end{array} \right. 
@@ -663,16 +663,16 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     \end{equation}
     At this point, the conditions between the solutions outside the boundary layer have been derived,
     and the  $a\rightarrow 0$ limit can be taken everywhere.  
-   % Eliminate references to internal state.  Take limit of regularization going to zero.
-   % {Quote final boundary conditions.}
-   %  We can now take $a\rightarrow 0 $ everywhere. 
+    % Eliminate references to internal state.  Take limit of regularization going to zero.
+    % {Quote final boundary conditions.}
+    % We can now take $a\rightarrow 0 $ everywhere. 
     
     The regularized dielectric step produces the following effective boundary matching conditions at an interface
     \begin{align}
       \Aboxed{
         f(d+0_+) =& e^{-\Xi}f(d-0_+), \qquad
         f'(d+0_+)= e^{\Xi}f'(d-0_+)
-      }
+      }\label{eq:TM_boundary_conditions}
     \end{align}
     \label{sec:TM boundary condition}
     These boundary conditions can then be used to find the ensemble average solution.  This is essential
@@ -681,30 +681,39 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
 
 \subsection{Finding the Feynman-Kac formula}
 
-  {Using above effective BC solve for Feynman-Kac eqn for open bridge.}
-    Quote form of solution, and PDE it solves.  
-    Note how to recover various cases by flipping signs etc.  
-    We are now in position to derive an expression the ensemble average of paths going from $0\rightarrow c$ through $V_{TM}$. 
-    \begin{equation}
-      f_{0\rightarrow c}=\int_0^\infty dt e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-s\int_0^T dt V_{TM}}\drangle.
-    \end{equation}
-    This is the solution to 
-    \begin{equation}
-      0 = \frac{1}{2} \partial_x^2 f - V_{TM}f - \lambda f + \delta(x-c)
-    \end{equation}
-    We will find the solutions for the case where $0<c<d$.  From this we can see how we need to change the signs to recover the other cases.  Note that the boundary conditions at $x=c$ are: ${f(c+\epsilon)=f(c-\epsilon)}, {f(c+\epsilon)-f(c-\epsilon)= -2}$.  As we found in Sec.~(\ref{sec:TM boundary condition}), at $x=d$ we need $f(d-\epsilon) = e^{\Xi}f(d+\epsilon),f'(d -\epsilon)= e^{-\Xi}f'(d+\epsilon)$.  
+We can now find the Feynman-Kac formula for open Brownian bridges near a single TM-potential, which 
+imposes the boundary conditions~\ref{eq:TM_boundary_conditions}.  This solution is the ensemble average 
+over all Brownian paths between the end points.
+
+We aim to find a closed form solution for the path integral over paths between starting at $x=0$ and terminating at $c$ after time $t$ and 
+interacting with potential $V\subTM$,
+\begin{equation}
+  f\subTM(c,d,\Xi)=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt V_{TM}}\drangle.
+\end{equation}
+The Gaussian factor in $c$ is the normalization for a 1D Brownian bridge between $x=0$ and $c$ in time $t$.
+This path integral is found by solving the following diffusion equation
+\begin{equation}
+  0 = \frac{1}{2} \partial_x^2 f\subTM - (V\subTM+\lambda)f\subTM + \delta(x-c).
+\end{equation}
+In this case the there are TM boundary conditions~(\ref{eq:TM_boundary_conditions}) imposed at $x=d$,
+and $\delta$-function boundary conditions imposed at $x=c$.  
+The solutions naturally decompose into two cases: first,  when the end points of the path are on the same
+side of the surface,  and when they are on different sides.
+% We will find the solutions for the case where $0<c<d$.
+% From this we can see how we need to change the signs to recover the other cases.
+% Note that the boundary conditions at $x=c$ are: ${f(c+\epsilon)=f(c-\epsilon)}, {f(c+\epsilon)-f(c-\epsilon)= -2}$.
   
- Form of solutions in each region, and fixing values via BCs from previous section
-    For example, with $c<d$ we have 
-    \begin{equation}
-      f  = \left\{\begin{array}{ccr} A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<c\\
-          B e^{\sqrt{2\lambda} x} + C e^{-\sqrt{2\lambda} x}  & \hspace{2cm} & c<x<d\\
-          D e^{-\sqrt{2\lambda} x}& \hspace{2cm} & c<x<d\\
-        \end{array}
-      \right. .
-    \end{equation}
-    In the case where $d>0$, we will need $f(0) = A$.  In the other case where $d<0$, we will need $f(0) = D$.  
-    Mathematica when asked to solve the boundary conditions finds that 
+%  Form of solutions in each region, and fixing values via BCs from previous section
+%     For example, with $c<d$ we have 
+%     \begin{equation}
+%       f  = \left\{\begin{array}{ccr} A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<c\\
+%           B e^{\sqrt{2\lambda} x} + C e^{-\sqrt{2\lambda} x}  & \hspace{2cm} & c<x<d\\
+%           D e^{-\sqrt{2\lambda} x}& \hspace{2cm} & c<x<d\\
+%         \end{array}
+%       \right. .
+%     \end{equation}
+%     In the case where $d>0$, we will need $f(0) = A$.  In the other case where $d<0$, we will need $f(0) = D$.  
+%     Mathematica when asked to solve the boundary conditions finds that 
     % \begin{equation}
     %   f = \left\{ \begin{array}{ccr} 
     %       \dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \dfrac{e^{-\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}  &   \hspace{2cm}  & d>c,  d>0\\
@@ -715,37 +724,68 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     %     \end{array}
     %   \right.
     % \end{equation}
-     Simplify down to crossing/no-crossing cases.
-    That seems complicated, but we can note that if there is a crossing ($|c|<|d|$) then we get 
+\comment{    Note how to recover various cases by flipping signs etc.  
+    Simplify down to crossing/no-crossing cases.}
+%    That seems complicated, but we can note that if there is a crossing ($|c|<|d|$) then we get 
+    When both points are on the same side, or $d(d-c)>0$, the solution is 
     \begin{equation}
-      f_{nc}=\dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \sgn(d)\dfrac{e^{-\sqrt{2\lambda}|2d-c|}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}
+      f\subTM=\dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} 
+      + \sgn(d)\dfrac{e^{-\sqrt{2\lambda}|2d-c|}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}.
     \end{equation}
-    For the case of crossings ($d(d-c)<0$) we get
+    When the paths must cross through the surface since $x=0$ and $c$ are on different sides of the surface, $d(d-c)<0$,
+    the solution is
     \begin{equation}
-      f_c = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
+      f\subTM = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
     \end{equation}
-   {Invert Laplace transform to get real-time version.}
-
-    Ultimately, we will want to isolate the potential term.  
-    If we use 
-    \begin{equation}
-      \mathcal{L}^{-1}\left[ \frac{e^{-\sqrt{2\lambda}x}}{\sqrt{2\lambda}}   \right] = \frac{e^{-x^2/(2t)}}{\sqrt{2\pi t}},
-    \end{equation}
-    which is exactly the factor we isolated in front of $\mathcal{M}$.  
-   {Final results.  Can now use as basis for numerical methods since depends on loop-time.}
-    So we have:
+    In both cases the Laplace transforms in $\lambda$ can be inverted yielding Gaussians [following from Eq.~\ref{eq:Laplace_gaussian}].
+    After cancelling out the Gaussian factor $e^{-c^2/(2t)}/\sqrt{2\pi t}$, the analytical expression for 
+    the path integral can be isolated
+    % Ultimately, we will want to isolate the potential term.  
+    % If we use 
+    % \begin{equation}
+    %   \mathcal{L}^{-1}\left[ \frac{e^{-\sqrt{2\lambda}x}}{\sqrt{2\lambda}}   \right] = \frac{e^{-x^2/(2t)}}{\sqrt{2\pi t}},
+    % \end{equation}
+    % which is exactly the factor we isolated in front of $\mathcal{M}$.  
     \begin{align}
-      \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} \dlangle e^{-\int_0^T dt V_{TM}(x-d)}\drangle 
-      &=  \bigg( \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}} 
-      + \sgn(d)\dfrac{e^{-(2d-c)^2/(2T)}}{\sqrt{2\pi T}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}\bigg)\nonumber\\
-      \theta(|d|-|c|) 
-      &+ \frac{e^{-c^2/(2T)}}{\sqrt{2\pi T}}\dfrac{2e^\Xi}{1 + e^{2\Xi}}\theta(|c|-|d|)
-    \end{align}
-    
+      \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
+      &=\left\{ \begin{array}{lc} 
+          1   + \sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\tanh\Xi & d(d-c)>0\\
+          \sech\Xi & d(d-c)<0
+        \end{array}
+        \right.
+      \end{align}
+      This result is absolutely crucial for developing numerical methods for the TM polarization.  
+      Even regularized the potential is too unruly to handle on a single trajectory wise basis.  The analytical
+      solution smooth the result out by averaging over all possible sub-paths, which tames the divergences. 
+      The result can be extended to include any starting point $x_i$ by shifting $d\rightarrow d-x_i$,
+      and identifying $c=x_f-x_i$, where $x_f$ is the final point.
+
+      The potential has been plotted in Fig.~\ref{fig:TM_plot} as a function of ending point
+      for paths starting inside and outside the barrier.  
+      Note that the potential leads to larger values on the vacuum side of the material, 
+      and suppresses values for starting points inside the surface or paths that must cross the surface.  
+
+      The material constants can be rewritten in terms of $\chi$,
+      \begin{align}
+        \tanh\Xi &=\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1} =\dfrac{\chi}{2+\chi}=\frac{\epsilon_{\text{r},1} -1}{\epsilon_{\text{r},1}+1}\\
+        \sech\Xi &= \dfrac{2e^\Xi}{1 + e^{2\Xi}} = \frac{2\sqrt{1+\chi}}{2+\chi}.
+      \end{align}
+      In the strong-coupling limit $\tanh\Xi\rightarrow 1, \sech\Xi\rightarrow 0$, and the solution for 
+      paths starting at the origin is
+    \begin{align}
+      f_N
+      &=\theta[d(d-c)]\bigg( 1 +\sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\bigg).
+      \end{align}
+      This is in some sense dual to the Dirichlet limit.  In that case paths reflect off with the opposite phase, 
+      leading to a value of zero on the boundary.  Here, the paths reflecting off the surface add in phase, suggesting 
+      a correspondence to Neuman boundary conditions.  However, this does not hold for paths starting 
+      inside the surface, where the solution is the same as for Dirichlet boundary conditions.  
+
     \begin{figure}
       \hspace{2cm}
       PLOT OF TM SOLUTION
       \caption[Plot of TM Solution]{Plot of path-averaged TM solution for various ending points}
+      \label{fig:TM_plot}
     \end{figure}
     
 
@@ -774,36 +814,24 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
 
 \section{Single TM potential and Step}
 
-\begin{enumerate}
-  \item {Solve FK for TM potential plus step. }
-  \item Quote form of solution, and PDE it solves
+Beyond the results, we can also consider a dielectric step combined with a TM boundary condition.  
+This is directly relevant to analytically computing the TM component of the Casimir--Polder energy for an atom near a
+dielectric half-space.  In this case we only require the results for closed paths.  
+
     Let's now find: 
     \begin{equation}
-      f = \int_0^\infty dT \frac{1}{\sqrt{2\pi T}}\langle e^{-\int_0^T dt V_{TM} + s\Theta}\rangle 
+      f = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x,d) + \chi\Theta(x-d)]}\bigdrangle 
     \end{equation}
-    This is the steady state solution to 
+    This is the steady-state solution to 
     \begin{equation}
       \partial_t f = \frac{1}{2}\partial_x^2f -(V_{TM} + s\Theta(x-d)+\lambda)f +\delta(x). 
     \end{equation}
 
-  \item Quote boundary conditions at the boundary, and delta function.  
-    For the boundary conditions at the delta function we have 
-    \begin{equation}
-      \partial_xf(\epsilon) -\partial_x f(-\epsilon) = -2 , \qquad f(d+\epsilon)-f(d-\epsilon) = 0,
-    \end{equation}
-    where both of these relations follow from integrating the PDE across the discontinuity.
-    And the boundary conditions courtesy of $V_{TM}$ are
-    \begin{align}
-      f(d-\epsilon) = e^{\Xi}f(d+\epsilon)\\
-      f'(d-\epsilon) = e^{-\Xi}f'(d+\epsilon).
-    \end{align}
-
     This problem can be solved in exactly the same fashion as the equivalent TE problems.
     Perhaps unsurprisingly, you find that the two slab results can also be ported over, but with their TM reflection coefficients.  
 
-  \item {Leave as Laplace-transform.  Note integral identities mean we can apply this for analytical
+   {Leave as Laplace-transform.  Note integral identities mean we can apply this for analytical
     result analytically.  }
-    \item Quote solution.  
   \begin{equation}
       f_{TM,1}(x) = \left\{\begin{array}{lcr} 
           \dfrac{1}{\sqrt{2\lambda}}\left[1+ u' e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
@@ -815,7 +843,7 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
       u' = \frac{\sqrt{\lambda}e^{2\Xi} -\sqrt{\lambda+\chi}}{\sqrt{\lambda}e^{2\Xi} + \sqrt{\lambda+\chi}},
     \end{equation}
     plays a similar role to the $TM$ reflection coefficient, since $e^{2\Xi} = (1+\chi)$.   
-  \item Final result.  
+   Final result.  
     Ultimately, we find that 
     \begin{equation}
       \int_0^\infty dT e^{-\lambda T} \dlangle \frac{e^{-\int_0^T dt V_{TM}+s\theta[x(t)-d]}}{\sqrt{2\pi T}}\drangle  =
@@ -823,7 +851,7 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     \end{equation}
     where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
     The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
-\end{enumerate}
+
 
 
 \section{Two TM Step Potentials}

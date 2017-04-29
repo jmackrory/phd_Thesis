@@ -15,166 +15,350 @@ The work presented on the TE polarization has been published in Ref.~\ref{Mackro
 
 The Casimir--Polder energy for an atom interacting with macroscopic bodies can be derived 
 by treating the atom as a perturbation to the permittivity and permeability.  
-The atom is located at $\xA$, and has polarizability $\alpha$ and magnetizability $\beta$.
-The atom is interacting with a fixed background permittivity $\epsr(\vect{x})$, and permeability $\mur(\vect{x})$.
-
-The full Casimir energy for TE and TM polarizations was derived as the free energy in Ch.~\ref{ch:EM_quantization},
-which we quote again here
+The atom is located at $\rA$, and has polarizability $\alpha$ and magnetizability $\beta$.
+The atom is perturbs the background permittivity $\epsr(\vect{r})\rightarrow \epsr(\vect{r})+\delta\epsr(\vect{r})$,
+and permeability $\mur(\vect{r})\rightarrow \epsr(\vect{r})+\delta\mur(\vect{r})$, where
 \begin{equation}
-    \cF\subTE-\cF\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+  \delta\epsr(\vect{r})=\frac{\alpha}{\epsilon_0}\delta(\vect{r}-\rA), 
+  \quad \delta\mu_r(\vect{r})=\mu_0\beta_0\delta(\vect{r}-\rA).
+\end{equation}
+Note that we will initially consider frequency independent media, at zero temperature.  The generalization 
+to nonzero temperature will be considered in Sec.~\ref{nonzero_temp}.
+
+The full Casimir energy for TE and TM polarizations was derived as the free energy in Ch.~\ref{ch:EM_quantization}.
+In the zero temperature limit, the energy in the EM field is 
+\begin{equation}
+    E\subTE-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
     \biggdlangle
     \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTE(z)\rangle\cT}-1
-    \biggdrangle_{\vect{x}(t)}.
+    \biggdrangle_{\vect{x}(t)}.\label{eq:TE_energy}
   \end{equation}
-The Casimir--Polder energy comes from expanding the free energy to linear order in the $\alpha$ and $\beta$.
-This expansion corresponds to extracting the lowest order linear response.
-The expansion must be carried out in both the path-averaged speed of light, and the potential $V\subTE$.
+The Casimir--Polder energy comes from expanding the energy to linear order in the $\alpha$ and $\beta_0$.
+Note that the $\delta$-functions are being used a short-handed for a well localized function with unit integral.
+All expansions involving these $\delta$-functions can be carried out with a finite regularization of the 
+$\delta$-function, and the arbitrarily sharp limit can be taken after the expansions.  
+%This expansion corresponds to extracting the lowest order linear response.
+The expansion must be carried out in both $\langle\epsr\mur\rangle$, and the potential $V\subTE$.
 Considering the similarities between the polarizations, we will carry these expansions out for only
 one polarization, since the others follow by duality.  
 
-It is important be clear about exactly what the energy is, and how it is computed.  
-As discussed in \S 4.7 of Jackson~\cite{Jackson1998}, the electrostatic energy for a system depends on the 
-manner in which the system was arranged.  Different energies are found if the free charge or potential
-are specified.  The same is true of magnetostatic systems: are the potentials on the boundaries, or the free 
-currents specified.  
+% It is important be clear about exactly what the energy is, and how it is computed.  
+% As discussed in \S 4.7 of Jackson~\cite{Jackson1998}, the electrostatic energy for a system depends on the 
+% manner in which the system was arranged.  Different energies are found if the free charge or potential
+% are specified.  The same is true of magnetostatic systems: are the potentials on the boundaries, or the free 
+% currents specified.  
 
-These considerations suggest that in order to extract the energy for a polarizing an atom, one should take the 
-following functional derivatives...
-
-
-
-We can try to handle the atom-body case by taking $\epsilon \rightarrow \epsilon + \alpha\delta(\vect{x}-\xA)$.
-The fundamental question in all of these cases is: what energy are you calculating, 
-and what physical procedure are you using to generate some configuration.
-The subtleties here tend to introduce various negative signs when you consider slightly different ways of achieving the same result.  
-
-However, let's charge ahead, and use: 
+The energy for an atom in the electromagnetic field can be found by considering the change in the energy 
+from adding the perturbation. 
+The energy can be written as a functional\footnote{A functional is a function that maps another function to a number.
+For example, the classical action $S[x(t)]=\int dt L(x,\dot{x})$ maps the trajectory of a classical path $x(t)$ to a single number,
+ via the time integral of the Lagrangian.
+The Euler-Lagrange equations of motion come from taking the functional derivative of the action with respect to small path variations.} 
+of the permittivity $\epsr$, and permeability $\mur$,
+ then this energy difference is 
 \begin{equation}
-V_{CP} = -\frac{1}{2}\alpha_0\langle E^2\rangle,
+  \delta E[\epsr,\mur] = E[\epsr+\delta\epsr,\mur+\delta\mur]-E[\epsr,\mur] 
 \end{equation}
-which is a result that follows from using second order perturbation theory in the atom-field coupling.
-  Given, a partition functions: 
+Since the atom is assumed to have a small localized effect on the permittity and permeability, this expansion corresponds to a functional derivative.  
+The functional derivative for a functional
+ $F[f(x)]$ is formally defined as 
+\begin{equation}
+  \frac{\delta F}{\delta f(x')} := \lim_{a\rightarrow 0} \frac{F[f(x)+a\delta(x-x')]-F[f(x)]}{a}.
+\end{equation}
+As a practical matter, the functional derivative $\delta f(t)/\delta f(t') = \delta(t-t')$ generalizes
+ the notation that $\delta x_i/\delta x_j = \delta_{ij}$ from ordinary multivariate calculus.  Otherwise,
+the expansions can be carried out with $\alpha_0$ and $\beta_0$ acting as the small parameters.
+The Casimir--Polder energy can be found by taking the following functional derivatives
+\begin{equation}
+  V\subCP(\rA) = \frac{\alpha_0}{\epsilon_0}\frac{\delta}{\delta\epsr(\rA)}E+\mu_0\beta_0\frac{\delta}{\delta\mur(\rA)}E.
+\end{equation}
+
+The Casimir--Polder energy must be renormalized by considering the change in the energy as the atom is removed 
+to $\infty$.
+
+It is necessary to expand the path-averaged permittivity and permeability,
 \begin{align}
-Z_{TE} = \int D\phi e^{-\frac{1}{2}\int d\beta \frac{\Pi^2}{\epsilon} + c^2\nabla\phi^2+\frac{i}{\hbar}\partial_\beta\phi \pi  }
-Z_{TE} = \int D\phi e^{-\int d\beta \frac{\Pi^2}{2} + \epsilon^{-1}\nabla\phi^2+i\partial_\beta\phi \pi  }
+  \langle(\epsr+\delta\epsr)(\mur+\delta\mur)\rangle^{-1/2} &= \langle\epsr\mur\rangle^{-1/2}
+  -\frac{1}{2}\langle \mur\delta\epsr+\epsr\delta\mur\rangle\langle\epsr\mur\rangle^{-3/2}\\
+&= \langle\epsr\mur\rangle^{-1/2}
+-\frac{1}{2}\frac{\alpha_0}{\epsilon_0}\langle \mur(\vect{x})\delta(x-\rA)\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
+&\hspace{1cm} -\frac{1}{2}\mu_0\beta_0\langle\epsr(\vect{x})\delta(\vect{x}-\rA)\rangle \langle\epsr\mur\rangle^{-3/2}
+\label{eq:mueps_expansion}
+\end{align}
+The path-averaged $\delta$-functions act to restrict the path integrals to paths starting at the atom's
+position $\rA$.
+
+  Consider a path integral over closed paths where the integrand depends on the whole path and includes 
+ a path-averaged $\delta$-function,
+\begin{equation}
+  I = \int d\vect{x}_0\Bigdlangle \,\langle f\rangle\langle\delta\rangle\,\Bigdrangle_{\vect{x}(t)}.
+\end{equation}
+In the discretized notation this is 
+\begin{equation}
+  I = \int \prod_{n=0}^{N-1}dx_n\,P(x_0,\cdots, x_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(x_k)\frac{1}{N}\sum_{j=0}^{N-1}\delta(\vect{x}_j-\rA)
+\end{equation}
+where the second $\delta$-function enforces path closure.  All of the functions are invariant under cyclic permutations 
+of the path labels.  This is true of the path-averaged functions, 
+and the Gaussian probability $P(x_0,\cdots x_{N-1})$, the exponent of which 
+can be written as  $\sum_{j=0}^{N-1}(x_{j+1}-x_j)^2$, subject to the condition that $x_N=x_0$.
+Then for each term $\delta(\vect{x}_j-\rA)$, the labels can be shifted $j$ times so that in the shifted
+coordinates $\vect{x}_j\rightarrow \vect{x}_0$.  Since there is now a sum of $N$ identical terms, the 
+path integral can be written as
+\begin{equation}
+  I = \int \prod_{n=0}^{N-1}dx_n\,P(\vect{x}_0,\cdots, \vect{x}_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(\vect{x}_k)\delta(\vect{x}_0-\rA)
+= \Bigdlangle\, \langle f\rangle\,\Bigdrangle_{\vect{x}(t), \vect{x}(0)=\rA}.
+\end{equation}
+For a closed path, integrated over all space, with integrands athat are all written as averaged around the path, 
+there is some freedom in which point of the path is called the origin.  
+Since only paths the satisfy the $\delta$-function will contribute to the path integral, we are free to call the point
+at $\rA$ the path origin.  
+The end result is the path-averaged $\delta$-function restricts the starting point of the paths to the atom's
+position $\rA$.
+\label{sec:path_average_delta}
+
+The singular potentials $V\subTE, V\subTM$ can be expanded in the same fashion.  The expansion is carried out to linear order 
+in $\delta\epsr,\delta\mur$, and all higher order terms are dropped.
+\begin{align}
+  \langle V\subTE[\mur +\delta\mur] \rangle 
+  =& \frac{1}{2}\langle (\nabla\log\sqrt{\mur+\delta\mur})^2-\nabla^2\log\sqrt{\mur+\delta\mur}\rangle\nonumber\\
+  =& \frac{1}{8} \langle [\nabla\log(\mur+\delta\mur)]^2\rangle
+  -\frac{1}{4}\langle \nabla^2\log(\mur+\delta\mur)\rangle \nonumber\\
+  =& \langle V\subTE[\mur]\rangle+\left< \frac{1}{4} \nabla\log\mur\cdot\nabla\frac{\delta\mur}{\mur}
+    -\frac{1}{4}\nabla^2\frac{\delta\mur}{\mur}\right> 
+  \label{eq:VTE_expansion}
+\end{align}
+The expansion to linear order in $\delta\mur $involving the exponential $e^{-\cT\langle V\subTE\rangle}$ is straightforward.  
+The terms involving derivatives $\nabla \delta\mur$ only make sense after integration by parts, 
+\begin{equation}
+  \int d\vect{x} f(\vect{x})\nabla\delta(\vect{x}-\rA)  = -\nabla f(\vect{x})\bigg|_{\vect{x}=\rA}.
+\end{equation}
+The same manipulations for the path-averaged $\delta$-function also apply to these versions involving derivatives.  
+
+Using the results in Eqs.~(\ref{eq:mueps_expansion}) and (\ref{eq:VTE_expansion}), the Casimir--Polder energy
+for the TE polarization can be written as
+\begin{align}
+    V\supTE\subCP(\vect{\rA}) &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+    \biggdlangle
+    \left( - \frac{\langle\mur\delta\epsr+\epsr\delta\mur\rangle}
+    {2\langle \epsr\mur\rangle^{3/2}}\right) 
+  e^{-\langle V\subTE\rangle\cT} \nonumber\\
+  &\hspace{1cm}+ e^{-\langle V\subTE\rangle\cT}\left(-\frac{\cT}{\langle\epsr\mur\rangle^{1/2}}
+    \left< \frac{1}{4} \nabla(\log\mur)\cdot\nabla\frac{\delta\mur}{\mur}
+      -\frac{1}{4}\nabla^2\frac{\delta\mur}{\mur}\right> \right)
+    \biggdrangle_{\vect{x}(t)}.
+\end{align}
+Then after manipulating the path-averaged $\delta$-functions, and renormalizing the energy against the 
+case when the atom is far from the bodies, the Casimir--Polder energy is
+\begin{align}
+    V\supTE\subCP(\vect{\rA}) &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}
+    \biggdlangle
+    \left( - \frac{\alpha_0\mur(\rA)}{2\epsilon_0\langle \epsr\mur\rangle^{3/2}}
+      -\frac{\beta_0\mu_0\epsr(\rA)}{2\langle \epsr\mur\rangle^{3/2}}\right) e^{-\langle V\subTE\rangle\cT} \nonumber\\
+    &\hspace{1cm}+\frac{\cT}{4}\frac{\beta_0\mu_0}{\mur(\rA)}\left[
+     \nabla^2      +\nabla^2(\log\mur)+ \nabla(\log\mur)\cdot\nabla\right]
+    \frac{ e^{-\langle V\subTE\rangle\cT}}{\langle\epsr\mur\rangle^{1/2}}
+    \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
+\end{align}
+Note that bracketed gradients such as $\nabla(\log\mur)$ should be interpreted as functions, while the 
+other derivative operators act on everything to their right.  The remaining derivatives act with respect to 
+the path origin $\vect{x}_0=\rA$.
+The corresponding TM Casimir--Polder energy can be found under the duality transformation, and is given by 
+\begin{align}
+    V\supTM\subCP(\vect{\rA}) &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}
+    \biggdlangle
+    \left( - \frac{\alpha_0\mur(\rA)}{2\epsilon_0\langle \epsr\mur\rangle^{3/2}}
+      -\frac{\beta_0\mu_0\epsr(\rA)}{2\langle \epsr\mur\rangle^{3/2}}\right) e^{-\langle V\subTM\rangle\cT} \nonumber\\
+    &\hspace{1cm}+\frac{\cT}{4}\frac{\alpha_0}{\epsilon_0\epsr(\rA)}\left[
+     \nabla^2      +\nabla^2(\log\epsr) + \nabla(\log\epsr)\cdot\nabla\right]
+    \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\mur\rangle^{1/2}}
+    \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
 
-\subsection{TE}
-Let's now take $\epsilon = \epsilon+\alpha\delta$, and expand to leading order in $\alpha.$  
-We need two terms:
+These expressions can be further simplified if the atom is in a region where the dielectric is not varying spatially,
+and we consider non-magnetic atoms and media where $\beta_0=0$ and $\mur=1$.  
+If the permittivity is spatially constant at the atom's location then $\nabla\log\sqrt\epsr(\rA)=0$.
+In this case, the TE and TM Casimir--Polder energies are given by 
 \begin{align}
-\langle\epsilon+\alpha\delta\rangle^{-1/2} =&  \left(\frac{1}{T}\int_0^Tdt\,\epsilon + \alpha\delta\right)^{-1/2}\\
-%=& \left(\frac{1}{T}\int_0^Tdt\,\epsilon + \alpha\frac{1}{T}\int_0^Tdt\,\delta\right)^{-1/2}\\
-=& \langle\epsilon\rangle^{-1/2} -\frac{1}{2}\alpha\langle\delta\rangle\langle\epsilon\rangle^{-3/2}
+    V\supTE\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
+    \biggdlangle
+      \frac{1}{\langle \epsr\mur\rangle^{3/2}}
+    %   \right) \nonumber\\
+    % &\hspace{1cm}
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\\
+    V\supTM\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
+    \biggdlangle
+      \frac{e^{-\langle V\subTE\rangle\cT}}{\langle \epsr\mur\rangle^{3/2}}
+    %   \right) \nonumber\\
+    % &\hspace{1cm}
+      -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTE\rangle\cT}}{\langle\epsr\mur\rangle^{1/2}}
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
-\subsection{TM Potential}
-Now take 
-\begin{align}
-\langle V_{TM}[\epsilon +\alpha\delta] \rangle =& 
-\frac{1}{2T}\int_0^Tdt\,\frac{1}{2}\nabla^2\log(\epsilon+\alpha\delta)-\frac{1}{4}|\nabla\log(\epsilon+\alpha\delta)|^2\\
-% =& \frac{1}{2T}\int_0^Tdt\,\frac{1}{2}\nabla^2\left( \log\epsilon + \alpha\epsilon^{-1}\delta\right)
-% -\frac{1}{4}|\nabla\log(\epsilon) +\alpha\nabla\epsilon^{-1}\delta|^2\\
-=& \frac{1}{2T}\int_0^Tdt\,\frac{1}{2}\nabla^2\log\epsilon - \frac{1}{4}|\nabla\log\epsilon|^2 
-+ \frac{\alpha}{2}\nabla^2(\epsilon^{-1}\delta)-\frac{\alpha}{2}\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\\
-=& \langle V_{\text{back}}\rangle + \frac{\alpha}{4}\langle \nabla^2(\epsilon^{-1}\delta)
-- \nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle
-\end{align}
-\subsection{Functional derivative of $\log Z_{TM}$}
-We then get
-\begin{align}
-\log Z =&\int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\bigdlangle\langle\epsilon\rangle^{-1/2}e^{- T\langle V\rangle}\bigdrangle\\
-% =& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle \left(\langle\epsilon\rangle^{-1/2}
-% -\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}\right)
-% \left( 1 + \frac{\alpha T}{4}\langle\nabla^2(\epsilon^{-1}\delta)
-% -\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle\\
-=& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle
-\left(\langle\epsilon\rangle^{-1/2}-\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}  
-+ \frac{\alpha T}{4}\langle\epsilon\rangle^{-1/2}\langle \nabla^2(\epsilon^{-1}\delta)-
-\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle
-\end{align}
+The TE Casimir--Polder energy will thus always be the simpler case to evaluate since it only depends on $\langle\epsr\mur\rangle$.
+In contrast, the TM Casimir--Polder energy also requires the singular TM potential which must be regularized
+using the results in Sec.~\ref{sec:TM_potential}.  The TM Casimir--Polder energy also requires spatial derivatives,
+which will require some care in numerical methods involving stochastic paths against singular potentials.
 
-Now consider $\langle \delta\,f\rangle $
-\begin{align}
-\int dx_0\int Dx\langle \delta(x)f(x)\rangle P(x) 
-=&  \int dx_0\prod_{j=1}^{N}dx_n\delta(x_N-x_0)\prod_k P(x_k) \frac{1}{N}\sum_j \delta(x_j-x')f(x_j) \nonumber\\
-= &f(x')\int \prod_{j=1}^N\delta(x_N-x') dx_jP(x_j) = f(x')\int Dx P(x)_{x_0=x(T)=x'}
-\end{align}
-This is a trace, which is invariant under cylic permutations.
-  We can cyclically permute all the loop labels around so that we call the point that passes through $x'$ the loop origin.
-  Doing this for every term, means we get $N$ copies of the same integrals.  We can then call $x_0=x'$, and drop that sum over $j$.   
-The same logic works for derivatives, and $\delta'$.
-  So we can find the linear term in $\alpha$.
-  This is effectively the functional derivative with respect to $\epsilon$.  
-\begin{align}
-\frac{\delta}{\delta\epsilon(x')}\log Z=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0
-\biggdlangle\bigg[ -\frac{\delta(x_0-x')}{\langle\epsilon\rangle^{3/2}}\nonumber\\
-&  +  \frac{T}{2}\langle\epsilon\rangle^{-1/2}\left(\nabla^2[\epsilon^{-1}(x_0)\delta(x_0-x')]
--\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta(x_0-x')\rangle\right)\bigg]e^{-T\langle V\rangle}\biggdrangle
-\end{align}
-Now integrate by parts on the delta functions, and we get 
-\begin{align}
-\frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0\delta(x_0-x')
-\biggdlangle-\frac{e^{T\langle V\rangle}}{\langle\epsilon\rangle^{3/2}}
-  +  \frac{T}{2}\epsilon^{-1}(x_0)\nabla'^2\left(\langle\epsilon\rangle^{-1/2} e^{T\langle V\rangle}\right)\nonumber\\
-& \hspace{3cm}+\epsilon^{-1}\frac{T}{2}\nabla'\cdot 
-\frac{\nabla'\epsilon(x')}{\epsilon(x')}\langle\epsilon\rangle^{-1/2}e^{-T\langle V\rangle}\biggdrangle
-\end{align}
-In cases with piece wise constant media, we can drop the final term, saying $\nabla'\epsilon(x')\approx 0$.
-  I will then use $\int dx \delta'(x-y)f(x) = \partial_y f(y) = \partial_y\int dx f(x)$ to pull the derivatives out.  
-\begin{align}
-\Aboxed{\frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \frac{1}{16\pi^2}\int_0^\infty dT
-\left[ \frac{1}{2}\epsilon^{-1}(x_0)\nabla'^2\biggdlangle
-\frac{ e^{-\int dt V}}{\langle\epsilon\rangle^{1/2}T^2}\biggdrangle
--\biggdlangle\frac{e^{-\int dt V}}{\langle\epsilon\rangle^{3/2}T^3} \biggdrangle \right]}
-\end{align}
+From now on we will work within the context of non-magnetic media with $\mur=1, \beta_0=0$.
+The essential ideas will have to be developed anyway for both polarizations.
 
-\section{Useful Analytical results}
+% \subsection{Functional derivative of $\log Z_{TM}$}
+% We then get
+% \begin{align}
+% \log Z =&\int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\bigdlangle\langle\epsilon\rangle^{-1/2}e^{- T\langle V\rangle}\bigdrangle\\
+% % =& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle \left(\langle\epsilon\rangle^{-1/2}
+% % -\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}\right)
+% % \left( 1 + \frac{\alpha T}{4}\langle\nabla^2(\epsilon^{-1}\delta)
+% % -\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle\\
+% =& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle
+% \left(\langle\epsilon\rangle^{-1/2}-\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}  
+% + \frac{\alpha T}{4}\langle\epsilon\rangle^{-1/2}\langle \nabla^2(\epsilon^{-1}\delta)-
+% \nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle
+% \end{align}
+
+% % Now consider $\langle \delta\,f\rangle $
+% % \begin{align}
+% % \int dx_0\int Dx\langle \delta(x)f(x)\rangle P(x) 
+% % =&  \int dx_0\prod_{j=1}^{N}dx_n\delta(x_N-x_0)\prod_k P(x_k) \frac{1}{N}\sum_j \delta(x_j-x')f(x_j) \nonumber\\
+% % = &f(x')\int \prod_{j=1}^N\delta(x_N-x') dx_jP(x_j) = f(x')\int Dx P(x)_{x_0=x(T)=x'}
+% % \end{align}
+% % This is a trace, which is invariant under cylic permutations.
+% %   We can cyclically permute all the loop labels around so that we call the point that passes through $x'$ the loop origin.
+% %   Doing this for every term, means we get $N$ copies of the same integrals.  We can then call $x_0=x'$, and drop that sum over $j$.   
+% The same logic works for derivatives, and $\delta'$.
+%   So we can find the linear term in $\alpha$.
+%   This is effectively the functional derivative with respect to $\epsilon$.  
+% \begin{align}
+% \frac{\delta}{\delta\epsilon(x')}\log Z=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0
+% \biggdlangle\bigg[ -\frac{\delta(x_0-x')}{\langle\epsilon\rangle^{3/2}}\nonumber\\
+% &  +  \frac{T}{2}\langle\epsilon\rangle^{-1/2}\left(\nabla^2[\epsilon^{-1}(x_0)\delta(x_0-x')]
+% -\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta(x_0-x')\rangle\right)\bigg]e^{-T\langle V\rangle}\biggdrangle
+% \end{align}
+% Now integrate by parts on the delta functions, and we get 
+% \begin{align}
+% \frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0\delta(x_0-x')
+% \biggdlangle-\frac{e^{T\langle V\rangle}}{\langle\epsilon\rangle^{3/2}}
+%   +  \frac{T}{2}\epsilon^{-1}(x_0)\nabla'^2\left(\langle\epsilon\rangle^{-1/2} e^{T\langle V\rangle}\right)\nonumber\\
+% & \hspace{3cm}+\epsilon^{-1}\frac{T}{2}\nabla'\cdot 
+% \frac{\nabla'\epsilon(x')}{\epsilon(x')}\langle\epsilon\rangle^{-1/2}e^{-T\langle V\rangle}\biggdrangle
+% \end{align}
+% In cases with piece wise constant media, we can drop the final term, saying $\nabla'\epsilon(x')\approx 0$.
+%   I will then use $\int dx \delta'(x-y)f(x) = \partial_y f(y) = \partial_y\int dx f(x)$ to pull the derivatives out.  
+% \begin{align}
+% \Aboxed{\frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \frac{1}{16\pi^2}\int_0^\infty dT
+% \left[ \frac{1}{2}\epsilon^{-1}(x_0)\nabla'^2\biggdlangle
+% \frac{ e^{-\int dt V}}{\langle\epsilon\rangle^{1/2}T^2}\biggdrangle
+% -\biggdlangle\frac{e^{-\int dt V}}{\langle\epsilon\rangle^{3/2}T^3} \biggdrangle \right]}
+% \end{align}
+
+\section{Rearranging Worldline Casimir Energies}
+
+The worldline energies need some rearrangement in order to use the analytical results for 
+path integrals derived in Ch.~\ref{ch:feynman_kac}.  This can be done with couple integral identities.
+The first converts the worldline path integral into the form where the Laplace transformed path
+integral appears.  The second exponentiates $\langle\epsr\mur\rangle$ by means of the Gamma function.  
 
 \subsection{ Laplace-Mellin Transforms}
 
-Let's introduce the Laplace transform, 
+The worldline path integral has the form of a Mellin transform.  The Mellin transform of a function $f$ is 
+defined as 
 \begin{equation}
-\mathfrak{L}[f](s) = \int_0^\infty dt e^{-st} f(t),
+\mathcal{M}[f](z)= \int_0^\infty dt\, t^{z-1}f(t).
 \end{equation}
-the Mellin transform
-\begin{equation}
-\mathcal{M}[f](z)= \int_0^\infty dt\, t^{z-1}f(t),
-\end{equation}
-and the $\Gamma$ function.  
-\begin{equation}
-\Gamma(z) = \int_0^\infty ds\, s^{z-1} e^{-s} = \mathcal{M}[e^{-s}](z)
-\end{equation}
+The result of the Mellin transform is a function $\tilde{f}(z)$.
+In the worldline energy $f$ is the ensemble-average path integral, while $z=1+D/2$.
+The Mellin transform appears in the context of $\zeta$-function renormalization for functional determinants,
+and considering its connection to the $\zeta$-function plays a role in formal number theory.  However,
+for our purposes it is just an integral transform.  
 
-We will show what we will refer to as the Laplace-Mellin theorem \footnote{Cite IBM dude}
+There is a useful relationship between Laplace transforms and Mellin transforms referred to as the Laplace-Mellin theorem~\cite{Lew1975}.  
+The Laplace transform (that we've been implicitly using) of a function $f(t)$ is defined as
 \begin{equation}
-\mathcal{M}[f](z) = \frac{1}{\Gamma(1-z)}\mathcal{M}[\mathcal{L}[f]](1-z)\label{eq:Laplace-Mellin}
+\mathcal{L}[f](s) = \int_0^\infty dt e^{-st} f(t).
 \end{equation}
-This is most easily motivated by starting with the RHS, swapping the order of the integrals, and scaling the $s$ integral.  
-\begin{align}
-\mathcal{M}[\mathcal{L}[f]](1-z) =& 
-\int_0^\infty ds\, s^{-z} \int_0^\infty dt\,e^{-st} f(t)\\ 
+We will also need the $\Gamma$ function which is defined as  
+\begin{equation}
+\Gamma(z) = \int_0^\infty ds\, s^{z-1} e^{-s} = \mathcal{M}[e^{-s}](z),
+\end{equation}
+where the second equality writes the Gamma function as the Mellin transform of the exponential.  
+The Laplace-Mellin theorem~\cite{Lew1975} says
+\begin{equation}
+  \Gamma(1-z)\mathcal{M}[f](z) = \mathcal{M}\big[\mathcal{L}[f]\big](1-z)\label{eq:Laplace-Mellin}
+\end{equation}
+This is most easily motivated by starting with the right hand side
+\begin{equation}
+\mathcal{M}\big[\mathcal{L}[f]\big](1-z) = 
+\int_0^\infty ds\, s^{-z} \int_0^\infty dt\,e^{-st} f(t).
+\end{equation}
+We assume that the order of $s$ and $t$ integration can be swapped, and change integration variable to $s=t/u$,
 % =& \int_0^\infty dt\,\left[\int_0^\infty ds s^{-z} e^{-st}\right] f(t)\\
 % =& \int_0^\infty dt\,\left[\int_0^\infty d\frac{u}{t}\, t^zu^{-z} e^{-u}\right] f(t) \\
-=&\left[\int_0^\infty du u^{-z} e^{-u}\right]\int_0^\infty dt\,t^{z-1} f(t) \\
-=& \Gamma(1-z)\mathcal{M}[f](t)
+\begin{align}
+\mathcal{M}\big[\mathcal{L}[f]\big](1-z)=&\int_0^\infty dt\,\int_0^\infty du\, u^{-z} e^{-u}\,t^{z-1} f(t) \\
+=& \Gamma(1-z)\mathcal{M}[f](z)
 \end{align}
-This is the form we will use most often anyway.  
-\subsection{Gamma function/ Moment Theorem}
+In words, the Mellin transform of a function is proportional to the Mellin transform of the functions
+Laplace transform, subject to $z\rightarrow 1-z$ and dividing by a constant $\Gamma(1-z)$.  This is 
+directly useful to rewriting worldline path integrals in terms of their Laplace transforms, especially
+since the solution method in Ch.~\ref{ch:feynman_kac} naturally yields the Laplace transform of the function.
 
-We will show that 
+\subsection{Inverse Moment Theorem}
+
+One further step is required to put all of the pieces involving material functions in the path integrals into exponential form.
+Again, the solutions derived in the previous chapter assumed path integrals with exponential potentials.
+So the terms in $\langle\epsr\mur\rangle$ should be exponentiated.  If we required positive powers,
+then the usual moment generating tricks could be used such as $\langle x\rangle^n = \frac{d^n}{ds^n}e^{-s\langle x\rangle}\big|_{s=0}$.
+However, for the inverse-moments required in the worldline method, the Gamma function must be used 
 \begin{equation}
 \frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\dlangle e^{-s(x+\beta)}\drangle  
-= \dlangle \frac{1}{(x+\beta)^\alpha}\drangle\label{eq:moment_theorem}
+= \dlangle \frac{1}{(x+\beta)^\alpha}\drangle\label{eq:moment_theorem}.
 \end{equation}
-We can do this via a straightforward approach: 
+This is restricted to $x+\beta>0$, and $\alpha>0$.  In the worldline calculations $\alpha=1/2$ or $\alpha=3/2$
+for Casimir and Casimir--Polder energies respectively.  On the imaginary frequency axis, the response functions
+are real, positive, decaying functions, so all of these conditions are satisfied for worldline path integrals.
+
+% We can do this via a straightforward approach: 
+% \begin{align}
+% \frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\dlangle e^{-s(x+\beta)}\drangle 
+% % =&\frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\int dx f(x) e^{-s(x+\beta)}\\
+% % =& \frac{1}{\Gamma[\alpha]}\int dx f(x) \int_0^\infty ds\,s^{\alpha-1} e^{-s(x+\beta)} \\
+% % =&\frac{1}{\Gamma[\alpha]}\int dx f(x) \frac{1}{(x+\beta)^\alpha}\int_0^\infty dt\,t^{\alpha-1} e^{-t} \\
+% =&\int dx f(x) \frac{1}{(x+\beta)^\alpha} \\
+% =& \dlangle \frac{1}{(x+\beta)^\alpha}\drangle
+% \end{align}
+
+\subsection{Rearranging the Worldline}
+
+Consider a dielectric function which is written as $\epsr(\vect{x})=1+\chi(\vect{x})$, where $\chi$
+is some positive function of position. 
+From Eq.~(\ref{eq:log Z TE}), and  the moment theorem Eq.~(\ref{eq:moment_theorem}) we can write 
 \begin{align}
-\frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\dlangle e^{-s(x+\beta)}\drangle 
-% =&\frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\int dx f(x) e^{-s(x+\beta)}\\
-% =& \frac{1}{\Gamma[\alpha]}\int dx f(x) \int_0^\infty ds\,s^{\alpha-1} e^{-s(x+\beta)} \\
-% =&\frac{1}{\Gamma[\alpha]}\int dx f(x) \frac{1}{(x+\beta)^\alpha}\int_0^\infty dt\,t^{\alpha-1} e^{-t} \\
-=&\int dx f(x) \frac{1}{(x+\beta)^\alpha} \\
-=& \dlangle \frac{1}{(x+\beta)^\alpha}\drangle
+\int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle 
+% = &\int_0^\infty \frac{dT}{T^{1+D/2}}\frac{1}{\Gamma[\alpha]}\int_0^\infty ds s^{\alpha-1} 
+% \dlangle e^{-s(\chi \int_0^T dt \Theta(x-d) +1)}\drangle \\
+% =&\frac{1}{\Gamma[\alpha]}\int_0^\infty \frac{dT}{T^{1+D/2-\alpha}}\int_0^\infty ds s^{\alpha-1} e^{-s T}
+% \dlangle e^{-s \chi \int_0^T dt \Theta(x-d)}\drangle \\
+=&\int_0^\infty ds\, \frac{s^{\alpha-1}}{\Gamma(\alpha)}\int_0^\infty \frac{d\cT}{\cT^{1+D/2-\alpha}}
+\dlangle e^{-s\cT+ \int_0^\cT dt \,\chi[\vect{x}(t)]}\drangle.
 \end{align}
+In the second equality the integration variable was rescaled $s\rightarrow s\cT$,
+ and the definition of the path average~(\ref{eq:path_average}) was used.
+% where we used the Inverse-moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
+%  and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
+  Now we can use the Laplace-Mellin transform Eq.~(\ref{eq:Laplace-Mellin}) to write the $T$ integral using
+\begin{align}
+\int_0^\infty \frac{d\cT}{\cT^{1+z}}e^{-s\cT}\dlangle e^{-s \chi\int_0^\cTdt\Theta(x-d)}\drangle 
+% =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
+% =&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
+% =& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}
+% \dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
+=& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty d\cT e^{-(\lambda+s)\cT}
+\dlangle \frac{e^{-s \chi \int_0^\cT dt\,\chi(\vect{x})}}{\sqrt{T}}\drangle,
+\end{align}
+where we will take $z=D/2$.  
+
+
+
+
 
 \section{Finding the TE CP energy}
 
@@ -183,30 +367,6 @@ In the previous section we found various analytical expressions of the form $ \d
   We will start with the Casimir-Polder energy above a dielectric surface.
   We will then be treating cases like $\epsilon_r(z) = 1+\chi\Theta(x-d)$.  
 
-Let's put the Casimir results in the form where we can substitute in the analytical results.
-  From Eq.~(\ref{eq:log Z TE}), and  the moment theorem Eq.~(\ref{eq:moment_theorem})we can write 
-\begin{align}
-\int_0^\infty \frac{dT}{T^{1+D/2}}\dlangle\frac{1}{\left(1+\chi \langle \Theta[x(T)-d]\rangle\right)^\alpha} \drangle 
-% = &\int_0^\infty \frac{dT}{T^{1+D/2}}\frac{1}{\Gamma[\alpha]}\int_0^\infty ds s^{\alpha-1} 
-% \dlangle e^{-s(\chi \int_0^T dt \Theta(x-d) +1)}\drangle \\
-% =&\frac{1}{\Gamma[\alpha]}\int_0^\infty \frac{dT}{T^{1+D/2-\alpha}}\int_0^\infty ds s^{\alpha-1} e^{-s T}
-% \dlangle e^{-s \chi \int_0^T dt \Theta(x-d)}\drangle \\
-=&\frac{1}{\Gamma[\alpha]}\int_0^\infty ds s^{\alpha-1}\int_0^\infty \frac{dT}{T^{1+D/2-\alpha}}
-\dlangle e^{-s(T+ \chi \int_0^T dt \Theta(x-d))}\drangle 
-\end{align}
-where we used the Inverse-moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
- and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
-  Now we can use the Laplace-Mellin transform Eq.~(\ref{eq:Laplace-Mellin}) to write the $T$ integral using
-\begin{align}
-\int_0^\infty \frac{dT}{T^{1+z}}e^{-sT}\dlangle e^{-s \chi\int_0^Tdt\Theta(x-d)}\drangle 
-% =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
-% =&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-% =& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}
-% \dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-=& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty dT e^{-(\lambda+s)T}
-\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle,
-\end{align}
-where we will take $z=D/2$.  
 \comment{Comment earlier on factors of $\sqrt{T}$ as normalization for brownian bridge.}
 From the Feynman-Kac formula for one step in Eq.~(\ref{eq:Feynman-Kac TE one step}),  we have 
 \begin{equation}

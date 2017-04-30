@@ -181,16 +181,16 @@ In this case, the TE and TM Casimir--Polder energies are given by
 \begin{align}
     V\supTE\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
     \biggdlangle
-      \frac{1}{\langle \epsr\mur\rangle^{3/2}}
+      \frac{1}{\langle \epsr\rangle^{3/2}}
     %   \right) \nonumber\\
     % &\hspace{1cm}
       \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\\
     V\supTM\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
     \biggdlangle
-      \frac{e^{-\langle V\subTE\rangle\cT}}{\langle \epsr\mur\rangle^{3/2}}
+      \frac{e^{-\langle V\subTE\rangle\cT}}{\langle \epsr\rangle^{3/2}}
     %   \right) \nonumber\\
     % &\hspace{1cm}
-      -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTE\rangle\cT}}{\langle\epsr\mur\rangle^{1/2}}
+      -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTE\rangle\cT}}{\langle\epsr\rangle^{1/2}}
       \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
 The TE Casimir--Polder energy will thus always be the simpler case to evaluate since it only depends on $\langle\epsr\mur\rangle$.
@@ -198,17 +198,16 @@ In contrast, the TM Casimir--Polder energy also requires the singular TM potenti
 using the results in Sec.~\ref{sec:TM_potential}.  The TM Casimir--Polder energy also requires spatial derivatives,
 which will require some care in numerical methods involving stochastic paths against singular potentials.
 
-In this limit the worldline Casimir energy for both polarization is
+In this limit the worldline Casimir energy for both polarizations are
 \begin{align}
-    E\subTE-E\sup0 = -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+    E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
     \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TE}\\
-    E\subTM-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+    \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}\label{eq:log_Z_TE}\\
+    E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
     \biggdlangle
     \frac{1}{\sqrt{\langle \epsr(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
     \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TM}
 \end{align}
-
 
 From now on we will work within the context of non-magnetic media with $\mur=1, \beta_0=0$.
 The essential ideas will have to be developed anyway for both polarizations.
@@ -351,79 +350,82 @@ Using the moment theorem.~(\ref{eq:moment_theorem}),  we can write the energy de
 % =&\frac{1}{\Gamma[\alpha]}\int_0^\infty \frac{dT}{T^{1+D/2-\alpha}}\int_0^\infty ds s^{\alpha-1} e^{-s T}
 % \dlangle e^{-s \chi \int_0^T dt \Theta(x-d)}\drangle \\
 =&\int_0^\infty ds\, \frac{s^{\alpha-1}}{\Gamma(\alpha)}\int_0^\infty \frac{d\cT}{\cT^{1+D/2-\alpha}}
-\dlangle e^{-s\cT+ \int_0^\cT dt \,\chi[\vect{x}(t)]}\drangle.
+\dlangle e^{-s\cT- \int_0^\cT dt \,\chi[\vect{x}(t)]}\drangle.
 \end{align}
 In the second equality the integration variable was rescaled $s\rightarrow s\cT$,
  and the definition of the path average, $\langle f\rangle = \cT^{-1}\int_0^\cT dt\, f(t)$ was used.
 % where we used the Inverse-moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
 %  and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
-  Now we can use the Laplace-Mellin transform Eq.~(\ref{eq:Laplace-Mellin}) to write the $T$ integral using
+Using the Laplace-Mellin transform~(\ref{eq:Laplace-Mellin}), the energy density can be written as
 \begin{align}
-\int_0^\infty \frac{d\cT}{\cT^{1+z}}e^{-s\cT}\dlangle e^{-s \chi\int_0^\cT dt\,\Theta(x-d)}\drangle 
+&\int_0^\infty \frac{d\cT}{\cT^{1+D/2-\alpha}}e^{-s\cT}\dlangle e^{-s\int_0^\cT dt\,\chi[\vect{x}(t)]}\drangle \nonumber\\
 % =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
 % =&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
 % =& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}
 % \dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-=& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty d\cT e^{-(\lambda+s)\cT}
-\dlangle \frac{e^{-s \chi \int_0^\cT dt\,\chi(\vect{x})}}{\sqrt{T}}\drangle,
+&\hspace{1cm}= \int_0^\infty d\lambda\, \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[D/2-\alpha+1/2]}\int_0^\infty d\cT e^{-(\lambda+s)\cT}
+\dlangle \frac{e^{-s \int_0^\cT dt\,\chi(\vect{x})}}{\sqrt{\cT}}\drangle.\label{eq:Casimir_Laplace_inverse}
 \end{align}
-where we will take $z=D/2$.  
+The integral over $\cT$ is the solution to the relevant diffusion equation, as discussed in Ch.~\ref{ch:feynman_kac}.
+The solutions must be appropriately scaled with $\lambda\rightarrow \lambda+s$, and $\chi\rightarrow s\chi$.
 
+\section{Analytical  TE CP energy for an atom and a dielectric plane}
 
-
-
-
-\section{Finding the TE CP energy}
-
-In the previous section we found various analytical expressions of the form $ \dlangle e^{-\lambda t - \int V}\drangle$.
-  The identities given in the last two sections will let us find analytical solutions.
-  We will start with the Casimir-Polder energy above a dielectric surface.
-  We will then be treating cases like $\epsilon_r(z) = 1+\chi\Theta(x-d)$.  
-
-\comment{Comment earlier on factors of $\sqrt{T}$ as normalization for brownian bridge.}
-From the Feynman-Kac formula for one step in Eq.~(\ref{eq:Feynman-Kac TE one step}),  we have 
+The TE contribution to Casimir--Polder energy for an atom above a half-plane at $x=d$ is then given 
+combining these formal manipulations with the relevant path integral solution.  For an atom at the origin
+interacting with a planar dielectric $\epsr(z)=1+\chi\Theta(x-d)$, the path integral solution is given by
+ Eq.~(\ref{eq:Feynman-Kac TE one step}).
+Under the rescalings $s\rightarrow s\chi, \lambda\rightarrow \lambda+s$, the renormalized TE Casimir--Polder potential is
+\begin{align}
+V\subCP\supTE=&-\frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
+\int_0^\infty ds\, s^{\alpha-1}\int_0^\infty d\lambda\, \lambda^{(D-1)/2-\alpha}\nonumber\\
+&\times\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
+\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
+\end{align}
+This can be put into the same form as the known results by changing integration variables.
+Similar steps will be required to convert the other planar energies, so we will go through this once in detail.
+We will confine our attention to the integral
 \begin{equation}
-\int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi T_s[B_T;d]}}{\sqrt{T}}\drangle  
-= \sqrt{\frac{\pi}{\lambda+s}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}
-\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\right],
+  J=\int_0^\infty ds\, s^{\alpha-1}\int_0^\infty d\lambda\, \lambda^{(D-1)/2-\alpha}\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
+\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
 \end{equation}
-where we substistuted $s\rightarrow s\chi, \lambda\rightarrow \lambda+s$.  
-
-We can now write the renormalized potential that we wanted as 
+First change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, 
+\begin{equation}
+  J% =2\int_0^\infty ds\, s^{\alpha-1}s^{(D-1)/2-\alpha+1-1/2}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
+  % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v},
+  =2\int_0^\infty ds\, s^{D/2-1}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
+  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v},
+\end{equation}
+Next, change variable from $s$ to $t=\sqrt{8d^2 s}v$, and swap the $t$ and $v$ integrals. 
 \begin{align}
-V_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
-\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}
-\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
-\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
+  J % =4\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha} \int_0^\infty dt\, \frac{2t}{8d^2v^2}\left(\frac{t^2}{8d^2v^2}\right)^{D/2-1}e^{-t}
+  % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\\
+=\frac{1}{8^{D/2-1}d^D}\int_1^\infty dv\,v^{-D} (v^2-1)^{(D-1)/2-\alpha} 
+  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\int_0^\infty dt\, t^{D-1}e^{-t}
 \end{align}
-
-\subsection{Variable rescaling to evaluate the integral}
-Now we're in a position to try evaluating these integrals.
-  We can put this into the same form as the Lifshitz expressions for this case after we make a number of variable changes.
-  Similar steps are required for the other energies we calculate.  
-First we take $\lambda \rightarrow \lambda/(8d^2), s\rightarrow s/(8d^2)$
-\begin{align}
-V_D(\chi,d)%=&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}(8 d^2)^{\alpha-\alpha-(D+1)/2-1/2}\nonumber \\
-%&\times\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\frac{e^{-\sqrt{(\lambda+s)}}}{\sqrt{\lambda+s}} \frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\\
-=&\frac{\sqrt{\pi}}{2^{3D/2}\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]d^D}\nonumber \\
-&\times(-1)\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}
-\frac{e^{-\sqrt{(\lambda+s)}}}{\sqrt{\lambda+s}} 
-\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
-\end{align}
-Secondly we will substitute $\lambda +s = u^2$,
-\begin{align}
-J_{\alpha,D} % =& (-1)\int_0^\infty ds s^{\alpha-1}\int_{\sqrt{s}}^\infty du\,(2u) (u^2-s)^{(D-1)/2-\alpha}\frac{e^{-u}}{u} \frac{\sqrt{u^2+s\chi}-u}{\sqrt{u^2+s\chi  }+u}\\
-=& 2\int_0^\infty ds s^{\alpha-1}\int_{\sqrt{s}}^\infty du\, (u^2-s)^{(D-1)/2-\alpha}e^{-u} 
-\frac{u-\sqrt{u^2+s\chi}}{u+\sqrt{u^2+s\chi  }}.
-\end{align}
-Now take $u = v\sqrt{s}$.  
-\begin{align}
-J_{\alpha,D} % =& 2\int_0^\infty ds s^{\alpha-1}\int_{1}^\infty du\, \sqrt{s}(v^2s-s)^{(D-1)/2-\alpha}e^{-\sqrt{s}v}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\\
-% =& 2\int_{1}^\infty du\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\int_0^\infty ds s^{\alpha-1+1/2+(D-1)/2-\alpha}e^{-\sqrt{s}v}\\
-=& 2\int_{1}^\infty du\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}
-\int_0^\infty ds s^{D/2-1}e^{-\sqrt{s}v}
-\end{align}
-Lastly take $t= v\sqrt{s}$.  or $s = v^{-2}t^2$, with $ds = 2v^{-2}t dt$.  
+The $t$-integral can then be identified as a $\Gamma[D-1]$.  
+% \begin{align}
+% V_D(\chi,d)%=&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}(8 d^2)^{\alpha-\alpha-(D+1)/2-1/2}\nonumber \\
+% %&\times\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\frac{e^{-\sqrt{(\lambda+s)}}}{\sqrt{\lambda+s}} \frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\\
+% =&\frac{\sqrt{\pi}}{2^{3D/2}\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]d^D}\nonumber \\
+% &\times(-1)\int_0^\infty ds s^{\alpha-1}\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}
+% \frac{e^{-\sqrt{(\lambda+s)}}}{\sqrt{\lambda+s}} 
+% \frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
+% \end{align}
+% Secondly we will substitute $\lambda +s = u^2$,
+% \begin{align}
+% J_{\alpha,D} % =& (-1)\int_0^\infty ds s^{\alpha-1}\int_{\sqrt{s}}^\infty du\,(2u) (u^2-s)^{(D-1)/2-\alpha}\frac{e^{-u}}{u} \frac{\sqrt{u^2+s\chi}-u}{\sqrt{u^2+s\chi  }+u}\\
+% =& 2\int_0^\infty ds s^{\alpha-1}\int_{\sqrt{s}}^\infty du\, (u^2-s)^{(D-1)/2-\alpha}e^{-u} 
+% \frac{u-\sqrt{u^2+s\chi}}{u+\sqrt{u^2+s\chi  }}.
+% \end{align}
+% Now take $u = v\sqrt{s}$.  
+% \begin{align}
+% J_{\alpha,D} % =& 2\int_0^\infty ds s^{\alpha-1}\int_{1}^\infty du\, \sqrt{s}(v^2s-s)^{(D-1)/2-\alpha}e^{-\sqrt{s}v}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\\
+% % =& 2\int_{1}^\infty du\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\int_0^\infty ds s^{\alpha-1+1/2+(D-1)/2-\alpha}e^{-\sqrt{s}v}\\
+% =& 2\int_{1}^\infty du\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}
+% \int_0^\infty ds s^{D/2-1}e^{-\sqrt{s}v}
+% \end{align}
+% Lastly take $t= v\sqrt{s}$.  or $s = v^{-2}t^2$, with $ds = 2v^{-2}t dt$.  
 \begin{align}
 J % =& 2\int_{1}^\infty dv\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\int_0^\infty  dt (2v^{-2}t)\left(v^{-2}t^{2}\right)^{D/2-1}e^{-t}\\
 % =& 4\int_{1}^\infty dv\,(v^2-1)^{(D-1)/2-\alpha}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\int_0^\infty  dt v^{-D} t^{D-1}e^{-t}\\

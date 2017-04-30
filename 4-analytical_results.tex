@@ -2,14 +2,14 @@
 \label{ch:analytical}
 
 This chapter will show that the worldline path integrals yield the same results as the simpler 
-calculations outlined in Ch.~\ref{introduction}.  
+calculations outlined in Ch.~\ref{ch:introduction}.  
 We will show how to extract the Casimir--Polder energy via suitable functional derivatives of the free energy.
 The analytical energies can be derived by substituting in the Feynman-Kac formulae for the relevant path integrals.
 In order to put the Casimir energies in the right form the Gamma function is used, and the Laplace-Mellin
 transform is introduced.  The integrals are then transformed to yield known results in planar geometries.
 Finally, we examine the results in the case of non-zero temperature, and show how known results for 
 the near-field and high temperature results emerge from this formalism.    
-The work presented on the TE polarization has been published in Ref.~\ref{Mackrory2016}.
+The work presented on the TE polarization has been published in Ref.~\cite{Mackrory2016}.
 
 \section{Extracting Casimir--Polder Energies}
 
@@ -23,7 +23,7 @@ and permeability $\mur(\vect{r})\rightarrow \epsr(\vect{r})+\delta\mur(\vect{r})
   \quad \delta\mu_r(\vect{r})=\mu_0\beta_0\delta(\vect{r}-\rA).
 \end{equation}
 Note that we will initially consider frequency independent media, at zero temperature.  The generalization 
-to nonzero temperature will be considered in Sec.~\ref{nonzero_temp}.
+to nonzero temperature will be considered in Sec.~\ref{sec:nonzero_temp}.
 
 The full Casimir energy for TE and TM polarizations was derived as the free energy in Ch.~\ref{ch:EM_quantization}.
 In the zero temperature limit, the energy in the EM field is 
@@ -198,6 +198,18 @@ In contrast, the TM Casimir--Polder energy also requires the singular TM potenti
 using the results in Sec.~\ref{sec:TM_potential}.  The TM Casimir--Polder energy also requires spatial derivatives,
 which will require some care in numerical methods involving stochastic paths against singular potentials.
 
+In this limit the worldline Casimir energy for both polarization is
+\begin{align}
+    E\subTE-E\sup0 = -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+    \biggdlangle
+    \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TE}\\
+    E\subTM-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+    \biggdlangle
+    \frac{1}{\sqrt{\langle \epsr(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
+    \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TM}
+\end{align}
+
+
 From now on we will work within the context of non-magnetic media with $\mur=1, \beta_0=0$.
 The essential ideas will have to be developed anyway for both polarizations.
 
@@ -328,11 +340,12 @@ are real, positive, decaying functions, so all of these conditions are satisfied
 
 \subsection{Rearranging the Worldline}
 
-Consider a dielectric function which is written as $\epsr(\vect{x})=1+\chi(\vect{x})$, where $\chi$
-is some positive function of position. 
-From Eq.~(\ref{eq:log Z TE}), and  the moment theorem Eq.~(\ref{eq:moment_theorem}) we can write 
+Consider the TE path integral, with dielectric function $\epsr(\vect{x})=1+\chi(\vect{x})$, where $\chi$
+is a positive function of position.  In both the Casimir and Casimir--Polder cases, the energy involves 
+$\langle \epsr\rangle^{-\alpha}$, with $\alpha=1/2$, and $\alpha=3/2$ respectively.  
+Using the moment theorem.~(\ref{eq:moment_theorem}),  we can write the energy density 
 \begin{align}
-\int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle 
+\int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle_{\vect{x}(t)}
 % = &\int_0^\infty \frac{dT}{T^{1+D/2}}\frac{1}{\Gamma[\alpha]}\int_0^\infty ds s^{\alpha-1} 
 % \dlangle e^{-s(\chi \int_0^T dt \Theta(x-d) +1)}\drangle \\
 % =&\frac{1}{\Gamma[\alpha]}\int_0^\infty \frac{dT}{T^{1+D/2-\alpha}}\int_0^\infty ds s^{\alpha-1} e^{-s T}
@@ -341,12 +354,12 @@ From Eq.~(\ref{eq:log Z TE}), and  the moment theorem Eq.~(\ref{eq:moment_theore
 \dlangle e^{-s\cT+ \int_0^\cT dt \,\chi[\vect{x}(t)]}\drangle.
 \end{align}
 In the second equality the integration variable was rescaled $s\rightarrow s\cT$,
- and the definition of the path average~(\ref{eq:path_average}) was used.
+ and the definition of the path average, $\langle f\rangle = \cT^{-1}\int_0^\cT dt\, f(t)$ was used.
 % where we used the Inverse-moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
 %  and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
   Now we can use the Laplace-Mellin transform Eq.~(\ref{eq:Laplace-Mellin}) to write the $T$ integral using
 \begin{align}
-\int_0^\infty \frac{d\cT}{\cT^{1+z}}e^{-s\cT}\dlangle e^{-s \chi\int_0^\cTdt\Theta(x-d)}\drangle 
+\int_0^\infty \frac{d\cT}{\cT^{1+z}}e^{-s\cT}\dlangle e^{-s \chi\int_0^\cT dt\,\Theta(x-d)}\drangle 
 % =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
 % =&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
 % =& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}
@@ -916,7 +929,7 @@ Which gives us
 
 
 \section{Finite Temperature and Dispersion}
-
+\label{sec:nonzero_temp}
 We will handle the finite temperature (and dispersion) in the atom-plane geometry.
   We derive the partition function for finite temperature for both the TE and TM polarizations.
   So far, I have done both Casimir and Casimir-Polder energies for TE, and only Casimir-Polder for TM.

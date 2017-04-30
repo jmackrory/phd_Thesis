@@ -298,7 +298,7 @@ prescription which restricts the allowed quantum states to those that obey the c
 In the Dirac formulation for handling constraints, the commutator is now the Poisson bracket augmented by the 
 Poisson brackets between the constraints.  Such equations are said to only hold weakly, and all constraint terms should be retained until
 the end of the calculation.  Only at the end should the constraints be set to zero.  
-For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or Ch. in Weinberg~\ref{Weinbergvol2}.
+(For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
 
 The Poisson bracket in 4-vector notation follows from the choice that $A^\mu = (\phi,\vect A)$.
 This implies that the momentum conjugate to $A^\mu$ is given by
@@ -523,7 +523,7 @@ S_E[\vect{A},\phi] = \frac{1}{2} \int d^4x\, \bigg[
 % We are using the euclidean path integral, with $x_4=\beta$.
 
 \subsection{Fadeev-Popov Gauge Fixing}
-
+\label{sec:gauge_fixing}
 We need to enforce a gauge condition, since currently the path integral runs over all field configurations.
 The integral includes physically equivalent states that are related to each other by a gauge transformation.
 We will then only integrate over one point from the gauge fibre by enforcing a delta-function constraint.  
@@ -853,6 +853,7 @@ where the first determinant comes from the scalar potential path integral, the s
 the vector potential, and the final determinant comes is the Faddeev-Popov gauge-fixing determinant.
 The potentials $V_4$ and $V^{(A)}_{ij}$, and the operator $u_{ij}$, are defined as 
 \begin{subequations}
+\label{eq:potentials}
 \begin{align}
   V_4 & = \frac{1}{2}|\nabla\log\sqrt{\epsr}|^2-\frac{1}{2}\nabla^2\log\sqrt{\epsr}\\
   V^{(A)}_{ij} &= \frac{1}{2}|\nabla\log(\epsr^{-1})|^2-\frac{1}{2}\nabla^2\log (\epsr^{-1})\\
@@ -933,7 +934,7 @@ field behaves as a scalar throughout the problem: while its magnitude may vary, 
 The same is true for the magnetic field in the TM polarization.  
 In this case, the two fields will turn out to mirror each other under a duality transformation exchanging
 electric and magnetic properties of both fields and matter.  
-The following work is expanded from the presentation in Ref.~\ref{Mackrory2016}.
+The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}.
 
 Consider a medium which varies in only one Cartesian direction $z$.
 The material properties $\epsr(z)$,$\mur(z)$ also only vary in this direction, which implies 
@@ -1076,7 +1077,7 @@ result is
   &\int \prod_{j=1}^{N-1}d\tau_k \prod_{j=0}^{N}\frac{1}{\sqrt{2\pi\epsr(z_j)\mur(z_j)\Delta\cT}}
   \exp\left(-\frac{(\tau_{j+1}-\tau_j)^2}{2\epsr(z_j)\mur(z_j)\Delta\cT}\right)\nonumber\\
   &=\frac{1}{\sqrt{2\pi\langle \epsr(z)\mur(z)\rangle\cT}}
-  \exp\left(-\frac{(\tau_{N}-\tau_0)^2}{2\langle\epsr(z)\mur(z)\rangle\cT}\right),\label{eq:tau-integrals}
+  \exp\left(-\frac{(\tau_{N}-\tau_0)^2}{2\langle\epsr(z)\mur(z)\rangle\cT}\right),\label{eq:tau-integral}
 \end{align}
 where 
 \begin{equation}

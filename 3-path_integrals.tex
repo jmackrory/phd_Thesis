@@ -203,9 +203,9 @@ accelerate convergence for discrete steps along a path, from one discrete positi
 another $\vect{x}_{k+1}$.  That corresponds requires shifting all coordinates in the problem so that 
 $\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.  
 
-The path integral (\label{eq:f_soln}) satisfies the following steady-state diffusion equation
+The path integral (\ref{eq:f_soln}) satisfies the following steady-state diffusion equation
 \begin{equation}
-  0 = \frac{1}{2}\nabla^2f(x) - (V+\lambda)f + \delta(\vect{x}-\vect{c}),
+  0 = \frac{1}{2}\nabla^2f(x) - (V+\lambda)f + \delta(\vect{x}-\vect{c}),\label{eq:diffusion_eq}
 \end{equation}
 which for simple geometries can be solved analytically.  The closed form for the path
 integral is then found by inverting the Laplace transform in Eq.~(\ref{eq:f_soln}).
@@ -506,7 +506,7 @@ to the probability for a Brownian path to bounce $n$ times between points a dist
 This naturally goes over to the reflection picture for the Dirichlet scalar discussed in \S21.1.5.3 of Steck~\cite{SteckNotes}.
 
 \section{Feynman-Kac formula for Singular Potentials}
-
+\label{sec:TM_potential}
 The preceding has been a prelude for the truly important work of this method.
 Exactly the same methods can be used to yield sensible, finite results for the path integral 
 against singular potentials.  This is particularly true for $V\subTE$ and $V\subTM$, where 
@@ -745,7 +745,7 @@ side of the surface,  and when they are on different sides.
     \begin{equation}
       f\subTM = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
     \end{equation}
-    In both cases the Laplace transforms in $\lambda$ can be inverted yielding Gaussians [following from Eq.~\ref{eq:Laplace_gaussian}].
+    In both cases the Laplace transforms in $\lambda$ can be inverted yielding Gaussians [following from Eq.~(\ref{eq:Laplace_Gaussian})].
     After cancelling out the Gaussian factor $e^{-c^2/(2t)}/\sqrt{2\pi t}$, the analytical expression for 
     the path integral can be isolated
     % Ultimately, we will want to isolate the potential term.  

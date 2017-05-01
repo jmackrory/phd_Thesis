@@ -403,7 +403,7 @@ Next, change variable from $s$ to $t=\sqrt{8d^2 s}v$, and swap the $t$ and $v$ i
   \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\int_0^\infty dt\, t^{D-1}e^{-t}
 \end{align}
 The $t$-integral can then be identified as a $\Gamma[D-1]$.  Substituting this integral back into 
-the Casimir--Polder energy~(\ref{eq:TECP_interp}), while taking $D=4, \alpha=3/2$ yields
+the Casimir--Polder energy~(\ref{eq:VCP_TE_inter}), while taking $D=4, \alpha=3/2$ yields
 \begin{align}
   V\subCP\supTE-V\subCP\sup0=&-\frac{3\hbar c\alpha_0}{32\epsilon_0\pi^{2}d^4}
   \int_1^\infty dv\,\frac{1}{2v^4} \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}.
@@ -486,8 +486,11 @@ evaluated.
 After substituting this back into Eq.~(\ref{eq:TM_CP_inter}), the TM Casimir--Polder energy is given by 
 \begin{align}
   V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\comment{$\frac{1}{4}$}\frac{1}{2}
-  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}}
+  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}},
 \end{align}
+where we substituted $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
+for an atom near a dielectric half-space (Eq. 14.205 in Steck ~\cite{SteckNotes}).
+
 
 % \subsection{Changing Variables}
 % What follows is a lot of changes of variables to turn this into something like an integral against a decaying exponential.  
@@ -541,67 +544,128 @@ After substituting this back into Eq.~(\ref{eq:TM_CP_inter}), the TM Casimir--Po
 % %\comment{The scaled ``Gies'' formulation uses  $V = V_D - V_{D-2}''$}
 
 
-\subsection{Evaluating integral for specific $D$, and $\alpha$}
+% \subsection{Evaluating integral for specific $D$, and $\alpha$}
 
-We need $D=4$, $\alpha=3/2$.  
-\begin{align}
-\mathcal{V}_D(\chi;d;3/2)%=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{4}\Gamma[3/2]\Gamma\left[(D+1)/2-3/2\right]}\frac{1}{d^D}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-3/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
-=&-\frac{3}{4d^4}\int_1^\infty dw\,w^{-4}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-\end{align}
+% We need $D=4$, $\alpha=3/2$.  
+% \begin{align}
+% \mathcal{V}_D(\chi;d;3/2)%=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{4}\Gamma[3/2]\Gamma\left[(D+1)/2-3/2\right]}\frac{1}{d^D}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-3/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
+% =&-\frac{3}{4d^4}\int_1^\infty dw\,w^{-4}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
+% \end{align}
 
-We also need $D=2$, $\alpha=1/2$
-\begin{align}
-\mathcal{V}_{D-2}(\chi;d;1/2)%=&-\frac{\Gamma[D-2]\sqrt{\pi}}{2^{(3(D-2)/2-2)}\Gamma[1/2]\Gamma\left[(D-1)/2-1/2\right]}\frac{1}{d^{D-2}}\int_1^\infty dw\,w^{-(D-2)}(w^2-1)^{(D-3)/2-1/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
-=&-\frac{1}{2d^2}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-\end{align}
-\comment{Doesn't $V_2$ go to zero for $D=2$ due to $\Gamma[0]$ in the denominator?}
+% We also need $D=2$, $\alpha=1/2$
+% \begin{align}
+% \mathcal{V}_{D-2}(\chi;d;1/2)%=&-\frac{\Gamma[D-2]\sqrt{\pi}}{2^{(3(D-2)/2-2)}\Gamma[1/2]\Gamma\left[(D-1)/2-1/2\right]}\frac{1}{d^{D-2}}\int_1^\infty dw\,w^{-(D-2)}(w^2-1)^{(D-3)/2-1/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
+% =&-\frac{1}{2d^2}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
+% \end{align}
+% \comment{Doesn't $V_2$ go to zero for $D=2$ due to $\Gamma[0]$ in the denominator?}
 
-We finally need 
-\begin{align}
-\frac{1}{2}\partial_d^2(\mathcal{V}_{D-2}(\chi;d;1/2)=
-&-\frac{3}{2d^4}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-\end{align}
+% We finally need 
+% \begin{align}
+% \frac{1}{2}\partial_d^2(\mathcal{V}_{D-2}(\chi;d;1/2)=
+% &-\frac{3}{2d^4}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
+% \end{align}
 
-% Now if we go way back up and compare to averages we needed for the Casimir energy, we wanted: 
+% % Now if we go way back up and compare to averages we needed for the Casimir energy, we wanted: 
 
-\begin{equation}
-V(d) = -\frac{1}{2}\alpha_0\langle E^2\rangle = -\frac{1}{2}\hbar c\frac{\delta}{\delta\epsilon(d)}\log Z
-\end{equation}
-In addition, there is a factor of $-\hbar c\alpha_0/(16\epsilon_0\pi^2)$ 
-from the original path integral expression, which includes a $1/2$ from the functional derivative 
-($-\delta/(\delta\epsilon)$, and $-1/2$ from the $\det[A]^{-1/2}$ from the initial Gaussian integral.  
-So the final Casimir energy is 
-\begin{equation}
-V = -\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0d^4} \int_1^\infty dw\,w^{-4}(1-2w^2)
-\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}},
-\end{equation}
-which is the same as the Lifshitz integral.  
+% \begin{equation}
+% V(d) = -\frac{1}{2}\alpha_0\langle E^2\rangle = -\frac{1}{2}\hbar c\frac{\delta}{\delta\epsilon(d)}\log Z
+% \end{equation}
+% In addition, there is a factor of $-\hbar c\alpha_0/(16\epsilon_0\pi^2)$ 
+% from the original path integral expression, which includes a $1/2$ from the functional derivative 
+% ($-\delta/(\delta\epsilon)$, and $-1/2$ from the $\det[A]^{-1/2}$ from the initial Gaussian integral.  
+% So the final Casimir energy is 
+% \begin{equation}
+% V = -\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0d^4} \int_1^\infty dw\,w^{-4}(1-2w^2)
+% \frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}},
+% \end{equation}
+% which is the same as the Lifshitz integral.  
 
 \section{Finding the TE Casimir energy}
 
-This section is quite similar to the corresponding Casimir-Polder energy for a test particle placed near a plane.
-  In this cae however, we will deal with two planar dielectrics.
-  We will thus need the solutions for that Fokker-Planck equation in all regions, and then have to evaluate an integral over space.
-  That is the only conceptual difference, otherwise this follows the same pattern.  
-
-I have found a result by Zhou and Spruch, \footnote{Zhou, F, and Spruch, L., ``van der Waals and retardation (Casimir) interactions of an electron or atom with multilayered walls'', Phys. Rev. A, \textbf{52}, 297, (1995)}, where they have in Eq. (3.19),
+The Casimir energy for two dielectric planes can also be calculated within this formalism.  
+The dielectric is given by $\epsrab = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
+THe calculation proceeds in the same way, except for two changes.  
+First, the Casimir energy requires a further integral over the starting points of the paths.
+Second, the two-body interaction energy is found by subtracting the one-body energies involving $\epsra,\epsrb$ from the two-body
+ expressions with $\epsrab$.  The fully renormalized Casimir energy between two planes is
 \begin{align}
-\frac{F}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty d\xi \xi^3 \epsilon_3^{3/2}\int_1^\infty dp\,p^2\left[ \frac{r_{13}r_{23}e^{-2\sqrt{\epsilon_3}p\xi l/c}}{1 - r_{13}r_{23}e^{-2\sqrt{\epsilon_3}p\xi l/c}} + \frac{r'_{13}r'_{23}e^{-2\sqrt{\epsilon_3}p\xi l/c}}{1 - r'_{13}r'_{23}e^{-2\sqrt{\epsilon_3}p\xi l/c}}\right]\\
-\Aboxed{\frac{F}{L^2}=& -\frac{\hbar c}{2\pi^2d^4}\int_0^\infty du u^3\int_1^\infty dp\,p^2\left[ \frac{r^2e^{-2pu}}{1 - r^2e^{-2pu}} + \frac{r'^2e^{-2pu}}{1 - r'^2e^{-2pu}}\right]}
-\end{align}
+  E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+  \biggdlangle
+  \bigg(\frac{1}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\bigg) \nonumber\\
+&\hspace{1cm}  -\bigg(\frac{1}{\sqrt{\langle \epsra\rangle}}-\frac{1}{\sqrt{\epsra(\vect{x}_0)}}\bigg)
+  -\bigg(\frac{1}{\sqrt{\langle \epsrb\rangle}}-\frac{1}{\sqrt{\epsrb(\vect{x}_0)}}\bigg)
+    \biggdrangle_{\vect{x}(t)}.
+  \end{align}
+  Each term is renormalized by subtracting off the constant value of the dielectric evaluated at the 
+  start of the paths.  (It is also possible to renormalize the energy by instead subtracting off the vacuum value 
+  $\epsr=1$ from each term.)
 
-
-   {Carry out integral over position. Note divergent terms, these are cancelled out by 
-    suitable renormalization.}
-    We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.   Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$. 
-    First up we need $I_{12}=\int dx_0 f_{12}[x-(h-x_0)]$
-    \begin{align}
-      I_{TE,12} %=& \int_{-\infty}^h  dx_0  f_{x_0<h} + \int_{h}^{h+d}  dx_0  f_{h<x_0<h+d} + \int_{h+d}^\infty dx_0 f_{x_0>h+d}\\
-      =&\int_{-\infty}^h dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)}\dfrac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right] \nonumber\\
-      & +\int_{h}^{h+d}dx_0\left[\frac{1}{\sqrt{2\lambda}} + \frac{2u_1u_2 e^{-2\sqrt{2\lambda}d} + u_1 e^{2\sqrt{2\lambda}(h-x_0)} +u_2 e^{-2\sqrt{2\lambda}(d+h-x_0)}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} \right]\nonumber\\
-      &+ \int_{h+d}^\infty dx_0 \left[\dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d+(h-x_0))}\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{\sqrt{2(\lambda+\chi_2)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\right]
-    \end{align}
-
+  The Casimir energy can be recast using the inverse-moment theorem and the Laplace-Mellin transform.  
+  The energy is 
+\begin{align}
+  E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
+  \int d\lambda \frac{\lambda^{D/2-1-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
+  &\hspace{0.5cm}\times\int d\vect{x}_0 \left[ \big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) - \big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
+-\big(f_{2}(\vect{x}_0)-f_{1}\sup0\big)\right]
+  \end{align}
+  where $\alpha=1/2$, and $D/2$ will be taken at the end of the computation.
+  The solutions $f_i$ are the path integral solutions
+  \begin{equation}
+    f_i = \int_0^\infty d\cT \frac{e^{-(\lambda+s)\cT}}{\sqrt{\cT}}\dlangle e^{-\int_0^\cT dt\, \chi_i(\vect{x})}\drangle,
+  \end{equation}  
+  derived in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and (\ref{eq:Feynman-Kac TE two step}) for one and 
+  two planar bodies respectively, and are renormalized by subtracting the solution for a constant dielectric filling space.  
+  The spatial integral can be carried out for each of the three regions: Region I where $x_0<d_1$, Region II where
+  $d_1<x_0<d_2$, and Region III where $d_2<x_0$.  
+  Fortunately, the solutions are simple exponentials in $x_0$, making these integrals straightforward.
+  The spatial integral over the solution $f_{12}$ in region I is
+  \begin{align}
+    J_I  &= \int_{-\infty}^{d_1}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{-\infty}^{d_1}dx_0
+    e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}
+    {\sqrt{2(\lambda+\chi_1)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}   \nonumber\\
+    % &\hspace{1cm}- e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{ - u\supTE_1}{\sqrt{2(\lambda+\chi_1)}} -  e^{-2\sqrt{2\lambda}(d_2-x_0)}
+    % \frac{u\supTE_2}{\sqrt{2(\lambda)}}\bigg]\\
+    &=\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}%   \nonumber\\
+    \label{eq:J1}
+%    &\hspace{1cm}
+%    + \dfrac{ u\supTE_1}{4(\lambda+\chi_1)} -  e^{-2\sqrt{2\lambda}d}\frac{u\supTE_2}{4\lambda}
+  \end{align}
+  The equivalent one-body expressions can be found by setting the one of the susceptibilities to zero.  
+  The spatial integrals over the other regions are 
+  \begin{align}
+    J_{II} &= \int_{d_1}^{d_2}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{d_1}^{d_2}dx_0\bigg[\dfrac{2u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d} + u\supTE_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
+    +u\supTE_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\bigg]\nonumber\\
+    &=\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    +\frac{(u\supTE_1+u\supTE_2)(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})},
+    \label{eq:J2}
+  \end{align}
+  and
+  \begin{align}
+    J_{II} &= \int_{d_2}^{\infty}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{d_2}^\infty dx_0\,e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
+    {\sqrt{2(\lambda+\chi_2)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}    \\
+    &=\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
+    {4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}    \label{eq:J3}
+  \end{align}
+  The total spatial integral for the fully renormalized two-body solution is found by adding together Eqs.(\ref{eq:J1})-(\ref{eq:J3}),
+  and subtracting off the one-body integrals.  The final result is
+  with the result
+  \begin{align}
+    &\int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
+    -\big(f_{2}(\vect{x}_0)-f_{2}\sup0\big)\bigg]\\
+    =&\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})} 
+    -\frac{- u\supTE_1}{4(\lambda+\chi_1)}- \frac{u\supTE_2 e^{-2\sqrt{2\lambda}d}}{4\lambda} 
+    \nonumber\\
+    &+\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    +\frac{(u\supTE_1 +u\supTE_2)(1-e^{-2\sqrt{2\lambda}d})}
+    {4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
+    & -\frac{(u\supTE_1+u\supTE_2) (1-e^{-2\sqrt{2\lambda}d})}{4\lambda}\nonumber\\
+    &+\dfrac{u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2}{4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    -\dfrac{u\supTE_1 e^{-2\sqrt{2\lambda}d}}{4\lambda}    +\dfrac{u\supTE_2}{4(\lambda+\chi_2)}
+  \end{align}
+  
     %  We need 
     % \begin{gather}
     %   \int_{-\infty}^h dx_0 e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} = \int_{-\infty}^0 dx_0 e^{2\sqrt{2(\lambda+\chi_1)}(x_0)} = \frac{1}{2\sqrt{2(\lambda+\chi_1)}}\\
@@ -621,18 +685,18 @@ I have found a result by Zhou and Spruch, \footnote{Zhou, F, and Spruch, L., ``v
 
 
 
-\subsection{Rescaling TE again}
+% \subsection{Rescaling TE again}
 
-Let's try to check our TE results, by rescaling that again.  
-\begin{align}
-E =& - \partial_\beta \log Z_{TE}\\
- =& -\frac{\hbar c}{8\pi^2}\int_0^\infty \frac{dT}{T^{1+D/2}}\int dx_0 \dlangle \frac{1}{\langle \epsilon\rangle^{\alpha}}\drangle\\
-=& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int dx_0 \int_0^\infty ds\, s^{\alpha-1}
-\int_0^\infty dT e^{-\lambda T}\dlangle \frac{e^{-s\int_0^T dt  \epsilon}}{\sqrt{T}}\drangle\\
-=& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1} I(\lambda+s,s\chi)
-\end{align}
+% Let's try to check our TE results, by rescaling that again.  
+% \begin{align}
+% E =& - \partial_\beta \log Z_{TE}\\
+%  =& -\frac{\hbar c}{8\pi^2}\int_0^\infty \frac{dT}{T^{1+D/2}}\int dx_0 \dlangle \frac{1}{\langle \epsilon\rangle^{\alpha}}\drangle\\
+% =& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
+% \int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int dx_0 \int_0^\infty ds\, s^{\alpha-1}
+% \int_0^\infty dT e^{-\lambda T}\dlangle \frac{e^{-s\int_0^T dt  \epsilon}}{\sqrt{T}}\drangle\\
+% =& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
+% \int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1} I(\lambda+s,s\chi)
+% \end{align}
 
 $I_{tot}$ is the (renormalized) expression for 
 \begin{equation}
@@ -656,51 +720,53 @@ with
 \begin{equation}
 r = \frac{ \sqrt{\lambda+s} - \sqrt{\lambda+s+s\chi}}{ \sqrt{\lambda+s} + \sqrt{\lambda+s+s\chi}}
 \end{equation}
-Substitution time!
-\begin{enumerate}
-\item $\lambda = s\kappa$.
-\begin{align}
-E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_0^\infty d\kappa 
-\kappa^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2-\alpha+1} s^{\alpha-1}\nonumber\\
-&\times \frac{2r^2 e^{-2\sqrt{2(\kappa+1)s}d}}{\sqrt{s(\kappa+1)}(1-r^2 e^{-2\sqrt{2s(\kappa+1)}d})}
-\left( d + \frac{\sqrt{2}}{\sqrt{s(\kappa+1+\chi)}} \right),
-\end{align}
-with 
-\begin{equation}
-r = \frac{ \sqrt{\kappa+1} - \sqrt{\kappa+1+\chi}}{ \sqrt{\kappa+1} + \sqrt{\kappa+1+\chi}}
-\end{equation}
-\item $p = \sqrt{\kappa+1},$ or $\kappa = p^2-1$. 
-\begin{align}
-E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_1^\infty dp (2p) 
-(p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
-&\times \frac{2r^2 e^{-2\sqrt{2s}pd}}{\sqrt{s}p(1-r^2 e^{-2\sqrt{2s}pd})}
-\left( d + \frac{\sqrt{2}}{\sqrt{s(p^2+\chi)}} \right),
-\end{align}
-with 
-\begin{equation}
-r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
-\end{equation}
-\item $\xi = \sqrt{2s} d$, or $s = \xi^2/2 d^2$.  
+% Substitution time!
+% \begin{enumerate}
+% \item $\lambda = s\kappa$.
+% \begin{align}
+% E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_0^\infty d\kappa 
+% \kappa^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2-\alpha+1} s^{\alpha-1}\nonumber\\
+% &\times \frac{2r^2 e^{-2\sqrt{2(\kappa+1)s}d}}{\sqrt{s(\kappa+1)}(1-r^2 e^{-2\sqrt{2s(\kappa+1)}d})}
+% \left( d + \frac{\sqrt{2}}{\sqrt{s(\kappa+1+\chi)}} \right),
+% \end{align}
+% with 
+% \begin{equation}
+% r = \frac{ \sqrt{\kappa+1} - \sqrt{\kappa+1+\chi}}{ \sqrt{\kappa+1} + \sqrt{\kappa+1+\chi}}
+% \end{equation}
+% \item $p = \sqrt{\kappa+1},$ or $\kappa = p^2-1$. 
+% \begin{align}
+% E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_1^\infty dp (2p) 
+% (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
+% &\times \frac{2r^2 e^{-2\sqrt{2s}pd}}{\sqrt{s}p(1-r^2 e^{-2\sqrt{2s}pd})}
+% \left( d + \frac{\sqrt{2}}{\sqrt{s(p^2+\chi)}} \right),
+% \end{align}
+% with 
+% \begin{equation}
+% r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
+% \end{equation}
+% \item $\xi = \sqrt{2s} d$, or $s = \xi^2/2 d^2$.  
 
+% \begin{align}
+% E  % =& - \frac{\hbar c\sqrt{\pi}}{4\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
+% % \int_1^\infty dp\, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\frac{\xi}{d^2} \left( \frac{\xi^2}{2d^2}\right)^{(D-1)/2}\nonumber\\
+% % &\times \frac{2\sqrt{2} dr^2 e^{-2\xi p}}{\xi (1-r^2 e^{-2\xi p})}\left( d + \frac{2 d}{\sqrt{\xi(p^2+\chi)}} \right)\\
+%  =& - \frac{\hbar c\sqrt{\pi} 2^{3/2}}{2^{D/2}\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha) d^{D-1}2^{(D-1)/2}}
+%  \int_1^\infty dp \, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\xi^{D-1}\nonumber\\
+% &\times \frac{ r^2 e^{-2\xi p}}{(1-r^2 e^{-2\xi p})}\left( 1 + \frac{2 }{\sqrt{\xi(p^2+\chi)}} \right),
+% \end{align}
+% with 
+% \begin{equation}
+% r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
+% \end{equation}
+% \item Now set $\alpha=1/2, D=4$.
+
+% \end{enumerate}
 \begin{align}
-E  % =& - \frac{\hbar c\sqrt{\pi}}{4\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-% \int_1^\infty dp\, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\frac{\xi}{d^2} \left( \frac{\xi^2}{2d^2}\right)^{(D-1)/2}\nonumber\\
-% &\times \frac{2\sqrt{2} dr^2 e^{-2\xi p}}{\xi (1-r^2 e^{-2\xi p})}\left( d + \frac{2 d}{\sqrt{\xi(p^2+\chi)}} \right)\\
- =& - \frac{\hbar c\sqrt{\pi} 2^{3/2}}{2^{D/2}\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha) d^{D-1}2^{(D-1)/2}}
- \int_1^\infty dp \, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\xi^{D-1}\nonumber\\
-&\times \frac{ r^2 e^{-2\xi p}}{(1-r^2 e^{-2\xi p})}\left( 1 + \frac{2 }{\sqrt{\xi(p^2+\chi)}} \right),
-\end{align}
-with 
-\begin{equation}
-r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
-\end{equation}
-\item Now set $\alpha=1/2, D=4$.
-\begin{align}
-\Aboxed{E_{TM} =& - \frac{\hbar c }{8\pi^2 d^{D-1}} \int_1^\infty dp \, (p^2-1)\int_0^\infty d\xi\,\xi^{3} 
+\Aboxed{E_{TE} =& - \frac{\hbar c }{8\pi^2 d^{D-1}} \int_1^\infty dp \, (p^2-1)\int_0^\infty d\xi\,\xi^{3} 
 \frac{ r^2 e^{-2\xi p}}{ (1-r^2 e^{-2\xi p})}\left( 1 + \frac{2 }{\sqrt{\xi(p^2+\chi)}} \right),}
 \end{align}
 
-\end{enumerate}
+
 
 \begin{align}
 E_{TE} = & - \frac{\hbar c }{8\pi^2 d^{3}}\int_0^\infty du\,u^{3}\int_1^\infty dp\,(p^2-1)

@@ -1049,7 +1049,7 @@ in the $\tau$-direction.  As a result, only single integrals over $\tau$ and $p_
  However, it is still essential to develop the spatial path integral since $\epsr(z)\mur(z)$ and $\op{\vect{p}}^2$
 do not commute.
 After splitting the operator 
-into the product of many terms and inserting the momentum identities we have
+into the product of many terms and inserting the momentum identities, the free energy is
 \begin{align}
     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\frac{d\tau_0 dp_\tau}{2\pi}
     \int \prod_{k=0}^{N-1}\frac{d\vect{x}_kd\vect{p}_k}{(2\pi)^{D-1}}
@@ -1059,41 +1059,31 @@ into the product of many terms and inserting the momentum identities we have
     \bigg],
 \end{align}
 where $\Delta\cT:=\cT/N$, and the $\delta$-functions ensure path-closure. 
-The Gaussian momentum integrals can be evaluated immediately, with the result that 
+The Gaussian spatial momentum integrals can be evaluated immediately.
+The $\tau$ integrals can be evaluated at zero temperature using
+\begin{equation}
+  \int_{0}^{\beta\hbar c} d\tau \int_{-\infty}^{\infty} \frac{dp_\tau }{2\pi}
+  \exp\left[-\sum_{j=0}^N\epsr(z_j)\mur(z_j)p_{\tau}^2\frac{\Delta\cT}{2}\right]
+= \beta\hbar c \frac{1}{\sqrt{2\pi\cT\langle\epsr\mur\rangle}},
+\end{equation}
+where the path-average is defined as
+\begin{equation}
+  \langle\epsr(z)\mur(z)\rangle = \frac{1}{N}\sum_{j=0}^{N-1} \epsr(z_j)\mur(z_j) 
+  = \frac{1}{\cT}\int_0^\cT dt\, \epsr[z(t)]\mur[z(t)].
+\end{equation}
+We will use the single angle-brackets to denote the path-average of a quantity around a particular path.  
+The resulting free energy is 
 \begin{align}
-    \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_Nd\tau_N 
-    \int \prod_{k=0}^{N-1}d\vect{x}_kd\tau_k
-    \delta(\vect{x}_N-\vect{x}_0)\delta(\tau_N-\tau_0)\nonumber\\
-    &\times\bigg[\prod_{j=0}^{N-1}\frac{1}{\sqrt{2\pi\epsr(z_j)\mur(z_j)\Delta\cT}}
-    \exp\left(-\frac{(\tau_{j+1}-\tau_j)^2}{2\epsr(z_j)\mur(z_j)\Delta\cT}\right)\nonumber\\
-    &\hspace{1cm}\times\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
+    \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\int d\tau_0
+    \int \prod_{k=0}^{N-1}d\vect{x}_k
+    \delta(\vect{x}_N-\vect{x}_0)\frac{1}{\sqrt{2\pi\langle \epsr(z)\mur(z)\rangle\cT}}\nonumber\\
+    &\times\bigg[\prod_{j=0}^{N-1}\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
     \exp\left(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT} - V\subTE(z_j)\Delta\cT\right)
     \bigg].
 \end{align}
 
 % This can be further simplified by carrying out the Gaussian integrals in $\tau$, since those 
 % terms carry the only $\tau$-dependence.
-We will need the following Gaussian integral
-\begin{align}
-  \int_{-\infty}^\infty dy\, \frac{e^{-(x-y)^2/(2\sigma_1^2)}}{\sqrt{2\pi\sigma_1^2}}\frac{e^{-(y-z)^2/(2\sigma_2^2)}}{\sqrt{2\pi\sigma_2^2}}
-      = \frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}e^{-(x-z)^2/[2(\sigma_1^2+\sigma_2^2)]}.
-\end{align}
-The integral shows the fact after convolving two Gaussians together, the variance of the resulting Gaussian
-is the sum of the initial Gaussians.  This is useful since the Gaussian integrals have exactly this structure.
-So after carrying out all of integrals over $\tau_1,\tau_2,\ldots,\tau_{N-1}$, the 
-result is
-\begin{align}
-  &\int \prod_{j=1}^{N-1}d\tau_k \prod_{j=0}^{N}\frac{1}{\sqrt{2\pi\epsr(z_j)\mur(z_j)\Delta\cT}}
-  \exp\left(-\frac{(\tau_{j+1}-\tau_j)^2}{2\epsr(z_j)\mur(z_j)\Delta\cT}\right)\nonumber\\
-  &=\frac{1}{\sqrt{2\pi\langle \epsr(z)\mur(z)\rangle\cT}}
-  \exp\left(-\frac{(\tau_{N}-\tau_0)^2}{2\langle\epsr(z)\mur(z)\rangle\cT}\right),\label{eq:tau-integral}
-\end{align}
-where 
-\begin{equation}
-  \langle\epsr(z)\mur(z)\rangle = \frac{1}{N}\sum_{j=0}^{N-1} \epsr(z_j)\mur(z_j) 
-  = \frac{1}{\cT}\int_0^\cT dt\, \epsr[z(t)]\mur[z(t)].
-\end{equation}
-We will use the single angle-brackets to denote the average of a quantity around a particular path.  
 After carrying out the $\tau$-integrals, and enforcing $\tau_N=\tau_0$, the path integral is 
 \begin{align}
     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\int d\tau_0
@@ -1105,8 +1095,24 @@ After carrying out the $\tau$-integrals, and enforcing $\tau_N=\tau_0$, the path
 \end{align}
 We want to use the spatial Gaussians as the probability distribution for paths, where $\vect{x}_0$ is the 
 starting (and finishing) point.  
-The same reasoning as Eq.~(\ref{eq:tau-integral}) can be used to find the normalization for the Gaussian probability density,
-which is defined as
+% We will need the following Gaussian integral
+% \begin{align}
+%   \int_{-\infty}^\infty dy\, \frac{e^{-(x-y)^2/(2\sigma_1^2)}}{\sqrt{2\pi\sigma_1^2}}\frac{e^{-(y-z)^2/(2\sigma_2^2)}}{\sqrt{2\pi\sigma_2^2}}
+%       = \frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}e^{-(x-z)^2/[2(\sigma_1^2+\sigma_2^2)]}.
+% \end{align}
+% The integral shows the fact after convolving two Gaussians together, the variance of the resulting Gaussian
+% is the sum of the initial Gaussians.  This is useful since the Gaussian integrals have exactly this structure.
+% So after carrying out all of integrals over $\tau_1,\tau_2,\ldots,\tau_{N-1}$, the 
+% result is
+% \begin{align}
+%   &\int \prod_{j=1}^{N-1}d\vect{x}_k \prod_{j=0}^{N}\frac{1}{\sqrt{2\pi\sigma_j^2\Delta\cT}}
+%   \exp\left(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\sigma_j^2\Delta\cT}\right)\nonumber\\
+%   &=\frac{1}{(2\pi\langle \sigma^2\rangle\cT)^{(D-1)/2}}
+%   \exp\left(-\frac{(\vect{x}_{N}-\vect{x}_0)^2}{2\langle\sigma^2\rangle\cT}\right),\label{eq:tau-integral}
+% \end{align}
+The normalized Gaussian probability density is 
+% The same reasoning as Eq.~(\ref{eq:tau-integral}) can be used to find the normalization for the Gaussian probability density,
+% which is defined as
 \begin{align}
   P(\vect{x}_1,\ldots,\vect{x}_N):=&\cN\int \prod_{j=0}^{N}\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
   \exp\bigg(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT}\bigg).
@@ -1121,24 +1127,24 @@ The path integral can be written as an ensemble average over closed Brownian bri
 \begin{align}
     \cF\subTE-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
     \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTE(z)\rangle\cT}-1
-    \biggdrangle_{\vect{x}(t)},\label{eq:TE_worldline}
+    \frac{e^{-\langle V\subTE(z)\rangle\cT}}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} -1
+    \biggdrangle_{\vect{x}(t)}.\label{eq:TE_worldline}
 \end{align}
-where we also used $\int d\tau_0 = \beta\hbar c$ to write the free energy as the zero-temperature energy. 
-For completeness we note that the corresponding TM worldline method is derived in exactly the same way, so we quote
-the result
-\begin{align}
-    \cF\subTM-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
-    \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
-    \biggdrangle_{\vect{x}(t)}.\label{eq:TM_worldline}
-\end{align}
+%where we also used $\int d\tau_0 = \beta\hbar c$ to write the free energy as the zero-temperature energy. 
+For completeness we note that the corresponding TM worldline method is derived in exactly the same way, with
+$V\subTM$ replacing $V\subTE$.
+% the result
+% \begin{align}
+%     \cF\subTM-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+%     \biggdlangle
+%     \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
+%     \biggdrangle_{\vect{x}(t)}.\label{eq:TM_worldline}
+% \end{align}
 The main difference between the two path integrals is that $V\subTE$ depends on the magnetic response, while $V\subTM$ 
 depends on the dielectric response.  As a result the TM potential is much more important for typical
-materials.  In order to deal with this singular potential, we will work hard to handle this analytically and numerically.  
+materials.  
 
 Let us contrast the TE worldline (\ref{eq:TE_worldline}) with the Dirichlet worldline path integral (\ref{eq:scalar_worldline}). 
-
 First, there is a factor $\epsr\mur$ (corresponding to the square of the refractive index) 
 modifying the thermal direction and an additional potential deriving from the discontinuities of the media.
 The potentials will naturally enforce boundary conditions at surfaces in certain limits, far more naturally than the 
@@ -1151,7 +1157,7 @@ generalize.  We will see that this path integral can recover the Dirichlet resul
 $\epsr\rightarrow\infty$ limit.  So despite being adapted to a particular geometry
 the TE path integral may suggest ways to develop a better uncontrolled approximation to the full path integral.
 
-We should note that this derivation assumed zero temperature throughout, or the $\beta\rightarrow\infty$ limit. 
+This derivation assumed zero temperature throughout, or the $\beta\rightarrow\infty$ limit. 
 An alternative, more careful approach does not even develop the path integral in $\tau$, since the only 
 dependence in that direction is carried by $\op{p}_\tau$.   It is essential to develop the spatial
 path integral, since the prefactors of this term do not commute with the spatial momentum operators.  

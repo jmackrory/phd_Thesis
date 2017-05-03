@@ -58,10 +58,10 @@ a single combined harmonic oscillator~\cite{Huttner1992}.
 Another approach to the same problem directly couples the medium to white noise sources to create the dissipation~\cite{Dung1998}.
 Bechler carried out path integral quantization for a harmonic medium 
 including dispersion, and shown agreement with previous results in terms 
-of noise operators and commutators for the fields~(\cite{Bechler1999,Bechler2006}).  
+of noise operators and commutators for the fields~\cite{Bechler1999,Bechler2006}.  
 It is not strictly necessary to assume linear coupling of the fields to harmonic oscillators. 
 The dielectric function can be understood in terms of the linear-response of the underlying 
-medium to the electromagnetic field~(\cite{Altland2011}).
+medium to the electromagnetic field~\cite{Altland2011}.
 This was used by Rahi\etal to motivate the effective Lagrangian description in terms of macroscopic field in their 
 work on the scattering method~\cite{Rahi2009}.    
 More recently Philbin carried out a full canonical quantization of EM in media, without explicitly 
@@ -89,24 +89,30 @@ surface via functional $\delta$-functions, those corrections can be ignored.
 The resulting derivations proceed in analogy with the case of a homogeneous dielectric, but with the 
 fields in different regions coupled by the currents on the surfaces.  
 
- Bordag\etal also carried out path integral quantization of
- the EM field inside a spatially varying dielectric neglecting dispersion, starting from the 
+Bordag\etal also carried out path integral quantization of
+the EM field inside a spatially varying dielectric neglecting dispersion, starting from the 
 effective Lagrangian description for the macroscopic fields~\cite{Bordag1998}.
-They fix a generalized Lorenz gauge, and set about deriving the Heat Kernel.
+They fix a generalized Lorenz gauge, and set about deriving the Heat Kernel, which is effectively a small-$\cT$ 
+expansion of the worldline path integral.  
 The primary focus here was to explore the divergence structure of the theory (i.e. how does QED in media
 behave at high frequencies and small wavelengths).
-% The Heat Kernel expansion, corresponds to the small time expansion of a worldline path integral.
-% (In most work on worldline path integrals these high energy effects (corresponding to short path times)
-%  are renormalized away by subtracting off the vacuum path integral.)
 Unfortunately, their results are hard to interpret given that the non-physical
-degrees of freedom for the field do not cleanly decouple, as opposed to the 
-usual situation in free space QED.
-A later paper considering the quantization for EM in a spherical dielectric ball found better 
-results by exploiting the dual potentials~\cite{Bordag1999}. %  Even so, the majority of the work considered high energy
-% limits, and formal matters such as the divergences of the theory.  
+degrees of freedom do not cleanly cancel one another out.  In particular, the contributions from 
+the scalar and longitudinal photons do not cancel the gauge-fixing or ghost determinant, as happens in 
+vacuum.  
+A later paper by the same authors considering the quantization for EM in a spherical dielectric ball found better 
+results by exploiting the dual potentials~\cite{Bordag1999}.  In this latter paper they split the EM field
+into two scalar fields, corresponding to the TE and TM polarizations.  
+Schwinger\etal also split the EM fields into two non-interacting scalars in their works on the Casimir 
+effect in planar and spherical geometries~\cite{Schwinger1978, Milton1978,Schwinger1992}.
 
-
-
+Our work on the EM path integral will closely parallel Bordag\etal's work, with some difference in aims.
+The primary goal of Bordag\etal's work
+was to examine the divergence structure of QED in media via purely analytical calculations.  Our goal
+is to develop a numerical method for Casimir energies.  Since we will explicitly renormalize the
+Casimir energy against vacuum, we will have more freedom in rescaling the fields than they did.    
+Further, we will be interested in evaluating the worldline path integrals at all times, rather than 
+just making small-$\cT$ expansions.
 
 %copied from Intro.  
 % We are interested in small energies relative to the binding energies of the dielectrics, and very weak
@@ -161,163 +167,162 @@ results by exploiting the dual potentials~\cite{Bordag1999}. %  Even so, the maj
 
 \section{Classical Field Theory}
 
-Maxwell's equations in a dielectric, non magnetic medium, without sources  are
+Maxwell's equations govern the classical evolution for the electric and magnetic fields $\vect{E}(\vect{r},t)$ and $\vect{B}(\vect{r},t)$.
+In a medium, with permeability $\epsilon(\vect{r})$ and permittivity $\mu(\vect{r})$, 
+but no external source charges or currents, Maxwell's equations are
 \begin{align}
 \nabla \cdot \vect{D} = 0  \qquad 
 &\nabla \times \vect{E} = -\partial_t\vect{B}\\
 \nabla \cdot \vect{B} = 0\qquad
 &\nabla\times\vect{H} = \partial_t\vect{D},
 \end{align}
-where the fields obey the constitutive relations $\vect{D}=\epsilon\vect{E}$, $\vect{H}=\mu\vect{B}$.
-
-Here we will ignore the frequency dependence and dispersion.
-  We are implicitly assuming a monochromatic field.
+where electric displacement $\vect{D}(\vect{r},t):=\epsilon(\vect{r})\vect{E}$, $\vect{H}=\mu(\vect{r})\vect{B}$.
+In this initial development, we will ignore any frequency dependence in $\epsilon$ and $\mu$.  
+The relative permeability and permittivity are defined by 
+$\epsr(\vect{r}):=\epsilon(\vect{r})/\epsilon_0$, and $\mur(\vect{r}):=\mu(\vect{r})/\mu_0$, where 
+$\epsilon_0$ and $\mu_0$ are the permeability and permittivity of free space.  
+In Casimir physics we will be interested in the energy of the field alone, without any external sources.
   Later, we will extend this work to handle frequency dependence in the dielectric.
 
-% For a linear medium we can write 
-% \begin{equation}
-% \vect{P}(\vect x) = \epsilon_0\chi(\vect x)\vect{E}(\vect x),
-% \end{equation}
-% where $\vect{P}$ is the polarization and $\chi$ is the linear response function of the medium.
-%   The displacement can be rewritten
-% \begin{equation}
-% \vect{D}(\vect x) = \epsilon_0\vect{E}+\vect{P} = 
-% \epsilon_0(1+\chi(\vect x))\vect{E}(\vect x)= \epsilon_0\epsvx\vect{E}(\vect x).
-% \end{equation}
-The fields can be rewritten in terms of the potentials:
+The $\vect{E}$ and $\vect{B}$ fields can be rewritten in terms of the scalar $A_0(\vect{r},t)$ and vector potential
+$\vect{A}(\vect{r},t)$:
 \begin{align}
   \vect{B} = \nabla\times\vect A\qquad 
-  \vect{E} = -\nabla\phi -\partial_t\vect A,
+  \vect{E} = -\nabla\phi -\partial_t\vect A.
 \end{align}
-which automatically satisfies two of Maxwell's equations.  
-There is also another choice of potentials, which is less commonly used in physics.
+These are constructed to automatically satisfies two of Maxwell's equations.  
+Alternatively, in the absence of sources, Maxwell's equations are invariant under 
+the following duality transformation: $\vect{E}\leftrightarrow \vect{H}, \vect{B}\leftrightarrow -\vect{D},
+\mu\leftrightarrow \epsilon$.  This suggests that instead $\vect{D}$ and $\vect{H}$ can be written
+in terms of another set of potentials.
 In these dual potentials the fields are given by 
 \begin{equation}
   \vect{D}=\nabla\times\vect{C}\qquad
   \vect{H}=-\nabla\Lambda-\partial_t\vect{C}.
 \end{equation}
-The gauge potentials and the dual potentials are connected via a duality transformation on the field tensor.  
-The field tensor $F_{\mu\nu} = \partial_\mu A_\nu-\partial_\nu A_\mu$ is used in relativistic field theory.
-The field tensor is the gauge-invariant, Lorentz-invariant object which is used to construct the Lagrangian.  
-In matrix form, the field tensor is 
-\begin{equation}
-  F_{\mu\nu} = \left( \begin{array}{cccc}
-    0 & -E_x & -E_y & -E_z\\
-    E_x & 0 & B_z & -B_x\\
-    E_y & -B_z & 0 & B_y\\
-    E_z & B_x & -B_y & 0
-\end{array}\right).
-\end{equation}
-The dual tensor is defined as $G_{\mu\nu}:=\varepsilon_{\mu\nu\rho\sigma}F^{\rho\sigma}$.
-The Levi Civita density, $\epsilon_{\mu\nu\rho\sigma}$ is the fully antisymmetric rank four tensor density;
-where $\epsilon_{0123}=1$ any even permutation of indices; it picks up a negative sign for any odd permutation;
-and it vanishes if any indices are repeated.  
-
-The starting Lagrangian for electromagnetism in vacuum is 
-\begin{equation}
-  L=-\frac{1}{4}\int d^3\vect{x}\, F_{\mu\nu}F^{\mu\nu} = =-\frac{1}{2}\int d^3\vect{x}\, (|\vect{E}|^2-|\vect{B}|^2).
-\end{equation}
-
-Note that the fields are unchanged if we make the following gauge transformation $(\phi,\vect A)\rightarrow(\phi',\vect A')$.  
+The gauge potentials and the dual potentials are connected via a duality transformation on the field tensor 
+$F_{\mu\nu}.$  
+% The field tensor $F_{\mu\nu}:= \partial_\mu A_\nu-\partial_\nu A_\mu$ is used in relativistic field theory.
+% The field tensor is the gauge-invariant, Lorentz-invariant object which is used to construct the Lagrangian.  
+% In matrix form, the field tensor is 
+% \begin{equation}
+%   F_{\mu\nu} = \left( \begin{array}{cccc}
+%     0 & -E_x & -E_y & -E_z\\
+%     E_x & 0 & B_z & -B_x\\
+%     E_y & -B_z & 0 & B_y\\
+%     E_z & B_x & -B_y & 0
+% \end{array}\right).
+% \end{equation}
+% The dual tensor is defined as $G_{\mu\nu}:=\varepsilon_{\mu\nu\rho\sigma}F^{\rho\sigma}=\partial_\mu C_\nu-\partial_\nu C_\mu$.
+% The Levi-Civita density, $\epsilon_{\mu\nu\rho\sigma}$ is the fully antisymmetric rank four tensor density;
+% where $\epsilon_{0123}=1$ or for any even permutation of indices; it picks up a negative sign for any odd permutation;
+% and $\epsilon_{\mu\nu\rho\sigma}=0$ if any indices are repeated.  Of course, there are additional material factors
+% that should appear.
+%  These could be provided by the Gordon metric $g_{00}=\sqrt{\epsilon},g_{ij}=\delta_{ij}/\sqrt{\mu}, g_{0i}=0$
+% ~\cite{Gordon1926,Leonhardt2000}.
+Note that the electric and magnetic fields are unchanged under the following gauge transformation 
 \begin{align}
-  \vect A' = \vect A +\nabla\alpha\qquad
-  \phi' = \phi - \partial_t\alpha
+  \vect A' = \vect A +\nabla\alpha\qquad  \phi' = \phi - \partial_t\alpha,
 \end{align}
+where $\alpha$ is an arbitrary function.  Physical results do not depend on the gauge chosen to carry out 
+calculations.  However in order to quantize the theory it is necessary to remove this degree of freedom.
 
+% The classical Lagrangian for electromagnetism in vacuum is 
+% \begin{equation}
+%   L=-\frac{1}{4}\int d^3\vect{r}\, F_{\mu\nu}F^{\mu\nu} =-\frac{1}{2}\int d^3\vect{r}\, (|\vect{E}|^2-|\vect{B}|^2).
+% \end{equation}
 % The remaining two Maxwell equations are then given by
 % \begin{align}
 % \nabla\cdot\left[ \epsilon_0\epsvx\left(-\nabla\phi-\partial_t\vect A\right)\right] &= 0\\
 % \nabla\times\nabla\times\vect A +\mu_0\epsilon_0\epsvx\partial_t\left(\nabla\phi+\partial_t\vect A\right)&=0.
 % \end{align}
 
-Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.
-We will initially work with a spatially varying, but frequency independent dielectric.
+%Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.
+%We will initially work with a spatially varying, but frequency independent dielectric.
+
+The canonical procedure for quantization starts from the classical Lagrangian, finds the equivalent
+related Hamiltonian.  The theory is quantized by promoting the classical Poisson brackets to 
+quantum commutation relations.  However, in the presence of gauge theory this procedure must be slightly
+modified since there are gauge or redundant degrees of freedom.  Since the gauge degrees of freedom
+are non-dynamical they imply constraints.  
+There are couple ways to confront this.
+The Gupta-Bleuler formulation restricts the allowed states to obey a gauge condition.  
+Dirac's method instead adjusts the classical bracket to account for the constraints~\cite{Dirac1964,Dirac1966}.
+The Dirac bracket is what passes over to the commutation relation.
+Finally in a path integral, it is necessary to remove the gauge degree of freedom via gauge fixing.
+This is often done via Faddeev-Popov gauge fixing~\cite{Faddeev1991}, which we will also use once the time comes.  
+
+The classical Lagrangian for electromagnetism in non-dispersive media is
 \begin{align}
 L &= \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big) %\\
-= \frac{\epsilon_0}{2}\int\! d^3r\,\big[\epsr(\vect{r})(\nabla\phi+\partial_t\vect A)^2 - \mur(\vect{x})c^2(\nabla\times\vect A)^2\big].
+= \frac{\epsilon_0}{2}\int\! d^3r\,\big[\epsr(\vect{r})(\nabla\phi+\partial_t\vect A)^2 - \mur(\vect{r})c^2(\nabla\times\vect A)^2\big].
 \end{align}
 The momentum fields conjugate to the potential fields $A^\mu = (\phi,\vect A)$ are
 \begin{align}
 \Pi_0 & = \frac{\delta L}{\delta (\partial_t\phi)} = 0 \label{eq:Pi0}\\
-\vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsr(\vect{r})(\nabla\phi+\partial_t\vect A).
+\vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsr(\vect{r})(\nabla\phi+\partial_t\vect A),
 \end{align}
-Note that $\vect{\Pi}=-\vect{D}$, i.e. the momentum field conjugate to $\vect{A}$ is the electric displacement.
-Since $\Pi_0=0$ for all times, this must be preserved, which implies a constraint. Since the constraint
-equation must also be preserved, there will be a further constraint imposed on the theory.
+where $\delta L/\delta f$ is the functional derivative of the Lagrangian with respect to the function $f$.
+The functional derivative for a functional $F[f(x)]$ is formally defined as 
+\begin{equation}
+  \frac{\delta F}{\delta f(x')} := \lim_{a\rightarrow 0} \frac{F[f(x)+a\delta(x-x')]-F[f(x)]}{a}.
+\end{equation}
+% As a practical matter, the functional derivative $\delta f(t)/\delta f(t') = \delta(t-t')$ generalizes
+%  the notation that $\delta x_i/\delta x_j = \delta_{ij}$ from ordinary multivariate calculus. 
+The momentum field $\vect{\Pi}$, that is conjugate to $\vect{A}$ is proportional the electric displacement, $\vect{D}$.
+Since $\Pi_0=0$ for all times, there is a constraint on the system.
+Since the constraint equation must also be preserved at all times, there will be a further constraints imposed on the theory.
 That next constraint will turn out to be Gauss's law, which enforces conservation of electric charge. 
-This will in turn provide another constraint for the Hamiltonian theory.
-We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac1964, Dirac1966}
 
-Ultimately, in developing the Hamiltonian formulation it is necessary to correctly account for the constraints.
-We are going to follow the approach suggested by Paul Dirac in Ref.~\cite{Dirac1964, Dirac1966}, 
-which is analogous to the Gupta-Bleuler formulation.
-In that method the fields have canonical commutation relations imposed upon them, 
-and the gauge freedom restricts the states allowed the theory.  
-% Eq.~(\ref{eq:Pi0}) is a constraint on the Hamiltonian and we must check for any further constraints implied by that.
-% We must take all of these into account, \emph{after} we take over the classical Poisson brackets
-% over to quantum commutation relations. 
-
-The Hamiltonian for the classical fields is given by
+The Hamiltonian for the fields is given by
 \begin{align}
-H &= \int d^3x\,[ \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L}]\\
+H &= \int d^3r\,[ \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L}]\\
 % & = \int d^3x \, \vect \Pi\cdot\left(\frac{\vect{\Pi}}{\epsilon_0\epsvx}-\nabla\phi\right)
 % -\frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})} + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2\\
-& = \int d^3x\,\bigg[  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
+& = \int d^3r\,\bigg[  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
 -\vect{\Pi}\cdot\nabla\phi \bigg].
 \end{align}
-The equations of motion can be derived from the Hamiltonian. %  In particular, the requirement that the first constraint holds 
-% for all time implies 
-% \begin{equation}
-%   \dot{\Pi}_0 = -\frac{\delta H}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0,
-% \end{equation}
-The other equations of motion are 
-
-The Hamiltonian theory can be quantized by finding the Poisson bracket and promoting it to the commutator
-between the fields.  However, there is the matter of the constraints.  We will follow the Gupta-Bleuler
-prescription which restricts the allowed quantum states to those that obey the constraints.  
-
-In the Dirac formulation for handling constraints, the commutator is now the Poisson bracket augmented by the 
-Poisson brackets between the constraints.  Such equations are said to only hold weakly, and all constraint terms should be retained until
-the end of the calculation.  Only at the end should the constraints be set to zero.  
-(For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
 
 The Poisson bracket in 4-vector notation follows from the choice that $A^\mu = (\phi,\vect A)$.
 This implies that the momentum conjugate to $A^\mu$ is given by
 \begin{equation}
-\Pi_\mu = \frac{\partial \mathcal L}{\partial \dot{A}^\mu}.
+\Pi_\mu = \frac{\delta L}{\delta \dot{A}^\mu}.
 \end{equation}
-(Note that in this initial classical treatment, we will work in Minkowski space with metric $\eta_{\mu\nu}=\text{diag}(-1,1,1,1)$.)
+(Note that in this initial classical treatment, the metric is $\eta_{\mu\nu}=\text{diag}(-1,1,1,1)$.)
 The Poisson bracket for fields is 
 \begin{equation}
-  [F_\mu(\vect{x}),G_\nu(\vect{x'})] = \sum_\alpha\int d\vect{y}\bigg[
-  \frac{\delta F_\mu(\vect{x})}{\delta A^\alpha(\vect{y})}\frac{\delta G_\nu(\vect{x'})}{\delta \Pi_\alpha(\vect{y})}
-  -\frac{\delta G_\mu(\vect{x'})}{\delta A^\alpha(\vect{y})}\frac{\delta F_\nu(\vect{x})}{\delta \Pi_\alpha(\vect{y})}\bigg],
+  [F_\mu(\vect{r}),G_\nu(\vect{r'})] = \sum_\alpha\int d\vect{y}\bigg[
+  \frac{\delta F_\mu(\vect{r})}{\delta A^\alpha(\vect{y})}\frac{\delta G_\nu(\vect{r'})}{\delta \Pi_\alpha(\vect{y})}
+  -\frac{\delta G_\mu(\vect{r'})}{\delta A^\alpha(\vect{y})}\frac{\delta F_\nu(\vect{r})}{\delta \Pi_\alpha(\vect{y})}\bigg],
 \end{equation}
 where we have used $\Pi_\mu$ is conjugate to $A^\mu$.
 This is the straightforward generalization of the standard particle mechanics Poisson bracket.
 The Poisson bracket between the fields and momenta is
 \begin{align}
-[A_\mu(\vect{x}),\Pi_\nu(\vect{x'})]%  &= \sum_\alpha\int d\vect{y}  \bigg[
+[A_\mu(\vect{r}),\Pi_\nu(\vect{r'})]%  &= \sum_\alpha\int d\vect{y}  \bigg[
 % \frac{\delta A_\mu(\vect{x})}{\delta A^\alpha(\vect{y})}\frac{\delta \Pi_\nu(\vect{x'})}{\delta \Pi_\alpha(\vect{y})}\\
 % & = \sum_\alpha\int d\vect{y}g_{\mu \alpha}\delta^{\nu}_\alpha\delta(\vect{x'-y})\delta(\vect{x-y})\bigg]
-= \eta_{\mu \nu}\delta(\vect{x-x'}).  
+= \eta_{\mu \nu}\delta(\vect{r-r'}).  
 \end{align}
-In the quantum theory, the Poisson bracket between the fields goes over to the commutator between the field operators.  
 
-%\subsection{Constraints}
-Now we need to consider the constraints.
-%  We will use Paul Dirac's scheme for dealing with the constraints.
-  We need to ensure that the constraints are obeyed at all times 
---- which requires that all of the Poisson brackets with the Hamiltonian should vanish.
-   We should also consider the Poisson brackets of those constraints until we have exhausted 
-all of the conditions implied by the constraint.  
-From Eq.~\ref{eq:Pi0}, we have $\Pi_0 = 0$.  This in turn implies that 
+The equations of motion can be derived from the Hamiltonian.  For any quantity $F$, its time evolution 
+is given by $[F,H]$. 
+In particular, the requirement that the first constraint~(\ref{eq:Pi0} holds for all time implies 
 \begin{equation}
-\partial_t\Pi_0 = [\Pi_0,H ] =-\frac{\delta H}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0, 
+  \dot{\Pi}_0 = -\frac{\delta H}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0.
 \end{equation}
-which is Gauss's law in the absence of charges.
-% So we also have the constraint that $\nabla\cdot\vect{\Pi} = 0$.
-% Coulomb's law emerges as a constraint on the fields.  
+Since the momentum $\Pi$ is proportional to the displacement, this is just Gauss's law.  This constraint 
+does not impose any further constraints, since $[\nabla\cdot\vect{\Pi},H]=0$.  
+
+% %\subsection{Constraints}
+% Now we need to consider the constraints.
+% %  We will use Paul Dirac's scheme for dealing with the constraints.
+%   We need to ensure that the constraints are obeyed at all times 
+%   --- which requires that all of the Poisson brackets with the Hamiltonian should vanish.
+%    We should also consider the Poisson brackets of those constraints until we have exhausted 
+% all of the conditions implied by the constraint.  
+% % So we also have the constraint that $\nabla\cdot\vect{\Pi} = 0$.
+% % Coulomb's law emerges as a constraint on the fields.  
 
 We can equally well write the Hamiltonian as 
 \begin{align}
@@ -331,52 +336,84 @@ where $f$ and $g$ are arbitrary functions.  In this case $f$ and $g$ serve as ar
 
 \section{Quantum Theory}
 
-To pass over to the quantum theory, we take the Poisson brackets over to commutation relations 
-between operators and impose the constraints on the states we allow in the theory.
-In the Gupta-Bleuler formalism, one restrict the states allowed in the theory to obey the constraints,
-rather than the operators.  
+The Hamiltonian theory can be quantized by finding the Poisson bracket and promoting it to the commutator
+between the fields.  However, there is the matter of the constraints.  We will follow the Gupta-Bleuler
+prescription which restricts the allowed quantum states to those that obey the constraints.  
 
-The equal-time commutation relations are now 
+In the Dirac formulation for handling constraints, the commutator is now the Poisson bracket augmented by the 
+Poisson brackets between the constraints. 
+In these derivations, the constraints are only to be enforced after all calculations have been completed,
+including evaluating all Poisson brackets.
+The Dirac bracket between two variables $F$ and $G$, subject to a set of constraints $\chi$ is
 \begin{equation}
-[A_\mu(\vect{x},t),\Pi_\nu(\vect{x'},t)] = i\hbar \eta_{\mu\nu}\delta^{3}(\vect{x-x'}),
+  [F,G]_D= [F,G] + [F,\chi_r]([\chi_r,\chi_s])^{-1}[\chi_s,G]
 \end{equation}
-and the allowed states must obey:
+(For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
+In the example of QED, the Dirac bracket is 
 \begin{equation}
-\hat{\Pi}_0|\Psi\rangle = 0, \quad \nabla\cdot\hat{\Pi}|\Psi\rangle = 0.
+  [A_i(\vect{r},t),\Pi_j(\vect{r'},t)] = i\hbar\bigg(\delta_{ij}-\frac{\partial_i\partial_j}{\nabla^2}\bigg)\delta(\vect{r-r'}),
 \end{equation}
-When we insert identities we will use 
+where the right-hand side is the transverse $\delta$-function.  In this version, there are no 
+restrictions on the states, but the change in commutator leads to different state-overlap.  
+We will not pursue this any further.  
+% To quantize the theory, the Poisson brackets are promoted to commutation relations 
+% between operators.
+% In the Gupta-Bleuler formalism, one restrict the states allowed in the theory to obey the constraints,
+% rather than the operators.  
+
+% We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac1964, Dirac1966}
+
+% Ultimately, in developing the Hamiltonian formulation it is necessary to correctly account for the constraints.
+% We are going to follow the approach suggested by Paul Dirac in Ref.~\cite{Dirac1964, Dirac1966}, 
+% which is analogous to the Gupta-Bleuler formulation.
+% In that method the fields have canonical commutation relations imposed upon them, 
+% and the gauge freedom restricts the states allowed the theory.  
+% Eq.~(\ref{eq:Pi0}) is a constraint on the Hamiltonian and we must check for any further constraints implied by that.
+% We must take all of these into account, \emph{after} we take over the classical Poisson brackets
+% over to quantum commutation relations. 
+
+In the Gupta-Bleuler formulation, the equal-time commutation relations are given by 
+\begin{equation}
+[A_\mu(\vect{r},t),\Pi_\nu(\vect{r'},t)] = i\hbar \eta_{\mu\nu}\delta^{3}(\vect{r-r'}),
+\end{equation}
+and the allowed states $|\Psi\rangle$ must obey:
+\begin{equation}
+\hat{\Pi}_0|\Psi\rangle = 0, \quad \nabla\cdot\hat{\vect{\Pi}}|\Psi\rangle = 0.
+\end{equation}
+The resolutions of the identity for the fields are 
 \begin{align}
-V_\mathrm{gauge} &= \int d^3\vect A d\phi\,|\phi,\vect A\rangle\langle \phi,\vect A|\\
+1 &= \int d^3\vect A d\phi\,|\phi,\vect A\rangle\langle \phi,\vect A|\\
 1 &= \int d^4\Pi\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi})\delta(\Pi_0) 
-= \int d^3\vect{\Pi}\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi})
+= \int d^3\vect{\Pi}\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi}).
 \end{align}
-% The volume shows up because we are integrating over equivalent physical states that are related by gauge transformations.
-%   We won't care about this, since the volume only adds a constant to the energy.
-  The delta function in the momentum states ensures that we only include states that obey the constraints.
-%  We are ignoring any determinant that arising from changing measure, or rather assuming that it is already correctly accounted for.  
-
-The delta function can be written in the Fourier representation as 
+ (Strictly speaking, the identity for the potential states is proportional to the volume of the gauge group 
+ because we are integrating over equivalent physical states that are related by gauge transformations.
+ Ultimately, this adds an additive constant to the energy, but for electromagnetism this can be ignored.)
+ The $\delta$-functions restrict the momentum states to those that satisfy the constraints.
+The $\delta$-function can be written in the Fourier representation as 
 \begin{equation}
-\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left[-\frac{i}{\hbar}\int d^3x 
-  \varphi(\vect x)\nabla\cdot\vect{\Pi}(\vect x)\right],
+\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left[-\frac{i}{\hbar}\int d^3r 
+  \varphi(\vect r)\nabla\cdot\vect{\Pi}(\vect r)\right],
 \end{equation}
 where the factor of $\hbar$ is put there for later convenience.  
-
 Since the fields and momenta obey canonical commutation relations, and the states are restricted so that 
 $\hat{\Pi}_0|\Psi\rangle = 0$, the overlap between field and momentum states is
 \begin{equation}
-\langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left[-\frac{i}{\hbar}\int d^3x\, \vect A\cdot\vect{\Pi}\right].
+  \langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left[-\frac{i}{\hbar}\int d^3r\, \vect A\cdot\vect{\Pi}\right].
 \end{equation}
 
 \section{Electromagnetic Partition Function}
 
-Ultimately we want to evaluate the ground state energy, which requires that we evaluate the partition function 
+In order to calculate the energy in the field at zero and non-zero temperature, we will
+evaluate the partition function for the fields, and take the appropriate derivatives.  
+The electromagnetic partition function is defined as
 \begin{equation}
 Z\subEM = \mathrm{Tr}[e^{-\beta \op{H}}] = \int d\phi_0 d\vect A_0 \langle \phi_0,\vect A_0|e^{-\beta \op{H}}|\phi_0,\vect A_0\rangle.
 \end{equation}
 In analogy with the path integrals described in Ch.~\ref{ch:introduction}, this is can be converted 
-into a path integral --- a sum over all possible field configurations evolving in imaginary time 
-$\beta = i\tau$.  In this case, at each step there is also a delta-function restricting the allowed momentum states.
+into a path integral---a sum over all possible field configurations evolving in imaginary time 
+$\beta = i\tau$.
+  At each step there is also a $\delta$-function restricting the allowed momentum states.
 The path integral is given by
 \begin{align}
 Z & = \int d\phi d\vect A \langle \phi,\vect A|e^{-\beta \hat{H}}|\phi,\vect A\rangle %\\
@@ -409,11 +446,11 @@ Using the Fourier representation of the delta function, we can write one of thos
 \begin{align}
 \langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| e^{-d\beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle
 =
-% \int\! d\vect{\Pi}_\beta \int\! D\varphi_\beta\exp\bigg[ \int d^3x \,
+% \int\! d\vect{\Pi}_\beta \int\! D\varphi_\beta\exp\bigg[ \int d^3r \,
 % -\frac{i}{\hbar}\varphi_\beta(\nabla\cdot\vect{\Pi}_\beta) +\frac{i}{\hbar}\left(\vect A_{\beta+d\beta}
 % -\vect A_{\beta}\right)\cdot\vect{\Pi}_\beta  -d\beta\left( \ frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})}
 % +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\right)\bigg]\\
-& \int\! d\vect{\Pi}_\beta \int\!D\varphi\,e^{ -d\beta\int d^3x 
+& \int\! d\vect{\Pi}_\beta \int\!D\varphi\,e^{ -d\beta\int d^3r 
 \big[ \mathcal{H}_\beta-i\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta + \nabla\varphi_\beta)/\hbar 
 \big]},
 \end{align}
@@ -432,10 +469,10 @@ where
 The momentum integrals are Gaussian, and can be carried out immediately, with the result that
 \begin{multline}
 \langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| \exp[-d\beta \hat{H}]|\phi_\beta, \vect A_\beta\rangle\\
-%  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3x \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
+%  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3r \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
 % -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\varphi_\beta) \right] 
 \propto   \det[\epsr(\vect{r})]^{3/2}\exp \left\{ -\frac{\epsilon_0d\beta}{2\hbar^2}
-  \int d^3x\,\bigg[ \epsr(\vect{r})(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
+  \int d^3r\,\bigg[ \epsr(\vect{r})(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
   +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\}.
 \end{multline}
 Initially I missed the factor of $\epsr(\vect{r})^{3/2}$, which I discovered by reading a paper by
@@ -444,10 +481,10 @@ Initially I missed the factor of $\epsr(\vect{r})^{3/2}$, which I discovered by 
 % We are integrating over all field configurations, and at all points in space.
 We will introduce a notation
 \begin{equation}
-\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{x_k}\int d\vect{A}(\vect{x}_k,\beta)
-\int d\varphi(\vect{x}_k,\beta)\det[\epsilon^{3/2}(\vect{x}_k)],
+\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{r_k}\int d\vect{A}(\vect{r}_k,\beta)
+\int d\varphi(\vect{r}_k,\beta)\det[\epsilon^{3/2}(\vect{r}_k)],
 \end{equation}
-where the product $\vect{x}_k$ runs over all positions $\vect{x}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
+where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
 
 If we take the product of all of the matrix elements, then the total path integral is given by 
 % \begin{equation}
@@ -479,7 +516,7 @@ Since the constants $\det\epsilon$ will be the same in both cases, these will ca
 renormalization.
 We can then ignore drop these constant determinants and consider 
 \begin{equation}
-  Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4x\,
+  Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
   \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
 \end{equation}
 \comment{also dropped A0 integrals}
@@ -495,7 +532,7 @@ The filed path integral can be written in terms of the Euclidean action,
  \end{equation}
 where the Euclidean action is 
 \begin{equation}\label{eq:euclidean_action}
-S_E[\vect{A},\phi] = \frac{1}{2} \int d^4x\, \bigg[
+S_E[\vect{A},\phi] = \frac{1}{2} \int d^3rd\tau\, \bigg[
 \epsr(\vect{r})\left( \partial_4\vect{A}-\nabla A_4\right)^2
 +\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
 \end{equation}
@@ -530,16 +567,16 @@ One further trick is often used in gauge-fixing the path integral.  Instead of f
 $G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is an otherwise free parameter,
 we can integrate it against a Gaussian density,
 \begin{equation}
-  1 = \int D\gamma \exp\left[-\frac{1}{2}\int d^4x\,\gamma^2(x)\right].
+  1 = \int D\gamma \exp\left[-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right].
 \end{equation}
 Such factors are unity in the path integral sense that any constants will cancel out when considering
 physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}
  Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
- \exp\left[-S_E-\frac{1}{2}\int d^4x\, \gamma^2(x)\right]\nonumber\\
+ \exp\left[-S_E-\frac{1}{2}\int d^3rd\tau\, \gamma^2\right]\nonumber\\
  &= \int D\vect{A} DA_4\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
- \exp\left[-S_E-\frac{1}{2}\int d^4x\, G^2\right],
+ \exp\left[-S_E-\frac{1}{2}\int d^3rd\tau\, G^2\right],
 \end{align}
 where we carried out the integral over $\gamma$ in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
@@ -748,7 +785,6 @@ The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by
   L^{(V)}_{ij} &=-\epsr\partial_\tau^2\delta_{ij}-\partial_k\partial_k\delta_{ij}+\partial_j\partial_i
   -\epsr\partial_i\frac{1}{\epsr^2}\partial_j\epsr.\label{eq:matrix_operator_A}
 \end{align}
-
 
 At this point, we choose to rescale the scalar field, 
 \begin{equation}

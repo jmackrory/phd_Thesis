@@ -410,17 +410,19 @@ The electromagnetic partition function is defined as
 \begin{equation}
 Z\subEM = \mathrm{Tr}[e^{-\beta \op{H}}] = \int d\phi_0 d\vect A_0 \langle \phi_0,\vect A_0|e^{-\beta \op{H}}|\phi_0,\vect A_0\rangle.
 \end{equation}
-In analogy with the path integrals described in Ch.~\ref{ch:introduction}, this is can be converted 
-into a path integral---a sum over all possible field configurations evolving in imaginary time 
-$\beta = i\tau$.
-  At each step there is also a $\delta$-function restricting the allowed momentum states.
+In analogy with the scalar field path integrals described in Ch.~\ref{ch:introduction}, this is can be converted 
+into a field path integral---a sum over all possible field configurations evolving in imaginary time 
+subject to periodic boundary conditions.
 The path integral is given by
 \begin{align}
 Z & = \int d\phi d\vect A \langle \phi,\vect A|e^{-\beta \hat{H}}|\phi,\vect A\rangle %\\
  = \int d\phi d\vect A \langle \phi, \vect A| \prod_{i=1}^{N}e^{-d\beta\hat{H}}|\phi,\vect A\rangle,
 \end{align}
 where $d\beta = \beta/N$.
-Now we insert $(N-1)$ factors of the gauge volume between each factor of $e^{-d\beta\hat{H}}$.  
+Next, insert a factor of the gauge volume between each factor of $e^{-d\beta\hat{H}}$,
+and insert a complementary indentity for the momentum fields for each matrix element.    
+Each field will be labelled by a subscript with its ``time'' $A_\beta(\vect{r})$.
+All fields are functions of position $\vect{r}$, so this will be suppressed for the moment.  
 % \begin{equation}
 % Z  = \prod_{i=1}^N\int d\phi_id\vect A_i \delta(\vect A_N-\vect A_0)\delta(\phi_N-\phi_0)
 % \langle \phi_i,\vect A_i|e^{-d\beta\hat H}|\phi_{i-1},\vect A_{i-1}\rangle,
@@ -428,8 +430,8 @@ Now we insert $(N-1)$ factors of the gauge volume between each factor of $e^{-d\
 % where we have defined $A^\mu_N=A^\mu_0=A^\mu$.
 %   Now we note that each $A_i$ corresponds to a particular temperature range, 
 % so we can write $A_i = A_{\beta+d\beta}$ and $A_{i-1}=A_\beta$.  
-Next we insert the identity for the momentum states between each matrix element.
-  We focus our attention on a particular slice of matrix elements:
+%Next we insert the identity for the momentum states between each matrix element.
+%  We focus our attention on a particular slice of matrix elements:
 % \begin{align}
 % \langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| e^{-d\beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle %\\
 % % & = \int d\Pi_0 d\vect{\Pi}_\beta\,\delta(\Pi_0)\delta(\nabla\cdot\vect{\Pi}_\beta)
@@ -439,10 +441,11 @@ Next we insert the identity for the momentum states between each matrix element.
 % \langle \vect A_{\beta+d\beta}| \vect{\Pi}_\beta\rangle
 % \langle \vect{\Pi}_\beta|\exp[-d\beta \hat{H}]|\vect A_\beta\rangle.
 % \end{align}
-Since $\Pi_0$ is constrained to vanish, we can carry out that integral immediately, and focus on the other
-components of the momentum field.
+Since $\Pi_0$ is constrained to vanish, the $\Pi_0$ integrals can be carried out immediately.
+In addition, the $A_0$ integrals are independent of the other fields and lead to a (divergent) constant.
+However, since the constant is the same for all configurations of bodies, it will cancel out under renormalization.  
 
-Using the Fourier representation of the delta function, we can write one of those matrix elements as 
+Using the Fourier representation of the $\delta$-function, the matrix elements can be written as 
 \begin{align}
 \langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| e^{-d\beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle
 =
@@ -454,79 +457,62 @@ Using the Fourier representation of the delta function, we can write one of thos
 \big[ \mathcal{H}_\beta-i\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta + \nabla\varphi_\beta)/\hbar 
 \big]},
 \end{align}
-where
+where the Hamiltonian for a particular $\beta$ range is
 \begin{align}
-  \mathcal{H}_\beta = \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2
+  \mathcal{H}_\beta = \frac{\vect{\Pi}^2_\beta}{2\epsilon_0\epsr(\vect{r})} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2.
 \end{align}
-%   We will be subtracting off the vacuum energy, so we will be sloppy over keeping track of any constant normalization factors.
-%   We will need to be careful over constants with position dependence, 
-% but overall factors of $\pi, c,\text{etc.}$ are irrelevant. 
- We have also integrated by parts on the term coming from the Fourier representation of the delta function.
-  In addition we have identified 
-\begin{equation}
-  \partial_\beta\vect A_\beta=\frac{\vect A_{\beta+d\beta}-\vect A_\beta}{d\beta}.
-\end{equation}
-The momentum integrals are Gaussian, and can be carried out immediately, with the result that
+ We have also integrated by parts on the term coming from the Fourier representation of the delta function, 
+and identified $  \partial_\beta\vect A_\beta:=(\vect A_{\beta+d\beta}-\vect A_\beta)/d\beta.$
+The momentum integrals are Gaussian and can be carried out immediately, with the result that
 \begin{multline}
-\langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| \exp[-d\beta \hat{H}]|\phi_\beta, \vect A_\beta\rangle\\
+\langle \phi_{\beta+d\beta}\vect A_{\beta+d\beta}| e^{-d\beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle\\
 %  \int\! d\vect{\Pi}_\beta \exp\left[ -d\beta\int d^3r \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
 % -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\varphi_\beta) \right] 
-\propto   \det[\epsr(\vect{r})]^{3/2}\exp \left\{ -\frac{\epsilon_0d\beta}{2\hbar^2}
-  \int d^3r\,\bigg[ \epsr(\vect{r})(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
-  +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\}.
+\propto   \det[\epsr(\vect{r})]^{3/2}\exp \left\{ -\frac{\epsilon_0d\beta}{\hbar^2}
+  \int d^3r\,\bigg[ \frac{\epsr(\vect{r})}{2}(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
+  +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\},
 \end{multline}
-Initially I missed the factor of $\epsr(\vect{r})^{3/2}$, which I discovered by reading a paper by
- Bordag on path integral quantization in dielectric media \cite{Bordag1998}.
-
-% We are integrating over all field configurations, and at all points in space.
-We will introduce a notation
+where the functional determinant $|\epsr|^{3/2}$ comes from the momentum integrals.  
+It is convenient to introduce a notation
 \begin{equation}
-\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{r_k}\int d\vect{A}(\vect{r}_k,\beta)
+\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{r_k,\beta'}\int d\vect{A}(\vect{r}_k,\beta')
 \int d\varphi(\vect{r}_k,\beta)\det[\epsilon^{3/2}(\vect{r}_k)],
 \end{equation}
 where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
-
-If we take the product of all of the matrix elements, then the total path integral is given by 
+%If we take the product of all of the matrix elements, then the total path integral is given by 
 % \begin{equation}
 % Z = \int D\vect A D\varphi\, \epsr(\vect{r})^{3/2}\exp\left[-\frac{\epsilon_0}{2\hbar^2}\int d^3x\int_0^\beta d\beta\,
 % \epsr(\vect{r})\left(\partial_\beta\vect A-\nabla\varphi\right)^2+\hbar^2c^2(\nabla\times\vect A)^2\right].  
 % \end{equation}
-We can change variables to $x_4=\beta\hbar c$, and $A_4 = \varphi/\hbar c$, and rescale all of the fields
-to eliminate the constants out front.  These rescaling cancel out under renormalization anyway. 
+We can change variables to $\tau=\beta\hbar c$, and $A_4 = \varphi/\hbar c$, and rescale all of the fields
+to eliminate the constants in the exponential.
+%These rescaling cancel out under renormalization anyway. 
 %Note that $A_4$ has the same dimensions as $\vect{A}$.
-We can also see that $x_4$ is proportional to the thermal de-Broglie wavelength, up to a factor of $2\pi$.  
+The new parameter $\tau$ is proportional to the thermal de-Broglie wavelength.
 \begin{equation}
-Z = \int D^4A\, \epsr(\vect{r})^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} dx_4\,
- \bigg[ \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect A)^2\bigg]\right\}.
+Z = \int D^4A\, \epsr(\vect{r})^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
+ \bigg[ \epsr(\vect{r})\left(\partial_\tau\vect{A}-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg]\right\}.
 \end{equation}
 We will compare this partition function to the case when the objects are infinitely far apart,
  which we will denote as $Z_0$.
 The objects will still be present in the space, but they will be too far away to interact significantly.  
-
-We can write the $\epsr(\vect{r})$ term as a functional determinant,
- since it is a product, $\det|\epsr(\vect{r})|=\prod_{r_k}\epsr(r_k)$.
- If we move the objects far apart from each other, 
- the $\epsr$-determinant will not change value since we are assuming the amount of material 
- $\epsilon$ is constant.  
- Ultimately we will calculate energies from the partition function.  In the zero temperature limit
-\begin{equation}
-E-E_0 = -\lim_{\beta\rightarrow 0}\frac{1}{\beta} \log Z-\log Z_0.
-\end{equation}
+% We can write the $\epsr(\vect{r})$ term as a functional determinant,
+%  since it is a product, $\det|\epsr(\vect{r})|=\prod_{r_k}\epsr(r_k)$.
+If we move the objects far apart from each other, 
+the $\epsr$-determinant will not change value since the amount of material $\epsilon$ is constant.  
+% Ultimately we will calculate energies from the free energy partition function.  In the zero temperature limit
+% \begin{equation}
+% E-E_0 = -\lim_{\beta\rightarrow 0}\frac{1}{\beta} \log Z-\log Z_0.
+% \end{equation}
 Since the constants $\det\epsilon$ will be the same in both cases, these will cancel out under this 
 renormalization.
-We can then ignore drop these constant determinants and consider 
-\begin{equation}
-  Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
-  \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
-\end{equation}
-\comment{also dropped A0 integrals}
+% We can then ignore drop these constant determinants and consider 
+% \begin{equation}
+%   Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
+%   \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
+% \end{equation}
 
-At this point Bordag\etal~\cite{Bordag1998} rescale the fields to handle the functional determinant
-in $\epsr$.  (The goal of that paper seems to be to examine the divergence structure of the theory,
-at a very formal level, rather than the straightforward energy calculation we wish to carry out.)
-As suggested above, the rescaling is not strictly necessary.  
-
-The filed path integral can be written in terms of the Euclidean action,
+The field path integral can be written in terms of the Euclidean action,
  \begin{equation}
  Z = \int D\vect{A} D\phi e^{-S_E[\vect{A},A_4]},
  \end{equation}

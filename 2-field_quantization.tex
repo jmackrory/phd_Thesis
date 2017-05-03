@@ -932,11 +932,12 @@ failures to make sense of the matrix path integral.}
 \section{Scalar Decomposition for Planar Geometries}
 
 The EM field can be split into two non-interacting polarizations for media that only vary in one Cartesian dimension in one dimension.
-These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.  In the TE polarization,
-the electric field is perpendicular to the plane of incidence, while in the TM polarization the magnetic field
-is perpendicular to the plane of incidence.
-In the each case a scalar field theory can be developed.  For the TE polarization the electric
-field behaves as a scalar throughout the problem: while its magnitude may vary, its direction does not.
+These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
+In the TE polarization, the electric field is perpendicular to the plane of incidence, 
+while in the TM polarization the magnetic field is perpendicular to the plane of incidence.
+In the each case a scalar field theory can be developed.
+For the TE polarization the electric field behaves as a scalar throughout the problem: 
+while its magnitude may vary, its direction does not.
 The same is true for the magnetic field in the TM polarization.  
 In this case, the two fields will turn out to mirror each other under a duality transformation exchanging
 electric and magnetic properties of both fields and matter.  
@@ -945,38 +946,37 @@ The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}
 Consider a medium which varies in only one Cartesian direction $z$.
 The material properties $\epsr(z)$,$\mur(z)$ also only vary in this direction, which implies 
 that the fields have the same dependence.  
-In this case the action for the vector electromagnetic can be split into two non-interacting scalar fields.
+In this case the action for the vector electromagnetic field can be split into two non-interacting scalar fields.
 
-From Maxwell's equations the electric and magnetic fields can be split into two sets: $(E_y, B_x, B_z)$
-and $(B_y,E_x,E_z)$.
+% From Maxwell's equations the electric and magnetic fields can be split into two sets: $(E_y, B_x, B_z)$
+% and $(B_y,E_x,E_z)$.
 
-Recall that the classical action is given by 
-\begin{equation}
-  S = \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
-\end{equation}
+% Recall that the classical action is given by 
+% \begin{equation}
+%   S = \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
+% \end{equation}
 
-\subsection{TE Partition Function}
+\subsection{Scalar Polarization Partition Functions}
 
-The action for the TE scalar is 
+The action for the TE scalar $\phi:=\phi(\vect{r},t)$ is 
 \begin{equation}
   S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg),
 \end{equation}
-where $\vect{E}= \partial_t\phi\hat{y}$.  The partition can be found via the same procedure 
+where $\vect{E}= \partial_t\phi\hat{y}$.  The partition function can be found via the same procedure 
 we used for the Dirichlet scalar, and full four-potential.  However, we will just skip to the final
-result in terms of the partition function with the Euclidean action.
-The partition function in terms of the scalar $\phi:=\phi(\vect{r},\tau)$ is 
+result in terms of the partition function with the Euclidean action,
 \begin{equation}
   Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
     \bigg(\epsr(\vect{r})(\partial_\tau\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg)\right].
 \end{equation}
-The field $\phi$ can be rescaled as $\tilde{\phi}:=\sqrt{\mur}\phi$ for the same reasons to the matrix path integral.  
+The field $\phi$ can be rescaled as $\tilde{\phi}:=\sqrt{\mur}\phi$ for the same reasons to the matrix path integral:  
 The scaled field yields a Gaussian probability density in the worldline, 
 and sidesteps any possible issues related to quantizing a field on a curved manifold.
-The path integral can be rewritten in terms of these new variables, and after an integration by parts is written
+The path integral can be rewritten in terms of these new variables, and after an integration by parts is given by
 \begin{equation}
   Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
-    \,\phi\bigg(-\epsr(\vect{r})\mur(\vect{r})\partial^2_\tau 
-    - \sqrt{\mur}\nabla\cdot\frac{1}{\mur(\vect{r})}\nabla\sqrt{\mur}\bigg)\phi\right].
+    \,\phi\bigg(-\epsr\mur\partial^2_\tau 
+    - \sqrt{\mur}\,\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\bigg)\phi\right].
 \end{equation}
 The gradients can be expanded out in the same fashion as Eq.~(\ref{eq:TM_potential_derivatives}), which
 yields an additional potential, 
@@ -988,16 +988,13 @@ The Gaussian integral over $\phi$ can be carried out immediately, with the resul
   Z\subTE = \det\bigg\{-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z)  \bigg\}^{-1/2}.
 \end{equation}
 
-\subsection{TM Partition Function}
 
 A similar derivation is possible for fields where $\vect{H}:=\partial_t\psi\hat{y}$.
-
 In that case electromagnetic duality can be exploited to rewrite our results.
 Maxwell's equations are invariant under the following duality transformation in the absence of sources:
 $\epsr\Leftrightarrow \mu, \vect{D}\Leftrightarrow \vect{B}, \vect{E}\Leftrightarrow-\vect{H}$.
 As one might expect, this field theory can be naturally formulated in terms of the dual potentials, 
 subject to ``dual Coulomb gauge'', $\nabla\cdot\vect{C}=0$.
-
 Exactly the same manipulations as the TE case can be carried out, but with $\epsr$ and $\mur$ exchanged.
 The TM partition function is 
 \begin{equation}
@@ -1038,21 +1035,26 @@ is easily recovered by setting $\epsr=\mur=1$ everywhere, and subtracting the re
 
 The worldline path integrals can be developed in the usual fashion, where differential operators 
 pass over to momentum operators on the auxiliary Hilbert space.  There are no problems with 
-operator ordering or commutation since $\epsr(z)\mur(z)\partial_4^2$ is the only case of joint position and momentum operators.
+operator ordering or commutation since $\epsr(z)\mur(z)\partial_\tau^2$ is the only case of joint position and momentum operators.
 After converting the operators, the TE partition function is
 \begin{align}
-    \cF\subTE &= \frac{\kB T}{2}\int\frac{d\cT}{\cT}\int d\vect{x}_0d\tau_0
+    \cF\subTE &= \frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_0d\tau_0
     \langle \vect{x}_0,\tau_0|e^{-\epsr(\op{z})\mur(\op{z})\partial_\tau^2+\op{\vect{p}}^2]\cT/2 - V\subTE(\op{z})\cT}
     |\vect{x}_0,\tau_0\rangle.
 \end{align}
 Note that although the potential only varies in one dimension, it is still necessary to evaluate the trace and path integrals
-over all of the dimensions.  The path integral can be developed in the usual fashion.  After splitting the operator 
+over all of the dimensions.  The path integral can be developed in the usual fashion, with one minor difference.
+Since the exponential operator is independent of $\tau$, it is not necessary to develop the path integral
+in the $\tau$-direction.  As a result, only single integrals over $\tau$ and $p_\tau$ will be required.
+ However, it is still essential to develop the spatial path integral since $\epsr(z)\mur(z)$ and $\op{\vect{p}}^2$
+do not commute.
+After splitting the operator 
 into the product of many terms and inserting the momentum identities we have
 \begin{align}
-    \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_Nd\tau_N 
-    \int \prod_{k=0}^{N-1}\frac{d\vect{x}_kd\tau_kd\vect{p}_kdp_{\tau,k}}{(2\pi)^D}
-    \delta(\vect{x}_N-\vect{x}_0)\delta(\tau_N-\tau_0)\nonumber\\
-    &\times\bigg[\prod_{j=0}^{N-1}e^{-\epsr(z_j)\mur(z_j)p_{\tau,j}^2\Delta\cT/2 +ip_{\tau_j}(\tau_{j+1}-\tau_j)}
+    \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\frac{d\tau_0 dp_\tau}{2\pi}
+    \int \prod_{k=0}^{N-1}\frac{d\vect{x}_kd\vect{p}_k}{(2\pi)^{D-1}}
+    \delta(\vect{x}_N-\vect{x}_0)\nonumber\\
+    &\times\bigg[\prod_{j=0}^{N-1}e^{-\epsr(z_j)\mur(z_j)p_{\tau}^2\Delta\cT/2}
      e^{-\vect{p}_j^2\Delta \cT/2 +i\vect{p}_j\cdot(\vect{x}_{j+1}-\vect{x}_j)- V\subTE(z_j)\Delta\cT}
     \bigg],
 \end{align}
@@ -1069,8 +1071,9 @@ The Gaussian momentum integrals can be evaluated immediately, with the result th
     \bigg].
 \end{align}
 
-This can be further simplified by carrying out the Gaussian integrals in $\tau$, since those 
-terms carry the only $\tau$-dependence.  We will need the following Gaussian integral
+% This can be further simplified by carrying out the Gaussian integrals in $\tau$, since those 
+% terms carry the only $\tau$-dependence.
+We will need the following Gaussian integral
 \begin{align}
   \int_{-\infty}^\infty dy\, \frac{e^{-(x-y)^2/(2\sigma_1^2)}}{\sqrt{2\pi\sigma_1^2}}\frac{e^{-(y-z)^2/(2\sigma_2^2)}}{\sqrt{2\pi\sigma_2^2}}
       = \frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}e^{-(x-z)^2/[2(\sigma_1^2+\sigma_2^2)]}.

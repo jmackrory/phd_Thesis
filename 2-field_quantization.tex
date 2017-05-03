@@ -1168,24 +1168,16 @@ yields the answer quoted above.
 
 \section{Nonzero temperature Worldline Path Integrals}
 
-Let us change to using $\tau = \beta \hbar c$ as our temperature coordinate.  Then   
-\begin{equation}
-  Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
-    \left( \epsr(\vect{r})(\partial_{\tau}\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\right)\right].
-\end{equation}
-
-Since the path integral is periodic for $\tau\in[0,\beta\hbar c]$, the fields can be expanded 
-in a Fourier series,
-\begin{equation}
-  \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}).
-\end{equation}
-Here the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
-the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation,
-\begin{equation}
-\int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau} = \beta\hbar c \delta_{n,-m},
-\end{equation}
-where $\phi_n^* = \phi_{-n}$ since $\phi^*(\beta, \vect{r}) = \phi(\beta, \vect{r})$.  
-
+It has been found that the correct dispersion dependent results can be found by the simple 
+substitution $\epsr(\vect{r})\rightarrow\epsr(\vect{r},i\omega)$.  This was carefully examined 
+in the context of the Lifshitz theory by Barush and Ginzburg~\cite{Barash1975}, and more recently
+Rosa\etal\cite{Rosa2009}.  As noted earlier, Rahi\etal derived their effective Lagrangian at finite
+temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arguments apply here 
+%   Then   
+% \begin{equation}
+%   Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
+%     \left( \epsr(\vect{r})(\partial_{\tau}\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\right)\right].
+% \end{equation}
 % \begin{shaded}
 % \comment{See Dec 2012 notes for how to handle the variable counting from doubling the number of variables}
 % I'm just trying to figure out the factors of 2 here - just think of the transform to Matsubara 
@@ -1208,13 +1200,27 @@ where $\phi_n^* = \phi_{-n}$ since $\phi^*(\beta, \vect{r}) = \phi(\beta, \vect{
 % where $\phi_n = \phi_r + i \phi_i$.
 %   We then consider the limit where $N_\beta\rightarrow \infty$.  
 % \end{shaded}
-
-We assume that the appropriate frequency dependent path integral is 
+so assume that the appropriate frequency-dependent, non-zero temperature path integral is 
 \begin{equation}
 Z_{TE} = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
-  \int d^3r\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},s_n)\frac{s_n^2}{c^2} 
-    -\nabla\cdot\frac{1}{\mur(\vect{r},s_n)}\nabla\right)\phi_n(\vect{r})\right] .
+  \int d^3r\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
+    -\nabla\cdot\frac{1}{\mur(\vect{r},is_n)}\nabla\right)\phi_n(\vect{r})\right] .
 \end{equation}
+Since the path integral is periodic (since the partition function started as a trace, implying the starting and ending states 
+are identical), the fields can be expanded 
+in a Fourier series,
+\begin{equation}
+  \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}).
+\end{equation}
+Here the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
+the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation,
+\begin{equation}
+\int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau} = \beta\hbar c \delta_{n,-m},
+\end{equation}
+where $\phi_n^* = \phi_{-n}$ since the fields are real. 
+
+
+
 
 %Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
 The same field rescalings can be carried out as for the frequency independent case.  
@@ -1273,8 +1279,8 @@ In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi
 If we treat the material responses as being frequency independent, then the integral over frequency
 is Gaussian, and the zero temperature worldline (\ref{eq:TE_worldline}) is recovered.
 
-The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
-employ in the next chapter.  
+% The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
+% employ in the next chapter.  
 
 
 % \section{Quantization with Harmonic Medium and Linear Response}

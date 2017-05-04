@@ -991,6 +991,14 @@ numerical approach to computing Casimir forces~\cite{Johnson2011}.
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
 
+(We will briefly note methods based on computing van der Waals energies in the static field limit,
+by evaluating functional determinants for discrete spatial grids~\cite{Maggs2006,Pasquali2008}. This approach 
+omits any time evolution of the fields, but it does offer a direct method of trying to evaluate the field path integral.
+That work relied on direct spatial discretization to evaluate the functional determinants, which limits
+the size of medium that can be considered.)
+
+
+
 % \begin{enumerate}
 % %\item Experiments spurred development of theory.  
 % % \item Prior methods relied on mode-function expansion of fields, which is only possible
@@ -1347,12 +1355,14 @@ and did not have concrete, correct results.
 % world line method.   
 \subsection{Derivation of the Scalar Casimir Worldline Path Integral}
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
-(We will use terminology and scaling of dimensions in common with our later work, rather than the 
-choices used in the original papers by Gies\etal.)  
+We will use terminology and scaling of dimensions in common with our later work, rather than the 
+choices used in the original papers by Gies\etal~\cite{Gies2003}.
 
 \change{See also Ch 20 of Steck's Quantum Optics notes for an alternative perspective on this work, including
 some of the analytical techniques we will use later.}
 
+(As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
+ and $\vect{x}$, the coordinate of a path integral)
 
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
 The action for the field $\phi$ is given by 

@@ -1,6 +1,6 @@
-\chapter{Calculations}
-
-Nasty details about calculations
+\chapter{Detailed Calculations}
+\label{ch:nasty_calc}
+This Appendix collects a number of lengthy, but tedious calculations required in the main text.  
 
 
 
@@ -1410,8 +1410,119 @@ off the interface.
 
 
 
-\section{Classical Gauge Theory - Dual Potentials}
+\section{Integrated Renormalized Two-Body Feynman-Kac Formula}
 
+  The spatial integral over the solution $f_{12}$ in region I is
+  \begin{align}
+    J_I  &= \int_{-\infty}^{d_1}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{-\infty}^{d_1}dx_0
+    e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}
+    {\sqrt{2(\lambda+\chi_1)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}   \nonumber\\
+    % &\hspace{1cm}- e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{ - u\supTE_1}{\sqrt{2(\lambda+\chi_1)}} -  e^{-2\sqrt{2\lambda}(d_2-x_0)}
+    % \frac{u\supTE_2}{\sqrt{2(\lambda)}}\bigg]\\
+    &=\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}%   \nonumber\\
+    \label{eq:J1}
+%    &\hspace{1cm}
+%    + \dfrac{ u\supTE_1}{4(\lambda+\chi_1)} -  e^{-2\sqrt{2\lambda}d}\frac{u\supTE_2}{4\lambda}
+  \end{align}
+  The equivalent one-body expressions can be found by setting the one of the susceptibilities to zero.  
+  The spatial integrals over the other regions are 
+  \begin{align}
+    J_{II} &= \int_{d_1}^{d_2}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{d_1}^{d_2}dx_0\bigg[\dfrac{2u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d} + u\supTE_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
+    +u\supTE_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\bigg]\nonumber\\
+    &=\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    +\frac{(u\supTE_1+u\supTE_2)(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})},
+    \label{eq:J2}
+  \end{align}
+  and
+  \begin{align}
+    J_{II} &= \int_{d_2}^{\infty}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    &=\int_{d_2}^\infty dx_0\,e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
+    {\sqrt{2(\lambda+\chi_2)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}    \\
+    &=\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
+    {4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}    \label{eq:J3}
+  \end{align}
+  The total spatial integral for the fully renormalized two-body solution is found by adding together Eqs.(\ref{eq:J1})-(\ref{eq:J3}),
+  and subtracting off the one-body integrals.  The result is
+  \begin{align}
+    &\int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
+    -\big(f_{2}(\vect{x}_0)-f_{2}\sup0\big)\bigg]\\
+    % 
+   =&\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})} 
+    +\frac{u\supTE_1}{4(\lambda+\chi_1)}- \frac{u\supTE_2 e^{-2\sqrt{2\lambda}d}}{4\lambda} 
+    \nonumber\\
+    &+\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    +\frac{(u\supTE_1 +u\supTE_2)(1-e^{-2\sqrt{2\lambda}d})}
+    {4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
+    & -\frac{(u\supTE_1+u\supTE_2) (1-e^{-2\sqrt{2\lambda}d})}{4\lambda}\nonumber\\
+    &+\dfrac{u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2}{4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    -\dfrac{u\supTE_1 e^{-2\sqrt{2\lambda}d}}{4\lambda}    +\dfrac{u\supTE_2}{4(\lambda+\chi_2)}
+  \end{align}
+  After some algebra \comment{ALGEBRA DEATH TRAP!}
+  Then simplifying a little using $a/(1-x) -a = ax/(1-x)$.
+\begin{align*}
+  J=&+\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
+  &\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})} 
+    +\frac{u\supTE_1}{4(\lambda+\chi_1)}   \\
+    &   +\frac{(u\supTE_1 +u\supTE_2)(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+    -\frac{(u\supTE_1+u\supTE_2)}{4\lambda}\\
+    &+\dfrac{u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2}{4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+       +\dfrac{u\supTE_2}{4(\lambda+\chi_2)}
+  \end{align*}
+
+\begin{align*}
+  J=&+\frac{2d\,u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
+  &+\frac{u\supTE_2 e^{-2\sqrt{2\lambda}d}[1 - (u\supTE_1)^2]}{4(\lambda+\chi_1)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})} 
+    \\
+    & +\frac{(u\supTE_1 +u\supTE_2)e^{-2\sqrt{2\lambda}d}[-1+u\supTE_1u\supTE_2]}
+    {4\lambda(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\\
+    &+\frac{u\supTE_1 e^{-2\sqrt{2\lambda}d}[1-(u\supTE_2)^2]}{4(\lambda+\chi_2)(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+  \end{align*}
+
+%Rearranging central fraction, to cancel.  And factoring out common terms.
+% \begin{align*}
+%   J=&+\frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\bigg[\frac{2d\,u\supTE_1u\supTE_2}{\sqrt{2\lambda}}\nonumber\\
+%   &+\frac{u\supTE_2[1 - (u\supTE_1)^2]}{4(\lambda+\chi_1)} +\frac{u\supTE_1 [1-(u\supTE_2)^2]}{4(\lambda+\chi_2)}\\
+%     & -\frac{[u\supTE_1(1-(u\supTE_2)^2) +u\supTE_2(1-(u\supTE_1)^2)]}{4\lambda}\bigg]\\
+%     %
+%   =&+\frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\bigg[\frac{2d\,u\supTE_1u\supTE_2}{\sqrt{2\lambda}}\nonumber\\
+%   -\frac{u\supTE_1u\supTE_1}{4}\left(\frac{u\supTE_1}{\lambda+\chi_1}+\frac{u\supTE_2}{\lambda+\chi_2}
+%     -\frac{
+%   &+\frac{u\supTE_2 - u\supTE_2 (u\supTE_1)^2}{4(\lambda+\chi_1)} +\frac{u\supTE_1-u\supTE_1(u\supTE_2)^2]}{4(\lambda+\chi_2)}\\
+%     & -\frac{[u\supTE_1(1-(u\supTE_2)^2) +u\supTE_2(1-(u\supTE_1)^2)]}{4\lambda}\bigg]\\
+%   \end{align*}
+%Hoping to get 
+% \begin{align*}
+%   J=&+\frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+%   \bigg[\frac{2d\,u\supTE_1u\supTE_2}{\sqrt{2\lambda}}\nonumber\\
+%    &+u\supTE_2(1 -u\supTE_1)(1+u\supTE_1)\frac{1}{4}\left( \frac{1}{\lambda+\chi_1} - \frac{1}{\lambda}\right)\\
+%    &+u\supTE_1(1-u\supTE_2)(1+u\supTE_2)\frac{1}{4}\left(\frac{1}{\lambda+\chi_2}-\frac{1}{\lambda}\right)\bigg]
+%   \end{align*}
+All action is happening in second lines now.
+% \begin{align*}
+%   J_1=&+u\supTE_2\left(1-\frac{\sqrt{\lambda}-\sqrt{\lambda+\chi_1}}{\sqrt{\lambda}+\sqrt{\lambda+\chi_1}}\right)
+%   \left(1+\frac{\sqrt{\lambda}-\sqrt{\lambda+\chi_1}}{\sqrt{\lambda}+\sqrt{\lambda+\chi_1}}\right)
+%   \frac{1}{4}\left(\frac{\chi_1}{(\lambda+\chi_1)\lambda}\right)\\
+%   =&+u\supTE_2\left(\frac{\sqrt{\lambda+\chi_1}}{\sqrt{\lambda}+\sqrt{\lambda+\chi_1}}\right)
+%   \left(\frac{\sqrt{\lambda}}{\sqrt{\lambda}+\sqrt{\lambda+\chi_1}}\right)
+%   \left(\frac{\chi_1}{(\lambda+\chi_1)\lambda}\right)\\
+%   \end{align*}
+
+  For comparison what is 
+  \begin{align}
+    \frac{1}{r}- r &= \frac{\sqrt{\lambda}+\sqrt{\lambda+\chi}}{\sqrt{\lambda}-\sqrt{\lambda+\chi}}
+    - \frac{\sqrt{\lambda}-\sqrt{\lambda+\chi}}{\sqrt{\lambda}+\sqrt{\lambda+\chi}}\\
+&= \frac{(\sqrt{\lambda}+\sqrt{\lambda+\chi})^2 - (\sqrt{\lambda}-\sqrt{\lambda+\chi})^2}
+    {(\sqrt{\lambda}-\sqrt{\lambda+\chi})(\sqrt{\lambda}+\sqrt{\lambda+\chi})}\\
+&= \frac{(2\sqrt{\lambda}\sqrt{\lambda+\chi})}
+    {-\chi}\\
+  \end{align}
+  
+  So we have something like 
+  \begin{equation}
+    (r^{-1}-r)^{-1} = \frac{r}{1-r^2}
+  \end{equation}
 
 
 

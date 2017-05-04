@@ -464,29 +464,28 @@ The solution must be continuous at both surfaces $x=d_1,d_2$, and have continuou
 %     We would expect the Casimir energy to only depend on $d$ in this case.   
 
 Skipping what is some tedious algebra, the solution for closed Brownian paths can be be written 
-in each of three regions.  First, for paths starting inside the left hand body, when $d_1>x_0$, 
-\begin{equation}
-  f_{\text{TE},12}^{(I)}(x_0)= \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} 
-  + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}
-  {\sqrt{2(\lambda+\chi_1)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
-\end{equation}
-where the reflection coefficients are given by
+in each of three regions: Region I is inside the left hand body with $x_0<d_1$, Region II is 
+between the bodies with $d_1<x_0<d_2$, and Region III is inside the right hand body with $d_2<x_0$.
+The reflection coefficients for each body are given by 
 \begin{equation}
   u\supTE_i = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
 \end{equation}
-In between the half-spaces the solution is 
-\begin{equation}
-  f^{(II)}_{\text{TE},12}(x_0)=\frac{1}{\sqrt{2\lambda}} 
+The solutions for each region are 
+ \begin{subequations}
+  \label{eq:Feynman-Kac TE two step}
+ \begin{align}
+  f_{\text{TE},12}^{(I)}(x_0)&= \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} 
+  + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{u\supTE_2 e^{-2\sqrt{2\lambda}d} - u\supTE_1}
+  {\sqrt{2(\lambda+\chi_1)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\\
+  f^{(II)}_{\text{TE},12}(x_0)&=\frac{1}{\sqrt{2\lambda}} 
   + \dfrac{2u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d} + u\supTE_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
-    +u\supTE_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
-\end{equation}
-Finally, in the right hand planar body, for $d_2<0$, the solution is 
-\begin{equation}
-  f^{(III)}_{\text{TE},12}(x_0) = 
+    +u\supTE_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}\\
+  f^{(III)}_{\text{TE},12}(x_0)& = 
   \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} 
   + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(u\supTE_1 e^{-2\sqrt{2\lambda}d}-u\supTE_2)}
   {\sqrt{2(\lambda+\chi_2)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}.
-\end{equation}
+\end{align}
+\end{subequations}
 The ``12'' subscript denotes that both left and right or first and second bodies are present.
 The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
 be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.  
@@ -551,13 +550,13 @@ The regularized TM potential is now given by
   V\subTM\supa(x) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)\big].
 \end{equation}
 The worst singularity present are the $\delta$-functions from the second derivative.
-While the potential is still horribly singular, and cannot be handled nicely for just a single path, the ensemble
+The potential is still quite singular, and cannot be handled nicely for just a single path, the ensemble
 averaged expression over many such paths is well behaved.  And that ensemble averaged expression can be
 found by solving the associated diffusion equation.  Fortunately, this is smooth enough to get sensible results.
 
-
 \begin{figure}
   \hspace{2cm} FIGURE FROM POSTER
+  
   \caption[Regularized TM Potential]{Schematic drawing of a regularized TM potential at a surface. 
     Vertical arrows denote $\delta$-functions.}
 \end{figure}

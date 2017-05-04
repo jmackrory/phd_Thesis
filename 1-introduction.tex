@@ -51,7 +51,7 @@ of these devices.
 The advent of these experiments in complicated arrangements of bodies, has spurred the development
 of a number of theoretical and computational methods for computing Casimir effects~\cite{Dalvit2011,Bordag2009}. 
 To model these experiments, it is necessary to be able to compute the Casimir effect between arbitrarily shaped bodies, with 
-realistic material properties --- which in general requires a numerical approach~\cite{Johnson2011}.
+realistic material properties---which in general requires a numerical approach~\cite{Johnson2011}.
 The most important of these modern methods are the so-called ``scattering method''~\cite{Lambrecht2006,Rahi2009,Reid2009}
  and ``worldline methods''~\cite{Gies2003}.
 To date, the scattering method is the only general purpose numerical method available for computing
@@ -74,7 +74,7 @@ easy to parallelize.
 It is the goal of this thesis to extend the worldline method to computing electromagnetic Casimir effects.
 This requires accounting for the vector nature of the electromagnetic field, and including realistic coupling to 
 material properties, while attempting to retain as many of its appealing properties as possible.    
-In Ch.~\ref{ch:quantization}, we will discuss quantization of the electromagnetic field, and introduce
+In Ch.~\ref{ch:EM_quantization}, we will discuss quantization of the electromagnetic field, and introduce
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
@@ -236,7 +236,7 @@ For an atom in its ground state, the Casimir--Polder potential is given by
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
 $|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)/\hbar$.
-The shift $V\subCP$ can be understood as two virtual transitions --- 
+The shift $V\subCP$ can be understood as two virtual transitions---
 one from the atomic ground state with no photons to an atomic excited state with one photon,
 followed by a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
@@ -342,7 +342,7 @@ close to the surface from spatial infinity.
 Throughout this thesis, this simple energy subtraction is the only renormalization we will need. 
 
 The renormalized Casimir--Polder energy between an atom and a conducting plane can be evaluated in spherical
-coordinates, although some care is required to regularize these oscillatory integrals --- this can be done by introducing an exponential
+coordinates, although some care is required to regularize these oscillatory integrals---this can be done by introducing an exponential
 convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end of the computation:
 \begin{align}
  V\subCP(\vect{r})- V\sup0&=\lim_{a\rightarrow 0}-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k 
@@ -410,7 +410,7 @@ The total ground state energy in the electromagnetic field is
   E=\sum_\alpha\frac{\hbar\omega_{\alpha}}{2},
 \end{equation}
 where $\alpha$ indexes all possible modes.  
-While the total energy is badly divergent, a finite answer can be found by considering 
+While the total energy is divergent, a finite answer can be found by considering 
 the energy difference between two different configurations of bodies.  
 % The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
 % and will be essential in computations of Casimir quantities.  
@@ -419,8 +419,7 @@ For example, the renormalized energy between two perfectly conducting plates is
 \begin{equation}
   E-E_0 = -\frac{\hbar c}{720\pi^2 d^3},\label{eq:Casimir_energy}
 \end{equation}
-where $c$ is the speed of light in vacuum, $\hbar$ is the reduced Planck constant,
-and $d$ is the distance between the plates.  % Note that in this expression there is no
+where $d$ is the distance between the plates.  % Note that in this expression there is no
 % mention of the material properties of the media --- this is an artifact of imposing Dirichlet
 % boundary conditions on the surfaces.  
 
@@ -428,7 +427,7 @@ and $d$ is the distance between the plates.  % Note that in this expression ther
 \center
 \includegraphics[width=6cm]{fig/intro/twoplanes_wave}
 \caption[Allowed modes between parallel plates]
-{Sketch of allowed modes between perfectly conducting plates. 
+{Sketch of allowed modes between perfectly conducting parallel plates. 
  Only waves with a half-integer number of wavelengths fit between the plates.
 Blue modes are only allowed outside the plates, while green modes are allowed inside
 and outside.  Modes have been vertically offset for clarity.  }
@@ -437,8 +436,8 @@ and outside.  Modes have been vertically offset for clarity.  }
 
 The theory was extended by Lifshitz and coworkers to describe forces between dielectric half-spaces~\cite{Lifshitz1956,
 Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
-perfect conductors, and Casimir--Polder forces between atoms' and dielectric surfaces.  
-We will sketch the derivation of the Lifshitz formula (which we will require later),
+perfect conductors, and Casimir--Polder forces between atom's and dielectric surfaces.  
+We will sketch the derivation of the Lifshitz formula (which will be used later),
 since this can naturally also compute the Casimir energy.
 
 %  As intimidating as this expression is, it can be heuristically derived with
@@ -454,9 +453,10 @@ since this can naturally also compute the Casimir energy.
 \subsubsection{Derivation of Lifshitz Formula}
 \label{sec:lifshitz}
 The Lifshitz formula for the Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
-In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants $\epsilon_1,\epsilon_2$
+In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants 
+$\epsilon_1$ and $\epsilon_2$,
 separated by a medium with dielectric constant $\epsilon_3$.  
-(This derivation parallels those is taken from \S 7.2 in Milonni~\cite{Milonni1994} and Ch.12 of Bordag\etal\cite{Bordag2009}.
+(This derivation parallels those in \S~7.2 of Milonni~\cite{Milonni1994}, and Ch.~12 of Bordag\etal\cite{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
 \begin{equation}
@@ -465,18 +465,19 @@ The energy for the EM field in its ground state is
 where the sum runs over all of the allowed modes for the particular arrangement of bodies.  
 In this case, the  non-zero contribution to the Casimir effect comes from surface plasmon modes, which propagate along the interfaces
 and decay exponentially away from the bodies.  
+The mode sum can be converted into an integral with respect to the transverse wavenumber $k_T:=\sqrt{k_x^2+k_y^2}$.
 The sum over frequencies can be recast as a contour integral over complex frequency $\xi$, against a function $\Delta^{(\zeta)}$,
- whose poles occur at the allowed frequencies, with residue $\omega_k$:  
+ whose poles occur at the allowed frequencies, with residue $\omega_k$  
 \begin{equation}
   E = \frac{L^2}{(2\pi)^2}\sum_{\zeta}\int_0^\infty dk_T\,k_T\oint d\xi\, 
-  \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta^{(\zeta)}(\xi)}\frac{d\Delta^{(\zeta)}(\xi)}{d\xi},
+  \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta^{(\zeta)}(\xi)}\frac{d\Delta^{(\zeta)}(\xi)}{d\xi}.
 \end{equation}
-where the function $\Delta'(\xi)/[2\pi i\Delta(\xi)]$ is designed to have unit residue at the zeroes of $\Delta(\xi)$, 
-and $k_T$ is the transverse wavenumber.  The factor of $L^2$ is accounted for by considering the energy 
-per unit area.  
-The energy can be simplified by integrating by parts leading to 
+The function $[2\pi i\Delta(\xi)]^{-1}d\Delta(\xi)/d\xi$ is designed to have unit residue at the zeroes of $\Delta(\xi)$, 
+The factor of $L^2$ is accounted for by considering the energy per unit area.  
+The energy can be simplified by integrating by parts, leading to 
 \begin{equation}
   \frac{E}{A} = \frac{\hbar}{16\pi^3 i}\sum_{\zeta}\int_0^\infty dk_Tk_T\oint d\xi \, \ln\Delta^{(\zeta)}(\xi).
+  \label{eq:lifshitz_logDelta}
 \end{equation}
 The most important modes are the surface modes, since these modes are sensitive to the position of the other body, where
 these modes exponentially decay between the bodies.
@@ -484,7 +485,7 @@ The allowed frequencies for these modes must satisfy
 \begin{equation}
   r^{\zeta}_{13}r^{\zeta}_{23} e^{-2k_z d}=1,
 \end{equation}
-where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$ and\
+where $r^\zeta_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$, and\
 the wavenumber is given by $k_z=\sqrt{k_T^2-\epsilon(\omega)\omega^2/c^2}$.  The reflection coefficients
 are given by 
 \begin{equation}
@@ -497,18 +498,18 @@ allowed modes (this interpretation is bolstered by considering the Casimir force
 This suggests choosing $\Delta(\xi) = 1-r^{\zeta}_{13}r^{\zeta}_{23} e^{-2k_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $\xi$.  
 
-The complex contour integral can be split into two pieces: the integral over the right semi-circle 
-is apparently independent of $d$, and can be ignored.  This leaves the integral along the imaginary 
-frequency axis, $\omega=is$.  
-It turns out Casimir effects are most naturally discussed along the imaginary frequency axis.  
+The contour integral~(\ref{eq:lifshitz_logDelta}) can be split into two pieces: the integral over the right semi-circle 
+is independent of $d$, and decays to zero when the semicircular contour is taken to inifinity.
+  This leaves the integral along the imaginary frequency axis, $\xi=is$ where $s$ is real.  
+Casimir effects are most naturally discussed along the imaginary frequency axis.  
 Due to the causal nature of the dielectric response functions, the dielectric function is a 
 smooth, real function on the imaginary axis.  This also means that the $z$-wavenumber is also real,
 with $k_z=\sqrt{k_T^2+\epsilon(is)s^2/c^2}$, 
 and that oscillatory functions like plane wave factors are replaced with real, decaying exponentials.  
-Both of these features are extremely attractive for numerical methods, and so this is also
-often used in numerical methods~\cite{Johnson2011}.
+Both of these features are extremely attractive for numerical methods, and so numerical methods also
+work with imaginary frequency~\cite{Johnson2011}.
 
-The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1, \epsilon_2$
+The Casimir energy between two dielectric half-spaces of permittivities $\epsilon_1$ and $\epsilon_2$
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
 \begin{align}
 \frac{E}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty ds\, s^2 \epsilon_3
@@ -517,45 +518,38 @@ separated by a gap of thickness filled with permittivity $\epsilon_3$ is given b
 \end{align}
 where the electromagnetic reflection coefficients are given by 
 \begin{align}
-  r\supTE_{ij}  = \frac{\kappa_i-\kappa_j}{\kappa_i+\kappa_j},\quad
+  r\supTE_{ij}  = \frac{\kappa_i-\kappa_j}{\kappa_i+\kappa_j} \quad
   r\supTM_{ij}  = \frac{\epsilon_j \kappa_i - \epsilon_i \kappa_j}{\epsilon_j \kappa_i + \epsilon_i \kappa_j},
 \end{align}
 and
 \begin{equation}
-  \kappa_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1}.
+  \kappa_i = \sqrt{p^2 + \epsilon_i/\epsilon_3-1},
 \end{equation}
 following Zhou~\cite{Zhou1995}.
-The variables have been adjusted to agree with Lifshitz original calculation, by defining 
+The variables have been adjusted to agree with the Lifshitz calculation, by defining 
 \begin{align}
   k_T &= \frac{s}{c}\sqrt{\epsilon_3(p^2-1)}.
 \end{align}
-In general, this integral form is the simplest expression for the Casimir energy between dielectrics. 
+In general, this integral form is the simplest expression for the Casimir energy between two dielectrics planes. 
 % As intimidating as this expression may be, it is a necessary touchstone for later comparison, and it allows 
 % us to examine the different scaling regimes at different distances.  
 The perfect-conductor Casimir energy result (\ref{eq:Casimir_energy}) can be found by taking the strong-coupling limit,
- $r^{(\zeta)}_i\rightarrow 1$, and setting $\epsilon_3=1$.  and evaluating the integrals using 
+ $r^{(\zeta)}_i\rightarrow 1$, setting $\epsilon_3=1$,  and evaluating the integrals using 
 \begin{equation}
   \int_0^\infty ds\,s^2 \int_1^{\infty} dp\,p \log[1 - e^{-2 s p d/c}] = -\frac{c^3 \pi^4}{360 d^3}.
 \end{equation}
 The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
 
-% This was further expanded on by Dzyaloshinskii\etal\cite{Dzyaloshinskii1959,Dzyaloshinskii1961} who
-% showed the connection between Casimir force and the pair-wise van der Waals potentials.  
-%This work is reviewed by McLachlan~\cite{McLachlan1963, McLachlan1963a}.  
-
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
 Some care is required in quantizing the electromagnetic field within dielectric media,
-since due to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
-% The usual approach to open-systems in quantum mechanics is to couple the system to a reservoir, 
-% and integrate out the reservoir.  
-However, it has been phenomenologically observed that one gets the correct answers by a direct substitution
-$\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has in investigated more carefully in~
+since according to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
+However, it has been observed that one gets the correct answers by a direct substitution
+$\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has been investigated more carefully in~
 \cite{Barash1975,Rosa2010}, and justified by careful examination of the thermodynamic energy
 and relation to the microscopic details of the medium.   
 
-At non-zero temperature it is necessary to also include the effects of real thermally excited photons,
-by accounting for the mean number of excited photons.
+At non-zero temperature it is necessary to also include the effects of real thermally excited photons.
 At inverse temperature $\beta=(\kB T)^{-1}$, for a 
 frequency $\omega$, the mean number of photons is $\bar{n}(\omega) = \coth(\beta\hbar \omega/2)$.  
 Note that $\coth(i x)$ has simple poles at $x=\pm n \pi$ for $n$ integer. 
@@ -571,13 +565,13 @@ The resulting free energy per unit area is
 where the primed sum gives half the weight to the $n=0$ term, and all functions of frequency are evaluated at $s_n.$ 
 At zero temperature, this result passes over to the previous one, 
 by transforming the sum over frequencies into an integral.  This is the most general form of the Lifshitz
-formula, and can recover all of the limiting behaviors at close distance, far field, and perfect conducting
+formula, and can recover all of the limiting behaviors in the near and far field, and perfect conducting
 media, and rarefied media.
 
-\subsection{Physical Interpretation}
+\subsubsection{Physical Interpretation}
 
 Casimir's original calculation vividly shows the importance of vacuum fields, and is said to show the reality 
-of the vacuum field.  This is due to the emphasis given to the imposed boundary conditions,
+of the vacuum field~\cite{Casimir1948}.  This is due to the emphasis given to the imposed boundary conditions,
 which are emphasized over the matter that created the boundary conditions~\cite{Jaffe2005}.  
 It is the author's opinion that the Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.  This picture is also
@@ -588,16 +582,16 @@ analogous to the intuitive photon exchange picture used to explain the Casimir--
 electrons on different bodies interact with one another via the electromagnetic field.
   The solid lines should
 be understood as the current operators for the electrons bound to a particular, separate media, while the 
-wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles'',
-one can recover the full Casimir force results --- as was done by Dzyaloshinskii\etal in re-summing a field 
+wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles''
+one can recover the full Casimir force results---as was done by Dzyaloshinskii\etal in re-summing a field 
 theoretic expansion~\cite{Dzyaloshinskii1961}.  
 In that case the closed electron loops should be understood as current-current correlation functions,
 $\langle j_\mu j_\nu\rangle$, where under linear response theory, this correlation function is related to the conductivity
 tensor $\sigma_{\mu\nu}$~\cite{Kubo1957,Altland2011}.  The conductivity tensor is in turn related to the dielectric tensor, $\epsilon_{ij}$
-via Ohm's Law $j_i=\sigma_{ij}E_j,$ which makes the connection between this condensed matter physics,
-and the material functions used in the Casimir effect\footnote{
+via Ohm's Law $j_i=\sigma_{ij}E_j,$ which makes the connection between the underlying fundamental physics,
+and the material functions used in the Casimir effect.\footnote{
   This relationship was pointed out by Rahi\etal\cite{Rahi2009}, as a justification for their starting point
-  in quantizing the electromagnetic field in media.}.
+  in quantizing the electromagnetic field in media.}
 
 %\todo{Details of Kubo?}
 % \comment{Effective interaction: expanding out perturbation theory leads to $\langle j_\mu j_\nu\rangle$
@@ -646,9 +640,60 @@ electron current with the field is described by the dielectric constant.}
 \label{fig:electron-effective-interaction}
 \end{figure}
 
-\subsection{Comparison with other forces}
+\subsubsection{Different Distance Scaling Regimes}
 
-Casimir or van der Waals forces, are the dominant forces for electrically neutral bodies.  
+The Casimir effect is important at distances around the resonant wavelengths of the atom or medium,
+ which are typically on the order of a micron for optical transitions.  
+The Casimir effect is typically computed in a long-wavelength or low energy limit where the constituents of the bodies can be treated 
+as a continuum.
+%This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
+This approximation starts to break down when the distances between bodies approach an angstrom.
+That is the separation of the constituent atoms of the bodies, the distance scale where exchange effects and 
+other quantum physics becomes important.
+At the other extreme, for distances beyond a hundred microns, the Casimir effect becomes too weak to detect.  
+
+The distance scaling of the Casimir energy for bodies separated by a distance $d$, can be found by approximating 
+the Lifshitz integral~(\ref{eq:lifshitz_finite_temp}) in certain limits.
+%The differing scaling emerges by approximating the integrals in the Lifshitz formula~(\ref{eq:lifshitz_temperature}) in various limits.  
+% The distance scaling depends on the nature of the bodies, and the how large the separation is in comparison to 
+% relevant wavelengths in the problem.  
+% For pairs of macroscopic slabs the energy scales as $d^{-2}$--$d^{-3}$, depending on the separation, 
+% while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.  
+In particular, one must compare the separation of the bodies $d$ to the resonant wavelengths or frequencies 
+ of the interacting media.  
+This requires some knowledge of the peak frequencies $\omega_A$ of the atomic polarizabilities $\alpha(\omega)$ or the dielectric
+ function $\epsilon(\omega)$.  At nonzero temperature, there is another distance scale given by the thermal wavelength,
+ $\omega_T=\kB T/\hbar$.  One can estimate the most important frequencies by examining $\alpha(is),\epsilon(is),e^{-2pd\xi/c}$
+and approximating the integral in various limits. 
+
+ In the near field or van der Waals regime, the separation of the bodies is less than any of the 
+ resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$.  In that limit $\epsilon(i\omega)$ serves to cut off 
+ the frequency integral, and the exponential factor $e^{-2pd\xi/c}$
+ is unity for all relevant frequencies.  In essence, the interaction is an instantaneous 
+ dipole interaction between the media.  For example the atom-wall potential shows a $d^{-3}$ scaling. 
+
+ In the retarded or Casimir-Polder regime, the atoms are much further than a resonant wavelength 
+ $d\gg \omega_A/c,\omega_M/c$.  In that case the dominant contributions come at zero frequency, 
+and the functions can be approximated with their static limit.
+ This typically occurs for distances greater than a micron.
+ In this far field regime, the potential typically decays more quickly.  For example, the  atom-wall
+potentials shows a $d^{-4}$ scaling in this limit.
+
+At even greater separations between the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
+ thermal field contribute significantly to polarizing the atom.  At room temperature, the thermal wavelength is
+ $\lambda_T~10\mu$m.  In this regime the potential falls off more slowly as $E\sim d^{-3}$,
+ the same as the near-field van der Waals regime.  
+
+\section{Overview of Casimir Experiments}
+\label{sec:expt_review}
+
+The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
+This section provides a brief overview of the broad categories of experiments where the Casimir effect is relevant,
+and the challenges these experiments provide to theoretical and computational methods.    
+The following is intended as a broad survey, since the full literature on the Casimir and Casimir--Polder 
+effects is quite large.  
+
+Casimir forces are the dominant forces for electrically neutral bodies.  
 However, they can be screened by other electrostatic forces in some circumstances, particularly if one is 
 considering metal bodies~\cite{Lamoreaux2011,Bordag2009}.  
 These electrostatic forces typically have a longer ranged force law than the Casimir effect, 
@@ -656,27 +701,27 @@ with a similar order of magnitude.
 In order to detect the classic Casimir force between conducting bodies, it is then necessary to carefully 
 remove any stray background fields.  These arise from patch potentials (localized distributions of electric charge
 on a conductors surface), stray charges, or adsorbed atoms.  
-
-Note that while these electrostatic forces can be mitigated, the Casimir effect cannot be removed.  
+Note that while these electrostatic forces can be mitigated, the Casimir effect is a fundamental 
+effect and must be taken into account in engineering applications.  
 The resulting power law potentials are relatively short-ranged power laws compared to the Coulomb potential 
 between charged particles which decays $d^{-1}$. 
-We will compare the size of the Casimir force to typical Coulomb energies that arise in experiments.
-We will also compare the Casimir--Polder energy to the typical trapping potentials used to trap atoms.
+% We will compare the size of the Casimir force to typical Coulomb energies that arise in experiments.
+% We will also compare the Casimir--Polder energy to the typical trapping potentials used to trap atoms.
   
 % While the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
 % However, most bodies are electrically neutral and thus have no long-ranged Coulomb potential, whereas
 % the Casimir effect applies even if the bodies have no net charge.  
 
-For macroscopic bodies we can compare the Casimir energy for perfect 
-metal conductors at a distance $d$ to the energy stored in the capacitance.
-The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
-This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
-For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
-between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
-vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
-The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu$m
-this corresponds to a voltage of $17$mV.  
-In experiments, voltages of this magnitude are observed from electrostatic sources~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
+% For macroscopic bodies we can compare the Casimir energy for perfect 
+% metal conductors at a distance $d$ to the energy stored in the capacitance.
+% The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
+% This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
+% For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
+% between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
+% vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
+% The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu$m
+% this corresponds to a voltage of $17$mV.  
+% In experiments, voltages of this magnitude are observed from electrostatic sources~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
 
 For conducting bodies, such stray potentials can emerge from variations in the work function
 of the metal~\cite{Lamoreaux2011}.
@@ -686,24 +731,24 @@ These various electrostatic potentials are randomly distributed and show a $d^{-
 contribution to the force~\cite{Sushkov2011}, as opposed to the faster $d^{-2}--d^{-3}$ behavior expected
 from the Casimir force.  
 
-The typical Casimir--Polder energy scale can be estimated from dimensional considerations.
-For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
-is then $\alpha\sim \sum_jd_j^2/(\hbar\omega_j)$.
-The Casimir-Polder energy in the far-field is then
-\begin{align}
-  V\subCP &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
-%  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
-%  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
-%  &= -\frac{10^{-31}}{10^{-19}} eV\\
-  \approx -10^{-12}eV,
-\end{align}
-which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
-% In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
-% with its image dipole.
-In comparison, a far-off resonant light beam can create an all optical trap with a depth of $10^{-9} eV$
-\footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV$}
-So at a distance of $1\mu$m from a surface, it may be possible to trap an atom, but at a tenth of that distance the Casimir--Polder
-attraction would overcome the optical trapping potential.
+% The typical Casimir--Polder energy scale can be estimated from dimensional considerations.
+% For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
+% is then $\alpha\sim \sum_jd_j^2/(\hbar\omega_j)$.
+% The Casimir-Polder energy in the far-field is then
+% \begin{align}
+%   V\subCP &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
+% %  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
+% %  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
+% %  &= -\frac{10^{-31}}{10^{-19}} eV\\
+%   \approx -10^{-12}eV,
+% \end{align}
+% which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
+% % In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
+% % with its image dipole.
+% In comparison, a far-off resonant light beam can create an all optical trap with a depth of $10^{-9} eV$
+% \footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV$}
+% So at a distance of $1\mu$m from a surface, it may be possible to trap an atom, but at a tenth of that distance the Casimir--Polder
+% attraction would overcome the optical trapping potential.
 
 %As comparison, a typical trapping potential using far detuned lasers is 
 % As an example, atoms near a conducting surface can adsorb onto the surface, and form ionic bonds with a large dipole 
@@ -727,58 +772,6 @@ attraction would overcome the optical trapping potential.
 % \begin{equation}
 %   V_{\text{ad}}(\vect{r}) \sim -\frac{\alpha_0}{2}\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}\vect{d}^2
 % \end{equation}
-
-\subsection{Different Distance Scaling Regimes}
-
-The Casimir effect is important at distances around the resonant wavelengths of the atom or medium,
- which are typically on the order of $1\mu$m for optical transitions.  
-The Casimir effect is typically computed in a long-wavelength or low energy limit where the constituents of the bodies can be treated 
-as a continuum.
-%This long-wavelength limit also corresponds to energies small compared to the binding energies of the bodies.
-This approximation starts to break down when the distances between bodies approach the separation of the constituent atoms.
-which is around $1\AA$, where exchange effects and other physics becomes important.
-At the other limit, for distances beyond $100 \mu$m, the Casimir effect becomes too weak to detect.  
-
-The distance scaling of the Casimir energy for bodies separated by a distance $d$, can be found by approximating 
-the Lifshitz integral~(\ref{eq:lifshitz_finite_temp}) in certain limits.
-%The differing scaling emerges by approximating the integrals in the Lifshitz formula~(\ref{eq:lifshitz_temperature}) in various limits.  
-% The distance scaling depends on the nature of the bodies, and the how large the separation is in comparison to 
-% relevant wavelengths in the problem.  
-% For pairs of macroscopic slabs the energy scales as $d^{-2}$--$d^{-3}$, depending on the separation, 
-% while the energy scales as $d^{-6}$--$d^{-7}$ for pairs of atoms.  
-In particular, one must compare the separation of the bodies $d$ to the resonant wavelengths or frequencies of 
- of the interacting media.  
-This requires some knowledge of the peak frequencies $\omega_A$ of the atomic polarizabilities $\alpha(\omega)$ or the dielectric
- function $\epsilon(\omega)$.  At nonzero temperature, there is another distance scale given by the thermal wavelength,
- $\omega_T=\kB T/\hbar$.  One can estimate the most important frequencies by examining $\alpha(is),\epsilon(is),e^{-2pd\xi/c}$
-and approximating the integral in various limits. 
-
- In the near field or van der Waals regime, the separation of the bodies is less than any of the 
- resonant wavelengths for the bodies $d\ll \omega_A/c,\omega_M/c$.  In that limit $\epsilon(i\omega)$ serves to cut off 
- the frequency integral, and the exponential factor $e^{-2pd\xi/c}$
- is unity for all relevant frequencies.  In essence, the interaction is an instantaneous 
- dipole interaction between the media.  For example the atom-wall potential shows a $d^{-3}$ scaling. 
-
- In the retarded or Casimir-Polder regime, the atoms are much further than a resonant wavelength 
- $d\gg \omega_A/c,\omega_M/c$.  In that case the dominant contributions come at zero frequency, 
-and the functions can be approximated with their static limit.
- This typically occurs for distances greater than a micron.
- In this far field regime, the potential typically decays more quickly.  For example, the  atom-wall
-potentials shows a $d^{-4}$ scaling in this limit.
-
-At even greater separations between the bodies is the thermal regime $d\sim \omega_T/c$, where the real photons excited by the 
- thermal field contribute significantly to polarizing the atom.  At room temperature, the thermal wavelength is
- $\lambda_T=\hbar c/(\kB T)~10\mu m$.  In this regime the potential falls off more slowly as $E\sim d^{-3}$,
- the same as the near-field van der Waals regime.  
-
-\section{Overview of Casimir Experiments}
-\label{sec:expt_review}
-
-The Casimir effect has been measured in experiments, both for macroscopic bodies and atoms.
-This section provides a brief overview of the broad categories of experiments where the Casimir effect is relevant,
-and the challenges these experiments provide to theoretical and computational methods.    
-The following is intended as a broad survey, since the full literature on the Casimir and Casimir--Polder 
-effects is quite large.  
 
 %Lamoreaux
 \subsection{Experiments on Casimir Forces}
@@ -1775,7 +1768,7 @@ Finally, the method must agree with known results in simple geometries.
 
 As later chapters in this thesis will show, we have partially met those goals.  We have developed analytical
 and numerical techniques that can be applied to improving existing worldline algorithms.
-This thesis focuses primarily on solving the planar problem ---- although this is well-studied,
+This thesis focuses primarily on solving the planar problem---although this is well-studied,
 it is a good platform for exploring and testing worldline methods.  
 The methods we develop here could be used as uncontrolled approximations in general geometries, but with
 no guarantee of correctness.  

@@ -12,8 +12,8 @@ The TM polarization is by far the hardest to deal with, and has prompted most of
 That said, the same developments can be used to enhance the TE polarization, as well as existing Dirichlet
 worldline methods.
 
-In particular we will discuss techniques path construction, Monte Carlo sampling of both starting points
-and path-times.  In the case of the TE polarization, these are all quite straightforward.  
+In particular we will discuss techniques path construction, Monte Carlo sampling of the path starting points $x_0$
+and path-extent $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
 The TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
 used to construct the paths.  The essence of these methods is importance sampling, beyond what is manifestly
 obvious from the form of the path integral.    
@@ -45,6 +45,163 @@ remark:
 We present our work on the TM polarization as one way of numerically approaching the limit
 of Neumann boundary conditions.  As the effort expended shows, this is indeed much more difficult
 than the Dirichlet or even TE worldline methods.  
+
+\section{Path generation}
+
+The principal element of the worldline method is evaluating a potential along an ensemble of Gaussian
+paths.  This allows the enormous $N$-dimensional integral over positions to be efficiently evaluated in a 
+Monte Carlo fashion via $N_p$ sample paths.
+It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
+
+The v-loop algorithm is derived by decoupling the product of $N$ Gaussian probability densities 
+into $N-1$ independent Gaussian deviates.
+Since we will need to construct open and closed Brownian bridges of fixed length $N$, we will derive the v-loop algorithm
+for open paths, as closed paths are a special case of open paths.  
+
+Consider a Gaussian probability density of $N$ steps in one dimension, where the end points $x_0$ and $x_N$ 
+are fixed:
+\begin{equation}
+  P(x_1,\ldots,x_{N-1}) = \cN (2\pi\Delta\cT)^{-N/2}\exp\left[-\sum_{j=0}^{N-1}\frac{(x_{j+1}-x_j)^2}{2\Delta\cT}\right],
+\end{equation}
+where $\cN$ ensures the probability distribution is normalized.  
+It is convenient to define a shifted, normalized variable $y_k = (x_k-x_0)/\sqrt{\Delta \cT}.$% , for which the probability distribution is
+% \begin{equation}
+%   P(y_1,\ldots,y_{N-1}) = \cN (2\pi\Delta\cT)^{-1/2}(2\pi\Delta\cT)^{-(N-1)/2}\exp\left[-\frac{(x_N-x_0-y_{N-1})^2}{2}-
+%     \frac{y_1^2}{2}-\sum_{j=1}^{N-2}\frac{(y_{j+1}-y_j)^2}{2}\right].
+% \end{equation}
+%
+The exponent for the product of coupled Gaussians is
+\begin{equation}
+X = \frac{y_1^2}{2}+\frac{(y_2-y_1)^2}{2}+\cdots+\frac{(y_{N-1}-y_{N-2})^2}{2}+\frac{(\Delta x-y_{N-1})^2}{2},
+\end{equation}
+where $\Delta x :=(x_N-x_0)/\sqrt{\Delta \cT}$.
+In general we know that,
+\begin{align}
+  \frac{(y-\mu_1)^2}{2\sigma_1^2} + \frac{(y-\mu_2)^2}{2\sigma_2^2} &= 
+  \frac{\sigma_1^2+\sigma_2^2}{2\sigma_1^2\sigma_2^2}
+  \left(y - \frac{\sigma_2^2\mu_1+\sigma_1^2\mu_2}{\sigma_1^2+\sigma_2^2}\right)^2
+  + \frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)},
+\end{align}
+which is of particular use when convolving Gaussians.
+Let's start completing the square at $y_{N-1}$, and introduce a variance $\sigma^2_{N-1}=1$.
+It is possible to quickly develop recursion relations for how the resulting means and variance scale.  
+\begin{align}
+  & \frac{(y_{N-1}-\Delta x)^2}{2\sigma_{N-1}^2}+\frac{(y_{N-1}-y_{N-2})^2}{2} \nonumber \\
+  &= \frac{\sigma^2_{N-1}+1}{2\sigma_{N-1}^2}
+  \left(y_{N-1} - \frac{\sigma_{N-1}^2y_{N-2}+\Delta x}{\sigma_{N-1}^2+1}\right)^2 + \frac{(y_{N-2}-\Delta x)^2}{2(\sigma^2_{N-1}+1)}
+  % &= \frac{1}{2c_{N-1}}
+  % \left(y_{N-1} - c_{N-1}y_{N-2}-\frac{\Delta x}{\sigma_{N-1}^2+1}\right)^2 + \frac{(y_{N-2}-\Delta x)^2}{2(\sigma^2_{N-1}+1)}\\
+\end{align}
+where $\sigma_{N-2}:=\sigma_{N-1}+1$, and $c_{N-1} = \sigma_{N-1}^2/(\sigma_{N-1}^2+1)$.
+% If we repeat the completing the square again for $y_{N-1}$ we get
+% \begin{equation}
+% \frac{(y_{N-1}-(x_{N+1}-x_1))^2}{2(2)}+\frac{(y_{N-1}-y_{N-2})^2}{2} = \frac{1}{2(2/3)}\left(y_{N-1} - \frac{(x_{N+1}-x_1)+2y_{N-2}}{3}\right)^2 + \frac{(y_{N-2}-y_{N})^2}{2(3)}
+% \end{equation}
+After each completion of the square $\sigma_{N-j}\rightarrow \sigma_{N-j+1}+1$.  After repeating the process $N-1$ times
+the exponent is 
+\begin{equation}
+  X = \frac{\Delta x^2}{2N} + \sum_{j=1}^{N-1} \frac{z_j^2}{2},
+\end{equation}
+where 
+\begin{equation}
+  z_j = \frac{1}{2c_j}\left(y_j - c_jy_{j-1}-\frac{\Delta x}{N-j+1}\right)^2,\label{eq:zj}
+\end{equation}
+and 
+\begin{equation}
+  c_j = \frac{N-j}{N-j+1}.
+\end{equation}
+The $z_j$ are decoupled standard normal variables.  Once the $z_j$ have been sampled the 
+transformation (\ref{eq:zj}) can be inverted to find the path,
+\begin{equation}
+  x_k = x_0 + \frac{x_N-x_0}{N-k+1}+c_kx_{k-1} + \sqrt{c_k\Delta\cT}z_k
+\end{equation}
+\comment{double check counting?}
+
+% So after $k$ recursions, we expect to have 
+% \begin{align}
+% \frac{(y_{N-k+1}-\Delta x)^2}{2\sigma_k^2}+\frac{(y_{N-k+1}-y_{N-k})^2}{2} 
+% = \frac{k+1}{2k}\left(y_{N-k+1} - \frac{(x_{N+1}-x_1)+k y_{N-k}}{k+1}\right)^2 + \frac{(y_{N-k}-\Delta x)^2}{2(\sigma_k^2+1)}
+% \end{align}
+% For a walk from with $N$ intermediate steps from $x_1$ to $x_{N+1}$, we can do this $N-1$ times.  The end result is:
+% \begin{align}
+% Y = \sum_{k=2}^{N} \frac{1}{2u_{k}}\left(y_k - u_k y_{k-1} - v_{k}\right)^2 + \frac{(x_{N+1}-x_1)^2}{2N}
+% \end{align}
+% where $u_k = \frac{N-k+1}{N-k+2}$, and $v_k = \frac{(x_{N+1}-x_1)}{N-k+2}$.  This can be turned into an algorithm as follows: 
+% Old
+% \begin{align}
+% Y = \sum_{k=1}^{N-1} \frac{1}{2u_{k}}\left(y_k - u_k y_{k-1} - v_{k}\right)^2 + \frac{(x_{N+1}-x_1)^2}{2N}
+% \end{align}
+% where $u_k = \frac{N-k}{N-k+1}$, and $v_k = \frac{(x_{N+1}-x_1)}{N-k+1}$.  This can be turned into an algorithm as follows: 
+
+\begin{enumerate}
+\item Sample $N-1$ standard normal deviates, $z_k$, with $k\in\{2,\ldots,N\}$.
+\item Invert the transformation of Gaussians to write: 
+  \begin{equation}
+    z_k = \frac{(y_k - u_k y_{k-1}-v_k)}{\sqrt{u_k}}\rightarrow  y_k = u_ky_{k-1} +v_k + \sqrt{u_k}z_k
+  \end{equation}
+\item Start the recursion at $k=2$, with $y_1 = 0$, and work forwards to find each $y_k$ in turn.  
+\item Add on $x_1$ at the end to get the loop that starts at $x_1$ and ends at $x_{N+1}$.  
+\item Remember to include the factor of $\frac{1}{\sqrt{N}}\exp\left(-\frac{\Delta x^2}{2N}\right)$ for normalization.
+\end{enumerate}
+
+
+
+
+Gies\etal introduced the v-loop 
+Since Gies\etal were considering Casimir energy applications, it makes more sense to consider centered 
+paths, where the average position $\langle x\rangle$ is subtracted from the path.  
+However in Casimir--Polder (or stress-energy) applications it is better to consider paths emanating from
+a single point $\vect{x}_0$.  
+
+
+\subsection{TE}
+\begin{enumerate}
+\item Use v-loop algorithm from Gies.  Loops have Gaussian increments, and closed paths
+\item (Derivation for loops)
+\item Jacobian gives normalization.
+\item Note connection to Brownian bridge SDE.  
+\end{enumerate}
+
+\subsection{TM}
+\begin{enumerate}
+\item TM potential must also be tracked along a given path.
+( Explore the potential-only integrand to highlight the issues.)
+\item TM potential takes on values $1<V_k<2$ outside a body, and $0<V_k<1$ when crossing
+  or inside.  
+\item Leads to large fluctuations, for even moderate $N$.  (Histogram of values, and scaling of variance)
+\item Large fluctuations indicate a poor choice of probability distribution, and we should
+  adjust our choice.
+\item Two methods to incorporate the potential into the probability distribution.
+  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
+  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  FOr differences of Gaussians,
+  use rejection to sample the deviates.  
+  2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
+  is large, and terminate if too small.  
+\item Birth-death method is required for first method anyway, as there is still a potential
+inf the form of the normalizations.  
+\item Figure: Growth of fluctuations.
+\item Figure: Histograms of normalization.
+\end{enumerate}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/temp/TM_scalingN}
+  \caption{Scaling of variance TM potential as function of $N$ for four methods.  
+  All combinations of Gaussian paths increments and combined TM-Gaussian steps, with raw values and 
+  birth-death.}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/analytical/probTM}
+  \caption[Combined TM Potential and Gaussian probability distribution.]{
+    Combined TM Potential and Gaussian probability distribution plotted for various $\chi$.}
+\end{figure}
+
+
+
 
 \section{Monte-Carlo sampling}
 
@@ -179,36 +336,7 @@ We will be predominantly interested in $s=1+D/2$ and $m=3/2$ to account for zero
 and non-zero temperature limits.  % There are apparently better algorithms for moderate $m$,
 % such as might be required in large derivatives.
 
-\section{Path generation}
 
-\subsection{TE}
-\begin{enumerate}
-\item Use v-loop algorithm from Gies.  Loops have Gaussian increments, and closed paths
-\item (Derivation for loops)
-\item Jacobian gives normalization.
-\item Note connection to Brownian bridge SDE.  
-\end{enumerate}
-
-\subsection{TM}
-\begin{enumerate}
-\item TM potential must also be tracked along a given path.
-( Explore the potential-only integrand to highlight the issues.)
-\item TM potential takes on values $1<V_k<2$ outside a body, and $0<V_k<1$ when crossing
-  or inside.  
-\item Leads to large fluctuations, for even moderate $N$.  (Histogram of values, and scaling of variance)
-\item Large fluctuations indicate a poor choice of probability distribution, and we should
-  adjust our choice.
-\item Two methods to incorporate the potential into the probability distribution.
-  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
-  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  FOr differences of Gaussians,
-  use rejection to sample the deviates.  
-  2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
-  is large, and terminate if too small.  
-\item Birth-death method is required for first method anyway, as there is still a potential
-inf the form of the normalizations.  
-\item Figure: Growth of fluctuations.
-\item Figure: Histograms of normalization.
-\end{enumerate}
 
 \section{Gradient Estimation}
 
@@ -1587,8 +1715,6 @@ from and is not too sharpled peaked around $k=N/2$.
 % is fixed.  
 % Use that as basis to sample times, and indices.
 
-
-
 \section{Numerical Results: Casimir-Polder Energies}
 
     \subsection{TE Polarization - Atom-Plane}
@@ -1610,13 +1736,6 @@ from and is not too sharpled peaked around $k=N/2$.
       \item Histogram of raw values, with/without birth-death.
     \end{enumerate}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{fig/temp/TM_scalingN}
-  \caption{Scaling of variance TM potential as function of $N$ for four methods.  
-  All combinations of Gaussian paths increments and combined TM-Gaussian steps, with raw values and 
-  birth-death.}
-\end{figure}
 
 \section{Numerical Results: Casimir Energies}
 
@@ -1636,6 +1755,8 @@ from and is not too sharpled peaked around $k=N/2$.
 
 \subsubsection{Scaling with N}
 
+An analysis of the systematic error due to 
+
 
 \begin{figure}
   \centering
@@ -1648,6 +1769,9 @@ from and is not too sharpled peaked around $k=N/2$.
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TE2wallN3}
   \caption{Convergence planar TE Casimir energy as function of $N$.}
 \end{figure}
+
+\section{TE Forces}
+
 
 \subsection{TM Casimir Energies - Plane-Plane}
 
@@ -1664,7 +1788,8 @@ from and is not too sharpled peaked around $k=N/2$.
   \caption{Numericall computed TM Casimir Efficiency for Plane-Plane.  }
 \end{figure}
 
-\subsubsection{Scaling with N}
+
+
 
 
 %%% Local Variables: 

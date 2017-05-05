@@ -49,7 +49,7 @@ In  quantum optics, dissipation is usually handled by coupling the system to a b
 integrating or tracing out the bath degrees of freedom.\footnote{If damping is added to the system in an ad hoc
 manner, the canonical commutation relations between operators would decay away.  Adding the bath
 is necessary to preserve the commutation relations for the system operators.  As a result dissipation in quantum systems 
-is attended by noise, either as decoherence terms in the master equation or as noise terms in the Langevin equations for the operators~\cite{Gardiner2004}}.
+is attended by noise, either as decoherence terms in the master equation or as noise terms in the Langevin equations for the operators~\cite{GardinerZoller2004}}.
 The light field is linearly coupled to the dielectric medium, which is modeled
 as a bath of harmonic oscillators~\cite{Huttner1992,Dung1998,Bechler1999}.
 The dielectric medium is in turn coupled to a bath of harmonic oscillators, which provides the damping.
@@ -473,20 +473,20 @@ where the Hamiltonian for a particular value of $\beta$ is
 \end{align}
  We have also integrated by parts on the term coming from the Fourier representation of the $\delta$-function, 
 and identified $  \partial_\beta\vect A_\beta:=(\vect A_{\beta+\Delta \beta}-\vect A_\beta)/\Delta \beta.$
-The momentum integrals are Gaussian and can be carried out immediately, with the result that
+After the Gaussian momentum integrals have been carried out, the matrix element is
 \begin{multline}
 \langle \phi_{\beta+\Delta \beta}\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle\\
 %  \int\! d\vect{\Pi}_\beta \exp\left[ -\Delta \beta\int d^3r \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
 % -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\varphi_\beta) \right] 
-\propto   \det[\epsr(\vect{r})]^{3/2}\exp \left\{ -\frac{\epsilon_0\Delta \beta}{\hbar^2}
+\propto   \det[\epsr]^{3/2}\exp \left\{ -\frac{\epsilon_0\Delta \beta}{\hbar^2}
   \int d^3r\,\bigg[ \frac{\epsr(\vect{r})}{2}(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
   +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\},
 \end{multline}
-where the functional determinant $|\epsr|^{3/2}$ comes from the momentum integrals.  
+where the functional determinant $\det[epsr]^{3/2}$ comes from the momentum integrals.  
 It is convenient to introduce a notation
 \begin{equation}
-\int D \vect{A} D\varphi |\epsr(\vect{r})|^{3/2} = \prod_{i=1}^N\prod_{r_k,\beta'}\int d\vect{A}(\vect{r}_k,\beta')
-\int d\varphi(\vect{r}_k,\beta)\det[\epsilon^{3/2}(\vect{r}_k)],
+\int D \vect{A} D\varphi \det[\epsr]^{3/2} = \prod_{i=1}^N\prod_{\vect{r}_k,\beta'}\int d\vect{A}(\vect{r}_k,\beta')
+\int d\varphi(\vect{r}_k,\beta')\epsilon^{3/2}(\vect{r}_k),
 \end{equation}
 where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
 %If we take the product of all of the matrix elements, then the total path integral is given by 
@@ -494,45 +494,44 @@ where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3
 % Z = \int D\vect A D\varphi\, \epsr(\vect{r})^{3/2}\exp\left[-\frac{\epsilon_0}{2\hbar^2}\int d^3x\int_0^\beta \Delta \beta\,
 % \epsr(\vect{r})\left(\partial_\beta\vect A-\nabla\varphi\right)^2+\hbar^2c^2(\nabla\times\vect A)^2\right].  
 % \end{equation}
-We can change variables to $\tau=\beta\hbar c$, and $A_4 = \varphi/\hbar c$, and rescale all of the fields
+We can change variables to $\tau=\beta\hbar c$ and $A_4 = \varphi/\hbar c$, and rescale all of the fields
 to eliminate the constants in the exponential.
 %These rescaling cancel out under renormalization anyway. 
 %Note that $A_4$ has the same dimensions as $\vect{A}$.
-The new parameter $\tau$ is proportional to the thermal de-Broglie wavelength.
+The new parameter $\tau$ is proportional to the thermal deBroglie wavelength.  The resulting partition function is
 \begin{equation}
-Z = \int D^4A\, \epsr(\vect{r})^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
+Z = \!\int\! D^4\!A \det[\epsr]^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
  \bigg[ \epsr(\vect{r})\left(\partial_\tau\vect{A}-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg]\right\}.
 \end{equation}
-We will compare this partition function to the case when the objects are infinitely far apart,
+We will compare this partition function to the case when the bodies are infinitely far apart,
  which we will denote as $Z_0$.
-The objects will still be present in the space, but they will be too far away to interact significantly.  
+The bodies will still be present, but they will be too far away to interact significantly.  
 % We can write the $\epsr(\vect{r})$ term as a functional determinant,
 %  since it is a product, $\det|\epsr(\vect{r})|=\prod_{r_k}\epsr(r_k)$.
-If we move the objects far apart from each other, 
-the $\epsr$-determinant will not change value since the amount of material $\epsilon$ is constant.  
+If the bodies are rigidly translated, then $\det[\epsr(\vect{r})]^{3/2}=\prod_{\vect{r}_k}\epsr(\vect{r}_k)^{3/2}$
+is constant, since the amount of matter in $\epsilon(\vect{r})$ is fixed.  
 % Ultimately we will calculate energies from the free energy partition function.  In the zero temperature limit
 % \begin{equation}
 % E-E_0 = -\lim_{\beta\rightarrow 0}\frac{1}{\beta} \log Z-\log Z_0.
 % \end{equation}
-Since the constants $\det\epsilon$ will be the same in both cases, these will cancel out under this 
-renormalization.
+Since the determinants are the same in both cases, they will cancel out under this renormalization,
+and we will ignore them.
 % We can then ignore drop these constant determinants and consider 
 % \begin{equation}
 %   Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
 %   \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
 % \end{equation}
-
-The field path integral can be written in terms of the Euclidean action,
+The field path integral can be written 
  \begin{equation}
- Z = \int D\vect{A} DA_4\, e^{-S_E[\vect{A},A_4]},
+ Z = \int D\vect{A} DA_4\, e^{-S\subE[\vect{A},A_4]},
  \end{equation}
 where the Euclidean action is 
 \begin{equation}\label{eq:euclidean_action}
-S_E[\vect{A},A_4] = \frac{1}{2} \int d^3r\,d\tau\, \bigg[
+S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,d\tau\, \bigg[
 \epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
 +\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
 \end{equation}
-The action is the imaginary time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
+The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
 
 % This change of variable was necessary after the integral over the conjugate momentum fields.
 % We have already used all of the constraints on the fields to write the equations in this form. 
@@ -542,13 +541,13 @@ The action is the imaginary time action corresponding to the EM Lagrangian~(\ref
 \label{sec:gauge_fixing}
 
 % In order to proceed it is necessary to fix the gauge in the path integral.
-We need to enforce a gauge condition, since currently the path integral runs over all field configurations.
-The integral includes infinitely many physically equivalent states that are related to each other by a gauge transformation,
-which would lead to nonsensical results if this redundancy is not removed.
-After gauge-fixing, the integral should only run over one gauge field corresponding to a particular
-physical state.  %The gauge-fixing  is done by enforcing a delta-function constraint on the gauge degree of freedom.  
-This gauge-fixing is carried out by introducing a gauge-fixing function $G[A]$ inside a functional $\delta$-function.
-A further Jacobian determinant must be included to ensure each physically distinct state also receives the same weight.
+The path integral includes infinitely many physically equivalent fields that are related by a gauge transformation.
+If that redundancy is not removed, the path integral would give nonsensical infinite results.
+The redundancy is lifted by introducing a gauge-fixing condition so that only one gauge field 
+corresponding to a each physical field configuration in included in the path integral.  %The gauge-fixing  is done by enforcing a delta-function constraint on the gauge degree of freedom.  
+This gauge fixing is carried out by introducing a gauge fixing function $G[A]$ inside a functional $\delta$-function.
+A further Jacobian determinant must be included to ensure each physically distinct state also receives the same weight.\footnote{
+For example see \S 9.4 of Peskin and Schroeder~\cite{Peskin1995}.}
 
 The Jacobian factor associated with the gauge-fixing can be constructed in analogy
  with the change of variable for a single $\delta$-function:
@@ -560,15 +559,15 @@ inserted into the path integral
 \begin{equation}
   \delta[G(A)]\det\left[\frac{\delta G}{\delta\alpha}\right],
 \end{equation}
-where the determinant is known as the Faddeev-Popov determinant.
+where the determinant is known as the Faddeev-Popov determinant~\cite{Faddeev1967,Faddeev1991}.
  This ensures after integrating over each $\alpha$, each state receives the same weight.  
 One further trick is often used in gauge-fixing the path integral.  Instead of fixing a gauge with
-$G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is an otherwise free parameter,
+$G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is a free function,
 we can integrate it against a Gaussian density,
 \begin{equation}
-  1 = \int D\gamma \exp\left[-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right].
+  \text{const} = \int D\gamma \exp\left[-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right].
 \end{equation}
-Such factors are unity in the path integral sense that any constants will cancel out when considering
+Such factors are constant in the path integral sense that any constants will cancel out when considering
 physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}

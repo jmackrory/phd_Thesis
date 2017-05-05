@@ -693,92 +693,10 @@ and the challenges these experiments provide to theoretical and computational me
 The following is intended as a broad survey, since the full literature on the Casimir and Casimir--Polder 
 effects is quite large.  
 
-Casimir forces are the dominant forces for electrically neutral bodies.  
-However, they can be screened by other electrostatic forces in some circumstances, particularly if one is 
-considering metal bodies~\cite{Lamoreaux2011,Bordag2009}.  
-These electrostatic forces typically have a longer ranged force law than the Casimir effect, 
-with a similar order of magnitude. 
-In order to detect the classic Casimir force between conducting bodies, it is then necessary to carefully 
-remove any stray background fields.  These arise from patch potentials (localized distributions of electric charge
-on a conductors surface), stray charges, or adsorbed atoms.  
-Note that while these electrostatic forces can be mitigated, the Casimir effect is a fundamental 
-effect and must be taken into account in engineering applications.  
-The resulting power law potentials are relatively short-ranged power laws compared to the Coulomb potential 
-between charged particles which decays $d^{-1}$. 
-% We will compare the size of the Casimir force to typical Coulomb energies that arise in experiments.
-% We will also compare the Casimir--Polder energy to the typical trapping potentials used to trap atoms.
-  
-% While the Casimir effect is short-ranged compared to the $d^{-1}$ Coulumb potential between charged particles.
-% However, most bodies are electrically neutral and thus have no long-ranged Coulomb potential, whereas
-% the Casimir effect applies even if the bodies have no net charge.  
-
-% For macroscopic bodies we can compare the Casimir energy for perfect 
-% metal conductors at a distance $d$ to the energy stored in the capacitance.
-% The Casimir pressure (force per unit area) is $P_{\text{Cas}}=\frac{\hbar c\pi^2}{240 d^3}$.
-% This can be can be compared to the energy in a parallel-plate capacitor (pg. 219 of \cite{Milonni1994}.)
-% For a parallel-plate capacitor, with surface charge density $\sigma$, the attractive force 
-% between the plates is $P_{\text{cap}}=\sigma^2/(2\epsilon_0)$.  For a parallel-plate capacitor filled with
-% vacuum, the capacitance is $C=A\epsilon_0/d = QV$, which implies $\sigma=Q/A=\epsilon_0V/d$.
-% The capacitive pressure is then $P_{\text{cap}}= \dfrac{\epsilon_0 V^2}{2d^2}$.  At a distance of $1\mu$m
-% this corresponds to a voltage of $17$mV.  
-% In experiments, voltages of this magnitude are observed from electrostatic sources~(Ch 18 and 19 of Ref.~\cite{Bordag2009}).
-
-For conducting bodies, such stray potentials can emerge from variations in the work function
-of the metal~\cite{Lamoreaux2011}.
-If the Fermi surface dips below the surface of the metal, a localized electric charge can build up.
-This is one of the dominant backgrounds in Casimir experiments, and must be subtracted off to extract the Casimir effect.
-These various electrostatic potentials are randomly distributed and show a $d^{-1}$ power law
-contribution to the force~\cite{Sushkov2011}, as opposed to the faster $d^{-2}--d^{-3}$ behavior expected
-from the Casimir force.  
-
-% The typical Casimir--Polder energy scale can be estimated from dimensional considerations.
-% For a typical atom, with size $r=1\AA$, the dipole moment $d\sim er$.  The static polarizability
-% is then $\alpha\sim \sum_jd_j^2/(\hbar\omega_j)$.
-% The Casimir-Polder energy in the far-field is then
-% \begin{align}
-%   V\subCP &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 d^4}%\\
-% %  &= -\frac{3\hbar c e^2r^2}{32\pi^2\epsilon_0 \hbar\omega_0d^4}\\
-% %  &= -\frac{10^8 10^{-19}10^{-20}}{10^2  10^{-11} 10^{15}10^{-24}} eV\\
-% %  &= -\frac{10^{-31}}{10^{-19}} eV\\
-%   \approx -10^{-12}eV,
-% \end{align}
-% which corresponds to a frequency shift on the order of $10$kHz for a generic atom at 1$\mu$m.  
-% % In the near-field, it is necessary to shift over to the van der Waals energy, where the atom interacts
-% % with its image dipole.
-% In comparison, a far-off resonant light beam can create an all optical trap with a depth of $10^{-9} eV$
-% \footnote{Assume the atom is cooled down to the Doppler temperature, for which $E\sim\hbar\Gamma\sim 10^{-28}J\sim 10^{-9}eV$}
-% So at a distance of $1\mu$m from a surface, it may be possible to trap an atom, but at a tenth of that distance the Casimir--Polder
-% attraction would overcome the optical trapping potential.
-
-%As comparison, a typical trapping potential using far detuned lasers is 
-% As an example, atoms near a conducting surface can adsorb onto the surface, and form ionic bonds with a large dipole 
-% moment.  This permanent dipole polarizes the atom, leading to an atttractive potential~\cite{McGuirk2004}.  
-% The resulting potential can be written in terms of the atomic polarizability $\alpha$,
-% \begin{equation}
-%   V_{\text{ad}}(\vect{r}) = -\frac{\alpha_0}{2}|\vect{E}(\vect{r})|^2,
-% \end{equation}
-% where $\vect{E}$ is the field from the adatom dipole.  
-% The electric field for a dipole at the origin of dipole moment $\vect{d}$ is 
-% \begin{equation}
-%   \vect{E}(\vect{r})=\frac{1}{4\pi\epsilon_0|\vect{r}|^3}[3(\vect{d}\cdot \hat{r})\hat{r}-\vect{d}]. 
-% \end{equation}
-% The square of the electric field is 
-% \begin{equation}
-%   |\vect{E}(\vect{r})|^2% =\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}
-%   % [9(\vect{p}\cdot \hat{r})^2-6(\vect{p}\cdot\hat{r})^2+\vect{p}^2]
-% =\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}  [3(\vect{d}\cdot \hat{r})^2+\vect{d}^2]
-% \end{equation}
-% So for order of magnitude estimates, the interaction potential is approximately
-% \begin{equation}
-%   V_{\text{ad}}(\vect{r}) \sim -\frac{\alpha_0}{2}\frac{1}{(4\pi\epsilon_0|\vect{r}|^3)^2}\vect{d}^2
-% \end{equation}
-
 %Lamoreaux
 \subsection{Experiments on Casimir Forces}
 
-%\todo{Citation for this?}
-
-Despite it's prediction in 1948, the Casimir effect proper proved quite difficult to directly measure.
+Despite its prediction in 1948, the Casimir effect proper proved quite difficult to directly measure.
 Some early confirmations used the Casimir effect to explain the thickness of liquid helium film on 
 the wall of its container~\cite{Sabisky1973,Dzyaloshinskii1961}.
 In that case, helium satisfies the repulsive Casimir criterion and it is energetically favorable
@@ -790,11 +708,10 @@ to have helium between the vacuum and the walls.
 % between the vacuum and the sides of the jar, so the liquid helium experiences an attractive pressure up the walls.  
 
 The Casimir effect was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}.   
-%Lamoreaux's work spurred a large amount of experimental and theoretical work.  
-This experiment measured the Casimir force between a sphere above a metal plate,
-and measured the force via a torsion pendulum.  
-This landmark experiment was closely followed by measurement by Mohideen\etal\cite{Mohideen1998}
-using an atomic force microscope to measure the force in a sphere-plate geometry.  
+This experiment measured the Casimir force between a sphere above a metal plate
+ via a torsion pendulum.  
+This landmark experiment was closely followed by Mohideen\etal\cite{Mohideen1998},
+who used an atomic force microscope in a closer distance regime to measure the force in a sphere-plate geometry.  
 The Casimir force has also been directly measured in a nanoelectromechanical (NEMS) system 
 by Chan\etal~\cite{Chan2001}.  In this case, the Casimir force is detected by the modification it
 makes to the frequency of a torsional oscillator suspended above a plate.  
@@ -810,11 +727,33 @@ Given the Casimir force is an attractive potential, if parts of the device get t
 they will permanently stick to one another, leading to device failure.  
 
 Precisely measuring such a small force requires careful calibration of the measurements 
-and removing systematic effects.  Reviews of these and other difficulties are available in Refs~(\cite{Lamoreaux2011, vanZwol2011, Bordag2009}).
+and removing systematic effects.  Reviews of these and other difficulties are available in Refs.~\cite{Lamoreaux2011, vanZwol2011, Bordag2009}.
 Two of the primary experimental errors are due to 
 patch potentials, and surface roughness.  The patch potentials are localized surface 
 charge distributions, which due to the longer range Coulomb interaction must be subtracted off to extract the weaker
-Casimir force~\cite{Sushkov2011}.  The fact that the thin metallic films and surfaces used in these 
+Casimir force~\cite{Sushkov2011}.  
+
+However, they can be screened by other electrostatic forces in some circumstances, particularly if one is 
+considering metal bodies~\cite{Lamoreaux2011,Bordag2009}.  
+These electrostatic forces typically have a longer ranged force law than the Casimir effect, 
+with a similar order of magnitude. 
+In order to detect the classic Casimir force between conducting bodies, it is then necessary to carefully 
+remove any stray background fields.  These arise from patch potentials (localized distributions of electric charge
+on a conductors surface), stray charges, or adsorbed atoms.  
+Note that while these electrostatic forces can be mitigated, the Casimir effect is a fundamental 
+effect and must be taken into account in engineering applications.  
+The resulting power law potentials are relatively short-ranged power laws compared to the Coulomb potential 
+between charged particles which decays $d^{-1}$. 
+
+For conducting bodies, such stray potentials can emerge from variations in the work function
+of the metal~\cite{Lamoreaux2011}.
+If the Fermi surface dips below the surface of the metal, a localized electric charge can build up.
+This is one of the dominant backgrounds in Casimir experiments, and must be subtracted off to extract the Casimir effect.
+These various electrostatic potentials are randomly distributed and show a $d^{-1}$ power law
+contribution to the force~\cite{Sushkov2011}, as opposed to the faster $d^{-2}--d^{-3}$ behavior expected
+from the Casimir force.  
+
+The fact that the thin metallic films and surfaces used in these 
 experiments are not perfectly smooth is referred to as surface roughness, and is one of 
 the main theoretical sources of error in these experiments.  
 In addition, the optical properties of the surface must also be carefully characterized, since the 
@@ -829,20 +768,18 @@ Beyond those early experiments, Casimir--Polder forces have also been measured p
 using isolated atoms in experiments using atomic beams, cavity QED, and Bose-Einstein condensates.  
 
 The first modern attempts at directly measuring the Casimir-Polder force used atomic beams 
-near surfaces.  Sukenik\etal made the first modern attempt to measure the Casimir-Polder force~\cite{Sukenik1993}.
-Their experiment passed a hot beam of atoms through an optical cavity and attempted to detect
-the effect by the small phase-shift induced on the atoms.  Unfortunately, their measurement 
-was not definitive.
-More recent experiments by Perreault\etal\cite{Perreault2005}, and Lonig\etal\cite{Lonij2009} succeeded in measuring
-the Casimir-Polder force with atomic beams.  These experiments passed an atomic beam past grating and 
-detected the phase-shift by atom interferometry.  
+near surfaces.  Sukenik\etal made the first modern measurement of the Casimir-Polder force~\cite{Sukenik1993}.
+Their experiment passed a hot beam of atoms through an optical cavity and detected
+the effect by the fraction of the atoms that pass through undeflected. 
+More recent experiments by Perreault\etal\cite{Perreault2005}, and Lonig\etal\cite{Lonij2009} measured 
+the Casimir-Polder force by passing an atomic beam through a grating and detecting the phase-shift via atom interferometry.  
 
 The Casimir-Polder effect has also been observed in the context of a Bose-Einstein Condensate (BEC)
 of ultra-cold atoms~\cite{Harber2005,Obrecht2007}.  % The BEC allows for precise distance control,
 % and can be used in atom interferometry to detect small phase shifts.    
 The atoms are confined to a harmonic trap, and can be brought near to a surface to probe the Casimir
-force, where the Casimir force acts to shift the oscillation frequency of the harmonic trap in a position
-dependent manner.  % These experiments were able to measure the Casimir--Polder force in the thermal regime,
+force, where the Casimir--Polder force shifts the oscillation frequency of the harmonic trap.
+  % These experiments were able to measure the Casimir--Polder force in the thermal regime,
 % vary the distance of the atoms from the surface from $1\mu m$ up to 10 $\mu m$
 % This technique was able to measure the Casimir force in the thermal regime, which
 % is often difficult since the force is weak at those distance, but was accessible here due to the stability of the BEC.
@@ -852,32 +789,31 @@ dependent manner.  % These experiments were able to measure the Casimir--Polder 
 The Casimir-Polder force is also important in developing atomic technologies.  
 Atoms are an attractive platform for a number of reasons:
 Each atom of the same species is identical; 
-atoms have readily accessible, well-defined transitions that can be used to control their motion
-, internal state and interactions; and atoms
+atoms have readily accessible, well-defined transitions that can be used to control their motion,
+internal state and interactions; and atoms
 have internal states that are long-lived, which would be important in storing information.
 
 In recent years there has been a concerted push to develop technology that retains the appealing features 
-of cold atoms in an architecture that can be scaled up to having large numbers of addressable atoms
-~\cite{Kimble2008}.  
+of cold atoms in an architecture that can be scaled up to having large numbers of addressable 
+atoms~\cite{Kimble2008}.  
 % There is a large effort across many fields to harness quantum technologies to develop scalable 
 % quantum devices for computation and simulation of quantum systems
-The desire to get strong-coupling between the atom and light fields, addressable qubits, and a scalable
-architecture has pushed groups towards developing atomic traps that capture atoms close to dielectric surfaces.  
+The desire to get strong coupling between the atom and light fields, addressable qubits, and a scalable
+architecture has pushed groups towards developing traps that hold atoms close to dielectric surfaces.  
 In this limit, the Casimir--Polder force is the dominant force, which can only be partially mitigated
 by using laser fields to generate repulsive potentials.
 In designing these new devices it is essential to compute and account for the Casimir-Polder force
-the atom's experience when brought close to the dielectric surface.  
+the atoms experience when brought close to the dielectric surface.  
 
-One direction that has been pursued is the atom-chip~\cite{Folman2000,Schneider2003,Salem2010},
+One direction that has been pursued is the atom chip~\cite{Folman2000,Schneider2003,Salem2010},
 where atoms are trapped within a few microns of the surface via a combination of lasers and magnetic fields from wires embedded in
 the surface.  %The atoms are typically trapped within a micron of the surface.  
-In most applications the Casimir effect acts as a lower bound on how close bodies can be brought 
+In most applications the Casimir effect imposes a lower bound on how close bodies can be brought 
 to each other, which in turn limits the coupling strength, as well as how small devices can be made.
 In the atom-chip example bringing the atoms closer than a micron lead to most of the atoms escaping the 
 trap~\cite{Lin2004}.
 
-Another direction that has been pursued is strong coupling of atoms to light via cavity 
-quantum electrodynamics (QED).  
+Another direction that has been pursued is strong coupling of atoms to light via cavity QED.  
 Kimble's group is developing microscopic dielectric waveguides to allow trapping, addressing and strongly interacting with  
 single atoms in a scalable manner~\cite{Alton2011, Hung2013, Goban2014}.  In more recent work,
 the Casimir--Polder potential is explicitly accounted for as part of the trapping potential~\cite{Goban2014},
@@ -886,7 +822,11 @@ and must be precisely computed.
 \subsection{Current experimental directions}
 
 Beyond directly detecting the Casimir effect, experiments are also moving in some directions worth highlighting,
-since they are quite challenging for the theory to handle.  
+since they are quite challenging for the theory to handle.
+There is a continued effort to find repulsive Casimir effects, via material properties or geometric efforts.
+In addition, some experiments search for new forces on the micron scale, where any deviation from the predicted
+Casimir effect may be a new force.  In that case it is essential to be able to precisely calculate
+Casimir forces, and carefully remove all known backgrounds. 
 
 % \subsubsection{Thermal Force and Material Model}
 
@@ -921,14 +861,14 @@ since they are quite challenging for the theory to handle.
 \subsubsection{Repulsive Casimir Effects}
 
 Given that Casimir effects tend to enforce lower bounds for how close bodies can approach each other,
-there have been a push to search for repulsive Casimir effects.  This would allow open the possibility
-of trapping particles, and allow much smaller devices to be constructed.  
-Unfortunately, these prospects are somewhat limited, due to requiring rare material properties.
+there have been a push to search for repulsive Casimir effects.  This would open the possibility
+of trapping particles, and allow smaller devices to be constructed.  
+Unfortunately, these prospects are somewhat limited, due to requiring unusual material properties.
 From the Lifshitz formula, the sign of the force changes sign if $r_{12}r_{23}<0$.
 This implies Casimir repulsion should be possible if $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad range of frequencies.
 This was experimentally demonstrated for a gold sphere immersed in bromobenzene above a silica plate
 by Munday\etal\cite{Munday2009}.  However, this is method is little help for Casimir forces between
-identical materials.  
+identical materials or cold atoms in vacuum.  
 
 Alternatively, the Casimir force is also repulsive for combinations of dielectric and magnetic materials~\cite{Boyer1974}.  
 Given the strength of electric interactions over magnetic interactions in atoms, this spurred interest
@@ -941,14 +881,15 @@ The metallic response implies an attractive potential, with the result that the 
 
 While the preceding discussion emphasized varying materials for Casimir applications, it may 
 be possible to exploit similar ideas for repulsive Casimir--Polder effects~\cite{Milton2011,Milton2012},
-since the atom responds to a narrower range of frequencies.  In the far-field, the attractive dielectric
-response may dominate, it might be possible to engineer near-field repulsion.  
-These require an anisotropic response from the atom, which might be possible in the excited state.
+since the atom responds to a narrower range of frequencies.  In the far field, the attractive dielectric
+response would dominate over any repulsive response, so it might be possible to engineer a trap.  
+These proposals require an anisotropic response from the atom, which might be possible in the excited state.
 
-Another way towards repulsive effects is by varying the geometry of the bodies.  
+Another method of generating repulsive Casimir effects is by varying the geometry of the bodies.  
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
 \cite{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
 In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\cite{Rahi2010}.
+\todo{SUMMARIZE THIS}
 
 \subsubsection{Searches for new physics}
 
@@ -959,7 +900,7 @@ which models the interaction with a new massive particle.
 On the micron scale however, the Casimir effect is the dominant interaction between neutral bodies,
  and must be carefully subtracted in an experimental procedure.
  Experiments then look for deviations from the expected Casimir effect, which means that the 
-theory and experiment must be good agreement with one another.  
+theory and experiment must be in good agreement with one another.  
 This approach has already been used to exclude regions of the parameter space for the hypothetical
 Yukawa interaction~\cite{Obrecht2007,Bezerra2011}.  
 Experiments searching for modifications of gravity typically employ a thin gold layer over
@@ -992,7 +933,7 @@ and the ability to handle arbitrary shapes.
 % This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
 % range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
 % and one must carefully renormalize the results to avoid infinite answers.  
-For a simple, symmetric geometry (like perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
+For a simple, symmetric geometry (like the perfectly conducting planes we used in Sec.~\ref{sec:CP_calc})
 it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.
 %   However for general geometries 
@@ -1028,8 +969,8 @@ The proximity force approximation (PFA) or Derjaguin approximation, is an uncont
 the Casimir force between generally shaped objects~\cite{Derjaguin1934,Blocki1977}.  
 %\todo{Earlier citation is available}
 The PFA treats each infinitesimal patch of the surfaces as if they were planar bodies,
-and sums up the pair-wise interactions between different patches.
-The PFA is assumed to be valid if the radius of curvature of the bodies $R$, is large relative to 
+and sums up the pairwise interactions between different patches.
+The PFA is assumed to be valid if the radius of curvature of the bodies $R$ is large relative to 
 their separation $d$.  
 For many years the PFA was the only practical general method of estimating Casimir forces in arbitrary geometries.
 The PFA has the advantage of being straightforward to implement, and functions as an order of magnitude
@@ -1037,14 +978,15 @@ estimate for the Casimir force for arbitrary geometries.
 % It was used by Lamoreaux to estimate the Casimir force between the sphere-plate
 % in his landmark experiments, where the radius of the sphere was indeed large compared to the separations explored. 
 
-However it has some prominent limitations. First, it is only valid for vanishing curvature.
+However, it has some prominent limitations.  First, it is only valid for vanishing curvature.
 Second, the PFA assumes that the force can be found by integrating up
 the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
-the sum of the pair-wise potential energies, the Casimir force for an arrangement
-of bodies is not just the sum of the pair-wise energies.~(See \S{8.2} and \S{8.4} of \cite{Milonni1994})
+the sum of the pair wise potential energies, the Casimir force for an arrangement
+of bodies is not just the sum of the pair wise energies.~(This is discussed further in \S{8.2} and \S{8.4} of Ref.~\cite{Milonni1994}.)
 As a crude justification, the Casimir energy involves the square of the electric field, which responds 
 non-linearly as more bodies are added.  
+\comment{FIX}
 % Finally, the PFA allows only for strictly attractive forces.  
 % In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
 % such as media with a strong magnetic response, or anisotropic media.
@@ -1068,7 +1010,7 @@ non-linearly as more bodies are added.
 \subsection{Scattering Approach}
 
 The scattering approach is currently the only general method of computing 
-electromagnetic Casimir forces between general media.  The scattering method 
+electromagnetic Casimir forces between media.  The scattering method 
 is based on scattering techniques from classical electromagnetic theory and quantum mechanics~\cite{Rahi2009}.
 %The roots of the scattering method in Casimir physics go back a number of decades.  
 This method has been developed by a number of groups as an analytical method for general geometries~\cite{Emig2004, Lambrecht2006,
@@ -1090,17 +1032,17 @@ coupling between bodies and serves to remove any self-interactions.
 The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
 %Since different bodies have different shapes, it is necessary t be able to transform basis.  
 Derivations similar to the argument principle used in Sec.~\ref{sec:lifshitz} can be applied to describe the scattering between modes,
---- instead of reflection coefficients for a surface, one considers the full scattering matrix for each body,
-where matrix indices run over the labels (such as wavenumber, polarization) for the modes.
-This has been applied for two-body systems such as realistic mirrors~\cite{Lambrecht2006}, surface roughness, 
-and spheres and planes~\cite{Canaguier-Durand2012}.   
+--- instead of reflection coefficients for a surface, one considers the full scattering matrix for each body.
+%where matrix indices run over the labels (such as wavenumber and polarization) for the modes.
+This version of the scattering method has been applied to two-body systems such as realistic mirrors~\cite{Lambrecht2006}, 
+spheres and planes with investigatons of surface roughness~\cite{Canaguier-Durand2012}.   
 This subclass of these methods rely on scattering between mode functions suited to analytical expansions,
  and while they in principle offer a general purpose numerical method, 
 the simulations may be slow to converge if the choice of basis functions is poorly suited to the actual
 geometry required.  
 
 The Johnson group at MIT has developed a formulation of the scattering method that is better suited to numerical 
-applications for piece-wise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
+applications for piecewise constant media~\cite{Rodriguez2007,Rodriguez2007a, Rodriguez2009,Reid2009,Reid2011, Reid2013}.  
 % Instead of describing the scattering from one mode into another, one can describe the scattering 
 % locally at each patch of a surface.  
 % The scattering between objects is described by coupling different surface patches together via the
@@ -1112,16 +1054,16 @@ applications for piece-wise constant media~\cite{Rodriguez2007,Rodriguez2007a, R
 % can be described by its classical counterpart.)
 % This method has also been able to leverage the development of classical EM solvers to the Casimir problem~\cite{Johnson2011}.
 The fluctuating-surface-current formulation is a general method for computing Casimir
-energies for piece-wise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
+energies for piecewise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
 In essence the method calculates the interaction between electric and magnetic surface currents 
 on different bodies, mediated by the electromagnetic field.  Mathematically this is derived 
 from a path integral for the electromagnetic field, where the fields are restricted to obeying EM boundary conditions at the 
 surfaces via functional $\delta$-functions (simpler boundary conditions were handled in this fashion in
-~\cite{Bordag1985,Li1991}).  The $\delta$-functions introduce fields 
+Refs.~\cite{Bordag1985,Li1991}).  The $\delta$-functions introduce fields 
 bound to the surfaces, which can be interpreted as surface currents flowing to enforce boundary conditions.
 After integrating out the EM field in the interior and exterior regions, 
 these surface currents interact with one another via the electromagnetic Green function.
-Since the method assumes piece-wise, homogeneous media and enforces EM boundary
+Since the method assumes piecewise, homogeneous media and enforces EM boundary
 conditions, it is the relatively simple homogeneous EM Green function that appears in these expressions.
 These surface integrals are then discretized by splitting the surface into a finite number of patches.
 All of the surface currents can then be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
@@ -1137,28 +1079,27 @@ Since each frequency $\xi$ contributes independently, the integral over $\xi$ co
 trivially parallelized, but this may only offer relatively little parallelization for some problems.
 
 The fluctuating-surface-current method has been used to 
-for example describing the energy dependence of tetrahedral nanoparticles, capsules, and other  
+describe the energy dependence of tetrahedral nanoparticles, capsules, and other  
 geometries~\cite{Reid2009,Reid2011,Rodriguez2010}.  It has also been used to find cases 
 where the Casimir force is repulsive due to geometric effects~\cite{Levin2010}, although the repulsion
-is not stable~\cite{Levin2010,Rodriguez2013} .  
+is not stable~\cite{Levin2010,Rodriguez2013}.  
 The scattering method has also been used in the design of atomic traps near dielectric waveguides, where the Casimir--Polder
 force is an essential component of the trap~\cite{Hung2013}.  
 
 As we noted, the scattering method is the only available general method for computing Casimir effects.
 However, it is useful to have multiple methods with different computational properties
 and biases, particularly when extending calculations to unexplored domains.  We now turn to the worldline
-method which offers a very different picture and numerical method.  
+method, which offers a very different picture and numerical method.  
 
 \section{Path Integrals}
 \label{sec:feynman_path_integral}
 In order to discuss the modern methods of computing the Casimir effect it is necessary to introduce
-the path-integral.  The path integral was originally developed by Richard Feynman as an alternative 
+the path integral.  The path integral was originally developed by Richard Feynman as an alternative 
 formulation of quantum mechanics~\cite{Feynman1948,Feynman1965}.
 In the path integral, the probability amplitude for a particle to propagate from one position to another,
 is given by the sum over \emph{all} possible paths between the points.
 (In fact the path integral can be derived as the propagator from more traditional operator quantum mechanics~\cite{Sakurai1994}.)
 Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the classical action for the path.
-For a free particle, the allowed paths are Brownian motions, or diffusive in nature.  
 
     Path integrals have been used extensively in a wide range of theoretical physics~\cite{Kleinert2012}.
     While offering an intuitive picture of quantum mechanics, they are much harder to use 
@@ -1166,29 +1107,29 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     However, path integrals form a natural basis for quantum field theories, where they offer a relativistically covariant
     quantization procedure that naturally accounts for the gauge symmetries 
     that underlie the Standard Model of particle physics~\cite{Brown1994,Srednicki2008}.
-    % In these field theoretic path-integrals, the integral runs over
+    % In these field theoretic path integrals, the integral runs over
     % all possible field configurations connecting the initial and final states, and some care is required
     % to handle the redundant degrees of freedom implied by gauge invariance~\cite{Faddeev1991}.
 
-    Path-integrals have also been used in mathematics and statistics to describe stochastic 
+    Path integrals have also been used in mathematics and statistics to describe stochastic 
     processes~\cite{Kac1949,Durrett1996, Karatzas1991}.  Rather than solving the Schr\"odinger equation, 
-    this path integral is solves a diffusion equation --- this effectively passes over to ``imaginary time'',
-    since after the Wick rotation which replaces, $t\rightarrow -i \tau$, the Schr\"odinger equation is a diffusion equation.
+    this path integral solves a diffusion equation---this effectively passes over to ``imaginary time,''
+    since after the Wick rotation $t\rightarrow -i \tau$, the Schr\"odinger equation is a diffusion equation.
     This mathematical path integral weights each path by $e^{-S_{E}[x]}$, where $S_E$ is the real-valued Euclidean action for the path.
-    In this form the path-integral has clearer convergence properties, 
+    In this form the path integral has clearer convergence properties, 
     since the paths are weighted by real, decaying exponentials, as opposed to the oscillatory integrals
     in Feynman's path integral.  
 
-    % The path-integral is one way to view stochastic processes, along side stochastic differential
+    % The path integral is one way to view stochastic processes, along side stochastic differential
     % equations and diffusion or Fokker-Planck equations. 
-    % The path-integral is an infinite dimensional integral, which is the solution to an associated 
+    % The path integral is an infinite dimensional integral, which is the solution to an associated 
     % diffusion equation.  One can randomly sample from the 
     % dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
     % in turn be described by a stochastic differential equations.  %\todo{Gardiner citation for SDE-> PDE}
         
-    Path integrals underlie most of the work carried out in this thesis: we will use path-integrals
+    Path integrals underlie most of the work carried out in this thesis: we will use path integrals
     to quantize the electromagnetic field, and the worldline method relies heavily on path integrals.
-    In addition, we will use the connection between path-integrals and diffusion equations
+    In addition, we will use the connection between path integrals and diffusion equations
     to verify analytically that the worldline path integral gives the correct results, and enhance our numerical
     calculations.  Considering their importance to this thesis, we will 
     now derive Feynman's path integral, which will serve as a prototype for all of the path integrals
@@ -1200,36 +1141,37 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
 
     \subsubsection{Derivation of Feynman's Path Integral}
 
-    Let us consider the quantum mechanical treatment of a particle in a time-independent potential $V(\vect{x})$, with Hamiltonian 
+    Let us consider the quantum mechanical treatment of a particle in a time-independent potential $V(\vect{x})$, 
+    which is described by the following Hamiltonian 
     \begin{equation}
-      \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}),
+      \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}).
     \end{equation}
-    where the position and momentum operators obey the following commutation relations,
+    The position and momentum operators obey the following commutation relations,
     \begin{gather}
       [\op{x}_i,\op{p}_j] = i\hbar\delta_{ij}\qquad      [\op{x}_i,\op{x}_j] = [\op{p}_i,\op{p}_j]=0,
       \label{eq:commutation}
     \end{gather}
-    with resolutions of the identity,
+    and have the following resolutions of the identity,
     \begin{gather}
       I = \int d^Dx |\vect{x}\rangle\langle\vect{x}| = \int \frac{d^Dp}{(2\pi\hbar)^D} |\vect{p}\rangle\langle\vect{p}|,
       \label{eq:identity}
     \end{gather}
-    and state overlap
+    where $D$ is the dimension of the space.
+    The overlap between position and momentum eigenstates is
     \begin{equation}
       \langle \vect{x}|\vect{p}\rangle = e^{i\vect{p}\cdot\vect{x}/\hbar}.
       \label{eq:overlap}
     \end{equation}
-
-    In quantum mechanics, the amplitude for a particle starting at $x_i$ at time $t=0$, and propagating
-    to $x_f$ at time $t$ is given by 
+    In quantum mechanics, the amplitude for a particle starting at $\vect{x}_0$ at time $t_0=0$, and propagating
+    to $\vect{x}_N$ at time $t$ is given by 
     \begin{equation}
-      \langle x_f,t| x_i, t_0\rangle = \langle x_f| e^{-i\op{H}t/\hbar}|x_i\rangle.
+      \langle \vect{x}_N,t| \vect{x}_0, t_0\rangle = \langle \vect{x}_N| e^{-i\op{H}t/\hbar}|\vect{x}_0\rangle.
     \end{equation}
-    The amplitude to propagate from $x_0$ to $x_f$ can be developed into a path integral in a number of steps.
+    The amplitude to propagate from $\vect{x}_0$ to $\vect{x}_N$ can be developed into a path integral in a number of steps.
     First, split the evolution operator into $N$ pieces, and insert $(N-1)$ resolutions of the $\vect{x}$-identity 
     and $N$ resolutions of the $\vect{p}$-identity between    the pieces
     \begin{align}
-      \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle % &= \int \prod_{k=1}^{N-1} d^Dx_k 
+      \langle \vect{x}_N,t| \vect{x}_0, t_0\rangle % &= \int \prod_{k=1}^{N-1} d^Dx_k 
       % \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
       % \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       % \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
@@ -1238,10 +1180,10 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
       & \hspace{0.5cm}\times\langle \vect{x}_{N-1}|\vect{p}_{N-1}\rangle\langle\vect{p}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       \cdots \langle \vect{x}_1|\vect{p}_1\rangle\langle \vect{p}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle
     \end{align}
-    where $\Delta t:=t/N$, and we have introduced $x_N=x_f, x_0=x_i$. 
-    At this point we can note the basic structure: the total amplitude for 
+    where $\Delta t:=t/N$. 
+    At this point we can note the basic structure: The total amplitude for 
     the particle to propagate from $x_0$ to $x_f$ is the product of the amplitudes to propagate 
-    from one point to the next, with the total amplitude being the integral (or sum) summed over 
+    from one point to the next, with the total amplitude being the sum over all
     such paths.  
     Each infinitesimal time evolution operator can factored into a kinetic and potential piece, 
     \begin{equation}
@@ -1250,10 +1192,10 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
     \end{equation}
     where the corrections due to splitting and factorizing the exponential operator are higher order 
     in $\Delta t$.  
-    (In general, it is crucial to consistently carry out all expansions in path-integrals to $\order(\Delta t)$.  
+    [In general, it is crucial to consistently carry out all expansions in path integrals to $\order(\Delta t)$.  
     % For example, in path integrals in curved space this often requires working to high order in $\Delta x$, 
     % and exploiting the equivalent of the Ito rule $dx^2=dt$~\cite{deWitt1957,Kleinert2012,Grosche1998}.
-    )
+    ]
 
     At this point, the position and momentum operators can be replaced by their eigenvalues, and the
     state-overlap can be used to write,
@@ -1268,7 +1210,8 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
       &\times\bigg[\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
       e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg].
     \end{align}
-    Since the momentum integrals are Gaussian, they can be straightforwardly evaluated
+    Since the momentum integrals are Gaussian, they can be straightforwardly evaluated,
+    with the result
     \begin{align}
       \langle \vect{x}_f,t_f| \vect{x}_i, t_0\rangle 
       % &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=0}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}
@@ -1279,28 +1222,30 @@ For a free particle, the allowed paths are Brownian motions, or diffusive in nat
         \prod_{n=0}^{N-1}\bigg[\bigg(\frac{ m }{2\pi i\hbar\Delta t}\bigg)^{D/2}
         e^{i m (\vect{x}_{n+1}-\vect{x}_n)^2/(2\Delta t)}e^{ -iV(\vect{x}_n)\Delta t/\hbar}\bigg]\\
         &= \mathcal{N}\int D\vect{x} 
-        \exp\left\{\frac{i}{\hbar}\int_{0}^{t} dt'\,\left[ \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right]\right\},
+        \exp\left\{\frac{i}{\hbar}\int_{0}^{t} dt'\,\left[ \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right]\right\}.
     \end{align}
-    where in the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
+    In the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
     \rightarrow \dot{\vect{x}}, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
     $D\vect{x} = \prod_{k=1}^{N-1}d^Dx_k$.  The phase in exponent is the classical action for a particle
     in a potential.  Paths with the same phase will add together constructively, while 
-    paths in regions where the phase is quickly varying will cancel one another out.  
+    paths in regions where the phase is quickly varying will cancel.  
     This leads to the classical limit where only the paths of stationary phase where $\delta S[x(t)]=0$
-    contribute.
+    contribute.  
+    \comment{on integral over $e^{iS}$, field theories sometimes jump to this point with specified action.}
 
     % One can think of the integral as summing over all possible paths $\vect{x}(t)$
     % between points $x_0$ and $x_f$ weighted by their classical action.  This also suggests a number 
     % of semi-classical expansions, such as considering the limit when $\hbar\rightarrow 0$ to derive 
     % the classical limit, or in work on chaotic systems~\cite{Gutzwiller1990}.
 
-    In this thesis, this simple type of derivation will be all we require.  We 
+    In this thesis, this simple type of derivation will be all that is required.  We 
     will often work with the imaginary time version, which replaces the oscillating exponentials with
     decaying exponentials.  
-    The extension to field path-integrals over fields is straightforward: the field $\phi(\vect{x})$ 
-    is described by its value at finitely many points $\phi(\vect{x}_k)$, and one integrates over the field values at these 
-    points.  At the end of the calculation, one lets the spacing between grid points go to zero, 
-    and the size of the grid extend to infinity.  
+    The extension to field path integrals over fields is straightforward: the field $\phi(\vect{x})$ 
+    is described by its value at finitely many points $\phi(\vect{x}_k)$, where the field at each point
+    varies independently.  The field path integral involves an integral over the field values at all of these 
+    points.  At the end of the calculation, the spacing between grid points go to zero, 
+    and the size of the grid extend to infinity so as to encompass all of the bodies.  
     We will also only need to consider Gaussian path integrals, of the type considered here.  
     In a later chapter we will extend this derivation to include sources.
 
@@ -1313,19 +1258,19 @@ field is described by summing over the paths of a virtual particle interacting w
 The worldline method was later developed as an alternative method for 
 carrying out general quantum field theory calculations in terms of single particle 
 quantum mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.  
-% The worldline method is heavily based on Feynman's path-integral method, where the amplitude
+% The worldline method is heavily based on Feynman's path integral method, where the amplitude
 % for a particle to move from one position to another is the sum over all paths between the positions,
 % where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
 The basic insight of the worldline method is that for one-loop effective actions, 
-the field path integral calculation can be recast in terms of the particle path
+the field path integral calculation can be recast in terms of the path
  integral for particles traveling in closed space-time paths.
   Higher order loop calculations can also be carried out with more particles, 
 and gauge fields can also be treated~\cite{Schubert2001}.
 For example, the worldline method has been used to compute relativistic
-field effects for quantum electrodynamics (QED) such as the Lamb shift~\cite{Schmidt1995},  
+field effects for QED such as the Lamb shift~\cite{Schmidt1995},  
 It has also been used as a numerical algorithm for computing these relativistic QED effects~\cite{Mazur2014}---
 however, these methods were developed for free-space interactions at high energy, rather than the 
-low energy Casimir phenomena we desire to describe.  
+low energy Casimir phenomena we seek to describe.  
 
 The worldline method was first used to compute scalar Casimir energies by Gies\etal~\cite{Gies2003,Gies2006, Gies2006a}.
 The scalar worldline method has been extended to finite temperatures~\cite{Klingmueller2008},
@@ -1338,11 +1283,11 @@ with a view to exploring how the Casimir energy violates certain energy conditio
 The scalar worldline is also related to some semi-classical expansions for the Casimir energy.  
 In particular, it is a direct numerical method for computing the so-called optical path integral
 \cite{Scardicchio2005, Scardicchio2006}.  The sum over intersecting paths is also reminiscent 
-for the semi-classical approach to the Casimir force by Schaden and Spruch\cite{Schaden1998} that evaluates 
+for the semi-classical approach to the Casimir force by Schaden and Spruch~\cite{Schaden1998}, which evaluates 
 the Casimir energy by summing over all periodic orbits of light.  This latter work is particularly 
 related to other work on the semiclassical limits of path integrals involving chaos~\cite{Gutzwiller1990}.
-Both of these approximate techniques rely on a path integral expression for the Casimir energy that approximates electromagnetism as a
-scalar field, and the worldline provides a general purpose way of evaluating those path integrals.   
+Both of these approximate techniques rely on a path integral expression for the Casimir energy that models electromagnetism as a
+scalar field. The worldline provides a general way of evaluating those path integrals.   
 
 The worldline method has also been applied to the Casimir piston, where there are interesting geometric effects
 based on the geometry of the piston~\cite{Schaden2009,Schaden2009a}.
@@ -1354,13 +1299,13 @@ and did not have concrete, correct results.
 
 % \begin{enumerate}
 %   \item Semi-classical approach to Casimir force via trace formula~\cite{Schaden1998}
-%   \item Also the optical path-integral.
+%   \item Also the optical path integral.
 % \end{enumerate}
 
 % We consider a scalar field coupled to a background potential $V(\vect{x},t)$.  This potential
 % embodies the location of the bodies we are considering.  % Starting from the classical action,
 % we will derive the Hamiltonian for the fields, and then compute the quantum partition function.  
-% The partition function can be written as a path-integral, which is readily evaluated as a functional
+% The partition function can be written as a path integral, which is readily evaluated as a functional
 % determinant.  Ultimately we want the free energy, which can be further converted into a path integral
 % for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
 % world line method.   
@@ -1368,24 +1313,22 @@ and did not have concrete, correct results.
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies\etal~\cite{Gies2003}.
-
-\change{See also Ch 20 of Steck's Quantum Optics notes for an alternative perspective on this work, including
-some of the analytical techniques we will use later.}
-
-(As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
- and $\vect{x}$, the coordinate of a path integral)
+(See also Ch 20 of Steck's Quantum Optics notes for an alternative perspective on this work, including
+some of the analytical techniques we will use later~\cite{SteckNotes}.)
 
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
-The action for the field $\phi$ is given by 
+As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
+ and $\vect{x}$, the coordinate of a path integral.
+The action for the field $\phi$ is given by the time integral of the Lagrangian density $\cL$, 
 \begin{equation}
   S = \int_0^T dt \int d\vect{r} \cL = \int_0^T dt \int d^{D-1}\vect{r} 
-  \left[ \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r},t)\phi^2\right],
+  \left[ \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r},t)\phi^2\right].
 \end{equation}
-where $V(\vect{r},t)$ defines the surfaces of the interacting objects
+The potential $V(\vect{r},t)$ defines the surfaces of the interacting objects
 \begin{equation}
   V(\vect{r}) := \lambda \sum_r \delta[\sigma_r(\vect{r}-\vect{R}_r)],
 \end{equation}
-where $\lambda$ is the coupling constant, $\sigma_r(\vect{r})=0$ marks the locations of the surfaces, 
+where $\lambda$ is the coupling constant, $\sigma_r(\vect{r})=0$ defines the surfaces, 
 and $\vect{R}_r$ marks the center location of each body.
 In most work on scalar worldlines, the coupling constant $\lambda$ is taken to infinity, 
 which corresponds to imposing Dirichlet boundary conditions on the surfaces. 
@@ -1413,24 +1356,22 @@ In exactly analogous fashion to quantum mechanics, the overlap between states is
 \begin{equation}
   \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3r \phi(\vect{r})\Pi(\vect{r})\bigg].
 \end{equation}
-
 We can compute physical quantities of interest such as Casimir energies and forces
 by taking suitable derivatives of the partition function. 
 The quantum partition function for the field is 
 \begin{equation}
   Z = \tr[ e^{-\beta\op{H}}] = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
 \end{equation}
-the trace is evaluated over the complete set of field states.  
+and the trace is evaluated over the complete set of field states.  
 It is actually more useful to carry out calculations with the free energy $\mathcal{F}=-\kB T \log Z$.
-In classic path-integral fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
+In classic path integral fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
 in both fields and conjugate-momentum fields can be inserted between each piece.  
-
 % \begin{align}
 %   Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\rangle
 %   \langle\Pi_n| \phi_{n-1}\rangle
 % \end{align}
 After integrating out the momentum fields, the partition function can be written as a
-Euclidean Path integral
+Euclidean path integral
 \begin{equation}
   Z = \int D\phi \exp\left\{-\int_0^{\hbar\beta c} d\tau \int d^3r
     \left[ \frac{1}{2}(\partial_\tau\phi)^2+\frac{1}{2}(\nabla\phi)^2+V(\vect{r})\phi^2\right]\right\},
@@ -1445,7 +1386,7 @@ where the surface terms can be discarded by assuming the fields tend to zero at 
 infinity.% \comment{Actually need frequencies for periodic functions.  Especially for finite temperature,
 % dispersion.  Will discuss more carefully later.}
 
-The functional integral over $\phi$ is Gaussian and can be formally evaluated immediately as a 
+The functional integral over $\phi$ is Gaussian and can be formally evaluated as a 
 functional determinant, since the differential operator is positive operator.  
 Some care is required in regularizing such infinite determinants.
 This is done in analogy with finite dimensional Gaussian integrals.  
@@ -1458,9 +1399,9 @@ In that case the partition function is a large, finite Gaussian integral of the 
 \begin{equation}
   Z_{\text{reg}} = \int d\phi_k\exp\left\{-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right\}.
 \end{equation}
-where the labels over positions have been labeled with indices and the matrix $A$ represents the differential
+where the fields have been labeled with position indices and the matrix $A$ represents the differential
 operator.  
-This regularized expression can be integrated, under the assumption that the eigenbasis of $A$ can be found, i.e.
+This regularized expression can be integrated, under the assumption that the eigenbasis of $A$ can be found,
 where $A_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_k$.  In that case, each Gaussian integral decouples and the 
 regularized partition function can be written as 
 \begin{equation}
@@ -1491,7 +1432,7 @@ As it stands this functional determinant is divergent, but finite results can be
 free energy when the bodies are removed to spatial infinity.  Physically this corresponds to 
 computing energy differences between different configurations of bodies.  % The renormalization also cancels off 
 % the infinite constant normalization factors.  
-The renormalized free energy can now be converted into a single-particle path integral via some formal 
+The renormalized free energy can now be written in terms of a single-particle path integral via some formal 
 manipulations.  First, we will use the identity $\log\det A=\tr\log A$, which can be readily
 verified for positive finite matrices.  
 \begin{align}
@@ -1509,7 +1450,7 @@ where $A$ and $B$ are positive operators (i.e. $A$ and $B$ have strictly positiv
 This expression also relies on a difference of terms to cancel out divergent terms at $\cT=0$.  The 
 earlier renormalization by subtracting off the vacuum energy provides exactly this subtraction. 
 
-By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to free energy~(\ref{eq:free-energy-det}),
+By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to the free energy~(\ref{eq:free-energy-det}),
  the renormalized free energy can be rewritten as
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
@@ -1525,13 +1466,13 @@ $[\op{x}_i,\op{p}_j]=i\delta_{ij}$, with the result that
 \end{equation}
 The free energy is then in the form of the imaginary-time transition amplitude for a quantum particle
 in $D$ space-time dimensions, in a potential $V$.
-  In exactly the same fashion as Sec.~\ref{sec:feynman_path_integral},
+  In the same fashion as in Sec.~\ref{sec:feynman_path_integral},
 this can be converted into a single-particle path integral, although 
 there are some minor differences.  First, the starting and ending points are the same,
-so the random paths form closed loops.  
-Second, the time parameter $\cT$ is a fictitious parameter, with dimension of $L^2$, rather
-than the physical time between events.
-The resulting worldline path-integral for the free energy at zero temperature  is
+so the paths form closed loops.  
+Second, the parameter $\cT$ has dimension of $L^2$.  
+It governs the spatial extent of the path, rather than the proper time between events.
+The resulting worldline path integral for the free energy at zero temperature  is
   \begin{align}
     \mathcal{F}-\mathcal{F}_0 
     =&  -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
@@ -1541,7 +1482,7 @@ The resulting worldline path-integral for the free energy at zero temperature  i
     &\times \bigg(\prod_{j=1}^Ne^{-\Delta\cT V(\vect{x}_j)}-1\bigg)\delta(\vect{x}_N-\vect{x}_0)
     \delta(\tau_N-\tau_0).
   \end{align}
-The intermediate Gaussian integrals over $\tau_k$ can be carried out immediately, since the potential
+The intermediate Gaussian integrals over $\tau_k$ can be carried out, since the potential
 is independent of $\tau$.  
 The final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
 % (A more careful derivation for non-zero temperature handles the $\tau$ direction via a Fourier transform,
@@ -1569,7 +1510,7 @@ The free energy can be written in a more intuitive form, better suited to numeri
 if we consider the coupled Gaussians as the probability distribution for paths through space-time.
 Each path increment $\Delta \vect{x}_k=\vect{x}_{k+1}-\vect{x}_k$ is Gaussian with zero mean and variance $\Delta \cT$.
 In addition, the resulting paths must close on themselves --- such Brownian motions with fixed end points are 
-referred to as Brownian bridges in the statistics literature~\cite{Karatzas1991}.  
+referred to as Brownian bridges in the stochastic processes literature~\cite{Karatzas1991}.  
 The result of these manipulations is 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\frac{\hbar c}{2}\int \frac{d\cT}{(2\pi\cT)^{D/2}\cT} \int d\vect{x}_0
@@ -1585,24 +1526,25 @@ is the path-averaged value of the potential.
 
 The worldline method relies on generating an ensemble of closed Brownian bridges, and evaluating
 the path-averaged potential for each path.  One must also integrate over the starting point $\vect{x}_0$
-of the paths, and the path-time $\cT$.  The path-time $\cT$ governs the spatial extent of the paths, 
+of the paths, and the total path time $\cT$.  The total path time $\cT$ governs the spatial extent of the paths, 
 where the typical extent of is given by $x\sim\sqrt{\cT}$.
 The renormalization against vacuum ensures that only paths that touch one of the bodies contribute.  
-In order to extract interaction energies (such as the two-body Casimir energy) one subtracts off the 
+In order to extract interaction energies (such as the two-body Casimir energy) one subtracts the 
 one-body energies, which only account for the potential from one body.  As a result, only
-paths that touch both bodies will contribute.  This is depicted in Fig.~\ref{fig:strong_coupling_cartoon},
+paths that touch both bodies contribute.  This is depicted in Fig.~\ref{fig:strong_coupling_cartoon},
 where the upper path would contribute to the Casimir energy, while the lower path would not.  
 At small times $\cT$, both paths would shrink down around their starting points, 
 and since the paths would not touch both bodies, neither would contribute.
-This is a direct result of the energy renormalization --- subtracting off
+This is a direct result of the energy renormalization---subtracting off
 the vacuum energy cuts off the divergent $\cT$ integral as small $\cT$.  
 At later times $\cT$, these paths would have larger extent, and both would contribute, but due 
-to the $\cT^{-(1+D/2)}$ dependence, the lower-path would have a smaller contribution.  
+to the $\cT^{-(1+D/2)}$ dependence, the lower path would have a smaller contribution.  
 
-The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).  The typical extent of a Brownian motion of path-time
-$\cT$ is $\sqrt{\cT}$. The average time a path touches the surface a distance $d$ away, is then $\cT\sim d^2$.
-Since the integral is only non-zero after a path intersects the bodies, and the integrand is unit otherwise,
-the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D/2}$.  
+The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).
+  The typical extent of a Brownian motion of total path time $\cT$ is $\sqrt{\cT}$. 
+A typical path will touch a surface a distance $d$ away, at total path time $\cT\sim d^2$.
+Since the integral is only non-zero after a path intersects the bodies, and the integrand is unity otherwise,
+the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D}$.  
 After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
 space-time dimensions.
 
@@ -1618,7 +1560,7 @@ space-time dimensions.
 \end{figure}
 
 The worldline method has also been extended to non-zero temperatures~\cite{Klingmueller2008}.
-The generalization is straightforward --- in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
+The generalization is straightforward---in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
 since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace.  This motivates
 expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
 where each Fourier component contributes independently of the others.  The same sort of manipulations
@@ -1629,8 +1571,8 @@ can be carried out with the result
 \end{align}
 where the prime on the sum means that the $n=0$ term is multiplied by a half.  
 Since the $\cT$ dependence differs, there is also a different distance dependence.
-Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)/2}$,
-which means the renormalized energy scales as $d^{-2}$ in four space-time dimensions.
+Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)}$,
+which means the renormalized energy scales as $d^{-3}$ in four space-time dimensions.
 % In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
 % can be replaced by a Riemann sum, and the prior zero-temperature results
 
@@ -1642,19 +1584,19 @@ on itself after $N$ steps is negligible, it is essential to force the closure co
 constructing the paths.  
 
 The simplest method generates a free Brownian motion, and then forces the path to close by subtracting
-off a pro-rated fraction of the final position from each increment.  % So if we have a free random walk,
-% \begin{equation}
-%   W_k = \sum_{j=1}^k \Delta W_k,
-% \end{equation}
-% where $\dlangle \Delta W_k \drangle =0$ and $\dlangle \Delta W_k\Delta W_j\drangle = \delta_{jk}\Delta \cT$,
-% then a closed Brownian bridge can be constructed as 
-% \begin{equation}
-%   B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.
-% \end{equation}
+off a pro-rated fraction of the final position from each increment.  So if we have a free random walk,
+\begin{equation}
+  W_k = \sum_{j=1}^k \Delta W_k,
+\end{equation}
+where $\dlangle \Delta W_k \drangle =0$ and $\dlangle \Delta W_k\Delta W_j\drangle = \delta_{jk}\Delta \cT$,
+then a closed Brownian bridge can be constructed as 
+\begin{equation}
+  B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.
+\end{equation}
 This algorithm has the virtue of simplicity, but it does require that one know the whole Brownian path 
 in order to construct the closed version.
 Gies\etal developed an improved algorithm, the so-called ``v-loop'' algorithm for generating
-Brownian paths\cite{Gies2003}. 
+Brownian paths~\cite{Gies2003}. 
 % This algorithm decouples the Gaussian probability density of $N$ steps that must return
 % to their origin into $N-1$ independent Gaussian random variables, 
 % by essentially completing the square sequentially starting at $x_{N-1}$ and working downwards. 
@@ -1676,7 +1618,7 @@ If however, no points on the path intersect a surface, then the potential is zer
 worldline integrand is also zero.  
 
 Once a particular random path has been constructed, it is necessary to integrate over the starting
-point $\vect{x}_0$, and the path-time $\cT$.  
+point $\vect{x}_0$, and the total path time $\cT$.  
 % At small times, the paths will note intersect any of the bodies so that the potential is zero,
 % and the renormalized energy integrand $e^{-\cT\langle V\rangle}-1\rightarrow 0$.
 % At later times, the paths will intersect the bodies, and the potential will be non-zero.
@@ -1684,7 +1626,7 @@ point $\vect{x}_0$, and the path-time $\cT$.
 % to saturate so that $e^{-\cT\langle V\rangle}\rightarrow 0$ if any part of the path intersects one of
 % the bodies, so the renormalized integrand $e^{-\cT\langle V\rangle}-1\rightarrow -1$.
 Thus the worldline algorithm relies on finding the times $\cT$ when at least one path point intersects
-the bodies, and integrating over those times.  This must further be integrated over each path starting point.
+the bodies, and integrating over those times.  This must further be integrated over every possible path starting point.
 For simple geometries, these touching times can be found analytically for a particular random path,
 which simplifies the method further~\cite{Weber2009,Weber2010}.
 
@@ -1697,9 +1639,9 @@ which simplifies the method further~\cite{Weber2009,Weber2010}.
   \subsection{Advantages and shortcomings of the scalar method}
 
 The worldline method has a number of attractive features.  
-First, it offers an intuitive picture of Casimir energies emerging from the allowed spatial paths 
-of virtual particles.  In this picture, one thinks of the random paths as being the spatial path
-of a virtual particle, where the potential gives the energy cost for a particle entering certain regions.
+First, it offers an intuitive picture of Casimir energies emerging from the spatial paths 
+of virtual particles.   In this picture, the random path explore all of space
+and accumulate a contribution to the Casimir energy based on the potential $V$ they encounter.
 
 Second, it offers a geometry independent method of handling Casimir forces.  The paths are 
 created without reference to the underlying body geometry or a spatial grid, so the method can be easily applied to arbitrarily
@@ -1708,7 +1650,7 @@ to resolve the structure of the surfaces.
 
 Third, since each path is independent, the algorithm is trivially parallelizable: each path
 can be handled by a separate computing process, without any requirement that the processes communicate
-with one another.  This has the advantage of exploiting the growth of computing clusters with many nodes,
+with one another, except for accumulating results.  This has the advantage of exploiting the growth of computing clusters with many nodes,
 where that power can be harnessed with minimal effort: once the algorithm works on a single computer,
 it can be easily extended to arbitrarily many computers to increase the size of the ensemble sampled
 from, or reduce the time required to reach a given accuracy.  
@@ -1728,11 +1670,11 @@ from, or reduce the time required to reach a given accuracy.
 
 %  \item Shortcomings
 
-However, the worldline method has some prominent shortcoming.  First of all, it only applies 
+However, the worldline method has some prominent shortcomings.  First of all, it only applies 
 to scalar fields.
   The most important Casimir effects are due to electromagnetic radiation field, 
 which is a transverse vector field.
-  Second, it has only been applied for idealized potentials which effectively impose 
+  Second, it has only been applied for idealized potentials that effectively impose 
 Dirichlet boundary conditions on the surfaces.  As a result it is missing any 
 coupling of the fields to media with realistic properties.
 Finally, the development has been focused on Casimir energies, with no simple way to 
@@ -1789,10 +1731,9 @@ no guarantee of correctness.
 \section{Thesis outline}
 
 The rest of this thesis is laid out as follows: 
-
 In Ch.~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
-We will carry this out both for splitting the EM field into two non-interacting scalar polarizations,
+We will carry this out both for splitting the EM field into two noninteracting scalar polarizations,
 as well as the fully coupled path integral.
 %We will also review others work on quantizing the EM field in media.
 
@@ -1803,7 +1744,7 @@ and we will derive those solutions for some simple planar geometries.
 
 In Ch.~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
-We will also discuss the transition between high and low temperature, and near-field within the
+We will also discuss the transition between high and low temperature, and near field within the
 worldline context.  
 
 In Ch.~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals

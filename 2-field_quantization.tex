@@ -321,7 +321,7 @@ In particular, the requirement that the first constraint~(\ref{eq:Pi0}) holds fo
   \dot{\Pi}_0 = \{\Pi_0,H\}=-\frac{\delta H}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0.
 \end{equation}
 Since the momentum $\Pi$ is proportional to the displacement, this is just Gauss's law.  This constraint 
-does not impose any further constraints, since $[\nabla\cdot\vect{\Pi},H]=0$.  
+does not impose any further constraints, since $\{\nabla\cdot\vect{\Pi},H\}=0$.  
 % %\subsection{Constraints}
 % Now we need to consider the constraints.
 % %  We will use Paul Dirac's scheme for dealing with the constraints.
@@ -640,12 +640,11 @@ the dual-potential path integral later.
 % the effective field theory has problems, and it may be better to proceed directly via linear-response theory.
 %The resulting functional determinant from gauge-fixing depends on $\epsilon$, so we cannot drop the determinant.  
 
-
 \section{Gauge-Fixing: Generalized Lorenz Gauge}
 
-Of these gauges, the generalized Lorenz gauge is best suited to the four-potential path integral~\ref{eq:Z_potential}.  
+Of these gauges, the generalized Lorenz gauge is best suited to the four-potential path integral~(\ref{eq:Z_potential}).  
 %(In later work on the scalar path integrals in planar geometries, Coulomb gauge can be used to naturally.)
-In this case gauge function is
+In this case the gauge function is
 \begin{equation}
   G[A]=\frac{1}{\epsr(\vect{r})\sqrt{\mur(\vect{r})}}\nabla\cdot\epsr(\vect{r})\vect{A}
 -\epsr(\vect{r})\sqrt{\mur(\vect{r})}\partial_\tau A_4.
@@ -659,8 +658,8 @@ of the gauge function with respect to the gauge parameter $\alpha$.
 The functional derivative appears as the linear term in $\alpha$ after making a gauge transformation on the gauge condition,
 \begin{align}
   G[A^\nu+\partial^\nu \alpha] &= \frac{1}{\epsr\sqrt{\mur}}\nabla\cdot[\epsr(\vect{A}+\nabla\alpha)]
-  +\epsr\sqrt{\mur}\partial_4(A_4+\partial_4\alpha)\nonumber\\
-&=G[A^\nu]+\bigg[\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_4^2\bigg]\alpha.
+  +\epsr\sqrt{\mur}\partial_\tau(A_4+\partial_\tau\alpha)\nonumber\\
+&=G[A^\nu]+\bigg[\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_\tau^2\bigg]\alpha.
 \end{align}
 The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, canceling terms, and integrating by parts, becomes 
 \begin{align}
@@ -670,7 +669,7 @@ where we have started using the Einstein summation convention (where repeated la
 The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by 
 \begin{align}
   L^{(4)} &=-\epsr^2\mur\partial_\tau^2-\partial_k\epsr\partial_k\label{eq:4_operator}\\
-  L^{(V)}_{ij} &=-(\epsr\partial_\tau^2+\nabla\cdot\frac{1}{\mur}\nabla)\delta_{ij}+\partial_j\frac{1}{\mur}\partial_i
+  L^{(V)}_{ij} &=-\bigg(\epsr\partial_\tau^2+\nabla\cdot\frac{1}{\mur}\nabla\bigg)\delta_{ij}+\partial_j\frac{1}{\mur}\partial_i
   -\epsr\partial_i\frac{1}{\mur\epsr^2}\partial_j\epsr.\label{eq:matrix_operator_A}
 \end{align}
 At this point, it is useful to rescale the fields, 
@@ -679,26 +678,19 @@ At this point, it is useful to rescale the fields,
 \end{equation}
 These field scalings are chosen to simplify the worldline path integrals, and for the same reason as the 
 gauge choice.  This rescaling eliminates any combinations like $\partial_x\epsilon\partial_x$, which in path 
-integral terms should be interpreted as a metric.  It would also mean the diffusion constant of the paths 
-is spatially varying.  
-% In the worldline path integral, operators like $\partial_x^2$ lead to Gaussian probability densities%, while
-% % it is simplest to handle differential operators like $-partial_x^2$ instead of $\partial_x\epsilon\partial_x$,
-% % since the latter yields a Gaussian probability density.
-% operators like $\partial_x\epsilon\partial_x$ will lead to a non-Gaussian probability density, which is
-% harder to numerically sample from.
-% In rescaled form, operators $\epsr^{-1/2}\partial_x\epsr\partial_x\epsr^{-1/2}\rightarrow \partial_x^2+V$,
-% where $V$ arises from commuting space-dependent dielectric functions past the derivatives.
+integral terms should be interpreted as a metric.  In this case $\epsilon$ would also mean the diffusion constant of the paths 
+is spatially varying, which complicates path construction.  
 The field rescaling also leads to functional determinants $\det(\mur)$ and $\det(\epsr)$, but these can be ignored since they
 cancel after renormalization.  
 After the rescaling, the differential operators become 
 \begin{align}
-  \tilde{L}^{(4)} &= -\epsr\partial_\tau^2-\frac{1}{\sqrt{\epsr}}\partial_k\epsr\partial_k\frac{1}{\sqrt{\epsr}}.\label{eq:scalar_operator}\\
+  \tilde{L}^{(4)} &= -\epsr\mur\partial_\tau^2-\frac{1}{\sqrt{\epsr}}\partial_k\epsr\partial_k\frac{1}{\sqrt{\epsr}}.\label{eq:scalar_operator}\\
   \tilde{L}^{(V)}_{ij}&=
 -\left(\epsr\mur\partial_\tau^2+\sqrt{\mur}\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\right)\delta_{ij}
 +\sqrt{\mur}\partial_j\frac{1}{\mur}\partial_i\sqrt{\mur}
   -\epsr\sqrt{\mur}\partial_i\frac{1}{\mur\epsr^2}\partial_j\epsr\sqrt{\mur}.\label{eq:matrix_operator_A}
 \end{align}
-The combination of functions of the form $f^{-1/2}(x)\partial_if(x)\partial_jf^{-1/2}(x)$,will recur multiple 
+The combination of functions of the form $f^{-1/2}(x)\partial_if(x)\partial_jf^{-1/2}(x)$ will recur multiple 
 times in handling worldline path integrals.  This can be written out as a second derivative with an
 additional potential in terms of derivatives of $F_i:=\partial_i\log\sqrt{f}$.
 The derivatives can be written
@@ -714,97 +706,115 @@ This result is needed in both the scalar and matrix differential operators.
 
 The Gaussian integrals can be formally carried out, with the result that 
 \begin{align}
-Z%  &= \int D\vect{A} DA_4\, \det[-\partial_4^2-\nabla\cdot\epsilon\nabla]
- % \exp\left[-\int d^4x \mathcal{L}\right]\\
+Z\subEM
 \propto\,&
-\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)+V_4\right]^{-1/2}\nonumber\\
-&\times\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)\delta_{ij} -u_{ij} +V^{(A)}_{ij}
+\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)+V_4\right]^{-1/2}\nonumber\\
+&\times\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)\delta_{ij} -u_{ij} +V^{(A)}_{ij}
  \right]^{-1/2}\nonumber\\
-&\times\det\left[-\frac{1}{2}(\epsr\partial_4^2+\nabla^2)-\frac{1}{2}(\nabla\log\epsr)\cdot\nabla \right]
+&\times\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)-u_{\text{g}}+V_{\text{g}}\right]
+\label{eq:Z_4pot}
  \end{align}
 where the first determinant comes from the scalar potential path integral, the second comes from
 the vector potential, and the final determinant comes is the Faddeev-Popov gauge-fixing determinant.
-The potentials $V_4$ and $V^{(A)}_{ij}$, and the operator $u_{ij}$, are defined as 
+The gauge-fixing determinant has also been scaled symmetrically by $\mu^{1/4}$.
+The potentials $V_4$, $V^{(A)}_{ij}, V_\text{g}$ and the operators $u_{ij},u_\text{g}$, are defined as 
 \begin{subequations}
 \label{eq:potentials}
 \begin{align}
   V_4 & = \frac{1}{2}|\nabla\log\sqrt{\epsr}|^2-\frac{1}{2}\nabla^2\log\sqrt{\epsr}\\
-  V^{(A)}_{ij} &= \frac{1}{2}|\nabla\log(\epsr^{-1})|^2-\frac{1}{2}\nabla^2\log (\epsr^{-1})\\
-  u_{ij}&=\frac{1}{2}(\partial_i\log\epsr)\partial_j -\frac{1}{2}(\partial_j\log\epsr)\partial_i.
+  V^{(A)}_{ij} &= \frac{1}{2}\left[(\nabla\log\sqrt{\mur})^2-\nabla^2\log\sqrt{\mur}\right]\delta_{ij}\nonumber\\
+  &\hspace{0.5cm} -\frac{1}{2}\left[\partial_i\log\sqrt{\mur}\partial_j\log\sqrt{\mur}
+    -\partial_i\partial_j\nabla^2\log \sqrt{\mur}\right]\nonumber\\
+  &\hspace{0.5cm} +\frac{1}{2}\left[\partial_i\log(\epsr\sqrt{\mur})\partial_j\log(\epsr\sqrt{\mur})
+  -\partial_i\partial_j\nabla^2\log (\epsr\sqrt{\mur})\right]\\
+  V_{\text{g}} &= -\nabla\log\epsr\cdot\nabla\log\mur^{1/4} -\nabla^2\log\mur^{1/4}-(\nabla\log\mur^{1/4})^2\\
+  u_{ij}&=\frac{1}{2}(\partial_i\log\epsr\mur)\partial_j -\frac{1}{2}(\partial_j\log\epsr\mur)\partial_i\\
+  u_{\text{g}} &=-\nabla\log(\epsr\mur^{1/4})\cdot\nabla
 \end{align}
 \end{subequations}
 %\comment{right signs/powers of epsilon?}
-These potentials are highly singular for discontinuous media.  If the discontinuities are modeled 
-with a step-function $\theta(x)$, then potentials scale as 
+These potentials are highly singular for discontinuous media.  If a discontinuity is represented 
+by a step function $\Theta(x)$, then potentials have the form
 \begin{equation}
-  [\partial_x\theta(x)]^2-\partial_x^2\theta(x)\sim \delta(x)^2 - \delta'(x),
+  [\partial_x\Theta(x)]^2-\partial_x^2\Theta(x)\sim \delta^2(x) - \delta'(x),
 \end{equation}
 which is extremely singular.  
-These expressions must be suitable regularized by smoothing out the step, and taking the limit at 
-the end of the calculation.  Amazingly enough, finite results can be recovered from such singular
+These expressions must be regularized by smoothing out the step, and taking the limit of a sharp step 
+at the end of the calculation.  This regularization allows finite results to be recovered from such singular
 potentials.  This will be discussed further in Ch.~\ref{ch:feynman_kac}.    
 
-We also assume that the functional determinant of a matrix operator does not provide any problems.  
+We also assume that the functional determinant of a matrix operator does not pose any problems.  
 %This is a large assumption,since extra terms can appear in such matrix functional determinants in a regularization dependent manner.
 %Even greater care is required in treating matrix functional determinants of matrix differential operators.
 While $\det(AB)=\det(A)\det(B)$ for finite matrices, for infinite matrices this is not strictly true. 
-Instead, a regularization dependent factor can arise, known as the ``multiplicative anomaly''~\cite{McKenzieSmith1998}.
-As discussed by McKenzie-Smith and Parker, the multiplicative anomaly is essential to ensure agreement between 
+Instead, a regularization-dependent factor can arise, known as the ``multiplicative anomaly''.
+As discussed by McKenzie-Smith and Parker~\cite{McKenzieSmith1998}, 
+the multiplicative anomaly is essential to ensure agreement between 
 formal path integral calculations and more straightforward canonical methods.  
-This is important for $\zeta$-function regularization of functional determinants, which is closely allied with the worldline method.
+This is important for $\zeta$-function regularization of functional determinants, 
+which is closely allied with the worldline method.
 
-
-The worldline path integral for this can be computed straightforwardly, and read off from the functional
-determinants.  Each determinant contributes separately to an independent path integral.  
-All of the free gradient operators pass over to momentum operators, but terms like $\partial_i\log\epsr$ are understood
-as functions of position.  
-The renormalized free energy is 
+The worldline path integral for the four-potential treatment of the EM field can be computed straightforwardly
+from the partition function~(\ref{eq:Z_4pot}).
+The relations from Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) can be used to convert
+the functional determinants into worldline path integrals, where  
+each functional determinant in Eq.~\ref{eq:Z_4pot} leads to an independent path integral.  
+% All of the free gradient operators pass over to momentum operators, but terms like $\partial_i\log\epsr$ are understood
+% as functions of position.  
+The renormalized free energy is given by
 \begin{align}
   \cF -\cF\sup0 &=-\kB T (\log Z\subTE - \log Z\subTE\sup0)\\
-&= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\tr\bigg\{
+  &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\tr\bigg\{
   \big[\exp(-M_{ij}\cT)-\delta_{ij}\exp(-M\sup0\cT)\big]\nonumber\\
   &+ \big[\exp(-M_{4}\cT)-\exp(-M\sup0\cT)\big]\nonumber\\
-  &-2\big[\exp(-M_g\cT) - \exp(-M\sup0\cT)\big]\bigg\}
+  &-2\big[\exp(-M_\text{g}\cT) - \exp(-M\sup0\cT)\big]\bigg\}
 \end{align}
-where now the trace runs over both vector indices and the continuous degrees of freedom.
-The operators for the vector potential, scalar potential, gauge-fixing, and vacuum operators
+where now the trace runs over $\vect{x}$ and $\tau$ as well as any vector indices $i,j$.
+The operators for the vector potential, scalar potential, gauge-fixing, and vacuum terms 
 are respectively given by
 \begin{subequations}
 \begin{align}
   M_{ij}&=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2)\delta_{ij}
   +i(v_i(\op{x})\op{p}_j-v_j(\op{x})\op{p}_i) +V^{(A)}_{ij}(\op{x})\\
   M_4 &=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2) + V_4(\op{x})\\
-  M_g &=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2)-\frac{i}{2}(\nabla\log\epsr)\cdot\op{\vect{p}}\\
+  M_{\text{g}} &=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2)-\frac{i}{2}(\nabla\log\epsr)\cdot\op{\vect{p}}\\
   M\sup0 &=\frac{1}{2}(\op{p}_4^2+\op{\vect{p}}^2),
 \end{align}
 \end{subequations}
-where the potentials $V^{(A)}_{ij}$ and $V_4$ were specified in Eq.~(\ref{eq:potentials})
-First, it is not clear that the two physical degrees of freedom emerge from that path integral 
-in a general dielectric.  
-As written, there are three interacting vector degrees of freedom, a scalar, and a subtraction from
-the gauge-fixing.  Somehow a $3\times 3$ matrix path integral, and two scalar integrals must conspire
-to give two physical integrals.  
+where the potentials $V^{(A)}_{ij}$ and $V_4$ were specified in Eq.~(\ref{eq:potentials}).
+While this expression for the free energy has a seemingly intuitive form it is quite hard to evaluate.
+It is also not clear that the two physical degrees of freedom emerge from that path integral 
+in a general medium.  
+This path integral involves contributions from three interacting vector degrees of freedom, a scalar, and a subtraction from
+gauge-fixing.  Somehow all of these path integrals with different potentials must conspire 
+to give the energy of two physical polarizations.  
 Investigations by Bordag\etal found that the ghost (gauge-fixing) degrees of freedom
-did not cancel off the longitudinal and scalar degrees of freedom~\cite{Bordag1998}.  
-% Later work examining the spherical problem used the dual potentials and found better results that 
-% more closely correspond to the scalar polarizations we will develop~\cite{Bordag1999}.
+did not completely cancel off the longitudinal and scalar degrees of freedom~\cite{Bordag1998}.  
+Later work examining the spherical problem used the dual potentials and found better results that 
+more closely correspond to the scalar polarizations we will develop~\cite{Bordag1999}. 
+However as they noted, in a general medium the cancellation is expected to be disrupted.  
 % Even so, those calculations still focused on the divergence structure of the theory and only found partial
 % agreement in the perturbative limit of weak dielectrics.  
 
-It may be possible this complicated set of path integrals conspires to  yield the correct answer.
+It may be possible that this complicated set of path integrals conspires to  yield the correct answer.
+Ultimately a correct calculation should reproduce known answers, which in certain geometries only involve two physical degrees of freedom.
+However, it may be that there were errors in the calculation presented here.
+Potential areas for errors include incorrect gauge-fixing of an effective theory, rescaling fields and functional determinants,
+ and errors involving the multiplicative anomaly in a matrix path integral.  
 Instead of pursuing the matrix path integral further, we have developed an 
-alternative method explicitly focusing on the two physical degrees of freedom in a simple geometry.\footnote{
-The original impetus for this work was to find a scalar model that mimicked the vector wave equations electrodynamics
-and see if I could get \emph{anything} to yield known results.  This was motivated by months of repeated
-failures to make sense of the matrix path integral.}  
+alternative method explicitly focusing on the two physical degrees of freedom in a simple geometry.% \footnote{
+% The original impetus for this work was to find a scalar model that mimicked the vector wave equations electrodynamics
+% and see if I could get \emph{anything} to yield known results.  This was motivated by months of repeated
+% failures to make sense of the matrix path integral.}  
 
 \section{Scalar Decomposition for Planar Geometries}
 
-The EM field can be split into two non-interacting polarizations for media that only vary in one Cartesian dimension in one dimension.
+The EM field can be split into two non-interacting polarizations for media that only vary in one Cartesian dimension in one direction.
 These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
+The situation for plane waves scattering off a planar surface is illustrated in Fig.~\ref{fig:planar}.
 In the TE polarization, the electric field is perpendicular to the plane of incidence, 
 while in the TM polarization the magnetic field is perpendicular to the plane of incidence.
-In the each case a scalar field theory can be developed.
+In each case a scalar field theory can be developed.
 For the TE polarization the electric field behaves as a scalar throughout the problem: 
 while its magnitude may vary, its direction does not.
 The same is true for the magnetic field in the TM polarization.  
@@ -813,8 +823,7 @@ electric and magnetic properties of both fields and matter.
 The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}.
 
 Consider a medium which varies in only one Cartesian direction $z$.
-The material properties $\epsr(z)$,$\mur(z)$ also only vary in this direction, which implies 
-that the fields have the same dependence.  
+The material properties $\epsr(z)$ and $\mur(z)$ also only vary in this direction.  
 In this case the action for the vector EM field can be split into two non-interacting scalar fields.
 
 % From Maxwell's equations the electric and magnetic fields can be split into two sets: $(E_y, B_x, B_z)$

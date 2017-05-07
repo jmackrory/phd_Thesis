@@ -531,12 +531,16 @@ The birth-death process reduces the variance, and makes both methods much more t
 The difference between raw Gaussian and TM-gaussians is small under the birth-death process.
 Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
 use the birth-death process in conjunction with simple Gaussian throughout the remainder. 
+\comment{Note need for this with TM 2-body calculations}
 
 \subsection{Monte-Carlo Sampling for Path-Time}
 
 \label{sec:expT-sampling}
 However for integrands exploiting Feynman-Kac formulae, such as the TM integrand or 
 the improved Dirichlet integrand, this strategy is less useful, since the integrand turns on softly.
+
+\comment{Note need for this with TM 2-body calculations}
+
 In that case it is better to sample from a distribution
 that better reflects the behaviour of the ensemble.
 A better distribution is 

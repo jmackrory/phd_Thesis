@@ -759,7 +759,7 @@ side of the surface,  and when they are on different sides.
           1   + \sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\tanh\Xi & d(d-c)>0\\
           \sech\Xi & d(d-c)<0
         \end{array}
-        \right.
+        \right.  \label{eq:TM_potential}
       \end{align}
       This result is absolutely crucial for developing numerical methods for the TM polarization.  
       Even regularized the potential is too unruly to handle on a single trajectory wise basis.  The analytical
@@ -780,8 +780,7 @@ side of the surface,  and when they are on different sides.
       In the strong-coupling limit $\tanh\Xi\rightarrow 1, \sech\Xi\rightarrow 0$, and the solution for 
       paths starting at the origin is
     \begin{align}
-      f_N
-      &=\theta[d(d-c)]\bigg( 1 +\sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\bigg).
+      f_N      &=\theta[d(d-c)]\bigg( 1 +\sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\bigg).
       \end{align}
       This is in some sense dual to the Dirichlet limit.  In that case paths reflect off with the opposite phase, 
       leading to a value of zero on the boundary.  Here, the paths reflecting off the surface add in phase, suggesting 

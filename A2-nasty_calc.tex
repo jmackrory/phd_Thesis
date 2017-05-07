@@ -2,8 +2,6 @@
 \label{app:nasty_calc}
 This Appendix collects a number of lengthy, but tedious calculations required in the main text.  
 
-
-
 \section{Path Integrals in Curved Space}
 
 In this section we will show that the potential $\VTE$ naturally emerges if we
@@ -64,8 +62,6 @@ Let us consider the following action
   S = \frac{m}{2}g_{ij}(\vect{q})\dot{q}_i\dot{q}_j - V(x)
 \end{equation}
 We will find the 
-
-
 \begin{enumerate}
 \item Lagrangian.
 \item Momentum
@@ -1314,99 +1310,99 @@ We will find the
 % where the loops are to be taken with respect to the $g$ loops.  There may be an additional potentital arising rom operator ordering.  
 % \comment{replacing constants with their loop average? what order should this be done in?  average of functions, or function of averages?  }
 
-\section{Classical Gauge Theory - Potentials}
+% \section{Classical Gauge Theory - Potentials}
 
-Consider a Lagrangian density
-\begin{equation}
-  \cL = \epsr(\vect{x})(\nabla\phi+\partial_t\vect{A})^2-c^2(\nabla\times\vect{A})^2.
-\end{equation}
-The equations of motion reproduce the two remaining Maxwell equations:
-\begin{gather}
-  \nabla\cdot\vect{D} = 0
-  \rightarrow \nabla\cdot[\epsilon(\nabla\phi+\partial_t\vect{A})]=0\\
-  \nabla\times\vect{H} - \partial_t\vect{D} = 0
-  \rightarrow \nabla\times\nabla\times\vect{A} + \partial_t[\epsilon(\nabla\phi+\partial_t\vect{A})]=0.
-\end{gather}
-In the path integral we typically impose gauge conditions.  
-\begin{align}
-  G_C &= \nabla\cdot\epsilon\vect{A} = 0\\
-  G_L &= \epsilon^{-\alpha}\nabla\cdot\epsilon\vect{A} +\epsilon^\alpha\partial_t\phi= 0
-\end{align}
-The latter choice is essentially a generalized Lorenz gauge, which cancels off the coupling between $A$, $\phi$.
-We have left $\alpha$ as a parameter to be varied --- but we are most interested in the case when $\alpha=1$.  
-The first equations of motion in generalized Lorenz gauge is
-\begin{align}
-\nabla\cdot[\epsilon(\nabla\phi+\partial_t\vect{A})]
-%&=\nabla\cdot\epsilon\nabla\phi+ \partial_t\nabla\cdot\epsilon\vect{A}\\
-&=\nabla\cdot\epsilon\nabla\phi- \partial_t\epsilon^{2\alpha}\partial_t\phi=0
-\end{align}
-If we further scale the field to $\phi_1 = \epsilon^{-1/2}\phi$, the equation of motion is
-\begin{equation}
-  \boxed{\frac{1}{\sqrt{\epsilon}}\nabla\cdot\epsilon\nabla\frac{1}{\sqrt{\epsilon}}\phi_1- \epsilon^{2\alpha-1}\partial^2_t\phi_1=0}
-\end{equation}
+% Consider a Lagrangian density
+% \begin{equation}
+%   \cL = \epsr(\vect{x})(\nabla\phi+\partial_t\vect{A})^2-c^2(\nabla\times\vect{A})^2.
+% \end{equation}
+% The equations of motion reproduce the two remaining Maxwell equations:
+% \begin{gather}
+%   \nabla\cdot\vect{D} = 0
+%   \rightarrow \nabla\cdot[\epsilon(\nabla\phi+\partial_t\vect{A})]=0\\
+%   \nabla\times\vect{H} - \partial_t\vect{D} = 0
+%   \rightarrow \nabla\times\nabla\times\vect{A} + \partial_t[\epsilon(\nabla\phi+\partial_t\vect{A})]=0.
+% \end{gather}
+% In the path integral we typically impose gauge conditions.  
+% \begin{align}
+%   G_C &= \nabla\cdot\epsilon\vect{A} = 0\\
+%   G_L &= \epsilon^{-\alpha}\nabla\cdot\epsilon\vect{A} +\epsilon^\alpha\partial_t\phi= 0
+% \end{align}
+% The latter choice is essentially a generalized Lorenz gauge, which cancels off the coupling between $A$, $\phi$.
+% We have left $\alpha$ as a parameter to be varied --- but we are most interested in the case when $\alpha=1$.  
+% The first equations of motion in generalized Lorenz gauge is
+% \begin{align}
+% \nabla\cdot[\epsilon(\nabla\phi+\partial_t\vect{A})]
+% %&=\nabla\cdot\epsilon\nabla\phi+ \partial_t\nabla\cdot\epsilon\vect{A}\\
+% &=\nabla\cdot\epsilon\nabla\phi- \partial_t\epsilon^{2\alpha}\partial_t\phi=0
+% \end{align}
+% If we further scale the field to $\phi_1 = \epsilon^{-1/2}\phi$, the equation of motion is
+% \begin{equation}
+%   \boxed{\frac{1}{\sqrt{\epsilon}}\nabla\cdot\epsilon\nabla\frac{1}{\sqrt{\epsilon}}\phi_1- \epsilon^{2\alpha-1}\partial^2_t\phi_1=0}
+% \end{equation}
 
-The second equation of motion is 
-\begin{align}
-  \boxed{\nabla\times\nabla\times\vect{A} + \epsilon\partial^2_t\vect{A} - 
-  \epsilon\nabla\epsilon^{-2\alpha}\nabla\cdot\epsilon\vect{A}=0.}
-\end{align}
+% The second equation of motion is 
+% \begin{align}
+%   \boxed{\nabla\times\nabla\times\vect{A} + \epsilon\partial^2_t\vect{A} - 
+%   \epsilon\nabla\epsilon^{-2\alpha}\nabla\cdot\epsilon\vect{A}=0.}
+% \end{align}
 
-Let's just set $\alpha=1$.  Following our work with the TM potential, the gradient can be
-expanded as 
-\begin{align}
-  \sqrt{f}\partial_i\frac{1}{f}\partial_j\sqrt{f} 
-  &= f^{1/2}\partial_if^{-1/2}[f_j+\partial_j]\\
-  &= (-f_i+\partial_i)[f_j+\partial_j]\\
-  &= \partial_i\partial_j - f_i\partial_j + f_j\partial_i -f_if_j + (\partial_i f_j).
-\end{align}
-The extra terms induce a boundary condition at jump discontinuities.  For the TM boundaries with 
-$f=\ln\sqrt{\epsilon}$, the boundary condition (for a Helmholtz equation) was 
-\begin{equation}
-  f(d-\epsilon) = e^{\Xi}f(d+\epsilon), \qquad
-  f'(d -\epsilon)= e^{-\Xi}f'(d+\epsilon)
-\end{equation}
-at discontinuities from $\epsr=1$ to $\epsr=1+\chi$, and $\Xi = \ln\sqrt{1+\chi}$.
+% Let's just set $\alpha=1$.  Following our work with the TM potential, the gradient can be
+% expanded as 
+% \begin{align}
+%   \sqrt{f}\partial_i\frac{1}{f}\partial_j\sqrt{f} 
+%   &= f^{1/2}\partial_if^{-1/2}[f_j+\partial_j]\\
+%   &= (-f_i+\partial_i)[f_j+\partial_j]\\
+%   &= \partial_i\partial_j - f_i\partial_j + f_j\partial_i -f_if_j + (\partial_i f_j).
+% \end{align}
+% The extra terms induce a boundary condition at jump discontinuities.  For the TM boundaries with 
+% $f=\ln\sqrt{\epsilon}$, the boundary condition (for a Helmholtz equation) was 
+% \begin{equation}
+%   f(d-\epsilon) = e^{\Xi}f(d+\epsilon), \qquad
+%   f'(d -\epsilon)= e^{-\Xi}f'(d+\epsilon)
+% \end{equation}
+% at discontinuities from $\epsr=1$ to $\epsr=1+\chi$, and $\Xi = \ln\sqrt{1+\chi}$.
 
-After expanding out the gradients, the wave equations for the potentials are 
-\begin{gather}
-   (\nabla^2-\epsilon\partial_t^2 + |\nabla \ln\epsilon^{-1/2}|^2 + \nabla^2\ln\epsilon^{-1/2})\phi_1=0\\
-   % [\partial_i\partial_j-\nabla^2\delta_{ij}) + \epsilon\partial^2_t\delta_{ij} - 
-   % (\partial_i\partial_j - e_i\partial_j+e_j\partial_i - e_ie_j+\partial_if_j)]A_j=0.
-   [(\nabla^2-\epsilon\partial^2_t)\delta_{ij} -e_i\partial_j+e_j\partial_i - e_ie_j+\partial_ie_j]A_j=0.
-\end{gather}
-where $e_i=\partial_i\ln\epsilon$.
-These are the same results one finds from the path integral, with Fadeev-Popov gauge fixing, in the 
-``Feynman gauge'', where the gauge-fixing parameter $\xi=1$.
+% After expanding out the gradients, the wave equations for the potentials are 
+% \begin{gather}
+%    (\nabla^2-\epsilon\partial_t^2 + |\nabla \ln\epsilon^{-1/2}|^2 + \nabla^2\ln\epsilon^{-1/2})\phi_1=0\\
+%    % [\partial_i\partial_j-\nabla^2\delta_{ij}) + \epsilon\partial^2_t\delta_{ij} - 
+%    % (\partial_i\partial_j - e_i\partial_j+e_j\partial_i - e_ie_j+\partial_if_j)]A_j=0.
+%    [(\nabla^2-\epsilon\partial^2_t)\delta_{ij} -e_i\partial_j+e_j\partial_i - e_ie_j+\partial_ie_j]A_j=0.
+% \end{gather}
+% where $e_i=\partial_i\ln\epsilon$.
+% These are the same results one finds from the path integral, with Fadeev-Popov gauge fixing, in the 
+% ``Feynman gauge'', where the gauge-fixing parameter $\xi=1$.
 
-The primary questions we wish to answer are: 1)Do the fields found from these equations of motion, 
-agree with the electric fields derived elsewhere? 2) Do you recover the same Casimir--Polder force?
+% The primary questions we wish to answer are: 1)Do the fields found from these equations of motion, 
+% agree with the electric fields derived elsewhere? 2) Do you recover the same Casimir--Polder force?
 
-\subsection{Mode Functions at Planar Interface}
+% \subsection{Mode Functions at Planar Interface}
 
-Let the dielectric function only vary in one dimension, $\epsr(\vect{x})=1+\chi\theta(z)$.
-The terms involving $e_i$ are only non-zero on the boundary, and only $e_z$ is non-zero. 
-Away from the boundaries, the potentials obey: 
-\begin{gather}
-   (\nabla^2-\epsilon\partial_t^2)\phi_1=0\\
-   (\nabla^2-\epsilon\partial^2_t)A_i=0.
-\end{gather}
-Let us expand the fields as plane waves, 
-\begin{equation}
-  \phi_1(\vect{x},t) = \phi_1(\vect{k},\omega) e^{i\vect{k}\cdot\vect{x}-i\omega t}\\
-  A_i(\vect{x},t) = A_i(\vect{k},\omega) e^{i\vect{k}\cdot\vect{x}-i\omega t}\\
-\end{equation}
-Evidently $|\vect{k}|^2=\epsilon(z)\omega^2$ for both fields on either side of the interface. 
-If we are interested in Casimir--Polder shifts from the one side, we must also consider reflected waves.  
-We will follow Dan's notation and define $\vect{k}_- = (k_x,k_y,-k_z)$ to denote the wave reflecting
-off the interface.  
+% Let the dielectric function only vary in one dimension, $\epsr(\vect{x})=1+\chi\theta(z)$.
+% The terms involving $e_i$ are only non-zero on the boundary, and only $e_z$ is non-zero. 
+% Away from the boundaries, the potentials obey: 
+% \begin{gather}
+%    (\nabla^2-\epsilon\partial_t^2)\phi_1=0\\
+%    (\nabla^2-\epsilon\partial^2_t)A_i=0.
+% \end{gather}
+% Let us expand the fields as plane waves, 
+% \begin{equation}
+%   \phi_1(\vect{x},t) = \phi_1(\vect{k},\omega) e^{i\vect{k}\cdot\vect{x}-i\omega t}\\
+%   A_i(\vect{x},t) = A_i(\vect{k},\omega) e^{i\vect{k}\cdot\vect{x}-i\omega t}\\
+% \end{equation}
+% Evidently $|\vect{k}|^2=\epsilon(z)\omega^2$ for both fields on either side of the interface. 
+% If we are interested in Casimir--Polder shifts from the one side, we must also consider reflected waves.  
+% We will follow Dan's notation and define $\vect{k}_- = (k_x,k_y,-k_z)$ to denote the wave reflecting
+% off the interface.  
 
-\begin{gather}
-   (\nabla^2-\epsilon\partial_t^2 + |\partial_z \ln\epsilon^{-1/2}|^2 + \partial_z^2\ln\epsilon^{-1/2})\phi_1=0\\
-   % [\partial_i\partial_j-\nabla^2\delta_{ij}) + \epsilon\partial^2_t\delta_{ij} - 
-   % (\partial_i\partial_j - e_i\partial_j+e_j\partial_i - e_ie_j+\partial_if_j)]A_j=0.
-   [(\nabla^2-\epsilon\partial^2_t)\delta_{ij} -\delta_{iz}e_z\partial_j+\delta_{jz}e_z\partial_i 
-   - \delta_{iz}\delta_{jz}(e_z^2+\partial_ze_z)]A_j=0.
-\end{gather}
+% \begin{gather}
+%    (\nabla^2-\epsilon\partial_t^2 + |\partial_z \ln\epsilon^{-1/2}|^2 + \partial_z^2\ln\epsilon^{-1/2})\phi_1=0\\
+%    % [\partial_i\partial_j-\nabla^2\delta_{ij}) + \epsilon\partial^2_t\delta_{ij} - 
+%    % (\partial_i\partial_j - e_i\partial_j+e_j\partial_i - e_ie_j+\partial_if_j)]A_j=0.
+%    [(\nabla^2-\epsilon\partial^2_t)\delta_{ij} -\delta_{iz}e_z\partial_j+\delta_{jz}e_z\partial_i 
+%    - \delta_{iz}\delta_{jz}(e_z^2+\partial_ze_z)]A_j=0.
+% \end{gather}
 
 
 

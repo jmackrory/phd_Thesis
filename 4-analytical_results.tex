@@ -800,10 +800,12 @@ A differentiation with respect to distance then yields the Lifshitz force result
 
 From November 2013 we have
 \begin{align}
-I_{12}-I_1-I_2 + I_0 =&   \dfrac{r'_2 e^{-2\sqrt{2\lambda}d}}{4\kappa_1(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
-+\frac{2r'_1r'_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
-- (r'_1+r'_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-r'_1r'_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
-& +\frac{r'_1 e^{-2\sqrt{2\lambda}d}}{4\kappa_2(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})}  
+I_{tot}% -I_1-I_2 + I_0 
+=& 
+  \frac{2r'_1r'_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
++\dfrac{r'_2 e^{-2\sqrt{2\lambda}d}}{4\kappa_1(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
++\frac{r'_1 e^{-2\sqrt{2\lambda}d}}{4\kappa_2(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
+& - (r'_1+r'_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-r'_1r'_2e^{-2\sqrt{2\lambda}d})}
  -   \left(\frac{r'_1}{4\kappa_1}-\frac{(r'_1+r'_2)}{4\lambda}  
 + \frac{r'_2}{4\kappa_2}\right)\frac{r'_1r'_2 e^{-2\sqrt{2\lambda}d}}{(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})},
 \end{align}
@@ -823,14 +825,14 @@ I_{tot}=&  \frac{e^{-2\sqrt{2\lambda}d}}{(1-r'^2e^{-2\sqrt{2\lambda}d}}\left[
 \end{align}
 
 
-\begin{align}
-E =& - \partial_\beta \log Z_{TE}\\
- =& -\frac{\hbar c}{8\pi^2}\int_0^\infty \frac{dT}{T^{1+D/2}}\int dx_0 
-\dlangle \frac{1}{\langle \epsilon\rangle^{\alpha}}e^{-\int_0^T\mathfrak{M}dt}\drangle\\
-=& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_0^\infty d\lambda 
-\lambda^{(D-1)/2-\alpha}\int dx_0 \int_0^\infty ds\, s^{\alpha-1}\int_0^\infty dT e^{-\lambda T}
-\dlangle \frac{e^{-sT\int_0^T dt  \epsilon-\int_0^T\mathfrak{M}dt}}{\sqrt{T}}\drangle,
-\end{align}
+% \begin{align}
+% E =& - \partial_\beta \log Z_{TE}\\
+%  =& -\frac{\hbar c}{8\pi^2}\int_0^\infty \frac{dT}{T^{1+D/2}}\int dx_0 
+% \dlangle \frac{1}{\langle \epsilon\rangle^{\alpha}}e^{-\int_0^T\mathfrak{M}dt}\drangle\\
+% =& - \frac{\hbar c}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_0^\infty d\lambda 
+% \lambda^{(D-1)/2-\alpha}\int dx_0 \int_0^\infty ds\, s^{\alpha-1}\int_0^\infty dT e^{-\lambda T}
+% \dlangle \frac{e^{-sT\int_0^T dt  \epsilon-\int_0^T\mathfrak{M}dt}}{\sqrt{T}}\drangle,
+% \end{align}
 
 $I_{tot}$ is the (renormalized) expression for 
 \begin{equation}
@@ -839,43 +841,43 @@ I_{tot}=\int dx_0\int_0^\infty dT \frac{e^{-\lambda T}}{\sqrt{T}}\dlangle e^{-\m
 
 \begin{enumerate}
 \item We get the energy by making the following replacements \comment{$\lambda\rightarrow \lambda+s$, $\chi\rightarrow s\chi$.  } 
-(However, this does not apply to terms in $e^{\Xi}$.  )
- \begin{align}
-E=&  C\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}\nonumber\\
-&\times  \frac{e^{-2\sqrt{2(\lambda+s)}d}}{1-r'^2e^{-2\sqrt{2(\lambda+s)}d}}
-\left[\frac{2r'^2d}{\sqrt{2(\lambda+s)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{\lambda+s+s\chi}  -\frac{1}{\lambda+s}\right)\right],
-\end{align}
-and 
-\begin{equation}
-r' =  \frac{(1+\chi)\sqrt{\lambda+s}-\sqrt{\lambda+ s + s\chi}}{(1+\chi)\sqrt{\lambda+s}+\sqrt{\lambda+s+s\chi}},
-\end{equation}
-\begin{equation}
-C = -\frac{\hbar c\sqrt{2\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-\end{equation}
+% (However, this does not apply to terms in $e^{\Xi}$.  )
+%  \begin{align}
+% E=&  C\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}\nonumber\\
+% &\times  \frac{e^{-2\sqrt{2(\lambda+s)}d}}{1-r'^2e^{-2\sqrt{2(\lambda+s)}d}}
+% \left[\frac{2r'^2d}{\sqrt{2(\lambda+s)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{\lambda+s+s\chi}  -\frac{1}{\lambda+s}\right)\right],
+% \end{align}
+% and 
+% \begin{equation}
+% r' =  \frac{(1+\chi)\sqrt{\lambda+s}-\sqrt{\lambda+ s + s\chi}}{(1+\chi)\sqrt{\lambda+s}+\sqrt{\lambda+s+s\chi}},
+% \end{equation}
+% \begin{equation}
+% C = -\frac{\hbar c\sqrt{2\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
+% \end{equation}
 
 \item Now take $\lambda = qs$.  
- \begin{align}
-E=&  C\int_0^\infty dq q^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
-&\times  \frac{e^{-2\sqrt{2(q+1)s}d}}{1-r'^2e^{-2\sqrt{2(q+1)s}d}}\left[
-\frac{2r'^2d}{\sqrt{2s(q+1)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(q+1+\chi)}  -\frac{1}{s(q+1)}\right)\right],
-\end{align}
-and 
-\begin{equation}
-r' =  \frac{(1+\chi)\sqrt{q+1}-\sqrt{q+ 1 + \chi}}{(1+\chi)\sqrt{q+1}+\sqrt{q+1+\chi}},
-\end{equation}
+%  \begin{align}
+% E=&  C\int_0^\infty dq q^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
+% &\times  \frac{e^{-2\sqrt{2(q+1)s}d}}{1-r'^2e^{-2\sqrt{2(q+1)s}d}}\left[
+% \frac{2r'^2d}{\sqrt{2s(q+1)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(q+1+\chi)}  -\frac{1}{s(q+1)}\right)\right],
+% \end{align}
+% and 
+% \begin{equation}
+% r' =  \frac{(1+\chi)\sqrt{q+1}-\sqrt{q+ 1 + \chi}}{(1+\chi)\sqrt{q+1}+\sqrt{q+1+\chi}},
+% \end{equation}
 \item Now take $p = \sqrt{q+1}$.  $\rightarrow  q = p^2-1, dq = 2p dp$.  
- \begin{align}
-E%=&   C\int_1^\infty dp(2p) (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
-% &\times  \frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}p}+ 
-% \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(p^2+\chi)}  -\frac{1}{s p^2}\right)\right]\\
-=&  2C\int_1^\infty dp (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
-&\times\frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}}- 
-\frac{r'}{2}(1-r'^2)\left(\dfrac{\chi}{s(p^2+\chi)p}\right)\right],
-\end{align}
-and 
-\begin{equation}
-r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+\chi)p+\sqrt{p^2+\chi}},
-\end{equation}
+%  \begin{align}
+% E%=&   C\int_1^\infty dp(2p) (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
+% % &\times  \frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}p}+ 
+% % \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(p^2+\chi)}  -\frac{1}{s p^2}\right)\right]\\
+% =&  2C\int_1^\infty dp (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
+% &\times\frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}}- 
+% \frac{r'}{2}(1-r'^2)\left(\dfrac{\chi}{s(p^2+\chi)p}\right)\right],
+% \end{align}
+% and 
+% \begin{equation}
+% r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+\chi)p+\sqrt{p^2+\chi}},
+% \end{equation}
 \item Finally, take 
 $s = \xi^2$
 \item Now take $p = \sqrt{q+1}$.  $\rightarrow  q = p^2-1, dq = 2p dp$.  
@@ -909,42 +911,40 @@ r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
 \subsection{Integrate by parts w.r.t. $p$}
 Let's check if this also goes for the TM case.  
 \begin{align}
-\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] =& \frac{-2r' \frac{dr'}{dp} e^{-2pu} + 2u r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}} \\
+\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] %=& \frac{-2r' \frac{dr'}{dp} e^{-2pu} + 2u r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}} \\
 % &= \frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 2u -\frac{2}{r'} \frac{dr'}{dp}\right)\\
 % &= 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{1}{ur'} \frac{dr'}{dp}\right)\\
 &= 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{1}{u} \frac{d\ln[r']}{dp}\right)
 \end{align}
-
 Now use 
 \begin{align}
 \frac{d}{dp}\ln[r'] =& \frac{d}{dp}\left(\log[e^{2\Xi}p - \sqrt{p^2+\chi}] -\ln[e^{2\Xi}p + \sqrt{p^2+\chi}]\right) \\
-=& \frac{e^{2\Xi} - \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p-\sqrt{p^2+\chi}} -\frac{e^{2\Xi} + \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p + \sqrt{p^2+\chi}}\\ 
+%=& \frac{e^{2\Xi} - \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p-\sqrt{p^2+\chi}} -\frac{e^{2\Xi} + \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p + \sqrt{p^2+\chi}}\\ 
 %=& \frac{\left[e^{2\Xi} - \frac{p}{\sqrt{p^2+\chi}}\right]\left[e^{2\Xi}p + \sqrt{p^2+\chi}\right]-\left[e^{2\Xi} + \frac{p}{\sqrt{p^2+\chi}}\right]\left[e^{2\Xi}p-\sqrt{p^2+\chi}\right]}{e^{4\Xi}p^2-(p^2+\chi)}\\
 % =& \frac{\left[e^{4\Xi}p  - e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} +e^{2\Xi}\sqrt{p^2+\chi} - p\right]}{e^{4\Xi}p^2-(p^2+\chi)}\nonumber\\
 % & - \frac{\left[e^{4\Xi}p + e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} -e^{2\Xi}\sqrt{p^2+\chi}-p\right]}{e^{4\Xi}p^2-(p^2+\chi)}\\
 % =& \frac{2e^{2\Xi}\sqrt{p^2+\chi} - 2e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} }{e^{4\Xi}p^2-(p^2+\chi)}\nonumber\\
 =& \frac{2\chi e^{2\Xi}}{\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\label{eq:TM_integration_by_parts}
 \end{align}
-
 Then 
 \begin{align}
 \Aboxed{\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 
 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)}
 \end{align}
 
-% Ultimately, we want this to be proportional to 
- \begin{align}
- C=&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-% =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{e^{2\Xi}p+\sqrt{p^2+\chi}}{e^{2\Xi}p-\sqrt{p^2+\chi}}
-% -\frac{e^{2\Xi}p-\sqrt{p^2+\chi}}{e^{2\Xi}p+\sqrt{p^2+\chi}}\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-% =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{4pe^{2\Xi}\sqrt{p^2+\chi}}{e^{4\Xi}p^2-(p^2+\chi)}\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
- =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right]\label{eq:CTM}\\
- \end{align}
-% So this will work.  
-
+% % Ultimately, we want this to be proportional to 
+%  \begin{align}
+%  C=&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+% % =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{e^{2\Xi}p+\sqrt{p^2+\chi}}{e^{2\Xi}p-\sqrt{p^2+\chi}}
+% % -\frac{e^{2\Xi}p-\sqrt{p^2+\chi}}{e^{2\Xi}p+\sqrt{p^2+\chi}}\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+% % =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{4pe^{2\Xi}\sqrt{p^2+\chi}}{e^{4\Xi}p^2-(p^2+\chi)}\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+%  =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right]\label{eq:CTM}\\
+%  \end{align}
+% % So this will work.  
+The TM Casimir energy is given by
 \begin{align}
 E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\, (p^2-1) 
-\frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right],
+\frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right].
 \end{align}
 We can use Eqs.~(\ref{eq:CTM}) and (\ref{eq:TM_integration_by_parts}) to integrate with respect to $p$.  
 \begin{align}
@@ -964,17 +964,14 @@ Which gives us
 We will handle the finite temperature (and dispersion) in the atom-plane geometry.
   We derive the partition function for finite temperature for both the TE and TM polarizations.
   So far, I have done both Casimir and Casimir-Polder energies for TE, and only Casimir-Polder for TM.
-  The zero temperature limits all work out nicely.
-  I am stumbling a little over the right way to do the high temperature limit here.  
-
-
-\subsection{Should really be using the Free Energy?}
+  % The zero temperature limits all work out nicely.
+  % I am stumbling a little over the right way to do the high temperature limit here.  
 
 So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., 
 ``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'',
  Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.~\cite{Babb2004})
   In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
-  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
+%  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 
 % Tanmoy's initial calculation emphasized using $\mathcal{F}$ in the limit $\beta\rightarrow \infty$.
 %   I subbed in using the mean energy angle because I (for some reason) felt more comfortable with that.
@@ -995,198 +992,35 @@ So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostep
 % as the derivative has been doing for us. 
 % For high temperature, I don't need to take any derivatives, and I get exactly the results I want.       
 
-% \section{TE Polarization: Thermal Partition Function}
 
-% Our partition function is 
-% \begin{equation}
-% Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0}{2}\int_0^\beta d\beta'\int d^3x\, 
-% \left( \frac{\epsilon(x)}{\hbar^2}(\partial_{\beta'}\phi)^2 + c^2|\nabla\phi|^2\right)\right] .
-% \end{equation}
-
-% Let us change to using $\tau = \beta \hbar c$ as our temperature coordinate.  Then   
-% \begin{equation}
-% Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3x\, 
-% \left( \epsilon(x)(\partial_{\tau}\phi)^2 + |\nabla\phi|^2\right)\right] .
-% \end{equation}
-
-% We will now introduce the Matsubara frequencies $\omega_n = (2\pi n)/(\beta \hbar)$, with 
-% \begin{equation}
-% \phi(\beta,x) = \sum_{n=-\infty}^{\infty}e^{i\frac{\omega_n}{c}\tau} \phi_n(x),
-% \end{equation}
-% where $\tau = \beta\hbar c$, and the $\phi_n$ are complex variables.  We will also need to use  
-% \begin{equation}
-% \int_0^{\beta \hbar c}d\tau e^{i\frac{(\omega_n+\omega_m)}{c}\tau} = \beta\hbar c \delta_{n,-m},
-% \end{equation}
-% and $\phi_n^* = \phi_{-n}$ since $\phi^*(\beta, x) = \phi(\beta, x)$.  
-
-% \begin{shaded}
-% \comment{See Dec 2012 notes for how to handle the variable counting from doubling the number of variables}
-% I'm just trying to figure out the factors of 2 here - just think of the transform to Matsubara 
-% frequencies as a ordinary change of variables.
-%   In December I had completely reduced the problem to a discrete problem in $\beta$ as well.
-%   Say I have $N_\beta$ initial time-steps.
-%   I have $N_\beta$ real variables.
-%   If I introduce a Fourier series, then I now have $N-2$ complex variables for $0<n<N_\beta/2$, and 2 real variables at $n=0, N_\beta/2$.
-%   Furthermore we know that $\phi_n^* = \phi_{-n}$.
-%   So from the Gaussian structure of the integrals over $\phi_n$, each of these $(N-2)$ integrals over $\phi_n$ is equal.
-%   When I carry out the integrals I have 
-% \begin{equation}
-% \prod_{n=-N_\beta/2}^{N_\beta/2-1}\int D\phi_n e^{-A_n|\phi_n|^2} 
-% = C\left( \frac{1}{\sqrt{A_0}}\frac{1}{\sqrt{A_{N_\beta/2}}}\prod_{n>0}\frac{1}{A_n}\right),
-% \end{equation}
-% where I have used 
-% \begin{equation}
-% \int D\phi_nD\phi_n^* e^{-A_n|\phi_n|^2} = \int D\phi_r D\phi_ie^{-A_n(\phi_r^2+\phi_n^2)} = \frac{1}{A_n}, 
-% \end{equation}
-% where $\phi_n = \phi_r + i \phi_i$.
-%   We then consider the limit where $N_\beta\rightarrow \infty$.  
-
-% Does this still work with $\epsilon(i\omega)?$  What do the Kramers-Kr\"onig relations have to say?
-%   Is $\epsilon^*(i\omega) = \epsilon(-i\omega)$?
-%   Or is it just a result of saying this Hamiltonian is real.
-%   If so, we're golden.  
-% \end{shaded}
-
-% Then we have 
-% \begin{equation}
-% Z_{TE} = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
-% \int d^3x\, \phi_n^*\left(\epsilon(x)\frac{\omega_n^2}{c^2} -\nabla^2\right)\phi_n\right] .
-% \end{equation}
-
-% Now let's \comment{assume} we just handle dispersion by taking $\epsilon(x)\rightarrow \epsilon(i\omega_n,x)$.
-%   This idea is following Rahi's derivation where $\epsilon$ is treated as an effective action 
-% where the effect of the electron field has been intregrated out.  
-% Then 
-% \begin{equation}
-% \log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left[\frac{1}{2}
-% \left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right].
-% \end{equation}
-% where there is only a factor of $\frac{1}{2}$ for $n=0$.
-%   We will renormalize this against vacuum, 
-% \begin{equation}
-% \log Z_{TE} -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ 
-% \frac{1}{2}\left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right] 
-% - \log\det\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}
-% \end{equation}
-% Note that for $n=0$ the Matsubara frequency $\omega_n=0$, so we have 
-% \begin{align}
-%   \log\det\left[ \frac{1}{2}\left(\epsilon(0,\vect{x})\frac{\omega_0^2}{c^2} -\nabla^2\right)\right]
-%  - \log\det\left[ \frac{1}{2}\left(\frac{\omega_0^2}{c^2} -\nabla^2\right)\right] = 0.
-% \end{align}
-% This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, 
-% such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
-
-% Now the renormalized free energy is 
-% \begin{align}
-% F-F_0 & = -k_BT \log \frac{Z_{TE}}{Z_0} \\
-% % & = k_BT {\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
-% %     \left(\epsilon(i\omega_n,\vect{x})\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]
-% % -\log\left[ \frac{1}{2}\left(\frac{\omega_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
-% &=k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
-% \dlangle e^{-T\frac{\omega_n^2}{2c^2}} -  e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-% \label{eq:TEworldline_partition_function}
-% \end{align}
-% where we introduced the path integral.
-%   In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.
-%   So we also only use the normalization for 3D.
-%   The remaining factor of $\sqrt{2\pi T}$ will emerge in the zero temperature limit.
-%   This scaling with $T$ also reflects the different scaling behaviours in the near-field, 
-% thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
-
-% \begin{shaded}
-% The sequence of events we actually followed when we neglected dispersion from the start was
-% \begin{enumerate}
-% \item Take zero temperature limit, which lets us treat $\omega_n^2$ as $\partial_\tau^2$ in the field partition function.  
-% \begin{align}
-% \log Z & = -\frac{1}{2}\log\det[-\frac{1}{2}\epsilon\partial_\tau^2 - \frac{1}{2}\nabla^2] \\
-% & = \frac{1}{2}\int d^4x_0 \int \frac{dT}{T} \langle x_0| e^{[\epsilon(\hat{x})T+\nabla^2]T/2}|x_0\rangle\\
-% & = \frac{1}{8\pi^2}\int_0^{\beta\hbar c}d\tau_0\int d^3x_0 \int \frac{dT}{T^3} \dlangle \frac{1}{\sqrt{\langle \epsilon\rangle}}\drangle
-% \end{align}
-% \item Take $k_BT \log Z$ - which only actually affects $\int d\tau_0 = \beta\hbar c$, which is now a coordinate
-% \begin{equation}
-% E = -\frac{\hbar c}{8\pi^2}\int d^3x_0 \int \frac{dT}{T^3} \dlangle\frac{1}{\sqrt{\langle \epsilon\rangle}}\drangle
-% \end{equation}
-% \item Expand $\epsilon(x)$ to linear order in $\alpha_0/\epsilon_0$.  All functions are just functions of space.  
-% \begin{equation}
-% E(x') = \frac{\hbar c\alpha_0}{16\pi^2\epsilon_0} \int \frac{dT}{T^3} \dlangle \frac{1}{\langle \epsilon\rangle^{3/2}}\drangle_{x(0)=x'}.
-% \end{equation}
-
-% \end{enumerate}
-% \end{shaded}
-
-% \begin{shaded}
-% \subsection{First thing I tried, and evidently the wrong thing to do}
-
-% (Note that using the free-energy would entirely bypass these concerns : No extra derivatives, no problems.)
-
-% So I think it is correct to start from:
-% \begin{equation}
-% E=-\partial_\beta \log Z = -\partial_\beta{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle  - e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-% \end{equation}
-
-% For clarity, from here on I will suppress the renormalization terms.  They can be restored by subtracting off the same thing but with $\epsilon\rightarrow 1$ everywhere.  
-
-% Our sequence of operations once we got $\log Z$ in this case was: 
-% \begin{enumerate}
-% \item Take $\partial_\beta\log Z$ to get the energy.  
-% \begin{align}
-% E&={\sum_n}'\frac{\omega_n^2}{\beta c^2}\int d^3x_0\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left( \langle\epsilon(i\omega_n)\rangle +\frac{i}{2}\omega_n\langle\partial_\omega\epsilon(i\omega_n)\rangle \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-% \end{align}
-
-% \item Expand to linear order in $\alpha$
+% \subsection{Casimir-Polder energy}
 
 % \begin{align}
-% E&={\sum_n}'\frac{\omega_n^2}{\epsilon_0\beta c^2}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle  \left(\alpha(i\omega_n)+\frac{i}{2}\omega_n\partial_\omega\alpha(i\omega_n) - \frac{ T \omega_n^2\alpha(i\omega_n)}{2c^2} \right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle_{x_0=x'}
+% E-E_0&=k_BT\sum'_n\,\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
+% \dlangle e^{-T\frac{\omega_n^2}{2c^2}} - \left(1 - \frac{ T\omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)
+% \langle \delta(x-x')\rangle\right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
 % \end{align}
-% \item Take zero temperature limit, which replaces $\omega_n\rightarrow \omega,\sum_n \rightarrow \int_0^\infty d\omega$.  Also take the far-field limit on the frequency integral.  $\alpha(i\omega)\rightarrow\alpha_0, \epsilon(i\omega,x)\rightarrow \epsilon(x)$.  
+% I think the first two terms the energy due to the dielectrics on their own, without the atom, 
+% and such can be subtracted from the atom-wall interaction energy.
+%   The physical renormalization is to expand the energy for just a polarizable particle,
+%  and consider the energy change with and without the presence of the other dielectric.
+%   So we subtract off the same energy, but with $\epsilon=1$ everywhere.
+
+% We can also simplify this a bit by noting that 
 % \begin{equation}
-% E=\frac{\hbar}{2\pi\epsilon_0 c^2}\int_0^\infty d\omega\,\omega^2\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle   \left(\alpha_0 - \frac{ T \omega^2\alpha_0}{2c^2} \right)e^{-\frac{ T \omega^2\langle\epsilon\rangle}{2c^2}}\drangle
+% \int d^3x_0\, \dlangle \frac{1}{T}\int_0^T dt \delta(x(t)-x')\drangle = \int d^3x_0 \delta(x_0-x'),
 % \end{equation}
-% \item Carry out the Gaussian integral in frequency.  
-% \begin{equation}
-% E= \frac{\hbar c\alpha_0}{8\pi^2 \epsilon_0}\int_0^\infty \frac{dT}{T^3}\dlangle  \left( \frac{1}{\langle \epsilon\rangle^{3/2}}-\frac{3}{2\langle\epsilon\rangle^{5/2}} \right) \drangle.
-% \end{equation}
-% \end{enumerate}
-% Perhaps the derivative $\partial_\beta$ does not commute with some of these limits and approximations?  Perhaps this should be delayed to the final stage?  A derivative of a sum, is not necessarily equal to the sum of derivatives?  
+% This follows from considering the discrete form of the path integral,
+%  $\int d^3x_0 \prod_i\int d^3x_i f(x_i-x_{i-1})$, where the integral is cyclic under permutations of indices.  
+% In this way we can always relabel the point that passes through $x_0$ to be the starting point of the loop.
+%    So we will then only consider loops that start and return to $x_0 = x'$.
+%    Mathematically, we will use this $\delta$-function to eliminate the integral over $\int d^3x_0$.  
 
-% Of those steps, I think you can safely swap  3 and 4.  But I think these must precede step 5, otherwise you don't have an integral, or even a Gaussian one.  
-% \end{shaded}
-
-\subsection{Casimir-Polder energy}
-We can extract the Casimir-Polder energy by introducing a test-particle,
- with $\epsilon(\omega,\vect{x})\rightarrow \epsilon(\omega,\vect{x})
-+\frac{\alpha(i\omega)}{\epsilon_0}\delta(\vect{x}-\vect{x}_0)$.
-  The factor of $\epsilon_0$ arises since this is the relative permittivity.
-  Some care is necessary with the $\delta$-function, and should really be considered the limiting 
-result of some function like $f(x,\sigma) = e^{-x^2/(2\sigma^2)}/\sqrt{2\pi\sigma^2}$.
-  We will then expand the energy to linear order in $\alpha$.  
-
+The TE Casimir--Polder free energy is is 
 \begin{align}
-E-E_0&=k_BT\sum'_n\,\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
-\dlangle e^{-T\frac{\omega_n^2}{2c^2}} - \left(1 - \frac{ T\omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)
-\langle \delta(x-x')\rangle\right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-\end{align}
-I think the first two terms the energy due to the dielectrics on their own, without the atom, 
-and such can be subtracted from the atom-wall interaction energy.
-  The physical renormalization is to expand the energy for just a polarizable particle,
- and consider the energy change with and without the presence of the other dielectric.
-  So we subtract off the same energy, but with $\epsilon=1$ everywhere.
-
-We can also simplify this a bit by noting that 
-\begin{equation}
-\int d^3x_0\, \dlangle \frac{1}{T}\int_0^T dt \delta(x(t)-x')\drangle = \int d^3x_0 \delta(x_0-x'),
-\end{equation}
-This follows from considering the discrete form of the path integral,
- $\int d^3x_0 \prod_i\int d^3x_i f(x_i-x_{i-1})$, where the integral is cyclic under permutations of indices.  
-In this way we can always relabel the point that passes through $x_0$ to be the starting point of the loop.
-   So we will then only consider loops that start and return to $x_0 = x'$.
-   Mathematically, we will use this $\delta$-function to eliminate the integral over $\int d^3x_0$.  
-
-The renormalized result is 
-\begin{align}
-E-E_0&=-k_BT{\sum_n}\,\frac{ \omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\int_0^\infty dT\,
-\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega_n^2}{2c^2}} 
--e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:TE_thermal_energy}
+E-E_0&=-k_BT{\sum_n}\,\frac{ \omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\int_0^\infty d\cT\,
+\frac{1}{(2\pi \cT)^{3/2}}\dlangle e^{-\cT\frac{\omega_n^2}{2c^2}} 
+-e^{-\frac{\cT \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:TE_thermal_energy}
 \end{align}
 
 We will focus on the Casimir-Polder result, since I can then compare to Dan's expressions in the notes.
@@ -1203,26 +1037,12 @@ We will focus on the Casimir-Polder result, since I can then compare to Dan's ex
 
 % \subsection{Far-field approximation, zero temperature}
 
-% Let us consider how to take the far-field approximation from these expressions.  Since we are taking an ensemble average over Gaussian random walks, so the loops will intersect all the surfaces when $T\sim d^2$, where $d$ is the distance from the source point $x_0$ to the farthest surface.  Secondly, the frequency integral is dominated by the exponential factors, which will contribute most when $T\omega^2/c^2\sim 1$.  This suggests that frequencies with $d^2\omega^2/c^2<1$ will contribute most.  In the limit where $d/c$ is large, only frequencies near $0$ will contribute, and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$ everywhere.
+% Let us consider how to take the far-field approximation from these expressions.
+  % Since we are taking an ensemble average over Gaussian random walks, so the loops will intersect all the surfaces when $T\sim d^2$, where $d$ is the distance from the source point $x_0$ to the farthest surface.
+  % Secondly, the frequency integral is dominated by the exponential factors, which will contribute most when $T\omega^2/c^2\sim 1$.
+  % This suggests that frequencies with $d^2\omega^2/c^2<1$ will contribute most.
+  % In the limit where $d/c$ is large, only frequencies near $0$ will contribute, and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$ everywhere.
 
-
-
-% \begin{shaded}
-% One question is, can we say $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)= 0?$  
-%If we approximate the atom as a harmonic oscillator \footnotemark
-%  with damping $\gamma$, and resonant frequency $\omega_0$   , then 
-% \begin{equation}
-% \alpha(i\omega)= \frac{e/m}{\omega_0^2+\omega^2+\gamma\omega},
-% \end{equation}
-% whereas if we do a quantum mechanical perturbation theory calculation \footnotemark  we get
-% \begin{equation}
-% \alpha(i\omega) =\sum_j \frac{2\omega_{j0}|\langle g | d_z|e_j\rangle|^2}{2\hbar(\omega_{j0}^2+\omega^2)},
-% \end{equation}
-% where $\omega_{j0}$ are the transition frequencies.
-%  Evidently in both cases $\lim_{\omega\rightarrow 0}\partial_\omega\alpha(i\omega)=0$, if $\gamma=0$.   
-% \end{shaded}
-% \footnotetext{Rosa, F.S.S, Dalvit, D. A. R. and Milonni, P. W., Phys. Rev. A, \textbf{84},053813,(2011), ``Electromagnetic energy, absorption, and Casimir Forces, II. Inhomogenous dielectric media''}
-% \footnotetext{Steck, Daniel A. ``Quantum Optics Notes'', Eq.(14.146) for the scalar Kramers-Heisenberg formula, see also Eq.(14.152).}
 
 \subsubsection{Feynman-Kac formula}
 
@@ -1247,27 +1067,28 @@ We will need to apply both of these results as
 \frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
 \end{align}
 
-On plugging this in to Eq.~(\ref{eq:TE_thermal_energy}) we have
-\begin{align}
-E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\int_0^\infty d\lambda\, 
-\frac{e^{-2\sqrt{2(\lambda+\omega_n^2/(2c^2))}|d|}}{\sqrt{2(\lambda+\omega_n^2/(2c^2))}}
-\frac{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}-\sqrt{\lambda+\omega_n^2/(2c^2)}}
-{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}+\sqrt{\lambda+\omega_n^2/(2c^2)}},
-\end{align}
-Let's make a couple variable changes to put this into a more tractable form.  
-First we change integration variable using $\lambda = \kappa \omega_n^2/(2c^2)$.  
-\begin{align}
-E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\frac{\omega_n^2}{2c^2}
-\int_0^\infty d\kappa\, \frac{e^{-2\omega_n\sqrt{(\kappa+1)}|d|/c}}{\omega_n\sqrt{(\kappa+1)}/c}
-\frac{\sqrt{\kappa+1+\chi(i\omega_n)]}-\sqrt{\kappa+1}}{\sqrt{\kappa+1+\chi(i\omega_n)}+\sqrt{\kappa+1}},
-\end{align}
-Next we define $\kappa +1= p^2$.  
+% On plugging this in to Eq.~(\ref{eq:TE_thermal_energy}) we have
+% \begin{align}
+% E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\int_0^\infty d\lambda\, 
+% \frac{e^{-2\sqrt{2(\lambda+\omega_n^2/(2c^2))}|d|}}{\sqrt{2(\lambda+\omega_n^2/(2c^2))}}
+% \frac{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}-\sqrt{\lambda+\omega_n^2/(2c^2)}}
+% {\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}+\sqrt{\lambda+\omega_n^2/(2c^2)}},
+% \end{align}
+% Let's make a couple variable changes to put this into a more tractable form.  
+% First we change integration variable using $\lambda = \kappa \omega_n^2/(2c^2)$.  
+% \begin{align}
+% E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\frac{\omega_n^2}{2c^2}
+% \int_0^\infty d\kappa\, \frac{e^{-2\omega_n\sqrt{(\kappa+1)}|d|/c}}{\omega_n\sqrt{(\kappa+1)}/c}
+% \frac{\sqrt{\kappa+1+\chi(i\omega_n)]}-\sqrt{\kappa+1}}{\sqrt{\kappa+1+\chi(i\omega_n)}+\sqrt{\kappa+1}},
+% \end{align}
+% Next we define $\kappa +1= p^2$.  
 \begin{align}
 E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^3\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2\omega_n p|d|/c}
 \frac{\sqrt{p^2+\chi(i\omega_n)}-p}{\sqrt{p^2+\chi(i\omega_n)}+p},
 \label{eq:TE_CP_finite_temperature}
 \end{align}
-This is the general result for finite temperature and dispersion.
+This is the general result for finite temperature and dispersion for the TE polarization for an atom near 
+a planar dielectric.
   We can also take the zero temperature limit.
   In the limit $\beta\rightarrow \infty$ the difference between Matsubara frequencies approaches zero,
  $\Delta\omega_n =\frac{2\pi}{\beta\hbar}$.  Then we can take $\sum_n\Delta\omega_n \rightarrow \int_0^\infty d\omega$.
@@ -1292,9 +1113,6 @@ where $d$ is the distance from the source point $x_0$ to the farthest surface.
 We start from Eq.~(\ref{eq:TE_CP_zero_temperature}).
   If we also take the limit where $d/c$ is large, only frequencies near $0$ will contribute,
  and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$, $\alpha(i\omega)\approx\alpha_0$ everywhere.  
-\comment{Does this also only work up to a certain distance, 
-at which point the integral crosses over to High temperature,since there is always some thermal background.
-  e.g. infra-red radiation. }
 \begin{align}
 E-E_0&=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)
 \int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(0)}-p}{\sqrt{p^2+\chi(0)}+p}
@@ -1526,49 +1344,50 @@ E-E_0 & = -k_BT \log \frac{Z_{TM}}{Z_0} \\
 
 \subsection{Casimir-Polder energy}
 
-The Casimir-Polder energy can be recovered by expanding $\epsilon$ to linear order in $\alpha(i\omega)/\epsilon_0\delta(x-x').$
-  We will also have to expand $V_{TM}$,
-\begin{align}
-T\langle V_{TM}\rangle =& \int_0^Tdt\, (\partial_x\log\sqrt{\epsilon})^2 - \partial_x^2\log\sqrt{\epsilon}\\
-%=& \int_0^Tdt\, \frac{1}{4}(\partial_x\log\epsilon)^2 - \frac{1}{2}\partial_x^2\log\epsilon\\
-=& \int_0^Tdt\, \frac{1}{4}[\partial_x\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)]^2 
-- \frac{1}{2}\partial_x^2\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)\\
-%=& \int_0^Tdt\, \frac{1}{4}\{\partial_x[\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon(x_0)\epsilon_0)]\}^2 - \frac{1}{2}\partial_x^2\{\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon_0\epsilon(x_0))\}\\
-=& \int_0^Tdt\, V_{TM} +\frac{\alpha}{2}\partial_x\log\epsilon\partial_x[\delta(x-x_0)/(\epsilon(x)\epsilon_0)]
- - \frac{\alpha}{2}\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]
-\end{align}
-We will simplify this a bit by assuming we are only considering the polarizable particle in regions 
-where $\epsilon(x)$ is constant in the vicinity of $x_0$.
-  Then we can drop any terms in $\partial_x\epsilon|_{x=x_0}$.
-  This lets us drop the second term, and any derivatives from expanding out the derivative.
-  I think any extra terms from expanding out these derivatives would ultimately get eaten when
- considering the effect of $\delta'$.
-  It will be operationally cleaner to just leave the derivatives acting on the products, 
-and integrate by parts at the end. 
+% The Casimir-Polder energy can be recovered by expanding $\epsilon$ to linear order in $\alpha(i\omega)/\epsilon_0\delta(x-x').$
+%   We will also have to expand $V_{TM}$,
+% \begin{align}
+% T\langle V_{TM}\rangle =& \int_0^Tdt\, (\partial_x\log\sqrt{\epsilon})^2 - \partial_x^2\log\sqrt{\epsilon}\\
+% %=& \int_0^Tdt\, \frac{1}{4}(\partial_x\log\epsilon)^2 - \frac{1}{2}\partial_x^2\log\epsilon\\
+% =& \int_0^Tdt\, \frac{1}{4}[\partial_x\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)]^2 
+% - \frac{1}{2}\partial_x^2\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)\\
+% %=& \int_0^Tdt\, \frac{1}{4}\{\partial_x[\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon(x_0)\epsilon_0)]\}^2 - \frac{1}{2}\partial_x^2\{\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon_0\epsilon(x_0))\}\\
+% =& \int_0^Tdt\, V_{TM} +\frac{\alpha}{2}\partial_x\log\epsilon\partial_x[\delta(x-x_0)/(\epsilon(x)\epsilon_0)]
+%  - \frac{\alpha}{2}\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]
+% \end{align}
+% We will simplify this a bit by assuming we are only considering the polarizable particle in regions 
+% where $\epsilon(x)$ is constant in the vicinity of $x_0$.
+%   Then we can drop any terms in $\partial_x\epsilon|_{x=x_0}$.
+%   This lets us drop the second term, and any derivatives from expanding out the derivative.
+%   I think any extra terms from expanding out these derivatives would ultimately get eaten when
+%  considering the effect of $\delta'$.
+%   It will be operationally cleaner to just leave the derivatives acting on the products, 
+% and integrate by parts at the end. 
 
-Let us suppress the renormalization terms for the mean time.  
+% Let us suppress the renormalization terms for the mean time.  
+% \begin{align}
+% E&=-k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
+% \dlangle e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle} \right.\right. \nonumber \\
+% & \hspace{3cm}\times\left.\left.\left(-T\frac{\omega_n^2}{2c^2}\frac{\alpha(i\omega_n)}{\epsilon_0}
+% \langle\delta(x-x_0)\rangle  - \frac{\alpha T}{4}\langle\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]\rangle\right)\drangle\\
+% &=k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}
+% \dlangle \left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_x^2\right)
+% e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle}\drangle
+% \end{align}
+The renormalized TM Casimir--Polder free energy is 
 \begin{align}
-E&=-k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
-\dlangle e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle} \right.\right. \nonumber \\
-& \hspace{3cm}\times\left.\left.\left(-T\frac{\omega_n^2}{2c^2}\frac{\alpha(i\omega_n)}{\epsilon_0}
-\langle\delta(x-x_0)\rangle  - \frac{\alpha T}{4}\langle\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]\rangle\right)\drangle\\
-&=k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}
-\dlangle \left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_x^2\right)
-e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle}\drangle
-\end{align}
-Now doing the subtraction of the same energy with $\epsilon=1$ gives: 
-\begin{equation}
-E-E_0=-k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty dT\,
-\frac{1}{(2\pi T)^{3/2}}\dlangle \frac{\omega_n^2}{c^2}e^{-T\frac{\omega_n^2}{2c^2}}
+E-E_0=\,&-k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty d\cT\,
+\frac{1}{(2\pi \cT)^{3/2}}\nonumber\\
+&\times\dlangle \frac{\omega_n^2}{c^2}e^{-\cT\frac{\omega_n^2}{2c^2}}
 -\left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_x^2\right)e
-^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle}\drangle\label{eq:TM_CP_finite_temperature},
-\end{equation}
-which is our initial result for the finite-temperature Casimir-Polder energy.
-  As before, we can straightforwardly take the zero temperature limit: 
-\begin{equation}
-E-E_0=-\frac{\hbar}{2\pi}\int_0^\infty d\omega\frac{\alpha(i\omega)}{2\epsilon_0}
-\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle \frac{\omega^2}{c^2}e^{-T\frac{\omega^2}{2c^2}}-\left(\frac{\omega^2}{c^2}  - \frac{1}{2}\partial_x^2\right)e^{-\frac{ T \omega^2\langle\epsilon(i\omega)\rangle}{2c^2} - T\langle V_{TM}(i\omega)\rangle}\drangle\label{eq:TM_CP_zero_temperature},
-\end{equation}
+^{-\frac{ \cT \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - \cT\langle V_{TM}\rangle}\drangle\label{eq:TM_CP_finite_temperature}.
+\end{align}
+As before, we can straightforwardly take the zero temperature limit: 
+\begin{align}
+E-E_0=&-\frac{\hbar}{2\pi}\int_0^\infty d\omega\frac{\alpha(i\omega)}{2\epsilon_0}
+\int_0^\infty d\cT\,\frac{1}{(2\pi \cT)^{3/2}}\nonumber\\
+&\times\dlangle \frac{\omega^2}{c^2}e^{-\cT\frac{\omega^2}{2c^2}}-\left(\frac{\omega^2}{c^2}  - \frac{1}{2}\partial_x^2\right)e^{-\frac{ \cT \omega^2\langle\epsilon(i\omega)\rangle}{2c^2} - \cT\langle V_{TM}(i\omega)\rangle}\drangle\label{eq:TM_CP_zero_temperature},
+\end{align}
 
 \subsubsection{Laplace-Mellin and Feynman-Kac Formulae}
 We will again need to use the Laplace-Mellin transforms, and Feynman-Kac Formulae.
@@ -1584,11 +1403,11 @@ For Casimir-Polder we need$z=1/2$, and for Casimir we need $z=3/2$.
   We also need the actual analytical expression for that path integral.
 
 For one body we need:
-\begin{equation}
-\int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi\int_0^T dt \Theta(x-d)}}{\sqrt{2\pi T}}\drangle  
-=\frac{1}{\sqrt{2(\lambda+s)}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}\frac{\sqrt{\lambda+s(1+\chi)}
+\begin{align}
+&\int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi\int_0^T dt \Theta(x-d)}}{\sqrt{2\pi T}}\drangle  \nonumber\\
+&\hspace{0.5cm}=\frac{1}{\sqrt{2(\lambda+s)}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}\frac{\sqrt{\lambda+s(1+\chi)}
 -\sqrt{\lambda+s}e^{2\Xi}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}e^{2\Xi}}\right],
-\end{equation}
+\end{align}
 where $e^{2\Xi} = (1+\chi)$ comes from the contribution of $e^{-V_{TM}}$.
   \comment{Correct signs?} For two macroscopic bodies we will need:
 \begin{align}
@@ -1725,7 +1544,7 @@ Previously, we've done the calculations for the Feynman-Kac formula for just the
 \dlangle e^{-\int_0^T dt V_{TM}}\drangle &= 1 + \frac{\sinh(\Xi/2)}{\cosh\Xi}[e^{\Xi/2} + e^{-\Xi/2}]e^{-2 d^2/T}\\
 %&= 1 + \frac{(e^{\Xi/2} - e^{-\Xi/2})}{(e^{\Xi/2} + e^{-\Xi/2})}{e^\Xi + e^{-\Xi}}e^{-2 d^2/T}\\
 %&= 1 + \frac{e^{\Xi} - e^{-\Xi}}{e^\Xi + e^{-\Xi}}e^{-2 d^2/T}\\
-&= 1 + \frac{e^{2\Xi} - 1}{e^{2\Xi} + 1} e^{-2 d^2/T}\\
+%&= 1 + \frac{e^{2\Xi} - 1}{e^{2\Xi} + 1} e^{-2 d^2/T}\\
 &= 1 + \frac{\epsilon(0) - 1}{\epsilon(0)+1}e^{-2 d^2/T}.
 \end{align}
 Plugging this in, and taking the derivative 
@@ -1734,7 +1553,7 @@ F-F_0=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsilon(0)-1}{\epsilon(0)+1}
 \int_0^\infty dT\,\partial_d^2\frac{1}{\sqrt{2\pi }T^{3/2}} e^{-2 d^2/T}\\
 =&-\frac{k_BT\alpha_0}{16\pi\epsilon_0d^3}\frac{\epsilon(0)-1}{\epsilon(0)+1}.
 \end{align}
-
+This is the familiar expression for the van der Waals interaction of an atom and a dielectric wall.
 
  
     % \section{TE/TM Zero temperature atom-plane, plane-plane}

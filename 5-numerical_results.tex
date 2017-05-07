@@ -360,6 +360,7 @@ In Ref.~\ref{Mackrory2016}, some heuristic arguments are given to explain this s
 
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}
+
 Numerically calculating the Casimir energy due to the TM potential is much harder than the TE case. 
 The integrand is more singular for dielectrics.  We will develop a number of techniques to temper these
 difficulties that should have applications for more general Casimir worldlines.
@@ -374,11 +375,11 @@ The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is
   &=\Theta[(x_k-d)(x_{k+1}-d)]\big[1   + \sgn(d)e^{-2(d-x_k)(d-x_{k+1})/t}\tanh\Xi\big]\nonumber\\
   &\hspace{0.5cm}+ \Theta[-(x_k-d)(x_{k+1}-d)]\sech\Xi.        \label{eq:TM_pot}
 \end{align}
-This ensemble-averaged solution is plotted in Fig.~\ref{fig:  }, 
+This ensemble-averaged solution is plotted in Fig.~\ref{fig:TMexp}, 
 for starting points on either side of the interface at various values of $\Xi$.
 The solution is between zero and one for paths that start inside a body, or cross an interface.
-For paths starting outside a body, the solution is between one and two.  THe extreme values of zero and 
-two only appear in the strong-coupling limit right at the suface.
+For paths starting outside a body, the solution is between one and two.  The extreme values of zero and 
+two only appear in the strong-coupling limit close to the suface.
 
 This solution can be used in the path integral by identifying averages of sub-paths
 between discrete points with the analytical solutions.
@@ -405,15 +406,17 @@ and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref
 \subsection{Scaling of Averaged TM Potential with Path Resolution}
 
 Even after regularization, and ensemble averaging the TM potential is still difficult to handle.  
-The numerical properties of the solution can be examing by considering the following simplified path integral
-which includes only a single TM potential a distance $d$ away,
+The numerical properties of the solution can be examined by considering a simplified path integral
+that only includes a single TM potential a distance $d$ away,
 \begin{equation}
   I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} = \dlangle \prod_{k=1}^N
   \bigglinklangle  e^{-\int_0^\cT dt\,\VTM[x(t)]}\bigglinkrangle\drangle_{\vect{x}_k}.
 \end{equation}
 The left-hand ensemble average is over continuous Brownian bridges, whereas the second ensemble
 average runs over discrete Brownian bridges (and averaging over continuous sub-paths indicated by $\linklangle\cdots\linkrangle$).
-In this case, the analytical solution is known, and we can examine how the numerical answers scale with the number 
+In this case, the exact value of the integral is just the TM potential solution Eq.~\ref{eq:TM_pot},
+for $x_k=x_{k+1}=x_0$.  The right hand side can be computed numerically, and the 
+nd we can examine how the numerical answers scale with the number 
 of increments.  
 
 Fig.~\ref{fig:TM_histogram} shows a histogram of numerical estimated values for closed Brownian paths 
@@ -421,7 +424,8 @@ interacting with the TM potential.  Each Brownian path is generated via the v-lo
 and the total contribution from each path is the product of the TM solutions~(\ref{eq:TM_pot}) for every
 step along the path.
 As can be seen there is a very wide spread of values.  Most paths return values close to zero, 
-while a few rare paths return very large values.  
+while a few rare paths return very large values.  This suggests that the plain Gaussian paths 
+are poorly suited to this problem, and that the path generation scheme should be modified.
 
 \begin{figure}
   \centering
@@ -432,6 +436,8 @@ while a few rare paths return very large values.
   Raw Gaussian distribution extends off to negative infinity.  Birth-Death  distribution has trunctated peak at zero weight.}
 \end{figure}
 
+
+
 \subsubsection{TM Loops}
 
 \begin{figure}
@@ -441,27 +447,57 @@ while a few rare paths return very large values.
     Combined TM Potential and Gaussian probability distribution plotted for various $\chi$.}
 \end{figure}
 
+Instead of sampling path increments from the Gaussian, it is possible to account for the 
+path-averaged exponential~(\cite{eq:TMpot}) in generating increments.  The resulting 
+distribution would be a sum and difference of Gaussians.
 
+  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
+  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  For differences of Gaussians,
+  use rejection to sample the deviates.  
+
+  The v-loop algorithm can be adjusted to take the shift in the weights and variances into account.
+  In the cases where there is a sum of Gaussians, one can be randomly chosen to sample from, while 
+  if there is a difference of Gaussians the rejection method should be used to generate deviates.  
+  Generating these increments is a bit more difficult than the simple Gaussians.  
+
+  While this method has improved performance, it still relies on taking a product of $N-1$ normalization factors $\nu_k$,
+  with $0<\nu_k<2$.  
+  Note that $\nu_k$ does not go to one as $N\rightarrow\infty$, which is predominant source 
+  of the problem.  More and more terms are being multiplied together, leading to a growing variance.
+  Given enough samples, the correct mean would be found, but the number of samples requires diverges.  
+  This leads to similar problems as the plain Gaussians where the fluctuations grow uncontrollably as 
+  a function of the path resolution $N$. 
 
 \subsubsection{Birth-Death Loop Swarm}
+
+Both the plain Gaussian and TM-Gaussian paths can be rescued by further adjusting the sampling procedure.
+In both cases, as the trajectory propagates it accumulates a large weight.  After $k$ steps,
+the weight is $w_k=\prod_{j=1}^k\nu_j$.  Most trajectories wandering around the interface will acquire 
+a number of large weights with $\nu_j>1$ from the vacuum side, and small weights $0<\nu_j<1$ from within
+the medium.  
+The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$. If we consider
+$\nu_j$ to be random variables (since the normalizations and potentials are functions of an underlying random path),
+then we would expect $\log \omega_k$ to be normally distributed, with some variance. 
+Thus, the accumulated weight is expected to grow a log-normal deviate.    
+
+A large number of paths will yield very low values, and a lot of computer time would be wasted on simulations
+which contribute little to the Casimir energy.  A few rare paths would skirt outside the surface, accumulating
+very large weights, and contributing a lot to the Casimir energy.  Together these lead to large statistical
+fluctuations, which make it hard to get sufficienct averaging for even moderately fine paths.
+
+
+
 
 \begin{enumerate}
 % \item TM potential must also be tracked along a given path.
 % ( Explore the potential-only integrand to highlight the issues.)
 % \item TM potential takes on values $1<V_k<2$ outside a body, and $0<V_k<1$ when crossing
 %   or inside.  
-\item Leads to large fluctuations, for even moderate $N$.  (Histogram of values, and scaling of variance)
-\item Large fluctuations indicate a poor choice of probability distribution, and we should
-  adjust our choice.
 \item Two methods to incorporate the potential into the probability distribution.
-  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
-  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  FOr differences of Gaussians,
-  use rejection to sample the deviates.  
   2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
   is large, and terminate if too small.  
 \item Birth-death method is required for first method anyway, as there is still a potential
 inf the form of the normalizations.  
-%\item Figure: Growth of fluctuations.
 \end{enumerate}
 
 

@@ -178,14 +178,14 @@ is essential for good convergence.
 
 \begin{enumerate}
 %\item Need average over ensemble of paths.
-\item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
-  integrate over that.  In this case, the loop potential is either zero or one, with no variation.
-  Thus it is more straightforward to integrate over space/loop-time.  
+% \item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
+%   integrate over that.  In this case, the loop potential is either zero or one, with no variation.
+%   Thus it is more straightforward to integrate over space/loop-time.  
 % \item For computationally expensive loops, it makes sense to sample only a single position, time.
 %   Explore a larger ensemble in the same computational time.
 %   \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
-  \item For time: For TE loops, integrand is zero before first touching time.  
-    So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
+  \item For time: % For TE loops, integrand is zero before first touching time.  
+    % So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
     TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
     that touch the surface).
   \item Birth-death method effectively examines a larger ensemble of loops.
@@ -194,9 +194,6 @@ is essential for good convergence.
     is a poor estimate.  Simplest to use an ensemble average estimate for time:
     $P(\cT,d_0) = \exp(-2d_0^2/\cT)/\cT^3$, where exponential factor is the first touching
     time.  
-  \item For spatial integrals, sample from uniform distribution within a radius that bounds all objects.
-    Then sample from a power-law outside that, where estimate follows from first-touching time.
-    May be possible to optimize, but captures important features without biasing
   \item Frequency integrals: Can execute in parallel (like picking different $chi$).
 \end{enumerate}
 
@@ -257,64 +254,112 @@ to touch all bodies.
 This occurs for times $\cT\sim d_0^2$, where $d_0$ is the separation between bodies.    
 These considerations suggest sampling from 
 \begin{equation}
-  P_x(x;d_0):= \frac{2}{3d}\left\{ \begin{array}{cc}
+  P_x(x;d_0):= \frac{3}{8d_0}\left\{ \begin{array}{cc}
     1  & |x|<d_0\\
-    \frac{d^4_0}{|x|^4} & |x|>d_0
+    \dfrac{d^4_0}{|x|^4} & |x|>d_0
   \end{array}
-\right.
+\right.\label{eq:xPower_law}
 \end{equation}
-in a one-dimensional geometry, embeeded in a four-dimensional space-time.
-  This reasoning can be easily extended to higher dimensional problems,
-where in that case an sphere of radius $d_0$ should bound all of the interfaces between the bodies.
-Outside of that sphere, the sampling would again fall off as $|x|^D$.
+n a one-dimensional geometry, embedded in a four-dimensional space-time.
+ This reasoning can be easily extended to higher dimensional problems,
+where a sphere of radius $d_0$ should bound all of the interfaces between the bodies.
+Outside of that sphere, the sampling would again fall off as $|x|^D$.  
+While it may be possible to develop sampling procedures optimized for a particular geometry, this provides a general purpose way of 
+sampling the starting points for Casimir worldline path integrals.
 
 \subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
 Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE path integral
-at a variety of $\chi$.
-
+for at a range of $\chi$.  This plots the Casimir--Polder energy for an atom a distance $d$ away
+from a single planar dielectric interface with susceptibility $\chi$ and dielectric $\epsr=1+\chi\theta(x-d)$.
+The atom is located at the origin.
 
 \begin{figure}
   \centering
  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_atom_wall}
   \caption[Planar Casimir--Polder TE energy as function of $\chi$]
   {Planar Casimir--Polder TE energy as function of susceptibility $\chi$.  
-    Plots the ratio of Casimir--Polder energy for an
-    atom-dielectric interface and an atom--perfect-conductor interface, $\eta(\chi)$.
     Simulations used $10^8$ paths, with $10^4$ points per path.
     Results for each $\chi$ were computed using the same ensemble of paths.
     Dielectric average evaluated using trapezoidal rule.  
+    (Inset is same data on a linear vertical scale.)
     }
   \label{fig:eff_TE_atom_wall}
 \end{figure}
+
+Each path was generated with the v-loop algorithm~(\ref{eq:vloop}). 
+A single path-time $\cT$ was sampled for each path by sampling from Eq.~\ref{eq:Tpower_law}, 
+where $\cT_0$ is the smallest path-time that the part starting at $x_0$ would contact a planar surface a distance $d$ 
+away.  For TE integrands, a whole range of $\chi$ can be evaluated in parallel for a single path since 
+$\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.  The path-averaged occupation time can be computed once for a 
+given path, and re-used to compute the Casimir--Polder energy for various $\chi$.  
+
+The numerically sampled values agree well with the analytical result for the 
+efficiency $\eta(\chi)$.  The efficiency is the ratio of the TE Casimir--Polder energy between an atom and a dielectric 
+to the total Casimir--Polder energy for an atom and a perfectly conducting plate.  This approaches $1/6$ in the 
+strong-coupling limit---the remainder of the Casimir--Polder energy is provided by the TM polarization, which
+will be discussed further in Sec.~\ref{sec:TM_numerics}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_2wall}
   \label{fig:eff_TE_2wall}
-  \caption{ Convergence planar TE Casimir energy as function of $\chi$}
+  \caption[Planar TE Casimir energy as function of $\chi$.]{
+    Numerically calculated planar TE Casimir energy as function of $\chi$.
+  Simulations used $10^8$ paths, with $10^4$ points per path.  All values of $\chi$ were computed in parallel
+  using the same ensemble of paths.
+    (Inset is same data on a linear vertical scale.)}
 \end{figure}
+
+Fig.~\ref{eff_TE_2wall} shows the numerically computed Casimir energy between two planar dielectric interfaces
+a distance $d$ apart, with dielectric $\epsr = 1+\chi\Theta(-x+d/2)+\chi\Theta(x-d/2)$.  
+The same procedure is used as for Casimir--Polder energies, except in this case the starting position 
+of the path is also sampled as in Eq.~(\ref{eq:xPower_law}).
+The flat region was chosen so that $d_0=d$, which is twice the size of the region between the interfaces.  
+In this case it is also necesary to keep track of the occupation times for each body.
+In the strong-coupling limit the TE polarization provides half of the contribution to the full EM Casimir energy
+between dielectrics.  
 
 \subsubsection{Scaling with N}
 
-An analysis of the systematic error due to 
-
+Some interesting scaling behaviour was found by examining the relative error between the numerical 
+estimates and the exact analytical value.  
+In this case the primary systematic error is due to the discretization of the path.
+The path integral was derived under the assumption that $N\rightarrow\infty$, while the numerical
+simulations use a discrete path with a finite $N$.  
+There is an additional random error associated with the finite number of paths.   However, for $N_{\text{path}}$ paths,
+this error scales as $N_{\text{path}}^{-1/2}$, as is typical for Monte Carlo sampling error.  This is what provides
+the noise floor in Fig.~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TEatomN3}
-  \caption{Convergence of planar TE Casimir--Polder energy  as function of $N$}
+  \caption[Convergence of planar TE Casimir--Polder energy  as function of $N$.  ]{
+    Convergence of planar TE Casimir--Polder energy as function of $N$.  
+    Different values of $\chi$ use the same ensemble of paths.
+    Simulations used $10^8$ paths, which sets the $10^{-4}$ noise floor.}
+  \label{fig:conv_atom}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TE2wallN3}
-  \caption{Convergence planar TE Casimir energy as function of $N$.}
+  \caption[Convergence planar TE Casimir energy as function of $N$ for various $\chi$.]{
+    Convergence planar TE Casimir energy as function of $N$ for various $\chi$, using the same ensemble of paths for all $\chi$.
+    Simulations used $10^8$ paths, which sets the $10^{-4}$ noise floor.}
+  \label{fig:conv_wall}
 \end{figure}
 
+As $N$ varies for fixed $\chi$, there are two different scaling behaviours.  
+In the weak-coupling limit $\chi/N\gg 1$, the error comes from underestimating the sojourn time.
+In the strong-coupling limit $\chi/N\ll 1$, the error comes from underestimating the first path-time
+the path touches the surface.
+For a fixed $\chi$, the transition between both behaviours is observed at $\chi\sim N$. 
+
+In Ref.~\ref{Mackrory2016}, some heuristic arguments are given to explain this scaling, which will briefly reprised here.
 
 \section{TM Casimir Numerics}
-
+\label{sec:TM_numerics}
 Numerically calculating the Casimir energy due to the TM potential is much harder than the TE case. 
 The integrand is more singular for dielectrics.  We will develop a number of techniques to temper these
 difficulties that should have applications for more general Casimir worldlines.
@@ -377,7 +422,26 @@ and the total contribution from each path is the product of the TM solutions~(\r
 step along the path.
 As can be seen there is a very wide spread of values.  Most paths return values close to zero, 
 while a few rare paths return very large values.  
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/numerics/TM_normhist}
+  \caption[Histogram of Accumulated Numerical TM Estimates]
+  {Histogram of accumulated numerical TM estimates, for raw Gaussian (blue) and birth-death Gaussian (red).
+    Simulations used $10^6$ paths, with $N=100$ points per path, $\chi=100$, $d=1,T=1.$
+  Raw Gaussian distribution extends off to negative infinity.  Birth-Death  distribution has trunctated peak at zero weight.}
+\end{figure}
+
 \subsubsection{TM Loops}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/analytical/probTM}
+  \caption[Combined TM Potential and Gaussian probability distribution.]{
+    Combined TM Potential and Gaussian probability distribution plotted for various $\chi$.}
+\end{figure}
+
+
 
 \subsubsection{Birth-Death Loop Swarm}
 
@@ -400,14 +464,6 @@ inf the form of the normalizations.
 %\item Figure: Growth of fluctuations.
 \end{enumerate}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{fig/numerics/TM_normhist}
-  \caption[Histogram of Accumulated Numerical TM Estimates]
-  {Histogram of accumulated numerical TM estimates, for raw Gaussian (blue) and birth-death Gaussian (red).
-    Simulations used $10^6$ paths, with $N=100$ points per path, $\chi=100$, $d=1,T=1.$
-  Raw Gaussian distribution extends off to negative infinity.  Birth-Death  distribution has trunctated peak at zero weight.}
-\end{figure}
 
 \begin{figure}
   \centering
@@ -418,12 +474,6 @@ inf the form of the normalizations.
   birth-death.}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{fig/analytical/probTM}
-  \caption[Combined TM Potential and Gaussian probability distribution.]{
-    Combined TM Potential and Gaussian probability distribution plotted for various $\chi$.}
-\end{figure}
 
 \subsection{Monte-Carlo Sampling for Path-Time}
 

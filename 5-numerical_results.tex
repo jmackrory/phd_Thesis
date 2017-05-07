@@ -477,29 +477,43 @@ a number of large weights with $\nu_j>1$ from the vacuum side, and small weights
 the medium.  
 The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$. If we consider
 $\nu_j$ to be random variables (since the normalizations and potentials are functions of an underlying random path),
-then we would expect $\log \omega_k$ to be normally distributed, with some variance. 
+then we would expect $\log w_k$ to be normally distributed, with some variance. 
 Thus, the accumulated weight is expected to grow a log-normal deviate.    
 
 A large number of paths will yield very low values, and a lot of computer time would be wasted on simulations
-which contribute little to the Casimir energy.  A few rare paths would skirt outside the surface, accumulating
+which computing numbers very close to zero.  A few rare paths would skirt outside the surface, accumulating
 very large weights, and contributing a lot to the Casimir energy.  Together these lead to large statistical
 fluctuations, which make it hard to get sufficienct averaging for even moderately fine paths.
+Note that both of these paths will contribute to the Casimir energy (in a partially cancelling way).
 
+The path generation for either method can be modified as follows.  The weight is effectively treated as 
+the fitness function for the path.  Paths with high weights will spawn further paths (birth), while paths with
+small weights will be terminated and return zero (death).
+If the weight is becoming small, $w_k<0.5$ then compare $w_k$ with a uniform random number $u$.
+If $w_k<u$, then set $w_k=0$ and stop propagating the path; alternatively, if $w_k>u$, then 
+the path survives and the weight is reset $w_k=1$.    In an ensemble average, this yields the correct averaged value.  
+That is the death process.
+If the weight is becoming large, $w_k>2$, then split the weight in half, and assign each half to 
+two independent trajectories.
+Altogether, this is called the birth-death process, and should be applied at every step of the random path.
+Implementing the deaths ensures that the memory requirements do not grow exponentially as a function 
+of path length, while the birth process ensures that successful trajectories with a large weight have 
+more opportunity.  Note that returning zero is still a contribution to the Casimir energy (anything different
+from unity will contribute), and the death process speeds up the computation by not computing ever smaller
+values.
 
+The birth-death process is a very simple Markov Chain Monte Carlo (MCMC) method.  The birth-death
+process modifies the preferred motions based on the accumulated weight.  Paths are likely to be born
+on the vacuum side of interfaces, and they are likely to die on the inside of the interface.
+Far away from the interface on either side, the paths are unlikely to change.  
 
-
-\begin{enumerate}
-% \item TM potential must also be tracked along a given path.
-% ( Explore the potential-only integrand to highlight the issues.)
-% \item TM potential takes on values $1<V_k<2$ outside a body, and $0<V_k<1$ when crossing
-%   or inside.  
-\item Two methods to incorporate the potential into the probability distribution.
-  2) Use regular Gaussian increments, but spawn new trajectories if acculumated potential 
-  is large, and terminate if too small.  
-\item Birth-death method is required for first method anyway, as there is still a potential
-inf the form of the normalizations.  
-\end{enumerate}
-
+Similar, but different terms are discussed throughout
+stochastic processes literature.  The more typical birth-death process is used in queuing theory, where 
+the number of objects in a queue randomly increases and decreases at a fixed average rate~\cite{}.
+The process used here is closer to the genealogical methods discussed in Del Moral~\cite{DelMoral2004},
+where a sub-ensemble of paths is used to track the mean.
+A similar method has been used to discuss simulating rare events~\cite{}.  In that case, one splits trajectories 
+based on whether they exceed a certain threshold criterion. 
 
 \begin{figure}
   \centering
@@ -508,8 +522,15 @@ inf the form of the normalizations.
   {Scaling of variance TM potential as function of $N$ for four methods.  
   All combinations of Gaussian paths increments and combined TM-Gaussian steps, with raw values and 
   birth-death.}
+\label{fig:TM_scalingN}
 \end{figure}
 
+Fig.~\ref{fig:TM_scalingN} shows how the raw Gaussian and TM-Gaussians estimates of the simple path integral
+scale with the path resolution.  The birth-death process has been applied to both ways of generating paths.
+The birth-death process reduces the variance, and makes both methods much more tractable.
+The difference between raw Gaussian and TM-gaussians is small under the birth-death process.
+Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
+use the birth-death process in conjunction with simple Gaussian throughout the remainder. 
 
 \subsection{Monte-Carlo Sampling for Path-Time}
 

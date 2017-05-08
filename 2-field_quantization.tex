@@ -819,7 +819,8 @@ alternative method explicitly focusing on the two physical degrees of freedom in
 
 \section{Scalar Decomposition for Planar Geometries}
 
-The EM field can be split into two non-interacting polarizations for media that only vary in one Cartesian dimension in one direction.
+The EM field can be split into two non-interacting polarizations for media where 
+the material properties $\epsr(z)$ and $\mur(z)$ only vary in one direction.  
 These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
 The situation for plane waves scattering off a planar surface is illustrated in Fig.~\ref{fig:planar}.
 In the TE polarization, the electric field is perpendicular to the plane of incidence, 
@@ -832,9 +833,14 @@ In this case, the two fields will turn out to mirror each other under a duality 
 electric and magnetic properties of both fields and matter.  
 The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}.
 
-Consider a medium which varies in only one Cartesian direction $z$.
-The material properties $\epsr(z)$ and $\mur(z)$ also only vary in this direction.  
-In this case the action for the vector EM field can be split into two non-interacting scalar fields.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig/analytical/kvectorTE}
+  \includegraphics[width=0.4\textwidth]{fig/analytical/kvectorTM}
+  \caption[Scalar polarizations at planar interface]{Scalar polarizations for EM field at a planar 
+    dielectric interface.}
+  \label{fig:planar}
+\end{figure}
 
 % From Maxwell's equations the electric and magnetic fields can be split into two sets: $(E_y, B_x, B_z)$
 % and $(B_y,E_x,E_z)$.
@@ -844,13 +850,16 @@ In this case the action for the vector EM field can be split into two non-intera
 %   S = \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
 % \end{equation}
 
+
+
 \subsection{Scalar Polarization Partition Functions}
 
 In the TE polarization the electric field is described by a single scalar field, $\vect{E}=\partial_t\phi\hat{y}$,
 where  $\phi:=\phi(\vect{r},t)$.  In this case $\phi$ corresponds to the y-component of the vector potential.  
-In generalized Coulomb gauge $\nabla\cdot\eps\vect{A}=0$, and using Maxwell's equations, the magnetic
-field $B$ can also be written in terms of this scalar and $|\vect{B}|^2=|\nabla\phi|^2$.
-The action for the TE scalar $\phi:=\phi(\vect{r},t)$ is 
+The magnetic field can also be written in terms of this scalar.
+In Coulomb gauge $\nabla\cdot\vect{A}=0$, and using Maxwell's equations, the square of the magnetic
+field is $|\vect{B}|^2=|\nabla\phi|^2$.
+The action for the TE scalar $\phi:=\phi(\vect{r},t)$ is then given by
 \begin{equation}
   S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg).
 \end{equation}
@@ -875,9 +884,9 @@ yields an additional potential,
 \begin{equation}
   V\subTE(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\mur})^2-\partial_z^2\log\sqrt{\mur}\big].
 \end{equation}
-The Gaussian integral over $\phi$ can be carried out immediately, with the result
+The Gaussian integral over $\phi$ can be carried out, with the result
 \begin{equation}
-  Z\subTE = \det\bigg\{-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z)  \bigg\}^{-1/2}.
+  Z\subTE = \det\bigg(-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z)  \bigg)^{-1/2}.
 \end{equation}
 
 A similar derivation is possible for fields where $\vect{H}:=\partial_t\psi\hat{y}$.
@@ -889,7 +898,7 @@ subject to ``dual Coulomb gauge'', $\nabla\cdot\vect{C}=0$.
 Exactly the same manipulations as the TE case can be carried out, but with $\epsr$ and $\mur$ exchanged.
 The TM partition function is 
 \begin{equation}
-  Z\subTM = \det\bigg\{-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTM(z)  \bigg\}^{-1/2},
+  Z\subTM = \det\bigg(-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTM(z)  \bigg)^{-1/2},
 \end{equation}
 where the potential is 
 \begin{equation}
@@ -898,7 +907,7 @@ where the potential is
 Note that the potential depends on the dielectric function in this case, and will play a much larger
 role for most media.  
 The simplicity of this derivation is one reason for working with both magnetic and dielectric media in this geometry.  
-Given the rarity of magnetic media in quantum optical situations,  we will often set $\mur=1$.
+However, we will often set $\mur=1$, since magnetic media are rare in typical quantum optical situations.  
 
 \subsection{TE Polarization Worldline}
 
@@ -906,13 +915,13 @@ It is a straightforward matter to develop the TE worldline path-integral.  In th
 as the Dirichlet scalar method in Sec.~\ref{sec:dirichlet_worldline}, one uses two formal identities to rewrite the free energy in exponential form.
 The renormalized TE free energy is 
 \begin{align}
-  \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2}[\log\det \op{D}\subTE -\log \det \op{D}\sup0],
+  \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2}(\log\det \op{D}\subTE -\log \det \op{D}\sup0),
 \end{align}
 where the partition functions $Z\subTE$ were rewritten as the functional determinant of a differential operator. 
 The differential operators are 
 \begin{align}
   \op{D}\subTE&:=-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z) \\
-  \op{D}\sup0&:=-\frac{1}{2}[\partial_\tau^2+\nabla^2].
+  \op{D}\sup0&:=-\frac{1}{2}(\partial_\tau^2+\nabla^2).
 \end{align}
 The vacuum operator $\op{D}\sup0$ is the same for both polarization and is determined by setting $\epsr=\mur=1$ everywhere.  
 The free energy can be written using the $\log-\det$ goes to $\tr-\log$ rule~(\ref{eq:log-det}),
@@ -945,17 +954,17 @@ into the product of many terms and inserting the momentum identities, the free e
     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\frac{d\tau_0 dp_\tau}{2\pi}
     \int \prod_{k=0}^{N-1}\frac{d\vect{x}_kd\vect{p}_k}{(2\pi)^{D-1}}
     \delta(\vect{x}_N-\vect{x}_0)\nonumber\\
-    &\times\bigg[\prod_{j=0}^{N-1}e^{-\epsr(z_j)\mur(z_j)p_{\tau}^2\Delta\cT/2}
+    &\times\bigg(\prod_{j=0}^{N-1}e^{-\epsr(z_j)\mur(z_j)p_{\tau}^2\Delta\cT/2}
      e^{-\vect{p}_j^2\Delta \cT/2 +i\vect{p}_j\cdot(\vect{x}_{j+1}-\vect{x}_j)- V\subTE(z_j)\Delta\cT}
-    \bigg],
+    \bigg),
 \end{align}
 where $\Delta\cT:=\cT/N$, and the $\delta$-functions ensure path-closure. 
-The Gaussian spatial momentum integrals can be evaluated immediately.
-The $\tau$ integrals can be evaluated at zero temperature using
+The Gaussian spatial momentum integrals can be evaluated, 
+and the $\tau$ integrals can be evaluated at zero temperature using
 \begin{equation}
   \int_{0}^{\beta\hbar c} d\tau \int_{-\infty}^{\infty} \frac{dp_\tau }{2\pi}
-  \exp\left[-\sum_{j=0}^N\epsr(z_j)\mur(z_j)p_{\tau}^2\frac{\Delta\cT}{2}\right]
-= \beta\hbar c \frac{1}{\sqrt{2\pi\cT\langle\epsr\mur\rangle}},
+  \exp\bigg(-\sum_{j=0}^N\epsr(z_j)\mur(z_j)p_{\tau}^2\frac{\Delta\cT}{2}\bigg)
+= \frac{\beta\hbar c }{\sqrt{2\pi\cT\langle\epsr\mur\rangle}},
 \end{equation}
 where the path-average is defined as
 \begin{equation}
@@ -1116,12 +1125,10 @@ where $\phi_n^* = \phi_{-n}$ since the fields are real.
 %Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
 The same field rescalings can be carried out as for the frequency independent case.  
 The Gaussian integrals for each $\phi_n$ can be carried out, so that the free energy can be written
-% This idea is following Rahi's derivation where $\epsilon$ is treated as an effective action 
-% where the effect of the electron field has been intregrated out.  
 as
 \begin{equation}
--\kB T\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left[
-\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right],
+-\kB T\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left(
+\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right),
 \end{equation}
 where prime on the sum indicates that the $n=0$ is multiplied by a half and
 \begin{equation}

@@ -748,7 +748,7 @@ TM boundary conditions. This time consider the path integral solution for a pote
 In this case a little care is needed in defined the boundary conditions at the left hand surface.
 Since the left body has the opposite orientation (the permittivity decreases at $x=-d/2$)
 the correct TM potential for the left body has $Xi\rightarrow-\Xi_1$ everywhere.
-This change reverses the nature of the discontinuities from passing through the surface: if passing 
+This change reverses the nature of the effective boundary conditions at the surface: if passing 
 through the surface decreases the function, and increases the gradient, then traversing the surface in the   
 opposite direction should have the opposite effect.  
 
@@ -782,35 +782,38 @@ opposite direction should have the opposite effect.
 %     \item {Quote various limits for $h,h+d$ on either side of 0}
 The resulting solutions have the same form and structure as the TE solutions, but with 
 the TE reflection coefficients replaced by their TM counterparts.  
-(This simple correspondence was not anticipated given the highly singular form of the TM potentials.  
-Only the regularization, and the analytical averaging over sub-paths allowed this simplicity to emerge.)
-
-For paths starting in the left body, $x_0<d_1$ the solution is
+% (This simple correspondence was not anticipated given the highly singular form of the TM potentials.  
+% Only the regularization, and the analytical averaging over sub-paths allowed this simplicity to emerge.)
+The two-body TM solution can be written in the same three regions as two-body TE solution:%  where 
+% For paths starting in the left body, $x_0<d_1$ the solution is
+\begin{subequations}
     \begin{align}
       f^{(\text{I})}\subTMtwo(x) &=
-           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
- \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
+           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + \frac{e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}}{\sqrt{2(\lambda+\chi_1)}}
+ \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}}\\
 % =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
 %       \frac{u\supTM_2 e^{-2\sqrt{2\lambda}d}-u\supTM_1 }{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}.
+%    \end{align}
+    % For paths starting in the middle, $d_1<x_0<d_2$, the solution is
+    % \begin{equation}
+      f^{(\text{II})}\subTMtwo(x)&= %= \frac{1}{\sqrt{2\lambda}} + \frac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}h} +u\supTM_2 e^{-2\sqrt{2\lambda}(d+h)}}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
+          \frac{1}{\sqrt{2\lambda}} + 
+          \dfrac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}(d_1-x_0)} +u\supTM_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}
+          {\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}\\
+    % \end{equation}
+    % and  for paths starting in the right hand body, $d_2<x_0$, the solution is
+    % \begin{equation}
+            f^{(\text{III})}\subTMtwo(x)&= %=  \frac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d+h)}(u\supTM_1 e^{-2\sqrt{2\lambda}d} - u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
+          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}}{\sqrt{2(\lambda+\chi_2)}}
+          \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
     \end{align}
-    where the TM reflection coefficients for each body are given by 
+  \end{subequations}
+  where the TM reflection coefficients for each body are given by 
     \begin{equation}
       u\supTM_i = \frac{e^{2\Xi}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
     \end{equation}
-    For paths starting in the middle, $d_1<x_0<d_2$, the solution is
-    \begin{equation}
-      f^{(\text{II})}\subTMtwo(x)= %= \frac{1}{\sqrt{2\lambda}} + \frac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}h} +u\supTM_2 e^{-2\sqrt{2\lambda}(d+h)}}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
-          \frac{1}{\sqrt{2\lambda}} + 
-          \dfrac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d} + u\supTM_1 e^{2\sqrt{2\lambda}(d_1-x_0)} +u\supTM_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}
-          {\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
-    \end{equation}
-    and  for paths starting in the right hand body, $d_2<x_0$, the solution is
-    \begin{equation}
-            f^{(\text{III})}\subTMtwo(x)= %=  \frac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d+h)}(u\supTM_1 e^{-2\sqrt{2\lambda}d} - u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}
-          \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} .
-    \end{equation}
-%   \item {Integrate over position}
+
+  % \item {Integrate over position}
 %     In exactly the same fashion, we can integrate over position.  
 %     \begin{align}
 %       I_{TM,12} =& -I_{div} + \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d}-u\supTM_1}{4(\lambda+\chi_1)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} +\frac{2u\supTM_1u\supTM_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} + (u\supTM_1+u\supTM_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
@@ -820,10 +823,11 @@ For paths starting in the left body, $x_0<d_1$ the solution is
 %   \item Comment on divergent parts cancelling out. 
 % \end{enumerate}
 This result contains all of the previous results for closed paths.  By taking $\Xi\rightarrow 0$, the TE results are covered.
-In taking $\chi\rightarrow 0$, the steps can be ignored, and this is the two body TM 
+In taking $\chi\rightarrow 0$, the dielectric steps can be ignored, and this is the two body result for just the TM
+boundary conditions.  
 The equivalent single body results can be found by taking the far body to $x=\pm\infty$.  
 
-These intimidating formulae are most useful for showing the analytical agreement with existing 
+These formulae are most useful for showing the analytical agreement with existing 
 Casimir energy results.  As such it is best to leave them in this Laplace-transformed form.  
 The next chapter uses the results from this chapter to rederive known analytical results for both 
 polarizations for Casimir and Casimir--Polder energies.  

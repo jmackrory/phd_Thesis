@@ -226,31 +226,31 @@ above a dielectric half-space.
 % which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
 % we follow~\cite{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
 % in \S17.10 of Steck~\cite{SteckNotes}.)
-First we must solve
+Throughout what follows, we will work in one spatial dimension.  
+In this work we will use an explicit $\delta$-function, rather than a Fourier representation as used by
+Hooghiemstra.
+In this case, $f$ solves
 \begin{equation}
   0 = \frac{1}{2}\partial_x^2 f - [\chi\Theta(x-d)+\lambda]f + \delta(x).
 \end{equation}
-We initially assume that the surface is to the right of the origin, $d>0$.
-In this work we will use an explicit $\delta$-function, rather than a Fourier representation.
-
 In general the solutions are of the form, 
 \begin{equation}
   f(x) = A e^{\kappa x} + B e^{-\kappa x},
 \end{equation}
-where $\kappa$ will be determined to satisfy the equation in each region, and $A$ and $B$ will be determined by 
-the boundary conditions.
-At step discontinuities (such as at $x=d)$ the solution and its derivative must be continuous across the surface,
+where $\kappa$ will be determined to satisfy the differential equation in each region, and $A$ and $B$ will be determined by 
+the matching conditions at the discontinuities.
+The matching conditions follow from integrating the diffusion equation across the relevant discontinuity.  
+At step discontinuities (such as at $x=d$), the solution and its derivative must be continuous across the surface,
     \begin{equation}
-      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0, \qquad f(d+0_+)-f(d-0_+) = 0,  
+      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0, \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
     \end{equation}
     where $0_+$ is a small positive real number.
 At a $\delta$-function singularity the derivative of the solution is discontinuous, but the function
 is continuous.
     \begin{equation}
-      \partial_xf(0_+) -\partial_x f(-0_+) = -2 , \qquad f(d+0_+)-f(d-0_+) = 0.
+      \partial_xf(0_+) -\partial_x f(-0_+) = -2 , \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
     \end{equation}
-Both of these relations follow from integrating the diffusion equation across the relevant discontinuity.  
-Then for $d>0$, taking the bounded solution in each region, we have 
+    Then assuming $d>0$, taking the bounded solution in each region, the solution is 
 \begin{equation}
   f(x) =\left\{ 
     \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
@@ -258,11 +258,12 @@ Then for $d>0$, taking the bounded solution in each region, we have
       D e^{-\sqrt{2(\lambda+\chi)}x} & \hspace{2cm} & x>d
     \end{array}
   \right.
+.
 \end{equation}
-where the coefficients are fixed by matching the boundary conditions together at the interfaces at
-$x=0$ and $x=d$.  This was done using Mathematica to speed up the tedious algebraic work.  
-We are ultimately only interested in $f(x=0)$, which in this case means we just need to know $A$.
-Algebra, or a suitable software package such as Mathematica, shows that 
+The coefficients are determined by applying the boundary conditions at the interfaces at $x=0$ and $x=d$. 
+This was done using Mathematica to speed up the tedious algebraic work.  
+The worldline path integral solution only requires $f(x=0)$, so only $A$ needs to be found.  
+It is given by 
 \begin{equation}
   A = \frac{1}{\sqrt{2\lambda}} - u\supTE\,e^{-2\sqrt{2\lambda}d},
 \end{equation}
@@ -275,15 +276,15 @@ formula.
 A similar computation can be carried out for $d<0$, which corresponds to finding the solution inside
 the medium.
 For $d<0$, can get similar result from $D$, if $\lambda \leftrightarrow \lambda+\chi$.
-Ultimately, we find that 
-We can pull these results together to write
+The solution for both cases is
 \begin{equation}
-  f_{TE,1}(x) = \left\{\begin{array}{lcr} 
+  f_{\scriptscriptstyle{\text{TE}},1}(x) = \left\{\begin{array}{lcr} 
       \dfrac{1}{\sqrt{2\lambda}}\left[1+ u\supTE\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
       \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - u\supTE\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0\\
     \end{array} \right. 
+.
 \end{equation}
-The subscript deontes the relevance of this solution to a single body in the TE polarization.  
+The subscript denotes the relevance of this solution to a single body in the TE polarization.  
 Ultimately, we need to relate the solution to the diffusion equation back to the path integral via
 \begin{equation}
  f\subTE= \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \delta(x)e^{-\chi \theta[x(\cT)-d]}\biggdrangle_{W(t)}  
@@ -291,7 +292,7 @@ Ultimately, we need to relate the solution to the diffusion equation back to the
   \label{eq:Feynman-Kac TE one step}
 \end{equation}
 where the first ensemble average is over free Wiener paths, while the second is over Brownian bridges that satisfy $x(0)=x(\cT)=0$.
-The factor of $(2\pi T)^{-1/2}$ is normalization for the use of closed Brownian bridges.  
+The factor of $(2\pi \cT)^{-1/2}$ is the normalization for using closed Brownian bridges.  
 In this case, we will not undo the Laplace transform, since later results can convert the relevant 
 Casimir energies to exploit this form of the energy. 
 
@@ -301,25 +302,11 @@ These formulae may be useful in accelerating numerical techniques, with relative
 However the formulae are quite complicated and involve diverging integrands, which makes it difficult to implement them 
 efficient.
 
-   % Identify similarity to reflection coefficients
-   % {Quote result for integration over surface.}
-
-   %  We now need to evaluate $\int dx_0 \dlangle e^{-\int_0^T dt V[x_0 + B(t)-h]}\drangle$ for use with Casimir energies.
-   % Now we have to take $h\rightarrow h-x_0$, and integrate over $x_0$.
-   %  The integrals over position is 
-   %  \begin{align}
-   %    I_{TE,1} &= \int_{-\infty}^h dx_0 \frac{1}{\sqrt{2(\lambda+\chi_1)}}\left(1 - u_1e^{-2\sqrt{2(\lambda+\chi_1)}(h-x_0)} \right) 
-   %    + \int_h^\infty dx_0 \frac{1}{\sqrt{2\lambda}}\left(1 + u_1 e^{2\sqrt{2\lambda}(h-x_0)}\right) \\
-   %    % &= \int_h^\infty dx_0[(2\lambda)^{-1/2}+(2\kappa)^{-1/2}]  -  \int_{-\infty}^0  dx_0 \frac{1}{\sqrt{2\kappa_1}}u_1e^{2\sqrt{2\kappa_1}x_0} + \int_0^\infty dx_0 \frac{1}{\sqrt{2\lambda}}u_1 e^{-2\sqrt{2\lambda}x_0}\\
-   %    &= I^{(1)}_{div}  +   \left(\frac{1}{4\lambda}- \frac{1}{4(\lambda+\chi_1)}\right)u_1,
-   %  \end{align}
-   %  where $I^{(1)}_{div} = \int_h^\infty(2\lambda)^{-1/2}+\int_{-\infty}^h[2(\lambda+\chi_1)]^{-1/2}$.  This renormalization is only necessary for the energy.  
-
 
 \subsection{Planar Dirichlet Conditions}
 
 It is possible to take the strong-coupling limit where $\chi\rightarrow \infty$. 
-In that Dirichlet limit, the reflection coefficient goes to -1.
+In that Dirichlet limit, the reflection coefficient goes to negative one, and the solution vanishes on the surface.
 The path integral solution is
 \begin{equation}
   f_{D,1}(x) = \left\{\begin{array}{lcr} 
@@ -327,15 +314,13 @@ The path integral solution is
       0 & \hspace{2cm} & d>0\\
     \end{array} \right. 
 \end{equation}
+This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
 The path integral can be converted back to the time domain by inverting the Laplace transform with
 \begin{equation}
   \mathcal{L}^{-1}\bigg(\frac{1}{\sqrt{2\lambda}}e^{-2\sqrt{2\lambda}d}\bigg) 
   = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.\label{eq:Laplace_Gaussian}
 \end{equation}
-
-This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
-\comment{so do that?}
-The solution is  
+The result is
 \begin{equation}
   f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
       \dfrac{e^{-(x-y)^2/(2t)}}{\sqrt{2\pi t}}\left[1 - e^{-2(d-x)(d-y)/t}\right]  & \hspace{0.5cm} & (x-d)(y-d)>0\\
@@ -344,8 +329,8 @@ The solution is
 \end{equation}
 The lower solution applies when $x$ and $y$ are on different sides of the surface and the path 
 must cross through.  The upper solution applies when the points are both on the same side.
-As the points $x,y$ get closer to the surface, the probability of touching the surface increases, and the amplitude
-decreases.
+As the points $x$ and $y$ get closer to the surface, the probability of touching the surface increases, 
+and the amplitude of the solution decreases.
 
 This analytical could be applied to enhance Dirichlet worldline methods with little cost,
 since path resolution is one of the dominant sources of error in numerical worldlines~\cite{Mackrory2016}.
@@ -363,14 +348,8 @@ The next case of importance is for two step potentials, where $V=\chi_1\Theta[d_
 The bodies are separated by a distance $d=d_2-d_1$.
 This potential is useful for analytically calculating the Casimir energy between two dielectric half-spaces,
 or the Casimir--Polder energy for an atom between two half-spaces.
-The same procedure as one half-space can be used, albeit with another set of boundary conditions to manage.   
-The solution must be continuous at both surfaces $x=d_1,d_2$, and have continuous first derivative.
-
-    % When we do the Casimir energy between two bodies we will need to find the Feynman--Kac formula assuming two step discontinuities.
-    % We will use exactly the same procedure as above, but with an extra step. 
-
-    % Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
-
+The same procedure as a single half-space can be used, albeit with another set of boundary conditions to manage.   
+The solution and its derivative must be continuous at both surfaces.
 
 % For the case of 
 %     We have solutions, 
@@ -386,7 +365,6 @@ The solution must be continuous at both surfaces $x=d_1,d_2$, and have continuou
 %     We will take $d_1 = h, d_2 = d+h$.
 %     We can then check that our final solutions are independent of $h$ once we have integrated over position.
 %     We would expect the Casimir energy to only depend on $d$ in this case.   
-
 Skipping what is some tedious algebra, the solution for closed Brownian paths can be be written 
 in each of three regions: Region I is inside the left hand body with $x_0<d_1$, Region II is 
 between the bodies with $d_1<x_0<d_2$, and Region III is inside the right hand body with $d_2<x_0$.
@@ -414,16 +392,17 @@ The ``12'' subscript denotes that both left and right or first and second bodies
 The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
 be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.  
 
-We will not attempt to invert the Laplace transform for these two-body formulae.  
 Note the presence of $1-u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.  Given we are solving essentially the same
 problem as when we derived the Lifshitz formula in Sec.~\ref{sec:lifshitz}, this is perhaps not surprising. 
 However, in this case there is no need to make any conditions on which modes contribute.  
 Later we will convert the worldline energy into a suitable form to use these results as written.  
 
-In the strong coupling ($u\supTE_i\rightarrow 1$) limit, 
-the Laplace transform can be inverted by expanding the denominator of these expressions using 
-$(1-s)^{-1}=\sum_{n}(-1)^n s^n$ for $s<1$.  The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
-from the far surface and the governing exponential term would be of the form $e^{-2\sqrt{2\lambda}(n+1)d}$.
+We will not attempt to invert the Laplace transform to find the solution in the time domain.
+In the strong coupling ($u\supTE_i\rightarrow -1$) limit, 
+the Laplace transform can be inverted by expanding the denominator using 
+$(1-e^{-2\sqrt{2\lambda}d})^{-1}=\sum_{n}(-1)^n e^{-2n\sqrt{2\lambda}d}$ since $e^{-2\sqrt{2\lambda}d}<1$.  
+The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
+from the far surface.
 After inverting the Laplace transforms, each Gaussian in the sum would be of the form $\exp[-2(n+1)^2d^2/t]$, corresponding
 to the probability for a Brownian path to bounce $n$ times between points a distance $d$ apart.
 This naturally goes over to the reflection picture for the Dirichlet scalar discussed in \S21.1.5.3 of Steck~\cite{SteckNotes}.

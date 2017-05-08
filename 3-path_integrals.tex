@@ -409,22 +409,20 @@ This naturally goes over to the reflection picture for the Dirichlet scalar disc
 
 \section{Feynman--Kac formula for Singular Potentials}
 \label{sec:TM_potential}
-The preceding has been a prelude for the truly important work of this method.
-Exactly the same methods can be used to yield sensible, finite results for the path integral 
-against singular potentials.  This is particularly true for $V\subTE$ and $V\subTM$, where 
+The same methods can be used to yield sensible, finite results for worldline path integrals
+involving singular potentials, such as $V\subTE$ and $V\subTM$ where
 \begin{equation}
   V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
 \end{equation}
-(We will focus on $V\subTM$, since $\mu=1$ for almost all materials.)
-If we consider a dielectric with a step-function discontuity, $\epsr = 1+\chi\Theta(x-d)$, the resulting
+(We will focus on $V\subTM$, since $\mu=1$ for almost all materials, so $V\subTE=0$.)
+For a dielectric with a step-function discontuity $\epsr = 1+\chi\Theta(x-d)$, the resulting
 potential is highly singular.  
 The first derivative of a step-function is a $\delta$-function, and 
-the second derivative is $\delta'$.  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, so that we can write
-$\log\sqrt{\epsr}(x) = \Xi\theta(x-d)$, and the potential is
+the second derivative is $\delta'$.  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which means
+$\log\sqrt{\epsr}(x) = \Xi\theta(x-d)$, and the potential is given by
 \begin{equation}
   V\subTM(x) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big].
 \end{equation}
-As written this is horrifically divergent, and does not make sense (what is the effect of $\delta^2$ under an integral?). 
 The only way to make sense of this is to regularize the singularity in the step-function,
 and take the limit of vanishing regularization at the end of the computation. 
 
@@ -438,6 +436,14 @@ over a distance $a$,
     \end{array}.
   \right.
 \end{equation}
+% \begin{equation}
+%   \epsr\supa(x)= \Theta(d-x) + \Theta(x-d)\Theta(d+a-x)e^{2\Xi (x-d)/a} + \Theta(x-d-a)(1+\chi)
+%   %     1 & \hspace{0.5cm} &x<d\\ 
+%   %     e^{2\Xi (x-d)/a} & \hspace{0.5cm}&d<x<d+a\\
+%   %     1+\chi & \hspace{0.5cm}&x>d+a
+%   %   \end{array}.
+%   % \right.
+% \end{equation}
 The logarithm of the dielectric can then be written
 \begin{equation}
   \log\sqrt{\epsr\supa}(x)  
@@ -454,8 +460,8 @@ The regularized TM potential is now given by
 \end{equation}
 The worst singularity present are the $\delta$-functions from the second derivative.
 The potential is still quite singular, and cannot be handled nicely for just a single path, the ensemble
-averaged expression over many such paths is well behaved.  And that ensemble averaged expression can be
-found by solving the associated diffusion equation.  Fortunately, this is smooth enough to get sensible results.
+averaged expression over many such paths is well behaved.  % And that ensemble averaged expression can be
+% found by solving the associated diffusion equation.  Fortunately, this is smooth enough to get sensible results.
 
 \begin{figure}
   \hspace{2cm} FIGURE FROM POSTER
@@ -464,71 +470,65 @@ found by solving the associated diffusion equation.  Fortunately, this is smooth
     Vertical arrows denote $\delta$-functions.}
 \end{figure}
 
-\begin{enumerate}
-  % \item Smooth out contribution by analytically averaging over subpaths.
-  %   In handling the TM case we will first have need to handle that singular potential.
-  % \item We shall do this first on it's own, since we will have to use those results in any numerical method.
-  %   In addition, it vastly simplifies down.
-  %   We will find that the potential enforces a boundary condition.  
+% \begin{enumerate}
+%   % \item Smooth out contribution by analytically averaging over subpaths.
+%   %   In handling the TM case we will first have need to handle that singular potential.
+%   % \item We shall do this first on it's own, since we will have to use those results in any numerical method.
+%   %   In addition, it vastly simplifies down.
+%   %   We will find that the potential enforces a boundary condition.  
 
-  \item Quote PDE, and exact form of the potential
-    We will find the solution to 
-    \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2f -V_{TM} f - \lambda f + \delta(x-c)
-    \end{equation}
-    where 
-\end{enumerate}
+%   \item Quote PDE, and exact form of the potential
+%     We will find the solution to 
+%     \begin{equation}
+%       \partial_t f = \frac{1}{2}\partial_x^2f -V_{TM} f - \lambda f + \delta(x-c)
+%     \end{equation}
+%     where 
+% \end{enumerate}
 
 \subsection{Transfer Layer Boundary conditions for TM Potential}
 
-As a first step, we will show that the TM potential imposes an effective boundary condition at the interface. 
+We will show that the regularized TM potential imposes an effective boundary condition at the interface. 
 The diffusion equation can be solved inside the boundary layer $x\in(d,d+a)$, and all references 
-to the interior can be eliminated.  We will then have conditions relating the solution and its derivatives
-on either side of the surface.  Since we will eventually consider the surface to be infinitesimally thin,
-we will not consider pinning a point inside the surface.  
+to the interior can be eliminated.  The result of this will be conditions relating
+the solution and its derivatives on either side of the surface.
+Points starting inside the surface will not be considered, since the surface is infinitesimally thin.
 
 The analytical solutions for the path integral obey
 \begin{equation}
   \frac{1}{2}\partial_x^2f =\frac{1}{2}\bigg[\lambda+\frac{\Xi^2}{a^2}\Theta(x-d)\Theta(d+a-x)
   - \frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)]\bigg]f
 \end{equation}
-Since $a$ is small, $\Xi/a$ is large relative to $\lambda$, which can be ignored in the thin-surface limit.    
-As with the other cases, the solutions are exponentials of the form $f = \alpha_+ e^{\kappa x}+\alpha_- e^{-\kappa x}$, 
-where $\kappa$ is chosen to satisy the differential equation, and $\alpha_\pm$ are fixed by the boundary conditions.
-At each $\delta$-function $(\Xi/a)\delta(x-s)$, the solution $f$ has a jump in the derivative, but is still continuous
-\begin{equation}
-  f'(s+\epsilon)-f'(s-\epsilon) = \frac{\Xi}{a} f(s),\qquad f(s+\epsilon)-f(s-\epsilon) = 0.
-\end{equation}
+Since $a$ is small, $\Xi/a$ is large relative to $\lambda$, so $\lambda$ which can be ignored in the thin-surface limit.    
+At $x=d$, and $x=d+a$, $\delta$-function matching conditions~(\ref{eq:delta_BC}) will be enforced.
 
 Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,   
     \begin{align}
       f_{\text{mid}} %=& Be^{\sqrt{2\lambda + \Xi^2/a^2}x} + C e^{-\sqrt{2\lambda + \Xi^2/a^2}x}\\
       =& Be^{\Xi x/a} + C e^{-\Xi x/a}.
     \end{align}
-    Our goal is to derive the effective conditions imposed on the solutions just outside the surface.
-    Let the solutions from the left be $f_1:=f(d-0_+)$, and the gradient $f_1:=f'(d-0_+)$,
-    with corresponding solutions on the right $f_2:=f(d+a+0_+)$, $f_2':=f(d+a+0_+)$.  As far as this 
+%    Our goal is to derive the effective conditions imposed on the solutions just outside the surface.
+    Let the solutions from the left be $f_1:=f(d-0_+)$, and the gradient $\partial_x f_1:=\partial_x f(d-0_+)$,
+    with corresponding solutions on the right $f_2:=f(d+a+0_+)$, $\partial_x f_2:=f(d+a+0_+)$.  As far as this 
     calculation is concerned, these are unspecified real constants. 
-
     The continuity conditions at $x=d$ and $x=d+a$ require that
     \begin{subequations}
       \begin{align}
-        f_{\text{mid}}(d)-f_1 &= 0\\
-        f_2- f_{\text{mid}}(d+a)&= 0\\
-        f_{\text{mid}}'(d) -f_1'&= -\frac{\Xi}{a} f_1\\
-        f_2' -f'_{\text{mid}}(d+a)&= +\frac{\Xi}{a} f_2.
+        f_{\text{mid}}(d)-f_1 &= 0 \label{eq:f1}\\
+        f_2- f_{\text{mid}}(d+a)&= 0 \label{eq:f2}\\
+        f_{\text{mid}}'(d) -f_1'&= -\frac{\Xi}{a} f_1\label{eq:f1'}\\
+        \partial_x f_2 -\partial_x f_{\text{mid}}(d+a)&= +\frac{\Xi}{a} f_2.\label{eq:f2'}
       \end{align}
     \end{subequations}
    These equations can be solved for the internal parameters $B$ and $C$, as well as two of the external 
-   parameters, $f_2$ and $f_2'$.  As a result, there will be simple effective boundary conditions between
+   parameters, $f_2$ and $\partial_x f_2$.  As a result, there will be simple effective boundary conditions between
    the field values on either side of the boundary layer.  
-   Given this calculation's importance to our subsequent, we will actually go through the elementary algebra.  
+   Given this calculation's importance to our subsequent work, we will actually go through the elementary algebra.  
 
    % Find relations between $f(d\pm \epsilon)$ and $f'(d\pm \epsilon)$.
    %  We will solve for $f(d+a+\epsilon)$, and $f'(d+a+\epsilon)$,
    %  trying to eliminate $B$ and $C$, which we will fix in terms of $f(d-\epsilon),f'(d-\epsilon)$.
    %  We will thus have derived the relation between $f$ and its derivatives on both sides of the potential.      
-    The continuity conditions on $f_1$ and $f_2$ require that
+    The continuity conditions in Eqs.~(\ref{eq:f1}) and (\ref{eq:f2}) require that
     \begin{align}
 %      f(d+\epsilon) - f(d-\epsilon) =& 0\\
 %      \rightarrow 
@@ -540,24 +540,24 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     %   \rightarrow 
       f_2 &= Be^{\Xi d/a+\Xi} + C e^{-\Xi d/a-\Xi}\label{eq:M c2}.
     \end{align}
-    The derivative conditions then require that
+    The derivative conditions in Eqs.~(\ref{eq:f1'}) and (\ref{eq:f2'}) then require that
     \begin{align}
 %      f'(d +\epsilon)-f'(d-\epsilon) =& -\frac{\Xi}{a}f(d)\\
 %      \rightarrow f'_1%=& \frac{\Xi}{a}\left(Be^{\Xi d/a} + C e^{-\Xi d/a}\right) + \frac{\Xi}{a}\left(Be^{\Xi d/a} - C e^{-\Xi d/a}\right)\\
-      f_1'&= 2\frac{\Xi}{a}Be^{\Xi d/a} \label{eq:M d1}\\
+      \partial_xf_1&= 2\frac{\Xi}{a}Be^{\Xi d/a} \label{eq:M d1}\\
     % \end{align}
     % And the derivative conditions at $d+a$ yield 
     % \begin{align}
        % f'(d+a+\epsilon) -f'(d+a-\epsilon)=& \frac{\Xi}{a}f(d+a)\\
       % \rightarrow f'(d+a+\epsilon)=&\frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} + C e^{-\Xi (d+a)/a} \right)+ \frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} - C e^{-\Xi (d+a)/a} \right)\\
-      f_2'&=2\frac{\Xi}{a}Be^{\Xi d/a}e^{\Xi}\label{eq:M d2}
+      \partial_xf_2&=2\frac{\Xi}{a}Be^{\Xi d/a}e^{\Xi}\label{eq:M d2}
     \end{align}
-    From the derivative conditions, $f_1'$ and $f_2'$ can be related to one another as follows
+    From the derivative conditions, $\partial_xf_1$ and $\partial_xf_2$ can be related to one another as follows
 %    Eq.~(\ref{eq:M d1}) fixes $B$, which we can use in to Eq.~(\ref{eq:M d2}), so that 
     \begin{equation}
-      f'_2 = e^{\Xi}f'_1.
+      \partial_xf_2 = e^{\Xi}\partial_xf_1.
     \end{equation}
-    In addition, under the assumption that the external gradients $f_1'$, $f_2'$ are order one,
+    In addition, under the assumption that the external gradients $\partial_x f_1$, $\partial_xf_2$ are independent of $a$ and order one,
     that also implies that $B\sim\order(a)$.  That implies that in the continuity conditions 
     $B$ can be dropped relative to $C$ which must also be order one.  On setting $B=0$, it is clear 
     from Eqs.~(\ref{eq:M c1})-(\ref{eq:M c2}) that 
@@ -573,27 +573,21 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     \end{equation}
     At this point, the conditions between the solutions outside the boundary layer have been derived,
     and the  $a\rightarrow 0$ limit can be taken everywhere.  
-    % Eliminate references to internal state.  Take limit of regularization going to zero.
-    % {Quote final boundary conditions.}
-    % We can now take $a\rightarrow 0 $ everywhere. 
-    
     The regularized dielectric step produces the following effective boundary matching conditions at an interface
     \begin{align}
       \Aboxed{
         f(d+0_+) =& e^{-\Xi}f(d-0_+), \qquad
-        f'(d+0_+)= e^{\Xi}f'(d-0_+)
+        \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+)
       }\label{eq:TM_boundary_conditions}
     \end{align}
     \label{sec:TM boundary condition}
-    These boundary conditions can then be used to find the ensemble average solution.  This is essential
-    to take into account analytically, since the chance that a randomly drawn path will satisfy these conditions 
-    is negligible.  
+    These boundary conditions can then be used to find the ensemble average solution.  
 
-\subsection{Finding the Feynman--Kac formula}
+\subsection{Finding the Path Integral Solution for the TM Potential}
 
-We can now find the Feynman--Kac formula for open Brownian bridges near a single TM-potential, which 
-imposes the boundary conditions~\ref{eq:TM_boundary_conditions}.  This solution is the ensemble average 
-over all Brownian paths between the end points.
+% We can now find the Feynman--Kac formula for open Brownian bridges near a single TM-potential, which 
+% imposes the boundary conditions~\ref{eq:TM_boundary_conditions}.  This solution is the ensemble average 
+% over all Brownian paths between the end points.
 
 We aim to find a closed form solution for the path integral over paths between starting at $x=0$ and terminating at $c$ after time $t$ and 
 interacting with potential $V\subTM$,
@@ -601,48 +595,24 @@ interacting with potential $V\subTM$,
   f\subTM(c,d,\Xi)=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt V_{TM}}\drangle.
 \end{equation}
 The Gaussian factor in $c$ is the normalization for a 1D Brownian bridge between $x=0$ and $c$ in time $t$.
-This path integral is found by solving the following diffusion equation
+This path integral is found by solving
 \begin{equation}
-  0 = \frac{1}{2} \partial_x^2 f\subTM - (V\subTM+\lambda)f\subTM + \delta(x-c).
+  0 = \frac{1}{2} \partial_x^2 f\subTM - (V\subTM+\lambda)f\subTM + \delta(x-c),
 \end{equation}
-In this case the there are TM boundary conditions~(\ref{eq:TM_boundary_conditions}) imposed at $x=d$,
-and $\delta$-function boundary conditions imposed at $x=c$.  
+where TM boundary conditions~(\ref{eq:TM_boundary_conditions}) are imposed at $x=d$,
+and $\delta$-function boundary conditions~(\ref{eq:delta_BC}) are imposed at $x=c$.  
 The solutions naturally decompose into two cases: first,  when the end points of the path are on the same
 side of the surface,  and when they are on different sides.
-% We will find the solutions for the case where $0<c<d$.
-% From this we can see how we need to change the signs to recover the other cases.
-% Note that the boundary conditions at $x=c$ are: ${f(c+\epsilon)=f(c-\epsilon)}, {f(c+\epsilon)-f(c-\epsilon)= -2}$.
-  
-%  Form of solutions in each region, and fixing values via BCs from previous section
-%     For example, with $c<d$ we have 
-%     \begin{equation}
-%       f  = \left\{\begin{array}{ccr} A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<c\\
-%           B e^{\sqrt{2\lambda} x} + C e^{-\sqrt{2\lambda} x}  & \hspace{2cm} & c<x<d\\
-%           D e^{-\sqrt{2\lambda} x}& \hspace{2cm} & c<x<d\\
-%         \end{array}
-%       \right. .
-%     \end{equation}
-%     In the case where $d>0$, we will need $f(0) = A$.  In the other case where $d<0$, we will need $f(0) = D$.  
-%     Mathematica when asked to solve the boundary conditions finds that 
-    % \begin{equation}
-    %   f = \left\{ \begin{array}{ccr} 
-    %       \dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} + \dfrac{e^{-\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}  &   \hspace{2cm}  & d>c,  d>0\\
-    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & d>c,d<0 \\
-    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}} & \hspace{2cm} & c>d,d>0 \\
-    %       \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} - \dfrac{e^{\sqrt{2\lambda}(2d-c)}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi}+1} & \hspace{2cm} & c>d, d<0
-    %       \\
-    %     \end{array}
-    %   \right.
-    % \end{equation}
-\comment{    Note how to recover various cases by flipping signs etc.  
-    Simplify down to crossing/no-crossing cases.}
+% \comment{    Note how to recover various cases by flipping signs etc.  
+%     Simplify down to crossing/no-crossing cases.}
 %    That seems complicated, but we can note that if there is a crossing ($|c|<|d|$) then we get 
     When both points are on the same side, or $d(d-c)>0$, the solution is 
     \begin{equation}
       f\subTM=\dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} 
-      + \sgn(d)\dfrac{e^{-\sqrt{2\lambda}|2d-c|}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1}.
+      + \sgn(d)\dfrac{e^{-\sqrt{2\lambda}|2d-c|}}{\sqrt{2\lambda}}\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1},
     \end{equation}
-    When the paths must cross through the surface since $x=0$ and $c$ are on different sides of the surface, $d(d-c)<0$,
+    where $\sgn(x)$ is the signum function: $\sgn(0)=0$, $\sgn(x>0)=1$, $\sgn(x<0)=-1$.
+    When the paths must cross through the surface since $x=0$ and $c$ are on different sides of the surface so $d(d-c)<0$,
     the solution is
     \begin{equation}
       f\subTM = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
@@ -659,20 +629,20 @@ side of the surface,  and when they are on different sides.
     \begin{align}
       \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
       &=\left\{ \begin{array}{lc} 
-          1   + \sgn(d)\dfrac{e^{-2d(d-c)/t}}{\sqrt{2\pi t}}\tanh\Xi & d(d-c)>0\\
+          1   + \sgn(d)\tanh\Xi\, e^{-2d(d-c)/t} & d(d-c)>0\\
           \sech\Xi & d(d-c)<0
         \end{array}
         \right.  \label{eq:TM_potential}
       \end{align}
       This result is absolutely crucial for developing numerical methods for the TM polarization.  
-      Even regularized the potential is too unruly to handle on a single trajectory wise basis.  The analytical
-      solution smooth the result out by averaging over all possible sub-paths, which tames the divergences. 
+      Even the regularized potential is too unruly to handle on a single trajectory wise basis.  The analytical
+      solution smooths the result out by averaging over all possible sub-paths. 
       The result can be extended to include any starting point $x_i$ by shifting $d\rightarrow d-x_i$,
       and identifying $c=x_f-x_i$, where $x_f$ is the final point.
 
       The potential has been plotted in Fig.~\ref{fig:TM_plot} as a function of ending point
       for paths starting inside and outside the barrier.  
-      Note that the potential leads to larger values on the vacuum side of the material, 
+      Note that the potential leads to larger values on the vacuum side of the medium, 
       and suppresses values for starting points inside the surface or paths that must cross the surface.  
 
       The material constants can be rewritten in terms of $\chi$,
@@ -724,19 +694,19 @@ side of the surface,  and when they are on different sides.
 \section{Single TM potential and Step}
 
 Next, we consider a dielectric step combined with a TM boundary condition.  
-This is directly relevant to analytically computing the TM component of the Casimir--Polder energy for an atom near a
+This is required to analytically compute the TM component of the Casimir--Polder energy for an atom near a
 dielectric half-space.  We will only develop the solution for closed paths.
-
 The path integral
     \begin{equation}
       f = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x,d) + \chi\Theta(x-d)]}\bigdrangle ,
     \end{equation}
     is the steady-state solution to 
     \begin{equation}
-      \partial_t f = \frac{1}{2}\partial_x^2f -(V_{TM} + s\Theta(x-d)+\lambda)f +\delta(x). 
+      \partial_t f = \frac{1}{2}\partial_x^2f -[V_{TM}(x,d) + \chi\Theta(x-d)+\lambda]f +\delta(x). 
     \end{equation}
     The analytical expression is found by solving the diffusion equation directly, with 
-    TM boundary conditions at $x=d$ and $\delta$-function boundary conditions at $x=0$.
+    TM boundary conditions~(\ref{eq:TM_boundary_conditions}) at $x=d$ and 
+    $\delta$-function boundary conditions~(\ref{eq:delta_BC}) at $x=0$.
     The solution for a single TM body is 
   \begin{equation}
       f_{TM,1}(x) = \left\{\begin{array}{lcr} 
@@ -753,18 +723,19 @@ The path integral
     This calculation can also be naturally extended to include a magnetic response.
     The parameter $\Xi$ is defined in relation to the boundary condition, while $\chi$ relates to the 
     step discontinuity.  To describe the TM potential, one could take $\chi\rightarrow (\epsr\mur-1)$
-    and $\Xi\rightarrow \log\sqrt{\epsr}$, where $\epsr$ and $\mur$ denote the permittivity and permeability inside the medium.
+    and $\Xi$ is unchanged.  Similar reasoning could apply these results to the TE potential,
+    after the $\epsr\leftrightarrow \mur$ substitution is carried out.
 
-    Ultimately, we find that 
-    \begin{align}
-      &\int_0^\infty dT e^{-\lambda T} \dlangle \frac{1}{\sqrt{2\pi T}}
-      \exp\left(-\int_0^T dt \{V\subTM[x(t)]+s\theta[x(t)-d]\}\right)\drangle\nonumber\\
-      &\hspace{1cm}=
-      \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u\supTM e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right]
-      ,\label{eq:Feynman--Kac TM one step}
-    \end{align}
-    where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
-    The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
+    % Ultimately, we find that 
+    % \begin{align}
+    %   &\int_0^\infty dT e^{-\lambda T} \dlangle \frac{1}{\sqrt{2\pi T}}
+    %   \exp\left(-\int_0^T dt \{V\subTM[x(t)]+s\theta[x(t)-d]\}\right)\drangle\nonumber\\
+    %   &\hspace{1cm}=
+    %   \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u\supTM e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right]
+    %   ,\label{eq:Feynman--Kac TM one step}
+    % \end{align}
+    % where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
+    % The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
 
 
 \section{Two TM Step Potentials}

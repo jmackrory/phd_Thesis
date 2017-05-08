@@ -15,158 +15,140 @@ with a given potential.
 
 This chapter is devoted to deriving the Feynman--Kac formula, and then solving
 it for planar geometries that are useful for both TE and TM polarizations.
-These analytical solutions are particularly useful in accelerating numerical methods relying 
-on stochastic simulations, such as occur in finance.  
 These analytical formulae will be used in Ch.~\ref{ch:analytical} to show agreement 
-with other results for both Casimir and Casimir--Polder energies.
+with known results for both Casimir and Casimir--Polder energies.
 The Feynman--Kac formula is also essential for handling the singular potentials.  
 In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
+These analytical solutions are also useful in accelerating numerical methods relying 
+on stochastic simulations.  
 
 \section{Derivation of the Feynman--Kac formula }
 
-In this section we will derive the path integral as the solution to a diffusion equation,
+In this section, we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.
-Our derivation will stay close in spirit to the  one found in Sakurai~\cite{Sakurai1994}.
-But, we will extend the usual quantum derivation to including a source term, as is more common in statistics.
+The derivation will stay close in spirit to the one presented in Sakurai~\cite{Sakurai1994}, but it will
+be extended to include a source term, as is more common for stochastic processes.
 More formal derivations are available from mathematical~\cite{Cartier2004},
 and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  
 A detailed discussion of the more formal probabilistic derivation is available in Steck \S 17.9~\cite{SteckNotes}.
 
-We aim to find a solution $f(x,t)$ to the driven diffusion equation
+We aim to find a solution $f(\vect{x},t)$ to the driven diffusion equation
 \begin{equation}
   \partial_t f = \frac{1}{2}\nabla^2 f  - [V+\lambda]f +g,\label{eq:diffusion_equation}
 \end{equation}
-where the potential/killing rate is given by $V=V(\vect{x},t)$, and the source term is $g=g(\vect{x},t)$.  
+where the potential is given by $V=V(\vect{x})$, $\lambda$ is a constant, and the source term is $g=g(\vect{x},t)$.  
 In this form $f$ corresponds to the probability distribution for a diffusing particle with a source
 of particles $g$, with spatially dependent killing rate $V$.  
 The Schr\"odinger equation is recovered under the $\tau\rightarrow -it$ substitution.
-    We can use techniques from quantum mechanics, and introduce a Hilbert space with operators.
-    The differential equation can be written in operator form using the same Hilbert space 
-    conventions~(\ref{eq:commutation})--(\ref{eq:identity}) we have used for the worldline path integrals.
-    Note however that we will consider a Hilbert space with $\hbar=1$ in all operator equations.
-    % \begin{gather}
-    %   \langle \vect{x}|\op{x}_i|f\rangle = x_if(\vect{x})\qquad
-    %   \langle \vect{x}|\op{p}_i|f\rangle = -i\partial_if(\vect{x}),
-    % \end{gather}
-    % The position and momentum operators have commutation relations
-    % \begin{gather}
-    %   [\op{x}_i,\op{p}_j]=i\delta_{ij},
-    % \end{gather}
-    % and overlap 
-    % \begin{equation}
-    %   \langle \vect{x}|\vect{p}\rangle = e^{i\vect{x\cdot p}}.
-    % \end{equation}
-    % We also need the position and momentum resolutions of the identity
-    % \begin{gather}
-    %   I_x = \int d\vect{x}|\vect{x}\rangle \langle \vect{x}|, \quad
-    %   I_p = \int \frac{d\vect{p}}{(2\pi)^D}|\vect{p}\rangle \langle \vect{p}|.
-    % \end{gather}
+The differential equation can be written in operator form using the same Hilbert space 
+conventions~(\ref{eq:commutation})--(\ref{eq:identity}) were used for the worldline path integrals.
+Note that $\hbar=1$ in this auxiliary Hilbert space.
 The diffusion equation~(\ref{eq:diffusion_equation}) can be written in operator form
 \begin{equation}
-  \partial_t\langle \vect{x}| |f(t)\rangle = -\langle \vect{x}|
-  \left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}},t)+\lambda\right]|f(t)\rangle +\langle \vect{x}|g(t)\rangle.
+  \partial_t\langle \vect{x}|f(t)\rangle = -\langle \vect{x}|
+  \left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}})+\lambda\right]|f(t)\rangle +\langle \vect{x}|g(t)\rangle.
 \end{equation}
-We can solve this by introducing the evolution operator,
+This can be solved in analogy with solving the Schr\"odinger equation for a time-dependent Hamiltonian,
+ by introducing the evolution operator,
 \begin{equation}
-  U(t) = \text{T}\exp\left\{-\int_0^t ds\left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}},s)+\lambda\right]\right\},
+  U(t,0) := \text{T}\exp\left\{-\int_0^t ds\left[\frac{1}{2}\op{\vect{p}}^2 + V(\op{\vect{x}})+\lambda\right]\right\},
 \end{equation}
-where $\text{T}$ is the time-ordering operator.  \comment{Dyson series? - re QFT Derivation of S-matrix?}
+where $\text{T}$ is the time-ordering operator.  The time-ordering operator puts operators from right-to-left
+in order of increasing time.  
 We can then use the operator analogue of an integrating factor method, by transforming 
-the vectors to the Heisenberg picture, $|f\rangle \rightarrow |\tilde{f}\rangle=U^{-1}(t)|f\rangle$.  
+to the Heisenberg picture where $|f\rangle \rightarrow |\tilde{f}\rangle:=U^{-1}(t,0)|f\rangle$.  
 The transformed vectors obey
 \begin{equation}
-  \partial_t|\tilde{f}\rangle = U^{-1}(t)|\tilde{g}\rangle.
+  \partial_t|\tilde{f}\rangle = U^{-1}(t,0)|\tilde{g}\rangle.
 \end{equation}
 This equation can be formally integrated with respect to time,
-% \begin{equation}
-%   |\tilde{f}(t)\rangle-|\tilde{f}(0)\rangle = \int_0^t ds |\tilde{g}(s)\rangle.
-% \end{equation}
 and after transforming back to the original vectors we find
 \begin{equation}
-  |f(t)\rangle = U(t)|f(0)\rangle + U(t) \int_0^t ds\, U^{-1}(s)|g(s)\rangle,
+  |f(t)\rangle = U(t,0)|f(0)\rangle + U(t,0) \int_0^t ds\, U^{-1}(s,0)|g(s)\rangle,
 \end{equation}
 where $|\tilde{g}(t)\rangle = U^{-1}(t)|g(t)\rangle$.  
-If we assume we can combine  the operators, then 
+After combining the evolution operators, the solution is
 \begin{equation}
-  f(\vect{x}_f,t) = \langle \vect{x}_f|U(t)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t-s)|g(s)\rangle.
+  f(\vect{x}_f,t) = \langle \vect{x}_f|U(t,0)|f(0)\rangle + \int_0^t ds \langle \vect{x}_f|U(t,s)|g(s)\rangle.
+  \label{eq:op_soln}
 \end{equation}
 
-\subsection{Evaluating the matrix element}
-
-We can now evaluate the matrix elements for each piece.  In particular, 
+The matrix elements have the same form,
 \begin{equation}
   M = \langle \vect{x}_f|U(t)|f\rangle,
 \end{equation}
-where $U$ is the time-ordered evolution operator (so time increases towards the left.)
+where $U$ is the time-ordered evolution operator, and for time-independent Hamiltonians 
+it can be split into a product of terms.
 \begin{equation}
-  U(t) = T\exp\left[-\int_0^t du\, H(u) \right] = \prod_{n=1}^N e^{-\Delta t \op{H}(n\Delta t)}
+  U(t) = T\exp\left[-\int_0^t du\, H(u) \right] = \prod_{n=1}^N e^{-\Delta t \op{H}}
 \end{equation}
-The path integral litany of 1) splitting evolution operator into short-time evolution operators,
-2) inserting identities, 3) splitting position and momentum operators, 4) replacing operators with eigenvalues
-5) integrating out momenta 
-can be followed once again. 
-If we insert position/momentum identities between each of these, we have
+% The path integral litany of 1) splitting evolution operator into short-time evolution operators,
+% 2) inserting identities, 3) splitting position and momentum operators, 4) replacing operators with eigenvalues
+% 5) integrating out momenta 
+% can be followed once again. 
+Position and momentum identities can be inserted between each term, with the result that
 \begin{align}
-  M_n %&= \langle \vect{x}_f| e^{-\Delta t \op{H}(t_N)}|f\rangle%\\
+  M %&= \langle \vect{x}_f| e^{-\Delta t \op{H}(t_N)}|f\rangle%\\
 %   &= \int \frac{d\vect{p}_N}{(2\pi)^{D/2}}\langle \vect{x}_N|e^{-\Delta t \op{H}(t_N)} |\vect{p}_N\rangle \langle \vect{p}_N|
 % \prod_{j=1}^{N-1} e^{-\Delta t \op{H}(t_j)}|f\rangle\\
   = e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
-  \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta t \op{H}(t_k)}|\vect{p}_k\rangle
+  \prod_{j=1}^{N}\left[\langle \vect{x}_{k+1}| e^{-\Delta t \op{H}}|\vect{p}_k\rangle
     \langle \vect{p}_k| \vect{x}_{k}\rangle \right]
-  \langle \vect{x}_0| f\rangle
+  \langle \vect{x}_0| f\rangle.
 \end{align}
-(Note that since $\lambda$ in constant, $e^{-\lambda \cT}$ can be factored out immediately)
+Since $\lambda$ in constant, $e^{-\lambda \cT}$ can be factored out of the matrix element.
 The exponential operator is split into position and momentum pieces using the Baker-Campbell-Hausdorff theorem,
-\begin{equation}
-  e^{-\Delta t \op{p}^2+V(\op{x})} = e^{-\Delta t V(\op{x})}e^{-\Delta t \op{p}^2} +\order(\Delta t^2).
-\end{equation}
+$ e^{-\Delta t [\op{p}^2+V(\op{x})]} = e^{-\Delta t V(\op{x})}e^{-\Delta t \op{p}^2} +\order(\Delta t^2)$.
 The position and momentum operators then acquire the eigenvalues from operating to the left and right respectively.
 After carrying out the Gaussian momentum integrals, the matrix element is 
 \begin{align}
-  M_n %  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
+  M %  &= \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D}}
   % \prod_{j=1}^{N} e^{-\Delta t\left[\vect{p}_k^2/2 + V(\vect{x}_k,t_k)\right]+i\vect{p}_k\cdot(\vect{x}_{k+1}-\vect{x}_k)}
   % f(\vect{x}_0,0)\\
 &= e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}}{(2\pi\Delta t)^{D/2}}
-  \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta t)-\Delta t V(\vect{x}_k,t_k)}f(\vect{x}_0,0)
+  \prod_{j=1}^{N} e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta t)-\Delta t V(\vect{x}_k)}f(\vect{x}_0,0)
 \end{align}
-This is the traditional discrete form of the euclidean path integral.
-  We can transform it to look like the mathematical version, 
-stressing the connection to Brownian motion by changing integration variables.  
-We define the vector Wiener increments $\Delta \vect{W}_k = \vect{x}_{N-k-1}-\vect{x}_{N-k}$ 
-(note that this is labelling moves backwards in time from the usual convention).  
-Then we can write the positions in terms of the Brownian motion
-$\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.
-Note that evaluate the solutions at a constant fixed position $\vect{x}_N=\vect{x}_f$
-So our coordinates should be defined relative to that point, which prompts defining
+This is the traditional discrete form of the Euclidean path integral.
+We can transform it to stressing the connection to Brownian motion by changing integration variables.
+The vector Wiener increments are defined as $\Delta \vect{W}_k := \vect{x}_{N-k-1}-\vect{x}_{N-k}$. 
+Note that this labelling is backwards in time from the usual convention, but it 
+ensures that the solutions are defined in reference to the final coordinate $\vect{x}_N$.
+A general point along the path is given by 
+% This labelling convention ensures that 
+% Then we can write the positions in terms of the Brownian motion
+% $\sum_{k=0}^{j}\Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N$.
+% Note that evaluate the solutions at a constant fixed position $\vect{x}_N=\vect{x}_f$
+% So our coordinates should be defined relative to that point, which prompts defining
 \begin{equation}
 %  \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow 
 \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k= \vect{x}_N+\vect{W}_j
 \end{equation}
-where in the second equality we defined the Wiener process as $\vect{W}_j:=\sum_{k=0}^{N-j} \Delta \vect{W_j}$.
+where the Wiener process is defined as $\vect{W}_j:=\sum_{k=0}^{N-j} \Delta \vect{W_j}$.
 In terms of the Wiener paths, the path integral is
 \begin{align}
-  M_n %  &= \int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
+  M %  &= \int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
   % \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta t)-\Delta t V(\vect{x}_N+\sum_{j=0}^{N-k}\Delta \vect{W}_j,t_k)}
   % f\big(\vect{x}_N+\sum_{j=0}^{N-j}\Delta \vect{W}_j,0\big)\\
-&= e^{-\lambda t}\int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
-  \prod_{j=1}^{N} e^{-(\Delta \vect{W}_{k})^2/(2\Delta t)-\Delta t V(\vect{x}_N+\vect{W}_{N-k},t_k)}
-  f(\vect{x}_N+\vect{W}_{N},0).
+&= e^{-\lambda t}\int \prod_{k=0}^{N-1}d(\Delta \vect{W}_{k})
+  \prod_{j=1}^{N} \frac{e^{-(\Delta \vect{W}_{j})^2/(2\Delta t)}}{(2\pi\Delta t)^{D/2}}e^{-\Delta t\, V(\vect{x}_N+\vect{W}_{N-j})}
+  f[\vect{x}_N+\vect{W}_{N},0].
 \end{align}
-After taking the continuum limit $N\rightarrow\infty$, where the Riemann sum becomes an integral, and 
-the stochastic paths $\vect{W}_k=\vect{W}(t_k)$ are continuously varying stochastic processes 
- is a continuous process we can write
+After taking the continuum limit $N\rightarrow\infty$, 
+the Wiener paths $\vect{W}_k=\vect{W}(t_k)$ become a continuously varying stochastic processes, and
+the sum over potentials $V(x_j)$ can be written as an integral,
 \begin{align}
-  M_n  &= \biggdlangle \exp\bigg[-\lambda t-\int_0^t du\, V(\vect{x}+\vect{W}(t-u),u)\bigg] f(\vect{x}+\vect{W}(t),0)\biggdrangle
+  M  &= \biggdlangle \exp\bigg(-\lambda t-\int_0^t du\, V[\vect{x}+\vect{W}(t-u)]\bigg) f(\vect{x}+\vect{W}(t),0)\biggdrangle
 \end{align}
-The same style of reasoning can be used for both pieces.  \comment{Note however change in time limits on $g$
-term.  Also do the time arguments of $g$ work out?}
-
-After plugging this result back in to the evolution operator, the solution to the diffusion equation is 
+The same style of reasoning can be used for both terms in Eq.~(\ref{eq:op_soln}). 
+After substituting this result in to Eq.~(\ref{eq:op_soln}), the solution to the diffusion equation is 
 \begin{align}
-  f(\vect{x},t) = &\biggdlangle \exp\bigg[-\lambda t -\int_0^t du\, V[\vect{x}+\vect{W}(t-u),u]\bigg] f[\vect{x}+\vect{W}(t),0]\biggdrangle\nonumber\\
-  &+\int_0^t ds\,\biggdlangle \exp\bigg[-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u),u]\bigg] g[\vect{x}+\vect{W}(s),s]\biggdrangle
+  f(\vect{x},t) = &\biggdlangle  f[\vect{x}+\vect{W}(t),0]\exp\bigg(-\lambda t -\int_0^t du\, V[\vect{x}+\vect{W}(t-u)]\bigg)\biggdrangle\nonumber\\
+  &+\int_0^t ds\,\biggdlangle  g[\vect{x}+\vect{W}(s),s]\exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle.
   \label{eq:feynman-kac}
 \end{align}
+This agrees with the results of the more formal methods presented in Durrett~\cite{Durrett1995}, and Steck~\cite{SteckNotes}.
+This result was derived under the assumption that the potential is independent of time.  
+
 
 \subsection{Steady State Brownian Bridge Path Integral}
 

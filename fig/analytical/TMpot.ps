@@ -1,0 +1,143 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {5} bind def
+/height {3} bind def
+/xmax {4} def
+/xmin {-4} def
+/ymin {-2} def
+/ymax {4} def
+/xmaxstr (4) def
+/xminstr (-4) def
+/yminstr (-2) def
+/ymaxstr (4) def
+
+%size of ellipse
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
+
+/chi {2} def
+/sqrteps {1 chi add sqrt} def
+/Xi {sqrteps ln} def
+/a {1.5} def
+/d {-0.5} def
+/d1 {d} def
+/d2 {d a add} def
+
+/delta_h {2} def
+
+/step_h {3.5} def
+
+/TMcol {0.5 0.5 1 setrgbcolor} def
+
+
+startplot
+
+%Energy curve 
+1 setlinewidth
+
+
+gsave
+0 setgray
+1 setlinewidth
+newpath
+xmin 0 cc moveto
+xmax 0 cc lineto
+stroke
+grestore
+
+
+gsave
+newpath
+TMcol
+d1 0 cc moveto
+d1 step_h cc lineto
+d2 step_h cc lineto
+d2 0  cc lineto
+d1 0  cc lineto
+fill
+
+0 setgray
+newpath
+d1 0 cc moveto
+d1 step_h cc lineto
+d2 step_h cc lineto
+d2 0  cc lineto
+d1 0  cc lineto
+% -0.6 -1.5 cc moveto
+% -0.6 -0.75 cc lineto
+% -0.3 -0.75 cc lineto
+% -0.3 -1.5 cc lineto
+stroke
+grestore
+%delta'
+%stroke
+d1 0 cc d1 delta_h cc 1.5 1 arrowend  
+
+d2 0 cc d2 delta_h neg cc 1.5 1 arrowend  
+
+
+
+
+
+%1 in 1 in translate
+{ExpStep} 200 PlotFunction
+
+/col1{0 .67 0 setrgbcolor} def
+/col2{0 .5 1 setrgbcolor} def
+/col3{0 0 1 setrgbcolor} def
+
+/symbolsz 10 def % in points
+
+
+/x_nudge 0.1 def
+/y_nudge 0.1 def
+
+xmax 0.5 sub 1 chi add 0.25 add cc moveto
+0 setgray
+ [/KahoeTechGreek normal  (e)]  24 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  r)]  18 PrintArrayCenter	
+
+% %(Xi/a)^2 label
+ 
+% d1 0.6 sub step_h   cc moveto
+% 0 setgray
+%  [/KahoeTechGreek normal  (\(X )]  18 PrintArrayCenter
+%  [/KahoeTechLatin normal  (  /a\))]  18 PrintArrayCenter
+%   [/KahoeTechLatin superscript  (    2)]  18 PrintArrayCenter
+% % [/KahoeTechLatin subscript  (  r)]  14 PrintArrayCenter	
+
+% %Xi/a label
+% d1 0.5 sub delta_h 0.5 sub  cc moveto
+% 0 setgray
+%  [/KahoeTechGreek normal  (X )]  18 PrintArrayCenter
+%  [/KahoeTechLatin normal  (  /a )]  18 PrintArrayCenter
+% % [/KahoeTechLatin subscript  (  r)]  14 PrintArrayCenter	
+
+% % -Xi/a label
+% d2 0.5 add delta_h neg 0.5 add  cc moveto
+% 0 setgray
+%  [/KahoeTechGreek normal  (-X )]  18 PrintArrayCenter
+%  [/KahoeTechLatin normal  (   /a )]  18 PrintArrayCenter
+% % [/KahoeTechLatin subscript  (  r)]  14 PrintArrayCenter	
+
+
+gsave
+		d1 0.75 sub step_h 0.25 sub cc moveto
+[  /KahoeTechLatin normal (V) ]
+		20 PrintArrayCenter
+		10 .75 rmoveto
+[  /ComputerModern-Regular subscript (TM) ]
+		15 PrintArrayCenter
+grestore
+
+[ /KahoeTechLatin normal (x)]  XAxisTitle
+
+endplot

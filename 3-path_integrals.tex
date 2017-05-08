@@ -111,7 +111,7 @@ After carrying out the Gaussian momentum integrals, the matrix element is
 This is the traditional discrete form of the Euclidean path integral.
 We can transform it to stressing the connection to Brownian motion by changing integration variables.
 The vector Wiener increments are defined as $\Delta \vect{W}_k := \vect{x}_{N-k-1}-\vect{x}_{N-k}$. 
-Note that this labelling is backwards in time from the usual convention, but it 
+Note that this labeling is backwards in time from the usual convention, but it 
 ensures that the solutions are defined in reference to the final coordinate $\vect{x}_N$.
 A general point along the path is given by 
 % This labelling convention ensures that 
@@ -191,7 +191,7 @@ in applying these results to accelerating numerical computations, as will be dis
 It might seem circular having passed from wave equations that are too hard to solve, to path integrals,
 and back to diffusion equations we can only solve in particular geometries.
 However, the path integral provides a way to chain together results from a simpler geometry to simulate
-a more complicated geomtry.
+a more complicated geometry.
 For example, at each step of the path, planar results could be used, by treating the bodies in terms of the
 nearest tangent planes.  
 %notion of locally planar could be defined in terms of the nearest surface-normal.  
@@ -394,7 +394,7 @@ involving singular potentials, such as $V\subTE$ and $V\subTM$ where
   V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
 \end{equation}
 (We will focus on $V\subTM$, since $\mu=1$ for almost all materials, so $V\subTE=0$.)
-For a dielectric with a step-function discontuity $\epsr = 1+\chi\Theta(x-d)$, the resulting
+For a dielectric with a step-function discontinuity $\epsr = 1+\chi\Theta(x-d)$, the resulting
 potential is highly singular.  
 The first derivative of a step-function is a $\delta$-function, and 
 the second derivative is $\delta'$.  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which means
@@ -443,8 +443,8 @@ averaged expression over many such paths is well behaved.  % And that ensemble a
 % found by solving the associated diffusion equation.  Fortunately, this is smooth enough to get sensible results.
 
 \begin{figure}
-  \hspace{2cm} FIGURE FROM POSTER
-  
+  \centering
+  \includegraphics[width=0.4\linewidth,angle=90]{fig/analytical/TMpot}
   \caption[Regularized TM Potential]{Schematic drawing of a regularized TM potential at a surface. 
     Vertical arrows denote $\delta$-functions.}
 \end{figure}
@@ -597,7 +597,7 @@ side of the surface,  and when they are on different sides.
       f\subTM = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
     \end{equation}
     In both cases the Laplace transforms in $\lambda$ can be inverted yielding Gaussians [following from Eq.~(\ref{eq:Laplace_Gaussian})].
-    After cancelling out the Gaussian factor $e^{-c^2/(2t)}/\sqrt{2\pi t}$, the analytical expression for 
+    After canceling out the Gaussian factor $e^{-c^2/(2t)}/\sqrt{2\pi t}$, the analytical expression for 
     the path integral can be isolated
     % Ultimately, we will want to isolate the potential term.  
     % If we use 
@@ -636,7 +636,7 @@ side of the surface,  and when they are on different sides.
       \end{align}
       This is in some sense dual to the Dirichlet limit.  In that case paths reflect off with the opposite phase, 
       leading to a value of zero on the boundary.  Here, the paths reflecting off the surface add in phase, suggesting 
-      a correspondence to Neuman boundary conditions.  However, this does not hold for paths starting 
+      a correspondence to Neumann boundary conditions.  However, this does not hold for paths starting 
       inside the surface, where the solution is the same as for Dirichlet boundary conditions.  
 
     \begin{figure}
@@ -801,14 +801,14 @@ The two-body TM solution can be written in the same three regions as two-body TE
 %     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
 %   \item Comment on divergent parts cancelling out. 
 % \end{enumerate}
-This result contains all of the previous results for closed paths.  By taking $\Xi\rightarrow 0$, the TE results are covered.
+This result contains all of the previous results for closed paths.  The TE results are recovered by By taking $\Xi\rightarrow 0$.
 In taking $\chi\rightarrow 0$, the dielectric steps can be ignored, and this is the two body result for just the TM
 boundary conditions.  
 The equivalent single body results can be found by taking the far body to $x=\pm\infty$.  
 
 These formulae are most useful for showing the analytical agreement with existing 
 Casimir energy results.  As such it is best to leave them in this Laplace-transformed form.  
-The next chapter uses the results from this chapter to rederive known analytical results for both 
+The next chapter uses the results from this chapter to re-derive known analytical results for both 
 polarizations for Casimir and Casimir--Polder energies.  
 
 %%% Local Variables: 

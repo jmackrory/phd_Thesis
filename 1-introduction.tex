@@ -285,10 +285,10 @@ Following Milonni (\S3.12 in Ref.~\cite{Milonni1994}), we assume the atom is clo
 of a perfectly conducting box, but far from all other walls.
 The electromagnetic mode functions for a perfectly conducting box are given by 
 \begin{align}
-  \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg[&
+  \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg(&
   \hat{x}(\hat{\varepsilon}\subkz\cdot\hat{x})\cos(k_xx)\sin(k_y y)\sin(k_zz)\nonumber\\
   &+\hat{y}(\hat{\varepsilon}\subkz\cdot\hat{y})\sin(k_xx)\cos(k_y y)\sin(k_zz)\nonumber\\
-  &+\hat{z}(\hat{\varepsilon}\subkz\cdot\hat{z})\sin(k_xx)\sin(k_y y)\cos(k_zz)\bigg],
+  &+\hat{z}(\hat{\varepsilon}\subkz\cdot\hat{z})\sin(k_xx)\sin(k_y y)\cos(k_zz)\bigg),
 \end{align}
 where $\hat{\varepsilon}\subkz$ are the polarization unit vectors, and the wavenumbers $k_i=n_i\pi/L$,
 with $n_i$ integers~(\S 8.4.1 of Steck~\cite{SteckNotes}).
@@ -513,7 +513,7 @@ The Casimir energy between two dielectric half-spaces of permittivities $\epsilo
 separated by a gap of thickness filled with permittivity $\epsilon_3$ is given by 
 \begin{align}
 \frac{E}{L^2} =& -\frac{\hbar}{2\pi^2c^3}\int_0^\infty ds\, s^2 \epsilon_3
-\int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}ps d/c}\right],
+\int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left(1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}ps d/c}\right),
 \label{eq:lifshitz}
 \end{align}
 where the electromagnetic reflection coefficients are given by 
@@ -536,7 +536,7 @@ In general, this integral form is the simplest expression for the Casimir energy
 The perfect-conductor Casimir energy result (\ref{eq:Casimir_energy}) can be found by taking the strong-coupling limit,
  $r^{(\zeta)}_i\rightarrow 1$, setting $\epsilon_3=1$,  and evaluating the integrals using 
 \begin{equation}
-  \int_0^\infty ds\,s^2 \int_1^{\infty} dp\,p \log[1 - e^{-2 s p d/c}] = -\frac{c^3 \pi^4}{360 d^3}.
+  \int_0^\infty ds\,s^2 \int_1^{\infty} dp\,p \log\left(1 - e^{-2 s p d/c}\right) = -\frac{c^3 \pi^4}{360 d^3}.
 \end{equation}
 The Casimir--Polder results for interacting atoms can be recovered from the Lifshitz formula by taking the limit of dilute bodies,
 $\epsilon \approx 1+\alpha n$, where $n\ll 1$ is the density, and $\alpha$ is the polarizability.
@@ -1207,8 +1207,8 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       % \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
       %   e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\bigg]\\
         &= \int \prod_{k=1}^{N-1} d^Dx_k \prod_{k=1}^{N-1} \frac{d^Dp_k }{(2\pi\hbar)^D}\nonumber\\
-      &\times\bigg[\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
-      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg].
+      &\times\bigg(\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
+      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg).
     \end{align}
     Since the momentum integrals are Gaussian, they can be straightforwardly evaluated,
     with the result
@@ -1222,16 +1222,19 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
         \prod_{n=0}^{N-1}\bigg[\bigg(\frac{ m }{2\pi i\hbar\Delta t}\bigg)^{D/2}
         e^{i m (\vect{x}_{n+1}-\vect{x}_n)^2/(2\Delta t)}e^{ -iV(\vect{x}_n)\Delta t/\hbar}\bigg]\\
         &= \mathcal{N}\int D\vect{x} 
-        \exp\left\{\frac{i}{\hbar}\int_{0}^{t} dt'\,\left[ \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right]\right\}.
+        \exp\left[\frac{i}{\hbar}\int_{0}^{t} dt'\,\left( \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right)\right].
     \end{align}
     In the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
     \rightarrow \dot{\vect{x}}, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
     $D\vect{x} = \prod_{k=1}^{N-1}d^Dx_k$.  The phase in exponent is the classical action for a particle
     in a potential.  Paths with the same phase will add together constructively, while 
     paths in regions where the phase is quickly varying will cancel.  
-    This leads to the classical limit where only the paths of stationary phase where $\delta S[x(t)]=0$
-    contribute.  
-    \comment{on integral over $e^{iS}$, field theories sometimes jump to this point with specified action.}
+    This leads to a natural description for the classical limit ($\hbar\rightarrow 0$) 
+    where only the paths of stationary phase where $\delta S[x(t)]=0$ contribute.  
+    Quantizing field theories via the path integral is seen as 
+    a more relativistically covariant process than the canonical quantization procedure, which must 
+    single out a particular time.  
+    The symmetries of the field are also naturally taken into account due to the presence of the action.
 
     % One can think of the integral as summing over all possible paths $\vect{x}(t)$
     % between points $x_0$ and $x_f$ weighted by their classical action.  This also suggests a number 
@@ -1322,7 +1325,7 @@ As a matter of convention we will distinguish between $\vect{r}$ as a position l
 The action for the field $\phi$ is given by the time integral of the Lagrangian density $\cL$, 
 \begin{equation}
   S = \int_0^T dt \int d\vect{r} \cL = \int_0^T dt \int d^{D-1}\vect{r} 
-  \left[ \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r},t)\phi^2\right].
+  \left( \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r},t)\phi^2\right).
 \end{equation}
 The potential $V(\vect{r},t)$ defines the surfaces of the interacting objects
 \begin{equation}
@@ -1344,9 +1347,9 @@ The momentum conjugate to $\phi$ is given by
 where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
 The Hamiltonian is then given by
 \begin{align}
-  H &:= \int d^3r\,(\Pi\partial_t\phi -  L)= \int d^3r\,\bigg[\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r},t)\phi^2\bigg].  
+  H &:= \int d^3r\,(\Pi\partial_t\phi -  L)= \int d^3r\,\bigg(\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r},t)\phi^2\bigg).  
 \end{align}
-We are now in a position to quantize the theory by promoting the classical fields to quantum operators, 
+The theory can now be quantized by promoting the classical fields to quantum operators, 
 $\phi\rightarrow \op{\phi},\, \Pi\rightarrow\op{\Pi}$.
 The fields can be promoted to operators with equal-time commutation relations
 \begin{equation}
@@ -1354,13 +1357,13 @@ The fields can be promoted to operators with equal-time commutation relations
 \end{equation}
 In exactly analogous fashion to quantum mechanics, the overlap between states is given by 
 \begin{equation}
-  \langle \phi|\Pi\rangle = \exp\bigg[\frac{i}{\hbar}\int d^3r \phi(\vect{r})\Pi(\vect{r})\bigg].
+  \langle \phi|\Pi\rangle = \exp\bigg(\frac{i}{\hbar}\int d^3r \phi(\vect{r})\Pi(\vect{r})\bigg).
 \end{equation}
-We can compute physical quantities of interest such as Casimir energies and forces
+Physical quantities of interest such as Casimir energies and forces can be computed
 by taking suitable derivatives of the partition function. 
 The quantum partition function for the field is 
 \begin{equation}
-  Z = \tr[ e^{-\beta\op{H}}] = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
+  Z = \tr\left( e^{-\beta\op{H}}\right) = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
 \end{equation}
 and the trace is evaluated over the complete set of field states.  
 It is actually more useful to carry out calculations with the free energy $\mathcal{F}=-\kB T \log Z$.
@@ -1373,14 +1376,14 @@ in both fields and conjugate-momentum fields can be inserted between each piece.
 After integrating out the momentum fields, the partition function can be written as a
 Euclidean path integral
 \begin{equation}
-  Z = \int D\phi \exp\left\{-\int_0^{\hbar\beta c} d\tau \int d^3r
-    \left[ \frac{1}{2}(\partial_\tau\phi)^2+\frac{1}{2}(\nabla\phi)^2+V(\vect{r})\phi^2\right]\right\},
+  Z = \int D\phi \exp\left[-\int_0^{\hbar\beta c} d\tau \int d^3r
+    \left( \frac{1}{2}(\partial_\tau\phi)^2+\frac{1}{2}(\nabla\phi)^2+V(\vect{r})\phi^2\right)\right],
 \end{equation}
 where $\tau=\beta\hbar c$.  The partition function can be cast into a more suggestive form
 by integrating by parts in the exponential integrand, 
 \begin{equation}
-  Z = \int D\phi \exp\left\{-\int_0^{\hbar\beta c} d\tau \int d^3r\,\phi(\vect{r},\tau)
-    \left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right]\phi(\vect{r},\tau)\right\},
+  Z = \int D\phi \exp\left[-\int_0^{\hbar\beta c} d\tau \int d^3r\,\phi(\vect{r},\tau)
+    \left(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right)\phi(\vect{r},\tau)\right],
 \end{equation}
 where the surface terms can be discarded by assuming the fields tend to zero at spatial (and temporal)
 infinity.% \comment{Actually need frequencies for periodic functions.  Especially for finite temperature,
@@ -1397,7 +1400,7 @@ which can be thought of as sparse matrices.
 For example, $\partial_x^2\phi(x_k) \approx [\phi(x_k+\Delta)-2\phi(x_k)+\phi(x_k-\Delta)]/\Delta^2$
 In that case the partition function is a large, finite Gaussian integral of the form, 
 \begin{equation}
-  Z_{\text{reg}} = \int d\phi_k\exp\left\{-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right\}.
+  Z_{\text{reg}} = \int d\phi_k\exp\left(-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right).
 \end{equation}
 where the fields have been labeled with position indices and the matrix $A$ represents the differential
 operator.  
@@ -1405,7 +1408,7 @@ This regularized expression can be integrated, under the assumption that the eig
 where $A_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_k$.  In that case, each Gaussian integral decouples and the 
 regularized partition function can be written as 
 \begin{equation}
-   Z_{\text{reg}} = C \prod_k \lambda_{(n)}^{-1/2} = C \det[A],
+   Z_{\text{reg}} = C \prod_k \lambda_{(n)}^{-1/2} = C \det(A),
 \end{equation}
 where the determinant is understood to be the product of the eigenvalues of the operator $A$.
 The limit of an arbitrarily large volume, and lattice resolution can be taken after integration.
@@ -1413,7 +1416,7 @@ The limit of an arbitrarily large volume, and lattice resolution can be taken af
 In an analogous fashion, one can formally evaluate the partition function path integral as a 
 functional determinant, 
 \begin{equation}
-  Z \propto {\det}^{-1/2}\left[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right].
+  Z \propto {\det}^{-1/2}\left(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right).
 \end{equation}
 % The original computations for the worldline method stressed computing the quantum effective
 % action for the scalar field.  This yields essentially the same expression.  This expression has
@@ -1424,7 +1427,7 @@ be divided out in the renormalization process.
 The free energy for the interacting field can be written as 
 \begin{equation}
   \mathcal{F} = -\kB T\log Z = \frac{1}{2}\kB T 
-\log\det\bigg[-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\bigg]+C,
+\log\det\bigg(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\bigg)+C,
   \label{eq:free-energy-det}
 \end{equation}
 where $C$ is a constant.  
@@ -1454,7 +1457,7 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to the free ener
  the renormalized free energy can be rewritten as
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-  \tr\Big[e^{[(\partial_\tau^2+\nabla^2)/2-V(\vect{x})]\cT}-e^{(\partial_\tau^2+\nabla^2)\cT/2}\Big].
+  \tr\Big(e^{[(\partial_\tau^2+\nabla^2)/2-V(\vect{x})]\cT}-e^{(\partial_\tau^2+\nabla^2)\cT/2}\Big).
 \end{equation}
 The trace can be evaluated by introducing a $D$-dimensional auxiliary Hilbert space, where 
 $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
@@ -1477,8 +1480,8 @@ The resulting worldline path integral for the free energy at zero temperature  i
     \mathcal{F}-\mathcal{F}_0 
     =&  -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
     \int d\vect{x}_0  d\tau_0 \int \prod_{k=1}^Nd\vect{x}_k d\tau_k \nonumber\\
-    &\times\prod_{k=0}^{N-1}\bigg[\frac{1}{(2\pi\Delta\cT)^{D/2}}
-    e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}e^{-(\tau_{k+1}-\tau_k)^2/(2\Delta \cT)}\bigg]\nonumber\\
+    &\times\prod_{k=0}^{N-1}\bigg(\frac{1}{(2\pi\Delta\cT)^{D/2}}
+    e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}e^{-(\tau_{k+1}-\tau_k)^2/(2\Delta \cT)}\bigg)\nonumber\\
     &\times \bigg(\prod_{j=1}^Ne^{-\Delta\cT V(\vect{x}_j)}-1\bigg)\delta(\vect{x}_N-\vect{x}_0)
     \delta(\tau_N-\tau_0).
   \end{align}

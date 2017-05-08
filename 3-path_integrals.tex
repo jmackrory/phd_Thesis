@@ -146,144 +146,86 @@ After substituting this result in to Eq.~(\ref{eq:op_soln}), the solution to the
   &+\int_0^t ds\,\biggdlangle  g[\vect{x}+\vect{W}(s),s]\exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle.
   \label{eq:feynman-kac}
 \end{align}
-This agrees with the results of the more formal methods presented in Durrett~\cite{Durrett1995}, and Steck~\cite{SteckNotes}.
-This result was derived under the assumption that the potential is independent of time.  
+This agrees with the results of the more formal methods presented in Durrett~\cite{Durrett1996}, and Steck~\cite{SteckNotes}.
+This result was derived under the assumption that the potential is independent of time, since that is 
+all that is needed in worldline path integrals.  
 
-
-\subsection{Steady State Brownian Bridge Path Integral}
+\subsection{Steady-State Brownian Bridge Path Integral}
 
 In worldline path integrals such as Eq.~(\ref{eq:TE_worldline}), the Brownian motions are pinned to close on themselves.
-We will follow a solution outline used by Hooghiemstra~\cite{Hooghiemstra2002}, 
-and expanded upon and explained by Steck in \S 17.9 -- \S 17.11~\cite{SteckNotes}.
+The solution to the diffusion equation~(\ref{label:eq:feynman-kac}) can be converted into the right form with some manipulation.
+We will follow a solution method used by Hooghiemstra to compute the ``sojourn time''\footnote{
+The sojourn time $T_\text{S}$
+is the amount of time a Brownian process spends on one side of an interface at $x=d$,
+$T_\text{S}:= \int_0^T dt\,\Theta[x(t)-d],$ where $\Theta$ is the Heaviside step function.}~\cite{
+Hooghiemstra2002}.
+This method is explained in detail by Steck in \S 17.9 -- \S 17.11~\cite{SteckNotes}.
 
-An analytical form for the path integral can be derived in conjunction with the diffusion equation.  
-In what may seem like circular logic, the diffusion equation can be solved, and by 
-the Feynman--Kac formula that solution is an analytical expression for a path integral.  
-These results from simple planar geometries form a possible basis for more complicated geometries,
-since they can be chained together in a spatially dependent manner.  
-
-In the worldline path integral, we require path integrals for path-averaged potentials with closed paths.
-The solution to the diffusion equation can be converted into the right form with some manipulation.
-
-First, take the $t\rightarrow\infty$ limit.  In the steady state limit, the initial
-condition is irrelevant, so for simplicity it can be set to zero.
-Second, the source function can be used to construct the path pinning by setting $g(\vect{x})=\delta(\vect{x}-\vect{c})$, so
-that only paths at satisfying $\vect{x}(t)=c$ contribute.  After those manipulations, the general solution is
+First, take the steady-state limit where $t\rightarrow\infty$.
+In this limit the initial condition is irrelevant so it can be set to zero.
+Second, the source function $g$ can be used to construct the path pinning by setting $g(\vect{x})=\delta(\vect{x}-\vect{c})$.
+After those manipulations, the general solution is
 \begin{align}
   f(\vect{x}) = \int_0^{\infty} ds\,
-  \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] e^{-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u),u]}\biggdrangle,
+  \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] \exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle,
   \label{eq:f_soln}
 \end{align}
 which has the form of a Laplace transform in $\lambda$.  
-The $\delta$-function selects out paths that satisfy $\vect{W}(s)=\vect{c-x}$. In order to select
+The $\delta$-function selects paths that satisfy $\vect{W}(s)=\vect{c-x}$. In order to select
 out Brownian paths starting from $\vect{x}=0$ and propagating to $\vect{x}=\vect{c}$, we should 
 consider the solution at the origin $f(\vect{x}=0)$.  
-
-While the full path integral is concerned with closed paths where $\vect{c}=0$, 
-these path integral expressions will also be used to
-accelerate convergence for discrete steps along a path, from one discrete position $\vect{x}_{k}$ to 
-another $\vect{x}_{k+1}$.  That corresponds requires shifting all coordinates in the problem so that 
-$\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.  
-
 The path integral (\ref{eq:f_soln}) satisfies the following steady-state diffusion equation
 \begin{equation}
-  0 = \frac{1}{2}\nabla^2f(x) - (V+\lambda)f + \delta(\vect{x}-\vect{c}),\label{eq:diffusion_eq}
+  0 = \frac{1}{2}\nabla^2f(x) - [V(\vect{x})+\lambda]f + \delta(\vect{x}-\vect{c}),\label{eq:diffusion_eq}
 \end{equation}
 which for simple geometries can be solved analytically.  The closed form for the path
 integral is then found by inverting the Laplace transform in Eq.~(\ref{eq:f_soln}).
+While the worldline path integral requires closed paths where $\vect{c}=0$, 
+these path integral expressions will also be used for analytical expressions between
+ positions along a given path.  
+ The path integral results for sub-paths between one discrete position $\vect{x}_{k}$ to 
+another $\vect{x}_{k+1}$ can be found by subtracting $\vect{x}_k$ from all coordinates in the problem
+ so that $\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.  This is particularly useful 
+in applying these results to accelerating numerical computations, as will be discussed further in Ch.~\ref{ch:numerical}.
 
-This might seem circular having passed from wave equations we cannot solve, to path integrals,
+It might seem circular having passed from wave equations that are too hard to solve, to path integrals,
 and back to diffusion equations we can only solve in particular geometries.
-However, our goal with the path integral is to stitch together results for 
-simple geometries together to handle more complicated geometries.
-For example, the notion of locally planar could be defined in terms of the nearest surface-normal.  
+However, the path integral provides a way to chain together results from a simpler geometry to simulate
+a more complicated geomtry.
+For example, at each step of the path, planar results could be used, by treating the bodies in terms of the
+nearest tangent planes.  
+%notion of locally planar could be defined in terms of the nearest surface-normal.  
 This is not the same approximation as the proximity force approximation, 
-which approximates the bodies \emph{globally} by their planes.
+which approximates the bodies \emph{globally} by the tangent planes.
 This is a local approximation based on a particular point in space, 
 and varies as the path moves through space.
 
 
+% An analytical form for the path integral can be derived in conjunction with the diffusion equation.  
+% In what may seem like circular logic, the diffusion equation can be solved, and by 
+% the Feynman--Kac formula that solution is an analytical expression for a path integral.  
+% These results from simple planar geometries form a possible basis for more complicated geometries,
+% since they can be chained together in a spatially dependent manner.  
 
-%  \item {Fokker-Planck Equation on Hilbert space.  }
-%  \item {Split operators into $N$ steps.  Baker-Campbell-Hausdorff}
-  %   Then, do the usual path integral tricks:
-  %   \begin{align}
-  %     \langle x_N|f(t)\rangle =& \langle x_N|\exp\left[-t\frac{\op{p}^2}{2}-tV(\op{x})\right]|f\rangle \\
-  %     % =& \langle x_N|\prod_{k=1}^N\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
-  %     % =& \langle x_N|\exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})] \ldots \exp[- t/N(\frac{\op{p}^2}{2}+V(\op{x})]|f\rangle \\
-  %     % =& \int \prod_{k=0}^{N-1}dx_k \langle x_N|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_{N-1}\rangle\langle x_{N-1}| \ldots \langle x_1|\exp[- \Delta t(\frac{\op{p}^2}{2}+V(\op{x})]|x_0\rangle\langle x_0|f\rangle \\
-  %     % =& \int \prod_{k=1}^N\frac{dx_{k-1}dp_k}{(2\pi)}\prod_{j=1}^N e^{-\frac{\Delta t}{2}p_j^2 +ip_j(x_j-x_{j-1}) - V(x_j)\Delta t}\langle x_0|f\rangle \\
-  %     =& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}}e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)
-  %   \end{align}
-  %   Now somehow transform this to something like $f(x_n + \sum_{j}dW_j)$ to get the same form as Dan?
-  %   Transform to integrating over the increments $dW_j = x_{j+1}-x_j$.
-  %   Then $\sum_{j=0}^{N-1} dW_j = x_N - x_0$.
-  %   Well, just quickly solve, and you see that $x_0 = x_N - \sum_{j=0}^{N-1}dW_j$.
-  %   Similarly, $x_k = x_N - \sum_{j=k}^{N-1}dW_j$.  
-
-  % \item {Continuum limit.  Note source of walks}
-  %   \begin{align}
-  %     f(x_N,t)=& \int \prod_{k=0}^{N-1}\frac{dx_k}{\sqrt{2\pi \Delta t}} e^{-\frac{(x_{k+1}-x_k)^2}{2\Delta t} - \Delta t V(x_k)}f(x_0)\\
-  %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k\Delta t V(x_N-\sum_{j=k}^{N-1}dW_j)}f(x_N-\sum_{j=0}^{N-1}dW_j)\\
-  %     =& \int \prod_{k=0}^{N-1}\frac{d(dW_k)}{\sqrt{2\pi \Delta t}} e^{-\sum_k\frac{dW_{k+1}^2}{2\Delta t} - \sum_k \Delta t V(x_N+\sum_{j=0}^{k}dW_j)}f(x_N+\sum_{j=0}^{N-1}dW_j),
-  %   \end{align}
-  %   or in continuous language:
-  %   \begin{equation}
-  %     f(x,t)= \dlangle e^{-\int_0^t dt'  V[x+W(t')]}f_0[x+W(t)]\drangle
-  %   \end{equation}
-  % \item Note time-ordered product.
-  %   Note that in the case of $V(x,t)$ the exponential is really the time ordered product of these things.
-  % \item $\delta$-pinning at $x=0$.  
-  %   Then if we take $g(x) = \delta(x)$, then the Brownian walks will be restricted to return to the origin.
-  %   Note that I think this definition also assumes that the brownian walks are starting from the origin.  
-   Discuss notions of Brownian motion, Brownian bridges.  Specify in terms of increments,
-    final positions.  Introduce measures like correlation?
-
-  % \item For actual solutions work in steady-state limit.  
-  % \item {Work with Laplace transform.  }
-  %   Now let us consider steady state, for potentials $V(x,t) = V(x)$.
-  %   In this case, we can drop the initial condition, and take $f(x,t=0)=0$, as the steady state is insensitive to the initial condition.
-  %   In addition, we take $g(x,t)=g(x)$.   then as $t\rightarrow \infty$ we have 
-  %   \begin{equation}
-  %     f(x) = \dlangle \int_0^\infty ds\,g(x) e^{-\lambda s-\int_0^s du V[x(s)]} \drangle,\label{eq:path_int_solution}
-  %   \end{equation}
-  %   which satisfies 
-  % \item Take $g(x)=\delta(x)$.
-  % \item Solve associated diffusion equation.  (So works for separable geometries.  But foundational
-  %   for approximations suited step-wise basis.)
-  % \item Identify value of $f(x=0)$ as path integral.  Different location choices will yield different
-  %   functions.  
-   % Particularly interested in methods that could serve as approximations beyond PFA.  
-   %  Interested in results that can serve as \emph{local} approximations exploiting planes.  
-
-   % From here on, this is mostly a collection of solutions to Fokker Plank equations with various potentials,
-   %  notably steps, and sundry gradients of steps.
-   %  The overall procedure is the same, just the potential changes.
-   %  Later we will have need of these results in our analytical calculations.  The planar open
-   %  path results are essential for numerical techniques.      
 
     The remainder of this chapter is devoted to solving the diffusion equation~(\ref{eq:diffusion_eq})
     for some simple planar geometries.
     These geometries are important for analytically calculating Casimir and Casimir--Polder
     energies from the worldline path integrals.  
     
-\section{Sojourn Time and One Step Potential }
+\section{Single Step Potential}
 
 As a first example, consider a step potential $V=\chi\Theta(x-d)$, where $\Theta(x)$ is the Heaviside step
 function.  The Heaviside step function $\Theta(x)$ is unity for positive arguments, zero for negative arguments 
 and takes a value of $1/2$ at the origin.
-The step potential will be useful in computing the Casimir--Polder energy for an atom 
-above a dielectric half-space in the worldline formalism.
-It is also related to the Sojourn time statistic, which measures the time a Brownian motion $x(t)$ spends 
-beyond a certain point $d$,
-\begin{equation}
-  T_S:= \int_0^T dt\,\Theta[x(t)-d].
-\end{equation}
-(The following is a much briefer discussion of the sojourn time, 
-which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
-we follow~\cite{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
-in \S17.10 of Steck~\cite{SteckNotes}.)
-
+The step potential will be used to compute the Casimir--Polder energy for an atom 
+above a dielectric half-space.
+% It is also related to the Sojourn time statistic, which measures the time a Brownian motion $x(t)$ spends 
+% beyond a certain point $d$,
+% (The following is a much briefer discussion of the sojourn time, 
+% which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
+% we follow~\cite{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
+% in \S17.10 of Steck~\cite{SteckNotes}.)
 First we must solve
 \begin{equation}
   0 = \frac{1}{2}\partial_x^2 f - [\chi\Theta(x-d)+\lambda]f + \delta(x).

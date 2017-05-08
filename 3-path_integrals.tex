@@ -2,27 +2,27 @@
 
 \label{ch:feynman_kac}
 
-A path integral is a sum over all possible paths a system might explore.
-The path integral is a powerful way to represent stochastic processes, and path integals have been used
-extensively in statistics~\cite{Karatzas1991, Durrett1996,DelMoral2004}.  
-Although path integrals are primarily used in a perturbative sense within physics, 
-they can be solved exactly in some geometries.
-These analytical solutions are particularly useful in accelerating numerical methods relying 
-on stochastic simulations, such as occur in finance.  
-
-In honor of the pioneering work by Feynman~\cite{Feynman1950} and Kac~\cite{Kac1949}, the fact that path integrals
-act as the solutions to diffusion or Schrodinger equations is referred to as the Feynman-Kac 
-formula.  This thesis will also sometimes use the same label to refer to the analytical
-result for a particular path integral.  
+The imaginary-time path integral is a powerful way to represent stochastic processes.  
+If stochastic paths are sampled from path integral, then the path's evolution is governed by stochastic
+differential equations or Langevin equations.
+The path integral is also the solution to the diffusion or Fokker-Planck equation~\cite{Karatzas1991, Durrett1996}.
+This connects the path integral with other tools used in physics to describe stochastic processes~\cite{Gardiner2010}.
+The fact that path integrals are solutions to diffusion equations is known as the Feynman--Kac formula
+after Feynman's work in describing the evolution of a quantum particle~\cite{Feynman1950},  and Kac's
+work applying this to the diffusion equation~\cite{Kac1949}.
+The term ``Feynman--Kac formula'' is also sometimes to refer to the analytical result for a specific path integral,
+with a given potential.  
 
 This chapter is devoted to deriving the Feynman--Kac formula, and then solving
 it for planar geometries that are useful for both TE and TM polarizations.
+These analytical solutions are particularly useful in accelerating numerical methods relying 
+on stochastic simulations, such as occur in finance.  
 These analytical formulae will be used in Ch.~\ref{ch:analytical} to show agreement 
 with other results for both Casimir and Casimir--Polder energies.
 The Feynman--Kac formula is also essential for handling the singular potentials.  
 In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
 
-\section{Derivation of the Feynman-Kac formula }
+\section{Derivation of the Feynman--Kac formula }
 
 In this section we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.
@@ -176,7 +176,7 @@ and expanded upon and explained by Steck in \S 17.9 -- \S 17.11~\cite{SteckNotes
 
 An analytical form for the path integral can be derived in conjunction with the diffusion equation.  
 In what may seem like circular logic, the diffusion equation can be solved, and by 
-the Feynman-Kac formula that solution is an analytical expression for a path integral.  
+the Feynman--Kac formula that solution is an analytical expression for a path integral.  
 These results from simple planar geometries form a possible basis for more complicated geometries,
 since they can be chained together in a spatially dependent manner.  
 
@@ -442,7 +442,7 @@ or the Casimir--Polder energy for an atom between two half-spaces.
 The same procedure as one half-space can be used, albeit with another set of boundary conditions to manage.   
 The solution must be continuous at both surfaces $x=d_1,d_2$, and have continuous first derivative.
 
-    % When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
+    % When we do the Casimir energy between two bodies we will need to find the Feynman--Kac formula assuming two step discontinuities.
     % We will use exactly the same procedure as above, but with an extra step. 
 
     % Here we are solving this with $V = \chi_1\Theta(-d_1-x) + \chi_2\Theta(d_2-x)$.
@@ -504,7 +504,7 @@ After inverting the Laplace transforms, each Gaussian in the sum would be of the
 to the probability for a Brownian path to bounce $n$ times between points a distance $d$ apart.
 This naturally goes over to the reflection picture for the Dirichlet scalar discussed in \S21.1.5.3 of Steck~\cite{SteckNotes}.
 
-\section{Feynman-Kac formula for Singular Potentials}
+\section{Feynman--Kac formula for Singular Potentials}
 \label{sec:TM_potential}
 The preceding has been a prelude for the truly important work of this method.
 Exactly the same methods can be used to yield sensible, finite results for the path integral 
@@ -686,9 +686,9 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     to take into account analytically, since the chance that a randomly drawn path will satisfy these conditions 
     is negligible.  
 
-\subsection{Finding the Feynman-Kac formula}
+\subsection{Finding the Feynman--Kac formula}
 
-We can now find the Feynman-Kac formula for open Brownian bridges near a single TM-potential, which 
+We can now find the Feynman--Kac formula for open Brownian bridges near a single TM-potential, which 
 imposes the boundary conditions~\ref{eq:TM_boundary_conditions}.  This solution is the ensemble average 
 over all Brownian paths between the end points.
 
@@ -858,7 +858,7 @@ The path integral
       \exp\left(-\int_0^T dt \{V\subTM[x(t)]+s\theta[x(t)-d]\}\right)\drangle\nonumber\\
       &\hspace{1cm}=
       \frac{1}{\sqrt{2[\lambda+\chi\theta(d)]}}\left[1 - \sgn(d) u\supTM e^{-2\sqrt{2[\lambda+\chi\theta(d)]}|d|}\right]
-      ,\label{eq:Feynman-Kac TM one step}
+      ,\label{eq:Feynman--Kac TM one step}
     \end{align}
     where the ensemble average is over brownian bridges that satisfy $x(0)=x(T)=0$.
     The factor of $\sqrt{2\pi T}$ is normalization for the use of the bridges.  
@@ -881,7 +881,7 @@ opposite direction should have the opposite effect.
   % \item {Quote full potential, and note boundary conditions.}
   % \item Quote full potential, and PDE.
   % \item Comment on how to handle other surface.
-  %   When we do the Casimir energy between two bodies we will need to find the Feynman-Kac formula assuming two step discontinuities.
+  %   When we do the Casimir energy between two bodies we will need to find the Feynman--Kac formula assuming two step discontinuities.
   %   We will use exactly the same procedure as above, but with an extra step. 
 
   %   The potential is then 

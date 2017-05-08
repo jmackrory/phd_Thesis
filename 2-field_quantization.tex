@@ -263,8 +263,8 @@ Finally in a path integral, it is necessary to remove the gauge degree of freedo
 The classical Lagrangian for electromagnetism in non-dispersive media is
 \begin{align}
 L &= \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big) %\\
-= \frac{\epsilon_0}{2}\int\! d^3r\,\bigg[
-\epsr(\vect{r})(\nabla\phi+\partial_t\vect A)^2 - \frac{c^2}{\mur(\vect{r})}(\nabla\times\vect A)^2\bigg].
+= \frac{\epsilon_0}{2}\int\! d^3r\,\bigg(
+\epsr(\vect{r})(\nabla\phi+\partial_t\vect A)^2 - \frac{c^2}{\mur(\vect{r})}(\nabla\times\vect A)^2\bigg).
 \label{eq:EM_Lagrangian}
 \end{align}
 The momentum fields conjugate to the potential fields $A^\mu = (\phi,\vect A)$ are
@@ -286,11 +286,11 @@ That next constraint will turn out to be Gauss's law, which enforces conservatio
 
 The Hamiltonian for the potentials and their conjugate momenta is given by
 \begin{align}
-H &= \int d^3r\,[ \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L}]\\
+H &= \int d^3r\,( \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L})\\
 % & = \int d^3x \, \vect \Pi\cdot\left(\frac{\vect{\Pi}}{\epsilon_0\epsvx}-\nabla\phi\right)
 % -\frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})} + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2\\
-& = \int d^3r\,\bigg[  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
--\vect{\Pi}\cdot\nabla\phi \bigg].
+& = \int d^3r\,\bigg(  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
+-\vect{\Pi}\cdot\nabla\phi \bigg).
 \end{align}
 The Poisson bracket in 4-vector notation follows from the choice that $A^\mu = (\phi,\vect A)$.
 This implies that the momentum conjugate to $A^\mu$ is given by
@@ -300,9 +300,9 @@ This implies that the momentum conjugate to $A^\mu$ is given by
 [Note that in this initial classical treatment, the metric is $\eta_{\mu\nu}=\text{diag}(-1,1,1,1)$.]
 The Poisson bracket for fields is 
 \begin{equation}
-  \{F_\mu(\vect{r}),G_\nu(\vect{r'})\} = \sum_\alpha\int d\vect{y}\bigg[
+  \{F_\mu(\vect{r}),G_\nu(\vect{r'})\} = \sum_\alpha\int d\vect{y}\bigg(
   \frac{\delta F_\mu(\vect{r})}{\delta A^\alpha(\vect{y})}\frac{\delta G_\nu(\vect{r'})}{\delta \Pi_\alpha(\vect{y})}
-  -\frac{\delta G_\mu(\vect{r'})}{\delta A^\alpha(\vect{y})}\frac{\delta F_\nu(\vect{r})}{\delta \Pi_\alpha(\vect{y})}\bigg],
+  -\frac{\delta G_\mu(\vect{r'})}{\delta A^\alpha(\vect{y})}\frac{\delta F_\nu(\vect{r})}{\delta \Pi_\alpha(\vect{y})}\bigg),
 \end{equation}
 because $\Pi_\mu$ is conjugate to $A^\mu$.
 %This is the straightforward generalization of the standard particle mechanics Poisson bracket.
@@ -335,8 +335,8 @@ Since the contraints vanish, they can be added in any amount to the Hamiltonian 
 the dynamics.  
 The Hamiltonian can equally well be written as 
 \begin{align}
-  H& = \int d^3r\bigg[\frac{\vect{\Pi}^2}{2\epsilon_0\epsr(\vect{r})}+\phi(\nabla\cdot\vect{\Pi})
-+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2 + f\Pi_0 + g(\nabla\cdot\vect{\Pi})\bigg]
+  H& = \int d^3r\bigg(\frac{\vect{\Pi}^2}{2\epsilon_0\epsr(\vect{r})}+\phi(\nabla\cdot\vect{\Pi})
++ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2 + f\Pi_0 + g(\nabla\cdot\vect{\Pi})\bigg)
 \end{align}
 where $f$ and $g$ are arbitrary functions.  In this case $f$ and $g$ serve as gauge degrees of freedom, 
 with $\Pi_0$ and $\nabla\cdot\vect{\Pi}$ generating the gauge transformations.
@@ -403,12 +403,12 @@ The resolutions of the identity for the fields are
 The $\delta$-functions restrict the momentum states to those that satisfy the constraints, and can 
 be written in the Fourier representation as 
 \begin{equation}
-\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left[-\frac{i}{\hbar}\int d^3r 
-  \varphi(\vect r)\nabla\cdot\vect{\Pi}(\vect r)\right].
+\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left(-\frac{i}{\hbar}\int d^3r 
+  \varphi(\vect r)\nabla\cdot\vect{\Pi}(\vect r)\right).
 \end{equation}
 Since the fields and momenta obey canonical commutation relations, the overlap between field and momentum states is
 \begin{equation}
-  \langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left[-\frac{i}{\hbar}\int d^3r\, \vect A\cdot\vect{\Pi}\right],
+  \langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left(-\frac{i}{\hbar}\int d^3r\, \vect A\cdot\vect{\Pi}\right),
 \end{equation}
 where the term in $\phi\Pi_0$ has been dropped due to the $\Pi_0=0$ constraint. 
 
@@ -418,7 +418,7 @@ In order to calculate the energy in the field at zero and non-zero temperature, 
 evaluate the partition function for the fields, and take the appropriate derivatives.  
 The EM partition function is defined as
 \begin{equation}
-Z\subEM = \mathrm{Tr}\Big[e^{-\beta \op{H}}\Big] = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}}|\phi_0,\vect{A}_0\rangle.
+Z\subEM = \mathrm{Tr}\Big(e^{-\beta \op{H}}\Big) = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}}|\phi_0,\vect{A}_0\rangle.
 \end{equation}
 In analogy with the scalar field path integrals described in Ch.~\ref{ch:introduction}, this is can be converted 
 into a field path integral---a sum over all possible field configurations evolving in imaginary time 
@@ -499,10 +499,20 @@ to eliminate the constants in the exponential.
 %These rescaling cancel out under renormalization anyway. 
 %Note that $A_4$ has the same dimensions as $\vect{A}$.
 The new parameter $\tau$ is proportional to the thermal deBroglie wavelength.  The resulting partition function is
-\begin{equation}
-Z = \!\int\! D^4\!A \det[\epsr]^{3/2}\exp\left\{-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
- \bigg[ \epsr(\vect{r})\left(\partial_\tau\vect{A}-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg]\right\}.
+ \begin{equation}
+ Z = \int D\vect{A} DA_4\, \det[\epsr]^{3/2}e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
+ \end{equation}
+where the Euclidean action is 
+\begin{equation}\label{eq:euclidean_action}
+S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,\int_0^{\beta\hbar c}d\tau\, \bigg(
+\epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
++\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg).
 \end{equation}
+The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
+% \begin{equation}
+% Z = \!\int\! D^4\!A \det[\epsr]^{3/2}\exp\left[-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
+%  \bigg( \epsr(\vect{r})\left(\partial_\tau\vect{A}-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg)\right].
+% \end{equation}
 We will compare this partition function to the case when the bodies are infinitely far apart,
  which we will denote as $Z_0$.
 The bodies will still be present, but they will be too far away to interact significantly.  
@@ -521,17 +531,17 @@ and we will ignore them.
 %   Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
 %   \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
 % \end{equation}
-The field path integral can be written 
- \begin{equation}
- Z = \int D\vect{A} DA_4\, e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
- \end{equation}
-where the Euclidean action is 
-\begin{equation}\label{eq:euclidean_action}
-S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,d\tau\, \bigg[
-\epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
-+\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
-\end{equation}
-The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
+%The field path integral can be written 
+%  \begin{equation}
+%  Z = \int D\vect{A} DA_4\, e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
+%  \end{equation}
+% where the Euclidean action is 
+% \begin{equation}\label{eq:euclidean_action}
+% S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,d\tau\, \bigg[
+% \epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
+% +\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
+% \end{equation}
+% The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
 
 % This change of variable was necessary after the integral over the conjugate momentum fields.
 % We have already used all of the constraints on the fields to write the equations in this form. 
@@ -557,7 +567,7 @@ The Jacobian factor associated with the gauge-fixing can be constructed in analo
 In order to fix the gauge, and assign each state equal weight, the following combination should be
 inserted into the path integral 
 \begin{equation}
-  \delta[G(A)]\det\left[\frac{\delta G}{\delta\alpha}\right],
+  \delta[G(A)]\det\left(\frac{\delta G}{\delta\alpha}\right),
 \end{equation}
 where the determinant is known as the Faddeev-Popov determinant~\cite{Faddeev1967,Faddeev1991}.
 This ensures that after integrating over out $\alpha$, each state receives the same weight.  
@@ -565,16 +575,16 @@ One further trick is often used in gauge-fixing the path integral.  Instead of f
 $G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is a free function,
 it can be integrated against a Gaussian
 \begin{equation}
-  \text{const} = \int D\gamma \exp\left[-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right].
+  \text{const} = \int D\gamma \exp\left(-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right).
 \end{equation}
 Such factors are constant in the path integral sense that they will cancel out when considering
 physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}
- Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
- \exp\left[-S_E-\frac{1}{2}\int d^3rd\tau\, \gamma^2\right]\nonumber\\
- &= \int D\vect{A} DA_4\det\bigg[\frac{\delta G}{\delta \alpha} \bigg]
- \exp\left[-S_E-\frac{1}{2}\int d^3rd\tau\, G^2\right],
+ Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
+ \exp\left(-S_E-\frac{1}{2}\int d^3rd\tau\, \gamma^2\right)\nonumber\\
+ &= \int D\vect{A} DA_4\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
+ \exp\left(-S_E-\frac{1}{2}\int d^3rd\tau\, G^2\right),
 \end{align}
 where the Gaussian integral over $\gamma$ was evaluated in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
@@ -642,7 +652,7 @@ the dual-potential path integral later.
 
 \section{Gauge-Fixing: Generalized Lorenz Gauge}
 
-Of these gauges, the generalized Lorenz gauge is best suited to the four-potential path integral~(\ref{eq:Z_potential}).  
+Of these gauges, the generalized Lorenz gauge is best suited to the vector path integral~(\ref{eq:Z_potential}).  
 %(In later work on the scalar path integrals in planar geometries, Coulomb gauge can be used to naturally.)
 In this case the gauge function is
 \begin{equation}
@@ -659,11 +669,11 @@ The functional derivative appears as the linear term in $\alpha$ after making a 
 \begin{align}
   G[A^\nu+\partial^\nu \alpha] &= \frac{1}{\epsr\sqrt{\mur}}\nabla\cdot[\epsr(\vect{A}+\nabla\alpha)]
   +\epsr\sqrt{\mur}\partial_\tau(A_4+\partial_\tau\alpha)\nonumber\\
-&=G[A^\nu]+\bigg[\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_\tau^2\bigg]\alpha.
+&=G[A^\nu]+\bigg(\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_\tau^2\bigg)\alpha.
 \end{align}
 The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, canceling terms, and integrating by parts, becomes 
 \begin{align}
-  S\subE &=\frac{1}{2}\int d^3r d\tau\,\bigg[ A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg],\label{eq:S_pot_vec}
+  S\subE &=\frac{1}{2}\int d^3r d\tau\,\bigg( A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg),\label{eq:S_pot_vec}
 \end{align}
 where we have started using the Einstein summation convention (where repeated latin and greek indices are summed over).
 The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by 
@@ -708,10 +718,10 @@ The Gaussian integrals can be formally carried out, with the result that
 \begin{align}
 Z\subEM
 \propto\,&
-\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)+V_4\right]^{-1/2}\nonumber\\
-&\times\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)\delta_{ij} -u_{ij} +V^{(A)}_{ij}
- \right]^{-1/2}\nonumber\\
-&\times\det\left[-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)-u_{\text{g}}+V_{\text{g}}\right]
+\det\left(-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)+V_4\right)^{-1/2}\nonumber\\
+&\times\det\left(-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)\delta_{ij} -u_{ij} +V^{(A)}_{ij}
+ \right)^{-1/2}\nonumber\\
+&\times\det\left(-\frac{1}{2}(\epsr\mur\partial_4^2+\nabla^2)-u_{\text{g}}+V_{\text{g}}\right)
 \label{eq:Z_4pot}
  \end{align}
 where the first determinant comes from the scalar potential path integral, the second comes from
@@ -721,7 +731,7 @@ The potentials $V_4$, $V^{(A)}_{ij}, V_\text{g}$ and the operators $u_{ij},u_\te
 \begin{subequations}
 \label{eq:potentials}
 \begin{align}
-  V_4 & = \frac{1}{2}|\nabla\log\sqrt{\epsr}|^2-\frac{1}{2}\nabla^2\log\sqrt{\epsr}\\
+  V_4 & = \frac{1}{2}(\nabla\log\sqrt{\epsr})^2-\frac{1}{2}\nabla^2\log\sqrt{\epsr}\\
   V^{(A)}_{ij} &= \frac{1}{2}\left[(\nabla\log\sqrt{\mur})^2-\nabla^2\log\sqrt{\mur}\right]\delta_{ij}\nonumber\\
   &\hspace{0.5cm} -\frac{1}{2}\left[\partial_i\log\sqrt{\mur}\partial_j\log\sqrt{\mur}
     -\partial_i\partial_j\nabla^2\log \sqrt{\mur}\right]\nonumber\\
@@ -754,7 +764,7 @@ formal path integral calculations and more straightforward canonical methods.
 This is important for $\zeta$-function regularization of functional determinants, 
 which is closely allied with the worldline method.
 
-The worldline path integral for the four-potential treatment of the EM field can be computed straightforwardly
+The vector worldline path integral for the EM field can be computed straightforwardly
 from the partition function~(\ref{eq:Z_4pot}).
 The relations from Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) can be used to convert
 the functional determinants into worldline path integrals, where  
@@ -763,21 +773,21 @@ each functional determinant in Eq.~\ref{eq:Z_4pot} leads to an independent path 
 % as functions of position.  
 The renormalized free energy is given by
 \begin{align}
-  \cF -\cF\sup0 &=-\kB T (\log Z\subTE - \log Z\subTE\sup0)\\
-  &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\tr\bigg\{
+  \cF -\cF\sup0 =\,&-\kB T (\log Z\subTE - \log Z\subTE\sup0)\\
+  =\,& -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\tr\bigg(
   \big[\exp(-M_{ij}\cT)-\delta_{ij}\exp(-M\sup0\cT)\big]\nonumber\\
-  &+ \big[\exp(-M_{4}\cT)-\exp(-M\sup0\cT)\big]\nonumber\\
-  &-2\big[\exp(-M_\text{g}\cT) - \exp(-M\sup0\cT)\big]\bigg\}
+  &\hspace{3.5cm}+ \big[\exp(-M_{4}\cT)-\exp(-M\sup0\cT)\big]\nonumber\\
+  &\hspace{3.5cm}-2\big[\exp(-M_\text{g}\cT) - \exp(-M\sup0\cT)\big]\bigg)
 \end{align}
 where now the trace runs over $\vect{x}$ and $\tau$ as well as any vector indices $i,j$.
 The operators for the vector potential, scalar potential, gauge-fixing, and vacuum terms 
 are respectively given by
 \begin{subequations}
 \begin{align}
-  M_{ij}&=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2)\delta_{ij}
-  +i(v_i(\op{x})\op{p}_j-v_j(\op{x})\op{p}_i) +V^{(A)}_{ij}(\op{x})\\
-  M_4 &=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2) + V_4(\op{x})\\
-  M_{\text{g}} &=\frac{1}{2}(\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2)-\frac{i}{2}(\nabla\log\epsr)\cdot\op{\vect{p}}\\
+  M_{ij}&=\frac{1}{2}[\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2]\delta_{ij}
+  +i[v_i(\op{x})\op{p}_j-v_j(\op{x})\op{p}_i] +V^{(A)}_{ij}(\op{x})\\
+  M_4 &=\frac{1}{2}[\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2] + V_4(\op{x})\\
+  M_{\text{g}} &=\frac{1}{2}[\epsr(\op{\vect{x}})\op{p}_4^2+\op{\vect{p}}^2]-\frac{i}{2}(\nabla\log\epsr)\cdot\op{\vect{p}}\\
   M\sup0 &=\frac{1}{2}(\op{p}_4^2+\op{\vect{p}}^2),
 \end{align}
 \end{subequations}
@@ -836,12 +846,16 @@ In this case the action for the vector EM field can be split into two non-intera
 
 \subsection{Scalar Polarization Partition Functions}
 
+In the TE polarization the electric field is described by a single scalar field, $\vect{E}=\partial_t\phi\hat{y}$,
+where  $\phi:=\phi(\vect{r},t)$.  In this case $\phi$ corresponds to the y-component of the vector potential.  
+In generalized Coulomb gauge $\nabla\cdot\eps\vect{A}=0$, and using Maxwell's equations, the magnetic
+field $B$ can also be written in terms of this scalar and $|\vect{B}|^2=|\nabla\phi|^2$.
 The action for the TE scalar $\phi:=\phi(\vect{r},t)$ is 
 \begin{equation}
-  S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg),
+  S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg).
 \end{equation}
-where $\vect{E}= \partial_t\phi\hat{y}$.  The partition function can be found via the same procedure 
-we used for the Dirichlet scalar, and full four-potential.  However, we will just skip to the final
+The partition function can be found via the same procedure 
+that was used for the Dirichlet scalar, and full vector path interal.  However, we will just skip to the final
 result in terms of the partition function with the Euclidean action,
 \begin{equation}
   Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau

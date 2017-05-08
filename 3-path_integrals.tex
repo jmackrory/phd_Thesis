@@ -6,7 +6,7 @@ The imaginary-time path integral is a powerful way to represent stochastic proce
 If stochastic paths are sampled from path integral, then the path's evolution is governed by stochastic
 differential equations or Langevin equations.
 The path integral is also the solution to the diffusion or Fokker-Planck equation~\cite{Karatzas1991, Durrett1996}.
-This connects the path integral with other tools used in physics to describe stochastic processes~\cite{Gardiner2010}.
+This connects the path integral with other tools used in physics to describe stochastic processes~\cite{Gardiner2009}.
 The fact that path integrals are solutions to diffusion equations is known as the Feynman--Kac formula
 after Feynman's work in describing the evolution of a quantum particle~\cite{Feynman1950},  and Kac's
 work applying this to the diffusion equation~\cite{Kac1949}.
@@ -335,13 +335,6 @@ and the amplitude of the solution decreases.
 This analytical could be applied to enhance Dirichlet worldline methods with little cost,
 since path resolution is one of the dominant sources of error in numerical worldlines~\cite{Mackrory2016}.
 
-% \begin{enumerate}
-%   \item Note connection to Gies work (they don't use this).    Note we will discuss this in
-%     accelerated convergence techniques.  
-%   \item Take $\delta$-function potential a distance $d$ away.  Use open loops.  
-%   \item Quote potential
-% \end{enumerate}
-
 \section{Two Step Potentials}
 
 The next case of importance is for two step potentials, where $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.
@@ -351,20 +344,6 @@ or the Casimir--Polder energy for an atom between two half-spaces.
 The same procedure as a single half-space can be used, albeit with another set of boundary conditions to manage.   
 The solution and its derivative must be continuous at both surfaces.
 
-% For the case of 
-%     We have solutions, 
-%     \begin{equation}
-%       f(x) = \left\{ \begin{array}{lcr}
-%           A e^{\sqrt{2(\lambda+\chi_1)}x}   & \hspace{1cm} & x<0\\
-%           B e^{\sqrt{2(\lambda+\chi_1)}x} + C e^{-\sqrt{2(\lambda+\chi_1)}x}  & \hspace{1cm} & 0<x<h\\
-%           D e^{\sqrt{2\lambda}x} + F e^{-\sqrt{2\lambda}x}  & \hspace{1cm} & h<x<h+d\\
-%           G e^{-\sqrt{2(\lambda+\chi_2)}x} & \hspace{1cm} & x>d_2
-%         \end{array}
-%       \right.
-%     \end{equation}
-%     We will take $d_1 = h, d_2 = d+h$.
-%     We can then check that our final solutions are independent of $h$ once we have integrated over position.
-%     We would expect the Casimir energy to only depend on $d$ in this case.   
 Skipping what is some tedious algebra, the solution for closed Brownian paths can be be written 
 in each of three regions: Region I is inside the left hand body with $x_0<d_1$, Region II is 
 between the bodies with $d_1<x_0<d_2$, and Region III is inside the right hand body with $d_2<x_0$.

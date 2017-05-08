@@ -448,7 +448,7 @@ are poorly suited to this problem, and that the path generation scheme should be
 \end{figure}
 
 Instead of sampling path increments from the Gaussian, it is possible to account for the 
-path-averaged exponential~(\cite{eq:TMpot}) in generating increments.  The resulting 
+path-averaged exponential~(\ref{eq:TMpot}) in generating increments.  The resulting 
 distribution would be a sum and difference of Gaussians.
 
   1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
@@ -531,7 +531,6 @@ The birth-death process reduces the variance, and makes both methods much more t
 The difference between raw Gaussian and TM-gaussians is small under the birth-death process.
 Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
 use the birth-death process in conjunction with simple Gaussian throughout the remainder. 
-\comment{Note need for this with TM 2-body calculations}
 
 \subsection{Monte-Carlo Sampling for Path-Time}
 

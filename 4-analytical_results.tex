@@ -1,14 +1,14 @@
 \chapter{Electromagnetic Worldlines - Analytical Results}
 \label{ch:analytical}
 
-This chapter will show that the worldline path integrals yield the same results as the simpler 
+This chapter will show that the worldline path integrals yield the same results as the more direct 
 calculations outlined in Ch.~\ref{ch:introduction}.  
 We will show how to extract the Casimir--Polder energy via suitable functional derivatives of the free energy.
-The analytical energies can be derived by substituting in the Feynman-Kac formulae for the relevant path integrals.
-In order to put the Casimir energies in the right form the Gamma function is used, and the Laplace-Mellin
-transform is introduced.  The integrals are then transformed to yield known results in planar geometries.
-Finally, we examine the results in the case of non-zero temperature, and show how known results for 
-the near-field and high temperature results emerge from this formalism.    
+The analytical energies can be derived by substituting in analytical solutions for the relevant path integrals.
+The worldline Casimir energies can be put in the right form by using the Gamma function, and the Laplace-Mellin
+transform.  The integrals are then transformed to yield known results in planar geometries.
+Finally, we examine the behaviour of the worldline path integrals in the case of nonzero temperature, 
+and show how known results for the near-field and high temperature results emerge from this formalism.    
 The work presented on the TE polarization has been published in Ref.~\cite{Mackrory2016}.
 
 \section{Extracting Casimir--Polder Energies}
@@ -17,28 +17,28 @@ The Casimir--Polder energy for an atom interacting with macroscopic bodies can b
 by treating the atom as a perturbation to the permittivity and permeability.  
 The atom is located at $\rA$, and has polarizability $\alpha$ and magnetizability $\beta$.
 The atom is perturbs the background permittivity $\epsr(\vect{r})\rightarrow \epsr(\vect{r})+\delta\epsr(\vect{r})$,
-and permeability $\mur(\vect{r})\rightarrow \epsr(\vect{r})+\delta\mur(\vect{r})$, where
+and permeability $\mur(\vect{r})\rightarrow \mur(\vect{r})+\delta\mur(\vect{r})$, where
 \begin{equation}
   \delta\epsr(\vect{r})=\frac{\alpha}{\epsilon_0}\delta(\vect{r}-\rA), 
   \quad \delta\mu_r(\vect{r})=\mu_0\beta_0\delta(\vect{r}-\rA).
 \end{equation}
-Note that we will initially consider frequency independent media, at zero temperature.  The generalization 
+We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
 to nonzero temperature will be considered in Sec.~\ref{sec:nonzero_temp}.
 
-The full Casimir energy for TE and TM polarizations was derived as the free energy in Ch.~\ref{ch:EM_quantization}.
-In the zero temperature limit, the energy in the EM field is 
+The Casimir energy for TE and TM polarizations was derived in Ch.~\ref{ch:EM_quantization}.
+In the zero temperature limit, the energy in the EM field in the TE polarization is 
 \begin{equation}
-    E\subTE-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
-    \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} e^{-\langle V\subTE(z)\rangle\cT}-1
-    \biggdrangle_{\vect{x}(t)}.\label{eq:TE_energy}
-  \end{equation}
+  E\subTE-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+  \biggdlangle
+  \frac{e^{-\langle V\subTE(\vect{x})\rangle\cT}}{\sqrt{\langle \epsr(\vect{x})\mur(\vect{x})\rangle}} -1
+  \biggdrangle_{\vect{x}(t)}.\label{eq:TE_energy}
+\end{equation}
 The Casimir--Polder energy comes from expanding the energy to linear order in the $\alpha$ and $\beta_0$.
-Note that the $\delta$-functions are being used a short-handed for a well localized function with unit integral.
+Note that the $\delta$-functions are being used a short-hand notation for a sharply localized function with unit integral.
 All expansions involving these $\delta$-functions can be carried out with a finite regularization of the 
-$\delta$-function, and the arbitrarily sharp limit can be taken after the expansions.  
+$\delta$-function, and the arbitrarily sharp limit can be taken at the end of the computations.  
 %This expansion corresponds to extracting the lowest order linear response.
-The expansion must be carried out in both $\langle\epsr\mur\rangle$, and the potential $V\subTE$.
+The expansions in $\alpha$ and $\beta$ must be carried out in both $\langle\epsr\mur\rangle$, and the potential $V\subTE$.
 Considering the similarities between the polarizations, we will carry these expansions out for only
 one polarization, since the others follow by duality.  
 
@@ -50,51 +50,62 @@ one polarization, since the others follow by duality.
 
 The energy for an atom in the electromagnetic field can be found by considering the change in the energy 
 from adding the perturbation. 
-The energy can be written as a functional\footnote{A functional is a function that maps another function to a number.
-For example, the classical action $S[x(t)]=\int dt L(x,\dot{x})$ maps the trajectory of a classical path $x(t)$ to a single number,
- via the time integral of the Lagrangian.
-The Euler-Lagrange equations of motion come from taking the functional derivative of the action with respect to small path variations.} 
-of the permittivity $\epsr$, and permeability $\mur$,
- then this energy difference is 
+The energy can be written as a functional of the permittivity and permeability, $E[\epsr,\mur]$.
+The change in energy for adding an atom is then
 \begin{equation}
-  \delta E[\epsr,\mur] = E[\epsr+\delta\epsr,\mur+\delta\mur]-E[\epsr,\mur] 
+  \delta E[\epsr,\mur] = E[\epsr+\delta\epsr,\mur+\delta\mur]-E[\epsr,\mur].
 \end{equation}
-Since the atom is assumed to have a small localized effect on the permittity and permeability, this expansion corresponds to a functional derivative.  
- Otherwise,
-the expansions can be carried out with $\alpha_0$ and $\beta_0$ acting as the small parameters.
+Since the atom is assumed to have a small localized effect on the permittity and permeability, 
+this expansion corresponds to a functional derivative.  
+ Otherwise, the expansions can be carried out with $\alpha_0$ and $\beta_0$ acting as the small parameters.
 The Casimir--Polder energy can be found by taking the following functional derivatives
 \begin{equation}
   V\subCP(\rA) = \frac{\alpha_0}{\epsilon_0}\frac{\delta}{\delta\epsr(\rA)}E+\mu_0\beta_0\frac{\delta}{\delta\mur(\rA)}E.
 \end{equation}
-
 The Casimir--Polder energy must be renormalized by considering the change in the energy as the atom is removed 
-to $\infty$.
+arbitrarily from the dielectric objects.
 
 It is necessary to expand the path-averaged permittivity and permeability,
 \begin{align}
   \langle(\epsr+\delta\epsr)(\mur+\delta\mur)\rangle^{-1/2} &= \langle\epsr\mur\rangle^{-1/2}
-  -\frac{1}{2}\langle \mur\delta\epsr+\epsr\delta\mur\rangle\langle\epsr\mur\rangle^{-3/2}\\
+  -\frac{1}{2}\langle \mur\delta\epsr+\epsr\delta\mur\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
 &= \langle\epsr\mur\rangle^{-1/2}
 -\frac{1}{2}\frac{\alpha_0}{\epsilon_0}\langle \mur(\vect{x})\delta(x-\rA)\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
 &\hspace{1cm} -\frac{1}{2}\mu_0\beta_0\langle\epsr(\vect{x})\delta(\vect{x}-\rA)\rangle \langle\epsr\mur\rangle^{-3/2}
 \label{eq:mueps_expansion}
 \end{align}
-The path-averaged $\delta$-functions act to restrict the path integrals to paths starting at the atom's
-position $\rA$.
+The singular potentials $V\subTE, V\subTM$ can be expanded in the same fashion.  The expansion is carried out to linear order 
+in $\delta\epsr,\delta\mur$, and all higher order terms are dropped.
+\begin{align}
+  \langle V\subTE[\mur +\delta\mur] \rangle 
+  =& \frac{1}{2}\Big<(\nabla\log\sqrt{\mur+\delta\mur})^2-\nabla^2\log\sqrt{\mur+\delta\mur}\Big>\nonumber\\
+  =& \frac{1}{8} \Big< [\nabla\log(\mur+\delta\mur)]^2\Big>
+  -\frac{1}{4}\Big< \nabla^2\log(\mur+\delta\mur)\Big> \nonumber\\
+  =& \langle V\subTE[\mur]\rangle+\left< \frac{1}{4} \nabla\log\mur\cdot\nabla\frac{\delta\mur}{\mur}
+    -\frac{1}{4}\nabla^2\frac{\delta\mur}{\mur}\right> 
+  \label{eq:VTE_expansion}
+\end{align}
+It is straightforward to then expand the exponential $e^{-\cT\langle V\subTE\rangle}$ to linear order in $\delta\epsr$ and $\delta\mur$.  
+The terms involving derivatives $\nabla \delta\mur$ only make sense after integration by parts, 
+\begin{equation}
+  \int d\vect{x} f(\vect{x})\nabla\delta(\vect{x}-\rA)  = -\nabla f(\vect{x})\bigg|_{\vect{x}=\rA}.
+\end{equation}
+The same manipulations for the path-averaged $\delta$-function also apply to the versions involving derivatives.  
 
-  Consider a path integral over closed paths where the integrand depends on the whole path and includes 
+In all of these expansions, the path-averaged $\delta$-functions act to restrict the path integrals to paths starting at the atom's
+position $\rA$.  
+The path integral can be written schematically as some path-averaged function that depends the whole path and includes 
  a path-averaged $\delta$-function,
 \begin{equation}
-  I = \int d\vect{x}_0\Bigdlangle \,\langle f\rangle\langle\delta\rangle\,\Bigdrangle_{\vect{x}(t)}.
+  I = \int d\vect{x}_0\Bigdlangle \,\langle f(\vect{x})\rangle\langle g(\vect{x})\delta(\vect{x}-\rA)\rangle\,\Bigdrangle_{\vect{x}(t)}.
 \end{equation}
 In the discretized notation this is 
 \begin{equation}
-  I = \int \prod_{n=0}^{N-1}dx_n\,P(x_0,\cdots, x_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(x_k)\frac{1}{N}\sum_{j=0}^{N-1}\delta(\vect{x}_j-\rA)
+  I = \int \prod_{n=0}^{N-1}dx_n\,P(x_0,\cdots, x_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(x_k)\frac{1}{N}\sum_{j=0}^{N-1}\delta(\vect{x}_j-\rA)g(\vect{x}_j)
 \end{equation}
 where the second $\delta$-function enforces path closure.  All of the functions are invariant under cyclic permutations 
-of the path labels.  This is true of the path-averaged functions, 
-and the Gaussian probability $P(x_0,\cdots x_{N-1})$, the exponent of which 
-can be written as  $\sum_{j=0}^{N-1}(x_{j+1}-x_j)^2$, subject to the condition that $x_N=x_0$.
+of the path labels.  This is true of the path-averaged functions such as $\langle \epsr \mur$ and $\langle \VTM\rangle$,
+and the Gaussian probability for closed Brownian bridges.
 Then for each term $\delta(\vect{x}_j-\rA)$, the labels can be shifted $j$ times so that in the shifted
 coordinates $\vect{x}_j\rightarrow \vect{x}_0$.  Since there is now a sum of $N$ identical terms, the 
 path integral can be written as
@@ -102,31 +113,13 @@ path integral can be written as
   I = \int \prod_{n=0}^{N-1}dx_n\,P(\vect{x}_0,\cdots, \vect{x}_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(\vect{x}_k)\delta(\vect{x}_0-\rA)
 = \Bigdlangle\, \langle f\rangle\,\Bigdrangle_{\vect{x}(t), \vect{x}(0)=\rA}.
 \end{equation}
-For a closed path, integrated over all space, with integrands athat are all written as averaged around the path, 
-there is some freedom in which point of the path is called the origin.  
+% For a closed path, integrated over all space, with integrands athat are all written as averaged around the path, 
+% there is some freedom in which point of the path is called the origin.  
 Since only paths the satisfy the $\delta$-function will contribute to the path integral, we are free to call the point
 at $\rA$ the path origin.  
 The end result is the path-averaged $\delta$-function restricts the starting point of the paths to the atom's
 position $\rA$.
-\label{sec:path_average_delta}
 
-The singular potentials $V\subTE, V\subTM$ can be expanded in the same fashion.  The expansion is carried out to linear order 
-in $\delta\epsr,\delta\mur$, and all higher order terms are dropped.
-\begin{align}
-  \langle V\subTE[\mur +\delta\mur] \rangle 
-  =& \frac{1}{2}\langle (\nabla\log\sqrt{\mur+\delta\mur})^2-\nabla^2\log\sqrt{\mur+\delta\mur}\rangle\nonumber\\
-  =& \frac{1}{8} \langle [\nabla\log(\mur+\delta\mur)]^2\rangle
-  -\frac{1}{4}\langle \nabla^2\log(\mur+\delta\mur)\rangle \nonumber\\
-  =& \langle V\subTE[\mur]\rangle+\left< \frac{1}{4} \nabla\log\mur\cdot\nabla\frac{\delta\mur}{\mur}
-    -\frac{1}{4}\nabla^2\frac{\delta\mur}{\mur}\right> 
-  \label{eq:VTE_expansion}
-\end{align}
-The expansion to linear order in $\delta\mur $involving the exponential $e^{-\cT\langle V\subTE\rangle}$ is straightforward.  
-The terms involving derivatives $\nabla \delta\mur$ only make sense after integration by parts, 
-\begin{equation}
-  \int d\vect{x} f(\vect{x})\nabla\delta(\vect{x}-\rA)  = -\nabla f(\vect{x})\bigg|_{\vect{x}=\rA}.
-\end{equation}
-The same manipulations for the path-averaged $\delta$-function also apply to these versions involving derivatives.  
 
 Using the results in Eqs.~(\ref{eq:mueps_expansion}) and (\ref{eq:VTE_expansion}), the Casimir--Polder energy
 for the TE polarization can be written as
@@ -185,100 +178,36 @@ In this case, the TE and TM Casimir--Polder energies are given by
       -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\rangle^{1/2}}
       \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
-The TE Casimir--Polder energy will thus always be the simpler case to evaluate since it only depends on $\langle\epsr\mur\rangle$.
-In contrast, the TM Casimir--Polder energy also requires the singular TM potential which must be regularized
-using the results in Sec.~\ref{sec:TM_potential}.  The TM Casimir--Polder energy also requires spatial derivatives,
-which will require some care in numerical methods involving stochastic paths against singular potentials.
+The TE Casimir--Polder energy will thus always be the simpler case to evaluate since it only depends on $\langle\epsr\rangle$, which
+is well behaved.
+In contrast, the TM Casimir--Polder energy involves the singular TM potential%  which must be regularized
+% using the results in Sec.~\ref{sec:TM_potential}.  The TM Casimir--Polder energy also requires
+and also requires spatial derivatives.
+ Both of those factors will require some care in numerical methods involving stochastic paths against singular potentials.
 
-In this limit the worldline Casimir energy for both polarizations are
-\begin{align}
-    E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
-    \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}\label{eq:log_Z_TE}\\
-    E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
-    \biggdlangle
-    \frac{1}{\sqrt{\langle \epsr(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
-    \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TM}
-\end{align}
-
-From now on we will work within the context of non-magnetic media with $\mur=1, \beta_0=0$.
-The essential ideas will have to be developed anyway for both polarizations.
-
-% \subsection{Functional derivative of $\log Z_{TM}$}
-% We then get
-% \begin{align}
-% \log Z =&\int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\bigdlangle\langle\epsilon\rangle^{-1/2}e^{- T\langle V\rangle}\bigdrangle\\
-% % =& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle \left(\langle\epsilon\rangle^{-1/2}
-% % -\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}\right)
-% % \left( 1 + \frac{\alpha T}{4}\langle\nabla^2(\epsilon^{-1}\delta)
-% % -\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle\\
-% =& \int_0^\infty \frac{dT}{8\pi^2T^3}\int dx_0\biggdlangle
-% \left(\langle\epsilon\rangle^{-1/2}-\frac{\alpha\langle\delta\rangle}{2\langle\epsilon\rangle^{3/2}}  
-% + \frac{\alpha T}{4}\langle\epsilon\rangle^{-1/2}\langle \nabla^2(\epsilon^{-1}\delta)-
-% \nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta\rangle\right)e^{-T\langle V\rangle}\biggdrangle
-% \end{align}
-
-% % Now consider $\langle \delta\,f\rangle $
-% % \begin{align}
-% % \int dx_0\int Dx\langle \delta(x)f(x)\rangle P(x) 
-% % =&  \int dx_0\prod_{j=1}^{N}dx_n\delta(x_N-x_0)\prod_k P(x_k) \frac{1}{N}\sum_j \delta(x_j-x')f(x_j) \nonumber\\
-% % = &f(x')\int \prod_{j=1}^N\delta(x_N-x') dx_jP(x_j) = f(x')\int Dx P(x)_{x_0=x(T)=x'}
-% % \end{align}
-% % This is a trace, which is invariant under cylic permutations.
-% %   We can cyclically permute all the loop labels around so that we call the point that passes through $x'$ the loop origin.
-% %   Doing this for every term, means we get $N$ copies of the same integrals.  We can then call $x_0=x'$, and drop that sum over $j$.   
-% The same logic works for derivatives, and $\delta'$.
-%   So we can find the linear term in $\alpha$.
-%   This is effectively the functional derivative with respect to $\epsilon$.  
-% \begin{align}
-% \frac{\delta}{\delta\epsilon(x')}\log Z=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0
-% \biggdlangle\bigg[ -\frac{\delta(x_0-x')}{\langle\epsilon\rangle^{3/2}}\nonumber\\
-% &  +  \frac{T}{2}\langle\epsilon\rangle^{-1/2}\left(\nabla^2[\epsilon^{-1}(x_0)\delta(x_0-x')]
-% -\nabla\log(\epsilon)\cdot\nabla\epsilon^{-1}\delta(x_0-x')\rangle\right)\bigg]e^{-T\langle V\rangle}\biggdrangle
-% \end{align}
-% Now integrate by parts on the $\delta$-functions, and we get 
-% \begin{align}
-% \frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \int_0^\infty \frac{dT}{16\pi^2T^3}\int dx_0\delta(x_0-x')
-% \biggdlangle-\frac{e^{T\langle V\rangle}}{\langle\epsilon\rangle^{3/2}}
-%   +  \frac{T}{2}\epsilon^{-1}(x_0)\nabla'^2\left(\langle\epsilon\rangle^{-1/2} e^{T\langle V\rangle}\right)\nonumber\\
-% & \hspace{3cm}+\epsilon^{-1}\frac{T}{2}\nabla'\cdot 
-% \frac{\nabla'\epsilon(x')}{\epsilon(x')}\langle\epsilon\rangle^{-1/2}e^{-T\langle V\rangle}\biggdrangle
-% \end{align}
-% In cases with piece wise constant media, we can drop the final term, saying $\nabla'\epsilon(x')\approx 0$.
-%   I will then use $\int dx \delta'(x-y)f(x) = \partial_y f(y) = \partial_y\int dx f(x)$ to pull the derivatives out.  
-% \begin{align}
-% \Aboxed{\frac{\delta}{\delta\epsilon(x')}\log \ZTM=& \frac{1}{16\pi^2}\int_0^\infty dT
-% \left[ \frac{1}{2}\epsilon^{-1}(x_0)\nabla'^2\biggdlangle
-% \frac{ e^{-\int dt V}}{\langle\epsilon\rangle^{1/2}T^2}\biggdrangle
-% -\biggdlangle\frac{e^{-\int dt V}}{\langle\epsilon\rangle^{3/2}T^3} \biggdrangle \right]}
-% \end{align}
 
 \section{Rearranging Worldline Casimir Energies}
 
 The worldline energies need some rearrangement in order to use the analytical results for 
-path integrals derived in Ch.~\ref{ch:feynman_kac}.  This can be done with couple integral identities.
+path integrals derived in Ch.~\ref{ch:feynman_kac}.  This can be done with two integral identities.
 The first converts the worldline path integral into the form where the Laplace transformed path
-integral appears.  The second exponentiates $\langle\epsr\mur\rangle$ by means of the Gamma function.  
+integral appears.  The second exponentiates $\langle\epsr\rangle$ by means of the Gamma function.  
 
 \subsection{ Laplace-Mellin Transforms}
 
-The worldline path integral has the form of a Mellin transform.  The Mellin transform of a function $f$ is 
-defined as 
-\begin{equation}
-\mathcal{M}[f](z)= \int_0^\infty dt\, t^{z-1}f(t).
-\end{equation}
-The result of the Mellin transform is a function $\tilde{f}(z)$.
-In the worldline energy $f$ is the ensemble-average path integral, while $z=1+D/2$.
+The worldline path integral has the form of a Mellin transform.  
 The Mellin transform appears in the context of $\zeta$-function renormalization for functional determinants,
 and considering its connection to the $\zeta$-function plays a role in formal number theory.  However,
 for our purposes it is just an integral transform.  
+The Mellin transform of a function $f$ is defined as 
+\begin{equation}
+\mathcal{M}[f](z)= \int_0^\infty dt\, t^{z-1}f(t),
+\end{equation}
+which is a function of $z$.  
+In the worldline energy $f$ is the ensemble-average path integral and $z=1+D/2$.
 
 There is a useful relationship between Laplace transforms and Mellin transforms referred to as the Laplace-Mellin theorem~\cite{Lew1975}.  
-The Laplace transform (that we've been implicitly using) of a function $f(t)$ is defined as
-\begin{equation}
-\mathcal{L}[f](s) = \int_0^\infty dt e^{-st} f(t).
-\end{equation}
-We will also need the $\Gamma$ function which is defined as  
+The Laplace transform was defined in Eq.~(\ref{eq:Laplace}), and the $\Gamma$ function is defined as  
 \begin{equation}
 \Gamma(z) = \int_0^\infty ds\, s^{z-1} e^{-s} = \mathcal{M}[e^{-s}](z),
 \end{equation}
@@ -292,49 +221,42 @@ This is most easily motivated by starting with the right hand side
 \mathcal{M}\big[\mathcal{L}[f]\big](1-z) = 
 \int_0^\infty ds\, s^{-z} \int_0^\infty dt\,e^{-st} f(t).
 \end{equation}
-We assume that the order of $s$ and $t$ integration can be swapped, and change integration variable to $s=t/u$,
+The order of $s$ and $t$ integration can be swapped, and the $s$ can be transformed to $s:=t/u$, with the 
+result
 % =& \int_0^\infty dt\,\left[\int_0^\infty ds s^{-z} e^{-st}\right] f(t)\\
 % =& \int_0^\infty dt\,\left[\int_0^\infty d\frac{u}{t}\, t^zu^{-z} e^{-u}\right] f(t) \\
 \begin{align}
 \mathcal{M}\big[\mathcal{L}[f]\big](1-z)=&\int_0^\infty dt\,\int_0^\infty du\, u^{-z} e^{-u}\,t^{z-1} f(t) \\
 =& \Gamma(1-z)\mathcal{M}[f](z)
 \end{align}
-In words, the Mellin transform of a function is proportional to the Mellin transform of the functions
-Laplace transform, subject to $z\rightarrow 1-z$ and dividing by a constant $\Gamma(1-z)$.  This is 
+In words, the Mellin transform of a function is proportional to the Mellin transform of the Laplace transform of the function,
+ and subject to a change of variable $z\rightarrow 1-z$.  This is 
 directly useful to rewriting worldline path integrals in terms of their Laplace transforms, especially
 since the solution method in Ch.~\ref{ch:feynman_kac} naturally yields the Laplace transform of the function.
 
 \subsection{Inverse Moment Theorem}
 
-One further step is required to put all of the pieces involving material functions in the path integrals into exponential form.
-Again, the solutions derived in the previous chapter assumed path integrals with exponential potentials.
-So the terms in $\langle\epsr\mur\rangle$ should be exponentiated.  If we required positive powers,
-then the usual moment generating tricks could be used such as $\langle x\rangle^n = \frac{d^n}{ds^n}e^{-s\langle x\rangle}\big|_{s=0}$.
+One further step is required to put all of the material functions in the path integral into exponential form.
+This is necessary, since the solutions from the previous chapter were for path integrals with exponential potentials.
+If positive powers were required, then the usual moment generating tricks could be used 
+such as $\langle x\rangle^n = \frac{d^n}{ds^n}e^{-s\langle x\rangle}\big|_{s=0}$.
 However, for the inverse-moments required in the worldline method, the Gamma function must be used 
 \begin{equation}
 \frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\dlangle e^{-s(x+\beta)}\drangle  
 = \dlangle \frac{1}{(x+\beta)^\alpha}\drangle\label{eq:moment_theorem}.
 \end{equation}
-This is restricted to $x+\beta>0$, and $\alpha>0$.  In the worldline calculations $\alpha=1/2$ or $\alpha=3/2$
-for Casimir and Casimir--Polder energies respectively.  On the imaginary frequency axis, the response functions
+This is restricted to $x+\beta>0$, and $\alpha>0$.
+In the worldline calculations $x+\beta=\langle\epsr(\vect{x})\rangle$ and $\alpha=1/2$ for Casimir energies, and $\alpha=3/2$
+for Casimir--Polder energies.  On the imaginary frequency axis, the dielectric functions
 are real, positive, decaying functions, so all of these conditions are satisfied for worldline path integrals.
 
-% We can do this via a straightforward approach: 
-% \begin{align}
-% \frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\dlangle e^{-s(x+\beta)}\drangle 
-% % =&\frac{1}{\Gamma[\alpha]}\int_0^\infty ds\,s^{\alpha-1}\int dx f(x) e^{-s(x+\beta)}\\
-% % =& \frac{1}{\Gamma[\alpha]}\int dx f(x) \int_0^\infty ds\,s^{\alpha-1} e^{-s(x+\beta)} \\
-% % =&\frac{1}{\Gamma[\alpha]}\int dx f(x) \frac{1}{(x+\beta)^\alpha}\int_0^\infty dt\,t^{\alpha-1} e^{-t} \\
-% =&\int dx f(x) \frac{1}{(x+\beta)^\alpha} \\
-% =& \dlangle \frac{1}{(x+\beta)^\alpha}\drangle
-% \end{align}
+\subsection{Rearranging the Worldline into Analytical Form}
 
-\subsection{Rearranging the Worldline}
-
-Consider the TE path integral, with dielectric function $\epsr(\vect{x})=1+\chi(\vect{x})$, where $\chi$
+The path integral can be converted into a form where analytical results can be substituted in by using both of the preceding results.
+As an exampe, consider the TE path integral, with dielectric function $\epsr(\vect{x})=1+\chi(\vect{x})$, where $\chi$
 is a positive function of position.  In both the Casimir and Casimir--Polder cases, the energy involves 
 $\langle \epsr\rangle^{-\alpha}$, with $\alpha=1/2$, and $\alpha=3/2$ respectively.  
-Using the moment theorem.~(\ref{eq:moment_theorem}),  we can write the energy density 
+The energy density can be rewritten using the inverse-moment theorem~(\ref{eq:moment_theorem}),  
 \begin{align}
 \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle_{\vect{x}(t)}
 % = &\int_0^\infty \frac{dT}{T^{1+D/2}}\frac{1}{\Gamma[\alpha]}\int_0^\infty ds s^{\alpha-1} 
@@ -348,16 +270,22 @@ In the second equality the integration variable was rescaled $s\rightarrow s\cT$
  and the definition of the path average, $\langle f\rangle = \cT^{-1}\int_0^\cT dt\, f(t)$ was used.
 % where we used the Inverse-moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
 %  and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
-Using the Laplace-Mellin transform~(\ref{eq:Laplace-Mellin}), the energy density can be written as
+The energy density can be further transformed with the Laplace-Mellin transform~(\ref{eq:Laplace-Mellin}), 
 \begin{align}
-&\int_0^\infty \frac{d\cT}{\cT^{1+D/2-\alpha}}e^{-s\cT}\dlangle e^{-s\int_0^\cT dt\,\chi[\vect{x}(t)]}\drangle \nonumber\\
+\int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle_{\vect{x}(t)}
 % =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
 % =&\mathcal{M}\left[e^{-sT}\dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
 % =& \frac{1}{\Gamma[1+z-1/2]}\mathcal{M}\left[\int_0^\infty dT e^{-(\lambda+s)T}
 % \dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\right]\left(-z+1/2\right) \\
-&\hspace{1cm}= \int_0^\infty d\lambda\, \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[D/2-\alpha+1/2]}\int_0^\infty d\cT e^{-(\lambda+s)\cT}
-\dlangle \frac{e^{-s \int_0^\cT dt\,\chi(\vect{x})}}{\sqrt{\cT}}\drangle.\label{eq:Casimir_Laplace_inverse}
+&= \int_0^\infty ds\, \frac{s^{\alpha-1}}{\Gamma(\alpha)}\int_0^\infty d\lambda\, 
+\frac{\lambda^{(D-n)/2-\alpha}}{\Gamma[(D-n)/2-\alpha+1]}\nonumber\\
+&\hspace{1cm}\times\int_0^\infty d\cT e^{-(\lambda+s)\cT}
+\dlangle \frac{e^{-s \int_0^\cT dt\,\chi(\vect{x})}}{\cT^{n/2}}\drangle_{\vect{x}(t)}.\label{eq:Casimir_Laplace_inverse}
 \end{align}
+In the last line we have factored out $\cT^{n/2}$, the normalization for a $n$-dimensional brownian bridge.
+This assumes that the solution was computed in $n$-dimension; we will work in the case where $n=1$.
+(Despite knowing the parameters $\alpha, D$ and $n$, it is easier to track them in calculations as variables
+than as numbers.)
 The integral over $\cT$ is the solution to the relevant diffusion equation, as discussed in Ch.~\ref{ch:feynman_kac}.
 The solutions must be appropriately scaled with $\lambda\rightarrow \lambda+s$, and $\chi\rightarrow s\chi$.
 
@@ -376,36 +304,36 @@ V\subCP\supTE-V\subCP\sup0=&-\frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\fra
 \label{eq:VCP_TE_inter}
 \end{align}
 This can be put into the same form as the known results by changing integration variables.
-Similar steps will be required to convert the other planar energies, so we will go through this once in detail.
-We will confine our attention to the integral
+Similar steps will be required to convert the other path integrals, so we will go through this once in detail.
+We will confine our attention to the integral over $s$ and $\lambda$, where
 \begin{equation}
   J=\int_0^\infty ds\, s^{\alpha-1}\int_0^\infty d\lambda\, \lambda^{(D-1)/2-\alpha}\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
-\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
+\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}.
 \end{equation}
-First change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, 
+First, change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, 
 \begin{equation}
   J% =2\int_0^\infty ds\, s^{\alpha-1}s^{(D-1)/2-\alpha+1-1/2}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
   % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v},
   =2\int_0^\infty ds\, s^{D/2-1}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
-  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v},
+  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}.
 \end{equation}
 Next, change variable from $s$ to $t=\sqrt{8d^2 s}v$, and swap the $t$ and $v$ integrals. 
 \begin{align}
   J % =4\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha} \int_0^\infty dt\, \frac{2t}{8d^2v^2}\left(\frac{t^2}{8d^2v^2}\right)^{D/2-1}e^{-t}
   % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\\
 =\frac{1}{8^{D/2-1}d^D}\int_1^\infty dv\,v^{-D} (v^2-1)^{(D-1)/2-\alpha} 
-  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\int_0^\infty dt\, t^{D-1}e^{-t}
+  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\int_0^\infty dt\, t^{D-1}e^{-t}.
 \end{align}
-The $t$-integral can then be identified as a $\Gamma[D-1]$.  Substituting this integral back into 
-the Casimir--Polder energy~(\ref{eq:VCP_TE_inter}), while taking $D=4, \alpha=3/2$ yields
+The $t$-integral can then be identified as a Gamma function, $\Gamma[D-1]$.  
+Substituting this integral back into the Casimir--Polder energy~(\ref{eq:VCP_TE_inter}), while taking $D=4, \alpha=3/2$ yields
 \begin{align}
   V\subCP\supTE-V\subCP\sup0=&-\frac{3\hbar c\alpha_0}{32\epsilon_0\pi^{2}d^4}
   \int_1^\infty dv\,\frac{1}{2v^4} \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}.
 \end{align}
 The prefactor is the Casimir--Polder energy for an atom above a perfect conductor~(\ref{eq:CP_conductor}).
 This result agrees with the known result for the TE contribution to the Casimir--Polder energy.  
-The integral is the TE contribution to the efficiency, $\eta\subTE$, and can be   
- evaluated in closed form\footnote{By Russian mathematicians and Mathematica}
+The integral over $v$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
+ evaluated in closed form
 \begin{align}
 \eta\subTE(\chi)=&\frac{1}{2}\int_{1}^\infty dv\,v^{-4}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\nonumber \\
 =&\frac{1}{3}+2\chi^{-1}- \frac{\sqrt{\chi  (\chi +1)}}{\chi^{3/2}}
@@ -444,24 +372,6 @@ The analytical path integral~(\ref{eq:Feynman-Kac TM one step}) can be substitut
 and the integral can be transformed in the same manner as Sec.~\ref{sec:TE_CP}.
 \begin{align}
   \cV_{z,\alpha}% =&\frac{(-1)\sqrt{2\pi}}{\Gamma[\alpha]\Gamma[z-\alpha+1/2]}\int_0^\infty d\lambda\,\lambda^{z-1/2-\alpha}
-  % \int_0^\infty ds\,s^{\alpha-1}\nonumber\\
-  % &\times\frac{1}{\sqrt{2(\lambda+s)}}\frac{\sqrt{\lambda+s}e^{2\Xi}-\sqrt{\lambda+s(1+\chi)}}
-  % {\sqrt{\lambda+s}e^{2\Xi}+\sqrt{\lambda+s(1+\chi)}} e^{-2\sqrt{2(\lambda+s)}d}\\
-% First change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, (removed $\frac{(-1)\sqrt{\pi}}{\Gamma[\alpha]\Gamma[z-\alpha-1]}$)
-% \begin{align}
-%   \cV_{z,\alpha}% =&\int_0^\infty ds\,\int_1^\infty dv\,(2sv) s^{z-1/2-a\lpha}(v^2-1)^{z-1/2-\alpha} s^{\alpha-1}\nonumber\\
-%   % &\times\frac{1}{\sqrt{s}v}\frac{ ve^{2\Xi}-\sqrt{v^2+\chi}}
-%   % {v e^{2\Xi}+\sqrt{v^2+\chi}} e^{-\sqrt{8d^2s}v}\\
-% =&\int_0^\infty ds\,\int_1^\infty dv\,(2) s^{z-1}(v^2-1)^{z-1/2-\alpha}
-%   \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}}
-%   {v e^{2\Xi}+\sqrt{v^2+\chi}} e^{-\sqrt{8d^2s}v}
-% \end{align}
-% Next, change variable from $s$ to $t=\sqrt{8d^2 s}v$, and swap the $t$ and $v$ integrals. 
-% \begin{align}
-%  \cV_{z,\alpha}% &2\int_0^\infty dt\,\int_1^\infty dv\,\frac{1}{2t}\left(\frac{t^2}{8v^2d^2}\right)^{z}(v^2-1)^{z-1/2-\alpha}
-%   \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}} e^{-t}\\
-% =&\int_0^\infty dt\,\int_1^\infty dv\,\frac{t^{2z-1}}{(8v^2d^2)^z}(v^2-1)^{z-1/2-\alpha}
-%   \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}} e^{-t}\\
 =&-\frac{\sqrt{\pi}\Gamma[2z]}{8^zd^{2z}\Gamma[\alpha]\Gamma[z-\alpha+1/2]}\int_1^\infty dv\,\frac{1}{v^{2z}}(v^2-1)^{z-1/2-\alpha}
   \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}}.
 \end{align}
@@ -484,101 +394,31 @@ After substituting this back into Eq.~(\ref{eq:TM_CP_inter}), the TM Casimir--Po
 \end{align}
 where we substituted $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
 for an atom near a dielectric half-space (Eq. 14.205 in Steck ~\cite{SteckNotes}).
-
-
-% \subsection{Changing Variables}
-% What follows is a lot of changes of variables to turn this into something like an integral against a decaying exponential.  
-% This follows in exact analogy with the TE case.  
-% $u=\lambda+s$.  
-% \begin{align}
-% \mathcal{V}_D(\chi,d)=-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
-% \int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}
-% \frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-2\sqrt{2u } |d|}
-% \end{align}
-% Now take $u\rightarrow u/8d^2, s\rightarrow s/(8d^2)$.  
-% \begin{align}
-% \mathcal{V}_D(\chi,d)% =&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^\alpha}\frac{1}{(8d^2)^{(D-1)/2-\alpha+1-1/2}}\nonumber\\
-% % & \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2}(u-s)^{(D-1)/2-\alpha}\frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}\\
-% =&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\nonumber\\
-% & \times\int_0^\infty ds s^{\alpha-1}\int_s^\infty du\, u^{-1/2} (u-s)^{(D-1)/2-\alpha}
-% \frac{\left(\sqrt{u}e^{2\Xi }- \sqrt{u + s\chi}\right) }{\sqrt{u} e^{2 \Xi }+\sqrt{u + s\chi}}e^{-\sqrt{u }}
-% \end{align}
-% Now define $u = sv$.  
-% \begin{align}
-% \mathcal{V}_D=&-\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\nonumber\\
-% & \times\int_0^\infty ds s^{(D-2)/2}\int_1^\infty dv \, v^{-1/2}(v-1)^{(D-1)/2-\alpha}
-% \frac{\left(\sqrt{v}e^{2\Xi }- \sqrt{v + \chi}\right) }{\sqrt{v} e^{2 \Xi }+\sqrt{v + \chi}}e^{-\sqrt{s v}}
-% \end{align}
-% Now define $ s = t^2, v = w^2$.  
-% \begin{align}
-% \mathcal{V}_D%=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_0^\infty dt\, t^{(D-2)+1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}\\
-% =&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}
-% \int_0^\infty dt\, t^{D-1}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}
-% \frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}e^{-tw}
-% \end{align}
-% Now take swap the $t,w$ integrals, and turn the $t$ integral into a Gamma function.  
-% \begin{align}
-% \mathcal{V}_D%=&-\frac{4\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,(w^2-1)^{(D-1)/2-\alpha}\frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}\int_0^\infty dt\, t^{D-1}e^{-tw}\\
-% =&-\frac{4\sqrt{\pi}\Gamma[D]}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
-% \frac{1}{(8d^2)^{D/2}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}
-% \frac{\left(w e^{2\Xi }- \sqrt{w^2 + \chi}\right) }{w e^{2 \Xi }+\sqrt{w^2 + \chi}}
-% \end{align}
-
-% So we finally have
-% \begin{align}
-% \Aboxed{\mathcal{V}_D=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{3D/2-2}\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}
-% \frac{1}{d^{D}}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-\alpha}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}},
-% \end{align}
-% where we used $\Xi = \log\sqrt{1+\chi}$.  
-
-% Now for the full atom-wall potential we need 
-% \begin{align}
-% V = \mathcal{V}_D(\chi,d;3/2) - \frac{1}{2}\partial_d^2\mathcal{V}_{D-2}(x,d;1/2)
-% \end{align}
-% %\comment{The scaled ``Gies'' formulation uses  $V = V_D - V_{D-2}''$}
-
-
-% \subsection{Evaluating integral for specific $D$, and $\alpha$}
-
-% We need $D=4$, $\alpha=3/2$.  
-% \begin{align}
-% \mathcal{V}_D(\chi;d;3/2)%=&-\frac{\Gamma[D]\sqrt{\pi}}{2^{4}\Gamma[3/2]\Gamma\left[(D+1)/2-3/2\right]}\frac{1}{d^D}\int_1^\infty dw\,w^{-D}(w^2-1)^{(D-1)/2-3/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
-% =&-\frac{3}{4d^4}\int_1^\infty dw\,w^{-4}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-% \end{align}
-
-% We also need $D=2$, $\alpha=1/2$
-% \begin{align}
-% \mathcal{V}_{D-2}(\chi;d;1/2)%=&-\frac{\Gamma[D-2]\sqrt{\pi}}{2^{(3(D-2)/2-2)}\Gamma[1/2]\Gamma\left[(D-1)/2-1/2\right]}\frac{1}{d^{D-2}}\int_1^\infty dw\,w^{-(D-2)}(w^2-1)^{(D-3)/2-1/2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}\\
-% =&-\frac{1}{2d^2}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-% \end{align}
-% \comment{Doesn't $V_2$ go to zero for $D=2$ due to $\Gamma[0]$ in the denominator?}
-
-% We finally need 
-% \begin{align}
-% \frac{1}{2}\partial_d^2(\mathcal{V}_{D-2}(\chi;d;1/2)=
-% &-\frac{3}{2d^4}\int_1^\infty dw\,w^{-2}\frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}}
-% \end{align}
-
-% % Now if we go way back up and compare to averages we needed for the Casimir energy, we wanted: 
-
-% \begin{equation}
-% V(d) = -\frac{1}{2}\alpha_0\langle E^2\rangle = -\frac{1}{2}\hbar c\frac{\delta}{\delta\epsilon(d)}\log Z
-% \end{equation}
-% In addition, there is a factor of $-\hbar c\alpha_0/(16\epsilon_0\pi^2)$ 
-% from the original path integral expression, which includes a $1/2$ from the functional derivative 
-% ($-\delta/(\delta\epsilon)$, and $-1/2$ from the $\det[A]^{-1/2}$ from the initial Gaussian integral.  
-% So the final Casimir energy is 
-% \begin{equation}
-% V = -\frac{3\hbar c\alpha_0}{64\pi^2\epsilon_0d^4} \int_1^\infty dw\,w^{-4}(1-2w^2)
-% \frac{w(1+\chi)- \sqrt{w^2 + \chi} }{w (1+\chi)+\sqrt{w^2 + \chi}},
-% \end{equation}
-% which is the same as the Lifshitz integral.  
+The TM efficiency $\eta\subTM$ also has a closed form solution, 
+\begin{align}
+  \eta\subTM(\chi):=\,&\frac{1}{2}
+  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}}\\
+  =\,& \frac{7}{6} + \chi + \frac{2 - (1+\chi)^{3/2}}{2\chi} 
+  - \frac{\text{arcsinh}\sqrt{\chi}}{2\chi^{3/2}}[1 + \chi + 2\chi^2(1 + \chi)] \nonumber\\ 
+  &+ \frac{(1+\chi)^2}{\sqrt{2+\chi}}\left[\text{arcsinh}\sqrt{1+\chi} - \text{arcsinh}\left(\frac{1}{\sqrt{1+\chi}}\right)\right]
+\end{align}
 
 \section{Finding the TE Casimir energy}
 
+% For non-magnetic media, the worldline Casimir energies for both polarizations are
+% \begin{align}
+%     E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+%     \biggdlangle
+%     \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}\label{eq:log_Z_TE}\\
+%     E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+%     \biggdlangle
+%     \frac{1}{\sqrt{\langle \epsr(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
+%     \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TM}
+% \end{align}
 The Casimir energy for two dielectric planes can also be calculated within this formalism.  
-The dielectric is given by $\epsrab = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
-THe calculation proceeds in the same way, except for two changes.  
+The dielectric function is given by $\epsrab(x) = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
+The calculation proceeds in the same way, except for two changes.  
+
 First, the Casimir energy requires a further integral over the starting points of the paths.
 Second, the two-body interaction energy is found by subtracting the one-body energies involving $\epsra,\epsrb$ from the two-body
  expressions with $\epsrab$.  The fully renormalized Casimir energy between two planes is
@@ -677,122 +517,6 @@ This is exactly the TE component of the Lifshitz energy we derived by more strai
 In this derivation, the gap between the spaces was filled with vacuum $\epsilon_3=1$.  
 This derivation will be extended to the TM component, and the nonzero temperature case where
 there is dispersion.  
-
-% $I_{tot}$ is the (renormalized) expression for 
-% \begin{equation}
-% I_{tot}(\lambda,\chi)=\int dx_0\int_0^\infty dT \frac{e^{-\lambda T}}{\sqrt{T}}\dlangle e^{-\int_0^T dt \chi\Theta(x_0+B(t))  } \drangle,
-% \end{equation}
-% we found that 
-% \begin{align}
-% I_{tot}(\lambda,\chi) =& I_{12}-I_1-I_2 + I_0 \\
-% =&  \sqrt{2\pi}\frac{r_1r_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
-% \left( 2d + 2\frac{\sqrt{2}}{\sqrt{\lambda+\chi}}\right)
-% \end{align}
-
-% Plugging all this in, we have 
-% \begin{align}
-% E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-% \int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}
-% \frac{2r^2 e^{-2\sqrt{2\lambda}d}}{\sqrt{\lambda+s}(1-r^2 e^{-2\sqrt{2(\lambda+s)}d})}
-% \left( d + \frac{\sqrt{2}}{\sqrt{\lambda+s+s\chi}} \right),
-% \end{align}
-% with 
-% \begin{equation}
-% r = \frac{ \sqrt{\lambda+s} - \sqrt{\lambda+s+s\chi}}{ \sqrt{\lambda+s} + \sqrt{\lambda+s+s\chi}}
-% \end{equation}
-% % Substitution time!
-% % \begin{enumerate}
-% % \item $\lambda = s\kappa$.
-% % \begin{align}
-% % E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_0^\infty d\kappa 
-% % \kappa^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2-\alpha+1} s^{\alpha-1}\nonumber\\
-% % &\times \frac{2r^2 e^{-2\sqrt{2(\kappa+1)s}d}}{\sqrt{s(\kappa+1)}(1-r^2 e^{-2\sqrt{2s(\kappa+1)}d})}
-% % \left( d + \frac{\sqrt{2}}{\sqrt{s(\kappa+1+\chi)}} \right),
-% % \end{align}
-% % with 
-% % \begin{equation}
-% % r = \frac{ \sqrt{\kappa+1} - \sqrt{\kappa+1+\chi}}{ \sqrt{\kappa+1} + \sqrt{\kappa+1+\chi}}
-% % \end{equation}
-% % \item $p = \sqrt{\kappa+1},$ or $\kappa = p^2-1$. 
-% % \begin{align}
-% % E  =& - \frac{\hbar c\sqrt{\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} \int_1^\infty dp (2p) 
-% % (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
-% % &\times \frac{2r^2 e^{-2\sqrt{2s}pd}}{\sqrt{s}p(1-r^2 e^{-2\sqrt{2s}pd})}
-% % \left( d + \frac{\sqrt{2}}{\sqrt{s(p^2+\chi)}} \right),
-% % \end{align}
-% % with 
-% % \begin{equation}
-% % r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
-% % \end{equation}
-% % \item $\xi = \sqrt{2s} d$, or $s = \xi^2/2 d^2$.  
-
-% % \begin{align}
-% % E  % =& - \frac{\hbar c\sqrt{\pi}}{4\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
-% % % \int_1^\infty dp\, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\frac{\xi}{d^2} \left( \frac{\xi^2}{2d^2}\right)^{(D-1)/2}\nonumber\\
-% % % &\times \frac{2\sqrt{2} dr^2 e^{-2\xi p}}{\xi (1-r^2 e^{-2\xi p})}\left( d + \frac{2 d}{\sqrt{\xi(p^2+\chi)}} \right)\\
-% %  =& - \frac{\hbar c\sqrt{\pi} 2^{3/2}}{2^{D/2}\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha) d^{D-1}2^{(D-1)/2}}
-% %  \int_1^\infty dp \, (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\xi^{D-1}\nonumber\\
-% % &\times \frac{ r^2 e^{-2\xi p}}{(1-r^2 e^{-2\xi p})}\left( 1 + \frac{2 }{\sqrt{\xi(p^2+\chi)}} \right),
-% % \end{align}
-% % with 
-% % \begin{equation}
-% % r = \frac{ p - \sqrt{p^2+\chi}}{ p + \sqrt{p^2+\chi}}
-% % \end{equation}
-% % \item Now set $\alpha=1/2, D=4$.
-
-% % \end{enumerate}
-% % \begin{align}
-% % \Aboxed{E_{TE} =& - \frac{\hbar c }{8\pi^2 d^{D-1}} \int_1^\infty dp \, (p^2-1)\int_0^\infty d\xi\,\xi^{3} 
-% % \frac{ r^2 e^{-2\xi p}}{ (1-r^2 e^{-2\xi p})}\left( 1 + \frac{2 }{\sqrt{\xi(p^2+\chi)}} \right),}
-% % \end{align}
-
-
-
-% % \begin{align}
-% % E_{TE} = & - \frac{\hbar c }{8\pi^2 d^{3}}\int_0^\infty du\,u^{3}\int_1^\infty dp\,(p^2-1)
-% % \frac{ r^2e^{-2pu}}{(1 -r^2 e^{-2pu})}\left[ 1 +\frac{2}{u\sqrt{p^2+\chi}}\right]
-% % \end{align}
-
-% Now integrate by parts with $p$.  
-% Let's try integrating by parts with respect to $p$?    
-% \begin{equation}
-% \int_{1}^\infty dp f(p) = pf(p)\bigg|_{p=1}^\infty -\int_1^\infty dp\, p f'(p) 
-% \end{equation}
-% We may have to integrate by parts with respect to $u$ to get the correct power there.  
-
-% \begin{align}
-% \frac{dr}{dp} =& \frac{d}{dp} \frac{p-\sqrt{p^2+\chi}}{p+\sqrt{p^2+\chi}}
-% = \frac{1-\frac{2p}{2\sqrt{p^2+\chi}}}{p+\sqrt{p^2+\chi}} - 
-% (p-\sqrt{p^2+\chi})\frac{(1+\frac{2p}{2\sqrt{p^2+\chi}})}{(p+\sqrt{p^2+\chi})^2} 
-% %=& \frac{1}{\sqrt{p^2+\chi}}\frac{\sqrt{p^2+\chi}-p}{p+\sqrt{p^2+\chi}} - (p-\sqrt{p^2+\chi})\frac{p+\sqrt{p^2+\chi}}{\sqrt{p^2+\chi}(p+\sqrt{p^2+\chi})^2} \\
-% =& -\frac{2r}{\sqrt{p^2+\chi}}
-% \end{align}
-% % Intriguingly, I found that 
-% % \begin{align}
-% % \frac{d}{dp}[r^{-2} e^{2pu} -1]&= \left( -2\frac{dr}{dp} r^{-3} e^{2pu} + 2u r^{-2}e^{2pu}\right)\\
-% % &=  \frac{4}{\sqrt{p^2+\chi}} r^{-2} e^{2pu} + 2u r^{-2}e^{2pu}\\
-% % &=  2u\left(1+\frac{2}{u\sqrt{p^2+\chi}}\right) r^{-2} e^{2pu}
-% % \end{align}
-% We can also write:
-% \begin{align}
-% \frac{d}{dp}[1-r^{2} e^{-2pu}]&= -\left( 2r\frac{dr}{dp} e^{-pu} - 2u r^{2}e^{-2pu}\right)\\
-% &= \left(u+\frac{4}{\sqrt{p^2+\chi}}\right) r^{2}e^{-2pu},
-% \end{align}
-% which suggests 
-% \begin{align}
-% \Aboxed{\frac{d}{dp}\ln[1-r^{2} e^{-2pu}]&= 2u \frac{r^2 e^{-2pu}}{1 - r^2  e^{-2pu}}\left(1+\frac{2}{u\sqrt{p^2+\chi}}\right)}
-% \end{align}
-% So our integral becomes
-% \begin{align}
-% I_1 & = \int_1^\infty dp\,(p^2-1)\frac{ r^2e^{-2pu}}{(1 -r^2 e^{-2pu})}\left[ 1 +\frac{2}{u\sqrt{p^2+\chi}}\right]\\
-% & = \frac{1}{2u}\log\left[1-r^2 e^{-2pu}\right](p^2-1)\bigg|_{p=1}^\infty - \int_1^\infty dp \,\frac{p}{u}\log\left[1-r^2 e^{-2pu}\right]
-% \end{align}
-% Note that the boundary term vanishes at both limits.  Let's now apply that integration by parts to the $TE$ energy.  
-% \begin{align}
-% %E_{TE} = &  \frac{\hbar c }{8\pi^2 d^{3}}\int_0^\infty du\,u^{2}\int_1^\infty dp\,p \log\left[1- r^2e^{-2pu}\right]\\
-% \Aboxed{E_{TE}= &  \frac{\hbar c }{8\pi^2}\int_0^\infty d\xi\,\xi^{2}\int_1^\infty dp\,p \log\left[1- r^2e^{-2p\xi d}\right]},
-% \end{align}
-A differentiation with respect to distance then yields the Lifshitz force results.  
 
 
 
@@ -973,48 +697,7 @@ So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostep
   In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
 %  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 
-% Tanmoy's initial calculation emphasized using $\mathcal{F}$ in the limit $\beta\rightarrow \infty$.
-%   I subbed in using the mean energy angle because I (for some reason) felt more comfortable with that.
-%   In the limit $T\rightarrow 0$ they of course agree - as borne out above.  
 
-% However my finite temperature results using the energy are completely crap.
-% If I actually use $\mathcal{F}$, then I think I reproduce Dan's  finite temperature result\footnote{Steck, D. A.,
-%  ``Quantum Optics Notes'', Eq. (14.326)}: 
-% \begin{equation}
-%   V_{CP} = \frac{k_BT}{4\pi\epsilon_0c^2}{\sum_{n=0}^{\infty}}'s_n^2\alpha(is_n)
-% \int_0^\infty dk_T \frac{k_T}{\kappa_n}\left[ r_\perp(\theta,is_n)+ 
-%   \left(1 +\frac{2k_T^2c^2}{s_n^2}\right)r_\|(\theta,is_n)\right]e^{-2\kappa_nz},
-% \end{equation}
-% where $\kappa_n = \sqrt{s_n^2/c^2+k_T^2}$, and $r_\|, r_\perp$ still depend on $\cos(\theta)$.
-%   I think after variable transformation they become the reflection coefficients we use above.  
-
-% In the limit of zero temperature, then the factor of $\beta^{-1}$ will get eaten - 
-% as the derivative has been doing for us. 
-% For high temperature, I don't need to take any derivatives, and I get exactly the results I want.       
-
-
-% \subsection{Casimir-Polder energy}
-
-% \begin{align}
-% E-E_0&=k_BT\sum'_n\,\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
-% \dlangle e^{-T\frac{\omega_n^2}{2c^2}} - \left(1 - \frac{ T\omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)
-% \langle \delta(x-x')\rangle\right)e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle
-% \end{align}
-% I think the first two terms the energy due to the dielectrics on their own, without the atom, 
-% and such can be subtracted from the atom-wall interaction energy.
-%   The physical renormalization is to expand the energy for just a polarizable particle,
-%  and consider the energy change with and without the presence of the other dielectric.
-%   So we subtract off the same energy, but with $\epsilon=1$ everywhere.
-
-% We can also simplify this a bit by noting that 
-% \begin{equation}
-% \int d^3x_0\, \dlangle \frac{1}{T}\int_0^T dt \delta(x(t)-x')\drangle = \int d^3x_0 \delta(x_0-x'),
-% \end{equation}
-% This follows from considering the discrete form of the path integral,
-%  $\int d^3x_0 \prod_i\int d^3x_i f(x_i-x_{i-1})$, where the integral is cyclic under permutations of indices.  
-% In this way we can always relabel the point that passes through $x_0$ to be the starting point of the loop.
-%    So we will then only consider loops that start and return to $x_0 = x'$.
-%    Mathematically, we will use this $\delta$-function to eliminate the integral over $\int d^3x_0$.  
 
 The TE Casimir--Polder free energy is is 
 \begin{align}
@@ -1067,21 +750,6 @@ We will need to apply both of these results as
 \frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
 \end{align}
 
-% On plugging this in to Eq.~(\ref{eq:TE_thermal_energy}) we have
-% \begin{align}
-% E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\int_0^\infty d\lambda\, 
-% \frac{e^{-2\sqrt{2(\lambda+\omega_n^2/(2c^2))}|d|}}{\sqrt{2(\lambda+\omega_n^2/(2c^2))}}
-% \frac{\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}-\sqrt{\lambda+\omega_n^2/(2c^2)}}
-% {\sqrt{\lambda+\omega_n^2/(2c^2)[1+\chi(i\omega_n)]}+\sqrt{\lambda+\omega_n^2/(2c^2)}},
-% \end{align}
-% Let's make a couple variable changes to put this into a more tractable form.  
-% First we change integration variable using $\lambda = \kappa \omega_n^2/(2c^2)$.  
-% \begin{align}
-% E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^2\alpha(i\omega_n)}{4\pi\epsilon_0c^2}\frac{\omega_n^2}{2c^2}
-% \int_0^\infty d\kappa\, \frac{e^{-2\omega_n\sqrt{(\kappa+1)}|d|/c}}{\omega_n\sqrt{(\kappa+1)}/c}
-% \frac{\sqrt{\kappa+1+\chi(i\omega_n)]}-\sqrt{\kappa+1}}{\sqrt{\kappa+1+\chi(i\omega_n)}+\sqrt{\kappa+1}},
-% \end{align}
-% Next we define $\kappa +1= p^2$.  
 \begin{align}
 E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^3\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2\omega_n p|d|/c}
 \frac{\sqrt{p^2+\chi(i\omega_n)}-p}{\sqrt{p^2+\chi(i\omega_n)}+p},
@@ -1344,36 +1012,6 @@ E-E_0 & = -k_BT \log \frac{Z_{TM}}{Z_0} \\
 
 \subsection{Casimir-Polder energy}
 
-% The Casimir-Polder energy can be recovered by expanding $\epsilon$ to linear order in $\alpha(i\omega)/\epsilon_0\delta(x-x').$
-%   We will also have to expand $V_{TM}$,
-% \begin{align}
-% T\langle V_{TM}\rangle =& \int_0^Tdt\, (\partial_x\log\sqrt{\epsilon})^2 - \partial_x^2\log\sqrt{\epsilon}\\
-% %=& \int_0^Tdt\, \frac{1}{4}(\partial_x\log\epsilon)^2 - \frac{1}{2}\partial_x^2\log\epsilon\\
-% =& \int_0^Tdt\, \frac{1}{4}[\partial_x\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)]^2 
-% - \frac{1}{2}\partial_x^2\log(\epsilon + \alpha\delta(x-x_0)/\epsilon_0)\\
-% %=& \int_0^Tdt\, \frac{1}{4}\{\partial_x[\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon(x_0)\epsilon_0)]\}^2 - \frac{1}{2}\partial_x^2\{\log(\epsilon) + \alpha\delta(x-x_0)/(\epsilon_0\epsilon(x_0))\}\\
-% =& \int_0^Tdt\, V_{TM} +\frac{\alpha}{2}\partial_x\log\epsilon\partial_x[\delta(x-x_0)/(\epsilon(x)\epsilon_0)]
-%  - \frac{\alpha}{2}\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]
-% \end{align}
-% We will simplify this a bit by assuming we are only considering the polarizable particle in regions 
-% where $\epsilon(x)$ is constant in the vicinity of $x_0$.
-%   Then we can drop any terms in $\partial_x\epsilon|_{x=x_0}$.
-%   This lets us drop the second term, and any derivatives from expanding out the derivative.
-%   I think any extra terms from expanding out these derivatives would ultimately get eaten when
-%  considering the effect of $\delta'$.
-%   It will be operationally cleaner to just leave the derivatives acting on the products, 
-% and integrate by parts at the end. 
-
-% Let us suppress the renormalization terms for the mean time.  
-% \begin{align}
-% E&=-k_BT{\sum_n}'\int_0^\infty \frac{dT}{T}\int d^3x\,\frac{1}{(2\pi T)^{3/2}}
-% \dlangle e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle} \right.\right. \nonumber \\
-% & \hspace{3cm}\times\left.\left.\left(-T\frac{\omega_n^2}{2c^2}\frac{\alpha(i\omega_n)}{\epsilon_0}
-% \langle\delta(x-x_0)\rangle  - \frac{\alpha T}{4}\langle\partial_x^2[\delta(x-x_0)/(\epsilon_0\epsilon(x))]\rangle\right)\drangle\\
-% &=k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}
-% \dlangle \left(\frac{\omega_n^2}{c^2}  - \frac{1}{2}\partial_x^2\right)
-% e^{-\frac{ T \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2} - T\langle V_{TM}\rangle}\drangle
-% \end{align}
 The renormalized TM Casimir--Polder free energy is 
 \begin{align}
 E-E_0=\,&-k_BT{\sum_n}'\frac{\alpha(i\omega_n)}{2\epsilon_0}\int_0^\infty d\cT\,
@@ -1556,11 +1194,6 @@ F-F_0=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsilon(0)-1}{\epsilon(0)+1}
 This is the familiar expression for the van der Waals interaction of an atom and a dielectric wall.
 
  
-    % \section{TE/TM Zero temperature atom-plane, plane-plane}
-    % \section{TE/TM Zero temperature atom-sphere, atom-cylinder}
-    % \section{Finite Temperature}
-
-    % \comment{Maybe I need some words here to avoid weirdness?}
 
 
 %%% Local Variables: 

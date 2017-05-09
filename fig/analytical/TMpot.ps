@@ -27,7 +27,7 @@
 /sqrteps {1 chi add sqrt} def
 /Xi {sqrteps ln} def
 /a {1.5} def
-/d {-0.5} def
+/d {-0.75} def
 /d1 {d} def
 /d2 {d a add} def
 
@@ -35,14 +35,13 @@
 
 /step_h {3.5} def
 
-/TMcol {0.5 0.5 1 setrgbcolor} def
+/TMcol {0.75 0.75 0.75 setrgbcolor} def
 
 
 startplot
 
 %Energy curve 
 1 setlinewidth
-
 
 gsave
 0 setgray
@@ -52,7 +51,6 @@ xmin 0 cc moveto
 xmax 0 cc lineto
 stroke
 grestore
-
 
 gsave
 newpath
@@ -83,9 +81,50 @@ d1 0 cc d1 delta_h cc 1.5 1 arrowend
 
 d2 0 cc d2 delta_h neg cc 1.5 1 arrowend  
 
+%make tick marks 
+gsave
+/strokelength {0.2} def
+newpath
+0.2 setlinewidth
+0 setgray
+d1 ymin cc moveto
+d1 ymin strokelength add cc lineto
+stroke
+
+newpath
+0.2 setlinewidth
+0 setgray
+d1 ymax cc moveto
+d1 ymax strokelength sub cc lineto
+stroke
+
+newpath
+0.2 setlinewidth
+0 setgray
+d2 ymin cc moveto
+d2 ymin strokelength add cc lineto
+stroke
+
+newpath
+0.2 setlinewidth
+0 setgray
+d2 ymax cc moveto
+d2 ymax strokelength sub cc lineto
+stroke
+
+d1 ymin 0.4 sub cc moveto
+0 setgray
+ [/KahoeTechLatin normal  (d)]  12 PrintArrayCenter
 
 
 
+d2 ymin 0.4 sub cc moveto
+0 setgray
+ [/KahoeTechLatin normal  (d+a)]  12 PrintArrayCenter
+
+
+
+grestore
 
 %1 in 1 in translate
 {ExpStep} 200 PlotFunction
@@ -138,6 +177,9 @@ gsave
 		15 PrintArrayCenter
 grestore
 
-[ /KahoeTechLatin normal (x)]  XAxisTitle
+gsave
+[ /ComputerModern-Regular normal (Position)]  XAxisTitle
+[ /ComputerModern-Regular normal (Dielectric / TM Potential)]  YAxisTitle
+grestore
 
 endplot

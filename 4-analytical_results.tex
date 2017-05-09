@@ -924,12 +924,12 @@ Now use
 % =& \frac{\left[e^{4\Xi}p  - e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} +e^{2\Xi}\sqrt{p^2+\chi} - p\right]}{e^{4\Xi}p^2-(p^2+\chi)}\nonumber\\
 % & - \frac{\left[e^{4\Xi}p + e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} -e^{2\Xi}\sqrt{p^2+\chi}-p\right]}{e^{4\Xi}p^2-(p^2+\chi)}\\
 % =& \frac{2e^{2\Xi}\sqrt{p^2+\chi} - 2e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} }{e^{4\Xi}p^2-(p^2+\chi)}\nonumber\\
-=& \frac{2\chi e^{2\Xi}}{\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\label{eq:TM_integration_by_parts}
+=& \frac{2\chi e^{2\Xi}}{\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}
 \end{align}
 Then 
 \begin{align}
-\Aboxed{\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 
-2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)}
+\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 
+2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)\label{eq:TM_integration_by_parts}
 \end{align}
 
 % % Ultimately, we want this to be proportional to 
@@ -946,7 +946,7 @@ The TM Casimir energy is given by
 E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\, (p^2-1) 
 \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right].
 \end{align}
-We can use Eqs.~(\ref{eq:CTM}) and (\ref{eq:TM_integration_by_parts}) to integrate with respect to $p$.  
+We can use Eq.~(\ref{eq:TM_integration_by_parts}) to integrate with respect to $p$.  
 \begin{align}
 I_2 =& \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}
 \left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\

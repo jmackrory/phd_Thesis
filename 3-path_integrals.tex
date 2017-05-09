@@ -244,13 +244,13 @@ the matching conditions at the discontinuities.
 The matching conditions follow from integrating the diffusion equation across the relevant discontinuity.  
 At step discontinuities (such as at $x=d$), the solution and its derivative must be continuous across the surface,
     \begin{equation}
-      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0, \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
+      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0 \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
     \end{equation}
     where $0_+$ is a small positive real number.
 At a $\delta$-function singularity the derivative of the solution is discontinuous, but the function
 is continuous,
     \begin{equation}
-      \partial_xf(0_+) -\partial_x f(-0_+) = -2 , \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
+      \partial_xf(0_+) -\partial_x f(-0_+) = -2  \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
     \end{equation}
     Then assuming $d>0$ and taking the bounded solution in each region, the solution is 
 \begin{equation}
@@ -510,45 +510,24 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
    %  We will thus have derived the relation between $f$ and its derivatives on both sides of the potential.      
     The continuity conditions in Eqs.~(\ref{eq:f1}) and (\ref{eq:f2}) require that
     \begin{align}
-%      f(d+\epsilon) - f(d-\epsilon) =& 0\\
-%      \rightarrow 
       f_1 &= Be^{\Xi d/a} + C e^{-\Xi d/a}\label{eq:M c1}\\
-    % \end{align}
-    % Similarly, at the second edge  we find that 
-    % \begin{align}
-    %   f(d+a+\epsilon) - f(d+a-\epsilon) =& 0\\
-    %   \rightarrow 
       f_2 &= Be^{\Xi d/a+\Xi} + C e^{-\Xi d/a-\Xi}\label{eq:M c2}.
     \end{align}
     The derivative conditions in Eqs.~(\ref{eq:f1'}) and (\ref{eq:f2'}) then require that
     \begin{align}
-%      f'(d +\epsilon)-f'(d-\epsilon) =& -\frac{\Xi}{a}f(d)\\
-%      \rightarrow f'_1%=& \frac{\Xi}{a}\left(Be^{\Xi d/a} + C e^{-\Xi d/a}\right) + \frac{\Xi}{a}\left(Be^{\Xi d/a} - C e^{-\Xi d/a}\right)\\
       \partial_xf_1&= 2\frac{\Xi}{a}Be^{\Xi d/a} \label{eq:M d1}\\
-    % \end{align}
-    % And the derivative conditions at $d+a$ yield 
-    % \begin{align}
-       % f'(d+a+\epsilon) -f'(d+a-\epsilon)=& \frac{\Xi}{a}f(d+a)\\
-      % \rightarrow f'(d+a+\epsilon)=&\frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} + C e^{-\Xi (d+a)/a} \right)+ \frac{\Xi}{a}\left(Be^{\Xi (d+a)/a} - C e^{-\Xi (d+a)/a} \right)\\
       \partial_xf_2&=2\frac{\Xi}{a}Be^{\Xi d/a}e^{\Xi}\label{eq:M d2},
     \end{align}
     where the continuity conditions have been exploited.
-    From the derivative conditions, $\partial_xf_1$ and $\partial_xf_2$ can be related to one another as follows
+    From the derivative conditions, $\partial_xf_1$ and $\partial_xf_2$ can be related to one another:
 %    Eq.~(\ref{eq:M d1}) fixes $B$, which we can use in to Eq.~(\ref{eq:M d2}), so that 
     \begin{equation}
       \partial_xf_2 = e^{\Xi}\partial_xf_1.
     \end{equation}
     In addition, under the assumption that the external gradients $\partial_x f_1$, $\partial_xf_2$ are independent of $a$ and order one,
-    that also implies that $B\sim\order(a)$.  That implies that in the continuity conditions 
-    $B$ can be dropped relative to $C$ which must also be order one.  On setting $B=0$, it is clear 
-    from Eqs.~(\ref{eq:M c1})-(\ref{eq:M c2}) that 
-% Next up the normal continuity condition.  
-%     \begin{align}
-%       f_1 =& B e^{\Xi d/a} + C e^{-\Xi d/a}\\
-%       =& \frac{a}{2\Xi} f' + C e^{-\Xi d/a} = C e^{-\Xi d/a},
-%     \end{align}
-%     which says that $B\sim a$, so we will drop it from this part of the calculation.  
-%     Now use this in Eq.~(\ref{eq:M d2}) to find
+    that also implies that $B\sim\order(a)$, since $\frac{B}{a}$ must be finite.  
+    That implies that in the continuity conditions $B$ is much smaller than $C$ which must also be order one.
+    On setting $B=0$, it is clear from Eqs.~(\ref{eq:M c1})-(\ref{eq:M c2}) that 
     \begin{equation}
       f_2 =  e^{-\Xi} f_1.  
     \end{equation}
@@ -557,12 +536,13 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     The regularized dielectric step produces the following effective boundary matching conditions at an interface
     \begin{align}
       \Aboxed{
-        f(d+0_+) =& e^{-\Xi}f(d-0_+), \qquad
+        f(d+0_+) =& e^{-\Xi}f(d-0_+) \qquad
         \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+)
       }\label{eq:TM_boundary_conditions}
     \end{align}
     \label{sec:TM boundary condition}
-    These boundary conditions can then be used to find the ensemble average solution.  
+    These boundary conditions can then be used to find the ensemble average solution for the 
+    regularized TM potential.  
 
 \subsection{Finding the Path Integral Solution for the TM Potential}
 
@@ -573,9 +553,9 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
 We aim to find a closed form solution for the path integral over paths between starting at $x=0$ and terminating at $c$ after time $t$ and 
 interacting with potential $V\subTM$,
 \begin{equation}
-  f\subTM(c,d,\Xi)=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt V_{TM}}\drangle.
+  f\subTM(c,d,\Xi)=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt\, V_{TM}}\drangle.
 \end{equation}
-The Gaussian factor in $c$ is the normalization for a 1D Brownian bridge between $x=0$ and $c$ in time $t$.
+The Gaussian factor is the normalization for a 1D Brownian bridge between $x=0$ and $c$ in time $t$.
 This path integral is found by solving
 \begin{equation}
   0 = \frac{1}{2} \partial_x^2 f\subTM - (V\subTM+\lambda)f\subTM + \delta(x-c),
@@ -598,6 +578,12 @@ side of the surface,  and when they are on different sides.
     \begin{equation}
       f\subTM = \dfrac{ e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} \dfrac{2e^\Xi}{1 + e^{2\Xi}}.
     \end{equation}
+      The material constants can be rewritten in terms of $\chi$, by using $\Xi=\log\sqrt{1+\chi}$,
+      with the result
+      \begin{align}
+        \tanh\Xi &=\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1} =\dfrac{\chi}{2+\chi}=\frac{\epsilon_{\text{r},1} -1}{\epsilon_{\text{r},1}+1}\\
+        \sech\Xi &= \dfrac{2e^\Xi}{1 + e^{2\Xi}} = \frac{2\sqrt{1+\chi}}{2+\chi}.
+      \end{align}
     In both cases the Laplace transforms in $\lambda$ can be inverted yielding Gaussians [following from Eq.~(\ref{eq:Laplace_Gaussian})].
     After canceling out the Gaussian factor $e^{-c^2/(2t)}/\sqrt{2\pi t}$, the analytical expression for 
     the path integral can be isolated
@@ -643,11 +629,6 @@ side of the surface,  and when they are on different sides.
       Note that the potential leads to larger values on the vacuum side of the medium, 
       and suppresses values for starting points inside the surface or paths that must cross the surface.  
 
-      The material constants can be rewritten in terms of $\chi$,
-      \begin{align}
-        \tanh\Xi &=\dfrac{e^{2\Xi}-1}{e^{2\Xi} +1} =\dfrac{\chi}{2+\chi}=\frac{\epsilon_{\text{r},1} -1}{\epsilon_{\text{r},1}+1}\\
-        \sech\Xi &= \dfrac{2e^\Xi}{1 + e^{2\Xi}} = \frac{2\sqrt{1+\chi}}{2+\chi}.
-      \end{align}
       In the strong-coupling limit $\tanh\Xi\rightarrow 1, \sech\Xi\rightarrow 0$, and the solution for 
       paths starting at the origin is
     \begin{align}
@@ -712,7 +693,8 @@ The path integral
     \end{equation}
     The reflection coefficient $u\supTM$ corresponds to the TM reflection coefficient 
     used in Sec.~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
-    This calculation can also be naturally extended to include a magnetic response.
+    This calculation can also be naturally extended to include a magnetic response, since $\Xi$ and $\chi$
+    can be treated as independent parameters.  
     The parameter $\Xi$ is defined in relation to the boundary condition, while $\chi$ relates to the 
     step discontinuity.  To describe the TM potential, one could take $\chi\rightarrow (\epsr\mur-1)$
     and $\Xi$ is unchanged.  Similar reasoning could apply these results to the TE potential,
@@ -732,17 +714,21 @@ The path integral
 
 \section{Two TM Step Potentials}
 
-The preceding calculations for can be easily adapted to handle two planar half-spaces subject to 
-TM boundary conditions. This time consider the path integral solution for a potential
+The preceding calculations for can be easily to handle two planar dielectric half-spaces subject to 
+TM boundary conditions.  This time, the solution is  the path integral for a potential
 \begin{equation}
-  V = \chi_1\Theta(-d/2-x)+\chi_2\Theta(x-d/2)+V\subTM(-\Xi_1,-d/2)+V\subTM(\Xi_2,d/2)
+  V = \chi_1\Theta(-d/2-x)+\chi_2\Theta(x-d/2)+V\subTM(-\Xi_1,d_1)+V\subTM(\Xi_2,d_2)
 \end{equation}
 In this case a little care is needed in defined the boundary conditions at the left hand surface.
-Since the left body has the opposite orientation (the permittivity decreases at $x=-d/2$)
-the correct TM potential for the left body has $Xi\rightarrow-\Xi_1$ everywhere.
+Since the left body has the opposite orientation (the permittivity decreases as $x$ increases at $x=-d/2$)
+the correct TM potential for the left body has $\Xi_1\rightarrow-\Xi_1$ everywhere.
 This change reverses the nature of the effective boundary conditions at the surface: if passing 
 through the surface decreases the function, and increases the gradient, then traversing the surface in the   
-opposite direction should have the opposite effect.  
+opposite direction should have the opposite effect.  So at the left hand-surface, the boundary conditions 
+are 
+    \begin{align}
+        f(d_1+0_+) =& e^{\Xi_1}f(d_1-0_+) \qquad      \partial_xf(d_1+0_+)= e^{-\Xi_1}\partial_xf(d_1-0_+).
+    \end{align}
 
   % \item {Quote full potential, and note boundary conditions.}
   % \item Quote full potential, and PDE.
@@ -781,8 +767,8 @@ The two-body TM solution can be written in the same three regions as two-body TE
 \begin{subequations}
     \begin{align}
       f^{(\text{I})}\subTMtwo(x) &=
-           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + \frac{e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}}{\sqrt{2(\lambda+\chi_1)}}
- \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}}\\
+           \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
+ \dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d} - u\supTM_1}{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}\\
 % =\frac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}
 %       \frac{u\supTM_2 e^{-2\sqrt{2\lambda}d}-u\supTM_1 }{\sqrt{2(\lambda+\chi_1)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}.
 %    \end{align}
@@ -796,15 +782,14 @@ The two-body TM solution can be written in the same three regions as two-body TE
     % and  for paths starting in the right hand body, $d_2<x_0$, the solution is
     % \begin{equation}
             f^{(\text{III})}\subTMtwo(x)&= %=  \frac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d+h)}(u\supTM_1 e^{-2\sqrt{2\lambda}d} - u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
-          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + \frac{e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}}{\sqrt{2(\lambda+\chi_2)}}
-          \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
+          \dfrac{1}{\sqrt{2(\lambda+\chi_2)}} + e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}
+          \dfrac{(u\supTM_1 e^{-2\sqrt{2\lambda}d}-u\supTM_2)}{\sqrt{2(\lambda+\chi_2)}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
     \end{align}
   \end{subequations}
   where the TM reflection coefficients for each body are given by 
     \begin{equation}
-      u\supTM_i = \frac{e^{2\Xi}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
+      u\supTM_i = \frac{e^{2\Xi_i}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi_i}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
     \end{equation}
-
   % \item {Integrate over position}
 %     In exactly the same fashion, we can integrate over position.  
 %     \begin{align}
@@ -814,7 +799,8 @@ The two-body TM solution can be written in the same three regions as two-body TE
 %     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
 %   \item Comment on divergent parts cancelling out. 
 % \end{enumerate}
-This result contains all of the previous results for closed paths.  The TE results are recovered by By taking $\Xi\rightarrow 0$.
+This result contains all of the previous results for closed paths.  
+The TE results are recovered by taking $\Xi\rightarrow 0$.
 In taking $\chi\rightarrow 0$, the dielectric steps can be ignored, and this is the two body result for just the TM
 boundary conditions.  
 The equivalent single body results can be found by taking the far body to $x=\pm\infty$.  

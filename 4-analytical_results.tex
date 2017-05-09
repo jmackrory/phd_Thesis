@@ -12,7 +12,7 @@ and show how known results for the near-field and high temperature results emerg
 The work presented on the TE polarization has been published in Ref.~\cite{Mackrory2016}.
 
 \section{Extracting Casimir--Polder Energies}
-
+\label{sec:casimir-polder_worldline}
 The Casimir--Polder energy for an atom interacting with macroscopic bodies can be derived 
 by treating the atom as a perturbation to the permittivity and permeability.  
 The atom is located at $\rA$, and has polarizability $\alpha$ and magnetizability $\beta$.
@@ -534,20 +534,12 @@ After the Laplace-Mellin and inverse-moment transforms, the TM Casimir energy is
 -\big(f\supTM_{2}(\vect{x}_0)-f_{1}\sup0\big)\right],
   \end{align}
 where this time the solutions are the path integrals in Eqs.~(\ref{eq:Feynman-Kac TM one step}) and 
-(\ref{eq:Feynman-Kac TM two step})
-\begin{align}
-I_{tot}% -I_1-I_2 + I_0 
-=& 
-  \frac{2u\supTM_1u\supTM_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
-+\dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_1)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
-+\frac{u\supTM_1 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_2)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
-& - (u\supTM_1+u\supTM_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d})}
- -   \left(\frac{u\supTM_1}{4(\lambda+\chi_1)}-\frac{(u\supTM_1+u\supTM_2)}{4\lambda}  
-+ \frac{u\supTM_2}{4(\lambda+\chi_)2}\right)\frac{u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
-\end{align}
+(\ref{eq:Feynman-Kac TM two step}).
+The spatial integrals over $x_0$ can be evaluated, and the results simplified.  This algebra is again
+deferred to an App.~\ref{nasty_calc}.
 where $\kappa = \lambda+\chi$, and 
 \begin{equation}
-u\supTM =  \frac{\epsilon\sqrt{\lambda}-\sqrt{\kappa}}{\epsilon\sqrt{\lambda}+\sqrt{\kappa}}
+u\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda}-\sqrt{\lambda+\chi_i}}{e^{2\Xi_i}\sqrt{\lambda}+\sqrt{\lambda+\chi_i}}
 \end{equation}
 
 \comment{Let's now set $\chi_1=\chi_2=\chi$}
@@ -694,74 +686,99 @@ Which gives us
 \end{align}
 \comment{Am I off by $1/4$?  That should be a matter of more careful accounting.}
 
-
-\section{Finite Temperature and Dispersion}
+\section{Nonzero Temperature and Dispersion}
 \label{sec:nonzero_temp}
+The preceding results were all derived for dispersion free media at zero temperature.  
+These calculations can be extended to nonzero temperature and to account for dispersion.  This is needed
+to capture the near-field and extreme far-field behaviour.
 We will handle the finite temperature (and dispersion) in the atom-plane geometry.
-  We derive the partition function for finite temperature for both the TE and TM polarizations.
-  So far, I have done both Casimir and Casimir-Polder energies for TE, and only Casimir-Polder for TM.
+  % We derive the partition function for finite temperature for both the TE and TM polarizations.
+  % So far, I have done both Casimir and Casimir-Polder energies for TE, and only Casimir-Polder for TM.
   % The zero temperature limits all work out nicely.
   % I am stumbling a little over the right way to do the high temperature limit here.  
 
-So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., 
-``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'',
- Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.~\cite{Babb2004})
-  In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
+% So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., 
+% ``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'',
+%  Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.~\cite{Babb2004})
+%   In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
 %  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 
-
-
-The TE Casimir--Polder free energy is is 
+The free energy for the TE and TM polarizations (for non-magnetic media) is
 \begin{align}
-E-E_0&=-k_BT{\sum_n}\,\frac{ \omega_n^2}{2\epsilon_0c^2}\alpha(i\omega_n)\int_0^\infty d\cT\,
-\frac{1}{(2\pi \cT)^{3/2}}\dlangle e^{-\cT\frac{\omega_n^2}{2c^2}} 
--e^{-\frac{\cT \omega_n^2\langle\epsilon(i\omega_n)\rangle}{2c^2}}\drangle\label{eq:TE_thermal_energy}
+\cF\supTE-\cF_0 %& = -k_BT \log \frac{Z_{TE}}{Z_0} \\
+% & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
+%     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
+% -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
+=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+&\times\dlangle e^{-s_n^2\cT /(2c^2)} -  e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
+\drangle\\
+% \end{align}
+% \begin{align}
+\cF\supTM-\cF_0 
+=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+&\times\dlangle e^{-s_n^2\cT /(2c^2)} -  e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
+e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle.
+\end{align}
+The Casimir--Polder energy can be derived by the same reasoning used in Sec.~\ref{sec:casimir-polder_worldline}.
+In this case, the results are 
+\begin{align}
+\cF\supTE\subCP-\cF_0 
+=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\frac{s_n^2\alpha(is_n)}{2\epsilon_0c^2}\int_0^\infty \frac{d\cT}{(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+&\times \dlangle e^{-s_n^2\cT /(2c^2)} -  e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
+\drangle_{\vect{x}(t),\vect{x}(0)=\rA}\\
+\cF\supTM\subCP-\cF_0 
+=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\frac{\alpha(is_n)}{\epsilon_0}\int_0^\infty \frac{d\cT}{(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+&\times\dlangle \frac{s_n^2}{2c^2}e^{-s_n^2\cT /(2c^2)} -  \left(\frac{s_n^2}{2c^2}-\frac{1}{4}\nabla^2\right)e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
+e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
 
-We will focus on the Casimir-Polder result, since I can then compare to Dan's expressions in the notes.
-  For the Casimir results, I will collate some results from the literature to compare in the nonzero
- temperature/dispersive cases.  
+The fact that all material functions are already in the exponent suggests that this is the most natural
+way to discuss Casimir phenomena in the worldline.  
+Second, in the TE polarization the potential is proportional to $s_n^2$.
+ In contrast, in the TM polarization the additional TM potential is not weighted by $s_n$---the TM 
+potential might depend on the frequency via $\epsr(\vect{x},is_n)$,
+but it is not explicitly weighted by it.
+ This has important ramifications for the near-field and 
+high temperature limits.  In those limits, the entire effect is provided by the TM polarization.  
 
+At high temperature $\beta\rightarrow 0$, so the spacing between the Matsubara frequencies $s_n=2\pi n/(\hbar \beta)$
+diverges.  As a result, only the first and zero frequency mode significantly contribute.  In fact, the 
+first mode is exponentially suppressed relative to the zero frequency mode.  
+The leading order term comes from the TM potential, which for the Casimir energy would be 
+\begin{equation}
+\lim_{\beta\rightarrow 0} \cF\supTM-\cF\sup0=&-\frac{k_BT}{4}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,
+\dlangle 1 -  e^{-\cT\langle V\subTM^{(0)}(\vect{x})\rangle}\drangle.
+\end{equation}
+Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
+similarly dominant at small distances, although showing that hinges more on the form of the solutions
+and the dominant regions of the integrals.  
 
-% \begin{align}
-% E-E_0&=-k_BT \frac{\hbar\beta}{2\pi}\int_{-\infty}^\infty d\omega\int_0^\infty \frac{dT}{T}
-%\int d^3x\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-T\frac{\omega^2}{2c^2}} 
-%-  e^{-\frac{ T \omega^2\langle\epsilon(i\omega)\rangle}{2c^2}}\drangle,
-% \end{align}
+The high temperature limit touches on one of the arguments in the literature.  
+There has been a dispute over the correct model
+for the frequency dependence of a realistic metal.  The Drude model diverges as $\omega^{-1}$ at DC,
+whereas the plasma model diverges as $\omega^{-2}$ at zero frequency.  That extra divergence would 
+lead to an extra contribution from the TE polarization at zero frequency.  Early experiments were 
+unable to distinguish between the two models, although Sushkov~\etal measurements are claimed to have eliminated the 
+plasma model from consideration~\cite{Sushkov2011}.
 
-
-% \subsection{Far-field approximation, zero temperature}
-
-% Let us consider how to take the far-field approximation from these expressions.
-  % Since we are taking an ensemble average over Gaussian random walks, so the loops will intersect all the surfaces when $T\sim d^2$, where $d$ is the distance from the source point $x_0$ to the farthest surface.
-  % Secondly, the frequency integral is dominated by the exponential factors, which will contribute most when $T\omega^2/c^2\sim 1$.
-  % This suggests that frequencies with $d^2\omega^2/c^2<1$ will contribute most.
-  % In the limit where $d/c$ is large, only frequencies near $0$ will contribute, and we can approximate $\epsilon(i\omega) \approx \epsilon(0)$ everywhere.
+At the outset, we note that the zero temperature, far field limit can be recovered in two steps.
+First, since $\beta\rightarrow\infty$, the spacing between the Matsubara frequencies approaches zero.
+The sum over Matsubara modes, can be converted into a frequency integral 
+$\beta^{-1}\sum'_nf(s_n)\rightarrow \frac{\hbar c}{2\pi}\int_0^\infty ds\,f(s)$.
+Then assuming that the distances $d$ are longer than the dominant resonant wavelengths, the 
+material response functions can be replaced with their zero-frequency values.  The frequency integrals
+can then carried out, and our earlier expressions will be recovered.
 
 
 \subsubsection{Feynman-Kac formula}
 
 From Dan's work (or my re-working of it) we have the Laplace-Mellin transform for the single body Feynman-Kac formula,
-% \begin{align}
-% \int_0^\infty \frac{dT}{T^{1+z}}\dlangle e^{-s[T+ \chi\int_0^Tdt\Theta(x-d)]}\drangle 
-% =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int _0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
-% =& \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty dT e^{-(\lambda+s)T}
-% \dlangle \frac{e^{-s \chi \int_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle.
-% \end{align}
-% In our case $z=1/2$, and $s= \omega^2/(2c^2)$.
-%   We also need the actual analytical expression for that path integral,
-% \begin{equation}
-% \int_0^\infty dT e^{-(\lambda+s) T} \dlangle \frac{e^{-s\chi\int_0^T dt \Theta(x-d)}}{\sqrt{2\pi T}}\drangle  
-% =\frac{1}{\sqrt{2(\lambda+s)}}\left[1 - e^{-2\sqrt{2(\lambda+s)}|d|}\frac{\sqrt{\lambda+s(1+\chi)}
-% -\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}\right].
-% \end{equation}
 We will need to apply both of these results as 
-\begin{align}
-\int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-sT} - e^{-sT \langle\epsilon(i\omega)\rangle}\drangle 
-& =\frac{1}{2\pi}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{2(\lambda+s)}}
-\frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
-\end{align}
-
+% \begin{align}
+% \int_0^\infty dT\,\frac{1}{(2\pi T)^{3/2}}\dlangle e^{-sT} - e^{-sT \langle\epsilon(i\omega)\rangle}\drangle 
+% & =\frac{1}{2\pi}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{2(\lambda+s)}}
+% \frac{\sqrt{\lambda+s[1+\chi(i\omega)]}-\sqrt{\lambda+s}}{\sqrt{\lambda+s[1+\chi(i\omega)]}+\sqrt{\lambda+s}}
+% \end{align}
 \begin{align}
 E-E_0&=-k_BT{\sum_n}'\frac{\omega_n^3\alpha(i\omega_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2\omega_n p|d|/c}
 \frac{\sqrt{p^2+\chi(i\omega_n)}-p}{\sqrt{p^2+\chi(i\omega_n)}+p},

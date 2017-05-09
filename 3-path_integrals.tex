@@ -176,7 +176,7 @@ After those manipulations, the general solution is
 \end{align}
 which has the form of a Laplace transform in $\lambda$, where the Laplace transform is defined as
 \begin{equation}
-  \mathcal{L}[f(t)](\lambda):=\int_0^\infty d\lambda\, e^{-\lambda t} f(t).
+  \mathcal{L}[f(t)](\lambda):=\int_0^\infty d\lambda\, e^{-\lambda t} f(t).\label{eq:Laplace}
 \end{equation}
 The $\delta$-function selects paths that satisfy $\vect{W}(s)=\vect{c-x}$.  The Brownian motion $\vect{W}(0)$
 starts at the origin.  So in order to select
@@ -765,6 +765,7 @@ the TE reflection coefficients replaced by their TM counterparts.
 The two-body TM solution can be written in the same three regions as two-body TE solution:%  where 
 % For paths starting in the left body, $x_0<d_1$ the solution is
 \begin{subequations}
+    \label{eq:Feynman-Kac TM two step}
     \begin{align}
       f^{(\text{I})}\subTMtwo(x) &=
            \dfrac{1}{\sqrt{2(\lambda+\chi_1)}} + e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}

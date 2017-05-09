@@ -2,78 +2,78 @@
 \label{app:nasty_calc}
 This Appendix collects a number of lengthy, but tedious calculations required in the main text.  
 
-\section{Path Integrals in Curved Space}
+% \section{Path Integrals in Curved Space}
 
-In this section we will show that the potential $\VTE$ naturally emerges if we
-work in a curved space.  
-The problem of computing the path integral for a 
-particle in curved space was first considered by deWitt~\cite{deWitt1957}.  
-In a curved space, the position and momentum  operators take on slightly 
-different forms reflecting the differing inner product.  
-Let us follow Pauli to see one way towards handling this~\cite{Pauli1958}.  
+% In this section we will show that the potential $\VTE$ naturally emerges if we
+% work in a curved space.  
+% The problem of computing the path integral for a 
+% particle in curved space was first considered by deWitt~\cite{deWitt1957}.  
+% In a curved space, the position and momentum  operators take on slightly 
+% different forms reflecting the differing inner product.  
+% Let us follow Pauli to see one way towards handling this~\cite{Pauli1958}.  
 
-Let us consider a curved space, with generalized coordinates $q_i$.  The metric
-tensor $g_{ij}$ then gives the notion of distance, $ds^2 = g_{ij}dq^idq^j$.  
-In a curved space, the volume element is $\sqrt{|g|}\prod_idq_i$, where $g=\det(g_{ij})$.   
+% Let us consider a curved space, with generalized coordinates $q_i$.  The metric
+% tensor $g_{ij}$ then gives the notion of distance, $ds^2 = g_{ij}dq^idq^j$.  
+% In a curved space, the volume element is $\sqrt{|g|}\prod_idq_i$, where $g=\det(g_{ij})$.   
 
-The identity on the coordinates is 
-\begin{equation}
- I_q := \int d\vect{q}\sqrt{|g|} |\vect{q}\rangle\langle {q}|
-\end{equation}
-This implies that the wavefunction overlap for two states $|\phi\rangle,|\psi\rangle$
-is 
-\begin{equation}
-\langle \phi|\psi\rangle = \int d\vect{q}\sqrt{|g|} \phi^*(\vect{q})\psi(\vect{q}).
-\end{equation}
-In order for the identity to be idempotent ($I_q^2 = I_q$), this requires that
-the overlap between coordinate eigenstates is 
-\begin{equation}
-\langle \vect{q}|\vect{q'}\rangle = \frac{1}{\sqrt{|g|}}\delta(\vect{q}-\vect{q}')
-\end{equation}
+% The identity on the coordinates is 
+% \begin{equation}
+%  I_q := \int d\vect{q}\sqrt{|g|} |\vect{q}\rangle\langle {q}|
+% \end{equation}
+% This implies that the wavefunction overlap for two states $|\phi\rangle,|\psi\rangle$
+% is 
+% \begin{equation}
+% \langle \phi|\psi\rangle = \int d\vect{q}\sqrt{|g|} \phi^*(\vect{q})\psi(\vect{q}).
+% \end{equation}
+% In order for the identity to be idempotent ($I_q^2 = I_q$), this requires that
+% the overlap between coordinate eigenstates is 
+% \begin{equation}
+% \langle \vect{q}|\vect{q'}\rangle = \frac{1}{\sqrt{|g|}}\delta(\vect{q}-\vect{q}')
+% \end{equation}
 
-The position and momentum operators should be hermitian, and obey the 
-canonical commutation relations, 
-\begin{equation}
-[\op{q}_i,\op{p}_j]=i\hbar\delta_{ij}.
-\end{equation}
-If we define the position operators such that 
-\begin{equation}
-\langle \vect{q'}|\op{q}|\psi\rangle=\vect{q'}\langle \vect{q'}|\psi\rangle,
-\end{equation}
-then we can infer from the commutation relations, and the hermiticity condition
-that the momentum operators are given by
-\begin{align}
-\langle\phi|\op{p}_i|\psi\rangle = \int d\vect{q}\sqrt{|g|}\phi^*(\vect{q})
-\frac{1}{\sqrt{|g|}}\frac{\partial}{\partial q_i}\sqrt{|g|}\psi(\vect{q}).  
-\end{align}
-The presence of the extra factors of $\sqrt{|g|}$ ensures that the 
-$\langle\phi|(\op{p}_i|\psi\rangle = (\langle \phi|\op{p}_i^\dag)|\psi\rangle$,
-which follows from the integral represenation via an integration by parts.  
+% The position and momentum operators should be hermitian, and obey the 
+% canonical commutation relations, 
+% \begin{equation}
+% [\op{q}_i,\op{p}_j]=i\hbar\delta_{ij}.
+% \end{equation}
+% If we define the position operators such that 
+% \begin{equation}
+% \langle \vect{q'}|\op{q}|\psi\rangle=\vect{q'}\langle \vect{q'}|\psi\rangle,
+% \end{equation}
+% then we can infer from the commutation relations, and the hermiticity condition
+% that the momentum operators are given by
+% \begin{align}
+% \langle\phi|\op{p}_i|\psi\rangle = \int d\vect{q}\sqrt{|g|}\phi^*(\vect{q})
+% \frac{1}{\sqrt{|g|}}\frac{\partial}{\partial q_i}\sqrt{|g|}\psi(\vect{q}).  
+% \end{align}
+% The presence of the extra factors of $\sqrt{|g|}$ ensures that the 
+% $\langle\phi|(\op{p}_i|\psi\rangle = (\langle \phi|\op{p}_i^\dag)|\psi\rangle$,
+% which follows from the integral represenation via an integration by parts.  
 
-An alternative method of setting up the path integral in curved space is to 
-transform that flat-space path integral to curvilinear coordinates~\cite{Gervais1976,Girotti1983}.  
-The main concern in this approach is to consistently work to $\order(\Delta T)$.  
-Given the typical Gaussian path measure, which implies $\Delta x^2 \sim \Delta T$, 
-this requires us to also Taylor expand up to fourth order in spatial 
-functions~\cite{McLaughlin1971}.    
+% An alternative method of setting up the path integral in curved space is to 
+% transform that flat-space path integral to curvilinear coordinates~\cite{Gervais1976,Girotti1983}.  
+% The main concern in this approach is to consistently work to $\order(\Delta T)$.  
+% Given the typical Gaussian path measure, which implies $\Delta x^2 \sim \Delta T$, 
+% this requires us to also Taylor expand up to fourth order in spatial 
+% functions~\cite{McLaughlin1971}.    
 
-Let us consider the following action
-\begin{equation}
-  S = \frac{m}{2}g_{ij}(\vect{q})\dot{q}_i\dot{q}_j - V(x)
-\end{equation}
-We will find the 
-\begin{enumerate}
-\item Lagrangian.
-\item Momentum
-\item Hamiltonian.  Note $pgp$ structure.  Operator ordering problem in curved space.  
-  Have classical equations, with ambiguous ordering (and tiny, tiny consequences)
-  for different choices.  
-\item Wave equation is Laplace-Beltrami operator (what you get from changing coords
-  -motivates Gervais approach.  
-\item DeWitt: Path integral is kernel of appropriate Schrodinger equation.
-\item Kleinert, transformation useful in curvilinear coordinates. (path integral
-  for hydrogen atom.
-\end{enumerate}
+% Let us consider the following action
+% \begin{equation}
+%   S = \frac{m}{2}g_{ij}(\vect{q})\dot{q}_i\dot{q}_j - V(x)
+% \end{equation}
+% We will find the 
+% \begin{enumerate}
+% \item Lagrangian.
+% \item Momentum
+% \item Hamiltonian.  Note $pgp$ structure.  Operator ordering problem in curved space.  
+%   Have classical equations, with ambiguous ordering (and tiny, tiny consequences)
+%   for different choices.  
+% \item Wave equation is Laplace-Beltrami operator (what you get from changing coords
+%   -motivates Gervais approach.  
+% \item DeWitt: Path integral is kernel of appropriate Schrodinger equation.
+% \item Kleinert, transformation useful in curvilinear coordinates. (path integral
+%   for hydrogen atom.
+% \end{enumerate}
 
 
 
@@ -1520,6 +1520,44 @@ All action is happening in second lines now.
     (r^{-1}-r)^{-1} = \frac{r}{1-r^2}
   \end{equation}
 
+\section{Integrated Renormalized TM Casimir Interaction Energy}
+
+The integrated, renormalized Casimir interaction energy is
+\begin{align}
+I_{tot}% -I_1-I_2 + I_0 
+=& 
+  \frac{2u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
+ - (u\supTM_1+u\supTM_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d})}
+\nonumber\\
+&+\dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_1)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
++\frac{u\supTM_1 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_2)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
+& -   \left(\frac{u\supTM_1}{4(\lambda+\chi_1)}-\frac{(u\supTM_1+u\supTM_2)}{4\lambda}  
++ \frac{u\supTM_2}{4(\lambda+\chi_2)}\right)\frac{u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}.
+\end{align}
+\comment{I know this works, so let's try it out}
+
+First factor out the obvious common denominator. 
+\begin{align}
+I_{tot}% -I_1-I_2 + I_0 
+=& \frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} \bigg[
+  \frac{2u\supTM_1u\supTM_2d}{\sqrt{2\lambda}} 
+ - (u\supTM_1+u\supTM_2)\frac{1}{4\lambda}
+\nonumber\\
+&+\dfrac{u\supTM_2 }{4(\lambda+\chi_1)} 
+ +\frac{u\supTM_1}{4(\lambda+\chi_2)}  \nonumber\\
+& -   \left(\frac{u\supTM_1}{4(\lambda+\chi_1)}-\frac{(u\supTM_1+u\supTM_2)}{4\lambda}  
++ \frac{u\supTM_2}{4(\lambda+\chi_2)}\right)u\supTM_1u\supTM_2 \bigg]
+\end{align}
+
+Now try to group terms in $u\supTM_i$.  Also just focus on the square-bracketed term.
+\begin{align}
+ J&=  \frac{2u\supTM_1u\supTM_2d}{\sqrt{2\lambda}} 
+ +\left(\frac{1}{\lambda+\chi_2}-\frac{1}{\lambda}\right)\frac{u\supTM_1}{4}
++\left(\frac{1}{\lambda+\chi_1}-\frac{1}{\lambda}\right)\frac{u\supTM_2}{4}
+  \nonumber\\
+& -   \left(\frac{u\supTM_1}{4(\lambda+\chi_1)}-\frac{(u\supTM_1+u\supTM_2)}{4\lambda}  
++ \frac{u\supTM_2}{4(\lambda+\chi_2)}\right)u\supTM_1u\supTM_2 
+\end{align}
 
 
 %%% Local Variables: 

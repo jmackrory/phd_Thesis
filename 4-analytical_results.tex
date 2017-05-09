@@ -397,31 +397,24 @@ for an atom near a dielectric half-space (Eq. 14.205 in Steck ~\cite{SteckNotes}
 The TM efficiency $\eta\subTM$ also has a closed form solution, 
 \begin{align}
   \eta\subTM(\chi):=\,&\frac{1}{2}
-  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}}\\
+  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}}\nonumber\\
   =\,& \frac{7}{6} + \chi + \frac{2 - (1+\chi)^{3/2}}{2\chi} 
   - \frac{\text{arcsinh}\sqrt{\chi}}{2\chi^{3/2}}[1 + \chi + 2\chi^2(1 + \chi)] \nonumber\\ 
-  &+ \frac{(1+\chi)^2}{\sqrt{2+\chi}}\left[\text{arcsinh}\sqrt{1+\chi} - \text{arcsinh}\left(\frac{1}{\sqrt{1+\chi}}\right)\right]
+  &+ \frac{(1+\chi)^2}{\sqrt{2+\chi}}\left[\text{arcsinh}\sqrt{1+\chi} - \text{arcsinh}\left(\frac{1}{\sqrt{1+\chi}}\right)\right].
 \end{align}
+The TM polarization provides the majority of the Casimir--Polder energy for an atom-plane, with 5/6 of the 
+strong-coupling result coming from the TM polarization.  From the worldline point of view, most of that 
+comes from the term involving the second derivative, which suggest it is essential to correctly capture  
+that.  
 
 \section{Finding the TE Casimir energy}
 
-% For non-magnetic media, the worldline Casimir energies for both polarizations are
-% \begin{align}
-%     E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
-%     \biggdlangle
-%     \frac{1}{\sqrt{\langle \epsr\rangle}}-1    \biggdrangle_{\vect{x}(t)}\label{eq:log_Z_TE}\\
-%     E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
-%     \biggdlangle
-%     \frac{1}{\sqrt{\langle \epsr(z)\rangle}} e^{-\langle V\subTM(z)\rangle\cT}-1
-%     \biggdrangle_{\vect{x}(t)}.\label{eq:log_Z_TM}
-% \end{align}
 The Casimir energy for two dielectric planes can also be calculated within this formalism.  
 The dielectric function is given by $\epsrab(x) = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
 The calculation proceeds in the same way, except for two changes.  
-
 First, the Casimir energy requires a further integral over the starting points of the paths.
-Second, the two-body interaction energy is found by subtracting the one-body energies involving $\epsra,\epsrb$ from the two-body
- expressions with $\epsrab$.  The fully renormalized Casimir energy between two planes is
+Second, the two-body interaction energy is found by subtracting the one-body energies involving 
+$\epsra$ and $\epsrb$ from the two-body  expressions with $\epsrab$.  The fully renormalized Casimir energy between two planes is
 \begin{align}
   E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
   \biggdlangle
@@ -433,55 +426,52 @@ Second, the two-body interaction energy is found by subtracting the one-body ene
   Each term is renormalized by subtracting off the constant value of the dielectric evaluated at the 
   start of the paths.  (It is also possible to renormalize the energy by instead subtracting off the vacuum value 
   $\epsr=1$ from each term.)
-
-  The Casimir energy can be recast using the inverse-moment theorem and the Laplace-Mellin transform.  
-  The energy is 
+  The Casimir energy can be recast using the inverse-moment theorem and the Laplace-Mellin transform,  
   \begin{align}
   E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
   \int d\lambda \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
-  &\hspace{0.5cm}\times\int d\vect{x}_0 \left[ \big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) - \big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
--\big(f_{2}(\vect{x}_0)-f_{1}\sup0\big)\right]
+  &\hspace{0.5cm}\times\int d\vect{x}_0 \left[ \big(f\supTE_{12}(\vect{x}_0)-f_{12}\sup0\big) 
+- \big(f\supTE_{1}(\vect{x}_0)-f_{1}\sup0\big)
+-\big(f\supTE_{2}(\vect{x}_0)-f_{1}\sup0\big)\right].
   \end{align}
-  where $\alpha=1/2$, and $D/2$ will be taken at the end of the computation.
-  The solutions $f_i$ are the path integral solutions
-  \begin{equation}
-    f_i = \int_0^\infty d\cT \frac{e^{-(\lambda+s)\cT}}{\sqrt{\cT}}\dlangle e^{-s\int_0^\cT dt\, \chi_i(\vect{x})}\drangle,
-  \end{equation}  
+  % where $f(\vect{x}_0)$ is the path integral solution for the relevant geometry, and $f\sup0$ is the solution when the 
+  % dielectric is replaced by the constant value at the path starting point.
+  The values for $\alpha=1/2$ and $D=4$ will be taken at the end of the computation.
+  The solutions $f\supTE_i$ are the path integral solutions
+  % \begin{equation}
+  %   f_i = \int_0^\infty d\cT \frac{e^{-(\lambda+s)\cT}}{\sqrt{\cT}}\dlangle e^{-s\int_0^\cT dt\, \chi_i(\vect{x})}\drangle,
+  % \end{equation}  
   derived in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and (\ref{eq:Feynman-Kac TE two step}) for one and 
-  two planar bodies respectively, and are renormalized by subtracting the solution for a constant dielectric filling space.  
+  two dielectric steps respectively.  These are renormalized by subtracting $f\sup0_i$, the solution for a constant dielectric filling space.  
   The spatial integral can be carried out for each of the three regions: Region I where $x_0<d_1$, Region II where
   $d_1<x_0<d_2$, and Region III where $d_2<x_0$.  
   Fortunately, the solutions are simple exponentials in $x_0$, making these integrals straightforward.
   This calculation is deferred to an App.~\ref{app:nasty_calc}, since it is straightforward, but messy.
   
-  \comment{Guessing answer need to fix intermediate algebra}
   After a lot of algebra, the spatial integrand can be written as
   \begin{align}
-    &\int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
-    -\big(f_{2}(\vect{x}_0)-f_{2}\sup0\big)\bigg]\nonumber\\
-    & = \sqrt{2\pi}\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{2(\lambda+s)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2(\lambda+s)}d})}\left(2d
+    &\int_{-\infty}^\infty dx_0\bigg(\big[f\supTE_{12}(x_0)-f_{12}\sup0\big] -\big[f\supTE_{1}(x_0)-f_{1}\sup0\big]
+    -\big[f\supTE_{2}(x_0)-f_{2}\sup0\big]\bigg)\nonumber\\
+    & = \frac{A\sqrt{\pi}u\supTE_1u\supTE_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{(\lambda+s)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2(\lambda+s)}d})}\left(2d
      + \frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_1)}}+\frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_2)}}\right)
   \end{align}
-  where 
+  where $A$ is the (infinite) area of the dielectric planes, and the reflection cofficients for each surface are
   \begin{equation}
     u\supTE_i = \frac{\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
   \end{equation}
-  The integrals can be transformated into Lifshitz form via similar transformations to those used previously.
-First change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$,  [or $\lambda=s(v^2-1)$]
+  In order to recover a finite quantity it is necessary to calculate the energy per unit area.  
+  The integrals can be transformed into Lifshitz form via similar transformations to those used previously.
+First, change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, % [or $\lambda=s(v^2-1)$]
   \begin{align}
-    E\subTE-E\sup0 %  &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}s^{(D-1)/2-\alpha}
-%   \int_1^\infty dv\, 2vs\frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
-%   &\times\sqrt{2\pi}\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2s}vd}}{\sqrt{2s}v(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2s}vd})}
-% \left(2d + \frac{\sqrt{2}}{\sqrt{s}\sqrt{v^2+\chi_1}}+\frac{\sqrt{2}}{\sqrt{s}{v^2+\chi_2}}\right)\\
-&= -\frac{\hbar c}{(2\pi)^{D/2}}\sqrt{\pi}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
+    \frac{E\subTE-E\sup0}{A} &= -\frac{\hbar c}{(2\pi)^{D/2}}\sqrt{\pi}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
   \int_1^\infty dv\, \frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
   &\times\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2s}vd}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2s}vd})}
-\left(2d + \frac{\sqrt{2}}{\sqrt{s}\sqrt{v^2+\chi_1}}+\frac{\sqrt{2}}{\sqrt{s}{v^2+\chi_2}}\right)
+\left(2d + \frac{\sqrt{2}}{\sqrt{s}\sqrt{v^2+\chi_1}}+\frac{\sqrt{2}}{\sqrt{s}{v^2+\chi_2}}\right).
   \end{align}
   Next, change variable from $s$ to $t=\sqrt{2s}$, swap the $t$ and $v$ integrals, and  
   susbstitute $\alpha=1/2$, $D=4$, with the result
   \begin{align}
-    E\subTE-E\sup0
+     \frac{E\subTE-E\sup0}{A}
     &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{D-1}  \int_1^\infty dv\, (v^2-1)\nonumber\\
     &\times\frac{u\supTE_1u\supTE_2e^{-2tvd}}{(1-u\supTE_1u\supTE_2 e^{-2tvd})}
     \left(2d + \frac{2}{t\sqrt{v^2+\chi_1}}+\frac{2}{t\sqrt{v^2+\chi_2}}\right),
@@ -490,13 +480,10 @@ where the reflection coefficients have been transformed to
 \begin{equation}
    u\supTE_i = \frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}.
 \end{equation}
-This expression can be put into the Lifshitz form by integrating by parts\footnote{
-I realized this was necessary while reading Kimball Milton's scientific biography of Schwinger's
-work on the Casimir effect where he mentions an inexplicable integration by parts in Schwingers 1992 and 1993 PNAS papers.}
-with respect to $v$.
+Finally, integrate by parts with respect to $v$.
 The following derivatives will be of use,
 \begin{align}
-  \frac{d u\supTE_i}{dv} &= \frac{d}{dv}\frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
+  \frac{d u\supTE_i}{dv} &= \frac{d}{dv}\frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}\\
     % &= \frac{1-v/\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
     %   - \frac{(v-\sqrt{v^2+\chi_i})(1+v/\sqrt{v^2+\chi_i})}{(v+\sqrt{v^2+\chi_i})^2}\\
     % &= \frac{\sqrt{v^2+\chi_i}-v}{\sqrt{v^2+\chi_i}(v+\sqrt{v^2+\chi_i})}
@@ -508,8 +495,8 @@ The following derivatives will be of use,
 \end{align}
 The Casimir energy between two half-spaces is then 
 \begin{align}
-  E\subTE-E\sup0
-  &= -\frac{\hbar c}{8\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dv\, (v^2-1) \frac{d}{dv} \log(1-u\supTE_1u\supTE_2 e^{-2tvd})\\
+    \frac{E\subTE-E\sup0}{A}
+  &= -\frac{\hbar c}{8\pi^2}\int_0^\infty dt \,t^{3}  \int_1^\infty dv\, (v^2-1) \frac{d}{dv}\bigg[\frac{1}{t}\log(1-u\supTE_1u\supTE_2 e^{-2tvd})\bigg]\\
   &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dv\, v \log(1-u\supTE_1u\supTE_2 e^{-2tvd}),
 \end{align}
 since the boundary term from the integration by parts vanishes.  
@@ -518,34 +505,59 @@ In this derivation, the gap between the spaces was filled with vacuum $\epsilon_
 This derivation will be extended to the TM component, and the nonzero temperature case where
 there is dispersion.  
 
-
-
 \section{Finding the TM Casimir energy}
 
-From November 2013 we have
+The TM Casimir energy calculation is carried out in a similar manner to the TM case.
+ Despite the similarities thus far, it is still necessary to check that this calculation also works, 
+since the differences in the reflection coefficients may upset the cancellations that occured.  
+Fortunately, the calculation still works, and the Lifshitz results are recovered.    
+
+The renormalized two-body TM Casimir interaction energy is 
+\begin{align}
+  E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+  \biggdlangle
+  \bigg(\frac{e^{-\cT\langle \VTM\sup1+\VTM\sup2\rangle}}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\bigg) \nonumber\\
+&\hspace{1cm}  -\bigg(\frac{e^{-\cT\langle \VTM\sup1\rangle}}{\sqrt{\langle \epsra\rangle}}-\frac{1}{\sqrt{\epsra(\vect{x}_0)}}\bigg)
+  -\bigg(\frac{e^{-\cT\langle\VTM\sup2\rangle}}{\sqrt{\langle \epsrb\rangle}}-\frac{1}{\sqrt{\epsrb(\vect{x}_0)}}\bigg)
+    \biggdrangle_{\vect{x}(t)}.
+  \end{align}
+In addition, to the two-body dielectric, the path integral is augmented by the TM potentials 
+at both surfaces $\VTM\sup1$ and $\VTM\sup2$.
+The TM potentials $\VTM$ all vanish for the renormalization
+terms, which are evaluated for the case of a constant dielectric.  
+After the Laplace-Mellin and inverse-moment transforms, the TM Casimir energy is 
+  \begin{align}
+  E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
+  \int d\lambda \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
+  &\hspace{0.5cm}\times\int d\vect{x}_0 \left[ \big(f\supTM_{12}(\vect{x}_0)-f_{12}\sup0\big) 
+- \big(f\supTM_{1}(\vect{x}_0)-f_{1}\sup0\big)
+-\big(f\supTM_{2}(\vect{x}_0)-f_{1}\sup0\big)\right],
+  \end{align}
+where this time the solutions are the path integrals in Eqs.~(\ref{eq:Feynman-Kac TM one step}) and 
+(\ref{eq:Feynman-Kac TM two step})
 \begin{align}
 I_{tot}% -I_1-I_2 + I_0 
 =& 
-  \frac{2r'_1r'_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
-+\dfrac{r'_2 e^{-2\sqrt{2\lambda}d}}{4\kappa_1(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})} 
-+\frac{r'_1 e^{-2\sqrt{2\lambda}d}}{4\kappa_2(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
-& - (r'_1+r'_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-r'_1r'_2e^{-2\sqrt{2\lambda}d})}
- -   \left(\frac{r'_1}{4\kappa_1}-\frac{(r'_1+r'_2)}{4\lambda}  
-+ \frac{r'_2}{4\kappa_2}\right)\frac{r'_1r'_2 e^{-2\sqrt{2\lambda}d}}{(1-r'_1r'_2 e^{-2\sqrt{2\lambda}d})},
+  \frac{2u\supTM_1u\supTM_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
++\dfrac{u\supTM_2 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_1)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})} 
++\frac{u\supTM_1 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_2)(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
+& - (u\supTM_1+u\supTM_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d})}
+ -   \left(\frac{u\supTM_1}{4(\lambda+\chi_1)}-\frac{(u\supTM_1+u\supTM_2)}{4\lambda}  
++ \frac{u\supTM_2}{4(\lambda+\chi_)2}\right)\frac{u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})},
 \end{align}
 where $\kappa = \lambda+\chi$, and 
 \begin{equation}
-r' =  \frac{\epsilon\sqrt{\lambda}-\sqrt{\kappa}}{\epsilon\sqrt{\lambda}+\sqrt{\kappa}}
+u\supTM =  \frac{\epsilon\sqrt{\lambda}-\sqrt{\kappa}}{\epsilon\sqrt{\lambda}+\sqrt{\kappa}}
 \end{equation}
 
 \comment{Let's now set $\chi_1=\chi_2=\chi$}
 Now factor out the common terms: 
 \begin{align}
-I_{tot}=&  \frac{e^{-2\sqrt{2\lambda}d}}{(1-r'^2e^{-2\sqrt{2\lambda}d}}\left[
- \frac{2r'^2d}{\sqrt{2\lambda}}+ \dfrac{r'}{2\kappa}  -\frac{ r'}{2\lambda} 
-- \left(\frac{r'}{2\kappa}-\frac{r'}{2\lambda}\right)r'^2\right]\\
-=&  \frac{e^{-2\sqrt{2\lambda}d}}{(1-r'^2e^{-2\sqrt{2\lambda}d}}\left[
-\frac{2r'^2d}{\sqrt{2\lambda}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{\kappa}  -\frac{1}{\lambda}\right)\right],
+I_{tot}=&  \frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d}}\left[
+ \frac{2u\supTM_1u\supTM_2d}{\sqrt{2\lambda}}+ \dfrac{u\supTM}{2\kappa}  -\frac{ u\supTM}{2\lambda} 
+- \left(\frac{u\supTM}{2\kappa}-\frac{u\supTM}{2\lambda}\right)u\supTM_1u\supTM_2\right]\\
+=&  \frac{e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d}}\left[
+\frac{2u\supTM_1u\supTM_2d}{\sqrt{2\lambda}}+ \frac{u\supTM}{2}(1-u\supTM_1u\supTM_2)\left(\dfrac{1}{\kappa}  -\frac{1}{\lambda}\right)\right],
 \end{align}
 
 
@@ -568,12 +580,12 @@ I_{tot}=\int dx_0\int_0^\infty dT \frac{e^{-\lambda T}}{\sqrt{T}}\dlangle e^{-\m
 % (However, this does not apply to terms in $e^{\Xi}$.  )
 %  \begin{align}
 % E=&  C\int_0^\infty d\lambda \lambda^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}\nonumber\\
-% &\times  \frac{e^{-2\sqrt{2(\lambda+s)}d}}{1-r'^2e^{-2\sqrt{2(\lambda+s)}d}}
-% \left[\frac{2r'^2d}{\sqrt{2(\lambda+s)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{\lambda+s+s\chi}  -\frac{1}{\lambda+s}\right)\right],
+% &\times  \frac{e^{-2\sqrt{2(\lambda+s)}d}}{1-u\supTM^2e^{-2\sqrt{2(\lambda+s)}d}}
+% \left[\frac{2u\supTM^2d}{\sqrt{2(\lambda+s)}}+ \frac{u\supTM}{2}(1-u\supTM^2)\left(\dfrac{1}{\lambda+s+s\chi}  -\frac{1}{\lambda+s}\right)\right],
 % \end{align}
 % and 
 % \begin{equation}
-% r' =  \frac{(1+\chi)\sqrt{\lambda+s}-\sqrt{\lambda+ s + s\chi}}{(1+\chi)\sqrt{\lambda+s}+\sqrt{\lambda+s+s\chi}},
+% u\supTM =  \frac{(1+\chi)\sqrt{\lambda+s}-\sqrt{\lambda+ s + s\chi}}{(1+\chi)\sqrt{\lambda+s}+\sqrt{\lambda+s+s\chi}},
 % \end{equation}
 % \begin{equation}
 % C = -\frac{\hbar c\sqrt{2\pi}}{8\pi^2\Gamma[(D+1)/2+\alpha]\Gamma(\alpha)} 
@@ -582,52 +594,52 @@ I_{tot}=\int dx_0\int_0^\infty dT \frac{e^{-\lambda T}}{\sqrt{T}}\dlangle e^{-\m
 \item Now take $\lambda = qs$.  
 %  \begin{align}
 % E=&  C\int_0^\infty dq q^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
-% &\times  \frac{e^{-2\sqrt{2(q+1)s}d}}{1-r'^2e^{-2\sqrt{2(q+1)s}d}}\left[
-% \frac{2r'^2d}{\sqrt{2s(q+1)}}+ \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(q+1+\chi)}  -\frac{1}{s(q+1)}\right)\right],
+% &\times  \frac{e^{-2\sqrt{2(q+1)s}d}}{1-u\supTM^2e^{-2\sqrt{2(q+1)s}d}}\left[
+% \frac{2u\supTM^2d}{\sqrt{2s(q+1)}}+ \frac{u\supTM}{2}(1-u\supTM^2)\left(\dfrac{1}{s(q+1+\chi)}  -\frac{1}{s(q+1)}\right)\right],
 % \end{align}
 % and 
 % \begin{equation}
-% r' =  \frac{(1+\chi)\sqrt{q+1}-\sqrt{q+ 1 + \chi}}{(1+\chi)\sqrt{q+1}+\sqrt{q+1+\chi}},
+% u\supTM =  \frac{(1+\chi)\sqrt{q+1}-\sqrt{q+ 1 + \chi}}{(1+\chi)\sqrt{q+1}+\sqrt{q+1+\chi}},
 % \end{equation}
 \item Now take $p = \sqrt{q+1}$.  $\rightarrow  q = p^2-1, dq = 2p dp$.  
 %  \begin{align}
 % E%=&   C\int_1^\infty dp(2p) (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{\alpha-1}s^{1+(D-1)/2-\alpha}\nonumber\\
-% % &\times  \frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}p}+ 
-% % \frac{r'}{2}(1-r'^2)\left(\dfrac{1}{s(p^2+\chi)}  -\frac{1}{s p^2}\right)\right]\\
+% % &\times  \frac{e^{-2\sqrt{2s}pd}}{1-u\supTM^2e^{-2\sqrt{2s}pd}}\left[\frac{2u\supTM^2d}{\sqrt{2s}p}+ 
+% % \frac{u\supTM}{2}(1-u\supTM^2)\left(\dfrac{1}{s(p^2+\chi)}  -\frac{1}{s p^2}\right)\right]\\
 % =&  2C\int_1^\infty dp (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty ds\, s^{(D-1)/2}\nonumber\\
-% &\times\frac{e^{-2\sqrt{2s}pd}}{1-r'^2e^{-2\sqrt{2s}pd}}\left[\frac{2r'^2d}{\sqrt{2s}}- 
-% \frac{r'}{2}(1-r'^2)\left(\dfrac{\chi}{s(p^2+\chi)p}\right)\right],
+% &\times\frac{e^{-2\sqrt{2s}pd}}{1-u\supTM^2e^{-2\sqrt{2s}pd}}\left[\frac{2u\supTM^2d}{\sqrt{2s}}- 
+% \frac{u\supTM}{2}(1-u\supTM^2)\left(\dfrac{\chi}{s(p^2+\chi)p}\right)\right],
 % \end{align}
 % and 
 % \begin{equation}
-% r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+\chi)p+\sqrt{p^2+\chi}},
+% u\supTM =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+\chi)p+\sqrt{p^2+\chi}},
 % \end{equation}
 \item Finally, take 
 $s = \xi^2$
 \item Now take $p = \sqrt{q+1}$.  $\rightarrow  q = p^2-1, dq = 2p dp$.  
  \begin{align}
 E% =&  4C\int_1^\infty dp (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\xi\xi^{D-1}\nonumber\\
-% &\times  \frac{e^{-2\sqrt{2}\xi pd}}{1-r'^2e^{-2\sqrt{2}\xi pd}}\left[\frac{2r'^2d}{\sqrt{2}\xi}-
-%  \frac{r'}{2}(1-r'^2)\left(\frac{ \chi}{\xi^2(p^2+\chi)p}\right)\right]\\
+% &\times  \frac{e^{-2\sqrt{2}\xi pd}}{1-u\supTM^2e^{-2\sqrt{2}\xi pd}}\left[\frac{2u\supTM^2d}{\sqrt{2}\xi}-
+%  \frac{u\supTM}{2}(1-u\supTM^2)\left(\frac{ \chi}{\xi^2(p^2+\chi)p}\right)\right]\\
 =&  4C\int_1^\infty dp (p^2-1)^{(D-1)/2-\alpha}\int_0^\infty d\xi\,\xi^{D-1}\nonumber\\
-&\times  \frac{r'^2e^{-2\sqrt{2}\xi pd}}{1-r'^2e^{-2\sqrt{2}\xi pd}}\left[\frac{2d}{\sqrt{2}}-
- \frac{1}{2}\left(\frac{1}{r'}-r'\right)\left(\dfrac{\chi}{\xi(p^2+\chi)p}\right)\right],
+&\times  \frac{u\supTM_1u\supTM_2e^{-2\sqrt{2}\xi pd}}{1-u\supTM_1u\supTM_2e^{-2\sqrt{2}\xi pd}}\left[\frac{2d}{\sqrt{2}}-
+ \frac{1}{2}\left(\frac{1}{u\supTM}-u\supTM\right)\left(\dfrac{\chi}{\xi(p^2+\chi)p}\right)\right],
 \end{align}
 and 
 \begin{equation}
-r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
+u\supTM =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
 \end{equation}
 
 \item Now take $u = \sqrt{2}\xi d$ 
  \begin{align}
 E% =&  4C\frac{1}{2^{5/2}d^4}\int_1^\infty dp (p^2-1)\int_0^\infty du\,u^{3} 
-% \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[2d- \left(\frac{1}{r'}-r'\right)\dfrac{\chi d}{u(p^2+\chi)p}\right]\\
+% \frac{u\supTM^2e^{-2u p}}{1-u\supTM^2e^{-2u p}}\left[2d- \left(\frac{1}{u\supTM}-u\supTM\right)\dfrac{\chi d}{u(p^2+\chi)p}\right]\\
 =&  C\frac{\sqrt{2}}{d^3}\int_1^\infty dp (p^2-1)\int_0^\infty du\,u^{3} 
- \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right],
+ \frac{u\supTM_1u\supTM_2e^{-2u p}}{1-u\supTM_1u\supTM_2e^{-2u p}}\left[1- \left(\frac{1}{u\supTM}-u\supTM\right)\dfrac{\chi }{2u(p^2+\chi)p}\right],
 \end{align}
 and 
 \begin{equation}
-r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
+u\supTM =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
 \end{equation}
 \comment{proportional to Schwinger}
 \end{enumerate}
@@ -635,14 +647,14 @@ r' =  \frac{(1+\chi)p-\sqrt{p^2 + \chi}}{(1+ \chi)p+\sqrt{p^2+\chi}},
 \subsection{Integrate by parts w.r.t. $p$}
 Let's check if this also goes for the TM case.  
 \begin{align}
-\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] %=& \frac{-2r' \frac{dr'}{dp} e^{-2pu} + 2u r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}} \\
-% &= \frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 2u -\frac{2}{r'} \frac{dr'}{dp}\right)\\
-% &= 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{1}{ur'} \frac{dr'}{dp}\right)\\
-&= 2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{1}{u} \frac{d\ln[r']}{dp}\right)
+\frac{d}{dp}\ln[1-u\supTM_1u\supTM_2 e^{-2pu}] %=& \frac{-2u\supTM \frac{du\supTM}{dp} e^{-2pu} + 2u u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}} \\
+% &= \frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left( 2u -\frac{2}{u\supTM} \frac{du\supTM}{dp}\right)\\
+% &= 2u\frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left( 1 -\frac{1}{uu\supTM} \frac{du\supTM}{dp}\right)\\
+&= 2u\frac{u\supTM_1u\supTM_2 e^{-2pu}}{1-u\supTM_1u\supTM_2 e^{-2pu}}\left( 1 -\frac{1}{u} \frac{d\ln[u\supTM]}{dp}\right)
 \end{align}
 Now use 
 \begin{align}
-\frac{d}{dp}\ln[r'] =& \frac{d}{dp}\left(\log[e^{2\Xi}p - \sqrt{p^2+\chi}] -\ln[e^{2\Xi}p + \sqrt{p^2+\chi}]\right) \\
+\frac{d}{dp}\ln[u\supTM] =& \frac{d}{dp}\left(\log[e^{2\Xi}p - \sqrt{p^2+\chi}] -\ln[e^{2\Xi}p + \sqrt{p^2+\chi}]\right) \\
 %=& \frac{e^{2\Xi} - \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p-\sqrt{p^2+\chi}} -\frac{e^{2\Xi} + \frac{p}{\sqrt{p^2+\chi}}}{e^{2\Xi}p + \sqrt{p^2+\chi}}\\ 
 %=& \frac{\left[e^{2\Xi} - \frac{p}{\sqrt{p^2+\chi}}\right]\left[e^{2\Xi}p + \sqrt{p^2+\chi}\right]-\left[e^{2\Xi} + \frac{p}{\sqrt{p^2+\chi}}\right]\left[e^{2\Xi}p-\sqrt{p^2+\chi}\right]}{e^{4\Xi}p^2-(p^2+\chi)}\\
 % =& \frac{\left[e^{4\Xi}p  - e^{2\Xi}\frac{p^2}{\sqrt{p^2+\chi}} +e^{2\Xi}\sqrt{p^2+\chi} - p\right]}{e^{4\Xi}p^2-(p^2+\chi)}\nonumber\\
@@ -652,33 +664,33 @@ Now use
 \end{align}
 Then 
 \begin{align}
-\frac{d}{dp}\ln[1-r'^2 e^{-2pu}] &= 
-2u\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)\label{eq:TM_integration_by_parts}
+\frac{d}{dp}\ln[1-u\supTM_1u\supTM_2 e^{-2pu}] &= 
+2u\frac{u\supTM_1u\supTM_2 e^{-2pu}}{1-u\supTM_1u\supTM_2 e^{-2pu}}\left( 1 -\frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right)\label{eq:TM_integration_by_parts}
 \end{align}
 
 % % Ultimately, we want this to be proportional to 
 %  \begin{align}
-%  C=&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-% % =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \left(\frac{e^{2\Xi}p+\sqrt{p^2+\chi}}{e^{2\Xi}p-\sqrt{p^2+\chi}}
+%  C=&\frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left[1 - \left(\frac{1}{u\supTM}-u\supTM\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+% % =&\frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left[1 - \left(\frac{e^{2\Xi}p+\sqrt{p^2+\chi}}{e^{2\Xi}p-\sqrt{p^2+\chi}}
 % % -\frac{e^{2\Xi}p-\sqrt{p^2+\chi}}{e^{2\Xi}p+\sqrt{p^2+\chi}}\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-% % =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{4pe^{2\Xi}\sqrt{p^2+\chi}}{e^{4\Xi}p^2-(p^2+\chi)}\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-%  =&\frac{r'^2 e^{-2pu}}{1-r'^2 e^{-2pu}}\left[1 - \frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right]\label{eq:CTM}\\
+% % =&\frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left[1 - \frac{4pe^{2\Xi}\sqrt{p^2+\chi}}{e^{4\Xi}p^2-(p^2+\chi)}\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+%  =&\frac{u\supTM^2 e^{-2pu}}{1-u\supTM^2 e^{-2pu}}\left[1 - \frac{2\chi e^{2\Xi}}{u\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}\right]\label{eq:CTM}\\
 %  \end{align}
 % % So this will work.  
 The TM Casimir energy is given by
 \begin{align}
 E_{TM} = & -\frac{\hbar c}{8\pi^2 d^3}\int_0^\infty du\,u^{3} \int_1^\infty dp\, (p^2-1) 
-\frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right].
+\frac{u\supTM_1u\supTM_2e^{-2u p}}{1-u\supTM_1u\supTM_2e^{-2u p}}\left[1- \left(\frac{1}{u\supTM}-u\supTM\right)\dfrac{\chi }{2u(p^2+\chi)p}\right].
 \end{align}
 We can use Eq.~(\ref{eq:TM_integration_by_parts}) to integrate with respect to $p$.  
 \begin{align}
-I_2 =& \int_1^\infty dp\, (p^2-1) \frac{r'^2e^{-2u p}}{1-r'^2e^{-2u p}}
-\left[1- \left(\frac{1}{r'}-r'\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
-=& \left[(p^2-1)\frac{1}{2u}\log[1-r'^2 e^{-2pu}]\right]_{p=1}^\infty - \int_1^\infty dp\,\frac{p}{u}\log[1-r'^2 e^{-2pu}]
+I_2 =& \int_1^\infty dp\, (p^2-1) \frac{u\supTM_1u\supTM_2e^{-2u p}}{1-u\supTM_1u\supTM_2e^{-2u p}}
+\left[1- \left(\frac{1}{u\supTM}-u\supTM\right)\dfrac{\chi }{2u(p^2+\chi)p}\right]\\
+=& \left[(p^2-1)\frac{1}{2u}\log[1-u\supTM_1u\supTM_2 e^{-2pu}]\right]_{p=1}^\infty - \int_1^\infty dp\,\frac{p}{u}\log[1-u\supTM_1u\supTM_2 e^{-2pu}]
 \end{align}
 Which gives us 
 \begin{align}
-\Aboxed{E_{TM}= & \frac{\hbar c}{8\pi^2 }\int_0^\infty d\xi\,\xi^{2} \int_1^\infty dp\, p \log[1-r'^2 e^{-2p\xi d}]}
+\Aboxed{E_{TM}= & \frac{\hbar c}{8\pi^2 }\int_0^\infty d\xi\,\xi^{2} \int_1^\infty dp\, p \log[1-u\supTM_1u\supTM_2 e^{-2p\xi d}]}
 \end{align}
 \comment{Am I off by $1/4$?  That should be a matter of more careful accounting.}
 

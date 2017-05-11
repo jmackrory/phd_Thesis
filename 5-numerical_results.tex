@@ -377,12 +377,27 @@ the noise floor in Fig.~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
   \label{fig:conv_wall}
 \end{figure}
 
-As $N$ varies for fixed $\chi$, there are two different scaling behaviours.  
-In the weak-coupling limit $\chi/N\ll 1$, the error comes from underestimating the sojourn time.
-In the strong-coupling limit $\chi/N\gg 1$, the error comes from underestimating the first path-time
-that a path touches the surface.
-For a fixed $\chi$, the transition between both behaviours is observed at $\chi\sim N$. 
-In Ref.~\cite{Mackrory2016}, some arguments are given to explain this scaling, which will not be repeated here.
+As the path resolution $N$ varies for fixed $\chi$, the error shows two different scaling behaviours.  
+In Ref.~\cite{Mackrory2016}, some arguments are given to explain this scaling, which will not be repeated here,
+but we will explain the basic reasoning.  The numerical computations use discrete paths, 
+while the path integral assumes $N$ is arbitrarily large.  Thus the paths considered by the path integral
+have arbitrarily fine structure, with a non-zero probability to touch, or enter the dielectric body.
+The discrete paths used in the numerical method miss those contributions.  
+
+In the weak-coupling limit $\chi/N\ll 1$, the numerical estimate is dominated by accurately estimating the sojourn
+time $\langle\theta\rangle$ for a given path.  Further increasing $N$ increases the accuracy of this 
+estimate and renormalized integrand.  The $N^{-3/2}$ scaling can be estimated by integrating up the probability for a nonzero sojourn time
+from each increment.  
+
+In the strong-coupling limit $\chi/N\gg 1$, the integrand immediately saturates, and returns one.
+Thus the dominant error comes from underestimating the time that this occurs.  The error scaling
+is estimated by integrating up the probability that a continous path \emph{did} touch the surface
+prior to the estimated first contact time.  This leads to a $N^{-1/2}$ scaling.
+
+For a fixed $\chi$, the transition between both behaviours is observed at $N\sim\chi$. 
+In the strict $\chi\rightarrow\infty$ Dirichlet limit, the numerical results and scaling 
+arguments suggests that the numerical error will always scaled as $N^{-1/2}$.  However, for a finite
+$\chi$ there is always such an $N$, although that $N$ grows linearly as the susceptibility increases.  
 
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}

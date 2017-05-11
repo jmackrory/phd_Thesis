@@ -402,21 +402,23 @@ $\chi$ there is always such an $N$, although that $N$ grows linearly as the susc
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}
 
-Numerically calculating the Casimir energy due to the TM potential is much harder than the TE case. 
-The integrand is more singular for dielectrics.  We will develop a number of techniques to temper these
-difficulties that should have applications for more general Casimir worldlines.
+Numerically calculating the Casimir energy due to the TM polarization is much harder than the TE case. 
+This is due to the TM potential.
+Even after regularization, and analytical path averaging, is still challenging to handle numerically.
+We will develop a number of techniques to temper these difficulties that should have applications for more general Casimir worldlines.
 
 The most daunting feature of the TM Casimir worldline is the singular TM potential.
-As found in Ch.~\ref{ch:feynman_kac}, it is possible to regularize the potential, 
-and smooth the potential further by considering the ensemble average of the potential over many paths.  
  A closed form solution for the TM potential $V\subTM$ at a single planar boundary was found in Ch.~\ref{ch:feynman_kac}.
 The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is 
 \begin{align}
-  \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle_{x_k\rightarrow x_{k+1}} 
-  &=\Theta[(x_k-d)(x_{k+1}-d)]\big[1   + \sgn(d)e^{-2(d-x_k)(d-x_{k+1})/t}\tanh\Xi\big]\nonumber\\
-  &\hspace{0.5cm}+ \Theta[-(x_k-d)(x_{k+1}-d)]\sech\Xi.        \label{eq:TM_pot}
+  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} 
+  \!\! =&\, \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]\nonumber\\
+%  &\times
+&+\Theta[-X_{k,k+1}]\sech\Xi,
+   \label{eq:TM_pot}
 \end{align}
-This ensemble-averaged solution is plotted in Fig.~\ref{fig:TMexp}, 
+where $X_{k,k+1}:=(d-x_k)(d-x_{k+1})$.
+This ensemble-averaged solution was plotted in Fig.~\ref{fig:TMpot}, 
 for starting points on either side of the interface at various values of $\Xi$.
 The solution is between zero and one for paths that start inside a body, or cross an interface.
 For paths starting outside a body, the solution is between one and two.  The extreme values of zero and 
@@ -434,15 +436,15 @@ between these points.
     \biggdrangle
 \end{equation}
 It is not strictly necessary to include the dielectric average in the averaging over
-sub-paths, since the dielectric is a much smoother function.  Taking the dielectric into the average of sub-paths would lead to 
-even better results, but those analytical solutions are difficult to calculate.
+sub-paths, since the dielectric is a much smoother function.  % Taking the dielectric into the average of sub-paths would lead to 
+% even better results, but those analytical solutions are difficult to calculate.
 The integrand can be built up even for a discrete Brownian bridge of length $N$, 
 by multiplying the appropriate TM potential terms~(\ref{eq:TM_pot}) along the path, and then dividing
 by the path-average of the dielectric $\langle\epsr\rangle$.  
 
-This notion of replacing a singular potential with its ensemble averaged value between two end points
-is a powerful one.  This technique also offers an improvement on the accuracy for Dirichlet boundary conditions,
-and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref{sec:accel_converge}.
+% This notion of replacing a singular potential with its ensemble averaged value between two end points
+% is a powerful one.  This technique also offers an improvement on the accuracy for Dirichlet boundary conditions,
+% and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref{sec:accel_converge}.
 
 \subsection{Scaling of Averaged TM Potential with Path Resolution}
 
@@ -450,23 +452,25 @@ Even after regularization, and ensemble averaging the TM potential is still diff
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
 \begin{equation}
-  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} = \dlangle \prod_{k=1}^N
-  \bigglinklangle  e^{-\int_0^\cT dt\,\VTM[x(t)]}\bigglinkrangle\drangle_{\vect{x}_k}.
+  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} = \Biggdlangle \prod_{k=1}^N
+  \bigglinklangle  e^{-\int_0^\cT dt\,\VTM[x(t)]}\bigglinkrangle\Biggdrangle_{\vect{x}_k}.
 \end{equation}
 The left-hand ensemble average is over continuous Brownian bridges, whereas the second ensemble
 average runs over discrete Brownian bridges (and averaging over continuous sub-paths indicated by $\linklangle\cdots\linkrangle$).
 In this case, the exact value of the integral is just the TM potential solution Eq.~\ref{eq:TM_pot},
-for $x_k=x_{k+1}=x_0$.  The right hand side can be computed numerically, and the 
-nd we can examine how the numerical answers scale with the number 
-of increments.  
+for $x_k=x_{k+1}=x_0$.  The right hand side can be computed numerically, its scaling with $N$ can be
+examined.
 
 Fig.~\ref{fig:TM_histogram} shows a histogram of numerical estimated values for closed Brownian paths 
-interacting with the TM potential.  Each Brownian path is generated via the v-loop algorithm~(\ref{eq:vloop}),
-and the total contribution from each path is the product of the TM solutions~(\ref{eq:TM_pot}) for every
+interacting with the TM potential.  Each Brownian path is generated via the v-loop algorithm~(\ref{eq:unit_vloop}),
+and scaled by $\sqrt{\cT}$.  The total contribution from each path is the product of the TM solutions~(\ref{eq:TM_pot}) for every
 step along the path.
-As can be seen there is a very wide spread of values.  Most paths return values close to zero, 
-while a few rare paths return very large values.  This suggests that the plain Gaussian paths 
+The direct estimate of the TM potential shows a wide spread of values.
+ Most paths return values close to zero, while a few rare paths return very large values.  
+This suggests that the plain Gaussian paths 
 are poorly suited to this problem, and that the path generation scheme should be modified.
+Given a large enough ensemble, this eventually converges to the right answer, but it displays
+unacceptably large numerical fluctuations.  
 
 \begin{figure}
   \centering
@@ -474,23 +478,31 @@ are poorly suited to this problem, and that the path generation scheme should be
   \caption[Histogram of Accumulated Numerical TM Estimates]
   {Histogram of accumulated numerical TM estimates, for raw Gaussian (blue) and birth-death Gaussian (red).
     Simulations used $10^6$ paths, with $N=100$ points per path, $\chi=100$, $d=1,T=1.$
-  Raw Gaussian distribution extends off to negative infinity.  Birth-Death  distribution has trunctated peak at zero weight.}
+  The raw Gaussian distribution extends off to negative infinity, while the birth-death distribution has trunctated peak at zero weight.}
+\label{fig:TM_histogram}
 \end{figure}
 
-
-
-\subsubsection{TM Loops}
+\subsubsection{TM-Gaussian paths}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/analytical/probTM}
   \caption[Combined TM Potential and Gaussian probability distribution.]{
-    Combined TM Potential and Gaussian probability distribution plotted for various $\chi$.}
+    Combined TM-Gaussian probability distribution plotted for various $\chi$.
+    Increment starting position is $x=-1$, and $\cT=1$.  The TM boundary is at the origin. }
 \end{figure}
 
-Instead of sampling path increments from the Gaussian, it is possible to account for the 
-path-averaged exponential~(\ref{eq:TMpot}) in generating increments.  The resulting 
-distribution would be a sum and difference of Gaussians.
+One possible solution to the fluctuations is to sample from a combination of a Gaussian
+and the path-averaged exponential~(\ref{eq:TM_pot}) for the path increment.
+In this case, the total probability distribution for the paths is 
+\begin{align}
+  P(x_1,\ldots ,x_{N-1}) = \prod_{k=0}^{N-1}\frac{e^{-(x_{k+1}-x_k)^2/(2\Delta\cT)}}{\sqrt{2\pi\Delta\cT}}
+  \bigglinklangle e^{-\int_0^{\Delta \cT}dt\, \VTM}\bigglinkrangle_{x_k\rightarrow x_{k+1}}
+\end{align}
+In the same manner as the v-loops, the Gaussian probability distribution can be decoupled into a
+set of random variables.  
+
+
 
   1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
   Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  For differences of Gaussians,

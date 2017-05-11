@@ -1313,6 +1313,7 @@ and did not have concrete, correct results.
 % for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
 % world line method.   
 \subsection{Derivation of the Scalar Casimir Worldline Path Integral}
+\label{sec:dirichlet_worldline_derivation}
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by Gies\etal~\cite{Gies2003}.
@@ -1543,14 +1544,6 @@ the vacuum energy cuts off the divergent $\cT$ integral as small $\cT$.
 At later times $\cT$, these paths would have larger extent, and both would contribute, but due 
 to the $\cT^{-(1+D/2)}$ dependence, the lower path would have a smaller contribution.  
 
-The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).
-  The typical extent of a Brownian motion of total path time $\cT$ is $\sqrt{\cT}$. 
-A typical path will touch a surface a distance $d$ away, at total path time $\cT\sim d^2$.
-Since the integral is only non-zero after a path intersects the bodies, and the integrand is unity otherwise,
-the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D}$.  
-After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
-space-time dimensions.
-
 \begin{figure}
 \center
 \includegraphics[width=10cm]{fig/intro/hit_strong_coupling}
@@ -1561,6 +1554,16 @@ space-time dimensions.
   Lower loop only touches one body, and does not contribute to Casimir energy.}
 \label{fig:strong_coupling_cartoon}
 \end{figure}
+
+\subsection{Worldline Distance Dependence}
+
+The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).
+  The typical extent of a Brownian motion of total path time $\cT$ is $\sqrt{\cT}$. 
+A typical path will touch a surface a distance $d$ away, at total path time $\cT\sim d^2$.
+Since the integral is only non-zero after a path intersects the bodies, and the integrand is unity otherwise,
+the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D}$.  
+After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
+space-time dimensions.
 
 The worldline method has also been extended to non-zero temperatures~\cite{Klingmueller2008}.
 The generalization is straightforward---in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
@@ -1578,7 +1581,7 @@ Since the effective dimension has been reduced by one, the energy density now sc
 which means the renormalized energy scales as $d^{-3}$ in four space-time dimensions.
 % In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
 % can be replaced by a Riemann sum, and the prior zero-temperature results
-
+\label{sec:worldline_distance_dep}
 \subsection{Numerical method}
 
 In order to numerically evaluate the worldline Casimir energy, it is necessary to generate 

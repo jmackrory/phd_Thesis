@@ -271,6 +271,7 @@ It is given by
 where
 \begin{equation}
   u\supTE = \frac{\sqrt{\lambda} -\sqrt{\lambda+\chi}}{\sqrt{\lambda} + \sqrt{\lambda+\chi}}.
+  \label{eq:TE_coeff}
 \end{equation}
 The reflection coefficient $u\supTE$ plays the same role as the TE-reflection coefficients in the Lifshitz 
 formula.  
@@ -301,7 +302,6 @@ bridges from $0\rightarrow c$, as discussed in App. B of Ref.~\cite{Mackrory2016
 These formulae may be useful in accelerating numerical techniques, with relatively coarse bridges.
 % However the formulae are quite complicated and involve diverging integrands, which makes it difficult to implement them 
 % efficient.
-
 
 \subsection{Planar Dirichlet Conditions}
 
@@ -690,6 +690,7 @@ The path integral
     where
     \begin{equation}
       u\supTM = \frac{\sqrt{\lambda}e^{2\Xi} -\sqrt{\lambda+\chi}}{\sqrt{\lambda}e^{2\Xi} + \sqrt{\lambda+\chi}}.
+      \label{eq:TM_coeff}
     \end{equation}
     The reflection coefficient $u\supTM$ corresponds to the TM reflection coefficient 
     used in Sec.~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
@@ -790,6 +791,7 @@ The two-body TM solution can be written in the same three regions as two-body TE
   where the TM reflection coefficients for each body are given by 
     \begin{equation}
       u\supTM_i = \frac{e^{2\Xi_i}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi_i}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
+      \label{eq:uTM_i}
     \end{equation}
   % \item {Integrate over position}
 %     In exactly the same fashion, we can integrate over position.  

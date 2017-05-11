@@ -6,14 +6,13 @@ This Appendix collects a number of lengthy, but tedious calculations required in
 
 The following calculation is required for the renormalized two-body energies for both TE and 
 TM.  Since TE and TM mimic each other in the form of their solutions, most of this can proceed in 
-parallel.  Only at the end is the exact form of the solution required.
+parallel.  Only at the end is the exact form of the solution required.  The form of the two-body
+solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feynman-Kac TM two step})
 
-For this initial section, the working applies to both TE and TE polarizations. 
-
-  The spatial integral over the solution $f_{12}$ in region I is
+  The spatial integral over the solution $f_{12}$  in region I is
   \begin{align}
     J_I  &= \int_{-\infty}^{d_1}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
-    &=\int_{-\infty}^{d_1}dx_0
+    &=\int_{-\infty}^{d_1}dx_0\,
     e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\frac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}
     {\sqrt{2(\lambda+\chi_1)}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}   \nonumber\\
     % &\hspace{1cm}- e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{ - u_1}{\sqrt{2(\lambda+\chi_1)}} -  e^{-2\sqrt{2\lambda}(d_2-x_0)}
@@ -55,53 +54,54 @@ For this initial section, the working applies to both TE and TE polarizations.
     {4\lambda(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
     & -\frac{(u_1+u_2) (1-e^{-2\sqrt{2\lambda}d})}{4\lambda}\nonumber\\
     &+\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
-    -\dfrac{u_1 e^{-2\sqrt{2\lambda}d}}{4\lambda}    +\dfrac{u_2}{4(\lambda+\chi_2)}
+    -\dfrac{u_1 e^{-2\sqrt{2\lambda}d}}{4\lambda}    +\dfrac{u_2}{4(\lambda+\chi_2)}.
   \end{align}
-  Then simplifying a little using $a/(1-x) -a = ax/(1-x)$.
-\begin{align*}
-  J=&+\frac{2d\,u_1u_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
-  &\frac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
-    +\frac{u_1}{4(\lambda+\chi_1)}   \\
+  Pairs of common terms can be simplified by using $a/(1-x) -a = ax/(1-x)$, with $a=u_i$ and $x=u_1u_2e^{-2\sqrt{2\lambda}d}$.
+\begin{align}
+  J=&+\frac{2d\,u_1u_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+  +\frac{u_2 e^{-2\sqrt{2\lambda}d} - u_1}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
+    +\frac{u_1}{4(\lambda+\chi_1)}   \nonumber\\
     &   +\frac{(u_1 +u_2)(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
-    -\frac{(u_1+u_2)}{4\lambda}\\
-    &+\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
-       +\dfrac{u_2}{4(\lambda+\chi_2)}
-  \end{align*}
-
-\begin{align*}
-  J=&+\frac{2d\,u_1u_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
-  &+\frac{u_2 e^{-2\sqrt{2\lambda}d}[1 - (u_1)^2]}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
-    \\
-    & +\frac{(u_1 +u_2)e^{-2\sqrt{2\lambda}d}[-1+u_1u_2]}
-    {4\lambda(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\\
-    &+\frac{u_1 e^{-2\sqrt{2\lambda}d}[1-(u_2)^2]}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
-  \end{align*}
-Now factor out common terms.  Momentarily suppress $u$.
-\begin{align*}
+    -\frac{(u_1+u_2)}{4\lambda}
+    +\dfrac{u_1 e^{-2\sqrt{2\lambda}d}-u_2}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+       +\dfrac{u_2}{4(\lambda+\chi_2)}.
+  \end{align}
+% \begin{align*}
+%   J=&+\frac{2d\,u_1u_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\nonumber\\
+%   &+\frac{u_2 e^{-2\sqrt{2\lambda}d}[1 - (u_1)^2]}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
+%     \\
+%     & +\frac{(u_1 +u_2)e^{-2\sqrt{2\lambda}d}[-1+u_1u_2]}
+%     {4\lambda(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}\\
+%     &+\frac{u_1 e^{-2\sqrt{2\lambda}d}[1-(u_2)^2]}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
+%   \end{align*}
+The exponential pieces are common to all terms and can be factored out.  
+The terms can be grouped by their denominators 
+\begin{align}
   J=\frac{e^{-2\sqrt{2\lambda}d}}{(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
     \bigg[\frac{2d\,u_1u_2 }{\sqrt{2\lambda}}
   +\frac{u_2 [1 - (u_1)^2]}{4(\lambda+\chi_1)} 
      +\frac{(u_1 +u_2)[-1+u_1u_2]}
     {4\lambda}
-    +\frac{u_1[1-(u_2)^2]}{4(\lambda+\chi_2)}\bigg]
-  \end{align*}
-Then regroup across terms.  
-\begin{align*}
+    +\frac{u_1[1-(u_2)^2]}{4(\lambda+\chi_2)}\bigg].
+  \end{align}
+The middle term with denominator $\lambda$ can then paired with the terms in $(\lambda+\chi_1)^{-1}$
+and $(\lambda+\chi_2)^{-1}$,
+\begin{align}
   J=\frac{e^{-2\sqrt{2\lambda}d}}{(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
-    \bigg[\frac{2d\,u_1u_2 }{\sqrt{2\lambda}}
-    +u_2 [1 - (u_1)^2]\left(\frac{1}{4(\lambda+\chi_1)}-\frac{1}{4\lambda} \right)
-    +u_1[1-(u_2)^2]\left(\frac{1}{4(\lambda+\chi_2)}-\frac{1}{4\lambda}\right)\bigg]
-  \end{align*}
-Now factor out $u_1u_2$.  
+    \bigg[&\frac{2d\,u_1u_2 }{\sqrt{2\lambda}}
+    +u_2 [1 - (u_1)^2]\left(\frac{1}{4(\lambda+\chi_1)}-\frac{1}{4\lambda} \right)\nonumber\\
+    &+u_1[1-(u_2)^2]\left(\frac{1}{4(\lambda+\chi_2)}-\frac{1}{4\lambda}\right)\bigg]
+  \end{align}
+Now factor out $u_1u_2$,  
 \begin{align*}
   J=\frac{u_1u_2e^{-2\sqrt{2\lambda}d}}{(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}
     \bigg[\frac{2d}{\sqrt{2\lambda}}
     -[u_1^{-1} - (u_1)]\frac{\chi_1}{4\lambda(\lambda+\chi_1)}
-    -[u_2^{-1}-(u_2)]\frac{\chi_2}{4\lambda(\lambda+\chi_2)}\bigg]
+    -[u_2^{-1}-(u_2)]\frac{\chi_2}{4\lambda(\lambda+\chi_2)}\bigg].
   \end{align*}
 This is as far as you can get without using the exact form of the reflection coefficients.  
 \subsection{TE reflection coefficients}
-For TE reflection coefficents, get
+For TE reflection coefficents~(\ref{eq:TE_coeff}), the integrated, renormalized two body solution is
 % \begin{align*}
 %   J=\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
 %     \bigg[\frac{2d}{\sqrt{2\lambda}}
@@ -109,7 +109,6 @@ For TE reflection coefficents, get
 %       -\frac{\sqrt{\lambda}-\sqrt{\lambda+\chi_1}}{\sqrt{\lambda}+\sqrt{\lambda+\chi_1}}]\frac{\chi_1}{4\lambda(\lambda+\chi_1)}
 %     +\{1\leftrightarrow 2\}\bigg]
 %   \end{align*}
-
 % \begin{align*}
 %   J=\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
 %     \bigg[\frac{2d}{\sqrt{2\lambda}}
@@ -117,30 +116,29 @@ For TE reflection coefficents, get
 %     {\lambda-(\lambda+\chi_1)}\bigg)
 %     \frac{\chi_1}{4\lambda(\lambda+\chi_1)}    +\{1\leftrightarrow 2\}\bigg]
 %   \end{align*}
-
-\begin{align*}
-  J&=\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
+\begin{align}
+  J\supTE&=\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
     \bigg[\frac{2d}{\sqrt{2\lambda}}
-    -\bigg(\frac{4\sqrt{\lambda}\sqrt{\lambda+\chi_1}}{\lambda-(\lambda+\chi_1)}\bigg)
-    \frac{\chi_1}{4\lambda(\lambda+\chi_1)}    +\{1\leftrightarrow 2\}\bigg]\\
+    -\sum_{i=1}^2\bigg(\frac{4\sqrt{\lambda}\sqrt{\lambda+\chi_i}}{\lambda-(\lambda+\chi_i)}\bigg)
+    \frac{\chi_i}{4\lambda(\lambda+\chi_i)}\bigg]\\
 %   \end{align*}
 % \begin{align*}
   &=\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2\lambda}d})}
-    \bigg[2d
+    \bigg(2d
     +\frac{\sqrt{2}}{\sqrt{\lambda+\chi_1}} 
-    +\frac{\sqrt{2}}{\sqrt{\lambda+\chi_2}} 
- \bigg].
-  \end{align*}
-This is the result substituted into Eq.~\ref{
+    +\frac{\sqrt{2}}{\sqrt{\lambda+\chi_2}}  \bigg).\label{eq:int_2body_soln_TE}
+  \end{align}
+This will be used to compute the Casimir energy between two dielectric half-spaces.  
+The extra terms will be allow an integration by parts to occur, that considerably simplifies the expressions.
 
 
 \subsection{TM Reflection Coefficients}
 In contrast, for the TM polarization, the $\sqrt{\lambda}\rightarrow e^{2\Xi}\sqrt{\lambda}$, but $\sqrt{\lambda+\chi}$ is unchanged.
 Note that the post-factor of $\chi_i/[4\lambda(\lambda+\chi_i)]$ came from the integrating the  
-the exponentials, rather than the reflection coefficients.
+the exponentials, rather than the reflection coefficients.  The TM reflection coefficients are given by Eq.~(\ref{eq:TM_coeff}).
 This means the answer is
-\begin{align*}
-  J&=\frac{u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
+\begin{align}
+  J\supTM&=\frac{u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
   \bigg[\frac{2d}{\sqrt{2\lambda}}
   -\sum_{i=1}^2\bigg(\frac{4e^{2\Xi_i}\sqrt{\lambda}\sqrt{\lambda+\chi_i}}{\lambda\,e^{4\Xi_i}-(\lambda+\chi_i)}
   \frac{\chi_i}{4\lambda (\lambda+\chi_i)}\bigg)\bigg]\\
@@ -149,73 +147,27 @@ This means the answer is
   &=\frac{u\supTM_1u\supTM_2e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2\lambda}d})}
   \bigg[2d
   -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}\chi_i}{\sqrt{\lambda+\chi_i}[\lambda\,e^{4\Xi_i}-(\lambda+\chi_i)]}
- \bigg]
-\end{align*}
-
-
-
-% \section{Integrated Renormalized TM Casimir Interaction Energy}
-
-% The integrated, renormalized Casimir interaction energy is
-% Suppress all TM superscripts.
-% \begin{align}
-% I_{tot}% -I_1-I_2 + I_0 
-% =& 
-%   \frac{2u_1u_2 e^{-2\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
-%  - (u_1+u_2)\frac{e^{-2\sqrt{2\lambda}d}}{4\lambda(1-u_1u_2e^{-2\sqrt{2\lambda}d})}
-% \nonumber\\
-% &+\dfrac{u_2 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_1)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} 
-% +\frac{u_1 e^{-2\sqrt{2\lambda}d}}{4(\lambda+\chi_2)(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}  \nonumber\\
-% & -   \left(\frac{u_1}{4(\lambda+\chi_1)}-\frac{(u_1+u_2)}{4\lambda}  
-% + \frac{u_2}{4(\lambda+\chi_2)}\right)\frac{u_1u_2 e^{-2\sqrt{2\lambda}d}}{(1-u_1u_2 e^{-2\sqrt{2\lambda}d})}.
-% \end{align}
-% \comment{I know this works, so let's try it out}
-
-% First factor out the obvious common denominator. 
-% \begin{align}
-% I_{tot}% -I_1-I_2 + I_0 
-% =& \frac{e^{-2\sqrt{2\lambda}d}}{(1-u_1u_2 e^{-2\sqrt{2\lambda}d})} \bigg[
-%   \frac{2u_1u_2d}{\sqrt{2\lambda}} 
-%  - (u_1+u_2)\frac{1}{4\lambda}
-% \nonumber\\
-% &+\dfrac{u_2 }{4(\lambda+\chi_1)} 
-%  +\frac{u_1}{4(\lambda+\chi_2)}  \nonumber\\
-% & -   \left(\frac{u_1}{4(\lambda+\chi_1)}-\frac{(u_1+u_2)}{4\lambda}  
-% + \frac{u_2}{4(\lambda+\chi_2)}\right)u_1u_2 \bigg]
-% \end{align}
-
-% Now try to group terms in $u_i$.  Also just focus on the square-bracketed term.
-% \begin{align}
-%  J&=%   \frac{2u_1u_2d}{\sqrt{2\lambda}} 
-% %  +\left(\frac{1}{\lambda+\chi_2}-\frac{1}{\lambda}\right)\frac{u_1}{4}
-% % +\left(\frac{1}{\lambda+\chi_1}-\frac{1}{\lambda}\right)\frac{u_2}{4}
-% %   \nonumber\\
-% % & -   \left(\frac{u_1}{4(\lambda+\chi_1)}-\frac{(u_1+u_2)}{4\lambda}  
-% % + \frac{u_2}{4(\lambda+\chi_2)}\right)u_1u_2 \\
-%  &=  \frac{2u_1u_2d}{\sqrt{2\lambda}} 
-%  +\left(\frac{1}{\lambda+\chi_2}-\frac{1}{\lambda}\right)\frac{(u_1-u_1u_2)}{4}
-% +\left(\frac{1}{\lambda+\chi_1}-\frac{1}{\lambda}\right)\frac{(u_2-u_1u_2^2)}{4}
-% %   \nonumber\\
-% % & -   \left(\frac{u_1}{4(\lambda+\chi_1)}-\frac{(u_1+u_2)}{4\lambda}  
-% % + \frac{u_2}{4(\lambda+\chi_2)}\right)u_1u_2 
-% \end{align}
-
-\subsection{Working backwards}
-Can also use
-\begin{align}
-  \frac{d}{dp}\log u &= \frac{d}{dp}\log(e^{2\Xi}p-\sqrt{p^2+\chi})-\frac{d}{dp}\log(e^{2\Xi}p+\sqrt{p^2+\chi}) \\
-  &= \frac{2\chi e^{2\Xi}}{\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}.
+ \bigg]\label{eq:int_2body_soln_TM}
 \end{align}
-Also know
-\begin{align}
-  \frac{d}{dp}(1 - u_1u_2 e^{-2p t d}) & = u_1u_2e^{-2p t d}(2 t d - \frac{d}{dp}\log u_1-\frac{d}{dp}\log u_2)
-\end{align}
-So 
-\begin{align}
-  \frac{d}{dp}\log(1-u_1u_2 e^{-2p t d}) &= \frac{u_1u_2 e^{-2p t d}}{1-u_1u_2 e^{-2 p t d}}\left( 
-    2 t d -  \frac{2\chi_1 e^{2\Xi_1}}{\sqrt{p^2+\chi_1}[e^{4\Xi_1}p^2-(p^2+\chi_1)]}
-    -\frac{2\chi_2 e^{2\Xi_2}}{\sqrt{p^2+\chi_2}[e^{4\Xi_2}p^2-(p^2+\chi_2)]}.\right)
-\end{align}
+Again, the extra terms allow an integration by parts to proceed, and for the Lifshitz form of the energy
+to be recovered.  
+
+% \subsection{Working backwards}
+% Can also use
+% \begin{align}
+%   \frac{d}{dp}\log u &= \frac{d}{dp}\log(e^{2\Xi}p-\sqrt{p^2+\chi})-\frac{d}{dp}\log(e^{2\Xi}p+\sqrt{p^2+\chi}) \\
+%   &= \frac{2\chi e^{2\Xi}}{\sqrt{p^2+\chi}[e^{4\Xi}p^2-(p^2+\chi)]}.
+% \end{align}
+% Also know
+% \begin{align}
+%   \frac{d}{dp}(1 - u_1u_2 e^{-2p t d}) & = u_1u_2e^{-2p t d}(2 t d - \frac{d}{dp}\log u_1-\frac{d}{dp}\log u_2)
+% \end{align}
+% So 
+% \begin{align}
+%   \frac{d}{dp}\log(1-u_1u_2 e^{-2p t d}) &= \frac{u_1u_2 e^{-2p t d}}{1-u_1u_2 e^{-2 p t d}}\left( 
+%     2 t d -  \frac{2\chi_1 e^{2\Xi_1}}{\sqrt{p^2+\chi_1}[e^{4\Xi_1}p^2-(p^2+\chi_1)]}
+%     -\frac{2\chi_2 e^{2\Xi_2}}{\sqrt{p^2+\chi_2}[e^{4\Xi_2}p^2-(p^2+\chi_2)]}.\right)
+% \end{align}
 
 
 

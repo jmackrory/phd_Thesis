@@ -2,63 +2,48 @@
 \label{ch:numerical}
 
 The ultimate goal of this project is to build a general numerical method. In order to test results 
-it is necessary to test smaller cases carefully first.  Despite the focus on planar geometries
+it is necessary to test smaller cases carefully first.  Despite the emphasis on planar geometries,
 we have tried to develop methods that would be well suited to more complicated geometries,
 and test them in the simple geometry.  In this case we can carefully test their convergence properties
 as the path resolution is increased.  
 
 Even in a planar geometry we have had to develop an array of tools to make the worldline methods tractable.
 The TM polarization is by far the hardest to deal with, and has prompted most of these developments.
-That said, the same developments can be used to enhance the TE polarization, as well as existing Dirichlet
+The same developments can be used to enhance the TE polarization, as well as existing Dirichlet
 worldline methods.
 
-In particular we will discuss techniques path construction, Monte Carlo sampling of the path starting points $x_0$
-and path-extent $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
+We will discuss techniques path construction, Monte Carlo sampling of the path starting points $x_0$
+and path-time $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
 The TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
 used to construct the paths.  The essence of these methods is importance sampling, beyond what is manifestly
 obvious from the form of the path integral.    
 
-Our tests are checking how well we can reproduce the distance dependence for the Casimir effect,
-as well as the efficiencies $\eta(\chi),\gamma(\chi)$.
-Most of our tests assume a medium with a fixed susceptibility $\chi$, and reproduce the known 
-efficiencies $\eta(\chi), \gamma(\chi)$.  As discussed in the previous chapter, each frequency 
-contributes separately to the Casimir effect. 
-Since the susceptibility of conductors at low frequencies diverges, it is necessary to test the convergence 
-of the worldline method for large, fixed $\chi$ as a simple proxy for frequency dependent calculations.
+The numerical results will be compared against the expected efficiencies $\eta(\chi)$ and $\gamma(\chi)$.
+The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
+integration over $\cT$, as was briefly discussed in Sec.~\ref{sec:worldline_distance_dep}. 
+That is still true within the for electromagnetic worldlines. 
+All of the simulations are carried out for a fixed $\chi$ in the far-field limit, but we will discuss how
+to generalize the simulations to allow dispersion.  
+The computations at fixed $\chi$ are useful indicators for how the full dispersion simulations.
+In the Casimir effect, each frequency contributes independently, so for a particular frequency $\chi(i\omega)$
+is effectively constant.  Since $\chi(i\omega)$ is a positive real constant, that diverges in some cases
+(such as metals), it is necessary to see how the worldline algorithm performs across a whole range of susceptibilities.
 
-% \begin{enumerate}
-% \item Need to develop methods that can easily generalize to more complicated geometries.
-% \item Even if using them to solve known problems.
-% \item In same fashion path integral relies on chaining together correct short-time propagator, we 
-%   are effectively using planar results at each step, under the assumption that the geometry
-%     is well-described locally by a single nearby plane.  
-% \item Need to study convergence effects carefully.  
-% \end{enumerate}
-
-This difficulty with the TM polarization is not unprecedented.  In a paper on applying
-worldline methods to imposing Neumann boundary conditions, Fosco\etal make the following 
-remark:
-\begin{quote}{We do not dwell with the numerical evaluation of this kind of path integral,
- which may certainly be more difficult than its local counter part,
- since the interaction term is not simple the integral of a local function of the time.}
-\end{quote} Fosco, Lombardo, Mazzitelli 2010.
-We present our work on the TM polarization as one way of numerically approaching the limit
-of Neumann boundary conditions.  As the effort expended shows, this is indeed much more difficult
-than the Dirichlet or even TE worldline methods.  
+The numerical results on the TE Casimir energies were published in Ref.~\cite{Mackrory2016}.
 
 \section{TE Casimir Numerics}
 
 In this section we will discuss numerically simulating the TE Casimir and Casimir--Polder energies 
 from the worldline expressions in Eqs.~(\ref{eq:TE_Casimir}) and (\ref{eq:TE_Casimir_Polder}).
 We will first discuss path generation, sampling starting positions $\vect{x}_0$ and path-times $\cT$,
-and evaluating the potentials $\rangle epsr\rangle$.  Despite working with expressions adapted to planar
-media, we will endeavour to develop general purpose numerical methods that would work in more general
-geometries.  
+and evaluating the dielectric path-average $\langle \epsr\rangle$.  % Despite working with expressions adapted to planar
+% media, we will endeavour to develop general purpose numerical methods that would work in more general
+% geometries.  
 
 \subsection{Path generation}
 
 The principal element of the worldline method is evaluating a potential along an ensemble of Gaussian
-paths.  This allows the enormous $N$-dimensional integral over positions to be efficiently evaluated in a 
+paths.  This allows the $N$-dimensional integral over positions to be efficiently evaluated in a 
 Monte Carlo fashion via $N_p$ sample paths.
 It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
 
@@ -69,34 +54,21 @@ into $N-1$ independent Gaussian deviates~\cite{Gies2003}.
 Since we will need to construct open and closed Brownian bridges of fixed length $N$, we will derive the v-loop algorithm
 for open paths, as closed paths are a special case of open paths.  
 
-Consider a Gaussian probability density of $N$ steps in one dimension, where the end points $x_0$ and $x_N$ 
+Consider a Gaussian density of $N$ steps in one dimension, where the end points $x_0$ and $x_N$ 
 are fixed:
 \begin{equation}
-  P(x_1,\ldots,x_{N-1}) = \cN (2\pi\Delta\cT)^{-N/2}\exp\left[-\sum_{j=0}^{N-1}\frac{(x_{j+1}-x_j)^2}{2\Delta\cT}\right],
+  P(x_1,\ldots,x_{N-1}) = (2\pi\Delta\cT)^{-N/2}\exp\left[-\sum_{j=0}^{N-1}\frac{(x_{j+1}-x_j)^2}{2\Delta\cT}\right].
+  \label{eq:Gaussian_distrib}
 \end{equation}
-where $\cN$ ensures the probability distribution is normalized.  
-It is convenient to define a shifted, normalized variable $y_k = (x_k-x_0)/\sqrt{\Delta \cT}.$% , for which the probability distribution is
-% \begin{equation}
-%   P(y_1,\ldots,y_{N-1}) = \cN (2\pi\Delta\cT)^{-1/2}(2\pi\Delta\cT)^{-(N-1)/2}\exp\left[-\frac{(x_N-x_0-y_{N-1})^2}{2}-
-%     \frac{y_1^2}{2}-\sum_{j=1}^{N-2}\frac{(y_{j+1}-y_j)^2}{2}\right].
-% \end{equation}
-%
+It is convenient to define a shifted, normalized variable $y_k = (x_k-x_0)/\sqrt{\Delta \cT}$.
 The exponent for the product of coupled Gaussians is
 \begin{equation}
 X = \frac{y_1^2}{2}+\frac{(y_2-y_1)^2}{2}+\cdots+\frac{(y_{N-1}-y_{N-2})^2}{2}+\frac{(\Delta x-y_{N-1})^2}{2},
 \label{eq:Xexp}
 \end{equation}
-where $\Delta x :=(x_N-x_0)/\sqrt{\Delta \cT}$.
-In general we know that,
-\begin{align}
-  \frac{(y-\mu_1)^2}{2\sigma_1^2} + \frac{(y-\mu_2)^2}{2\sigma_2^2} &= 
-  \frac{\sigma_1^2+\sigma_2^2}{2\sigma_1^2\sigma_2^2}
-  \left(y - \frac{\sigma_2^2\mu_1+\sigma_1^2\mu_2}{\sigma_1^2+\sigma_2^2}\right)^2
-  + \frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)},
-\end{align}
-which is of particular use when convolving Gaussians.
+where $\Delta x :=(x_N-x_0)/\sqrt{\Delta \cT}$.  
 The exponent~(\ref{eq:Xexp}) can be decoupled by completing the square repeatedly.
-The process starts at one end of the path, by completing the square at $y_{N-1}$.  It is convenient to
+The process starts at one end of the path $y_{N-1}$.  It is convenient to
 introduce a variance $\sigma^2_{N-1}=1$ as a bookkeeping device.
 It is possible to quickly develop recursion relations for how the resulting means and variance scale.  
 \begin{align}
@@ -128,103 +100,97 @@ transformation (\ref{eq:zj}) can be inverted to find the path,
 \comment{double check counting?}
 There is then an remaining normalization factor of $e^{-(x_N-x_0)^2/(2\cT)}/\sqrt{2\pi\cT}$,  
 which accounts for the Jacobian $\prod_{j}c_j=N^{-1}$ from changing variable.
-The limit of closed paths can be easily taken by setting $x_N-x_0=0$.  THis is also straightforwardly
-generalized to vector Brownian bridges.  
-This procedure allows the generation of a unit loop for $\cT=1$, which can then be integrated over
-multiple starting points $x_0$ and total path-times $\cT$.
-
-Since Gies\etal were considering Casimir energy applications, it made more sense to consider centered 
-paths, where the average position $\langle x\rangle$ is subtracted from the path~\cite{Gies2003}.
-This requires two passes through the path, and is inconvenient if the path is being generated on the fly 
-without storage, or if there are stochastic elements to path construction.    
-In Casimir--Polder applications (or when computing the stress-energy tensor~\cite{Schafer2016}),
- it is better to consider paths emanating from
-a single point $\vect{x}_0$.  The starting point corresponds to the atom's location, or the point where
-the stress-energy tensor is being computed.  
-
-Once a path is constructed the rest of the integrand can be sampled from along the path.
-For example, the path average of the dielectric can be evaluated as 
+This normalization is also the normalization factor derived in Eq.~\ref{eq:Gaussian_normalization}.
+An integral against the probability density~(\ref{eq:Gaussian_distrib}) could be evaluated as follows,
 \begin{equation}
-  \langle\epsr\rangle = \frac{1}{N}\sum_{k=1}^N\epsr(x_k).
+  I = \int \prod_{j=1}^{N-1}dx_j P(x_1,\ldots,x_{N-1})f(x_1,\ldots,x_N)
+  = \frac{e^{-\frac{(x_1-x_N)^2}{2\cT}}}{\sqrt{2\pi \cT}}\dlangle f\drangle_{x(t)},
+\end{equation}
+where the ensemble average is taken over open Brownian bridges betwen $x_0$ and $x_N$.
+The limit of closed paths can be easily taken by setting $x_N-x_0=0$.
+The v-loop construction is also straightforwardlygeneralized to vector Brownian bridges.  
+This procedure allows the generation of a unit loop for $\cT=1$, which can then be integrated over
+multiple starting points $x_0$ and total path-times $\cT$.  A closed unit Brownian bridge can be constructed 
+as
+\begin{equation}
+  B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k.
+\end{equation}
+A shifted, scaled Brownian bridge can then be constructed as
+\begin{equation}
+  x_k = x_0 + \sqrt{\cT} B_k.
 \end{equation}
 
-However, there are some other more accurate methods that take into the finite emount the path 
+The original v-loop algorithm used centered paths, where the average position $\langle x\rangle$ is subtracted from the path~\cite{Gies2003}.
+This requires first constructing the Brownian bridge, and then subtracting off the mean position.  
+This is inconvenient if the path is being generated on the fly 
+without storage, or if there are stochastic elements to path construction.    
+In Casimir--Polder applications (or when computing the stress-energy tensor~\cite{Schafer2016}),
+ it is better to consider paths emanating from a single point $\vect{x}_0$.
+  The starting point corresponds to the atom's location, or the point where
+the stress-energy tensor is being computed.  
 
-\section{Monte-Carlo sampling}
+\subsection{Monte-Carlo sampling}
 
 To evaluate the Casimir energy it is necessary to integrate the results for a single path over all
 starting points $\vect{x}_0$, path-times $\cT$, and average over an ensemble of paths.
 % The rationale for also sampling over times is to allow further ensemble averaging over paths,
 % and times. 
 The original Gies\etal computations emphasized computing the total $\cT$ integral for each path~\cite{Gies2003}.
-For Dirichlet scalar world-lines, this was relatively tractable as it only requires finding the 
-set of times when paths enter the body.  
+For Dirichlet worldlines, the path integrand is either zero or one based on whether the path intersects
+all of the bodies.  This makes evaluating the integral a tractable problem, since 
+it only requires finding the set of times $\{\cT_k\}$ when paths enter the body, and evaluating 
+$\int_{\cT_0}^{\cT_1} d\cT\,\cT^{-(1+D/2)}$ during those  times the integral is nonzero.
 For example, in their paper computing forces in a sphere-plane geometry Weber and Gies find analytical
 expressions in terms of $\vect{x}_0$ and $\cT$ for when each random path will intersect both bodies~\cite{Weber2010}.
 The remaining integrals over $\vect{x}_0$ and $\cT$ can be evaluated on a path-wise basis.
 
 However, for the dielectric integrands that the TE and TM path integrals require, 
-the integrand $\langle \epsr\rangle$ must be re-evaluated for every time.
-A large amount of computational effort must be expended on even a single path.  
+the integrand changes value based on how many points are inside the surface.  For a path of length $N$, this direct method would
+require finding all $N$ intersection times and then evaluating the integrals.  
+This becomes impractical for large $N$, as a large computational effort  must be expended on even a single path.  
+This becomes even more burdensome once the integral over the starting position is accounted for.
+
 Since the $N$-fold integral over positions is being handled in a Monte Carlo fashion, it makes sense to 
-treat the remaining integrals over the starting position $\vect{x}_0$ and times $\cT$ in the same manner.
-Each path should be evaluated for a single $\vect{x}_0$ and $\cT$, where those are picked from suitable
+treat the remaining integrals over the starting position $\vect{x}_0$ and path-times $\cT$ in the same manner.
+Each path can be evaluated for a single pair of $\vect{x}_0$ and $\cT$, where those are picked from suitable
 distributions, governed by the form of the integral.  This is a form of importance sampling, which 
-is often a powerful tool for accelerating Monte Carlo numerical computations~\cite{Asmussen2007, Glasserman2004}.
+is a powerful tool for accelerating Monte Carlo numerical computations~\cite{Asmussen2007, Glasserman2004}.
 This style of importance sampling goes beyond just using the Gaussian probability density to evaluate the 
-spatial integrals over the intermediate positions $\vect{x}_k$.  
-This extends the number of independent paths that can be averaged over, which 
+spatial integrals over the intermediate positions $\vect{x}_k$.  In this case, the importance sampling
+relies on knoweldge on which positions and times the most to the integral. 
+This Monte Carlo sampling of $x_0$ and $\cT$ also extends the number of independent paths that can be averaged over, which 
 is essential for good convergence.   
 
-\begin{enumerate}
-%\item Need average over ensemble of paths.
-% \item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
-%   integrate over that.  In this case, the loop potential is either zero or one, with no variation.
-%   Thus it is more straightforward to integrate over space/loop-time.  
-% \item For computationally expensive loops, it makes sense to sample only a single position, time.
-%   Explore a larger ensemble in the same computational time.
-%   \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
-  \item For time: % For TE loops, integrand is zero before first touching time.  
-    % So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
-    TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
-    that touch the surface).
-  \item Birth-death method effectively examines a larger ensemble of loops.
-    For two-bodies, it is possible to spawn new loops while close to only a single surface,
-    that might touch the other surface.  Thus the first-touching time for the parent loop
-    is a poor estimate.  Simplest to use an ensemble average estimate for time:
-    $P(\cT,d_0) = \exp(-2d_0^2/\cT)/\cT^3$, where exponential factor is the first touching
-    time.  
-  \item Frequency integrals: Can execute in parallel (like picking different $chi$).
-\end{enumerate}
+\subsubsection{Sampling Path-Time from Power Law}
 
-\subsubsection{First-touching time}
-
-The simplest method which applies to TE integrands is to find the first path-time $T_0$
-when the renormalized integrand takes on a non-zero value.\footnote{For a Brownian motion $\vect{x}(t)$,
-the first-touching time is reserved for the first time $t_0$ along a path that a Brownian bridge intersects a surface. 
+The simplest method of sampling path-times, is to exploit the presence of $\cT^{-(1+D/2)}$ in the integral.
+For a particular path, the renormalized TE integrand is only non-zero after the path touches all of the bodies,
+which occurs at some path-time $\cT_0$.\footnote{For a Brownian motion $\vect{x}(t)$,
+the term ``first-touching time'' is reserved for the first time $t_0$ along a path that a Brownian bridge intersects a surface: $\vect{x}(t_0)=d$. 
 This is distinct from the first path-time $\cT$ when any section of the scaled path intersects a surface.
 }
-After $T_0$, the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ will  increase due to as more points enter
-surfaces.  However, there is an additional $\cT^{-(1+D/2)}$ factor which damps these contributions out.
-This suggests sampling from a probability distribution 
+For $\cT>T_0$,  the extent of the path grows as $\sqrt{\cT}$, so the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ 
+increases as more points enter the bodies.  
+However, the $\cT^{-(1+D/2)}$ factor decreases the contributions from large path-times $\cT$.
+These facts suggest sampling $\cT$ from a probability distribution 
 \begin{equation}
   P(\cT;\cT_0,m)= \frac{(m-1) \cT_0^{m-1}}{\cT^m}\Theta(\cT-\cT_0),\label{eq:Tpower_law}
 \end{equation}
-where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of $\cT_0$.  For the example
-of paths starting between parallel planes $\cT_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
+where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of the first-contact time $\cT_0$.  
+For the example of paths starting between parallel planes $\cT_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
 \left(\frac{d_2-x_0}{B_+}\right)^2]$ where $d_1<x_0<d_2$, and $B_\pm$ are the maximum and minimum points
-of the unit Brownian path.    This time is the lowest bound on when the path will touch the relevant bodies.
-In computing Casimir energies, the path must touch \emph{all} of the bodies, while in Casimir--Polder
-calculations, the path must touch \emph{any} of the bodies to contribute. 
+of the unit Brownian path.  The path-time $\cT_0$ is the lowest bound on when the path will touch the relevant bodies.
+In computing Casimir interaction energies, the path must touch \emph{all} of the bodies, while in Casimir--Polder
+calculations, the path must touch \emph{any} of the bodies to contribute.  
 
-Sampled from the distribution~(\ref{eq:Tpower_law}) can be generated by inverting the cumulative distribution.
+Samples from the distribution~(\ref{eq:Tpower_law}) can be generated by inverting the cumulative probability distribution.
 (This sort of inversion is a general purpose method of generating random deviates from a distribution~\cite{NumRecipe,Devroye2003}.)
-In this case, the inversions requires a solution $\cT$ to
+In this case, the inversion requires a solution $\cT$ to
 \begin{equation}
   r=(m-1) \cT_0^{m-1}\int_{\cT_0}^\cT dt\, t^{-m}
 \end{equation}
 where $r\in [0,1]$ is a uniform random number and $\cT$ is the desired deviate.    
-This can be straightforwardly inverted 
+This can be easily solved, with the result that
 \begin{align}
 %  r&=(m-1) \cT_0^{m-1}\frac{1}{m-1}\left(\frac{1}{\cT_0^{m-1}}-\frac{1}{\cT^{m-1}}\right)\\
 %  \left(\frac{\cT_0}{\cT}\right)^{m-1}&= (1-r)\\
@@ -234,38 +200,66 @@ The lower-bound $\cT_0$ can be easily found in simple geometries on a path-wise 
 $\cT$ can then be generated for each path, where each path is then guaranteed to contribute.  
 
 In a more complicated arrangement of bodies, the lower-bound $\cT_0$ could be found via root-finding,
-to find the minimum path-time that the path touches all of the relevant bodies. 
+to find the minimum path-time that the path touches all of the relevant bodies.  It is important for 
+$\cT_0$ to be a lower bound on the first time the integrand is nonzero, otherwise this method will miss 
+part of the integral.  However, $\cT_0$ should not be set too low, as otherwise numerous samples will
+be made which generates paths that are too small to contribute.  
 
-\subsubsection{Sampling Positions}
+\subsubsection{Sampling Starting Positions}
 
-The integral over the starting point can also be evaluated in Monte-Carlo fashion by exploiting some knowledge 
+The integral over the starting point $x_0$ can also be evaluated in Monte-Carlo fashion by exploiting some knowledge 
 about the form of the integrand.  
-
-For points $x$ far from all bodies located around the origin, the expected minimum path-time $\cT_0\sim x^2$.
+For points $x$ far from all bodies located around the origin, the expected minimum path-time when the integrand is nonzero 
+is $\cT_0\sim x^2$.
 If the extent of the finite bodies is $d_{\text{max}}$, then there is also a maximum time $\cT_1$ for when the path is so large 
-it does not intersect the bodies anymore (this may be infinite in some geometries).
-In that case the path-time integral is approximately 
+that it does not intersect the bodies anymore (this may be infinite in some geometries).
+In that case, and approximating the integrand $(\langle\epsr\rangle^{-1}-1$ by its strong-coupling limit,
+the path-time integral is approximately 
 \begin{equation}
   \int_{\cT_0}^{\cT_1} \frac{d\cT }{\cT^{1+D/2}} = \frac{1}{x^{D}}-\frac{1}{d_{\text{max}}^D}.
 \end{equation}
-This suggests that the path integral contribution from points far from the bodies scales at most as $x^{-D}$.  
-In between the bodies, the contribution from each is roughly uniform, since each path must have sufficienct extent
-to touch all bodies.
+This suggests that the contribution from points far from the bodies scales at most as $x^{-D}$.  
+In between the bodies, the contribution from each starting position is roughly uniform, since each path must have sufficient extent
+to touch all bodies.  
 This occurs for times $\cT\sim d_0^2$, where $d_0$ is the separation between bodies.    
-These considerations suggest sampling from 
+In a one-dimensional geometry, embedded in a four-dimensional space-time, 
+these considerations suggest sampling from 
 \begin{equation}
   P_x(x;d_0):= \frac{3}{8d_0}\left\{ \begin{array}{cc}
     1  & |x|<d_0\\
     \dfrac{d^4_0}{|x|^4} & |x|>d_0
   \end{array}
-\right.\label{eq:xPower_law}
+\right.\label{eq:xPower_law}.
 \end{equation}
-n a one-dimensional geometry, embedded in a four-dimensional space-time.
- This reasoning can be easily extended to higher dimensional problems,
+This reasoning can be easily extended to higher dimensional problems,
 where a sphere of radius $d_0$ should bound all of the interfaces between the bodies.
 Outside of that sphere, the sampling would again fall off as $|x|^D$.  
-While it may be possible to develop sampling procedures optimized for a particular geometry, this provides a general purpose way of 
-sampling the starting points for Casimir worldline path integrals.
+While it may be possible to develop sampling procedures better suited to a particular geometry, 
+this provides a general purpose way of sampling the starting points for Casimir worldline path integrals.
+
+\subsubsection{Evaluating the Dielectric Path Average}
+
+Once a path is constructed the rest of the path integral integrand can be sampled along that path.
+For example, the path average of the dielectric can be evaluated as 
+\begin{equation}
+  \langle\epsr\rangle = \frac{1}{N}\sum_{k=1}^N\epsr(x_k).
+\end{equation}
+This corresponds to the trapezoidal rule for evaluating the path-average, 
+\begin{equation}
+  \langle\epsr\rangle = \frac{1}{\cT}\sum_{k=0}^{N-1}\int\limits_{k\Delta\cT}^{(k+1)\Delta\cT} dt'\, \epsr[x(t')]
+  \approx = \frac{\Delta \cT}{N}\sum_{k=0}^{N-1}\frac{\epsr(x_k)+\epsr(x_{k+1})}{2}=\frac{1}{N}\sum_{k=1}^N\epsr(x_k)
+\end{equation}
+where the trapezoidal rule $\int_a^b dx\,f(x)=(b-a)[f(a)+f(b)]/2$, was used for each time integral.
+As discussed in \S 5.C.3 of Ref.~\cite{Mackrory2016}, the trapezoidal rule outperforms some improved methods.  
+For example, in cases where $x_k$ and $x_{k+1}$ straddle a surface at $d$, the integral could be 
+weighted by the fraction of the path increment inside the surface, $(x_{k+1}-d)/(x_{k+1}-x_k)$.
+This reduces the contribution from path increments where one point just enters the surface.  
+Unfortunately, this does not fix an opposing error: what about paths that come close to the surface but just 
+miss it?  There is some finite probability that a sub-path between $x_k$ and $x_{k+1}$ would have entered the body, and given a greater 
+contribution.  Since the reduction of the contribution is not offset, this more advanced method actually
+fares worse than the straightforward trapezoidal method. 
+
+
 
 \subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
@@ -533,6 +527,29 @@ Given that small difference, and the relative simplicity of the Gaussians, we ha
 use the birth-death process in conjunction with simple Gaussian throughout the remainder. 
 
 \subsection{Monte-Carlo Sampling for Path-Time}
+
+\begin{enumerate}
+%\item Need average over ensemble of paths.
+% \item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
+%   integrate over that.  In this case, the loop potential is either zero or one, with no variation.
+%   Thus it is more straightforward to integrate over space/loop-time.  
+% \item For computationally expensive loops, it makes sense to sample only a single position, time.
+%   Explore a larger ensemble in the same computational time.
+%   \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
+  \item For time: % For TE loops, integrand is zero before first touching time.  
+    % So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
+    TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
+    that touch the surface).
+  \item Birth-death method effectively examines a larger ensemble of loops.
+    For two-bodies, it is possible to spawn new loops while close to only a single surface,
+    that might touch the other surface.  Thus the first-touching time for the parent loop
+    is a poor estimate.  Simplest to use an ensemble average estimate for time:
+    $P(\cT,d_0) = \exp(-2d_0^2/\cT)/\cT^3$, where exponential factor is the first touching
+    time.  
+  \item Frequency integrals: Can execute in parallel (like picking different $chi$).
+\end{enumerate}
+
+
 
 \label{sec:expT-sampling}
 However for integrands exploiting Feynman-Kac formulae, such as the TM integrand or 
@@ -1824,6 +1841,9 @@ when the paths are pass close to the body.
 while it is necessary to factor out the cross-sectional area, and consider the second derivative 
 of the energy per unit area).
 \comment{scaled out areas, and integrated over }
+
+
+
 
 \section{Path Construction Revisited: Path-Pinning as Importance Sampling}
 

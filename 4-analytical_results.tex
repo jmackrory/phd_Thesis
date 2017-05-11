@@ -392,7 +392,7 @@ evaluated.
 After substituting this back into Eq.~(\ref{eq:TM_CP_inter}), the TM Casimir--Polder energy is given by 
 \begin{align}
   V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\comment{$\frac{1}{4}$}\frac{1}{2}
-  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}},
+  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}},\label{eq:TM_CP}
 \end{align}
 where we substituted $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
 for an atom near a dielectric half-space (Eq. 14.205 in Steck ~\cite{SteckNotes}).
@@ -690,7 +690,7 @@ diverges.  As a result, only the first few terms significantly contribute.
   Since the TE energy contribution vanishes at zero frequency, the leading order term comes from the TM energy
 due to the TM potential, with the result that
 \begin{equation}
-\lim_{\beta\rightarrow 0} (\cF\supTM-\cF\sup0)=-\frac{k_BT}{4}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,
+\lim_{\beta\rightarrow 0} (\cF\supTM-\cF\sup0)=\frac{\kB T}{4}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,
 \dlangle 1 -  e^{-\cT\langle V\subTM^{(0)}(\vect{x})\rangle}\drangle.\label{eq:high_temp}
 \end{equation}
 Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
@@ -723,21 +723,25 @@ when $D=4$.
 This result can be used in the TE Casimir free energy if the $v$ is transformed according to $v\rightarrow s_n^2/(2c^2).$
 After changing integration variable to $p = \sqrt{1+2c^2\lambda/s_n^2}$, the free energy is
 \begin{align}
-\cF\supTE\subCP-\cF_0&=-k_BT{\sum_n}'\frac{s_n^3\alpha(is_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2s_n p|d|/c}
+\cF\supTE\subCP-\cF_0&=-\kB T{\sum_n}'\frac{s_n^3\alpha(is_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,e^{-2s_n p|d|/c}
 \frac{\sqrt{p^2+\chi(is_n)}-p}{\sqrt{p^2+\chi(is_n)}+p},
 \label{eq:TE_CP_finite_temperature}
 \end{align}
-This is the general result for finite temperature and dispersion for the TE polarization for an atom near 
+This is the general result accounting for finite temperature and dispersion for the TE polarization for an atom near 
 a planar dielectric.
 
-The presence of the worldline can be used to estimate the relevant frequencies.  
-Since the ensemble average is over Gaussian random walks,  the paths will typically intersect all the surfaces 
+The presence of the worldline can be used to estimate the relevant frequencies and dominant parts of the $p$ integral.  
+First, since the worldline path integral is an ensemble average is over Gaussian random walks,  the relevant $\cT$
+can estimated from the distances of the problem.
+The paths will typically intersect all the surfaces 
 when $\cT\sim d^2$, where $d$ is the distance from the source point $x_0$ to the farthest surface.
-Secondly, the frequency sum is dominated by the exponential factors, which will contribute most when $\cT s_n^2/c^2\sim 1$.
+Secondly, the frequency sum is dominated by the exponential factors with the form $e^{-s_n^2\cT/2c^2}$,
+which contribute most when $\cT s_n^2/c^2\sim 1$.
 This suggests that frequencies with  $s_n^2< c^2/d^2$  will contribute most to the Casimir energy.   
+From the exponential $e^{-2s_np d/c}$, the dominant regions for $p$ occur around $p\sim c/(2s_n d)$.
+Using these scalings, the integrals can be approximated in various limits.  
 
-We will now show that the TE contribution is negligible in both the near-field regime at zero temperature,
-and the high temperature, far-field limit.  
+We will now show that the TE contribution is negligible in both the near-field regime at zero temperature.
 In the near field regime, the separtion between the atom and the wall is much smaller than the atom's dominant wavelength, 
  $d\ll c/\omega_{j0}$.
 In the zero temperature limit, the free energy~(\ref{eq:TE_CP_finite_temperature}) becomes
@@ -745,10 +749,9 @@ In the zero temperature limit, the free energy~(\ref{eq:TE_CP_finite_temperature
 E-E_0=-\frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)
 \int_1^\infty dp\,e^{-2\omega p|d|/c}\frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}
 \end{equation}
-The integral contributes most when the exponent is order unity.
   The presence of the atom's polarizability $\alpha(i\omega)$ means that frequencies around 
-  $\omega_{j0}$ will dominate the frequency integral.
-  Then $p \sim  c/(d\omega_{j0})\gg 1$.
+  the atom's dominant transition frequency $\omega_{j0}$ will dominate the frequency integral.
+  In that case, since $p \sim  c/(d\omega_{j0})$, the dominant values of $p$ are much greater than one.
   The reflection coefficient can be approximated in this limit, 
 \begin{align}
   \frac{\sqrt{p^2+\chi(i\omega)}-p}{\sqrt{p^2+\chi(i\omega)}+p}
@@ -763,12 +766,9 @@ The $p$ integral can be approximately evaluated as
 Substituting this into the energy, the result is 
 \begin{align}
 E-E_0=&-\frac{\hbar}{32\pi^2\epsilon_0c^3}\int_0^\infty d\omega\,\omega^3\alpha(i\omega)\chi(i\omega)\\
-=&-\frac{\hbar}{32\pi^2\epsilon_0 d^3}\int_0^\infty d\omega\,\frac{\omega^3d^3}{c^3}\alpha(i\omega)\chi(i\omega)\approx 0
+=&-\frac{\hbar}{32\pi^2\epsilon_0 d^3}\int_0^\infty d\omega\,\frac{\omega^3d^3}{c^3}\alpha(i\omega)\chi(i\omega)\approx 0,
 \end{align}
-So this suppressed by $\order[(\omega d/c)^3]$ relative to the TM contributions, and be ignored.  
-As already noted, in the high-temperature limit, the TE free energy is suppressed by  $e^{-s_1^2\cT/(2c^2)}$,
-which comes from the first Matsubara frequency.  For a dielectric, the zeroth order contribution vanishes and 
-can be ignored. 
+which is suppressed by $\order[(\omega d/c)^3]$ relative to the TM contributions, and be ignored.  
 
 % The TM Casimir--Polder energy at zero temperature is:
 % \begin{align}
@@ -818,9 +818,9 @@ can be ignored.
 
 The TM contribution to the Casimir--Polder free energy for an atom in front of a dielectric plane 
  proceeds in the same manner as the TE case.
-This time, the non-zero contributions come from the presence of $\Xi$ in the TM expressions.   
-The relevant analytical expression for the path integral can be substituted in, and the Laplace-Mellin
-transform can be exploited.  
+This time, the non-zero contribution comes from the presence of the TM potential which manifests itself as $\Xi$ in the TM expressions.   
+The relevant analytical expression for the path integral~(\ref{eq:Feynman-Kac TM one step}) can be substituted in, and the Laplace-Mellin
+transform can be used to write
 \begin{align}
 \cF\supTM\subCP-\cF_0%=& -k_BT{\sum_n}'\frac{\alpha(i s_n)}{4\pi\epsilon_0}\left(\frac{ s_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)\int_0^\infty d\kappa\, \frac{ s_n^2}{2c^2}\frac{e^{-2\sqrt{\kappa+1} s_n d/c}c}{ s_n\sqrt{\kappa+1}}\frac{\sqrt{\kappa+1+\chi}-\sqrt{\kappa+1}e^{2\Xi}}{\sqrt{\kappa+1+\chi}+\sqrt{\kappa+1}e^{2\Xi}} \\
 =& -k_BT{\sum_n}'\frac{ s_n\alpha(i s_n)}{4\pi\epsilon_0c}
@@ -835,7 +835,7 @@ After take the $\partial_d$ derivatives, the free energy is
 =& -k_BT{\sum_n}'\frac{s^3_n\alpha(i s_n)}{4\pi\epsilon_0c^3}\int_1^\infty dp\,
 \left(1-2p^2\right)e^{-2p s_n d/c}\frac{\sqrt{p^2+\chi(is_n)}-pe^{2\Xi(is_n)}}{\sqrt{p^2+\chi(is_n)}+p e^{2\Xi(is_n)}}.
 \end{align}
-Evidently our earlier results~\ref{eq:TM_CP} would also be easily recovered by taking the zero temperature limit.
+This expression can then be approximated in the near field and high temperature limits.  
 
 \subsection{Zero temperature, near-field}
 
@@ -863,33 +863,32 @@ E-E_0&\approx \frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\, \omega^3
 \alpha(i\omega)\frac{\epsr(i\omega)-1}{\epsr(i\omega)+1}\int_1^\infty dp\,(1-2p^2)e^{-2p\omega d/c}\\
 &= \frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega\, \omega^3
 \alpha(i\omega)\frac{\epsr(i\omega)-1}{\epsr(i\omega)+1}\left(-\frac{c^3e^{-2\omega d/c}(1+\omega d/c)^2}{2 d^3\omega^3}\right)\\
-&\approx -\frac{\hbar }{16\pi^2\epsilon_0 d^3}\int_0^\infty d\omega 
+&\approx -\frac{\hbar }{16\pi^2\epsilon_0 d^3}\int_0^\infty d\omega \,
 \alpha(i\omega)\frac{\epsr(i\omega)-1}{\epsr(i\omega)+1},
 \end{align}
-which is the well known result for the van der Waals energy for an atom near a dielectric wall~\cite{}.
+which is the well known result for the van der Waals energy for an atom near a dielectric wall~(see Eq. 14.199 of Steck~\cite{SteckNotes}).
 
 \subsection{High temperature, far-field}
 
 In the high temperature limit, only the zero frequency term contributes, so the TM Casimir--Polder
 energy is  
 \begin{equation}
-\cF\supTM\subCP-F_0=-\frac{1}{2}\beta^{-1}\frac{\alpha(0)}{2\epsilon_0}\int_0^\infty d\cT\,\frac{1}{(2\pi \cT)^{3/2}}
-\dlangle -\left(-\frac{1}{2}\partial_x^2\right)e^{ - \cT\langle V_{TM}\rangle}\drangle.
+\cF\supTM\subCP-F_0=-\frac{1}{2}\kB T\frac{\alpha(0)}{\epsilon_0}\int_0^\infty d\cT\,\frac{1}{(2\pi \cT)^{3/2}}
+\dlangle \frac{1}{2}\partial_x^2e^{ - \cT\langle V_{TM}\rangle}\drangle.
 \end{equation}
 In this case the solution can be directly integrated, without need for Laplace transforms.    
 Plugging in the analytical solution~(\ref{eq:TM_pot}), and taking the derivatives gives 
 \begin{align}
 F-F_0=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsr(0)-1}{\epsr(0)+1} 
 \int_0^\infty d\cT\,\partial_d^2\frac{1}{\sqrt{2\pi }\cT^{3/2}} e^{-2 d^2/\cT}\\
-=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0d^3}\frac{\epsr(0)-1}{\epsr(0)+1}.
+=&-\frac{k_BT\alpha_0}{16\pi\epsilon_0d^3}\frac{\epsr(0)-1}{\epsr(0)+1},
 \end{align}
-This is the familiar expression for the van der Waals interaction of an atom and a dielectric wall.
-It seems that this duality between high temperatures and near-field is not unexpected.
-This also suggests that as hard as the TM potential may be deal with, it often provides the majority
-of the Casimir effect.  
-We have not examined the equivalent Casimir expressions, but they could be readily evaluated. As noted 
-in Eq.~\ref{eq:high_temp}, there too, the dominant contribution comes from the TM polarization, again
+which the expected high temperature result for an atom and a dielectric wall~(see Eq.~14.324 of Steck~\cite{SteckNotes}).
+Although we have not examined the equivalent Casimir expressions, they could be readily evaluated. 
+As noted in Eq.~\ref{eq:high_temp}, there too, the dominant contribution comes from the TM polarization,
 due to the singular TM potential.  
+Since the TM potential also provides the majority of the Casimir energy in these limiting cases, it is essential to 
+correctly account for it in a numerical method.  
 
 
 %%% Local Variables: 

@@ -411,10 +411,9 @@ The most daunting feature of the TM Casimir worldline is the singular TM potenti
  A closed form solution for the TM potential $V\subTM$ at a single planar boundary was found in Ch.~\ref{ch:feynman_kac}.
 The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is 
 \begin{align}
-  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} 
-  \!\! =&\, \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]\nonumber\\
-%  &\times
-&+\Theta[-X_{k,k+1}]\sech\Xi,
+  v_k(x_k,x_{k+1}):=\,&  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
+   =\,& \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]
+  +\Theta[-X_{k,k+1}]\sech\Xi,
    \label{eq:TM_pot}
 \end{align}
 where $X_{k,k+1}:=(d-x_k)(d-x_{k+1})$.
@@ -429,13 +428,14 @@ between discrete points with the analytical solutions.
 The path-averaged exponential potential can be split into many steps between $\vect{x}_k$ and $\vect{x}_{k+1}$
 at times $\cT_k$ and $\cT_{k+1}$.  Each exponential potential can be averaged against all possible sub-paths
 between these points.  
-\begin{equation}
-  \biggdlangle \frac{e^{-\cT\langle V\rangle}}{\langle\epsr\rangle^{1/2}}\biggdrangle = 
+\begin{align}
+  \biggdlangle \frac{e^{-\cT\langle V\rangle}}{\langle\epsr\rangle^{1/2}}\biggdrangle = &
   \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N
   \bigglinklangle \exp\left(-\int_{\cT_k}^{\cT_{k+1}} dt\, V[x(t)]\right)\bigglinkrangle_{x_k\rightarrow x_{k+1}}
-    \biggdrangle
-\end{equation}
-It is not strictly necessary to include the dielectric average in the averaging over
+    \biggdrangle\\
+ =& \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N  v_{k,k+1}    \biggdrangle
+  \end{align}
+  It is not strictly necessary to include the dielectric average in the averaging over
 sub-paths, since the dielectric is a much smoother function.  % Taking the dielectric into the average of sub-paths would lead to 
 % even better results, but those analytical solutions are difficult to calculate.
 The integrand can be built up even for a discrete Brownian bridge of length $N$, 
@@ -451,10 +451,12 @@ by the path-average of the dielectric $\langle\epsr\rangle$.
 Even after regularization, and ensemble averaging the TM potential is still difficult to handle.  
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
-\begin{equation}
-  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} = \Biggdlangle \prod_{k=1}^N
-  \bigglinklangle  e^{-\int_0^\cT dt\,\VTM[x(t)]}\bigglinkrangle\Biggdrangle_{\vect{x}_k}.
-\end{equation}
+\begin{align}
+  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} =\,& \Biggdlangle \prod_{k=0}^{N-1}
+  \bigglinklangle  e^{-\int_0^{\Delta \cT} dt\,\VTM[x(t)]}\bigglinkrangle_{x_k\rightarrow x_{k+1}}\Biggdrangle_{\vect{x}_k}\\
+=\,&\Biggdlangle \prod_{k=0}^{N-1}
+  v_{k,k+1}\Biggdrangle_{\vect{x}_k}.
+\end{align}
 The left-hand ensemble average is over continuous Brownian bridges, whereas the second ensemble
 average runs over discrete Brownian bridges (and averaging over continuous sub-paths indicated by $\linklangle\cdots\linkrangle$).
 In this case, the exact value of the integral is just the TM potential solution Eq.~\ref{eq:TM_pot},
@@ -500,52 +502,98 @@ In this case, the total probability distribution for the paths is
   \bigglinklangle e^{-\int_0^{\Delta \cT}dt\, \VTM}\bigglinkrangle_{x_k\rightarrow x_{k+1}}
 \end{align}
 In the same manner as the v-loops, the Gaussian probability distribution can be decoupled into a
-set of random variables.  
+set of random variables, where from Eq.~\ref{eq:open_vloop}, the argument of each of those Gaussians 
+involves ${z_k = (x_k-c_{k}x_{k-1})/\sqrt{c_k\Delta \cT}}$.
+\begin{align}
+  P(x_1,\ldots ,x_{N-1}) = v_{N,N-1}\prod_{k=0}^{N-1}\cN_{k+1}^{-1}P\supTM_{k+1}(x_{k+1}),
+\end{align}
+where the new probability distribution for $x_k$ is 
+\begin{align}
+P\supTM_{k+1}(x_{k+1}):=\cN^{-1}_{k+1}\frac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,x_{k+1}),
+  \end{align}
+with normalization constant 
+\begin{align}
+  \cN_k=\int dy\, \frac{e^{-(y-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,y).
+\end{align}
+The crucial point is that the $P\supTM_{k}$ can be sampled from, accounting only for the present position. 
+While the present position $x_k$ is still coupled to future positions via $v_{k+1,k}$, the sampling procedure ignores
+that coupling and samples $x_k$ based solely on $P_k$.  
+The probability distribution can be put into a convenient numerical form by completing the square to account
+for $v_{k,k+1}$.  The resulting piecewise Gaussian probability distribution is 
+\begin{align}
+  P\supTM_{k+1}(x_{k+1})
+ = \cN_k\left\{ \begin{array}{lc}
+     \vspace{0.2cm}  \dfrac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}}{\sqrt{2\pi c_k \Delta\cT}} + \sgn(d-x_k)\dfrac{\tanh\Xi}{\sqrt{2\pi c_k \Delta\cT}} & \hspace{2cm}\\
+    \vspace{0.2cm} \hspace{0.7cm}\times e^{-(x_{k+1}-c_k(2d-x_k))^2/(2c_k \Delta\cT)} e^{-2(1-c_k)d(d-x_k)/\Delta\cT} &  X_{k,k+1}>0\\
+\dfrac{\sech \Xi}{\sqrt{2\pi c_k \Delta\cT}}e^{-\frac{(x_{k+1}-c_k x_k)^2}{2c_k \Delta\cT}}  &  X_{k,k+1}<0\,,\\
+\end{array}
+\right.\label{eq:PTM_k}
+\end{align}
+where we previously defined $X_{k,k+1}=(d-x_k)(d-x_{k+1})$.  
+The normalization constant integral can be evaluated in two parts $\cN_k=\cN_k^{\text{C}}+\cN_k^{\text{NC}}$, 
+a crossing term $\cN_k^{\text{C}}$ for $X_{k,k+1}<0$,  and non-crossing term $\cN_k^{\text{NC}}$ for $X_{k,k+1}>0$,
+ with the result
+\begin{align}
+  \cN_k^{\text{C}}=\,& \frac{1}{2}\left[1+\sgn(d-x_k)\, \erf\!\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right] \nonumber\\
+  &+\sgn(d-x_k) \frac{\tanh\Xi}{2}\left[1+ \sgn(d-x_k)\,\erf\!\left(\frac{d(1-2c_k)+ c_kx_k}{\sqrt{2c_k \Delta\cT}}\right)\right]\nonumber\\
+  & \hspace{2cm}\times e^{-2(1-c_k)d(d-x_k)/\Delta\cT} \\
+ %  &=\frac{1}{2}\left[1- \erf\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right]
+ % - \frac{\tanh\Xi}{2}\left[1- \erf\left(\frac{d(1-2c_k)+ c_kx_k}{\sqrt{2c_k \Delta\cT}}\right)\right]e^{-\frac{2(1-c_k)d(d-x_k)}{\Delta\cT}}\text{d<x_k}.
+% \end{align}
+% \begin{align}
+\cN_k^{\text{NC}}=\,& \frac{\sech\Xi}{2}\left[1-\sgn(d-x_k) \erf\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right].
+\end{align}
+The probability distribution~(\ref{eq:PTM_k}) can be sampled via the following procedure.
+First, note that the probability distributions involve truncated Gaussians in $x_k$.  The truncation
+occurs at the surface, since the probability distribution was split based on wether path-increments cross
+through the surface or not.
+ The truncation ensures that the crossing or no-crossing constraint, $X_{k,k+1}$ is obeyed.  
+At each step the simulation picks the crossing or no-crossing branch of the probability distribution
+cased on the relative weights of $\cN_k^\text{C}$ and $\cN_k^\text{NC}$, picking the crossing branch 
+if $\cN_k^{\text{C}}/\cN_k<r$ where $r$ is a uniform random number.  
+If the crossing branch is chosen, then a deviate is sampled from the truncated Gaussian distribution.
+If the no-crossing branch is chosen, then depending on the sign of $\sgn(d-x_k)$, there are another two options.
+If $\sgn(d-x_k)>1$, then one of the Gaussians is picked based on their relative probability of occuring,
+and a deviate is sampled from one of them.
+If however, $\sgn(d-x_k)<1,$ then the rejection method is used to generate a deviate.
+In the rejection method, a deviate is sampled from a proposal distribution $P_1(x)$(such as one of the Gaussians),
+and accepted with a probability $P_2(x)/P_1(x)$, where  $P_2$ is the target distribution~\cite{NumRecipe}.
+In the other cases, the truncated Gaussian distributions can be sampled quickly via the inverse error function.  
 
-
-
-  1) Adjust loop increments by sampling from $P_{TM}(x):= e^{-x^2/(2\Delta \cT)}e^{-\VTM}$.
-  Integrand is piece-wise gaussian.  Can pick a particular Gaussian.  For differences of Gaussians,
-  use rejection to sample the deviates.  
-
-  The v-loop algorithm can be adjusted to take the shift in the weights and variances into account.
-  In the cases where there is a sum of Gaussians, one can be randomly chosen to sample from, while 
-  if there is a difference of Gaussians the rejection method should be used to generate deviates.  
-  Generating these increments is a bit more difficult than the simple Gaussians.  
-
-  While this method has improved performance, it still relies on taking a product of $N-1$ normalization factors $\nu_k$,
-  with $0<\nu_k<2$.  
-  Note that $\nu_k$ does not go to one as $N\rightarrow\infty$, which is predominant source 
-  of the problem.  More and more terms are being multiplied together, leading to a growing variance.
-  Given enough samples, the correct mean would be found, but the number of samples requires diverges.  
-  This leads to similar problems as the plain Gaussians where the fluctuations grow uncontrollably as 
-  a function of the path resolution $N$. 
+While this method does improve performance, it still relies on taking a product of $N-1$ normalization factors $\cN_k$,
+where $0<\cN_k<2$.  This leads to the same problems with numerical fluctuations as the plain Gaussians
+as the path length $N$ is increased.  It is also much more involved to implement than the plain Gaussian
+approach.
 
 \subsubsection{Birth-Death Loop Swarm}
 
 Both the plain Gaussian and TM-Gaussian paths can be rescued by further adjusting the sampling procedure.
 In both cases, as the trajectory propagates it accumulates a large weight.  After $k$ steps,
-the weight is $w_k=\prod_{j=1}^k\nu_j$.  Most trajectories wandering around the interface will acquire 
-a number of large weights with $\nu_j>1$ from the vacuum side, and small weights $0<\nu_j<1$ from within
-the medium.  
-The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$. If we consider
-$\nu_j$ to be random variables (since the normalizations and potentials are functions of an underlying random path),
-then we would expect $\log w_k$ to be normally distributed, with some variance. 
-Thus, the accumulated weight is expected to grow a log-normal deviate.    
+the weight is $w_k=\prod_{j=1}^k\nu_j$, where $\nu_j$ represents either $v_{j,j+1}$ for Gaussians or $\cN_j$
+for the TM-Gaussians.  Most paths propagating around the interface will acquire 
+a number of large weights with $\nu_j>1$ from the vacuum side, 
+and small weights $0<\nu_j<1$ from within the medium.  
+The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$.  
+Since the $\nu_j$ are random variables (since both the $v_{k,k+1}$ and $\cN_k$ are functions of an underlying random path),
+then we would expect $\log w_k$ to be normally distributed, with some variance $\sigma$. 
+Thus, the accumulated weight is expected to grow a log-normal deviate, with variance $\sigma^N$.    
+Note that the mean would still have the correct value, but the variance, and thus sampling error would
+grow unacceptably as $N$ increases.
 
 A large number of paths will yield very low values, and a lot of computer time would be wasted on simulations
 which computing numbers very close to zero.  A few rare paths would skirt outside the surface, accumulating
 very large weights, and contributing a lot to the Casimir energy.  Together these lead to large statistical
-fluctuations, which make it hard to get sufficienct averaging for even moderately fine paths.
-Note that both of these paths will contribute to the Casimir energy (in a partially cancelling way).
+fluctuations, which make it hard to get sufficient averaging for even moderately fine paths $N\sim 100$.
+Note that both types of paths will contribute to the Casimir energy.
 
-The path generation for either method can be modified as follows.  The weight is effectively treated as 
+The path generation for either method can be modified as follows.  The weight $w_k$ is effectively treated as 
 the fitness function for the path.  Paths with high weights will spawn further paths (birth), while paths with
 small weights will be terminated and return zero (death).
 If the weight is becoming small, $w_k<0.5$ then compare $w_k$ with a uniform random number $u$.
 If $w_k<u$, then set $w_k=0$ and stop propagating the path; alternatively, if $w_k>u$, then 
-the path survives and the weight is reset $w_k=1$.    In an ensemble average, this yields the correct averaged value.  
-That is the death process.
+the path survives and the weight is reset $w_k=1$.  That is the death process.
+In an ensemble average, an average fraction of the paths $u$ survive the death process, which gives 
+the correct average value.
 If the weight is becoming large, $w_k>2$, then split the weight in half, and assign each half to 
 two independent trajectories.
 Altogether, this is called the birth-death process, and should be applied at every step of the random path.
@@ -560,13 +608,19 @@ process modifies the preferred motions based on the accumulated weight.  Paths a
 on the vacuum side of interfaces, and they are likely to die on the inside of the interface.
 Far away from the interface on either side, the paths are unlikely to change.  
 
-Similar, but different terms are discussed throughout
-stochastic processes literature.  The more typical birth-death process is used in queuing theory, where 
-the number of objects in a queue randomly increases and decreases at a fixed average rate~\cite{}.
-The process used here is closer to the genealogical methods discussed in Del Moral~\cite{DelMoral2004},
-where a sub-ensemble of paths is used to track the mean.
-A similar method has been used to discuss simulating rare events~\cite{}.  In that case, one splits trajectories 
-based on whether they exceed a certain threshold criterion. 
+Similar, but different terms are discussed throughout stochastic processes literature.
+The more typical birth-death process is used in queuing theory, where 
+the number of objects in a queue randomly increases and decreases at a fixed average rate.
+In our case, that rate depends on the past behaviour of the system, and where it has gone.  
+The process used here is closer to the genealogical methods for evaluating path integrals discussed by Del Moral~\cite{DelMoral2004}.
+A similar genealogical idea has been used in quantum trajectory simulations~\cite{Jacobs2010a}, which is another
+technique for simulating open quantum systems.  In that variant, each random trajectory carries 
+a probability weight.  If that weight becomes too small, then that random trajectory is killed,
+and another more successful trajectory is split in two, and given half the weight.   
+A similar method has been used to discuss simulating rare events, such as the extreme tails of a Gaussian.
+In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\cite{Glasserman1999,Garvels2000}.
+These methods essentially reward the trajectories or paths of the system that enter regions with a large
+contribution to the integral (or other figure of merit).  
 
 \begin{figure}
   \centering
@@ -578,88 +632,72 @@ based on whether they exceed a certain threshold criterion.
 \label{fig:TM_scalingN}
 \end{figure}
 
-Fig.~\ref{fig:TM_scalingN} shows how the raw Gaussian and TM-Gaussians estimates of the simple path integral
+Fig.~\ref{fig:TM_scalingN} shows how the Gaussian and TM-Gaussians estimates of the simple path integral
 scale with the path resolution.  The birth-death process has been applied to both ways of generating paths.
 The birth-death process reduces the variance, and makes both methods much more tractable.
-The difference between raw Gaussian and TM-gaussians is small under the birth-death process.
+The difference between Gaussian and TM-gaussians is small under the birth-death process.
 Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
-use the birth-death process in conjunction with simple Gaussian throughout the remainder. 
+use the birth-death process in conjunction with Gaussians throughout the remainder. 
 
 \subsection{Monte-Carlo Sampling for Path-Time}
 
-\begin{enumerate}
-%\item Need average over ensemble of paths.
-% \item For a Dirichlet scalar, can determine the set of times when integral is non-zero and 
-%   integrate over that.  In this case, the loop potential is either zero or one, with no variation.
-%   Thus it is more straightforward to integrate over space/loop-time.  
-% \item For computationally expensive loops, it makes sense to sample only a single position, time.
-%   Explore a larger ensemble in the same computational time.
-%   \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
-  \item For time: % For TE loops, integrand is zero before first touching time.  
-    % So use $P(\cT,\cT_0) = 2\cT_0^2\Theta(\cT-\cT_0)/\cT^3$.
-    TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
-    that touch the surface).
-  \item Birth-death method effectively examines a larger ensemble of loops.
-    For two-bodies, it is possible to spawn new loops while close to only a single surface,
-    that might touch the other surface.  Thus the first-touching time for the parent loop
-    is a poor estimate.  Simplest to use an ensemble average estimate for time:
-    $P(\cT,d_0) = \exp(-2d_0^2/\cT)/\cT^3$, where exponential factor is the first touching
-    time.  
-  \item Frequency integrals: Can execute in parallel (like picking different $chi$).
-\end{enumerate}
-
-
-
 \label{sec:expT-sampling}
-However for integrands exploiting Feynman-Kac formulae, such as the TM integrand or 
-the improved Dirichlet integrand, this strategy is less useful, since the integrand turns on softly.
 
-\comment{Note need for this with TM 2-body calculations}
+The TM polarization requires a slightly different sampling method for generating path-times $\cT$.  
+In some limited cases it may be possible to estimate a minimum $\cT_0$ where 
+the integrand is small for a given path, and a path is unlikely to have branched or birthed new paths.  
+For paths starting on the vacuum side near a dielectric, the accumulated
+potential at small path-times is approximately ${\prod_k( 1+\tanh\Xi e^{-2(d-x_k)(d-x_{k+1})/\Delta\cT})}$,  
+which turns on smoothly in $\cT$.
+In that case, $\cT_0$ can be estimated from the time an initial, fiducial path would contact a surface and the 
+integrand would turn on.  The path-time can be sampled from the power law distribution~(\ref{eq:Tpower_law}).
+The birth-death process then proceeds starting with the initial path.  
 
-In that case it is better to sample from a distribution
-that better reflects the behaviour of the ensemble.
-A better distribution is 
+However, in a two-body geometry that sort of estimation fails.
+The renormalized integrand is only nonzero for paths that come close to both surfaces.
+Since the birth-death method may split the trajectory, it is not always possible to reliably
+find a minimum time $\cT_0$ when the renormalized integrand turns on.  (A very small $\cT_0$ could be picked, 
+where the path has no chance of touching the surface, but most computations would return zero,
+ since the most probable $\cT$ are close to $\cT_0$.)
+As a result, it is not possible to estimate for a single trajectory a lower bound $\cT_0$ 
+for which the path does not branch, but is also close to when the integrand turns on.  
+
+Since the birth-death method essentially enlarges the ensemble of paths selected, it's turn on
+closely mimics the probability for a Brownian bridge to touch a surface.  The probability for 
+a Brownian bridge to touch a surface a distance $d$ away in path-time $\cT$ is 
+\begin{equation}
+  P_{\text{touch}}(\cT) = e^{-2d^2/\cT}.
+\end{equation} 
+The combined potential term ${\prod_kv_{k,k+1}$,  also has a similar dependence.  
+This could be combined with the $\cT^{-(1+D/2)}$ power law for a new probability distribution.  
 \begin{equation}
   P_{\text{exp-T}}(\cT;\cT_0,s) = \frac{\cT_0^{s-1}}{\Gamma[s-1] \cT^s}e^{-\cT_0/\cT}\label{eq:expT},
 \end{equation}
-where $s>1$ and $\cT_0>0$.  In most cases of interest, $s=1+D/2$.  The exponential factor effectively models the finite touching 
-probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
-away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$.   This distribution can be used to sample times $\cT$
-even for TE integrands.  In that case however, it is possible the generated path will not
-touch all bodies and merely return zero.    
+where $s>1$ and $\cT_0>0$.  For the Casimir energy at zero temperature, $s=1+D/2$.  But for estimating
+thermal Casimir energies or forces, that power $s$ may change.  
+%  The exponential factor effectively models the finite touching 
+% probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
+% away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$. 
 
-% The normalization factor is determined by
-% \begin{align}
-%    1&= \int_0^\infty d\cT e^{-\cT_0/\cT} \cT^{-s}\\
-% %  &= \int_0^\infty ds\frac{1}{T_0} e^{-s}\left(\frac{T_0}{s}\right)^{-s+2}
-%   &= \eta \cT_0^{-s+1}\int_0^\infty d\tau\, e^{-\tau}\tau^{s-2}\\
-%  \implies \eta &= \frac{\cT_0^{s-1}}{\Gamma[s-1]}
-% \end{align}
-% where we changed variable to $s=\cT_0/\cT$, so $\cT=\cT_0/s$ and $ds=-\cT_0 d\cT/\cT^2$.  
-
-% In order to sample from this distribution, we must invert 
-% \begin{equation}
-%   r=\int_0^T dt e^{-T_0/t}t^{-m}
-% \end{equation}
-% where $r\in [0,1]$ is a uniform random number and $T$ is the desired deviate.    
-The probability distribution for $u=\cT_0/\cT$ is 
+The probability distribution~\ref{eq:expT} can be transformed to $u=\cT_0/\cT$, for 
+which the probability distribution is
 \begin{equation}
-  P_{\text{exp}-1/\cT}(u;\cT0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}
+  P_{\text{exp}-1/\cT}(u;\cT0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}.
 \end{equation}
-where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
-of measure.  
-Note that $u=\cT_0/\cT$ has the form of a Gamma distribution, where the distribution for   
+% where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
+% of measure.  
+The new variable $u=\cT_0/\cT$ has the form of a Gamma distribution, which has probability density 
 \begin{equation}
   f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
 \end{equation}
-where $a>0$ and $b>0$ are the shape and scale parameters respectively.  
-In order to develop deviates we follow Devroye~\cite{Devroye2003}
-A sum of Gamma deviates $\sum_{i=1}g_i$ with shape parameters $\gamma(a_i)$, is also a Gamma deviate
-with shape parameter $\sum a_i$ (pg 402 of Devroye).  
+where $a>0$ and $b>0$ are the shape and scale parameters respectively~\cite{Devroye2003}.  
+For small integer or half-integer powers $a$, there are some simple methods for generating 
+gamma deviates $g_i$.  
+A sum of Gamma deviates $\sum_{i=1}g_i$ with shape parameters $a_i$, is also a Gamma deviate
+with shape parameter $\sum a_i$~(see pg. 402 of Devroye~\cite{Devroye2003}).  
 In particular, this means the sum of $k$ exponential deviates $e_i=-\log(u_i)$, yields a Gamma 
-deviate gamma(k,1).  Furthermore if $z$ is normally distribed then $z^2/2$ obeys gamma$\left(\frac{1}{2},1\right)$.
-
-So for (low) integer powers 
+deviate gamma(k,1).  Furthermore if $z$ is normally distributed then $z^2/2$ obeys gamma$\left(\frac{1}{2},1\right)$.
+For small integer powers, $\cT$ is distributed according to
 \begin{equation}
   \cT\sim \frac{\cT_0}{-\sum_{i=1}^{s}\log u_i},
 \end{equation}
@@ -667,8 +705,12 @@ while for half-integer powers,
 \begin{equation}
   \cT\sim \frac{\cT_0}{-\sum_{i=1}^{\text{floor}(s)}\log u_i+z^2/2}.
 \end{equation}
-We will be predominantly interested in $s=1+D/2$ and $m=3/2$ to account for zero temperature
-and non-zero temperature limits.
+The integer powers are useful for estimating zero temperature Casimir energies. The half-integer powers
+naturally emerge when considering the thermal Casimir energy, or derivatives of the Casimir energy 
+such as the force.  
+This distribution can also be used to sample times $\cT$
+even for TE integrands.  In that case however, it is possible the generated path will not
+touch all bodies and merely return zero.    
 
 \section{Gradient Estimation}
 

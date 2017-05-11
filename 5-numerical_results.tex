@@ -113,7 +113,7 @@ This procedure allows the generation of a unit loop for $\cT=1$, which can then 
 multiple starting points $x_0$ and total path-times $\cT$.  A closed unit Brownian bridge can be constructed 
 as
 \begin{equation}
-  B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k.
+  B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k.\label{eq:unit_vloop}
 \end{equation}
 A shifted, scaled Brownian bridge can then be constructed as
 \begin{equation}
@@ -161,7 +161,7 @@ relies on knoweldge on which positions and times the most to the integral.
 This Monte Carlo sampling of $x_0$ and $\cT$ also extends the number of independent paths that can be averaged over, which 
 is essential for good convergence.   
 
-\subsubsection{Sampling Path-Time from Power Law}
+\subsubsection{Sampling Path-Times from a Power Law}
 
 The simplest method of sampling path-times, is to exploit the presence of $\cT^{-(1+D/2)}$ in the integral.
 For a particular path, the renormalized TE integrand is only non-zero after the path touches all of the bodies,
@@ -239,7 +239,7 @@ this provides a general purpose way of sampling the starting points for Casimir 
 
 \subsubsection{Evaluating the Dielectric Path Average}
 
-Once a path is constructed the rest of the path integral integrand can be sampled along that path.
+Once a path is constructed, the rest of the path integral integrand can be sampled along that path.
 For example, the path average of the dielectric can be evaluated as 
 \begin{equation}
   \langle\epsr\rangle = \frac{1}{N}\sum_{k=1}^N\epsr(x_k).
@@ -259,63 +259,96 @@ miss it?  There is some finite probability that a sub-path between $x_k$ and $x_
 contribution.  Since the reduction of the contribution is not offset, this more advanced method actually
 fares worse than the straightforward trapezoidal method. 
 
-
-
 \subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
-Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE path integral
-for at a range of $\chi$.  This plots the Casimir--Polder energy for an atom a distance $d$ away
-from a single planar dielectric interface with susceptibility $\chi$ and dielectric $\epsr=1+\chi\theta(x-d)$.
-The atom is located at the origin.
+These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
+As a first step, let us consider the Casimir--Energy for an atom interacting with a dielectric half-space 
+in the zero temperature, far-field limit.  The atom is located at the origin, with a dielectric half-space 
+a distance $d$ away with a constant susceptibility $\chi$.
 
+Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
+at a range of $\chi$.  
+The TE Casimir--Polder energy is calculated numerically by evaluating
+\begin{align}
+  V\supTE\subCP-V_0 %&= -\frac{\hbar c\alpha_0}{8\pi^2}\biggdlangle \int_0^\infty\frac{d\cT}{\cT^{3}}\big(\langle \epsr\rangle^{-3/2}-1)  \biggdrangle \nonumber\\
+  &=\biggdlangle \frac{\hbar c\alpha_0}{8\pi^2} \frac{1}{2\cT_0^{2}}\left(\frac{1}{\langle\epsr(x_k)\rangle^{-1/2}}-1\right) 
+    \biggdrangle_{\vect{x}_k,\cT},\label{eq:TE_CP_num}
+\end{align}
+where $\dlangle \cdots\drangle_{\vect{x}_k,\cT}$ denotes an ensemble average over discrete Brownian bridges,
+and times $\cT$.  
+One dimensional Brownian bridges are constructed using the v-loop algorithm~(\ref{eq:unit_vloop}).
+The minimum path-time $\cT_0$ is determined on a path-wise basis, based on solving $\sqrt{\cT_0}\text{max}(B_k)=d$.
+The path-time is sampled for each path from Eq.~(\ref{eq:Tpower_law}), with $m=1+D/2=3$.
+The path is then scaled, $x_k = \sqrt{\cT}B_k$, and the trapezoidal method is used to evaluate $\langle\epsr\rangle$
+around each path.  The sojourn time per path $\langle\Theta(x-d)\rangle$ can be estimated once per path,
+and then multiple $\chi$ can be computed at once using $\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.
+The results are then accumulated over many paths and times.  
+The numerically calculated efficiency $\eta(\chi)$ is found by dividing the numerical results by the perfect-conductor result,
+which cancels out the leading constants and the $d^{-4}$ distance dependence.
+
+% As the results show, the agreement with between the numerical results
+% and the analytical expression is excellent.  A more careful discussion of the numerical error is 
+% deferred to Sec.~\ref{sec:TE_convergence}.
 \begin{figure}
   \centering
  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_atom_wall}
   \caption[Planar Casimir--Polder TE energy as function of $\chi$]
   {Planar Casimir--Polder TE energy as function of susceptibility $\chi$.  
-    Simulations used $10^8$ paths, with $10^4$ points per path.
+    The simulations used $10^8$ paths, with $10^4$ points per path.
     Results for each $\chi$ were computed using the same ensemble of paths.
-    Dielectric average evaluated using trapezoidal rule.  
-    (Inset is same data on a linear vertical scale.)
+    The solid black line is the analytical result~(\ref{eq:etaTE}), and the points are the numerical
+    values computed using Eq.~(\ref{eq:TE_CP_num}).
+    (The inset is same data on a linear vertical scale.)
     }
   \label{fig:eff_TE_atom_wall}
 \end{figure}
 
-Each path was generated with the v-loop algorithm~(\ref{eq:vloop}). 
-A single path-time $\cT$ was sampled for each path by sampling from Eq.~\ref{eq:Tpower_law}, 
-where $\cT_0$ is the smallest path-time that the part starting at $x_0$ would contact a planar surface a distance $d$ 
-away.  For TE integrands, a whole range of $\chi$ can be evaluated in parallel for a single path since 
-$\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.  The path-averaged occupation time can be computed once for a 
-given path, and re-used to compute the Casimir--Polder energy for various $\chi$.  
+% Each path was generated with the v-loop algorithm~(\ref{eq:vloop}). 
+% A single path-time $\cT$ was sampled for each path by sampling from Eq.~\ref{eq:Tpower_law}, 
+% where $\cT_0$ is the smallest path-time that the part starting at $x_0$ would contact a planar surface a distance $d$ 
+% away.  For TE integrands, a whole range of $\chi$ can be evaluated in parallel for a single path since 
+% $\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.  The path-averaged occupation time can be computed once for a 
+% given path, and re-used to compute the Casimir--Polder energy for various $\chi$.  
 
-The numerically sampled values agree well with the analytical result for the 
-efficiency $\eta(\chi)$.  The efficiency is the ratio of the TE Casimir--Polder energy between an atom and a dielectric 
-to the total Casimir--Polder energy for an atom and a perfectly conducting plate.  This approaches $1/6$ in the 
-strong-coupling limit---the remainder of the Casimir--Polder energy is provided by the TM polarization, which
-will be discussed further in Sec.~\ref{sec:TM_numerics}.
+% The numerically sampled values agree well with the analytical result for the 
+% efficiency $\eta(\chi)$.  The efficiency is the ratio of the TE Casimir--Polder energy between an atom and a dielectric 
+% to the total Casimir--Polder energy for an atom and a perfectly conducting plate.  This approaches $1/6$ in the 
+% strong-coupling limit---the remainder of the Casimir--Polder energy is provided by the TM polarization, which
+% will be discussed further in Sec.~\ref{sec:TM_numerics}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_2wall}
-  \label{fig:eff_TE_2wall}
   \caption[Planar TE Casimir energy as function of $\chi$.]{
     Numerically calculated planar TE Casimir energy as function of $\chi$.
-  Simulations used $10^8$ paths, with $10^4$ points per path.  All values of $\chi$ were computed in parallel
-  using the same ensemble of paths.
+    The black lines show the analytical solution~(\ref{eq:gammaTE}), and the points show the numerical
+    estimates.
+    The simulations used $10^8$ paths, with $10^4$ points per path.  All values of $\chi$ were computed in parallel
+    using the same ensemble of paths.
     (Inset is same data on a linear vertical scale.)}
+  \label{fig:eff_TE_2wall}
 \end{figure}
 
-Fig.~\ref{eff_TE_2wall} shows the numerically computed Casimir energy between two planar dielectric interfaces
-a distance $d$ apart, with dielectric $\epsr = 1+\chi\Theta(-x+d/2)+\chi\Theta(x-d/2)$.  
-The same procedure is used as for Casimir--Polder energies, except in this case the starting position 
-of the path is also sampled as in Eq.~(\ref{eq:xPower_law}).
-The flat region was chosen so that $d_0=d$, which is twice the size of the region between the interfaces.  
-In this case it is also necesary to keep track of the occupation times for each body.
-In the strong-coupling limit the TE polarization provides half of the contribution to the full EM Casimir energy
-between dielectrics.  
+Fig.~\ref{fig:eff_TE_2wall} shows the numerically computed Casimir energy between two planar dielectric interfaces
+a distance $d$ apart, with dielectric function $\epsr(x) = 1+\chi\Theta(-x+d/2)+\chi\Theta(x-d/2)$.  
+This is computed numerically by evaluating
+\begin{align}
+  E\supTE\subCP-E_0 
+  &=\biggdlangle \frac{\hbar c\alpha_0}{8\pi^2} \frac{1}{2\cT_0^{2}P_x(x_0)}
+  \left(1+\frac{1}{\langle\epsrab(x_k)\rangle^{3/2}}-\frac{1}{\langle\epsra(x_k)\rangle^{3/2}}-\frac{1}{\langle\epsrb(x_k)\rangle^{3/2}}\right) \biggdrangle_{x_k,\cT,x_0},\label{eq:TE_Casimir_num}
+\end{align}
+The same procedure is similarto the one used for Casimir--Polder energies.  However, 
+in this case there is an additional ensemble average over path starting position $\vect{x}_0$.
+The starting positions are sampled from Eq.~(\ref{eq:xPower_law}), with $d_0=d$, 
+which is twice the size of the region between the interfaces.  
+In this case it is also necessary to keep track of $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
+The dielectric path average and the renormalized worldline integrand can also be quickly computed for multiple $\chi$.
+One upshot of Monte Carlo sampling of positions is that this is \emph{much} faster than directly evaluating 
+the position and path-time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
+roughly the same time as the Casimir--Polder energy.  
 
 \subsubsection{Scaling with N}
-
+\label{sec:TE_convergence}
 Some interesting scaling behaviour was found by examining the relative error between the numerical 
 estimates and the exact analytical value.  
 In this case the primary systematic error is due to the discretization of the path.
@@ -345,12 +378,11 @@ the noise floor in Fig.~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 \end{figure}
 
 As $N$ varies for fixed $\chi$, there are two different scaling behaviours.  
-In the weak-coupling limit $\chi/N\gg 1$, the error comes from underestimating the sojourn time.
-In the strong-coupling limit $\chi/N\ll 1$, the error comes from underestimating the first path-time
-the path touches the surface.
+In the weak-coupling limit $\chi/N\ll 1$, the error comes from underestimating the sojourn time.
+In the strong-coupling limit $\chi/N\gg 1$, the error comes from underestimating the first path-time
+that a path touches the surface.
 For a fixed $\chi$, the transition between both behaviours is observed at $\chi\sim N$. 
-
-In Ref.~\ref{Mackrory2016}, some heuristic arguments are given to explain this scaling, which will briefly reprised here.
+In Ref.~\cite{Mackrory2016}, some arguments are given to explain this scaling, which will not be repeated here.
 
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}
@@ -537,7 +569,7 @@ use the birth-death process in conjunction with simple Gaussian throughout the r
 %   Explore a larger ensemble in the same computational time.
 %   \item Rely on importance sampling to determine most important regions of $x_0$, $T$ to sample from.
   \item For time: % For TE loops, integrand is zero before first touching time.  
-    % So use $P(\cT,\cT_0) = 2\cT_0^2\theta(\cT-\cT_0)/\cT^3$.
+    % So use $P(\cT,\cT_0) = 2\cT_0^2\Theta(\cT-\cT_0)/\cT^3$.
     TM loops turn on more softly, due to potential terms (which take into account possible sub-paths
     that touch the surface).
   \item Birth-death method effectively examines a larger ensemble of loops.
@@ -629,15 +661,15 @@ and non-zero temperature limits.
     \end{enumerate}
 
 Let us consider the sensitivity of an expectation value $\dlangle f \drangle = \int dx f(x)P(x)$,
-with respect to a parameter $\theta$, where $P(x)$ is the probability distribution.  
+with respect to a parameter $\Theta$, where $P(x)$ is the probability distribution.  
     The likelihood ratio method relies on differentiating the underlying probability distribution,
-    and evaluating $\partial_\theta\dlangle f\drangle=\dlangle f(x)\partial_\theta\log P(x;\theta)\drangle$.  
+    and evaluating $\partial_\Theta\dlangle f\drangle=\dlangle f(x)\partial_\Theta\log P(x;\Theta)\drangle$.  
     One can then estimate the gradient by generating 
     samples using the original probability distribution, while evaluating this new function.
     This can be readily applied to computing sensitivities of expectations with respect to Brownian motion~\cite{Broadie1996}.  
     A similar idea exploits the Malliavin calculus~\cite{Nualart2006}:
-    In the Malliavin framework, one can estimate a sensitivity by evaluating $\dlangle f(x)\pi_\theta(x)\drangle$,
-    where $\pi_\theta$ is the Malliavin weight~\cite{Fournie1999}.  
+    In the Malliavin framework, one can estimate a sensitivity by evaluating $\dlangle f(x)\pi_\Theta(x)\drangle$,
+    where $\pi_\Theta$ is the Malliavin weight~\cite{Fournie1999}.  
     The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion.  
     One can derive the Malliavin weights by exchanging derivatives with respect to the parameter for
     derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
@@ -755,7 +787,7 @@ with respect to a parameter $\theta$, where $P(x)$ is the probability distributi
     For example, consider using the Feynman-Kac formula for open loops near a Dirichlet surface, 
     \begin{equation}
       \dlangle e^{-V_D(x-d)}\drangle_{x_{j}\rightarrow x_{j+1}} 
-      = \theta[(x_j-d)(x_{j+1}-d)]\left(1-e^{-2(x_j-d)(x_{j+1}-d)/T}\right)
+      = \Theta[(x_j-d)(x_{j+1}-d)]\left(1-e^{-2(x_j-d)(x_{j+1}-d)/T}\right)
     \end{equation}
 
 \begin{enumerate}
@@ -1197,8 +1229,8 @@ by angle $\phi$ about axis $\hat{m}$,
 % \end{equation}
 %where the perturbed dielectric is 
 \begin{equation}
-  \epsr(\vect{x}) = 1+\chi_1\theta[\sigma_1(\vect{x}-\vect{R}_1)]
-  +\chi_2\theta\big\{\sigma_2[\mathcal{R}(\phi)(\vect{x}-\vect{R}_2)]\big\}.
+  \epsr(\vect{x}) = 1+\chi_1\Theta[\sigma_1(\vect{x}-\vect{R}_1)]
+  +\chi_2\Theta\big\{\sigma_2[\mathcal{R}(\phi)(\vect{x}-\vect{R}_2)]\big\}.
 \end{equation}
 % where the second body has undergone an infinitesimal rotation 
 % by an angle $\phi$ about an axis $\hat{m}$ about its center.  
@@ -1212,9 +1244,9 @@ The torque for a rotation about axis $\hat{m}$ can be written as $K_m:=\hat{m}\c
 The $\phi$-derivative only acts on the path-averaged dielectric part of the energy integral,
 \begin{align}
   \partial_\phi\langle\epsilon\rangle&=
-  \chi_2\langle \partial_\phi\mathcal{R}_{ij}(\phi)(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
-%  =-\chi_2\langle m_k\epsilon_{kij}(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\theta(\sigma_2)]\rangle\nonumber\\
-  &=\chi_2\hat{m}\cdot\langle (\vect{x}-\vect{R}_2)\wedge\nabla\theta(\sigma_2)\rangle,
+  \chi_2\langle \partial_\phi\mathcal{R}_{ij}(\phi)(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\Theta(\sigma_2)]\rangle\nonumber\\
+%  =-\chi_2\langle m_k\epsilon_{kij}(\vect{x}-\vect{R}_2)_j[\hat{r}_i\cdot\nabla\Theta(\sigma_2)]\rangle\nonumber\\
+  &=\chi_2\hat{m}\cdot\langle (\vect{x}-\vect{R}_2)\wedge\nabla\Theta(\sigma_2)\rangle,
 \end{align}
 where we used the form of the infinitesimal rotation to write the result as a cross-product 
 via $(\vect{a}\wedge\vect{b})_i=\epsilon_{ijk}a_jb_k$.  
@@ -1299,10 +1331,10 @@ The spatial path integral can be written in exponential form via the Gamma funct
 \begin{align}
   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}% \nonumber\\
   % &\hspace{0.5cm}\times
-  \bigdlangle e^{-\langle \sum_b\chi_b\theta_b(\vect{x})\rangle}
-  - e^{-\sum_b\chi_b\theta_b(\vect{x}_0)}\bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
+  \bigdlangle e^{-\langle \sum_b\chi_b\Theta_b(\vect{x})\rangle}
+  - e^{-\sum_b\chi_b\Theta_b(\vect{x}_0)}\bigdrangle_{\vect{x}(t)}\label{eq:W_exp2}
 \end{align}
-where we have introduced a shorthand notation $\theta_b(\vect{x}) = \theta(\sigma_b[\vect{x}-\vect{R}_b])$.
+where we have introduced a shorthand notation $\Theta_b(\vect{x}) = \Theta(\sigma_b[\vect{x}-\vect{R}_b])$.
 % This exponential form is similar to the approach required to account for non-zero temperature and material
 % dispersion~\cite{Mackrory2016}.  The exponential expression also places the integrand in a suitable form 
 % to exploiting relevant Feynman-Kac formulae.  
@@ -1312,9 +1344,9 @@ be factorized as
   W &= \frac{1}{\Gamma[\alpha]}\int d\vect{x}_0 \int ds\, s^{\alpha-1}e^{-s}% \nonumber\\
   % &\hspace{0.5cm}\times
   \Bigdlangle 
-  (e^{-\langle \chi_1\theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\theta_2(\vect{x})\rangle}-1) \nonumber\\
+  (e^{-\langle \chi_1\Theta_1(\vect{x})\rangle}-1)(e^{-\langle \chi_2\Theta_2(\vect{x})\rangle}-1) \nonumber\\
    &\hspace{1.25cm}
-  -(e^{- \chi_1\theta_1(\vect{x}_0)}-1)(e^{-\chi_2\theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}
+  -(e^{- \chi_1\Theta_1(\vect{x}_0)}-1)(e^{-\chi_2\Theta_2(\vect{x}_0)}-1)\Bigdrangle_{\vect{x}(t)}
 \end{align}
 %\begin{align}
   % &e^{-s}[1+e^{-s\langle \chi_1(\vect{x})+\chi_2(\vect{x})\rangle } 
@@ -1322,16 +1354,16 @@ be factorized as
 The exponential of the path-averaged potential can be written as a product of potentials 
 for each increment, and the potential can be simplified for step-function dielectrics,
 \begin{align}
-  e^{-s \langle\chi_b\theta_b(\vect{x})\rangle}= \prod_{k=0}^{N-1}
-  \left[\bar{\theta}_{b,k}+\theta_{b,k}e^{-s\chi_b/N}\right].\label{eq:exp_step_limit1}
+  e^{-s \langle\chi_b\Theta_b(\vect{x})\rangle}= \prod_{k=0}^{N-1}
+  \left[\bar{\Theta}_{b,k}+\Theta_{b,k}e^{-s\chi_b/N}\right].\label{eq:exp_step_limit1}
 \end{align}
-where $\theta_{b,k} := \theta[\sigma_b(\vect{x}_k-\vect{R}_b)],$ 
-and $\bar{\theta}_{b,k}:=1-\theta_{b,k}$.  This way of regularizing the surface leads to 
+where $\Theta_{b,k} := \Theta[\sigma_b(\vect{x}_k-\vect{R}_b)],$ 
+and $\bar{\Theta}_{b,k}:=1-\Theta_{b,k}$.  This way of regularizing the surface leads to 
 a different representation for the gradients of the Casimir energy.
 In this section, we are assuming the step-function is arbitrarily sharp, and taking that limit before any gradients are taken.  
 The gradient for a single position can be computed from Eq.~(\ref{eq:exp_step_limit1}) as
 \begin{align}
-  [\nablaxk e^{-s \chi_b\theta_{b,k}/N}]_{\text{occupation}} 
+  [\nablaxk e^{-s \chi_b\Theta_{b,k}/N}]_{\text{occupation}} 
 =& \delta_{b,k}(e^{-s\chi_b/N}-1)\vect{n}_b(\vect{x}_k)
     \label{eq:occupation-grad}
 \end{align}
@@ -1343,8 +1375,8 @@ In essence, that calculation assumed the step was the limit of a smooth sigmoida
 and that the path had arbitrarily fine resolution on the scale over which the step-function jump occured,
 so that the gradient follows from applying the chain-rule, 
 \begin{align}
-  [\nablaxk e^{-s \chi_b\theta_{b,k}/N}]_{\text{pinning}} 
- =& \frac{s\chi_b}{N} \delta_{b,k}e^{-s \chi_b\theta_{b,k}/N}\vect{n}_b(\vect{x}_k)
+  [\nablaxk e^{-s \chi_b\Theta_{b,k}/N}]_{\text{pinning}} 
+ =& \frac{s\chi_b}{N} \delta_{b,k}e^{-s \chi_b\Theta_{b,k}/N}\vect{n}_b(\vect{x}_k)
   \label{eq:pinning-grad}
 \end{align}
 However, throughout this section we will treat using Eq.~(\ref{eq:occupation-grad}) to evaluate gradients,
@@ -1358,16 +1390,16 @@ can be defined as
   =& -\frac{1}{\Gamma[\alpha]}\int d\vect{x}_0\int ds\,s^{\alpha-1}e^{-s}\biggdlangle 
   \big(e^{-s\chi_2/N}-1\big)\nonumber\\
   &\times\sum_{j=0}^{N-1}[\vect{n}_2(\vect{x}_j)\delta_{2,j}
-  \prod_{k\ne j}\left(\bar\theta_{2,k}+\theta_{2,k}e^{-s\chi_2/N}\right)\nonumber\\
-  &\times\bigg[1-\prod_{n=0}^{N-1}\left(\bar{\theta}_{1,n}+\theta_{1,n}e^{-s\chi_1/N}\right)\bigg]\biggdrangle_{\vect{x}(t)}.
+  \prod_{k\ne j}\left(\bar\Theta_{2,k}+\Theta_{2,k}e^{-s\chi_2/N}\right)\nonumber\\
+  &\times\bigg[1-\prod_{n=0}^{N-1}\left(\bar{\Theta}_{1,n}+\Theta_{1,n}e^{-s\chi_1/N}\right)\bigg]\biggdrangle_{\vect{x}(t)}.
 \end{align}
 where the constant term has zero derivative.
 The $s$-integral can be carried out more easily if the integrand is re-arranged into terms with 
 a definite number of points $n$ inside each body $b$.  
 We define the indicator functions
 \begin{align}
-  \I[b]0&:= \prod_{j=0}^{N-1}\bar{\theta}_{r,j}\\
-  \I[b]n&:= \sum_{j_1=1}\sum_{j_2>j_1}\cdots\sum_{j_{n}>j_{n-1}}\theta_{b,j_1}\theta_{b,j_2}\cdots\theta_{b,j_n},
+  \I[b]0&:= \prod_{j=0}^{N-1}\bar{\Theta}_{r,j}\\
+  \I[b]n&:= \sum_{j_1=1}\sum_{j_2>j_1}\cdots\sum_{j_{n}>j_{n-1}}\Theta_{b,j_1}\Theta_{b,j_2}\cdots\Theta_{b,j_n},
  \quad n\ge 1,
 \end{align}
 where $\I[b]n=1$ when there are exactly $n$ points inside body $b$, and zero otherwise;  
@@ -1506,7 +1538,7 @@ of the integrand.
 % We consider a general geometry for computing Casimir forces between dielectrics, which is shown in Fig.~\ref{fig:spud_sketch}.
 % The dielectric $\epsr(\vect{x})$ is specified by 
 % \begin{equation}
-%   \epsr(\vect{x}) = 1+\sum_j\chi_j\theta[\sigma_j(\vect{x}-\vect{R}_j)],
+%   \epsr(\vect{x}) = 1+\sum_j\chi_j\Theta[\sigma_j(\vect{x}-\vect{R}_j)],
 % \end{equation}
 % where $\chi_j$ is the dielectric susceptibility of body $j$, $\sigma_j(\vect{x})=0$ 
 % defines the surface of body $j$, with $\sigma_j>0$ and $\sigma_j<0$ inside and outside the body

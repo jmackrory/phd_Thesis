@@ -663,26 +663,24 @@ As a result, it is not possible to estimate for a single trajectory a lower boun
 for which the path does not branch, but is also close to when the integrand turns on.  
 
 Since the birth-death method essentially enlarges the ensemble of paths selected, it's turn on
-closely mimics the probability for a Brownian bridge to touch a surface.  The probability for 
-a Brownian bridge to touch a surface a distance $d$ away in path-time $\cT$ is 
+closely mimics the probability for a Brownian bridge to touch a surface.
+The probability for a Brownian bridge to touch a surface a distance $d$ away in path-time $\cT$ is 
 \begin{equation}
   P_{\text{touch}}(\cT) = e^{-2d^2/\cT}.
 \end{equation} 
-The combined potential term ${\prod_kv_{k,k+1}$,  also has a similar dependence.  
+The combined potential term ${\prod_kv_{k,k+1}}$,  also has a similar dependence.  
 This could be combined with the $\cT^{-(1+D/2)}$ power law for a new probability distribution.  
 \begin{equation}
   P_{\text{exp-T}}(\cT;\cT_0,s) = \frac{\cT_0^{s-1}}{\Gamma[s-1] \cT^s}e^{-\cT_0/\cT}\label{eq:expT},
 \end{equation}
-where $s>1$ and $\cT_0>0$.  For the Casimir energy at zero temperature, $s=1+D/2$.  But for estimating
-thermal Casimir energies or forces, that power $s$ may change.  
+where $s>1$ and $\cT_0>0$.  
 %  The exponential factor effectively models the finite touching 
 % probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
 % away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$. 
-
 The probability distribution~\ref{eq:expT} can be transformed to $u=\cT_0/\cT$, for 
 which the probability distribution is
 \begin{equation}
-  P_{\text{exp}-1/\cT}(u;\cT0,s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}.
+  P_{\text{exp}-1/\cT}(u;s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}.
 \end{equation}
 % where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
 % of measure.  
@@ -712,40 +710,19 @@ This distribution can also be used to sample times $\cT$
 even for TE integrands.  In that case however, it is possible the generated path will not
 touch all bodies and merely return zero.    
 
-\section{Gradient Estimation}
+\subsection{Gradient Estimation}
 
-\begin{enumerate}
-  \item Need gradients to compute forces, torques from potential.  Also need it directly
-    for TM Casimir-Polder energy.
-  \item Looking for corrections to gravity need curvature.  Similarly, estimating 
-    (Cite Cornell expt) change in oscillation frequency.  Need two spatial derivatives.
-    For TM potential, this is 4 spatial derivatives.  
-\end{enumerate}
+Computing the TM Casimir--Polder energy~\ref{eq:TM_Casimir_Polder}, requires taking two spatial derivatives
+of the worldline path integral.
+Furthmore, in some experiments on the Casimir--Polder effect such as BEC experiments~\cite{Harber2005}, 
+the Casimir--Polder potential is estimated from how it shifts the frequency of the atom's oscillations
+in a harmonic potential.  This frequency shift is calculated by taking two derivatives of the Casimir--Polder
+potential.   For the TM polarization within the worldline method, this would require four spatial 
+derivatives, so it is essential to be able to efficiently compute these derivatives.  
 
-    \begin{enumerate}
-      \item Need gradient estimation.  Use Malliavin calculus~\cite{Fournie1999, Chen2007,Kohatsu-Higa2003}.
-        Formal introductions \cite{Nualart2006, Malliavin2006, DiNunno2009}.
-      \item Birth-death methods to handle product of increments.  Related to Genealogical 
-        methods used in rare-event simulation.  
-    \end{enumerate}
-
-Let us consider the sensitivity of an expectation value $\dlangle f \drangle = \int dx f(x)P(x)$,
-with respect to a parameter $\Theta$, where $P(x)$ is the probability distribution.  
-    The likelihood ratio method relies on differentiating the underlying probability distribution,
-    and evaluating $\partial_\Theta\dlangle f\drangle=\dlangle f(x)\partial_\Theta\log P(x;\Theta)\drangle$.  
-    One can then estimate the gradient by generating 
-    samples using the original probability distribution, while evaluating this new function.
-    This can be readily applied to computing sensitivities of expectations with respect to Brownian motion~\cite{Broadie1996}.  
-    A similar idea exploits the Malliavin calculus~\cite{Nualart2006}:
-    In the Malliavin framework, one can estimate a sensitivity by evaluating $\dlangle f(x)\pi_\Theta(x)\drangle$,
-    where $\pi_\Theta$ is the Malliavin weight~\cite{Fournie1999}.  
-    The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion.  
-    One can derive the Malliavin weights by exchanging derivatives with respect to the parameter for
-    derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
-    The Malliavin results can be recovered for Brownian motion if one combines the likelihood-ratio method with partial-averaging
-    along the Brownian motion~\cite{Chen2007}.  In either case, one exchanges differentiation for
-    evaluating a new reweighted function, which depends on the required derivatives, while still
-    using the original paths.  
+The simplest method for evaluating derivatives is the finite difference method.  It has the great
+virtue of simplicity.  Unfortunately, it behaves poorly at higher order derivatives, and the accuracy
+of the results depends sensitively on the step size chosen.  
 
 
 \subsection{Finite Differences}
@@ -758,6 +735,36 @@ with respect to a parameter $\Theta$, where $P(x)$ is the probability distributi
     ensemble-of-differences.  Some ordering of operations noticeably superior.  
     Essentially passes finite difference onto $1/\cT^3$, which is nice and smooth.
 \end{enumerate}
+
+\subsection{Malliavin Calculus}
+Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
+product to variations its underlying parameters must be estimated.  This could be done via a finite
+difference method, but that behaves poorly.  
+Since financial simulations also typically involved averages over simulated Brownian motions, similar problems emerge.
+One promising approach for worldline applications is based on the Malliavin calculus, which 
+is formally discussed in Ref.~\cite{Nualart2006, Malliavin2006, DiNunno2009}.
+Less formal (and more understandable) discussions of the Malliavin approach are presented in Refs.~\cite{Chen2007,Kohatsu-Higa2003}.
+In the Malliavin approach, the derivative can be estimated by \emph{multiplying} the integrand by
+a suitably chosen weight function, which depends on the nature of the derivative and the random path.
+The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion, 
+and an associated integration by parts formula.   
+The Malliavin weights can be derived by exchanging derivatives with respect to a parameter for
+derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
+The Malliavin results can also be recovered via the likelihood ratio method~\footnote{
+In the likelihood ratio method~\cite{Broadie1996}, a derivative with respect to a parameter $\theta$ of a stochastic average is evaluated 
+as $\partial_\theta\dlangle f(x)\drangle = \int dx f(x)\partial_\theta P(x,\theta) = \dlangle f(x)\partial_\theta\log P(x,\theta)\drangle$.
+The original sampling method can be used to evaluate this derivative.  So a function and its derivatives
+can be evaluated from a single stochastic simulation.}
+a direct integration by parts approach, followed by method with partial-averaging
+along the Brownian motion~\cite{Chen2007}. 
+In either case, one exchanges differentiation for
+evaluating a new reweighted function, which depends on the required derivatives, while still
+using the original paths.  
+
+While the Malliavin approach to derivative estimation did not yield better results for the worldline
+method, it did inspire a similar approach, with similar virtues.   
+
+
 
 \subsection{Partial Averaging-Gaussian Paths}
 
@@ -1942,9 +1949,6 @@ when the paths are pass close to the body.
 while it is necessary to factor out the cross-sectional area, and consider the second derivative 
 of the energy per unit area).
 \comment{scaled out areas, and integrated over }
-
-
-
 
 \section{Path Construction Revisited: Path-Pinning as Importance Sampling}
 

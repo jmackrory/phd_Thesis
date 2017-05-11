@@ -173,12 +173,13 @@ In this case, the TE and TM Casimir--Polder energies are given by
       \frac{1}{\langle \epsr\rangle^{3/2}}
     %   \right) \nonumber\\
     % &\hspace{1cm}
-      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\\
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}
+      \label{eq:TE_Casimir_Polder}\\
     V\supTM\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
     \biggdlangle
       \frac{e^{-\langle V\subTM\rangle\cT}}{\langle \epsr\rangle^{3/2}}
       -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\rangle^{1/2}}
-      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:TM_Casimir_Polder}
 \end{align}
 These expressions should be renormalized by subtracting off the path integral with a constant dielectric, $\epsr(\rA)$.
 This corresponds to finding the energy difference as the atom is brought in from far away within a given dielectric.
@@ -341,6 +342,7 @@ The integral over $v$ is the TE contribution to the efficiency, $\eta\subTE$, an
 =\,&\frac{1}{3}+\frac{2}{\chi}- \frac{\sqrt{\chi  (\chi +1)}}{\chi^{3/2}}
 -\frac{1}{4\chi^{3/2}}\log \left[2 \chi +2 \sqrt{\chi  (\chi+1)}+1\right]
 -\frac{\text{arcsinh}\left(\sqrt{\chi }\right)}{2\chi^{3/2}}.
+\label{eq:etaTE}
 \end{align}
 The efficiency $\eta\subTE$ smoothly interpolates between $0$ and $1/6$ as $\chi$ varies from $0$ to $\infty$.
 In the strong-coupling limit, the TE polarization provides $1/6$ of the Casimir--Polder energy.  
@@ -403,6 +405,7 @@ The TM efficiency $\eta\subTM$ also has a closed form solution,
   =\,& \frac{7}{6} + \chi + \frac{2 - (1+\chi)^{3/2}}{2\chi} 
   - \frac{\text{arcsinh}\sqrt{\chi}}{2\chi^{3/2}}[1 + \chi + 2\chi^2(1 + \chi)] \nonumber\\ 
   &+ \frac{(1+\chi)^2}{\sqrt{2+\chi}}\left[\text{arcsinh}\sqrt{1+\chi} - \text{arcsinh}\left(\frac{1}{\sqrt{1+\chi}}\right)\right],
+  \label{eq:etaTM}
 \end{align}
 which smoothly interpolates between $0$ and $5/6$ as $\chi$ increases.
 The TM polarization provides the majority of the Casimir--Polder energy for an atom-plane.  
@@ -423,7 +426,7 @@ $\epsra$ and $\epsrb$ from the two-body  expressions with $\epsrab$.  The fully 
   \bigg(\frac{1}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\bigg) \nonumber\\
 &\hspace{1cm}  -\bigg(\frac{1}{\sqrt{\langle \epsra\rangle}}-\frac{1}{\sqrt{\epsra(\vect{x}_0)}}\bigg)
   -\bigg(\frac{1}{\sqrt{\langle \epsrb\rangle}}-\frac{1}{\sqrt{\epsrb(\vect{x}_0)}}\bigg)
-    \biggdrangle_{\vect{x}(t)}.
+    \biggdrangle_{\vect{x}(t)}.\label{eq:TE_Casimir}
   \end{align}
   Each term is renormalized by subtracting off the constant value of the dielectric evaluated at the 
   start of the paths.  (It is also possible to renormalize the energy by instead subtracting off the vacuum value 
@@ -512,6 +515,7 @@ The TE Casimir energies per unit area can be written as
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTE$ is
 \begin{equation}
   \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-u\supTE_1u\supTE_2 e^{-2tvd}].
+  \label{eq:gammaTE}
 \end{equation}
 In this case, the $\gamma\subTE$ interpolates between $0$ and $1/2$ as $\chi$ increases.  In the Casimir energy
 both polarizations contribute equally in strong-coupling.  
@@ -531,7 +535,7 @@ The renormalized two-body TM Casimir interaction energy is
   \bigg(\frac{e^{-\cT\langle \VTM\sup1+\VTM\sup2\rangle}}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\bigg) \nonumber\\
 &\hspace{1cm}  -\bigg(\frac{e^{-\cT\langle \VTM\sup1\rangle}}{\sqrt{\langle \epsra\rangle}}-\frac{1}{\sqrt{\epsra(\vect{x}_0)}}\bigg)
   -\bigg(\frac{e^{-\cT\langle\VTM\sup2\rangle}}{\sqrt{\langle \epsrb\rangle}}-\frac{1}{\sqrt{\epsrb(\vect{x}_0)}}\bigg)
-    \biggdrangle_{\vect{x}(t)}.
+    \biggdrangle_{\vect{x}(t)}.\label{eq:TM_Casimir}
   \end{align}
 In addition, to the two-body dielectric function $\epsrab$, the path integral is augmented by the TM potentials 
 at both surfaces $\VTM\sup1$ and $\VTM\sup2$.
@@ -625,7 +629,8 @@ The TM Casimir energies per unit area can be written as
 \end{equation}
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTM$ is
 \begin{equation}
-  \gamma\supTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-u\supTM_1u\supTM_2 e^{-2tvd}].
+  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-u\supTM_1u\supTM_2 e^{-2tvd}].
+  \label{eq:gammaTM}
 \end{equation}
 At the end of the computation the relation $e^{2\Xi_i}=(1+\chi_i)$, can be used in the reflection coefficients
 In this case, the $\gamma$ interpolates between $0$ and $1/2$ as $\chi$ increases. 

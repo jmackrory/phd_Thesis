@@ -176,7 +176,7 @@ which leads to an attractive potential for the atom,
 where $\hbar$ is the reduced Planck's constant, $c$ is the speed of light, $\alpha_0$ is the atom's static polarizability,
 and $\epsilon_0$ is the permittivity of free space.  
 
-\subsubsection{Derivation of the Atom-Perfect Conductor potential}
+\subsubsection{Derivation of the Atom-Perfect Conductor Potential}
 \label{sec:CP_calc}
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the electromagnetic field.  We will consider the attraction between
@@ -397,7 +397,7 @@ which limits this approach to simple geometries.
 % \item Cite Barton
 % \end{enumerate}
 
-\subsection{Forces between bodies: Casimir Energy}
+\subsection{Forces between Bodies: Casimir Energy}
 
 We now turn our attention to the Casimir effect where macroscopic bodies are attracted to 
 one another via their interaction with the quantized electromagnetic (EM) field~\cite{Casimir1948}.  
@@ -819,7 +819,7 @@ single atoms in a scalable manner~\cite{Alton2011, Hung2013, Goban2014}.  In mor
 the Casimir--Polder potential is explicitly accounted for as part of the trapping potential~\cite{Goban2014},
 and must be precisely computed.
 
-\subsection{Current experimental directions}
+\subsection{Current Experimental Directions}
 
 Beyond directly detecting the Casimir effect, experiments are also moving in some directions worth highlighting,
 since they are quite challenging for the theory to handle.
@@ -889,9 +889,9 @@ Another method of generating repulsive Casimir effects is by varying the geometr
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
 \cite{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
 In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\cite{Rahi2010}.
-\todo{SUMMARIZE THIS}
 
-\subsubsection{Searches for new physics}
+
+\subsubsection{Searches for New Physics}
 
 The Casimir force is also important for speculative searches for new physics on the millimeter to micron
 scale~\cite{Dimopoulos2003, Bezerra2011}.  Since the new physics must be relatively short-ranged, 
@@ -916,8 +916,7 @@ to yield results.
 % \item Military applications to mimic at human scale. Cite 2015 paper.   
 % \end{enumerate}
 
-
-\section{Computational methods for Casimir Effects}
+\section{Computational Methods for Casimir Effects}
 \label{sec:numerical_review}
 
 Modern experiments require theoretical and computational methods
@@ -984,9 +983,10 @@ the pair-wise Casimir forces between each pair of surface patches.  This ignores
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
 the sum of the pair wise potential energies, the Casimir force for an arrangement
 of bodies is not just the sum of the pair wise energies.~(This is discussed further in \S{8.2} and \S{8.4} of Ref.~\cite{Milonni1994}.)
-As a crude justification, the Casimir energy involves a sum over mode functions, which are modified 
-in a nonlinear fashion as more bodies are added.  
-\comment{FIX}
+As a crude justification, the Casimir energy involves a sum over the frequencies for mode functions 
+of the systems.  Since the mode functions are changed in a global, nonlinear fashion, the sum over frequencies
+also changes in a nonlinear fashion as more bodies are added.  
+
 % Finally, the PFA allows only for strictly attractive forces.  
 % In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
 % such as media with a strong magnetic response, or anisotropic media.
@@ -1598,7 +1598,7 @@ which means the renormalized energy scales as $d^{-3}$ in four space-time dimens
 % can be replaced by a Riemann sum, and the prior zero-temperature results
 \label{sec:worldline_distance_dep}
 
-\subsection{Numerical method}
+\subsection{Numerical Method}
 
 In order to numerically evaluate the worldline Casimir energy, it is necessary to generate 
 an ensemble of closed, Brownian paths.  Given the probability for a free Brownian motion $W(t)$ to close 
@@ -1659,7 +1659,7 @@ which simplifies the method further~\cite{Weber2009,Weber2010}.
 %   % \item Can also create open Brownian walk, then force to close by pro-rating final position around walk.
 %   \item Corresponds to IR vs BT?
 
-  \subsection{Advantages and shortcomings of the scalar method}
+\subsection{Advantages and Shortcomings of the Scalar Method}
 
 The worldline method has a number of attractive features.  
 First, it offers an intuitive picture of Casimir energies emerging from the spatial paths 
@@ -1715,7 +1715,7 @@ electromagnetism, without any concrete results~\cite{Aehlig2011}.
     % \end{enumerate}
 %\end{enumerate}
 
-\subsection{Motivation and goal for thesis project}
+\subsection{Motivation and Goal for Thesis Project}
 
 The goal of this thesis is to extend the scalar worldline method to vector electromagnetism.
 Ideally we would retain the attractive features of the method, such as geometry independence of the paths,

@@ -53,14 +53,14 @@ Recall that the Casimir energy is
 where we have momentarily suppressed the renormalization from subtracting off the single body
 energies.    
 
-\subsection{Path generation}
+\subsection{Path Generation}
 
 The principal element of the worldline method is evaluating a potential along an ensemble of Gaussian
 paths.  This allows the $N$-dimensional integral over positions to be efficiently evaluated in a 
 Monte Carlo fashion by generating an ensemble of Brownian bridges.
 It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
 
-\subsubsection{Open Brownian Bridges: V-loop construction}
+\subsubsection{Open Brownian Bridges: V-loop Construction}
 
 Gies\etal found that the most effective method for generating paths was to directly
 sample from thecoupled Gaussian probability distribution, via the ``v-loop'' algorithm~\cite{Gies2003}.
@@ -151,7 +151,7 @@ In Casimir--Polder applications (or when computing the stress-energy tensor~\cit
   The starting point corresponds to the atom's location, or the point where
 the stress-energy tensor is being computed.  
 
-\subsection{Monte-Carlo sampling}
+\subsection{Monte Carlo Sampling}
 
 To evaluate the Casimir energy it is necessary to integrate the results for a single path over all
 starting points $\vect{x}_0$, path-times $\cT$, and average over an ensemble of paths.
@@ -230,7 +230,7 @@ be made which generate paths that are too small to contribute.
 
 \subsubsection{Sampling Starting Positions}
 
-The integral over the starting point $x_0$ can also be evaluated in Monte-Carlo fashion by exploiting some knowledge 
+The integral over the starting point $x_0$ can also be evaluated in Monte Carlo fashion by exploiting some knowledge 
 about the form of the integrand.  
 For points far from all bodies located around the origin, the expected minimum path-time when the integrand is nonzero 
 is $\cT_0\sim x_0^2$.
@@ -284,7 +284,7 @@ fares worse than the straightforward trapezoidal method.
 
 \label{sec:trapezoid}
 
-\subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
+\subsection{Results: TE Casimir  and Casimir--Polder Energies for Planar Geometries}
 
 These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
 Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
@@ -371,7 +371,7 @@ One upshot of Monte Carlo sampling of positions is that this is \emph{much} fast
 the position and path-time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
 roughly the same time as the Casimir--Polder energy.  
 
-\subsubsection{Scaling with N}
+\subsubsection{Error Scaling with Path Length $N$}
 \label{sec:TE_convergence}
 Some interesting scaling behavior was found by examining the relative error between the numerical 
 estimates and the exact analytical value.  
@@ -474,7 +474,7 @@ between these points,
 % is a powerful one.  This technique also offers an improvement on the accuracy for Dirichlet boundary conditions,
 % and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref{sec:accel_converge}.
 
-\subsection{Scaling of Averaged TM Potential with Path Resolution}
+\subsection{Scaling of Averaged TM Potential with Path Length $N$}
 
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
@@ -514,7 +514,7 @@ unacceptably large numerical fluctuations.
 \label{fig:TM_histogram}
 \end{figure}
 
-\subsubsection{TM-Gaussian paths}
+\subsubsection{TM-Gaussian Paths}
 
 \begin{figure}
   \centering
@@ -672,7 +672,7 @@ The difference between Gaussian and TM-Gaussians is small under the birth-death 
 Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
 use the birth-death process in conjunction with Gaussians throughout the remainder. 
 
-\subsection{Monte-Carlo Sampling for Path-Time}
+\subsection{Monte Carlo Sampling for the Path-Time}
 
 \label{sec:expT-sampling}
 When using the birth-death method for generating paths, the TM polarization requires a 
@@ -770,7 +770,7 @@ position is
 We will discuss how to evaluate this derivative with both the finite difference method 
 and the partial-averaging approach.
 
-\subsection{Finite Differences}
+\subsubsection{Finite Differences}
 \label{sec:finite_difference}
 The finite difference method is simplest method for numerically evaluating derivatives.
  It has the great virtue of simplicity, since it only requires that we evaluate the function multiple times.  
@@ -803,7 +803,7 @@ The finite difference method is also problematic for the birth-death method for 
 In that case, as the starting position of the paths varies, a different family
 of birth-death paths may be generated, which further compounds the fluctuation problem.    
 
-\subsection{Malliavin Calculus}
+\subsubsection{Malliavin Calculus}
 Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
 product to variations its underlying parameters must be estimated~\cite{Glasserman2004}.  This could be done via a finite
 difference method, but that behaves poorly.  
@@ -831,7 +831,7 @@ The advantage is the same sample paths can be used for both the estimate and its
 While the Malliavin approach to derivative estimation did not yield better results for the worldline
 method, it did inspire a similar approach, with similar virtues.   
 
-\subsection{Partial Averaging Gaussian Paths}
+\subsubsection{Partial Averaging Gaussian Paths}
 
 \label{sec:partial_averaging}
 Let us consider directly evaluating the derivative on the generic path integral
@@ -995,7 +995,7 @@ where $x_m, x_{N-m}$ are sampled from $P_{\text{HG}}$, and the remaining sub-bri
 the open Gaussian probability distribution.  
 
 
-\subsection{General Method Near Surfaces}
+\subsubsection{General Method Near Surfaces}
 \label{sec:general_path_averaging}
 
 While estimating gradients for the stress-tensor it may be necessary to estimate 
@@ -1066,7 +1066,7 @@ In this case, the derivatives act on the whole propagator , rather than just the
 This could be applied using the Dirichlet solution to the path integral for evaluating the 
 stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).
 
-\subsection{TM Numerical Results: Planar Casimir Energies}
+\subsection{Results: TM Casimir  and Casimir--Polder Energies for Planar Geometries}
 
 Fig.~\ref{fig:eff_TM_atom_wall} plots the numerical results for the efficiency $\eta\subTM$
 against the analytical expression~(\ref{eq:etaTM}).  The numerical results 

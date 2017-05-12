@@ -775,7 +775,10 @@ surface, and $\vect{x}_\Delta$ is on the second surface.
 % we have used $\dlangle \cdots\drangle_{y; C}$ to denote ensemble averaging over quantities 
 % $y$ subject to possible constraints $C$.  The first pinning position is fixed on the first surface,
 % the second pinnings are sampled from $P_\Delta$ with $k=j+\Delta$, 
-The path-times are sampled from $P_{\text{exp-T}}[T;T_0,1+(D+1)/2]$, with $T_0$ given by Eq.~(\ref{eq:T0_curvature}).  
+The path-times are sampled from $P_{\text{exp-T}}[\cT;\cT_0,1+(D+1)/2]$, with $\cT_0$ given by 
+\begin{equation}
+  \cT_0 = \frac{N^2d^2}{2\Delta(N-\Delta)} \label{eq:T0_curvature}.
+\end{equation}
 The paths are still then constructed subject to the constraints of touching the bodies at the appropriate
 indices.  The remaining integrand is evaluated for the resulting paths.  
 

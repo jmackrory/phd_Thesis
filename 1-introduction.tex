@@ -13,7 +13,7 @@ Changing the plates separation changes the allowed modes, and thus the total ene
 While the total vacuum energy is a badly divergent quantity, the difference in energy for two configurations
 is well defined.  
 The vaccum energy is compared between the cases when the plates are a finite distance apart, and when
-they are removed to spatial infinity.  
+they are removed to arbitrarily far apart.  
 As the plates are brought closer together, this vacuum energy difference is reduced, leading to an attractive force
 between the plates.  
 
@@ -206,7 +206,7 @@ which has spatial mode function $\vect{f}\subkz(x).$
 This field energy also includes the zero-point energy, $\sum_k\hbar\omega_k/2$, which will be important 
 in the Casimir effect.
 For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
-considering the energy differences when the atom is moved to spatial infinity.  
+considering the energy differences when the atom is moved close to the surface from arbitrarily far away.  
 Finally, the interaction Hamiltonian couples the internal state of the atom to the quantized light field,
 \begin{equation}
 H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
@@ -338,7 +338,7 @@ The $z$-independent parts lead to a constant, divergent contribution to the ener
 In order to extract a finite energy shift it is essential to renormalize the energy by subtracting
 off this constant energy.  
 This corresponds to considering the energy change as the atom is brought
-close to the surface from spatial infinity.  
+close to the surface from arbitrarily far away.  
 Throughout this thesis, this simple energy subtraction is the only renormalization we will need. 
 
 The renormalized Casimir--Polder energy between an atom and a conducting plane can be evaluated in spherical
@@ -414,7 +414,7 @@ While the total energy is divergent, a finite answer can be found by considering
 the energy difference between two different configurations of bodies.  
 % The subtraction to eliminate divergences is a simple form of field theoretic renormalization, 
 % and will be essential in computations of Casimir quantities.  
-In this case, the energy is renormalized by subtracting the energy when the bodies are removed to spatial infinity.  
+In this case, the energy is renormalized by subtracting the energy when the bodies are moved arbitrarily far away.  
 For example, the renormalized energy between two perfectly conducting plates is
 \begin{equation}
   E-E_0 = -\frac{\hbar c}{720\pi^2 d^3},\label{eq:Casimir_energy}
@@ -984,8 +984,8 @@ the pair-wise Casimir forces between each pair of surface patches.  This ignores
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
 the sum of the pair wise potential energies, the Casimir force for an arrangement
 of bodies is not just the sum of the pair wise energies.~(This is discussed further in \S{8.2} and \S{8.4} of Ref.~\cite{Milonni1994}.)
-As a crude justification, the Casimir energy involves the square of the electric field, which responds 
-non-linearly as more bodies are added.  
+As a crude justification, the Casimir energy involves a sum over mode functions, which are modified 
+in a nonlinear fashion as more bodies are added.  
 \comment{FIX}
 % Finally, the PFA allows only for strictly attractive forces.  
 % In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
@@ -1115,7 +1115,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     processes~\cite{Kac1949,Durrett1996, Karatzas1991}.  Rather than solving the Schr\"odinger equation, 
     this path integral solves a diffusion equation---this effectively passes over to ``imaginary time,''
     since after the Wick rotation $t\rightarrow -i \tau$, the Schr\"odinger equation is a diffusion equation.
-    This mathematical path integral weights each path by $e^{-S_{E}[x]}$, where $S_E$ is the real-valued Euclidean action for the path.
+    This mathematical path integral weights each path by $e^{-S_{E}[x]}$, where $S_E$ is the real-valued, imaginary time action for the path.
     In this form the path integral has clearer convergence properties, 
     since the paths are weighted by real, decaying exponentials, as opposed to the oscillatory integrals
     in Feynman's path integral.  
@@ -1190,8 +1190,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       e^{-i\op{H}\Delta t/\hbar} = \exp\left(-i\frac{\op{p}^2}{2m\hbar}\Delta t\right)
       \exp\left(-iV(\op{x})\Delta t\right)+\order(\Delta t^2),
     \end{equation}
-    where the corrections due to splitting and factorizing the exponential operator are higher order 
-    in $\Delta t$.  
+    where the corrections due to splitting and factorizing the exponential operator contribute at $\order(\Delta t^2)$.
     [In general, it is crucial to consistently carry out all expansions in path integrals to $\order(\Delta t)$.  
     % For example, in path integrals in curved space this often requires working to high order in $\Delta x$, 
     % and exploiting the equivalent of the Ito rule $dx^2=dt$~\cite{deWitt1957,Kleinert2012,Grosche1998}.
@@ -1264,7 +1263,14 @@ quantum mechanics~\cite{McKeon1993, Strassler1992,Schubert2001}.
 % The worldline method is heavily based on Feynman's path integral method, where the amplitude
 % for a particle to move from one position to another is the sum over all paths between the positions,
 % where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
-The basic insight of the worldline method is that for one-loop effective actions, 
+The basic insight of the worldline method is that for one-loop effective actions\footnote{
+One loop order in quantum field theory corresponds to processes such as the Casimir effect,
+where the field emits and absorbs a virtual particle.  These are often the first 
+correction from quantum effects, and as such are often computed.  For example, the Lamb shift and Casimir--Polder 
+effect involve one loop, since the electron emits and reabsorbed a photon.
+The effective action, gives the equations of motion
+in the absence of any external driving on the system~(see Ch. 16 of \cite{WeinbergQFT2}).  Often self-interactions or other
+quantum lead to a non-trivial effective action.}, 
 the field path integral calculation can be recast in terms of the path
  integral for particles traveling in closed space-time paths.
   Higher order loop calculations can also be carried out with more particles, 
@@ -1283,10 +1289,10 @@ In these non-trivial geometries the worldline method has also been used to exami
 More recent work has focused on computing the stress-energy tensor~\cite{Schafer2012, Schafer2016},
 with a view to exploring how the Casimir energy violates certain energy conditions (violations of which are required for certain exotic physics).
 
-The scalar worldline is also related to some semi-classical expansions for the Casimir energy.  
+The scalar worldline is also related to some semiclassical expansions for the Casimir energy.  
 In particular, it is a direct numerical method for computing the so-called optical path integral
 \cite{Scardicchio2005, Scardicchio2006}.  The sum over intersecting paths is also reminiscent 
-for the semi-classical approach to the Casimir force by Schaden and Spruch~\cite{Schaden1998}, which evaluates 
+of the semiclassical approach to the Casimir force by Schaden and Spruch~\cite{Schaden1998}, which evaluates 
 the Casimir energy by summing over all periodic orbits of light.  This latter work is particularly 
 related to other work on the semiclassical limits of path integrals involving chaos~\cite{Gutzwiller1990}.
 Both of these approximate techniques rely on a path integral expression for the Casimir energy that models electromagnetism as a
@@ -1312,6 +1318,7 @@ and did not have concrete, correct results.
 % determinant.  Ultimately we want the free energy, which can be further converted into a path integral
 % for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
 % world line method.   
+
 \subsection{Derivation of the Scalar Casimir Worldline Path Integral}
 \label{sec:dirichlet_worldline_derivation}
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
@@ -1433,7 +1440,7 @@ The free energy for the interacting field can be written as
 \end{equation}
 where $C$ is a divergent constant.  
 As it stands this functional determinant is divergent, but finite results can be found by subtracting off the 
-free energy when the bodies are removed to spatial infinity.  Physically this corresponds to 
+free energy when the bodies are removed arbitrarily far apart.  Physically this corresponds to 
 computing energy differences between different configurations of bodies.  % The renormalization also cancels off 
 % the infinite constant normalization factors.  
 The renormalized free energy can now be written in terms of a single-particle path integral via some formal 

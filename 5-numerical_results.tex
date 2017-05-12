@@ -2,35 +2,39 @@
 \label{ch:numerical}
 
 The ultimate goal of this project is to build a general numerical method for computing 
-Casimir energies.  In order to test results 
-it is necessary to test smaller cases carefully first.  Despite the emphasis on planar geometries,
-we have tried to develop methods that would be well suited to more complicated geometries,
-and test them in the simple geometry.  In this case we can carefully test their convergence properties
-as the path resolution is increased.  
-
-Even in a planar geometry we have had to develop an array of tools to make the worldline methods tractable.
-The TM polarization is by far the hardest to deal with, and has prompted most of these developments.
-The same developments can be used to enhance the TE polarization, as well as existing Dirichlet
+Casimir energies.  As a first, step it is necessary to test the proposed methods in well understood 
+cases, such as for planar media.  We have tried to develop numerical methods that would also work in the general
+case, despite emphasizing planar media.  
+%  Despite the emphasis on planar geometries,
+% we have tried to develop methods that would be well suited to more complicated geometries,
+% and test them in the simple geometry.  In this case we can carefully test their convergence properties
+% as the path resolution is increased. 
+Even in a planar geometry a number of tools are required to make the electromagnetic worldline methods tractable.
+The TM polarization is quite challenging to deal with, and has prompted most of these developments.
+The same developments have been used to enhance the TE polarization, and could be applied to improve existing Dirichlet
 worldline methods.
 
-We will discuss techniques path construction, Monte Carlo sampling of the path starting points $x_0$
+The primary ingredients for the numerical method are ways of efficiently 
+constructing Brownian paths and a technique for Monte Carlo sampling of the path starting points $x_0$
 and path-time $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
-The TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
-used to construct the paths.  The essence of these methods is importance sampling, beyond what is manifestly
-obvious from the form of the path integral.    
+However, the TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
+used to construct the paths.  In addition, the TM Casimir--Polder energy involves taking spatial
+derivatives of the worldline path integral.
 
 The numerical results will be compared against the expected efficiencies $\eta(\chi)$ and $\gamma(\chi)$.
 The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
 integration over $\cT$, as was briefly discussed in Sec.~\ref{sec:worldline_distance_dep}. 
-That is still true within the for electromagnetic worldlines. 
-All of the simulations are carried out for a fixed $\chi$ in the far-field limit, but we will discuss how
-to generalize the simulations to allow dispersion.  
-The computations at fixed $\chi$ are useful indicators for how the full dispersion simulations.
-In the Casimir effect, each frequency contributes independently, so for a particular frequency $\chi(i\omega)$
-is effectively constant.  Since $\chi(i\omega)$ is a positive real constant, that diverges in some cases
+That is still true within the context of electromagnetic worldlines. 
+All of the simulations are carried out for a fixed $\chi$ at zero temperature, neglecting dispersion.
+ At the end we will suggest how to generalize the simulations to include dispersion.  
+Despite not accounting for dispersion, the computations at fixed $\chi$ are useful indicators for how the full dispersion simulations
+will behave.
+In the Casimir effect, each frequency contributes independently, so for a particular frequency $\omega$, 
+the susceptibility $\chi(i\omega)$ is effectively constant.  
+Since $\chi(i\omega)$ is a positive real constant, that diverges in some cases
 (such as metals), it is necessary to see how the worldline algorithm performs across a whole range of susceptibilities.
 
-The numerical results on the TE Casimir energies were published in Ref.~\cite{Mackrory2016}.
+(The numerical results on the TE Casimir energies were published in Ref.~\cite{Mackrory2016}.)
 
 \section{TE Casimir Numerics}
 
@@ -40,20 +44,30 @@ We will first discuss path generation, sampling starting positions $\vect{x}_0$ 
 and evaluating the dielectric path-average $\langle \epsr\rangle$.  % Despite working with expressions adapted to planar
 % media, we will endeavour to develop general purpose numerical methods that would work in more general
 % geometries.  
+Recall that the Casimir energy is
+\begin{equation}
+  E\subTE-E\sup0 = -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
+  \biggdlangle
+  \frac{1}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\biggdrangle_{x(t)},
+\end{equation}
+where we have momentarily suppressed the renormalization from subtracting off the single body
+energies.    
 
 \subsection{Path generation}
 
 The principal element of the worldline method is evaluating a potential along an ensemble of Gaussian
 paths.  This allows the $N$-dimensional integral over positions to be efficiently evaluated in a 
-Monte Carlo fashion via $N_p$ sample paths.
+Monte Carlo fashion by generating an ensemble of Brownian bridges.
 It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
 
 \subsubsection{Open Brownian Bridges: V-loop construction}
 
+Gies\etal found that the most effective method for generating paths was to directly
+sample from thecoupled Gaussian probability distribution, via the ``v-loop'' algorithm~\cite{Gies2003}.
 The v-loop algorithm is derived by decoupling the product of $N$ Gaussian probability densities 
-into $N-1$ independent Gaussian deviates~\cite{Gies2003}.
-Since we will need to construct open and closed Brownian bridges of fixed length $N$, we will derive the v-loop algorithm
-for open paths, as closed paths are a special case of open paths.  
+into $N-1$ independent Gaussian deviates.
+Since the numerical methods will need to construct open and closed Brownian bridges of fixed length $N$, 
+we will derive the v-loop algorithm for open paths, as closed paths are a special case of open paths.  
 
 Consider a Gaussian density of $N$ steps in one dimension, where the end points $x_0$ and $x_N$ 
 are fixed:
@@ -62,16 +76,15 @@ are fixed:
   \label{eq:Gaussian_distrib}
 \end{equation}
 It is convenient to define a shifted, normalized variable $y_k = (x_k-x_0)/\sqrt{\Delta \cT}$.
-The exponent for the product of coupled Gaussians is
+The exponent for the product of coupled Gaussians is then
 \begin{equation}
 X = \frac{y_1^2}{2}+\frac{(y_2-y_1)^2}{2}+\cdots+\frac{(y_{N-1}-y_{N-2})^2}{2}+\frac{(\Delta x-y_{N-1})^2}{2},
 \label{eq:Xexp}
 \end{equation}
 where $\Delta x :=(x_N-x_0)/\sqrt{\Delta \cT}$.  
 The exponent~(\ref{eq:Xexp}) can be decoupled by completing the square repeatedly.
-The process starts at one end of the path $y_{N-1}$, and it is convenient to
-introduce a variance $\sigma^2_{N-1}=1$ as a bookkeeping device.  
-The last two terms of the sum can be rewritten as
+starting at $y_{N-1}$.
+The two terms of the sum involving $y_{N-1}$ can be rewritten as
 \begin{align}
   & \frac{(y_{N-1}-\Delta x)^2}{2\sigma_{N-1}^2}+\frac{(y_{N-1}-y_{N-2})^2}{2} \nonumber \\
   &= \frac{\sigma^2_{N-1}+1}{2\sigma_{N-1}^2}
@@ -80,9 +93,9 @@ The last two terms of the sum can be rewritten as
   % &= \frac{1}{2c_{N-1}}
   % \left(y_{N-1} - c_{N-1}y_{N-2}-\frac{\Delta x}{\sigma_{N-1}^2+1}\right)^2 + \frac{(y_{N-2}-\Delta x)^2}{2(\sigma^2_{N-1}+1)}\\
 \end{align}
-where $\sigma_{N-2}:=\sigma_{N-1}+1$, and $c_{N-1} = \sigma_{N-1}^2/(\sigma_{N-1}^2+1)$.
-It is possible to quickly develop recursion relations for how the resulting variables transform.  
-After each completion of the square $\sigma_{N-j}\rightarrow \sigma_{N-j+1}+1$, with the algebra
+where $\sigma_{N-1}:=1$, $\sigma_{N-2}:=\sigma_{N-1}+1$, and $c_{N-1} = \sigma_{N-1}^2/(\sigma_{N-1}^2+1)$.
+%It is possible to quickly develop recursion relations for how the resulting variables transform.  
+After each completion of the square $\sigma_{N-j}\rightarrow \sigma_{N-j1}+1=j+1$, with the algebra
 taking the same form as Eq.~(\ref{eq:decouple_barf}) with the label indices decreasing by one.
 Once the process has been repeated $N-1$ times
 the exponent is 
@@ -97,39 +110,44 @@ and
 \begin{equation}
   c_j = \frac{N-j}{N-j+1}.
 \end{equation}
-The $z_j$ are decoupled standard normal variables.  Once the $z_j$ have been sampled the 
+The probability distribution~(\ref{eq:Gaussian_distrib}) is then
+\begin{equation}
+  P(z_1,\ldots z_{N-1}) = \frac{1}{\sqrt{2\pi\cT}}e^{-(x_0-x_{N})^2/(2\cT)}
+  \prod_{k=1}^{N-1} \frac{e^{-z_k^2/2}}{\sqrt{2\pi}},
+\end{equation}
+which accounts for the Jacobian $\prod_{j}\sqrt{c_j}=N^{-1/2}$ from changing variables.
+The $z_j$ are decoupled standard normal variables.  Once the $z_j$ have been sampled, the 
 transformation (\ref{eq:zj}) can be inverted to find the path,
 \begin{equation}
   x_k = x_0 + \frac{x_N-x_0}{N-k+1}+c_kx_{k-1} + \sqrt{c_k\Delta\cT}z_k.\label{eq:open_vloop}
 \end{equation}
-There is then an remaining normalization factor of $e^{-(x_N-x_0)^2/(2\cT)}/\sqrt{2\pi\cT}$,  
-which accounts for the Jacobian $\prod_{j}c_j=N^{-1}$ from changing variable.
-This normalization is also the normalization factor derived in Eq.~\ref{eq:Gaussian_normalization}.
-An integral against the probability density~(\ref{eq:Gaussian_distrib}) could be evaluated as follows,
+This equation shows how to construct a Brownian bridge from $x_0\rightarrow x_N$ in time $\cT$.
+%This normalization is also the normalization factor derived in Eq.~\ref{eq:Gaussian_normalization}.
+An integral against the probability density~(\ref{eq:Gaussian_distrib}) could be rewritten as
 \begin{equation}
   I = \int \prod_{j=1}^{N-1}dx_j P(x_1,\ldots,x_{N-1})f(x_1,\ldots,x_N)
   = \frac{e^{-\frac{(x_1-x_N)^2}{2\cT}}}{\sqrt{2\pi \cT}}\dlangle f\drangle_{x(t)},
 \end{equation}
 where the ensemble average is taken over open Brownian bridges between $x_0$ and $x_N$.
-The limit of closed paths can be easily taken by setting $x_N-x_0=0$.
+The limit of closed paths can be taken by setting $x_N-x_0=0$.
 The v-loop construction is also straightforwardly generalized to vector Brownian bridges.  
 This procedure allows the generation of a unit loop for $\cT=1$, which can then be integrated over
 multiple starting points $x_0$ and total path-times $\cT$.  A closed unit Brownian bridge can be constructed 
 as
 \begin{equation}
-  B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k.\label{eq:unit_vloop}
+  B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k,\label{eq:unit_vloop}
 \end{equation}
-A shifted, scaled Brownian bridge can then be constructed as
+and a shifted, scaled Brownian bridge can then be constructed as
 \begin{equation}
   x_k = x_0 + \sqrt{\cT} B_k.
 \end{equation}
-
 The original v-loop algorithm used centered paths, where the average position $\langle x\rangle$ is subtracted from the path~\cite{Gies2003}.
 This requires first constructing the Brownian bridge, and then subtracting off the mean position.  
 This is inconvenient if the path is being generated on the fly 
-without storage, or if there are stochastic elements to path construction.    
+without storage, or if there are stochastic elements to path construction.  However it is slightly 
+more adapted to computing Casimir energies. 
 In Casimir--Polder applications (or when computing the stress-energy tensor~\cite{Schafer2016}),
- it is better to consider paths emanating from a single point $\vect{x}_0$.
+ it is preferable to consider paths emanating from a single point $\vect{x}_0$.
   The starting point corresponds to the atom's location, or the point where
 the stress-energy tensor is being computed.  
 
@@ -139,20 +157,21 @@ To evaluate the Casimir energy it is necessary to integrate the results for a si
 starting points $\vect{x}_0$, path-times $\cT$, and average over an ensemble of paths.
 % The rationale for also sampling over times is to allow further ensemble averaging over paths,
 % and times. 
-The original Gies\etal computations emphasized computing the total $\cT$ integral for each path~\cite{Gies2003}.
+The original Gies\etal computations emphasized computing the $\cT$ and $\vect{x}_0$ integrals for each path~\cite{Gies2003}.
 For Dirichlet worldlines, the path integrand is either zero or one based on whether the path intersects
 all of the bodies.  This makes evaluating the integral a tractable problem, since 
 it only requires finding the set of times $\{\cT_k\}$ when paths enter the body, and evaluating 
-$\int_{\cT_0}^{\cT_1} d\cT\,\cT^{-(1+D/2)}$ during those  times the integral is nonzero.
-For example, in their paper computing forces in a sphere-plane geometry Weber and Gies find analytical
+$\int d\cT\,\cT^{-(1+D/2)}$ during those  times the integral is nonzero.
+For example, in their paper computing forces in a sphere-plane geometry, Weber and Gies found analytical
 expressions in terms of $\vect{x}_0$ and $\cT$ for when each random path will intersect both bodies~\cite{Weber2010}.
-The remaining integrals over $\vect{x}_0$ and $\cT$ can be evaluated on a path-wise basis.
+The remaining integrals over $\vect{x}_0$ and $\cT$ were then evaluated on a path-wise basis.
 
 However, for the dielectric integrands that the TE and TM path integrals require, 
-the integrand changes value based on how many points are inside the surface.  For a path of length $N$, this direct method would
+the integrand changes value based on how many points are inside the surface.
+  For a path of length $N$, this direct method would
 require finding all $N$ intersection times and then evaluating the integrals.  
 This becomes impractical for large $N$, as a large computational effort  must be expended on even a single path.  
-This becomes even more burdensome once the integral over the starting position is accounted for.
+%This becomes even more burdensome once the integral over the starting position is accounted for.
 
 Since the $N$-fold integral over positions is being handled in a Monte Carlo fashion, it makes sense to 
 treat the remaining integrals over the starting position $\vect{x}_0$ and path-times $\cT$ in the same manner.
@@ -161,7 +180,7 @@ distributions, governed by the form of the integral.  This is a form of importan
 is a powerful tool for accelerating Monte Carlo numerical computations~\cite{Asmussen2007, Glasserman2004}.
 This style of importance sampling goes beyond just using the Gaussian probability density to evaluate the 
 spatial integrals over the intermediate positions $\vect{x}_k$.  In this case, the importance sampling
-relies on knowledge on which positions and times the most to the integral. 
+relies on estimating which positions and times are likely to contribute the most to the integral. 
 This Monte Carlo sampling of $x_0$ and $\cT$ also extends the number of independent paths that can be averaged over, which 
 is essential for good convergence.   
 
@@ -180,7 +199,7 @@ These facts suggest sampling $\cT$ from a probability distribution
 \begin{equation}
   P(\cT;\cT_0,m)= \frac{(m-1) \cT_0^{m-1}}{\cT^m}\Theta(\cT-\cT_0),\label{eq:Tpower_law}
 \end{equation}
-where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of the first-contact time $\cT_0$.  
+where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of $\cT_0$.  
 For the example of paths starting between parallel planes $\cT_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
 \left(\frac{d_2-x_0}{B_+}\right)^2]$ where $d_1<x_0<d_2$, and $B_\pm$ are the maximum and minimum points
 of the unit Brownian path.  The path-time $\cT_0$ is the lowest bound on when the path will touch the relevant bodies.
@@ -188,13 +207,13 @@ In computing Casimir interaction energies, the path must touch \emph{all} of the
 calculations, the path must touch \emph{any} of the bodies to contribute.  
 
 Samples from the distribution~(\ref{eq:Tpower_law}) can be generated by inverting the cumulative probability distribution.
-(This sort of inversion is a general purpose method of generating random deviates from a distribution~\cite{NumRecipe,Devroye2003}.)
-In this case, the inversion requires a solution $\cT$ to
+(Inversion is a general purpose method of generating random deviates from a given distribution~\cite{NumRecipe}.)
+In this case, the inversion requires a solving
 \begin{equation}
-  r=(m-1) \cT_0^{m-1}\int_{\cT_0}^\cT dt\, t^{-m},
+  r=(m-1) \cT_0^{m-1}\int_{\cT_0}^\cT dt\, t^{-m},\label{eq:Tsamp}
 \end{equation}
 where $r\in [0,1]$ is a uniform random number and $\cT$ is the desired deviate.    
-This can be easily solved, with the result that
+Eq.~(\ref{eq:Tsamp} can be easily solved, with the result that
 \begin{align}
 %  r&=(m-1) \cT_0^{m-1}\frac{1}{m-1}\left(\frac{1}{\cT_0^{m-1}}-\frac{1}{\cT^{m-1}}\right)\\
 %  \left(\frac{\cT_0}{\cT}\right)^{m-1}&= (1-r)\\
@@ -204,26 +223,26 @@ The lower-bound $\cT_0$ can be easily found in simple geometries on a path-wise 
 $\cT$ can then be generated for each path, where each path is then guaranteed to contribute.  
 
 In a more complicated arrangement of bodies, the lower-bound $\cT_0$ could be found via root-finding,
-to find the minimum path-time that the path touches all of the relevant bodies.  It is important for 
+to find the minimum path-time such that the path touches all of the relevant bodies.  It is important for 
 $\cT_0$ to be a lower bound on the first time the integrand is nonzero, otherwise this method will miss 
 part of the integral.  However, $\cT_0$ should not be set too low, as otherwise numerous samples will
-be made which generates paths that are too small to contribute.  
+be made which generate paths that are too small to contribute.  
 
 \subsubsection{Sampling Starting Positions}
 
 The integral over the starting point $x_0$ can also be evaluated in Monte-Carlo fashion by exploiting some knowledge 
 about the form of the integrand.  
-For points $x$ far from all bodies located around the origin, the expected minimum path-time when the integrand is nonzero 
-is $\cT_0\sim x^2$.
+For points far from all bodies located around the origin, the expected minimum path-time when the integrand is nonzero 
+is $\cT_0\sim x_0^2$.
 If the extent of the finite bodies is $d_{\text{max}}$, then there is also a maximum time $\cT_1$ for when the path is so large 
 that it does not intersect the bodies anymore (this may be infinite in some geometries).
-In that case, and approximating the integrand $(\langle\epsr\rangle^{-1}-1$ by its strong-coupling limit,
+In that case, and approximating the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ by its strong-coupling limit,
 the path-time integral is approximately 
 \begin{equation}
-  \int_{\cT_0}^{\cT_1} \frac{d\cT }{\cT^{1+D/2}} = \frac{1}{x^{D}}-\frac{1}{d_{\text{max}}^D}.
+  \int_{\cT_0}^{\cT_1} \frac{d\cT }{\cT^{1+D/2}} = \frac{1}{x_0^{D}}-\frac{1}{d_{\text{max}}^D}.
 \end{equation}
 This suggests that the contribution from points far from the bodies scales at most as $x^{-D}$.  
-In between the bodies, the contribution from each starting position is roughly uniform, since each path must have sufficient extent
+In between the bodies, the contribution from each starting position is roughly equal, since each path must have sufficient extent
 to touch all bodies.  
 This occurs for times $\cT\sim d_0^2$, where $d_0$ is the separation between bodies.    
 In a one-dimensional geometry, embedded in a four-dimensional space-time, 
@@ -239,7 +258,7 @@ This reasoning can be easily extended to higher dimensional problems,
 where a sphere of radius $d_0$ should bound all of the interfaces between the bodies.
 Outside of that sphere, the sampling would again fall off as $|x|^D$.  
 While it may be possible to develop sampling procedures better suited to a particular geometry, 
-this provides a general purpose way of sampling the starting points for Casimir worldline path integrals.
+this provides a general purpose way of sampling the starting points of the paths.
 
 \subsubsection{Evaluating the Dielectric Path Average}
 
@@ -266,12 +285,10 @@ fares worse than the straightforward trapezoidal method.
 \subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
 These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
-As a first step, let us consider the Casimir--Energy for an atom interacting with a dielectric half-space 
-in the zero temperature, far-field limit.  The atom is located at the origin, with a dielectric half-space 
-a distance $d$ away with a constant susceptibility $\chi$.
-
 Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
 at a range of $\chi$.  
+ The atom is located at the origin, with a dielectric half-space 
+a distance $d$ away with a constant susceptibility $\chi$.
 The TE Casimir--Polder energy is calculated numerically by evaluating
 \begin{align}
   V\supTE\subCP-V_0 %&= -\frac{\hbar c\alpha_0}{8\pi^2}\biggdlangle \int_0^\infty\frac{d\cT}{\cT^{3}}\big(\langle \epsr\rangle^{-3/2}-1)  \biggdrangle \nonumber\\
@@ -280,14 +297,14 @@ The TE Casimir--Polder energy is calculated numerically by evaluating
 \end{align}
 where $\dlangle \cdots\drangle_{\vect{x}_k,\cT}$ denotes an ensemble average over discrete Brownian bridges,
 and times $\cT$.  
-One dimensional Brownian bridges are constructed using the v-loop algorithm~(\ref{eq:unit_vloop}).
+The one-dimensional Brownian bridges are constructed using the v-loop algorithm~(\ref{eq:unit_vloop}).
 The minimum path-time $\cT_0$ is determined on a path-wise basis, based on solving $\sqrt{\cT_0}\text{max}(B_k)=d$.
 The path-time is sampled for each path from Eq.~(\ref{eq:Tpower_law}), with $m=1+D/2=3$.
 The path is then scaled, $x_k = \sqrt{\cT}B_k$, and the trapezoidal method is used to evaluate $\langle\epsr\rangle$
 around each path.  The sojourn time per path $\langle\Theta(x-d)\rangle$ can be estimated once per path,
 and then multiple $\chi$ can be computed at once using $\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.
 The results are then accumulated over many paths and times.  
-The numerically calculated efficiency $\eta(\chi)$ is found by dividing the numerical results by the perfect-conductor result,
+The numerically calculated efficiency $\eta(\chi)$ is found by dividing the numerical results by the perfect-conductor result~(\ref{eq:Casimir_Polder}),
 which cancels out the leading constants and the $d^{-4}$ distance dependence.
 
 % As the results show, the agreement with between the numerical results
@@ -340,14 +357,14 @@ This is computed numerically by evaluating
   E\supTE\subCP-E_0 
   &=\biggdlangle \frac{\hbar c\alpha_0}{8\pi^2} \frac{1}{2\cT_0^{2}P_x(x_0)}
   \bigg(1+\frac{1}{\langle\epsrab(x_k)\rangle^{3/2}}\nonumber\\
-    &\hspace{5cm}-\frac{1}{\langle\epsra(x_k)\rangle^{3/2}}-\frac{1}{\langle\epsrb(x_k)\rangle^{3/2}}\bigg) \biggdrangle_{x_k,\cT,x_0},\label{eq:TE_Casimir_num}
+    &\hspace{5cm}-\frac{1}{\langle\epsra(x_k)\rangle^{3/2}}-\frac{1}{\langle\epsrb(x_k)\rangle^{3/2}}\bigg) 
+\biggdrangle_{x_k,\cT,x_0},\label{eq:TE_Casimir_num}
 \end{align}
-The same procedure is similar to the one used for Casimir--Polder energies.  However, 
-in this case there is an additional ensemble average over path starting position $\vect{x}_0$.
+where the ensemble average now also includes the starting positions $x_0$.
 The starting positions are sampled from Eq.~(\ref{eq:xPower_law}), with $d_0=d$, 
 which is twice the size of the region between the interfaces.  
-In this case it is also necessary to keep track of $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
-The dielectric path average and the renormalized worldline integrand can also be quickly computed for multiple $\chi$.
+In this case, it is necessary to keep track of both $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
+The dielectric path average and the renormalized worldline integrand can then be quickly computed for multiple $\chi$.
 One upshot of Monte Carlo sampling of positions is that this is \emph{much} faster than directly evaluating 
 the position and path-time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
 roughly the same time as the Casimir--Polder energy.  
@@ -382,12 +399,12 @@ the noise floor in Fig.~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
   \label{fig:conv_wall}
 \end{figure}
 
-As the path resolution $N$ varies for fixed $\chi$, the error shows two different scaling behaviors.  
+As the path length $N$ increases for fixed $\chi$, the error shows two different scaling behaviors.  
 In Ref.~\cite{Mackrory2016}, some arguments are given to explain this scaling, which will not be repeated here,
 but we will explain the basic reasoning.  The numerical computations use discrete paths, 
-while the path integral assumes $N$ is arbitrarily large.  Thus the paths considered by the path integral
-have arbitrarily fine structure, with a non-zero probability to touch, or enter the dielectric body.
-The discrete paths used in the numerical method miss those contributions.  
+while the path integral assumes $N$ is arbitrarily large.  The continuous paths considered by the path integral
+have arbitrarily fine structure, and always have a non-zero probability to touch, or enter the dielectric body.
+The discrete paths used in the numerical method miss those contributions, leading to a systematic error.  
 
 In the weak-coupling limit $\chi/N\ll 1$, the numerical estimate is dominated by accurately estimating the sojourn
 time $\langle\theta\rangle$ for a given path.  Further increasing $N$ increases the accuracy of this 
@@ -401,8 +418,7 @@ prior to the estimated first contact time.  This leads to a $N^{-1/2}$ scaling.
 
 For a fixed $\chi$, the transition between both behaviors is observed at $N\sim\chi$. 
 In the strict $\chi\rightarrow\infty$ Dirichlet limit, the numerical results and scaling 
-arguments suggests that the numerical error will always scaled as $N^{-1/2}$.  However, for a finite
-$\chi$ there is always such an $N$, although that $N$ grows linearly as the susceptibility increases.  
+arguments suggests that the there will always be a $N^{-1/2}$ systematic error scaling.  
 
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}
@@ -417,11 +433,15 @@ The most daunting feature of the TM Casimir worldline is the singular TM potenti
 The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is 
 \begin{align}
   v_k(x_k,x_{k+1}):=\,&  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
-   =\,& \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]
-  +\Theta[-X_{k,k+1}]\sech\Xi,
+  %  =\,& \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]
+  % +\Theta[-X_{k,k+1}]\sech\Xi,
    \label{eq:TM_pot}
+      =&\left\{ \begin{array}{lc} 
+          1   + \sgn(d-x_k)\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/t} & (d-x_k)(d-x_{k+1})>0\\
+          \sech\Xi & (d-x_k)(d-x_{k+1})<0.
+        \end{array}
+        \right.  
 \end{align}
-where $X_{k,k+1}:=(d-x_k)(d-x_{k+1})$.
 This ensemble-averaged solution was plotted in Fig.~\ref{fig:TMpot}, 
 for starting points on either side of the interface at various values of $\Xi$.
 The solution is between zero and one for paths that start inside a body, or cross an interface.
@@ -432,20 +452,21 @@ This solution can be used in the path integral by identifying averages of sub-pa
 between discrete points with the analytical solutions.
 The path-averaged exponential potential can be split into many steps between $\vect{x}_k$ and $\vect{x}_{k+1}$
 at times $\cT_k$ and $\cT_{k+1}$.  Each exponential potential can be averaged against all possible sub-paths
-between these points.  
+between these points,
 \begin{align}
   \biggdlangle \frac{e^{-\cT\langle V\rangle}}{\langle\epsr\rangle^{1/2}}\biggdrangle = &
   \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N
   \bigglinklangle \exp\left(-\int_{\cT_k}^{\cT_{k+1}} dt\, V[x(t)]\right)\bigglinkrangle_{x_k\rightarrow x_{k+1}}
     \biggdrangle\\
- =& \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N  v_{k,k+1}    \biggdrangle
+ =& \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N  v_{k,k+1}    \biggdrangle,
   \end{align}
-  It is not strictly necessary to include the dielectric average in the averaging over
-sub-paths, since the dielectric is a much smoother function.  % Taking the dielectric into the average of sub-paths would lead to 
+  where $\linklangle\cdots\linkrangle$ denotes an average over continuous sub-paths between two points.
+%   It is not strictly necessary to include the dielectric average in the averaging over
+% sub-paths, since the dielectric average is a much smoother function that varies more slowly.  % Taking the dielectric into the average of sub-paths would lead to 
 % even better results, but those analytical solutions are difficult to calculate.
-The integrand can be built up even for a discrete Brownian bridge of length $N$, 
-by multiplying the appropriate TM potential terms~(\ref{eq:TM_pot}) along the path, and then dividing
-by the path-average of the dielectric $\langle\epsr\rangle$.  
+% The integrand can be built up even for a discrete Brownian bridge of length $N$, 
+% by multiplying the appropriate TM potential terms~(\ref{eq:TM_pot}) along the path, and then dividing
+% by the path-average of the dielectric $\langle\epsr\rangle$.  
 
 % This notion of replacing a singular potential with its ensemble averaged value between two end points
 % is a powerful one.  This technique also offers an improvement on the accuracy for Dirichlet boundary conditions,
@@ -453,7 +474,6 @@ by the path-average of the dielectric $\langle\epsr\rangle$.
 
 \subsection{Scaling of Averaged TM Potential with Path Resolution}
 
-Even after regularization, and ensemble averaging the TM potential is still difficult to handle.  
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
 \begin{align}
@@ -461,6 +481,7 @@ that only includes a single TM potential a distance $d$ away,
   \bigglinklangle  e^{-\int_0^{\Delta \cT} dt\,\VTM[x(t)]}\bigglinkrangle_{x_k\rightarrow x_{k+1}}\Biggdrangle_{\vect{x}_k}\\
 =\,&\Biggdlangle \prod_{k=0}^{N-1}
   v_{k,k+1}\Biggdrangle_{\vect{x}_k}.
+  \label{eq:Vsimp}
 \end{align}
 The left-hand ensemble average is over continuous Brownian bridges, whereas the second ensemble
 average runs over discrete Brownian bridges (and averaging over continuous sub-paths indicated by $\linklangle\cdots\linkrangle$).
@@ -485,7 +506,9 @@ unacceptably large numerical fluctuations.
   \caption[Histogram of Accumulated Numerical TM Estimates]
   {Histogram of accumulated numerical TM estimates, for raw Gaussian (blue) and birth-death Gaussian (red).
     Simulations used $10^6$ paths, with $N=100$ points per path, $\chi=100$, $d=1,T=1.$
-  The raw Gaussian distribution extends off to negative infinity, while the birth-death distribution has truncated peak at zero weight.}
+    (The birth-death method is discussed in Sec.\ref{sec:birth_death}.)
+    The raw Gaussian distribution extends off to negative infinity, 
+    while the birth-death distribution has truncated peak at zero weight.}
 \label{fig:TM_histogram}
 \end{figure}
 
@@ -507,36 +530,37 @@ In this case, the total probability distribution for the paths is
   \bigglinklangle e^{-\int_0^{\Delta \cT}dt\, \VTM}\bigglinkrangle_{x_k\rightarrow x_{k+1}}
 \end{align}
 In the same manner as the v-loops, the Gaussian probability distribution can be decoupled into a
-set of random variables, where from Eq.~\ref{eq:open_vloop}, the argument of each of those Gaussians 
+set of random variables, where from Eq.~(\ref{eq:open_vloop}), the argument of each of those Gaussians 
 involves ${z_k = (x_k-c_{k}x_{k-1})/\sqrt{c_k\Delta \cT}}$.
 \begin{align}
-  P(x_1,\ldots ,x_{N-1}) = v_{N,N-1}\prod_{k=0}^{N-1}\cN_{k+1}^{-1}P\supTM_{k+1}(x_{k+1}),
+  P(x_1,\ldots ,x_{N-1}) = v_{N,N-1}\prod_{k=0}^{N-1}\cN_{k+1}P\supTM_{k+1}(x_{k+1}),
 \end{align}
 where the new probability distribution for $x_k$ is 
 \begin{align}
-P\supTM_{k+1}(x_{k+1}):=\cN^{-1}_{k+1}\frac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,x_{k+1}),
+P\supTM(x_{k+1}):=\cN^{-1}_{k+1}\frac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,x_{k+1}),
   \end{align}
 with normalization constant 
 \begin{align}
   \cN_k=\int dy\, \frac{e^{-(y-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,y).
 \end{align}
 The crucial point is that the $P\supTM_{k}$ can be sampled from, accounting only for the present position. 
-While the present position $x_k$ is still coupled to future positions via $v_{k+1,k}$, the sampling procedure ignores
-that coupling and samples $x_k$ based solely on $P_k$.  
+Although the present position $x_k$ is still coupled to future positions via $v_{k+1,k}$, the sampling procedure ignores
+that and samples $x_k$ based solely on $P_k$.  
 The probability distribution can be put into a convenient numerical form by completing the square to account
-for $v_{k,k+1}$.  The resulting piecewise Gaussian probability distribution is 
+for $v_{k,k+1}$.  The resulting piecewise Gaussian probability distributions can be split 
+into ``no-crossing'' and  ``crossing'' terms, where
 \begin{align}
-  P\supTM_{k+1}(x_{k+1})
- = \cN_k\left\{ \begin{array}{lc}
-     \vspace{0.2cm}  \dfrac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}}{\sqrt{2\pi c_k \Delta\cT}} + \sgn(d-x_k)\dfrac{\tanh\Xi}{\sqrt{2\pi c_k \Delta\cT}} & \hspace{2cm}\\
-    \vspace{0.2cm} \hspace{0.7cm}\times e^{-(x_{k+1}-c_k(2d-x_k))^2/(2c_k \Delta\cT)} e^{-2(1-c_k)d(d-x_k)/\Delta\cT} &  X_{k,k+1}>0\\
-\dfrac{\sech \Xi}{\sqrt{2\pi c_k \Delta\cT}}e^{-\frac{(x_{k+1}-c_k x_k)^2}{2c_k \Delta\cT}}  &  X_{k,k+1}<0\,,\\
-\end{array}
-\right.\label{eq:PTM_k}
+  P\supTM(x_{k+1})
+  = \cN_k\big\{ \Theta[(d-x_k)(d-x_{k+1})]P\supTM_{\text{NC}}(x_{k+1}) +  \Theta[-(d-x_k)(d-x_{k+1})]P\supTM_{\text{C}}(x_{k+1})\big\}
+\label{eq:PTM_k}
 \end{align}
-where we previously defined $X_{k,k+1}=(d-x_k)(d-x_{k+1})$.  
-The normalization constant integral can be evaluated in two parts $\cN_k=\cN_k^{\text{C}}+\cN_k^{\text{NC}}$, 
-a crossing term $\cN_k^{\text{C}}$ for $X_{k,k+1}<0$,  and non-crossing term $\cN_k^{\text{NC}}$ for $X_{k,k+1}>0$,
+and
+\begin{align}
+P\supTM_{\text{NC}}(x_{k+1})&=  \sgn(d-x_k)\dfrac{\tanh\Xi}{\sqrt{2\pi c_k \Delta\cT}} e^{-2(1-c_k)d(d-x_k)/\Delta\cT} e^{-(x_{k+1}-c_k(2d-x_k))^2/(2c_k \Delta\cT)}\nonumber\\
+&  \hspace{0.5cm}+ \dfrac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}}{\sqrt{2\pi c_k \Delta\cT}}  \\
+P\supTM_{\text{C}}(x_{k+1}) &=\dfrac{\sech \Xi}{\sqrt{2\pi c_k \Delta\cT}}e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}
+\end{align}
+The normalization constant can be evaluated in two parts $\cN_k=\cN_k^{\text{C}}+\cN_k^{\text{NC}}$, 
  with the result
 \begin{align}
   \cN_k^{\text{C}}=\,& \frac{1}{2}\left[1+\sgn(d-x_k)\, \erf\!\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right] \nonumber\\
@@ -550,14 +574,13 @@ a crossing term $\cN_k^{\text{C}}$ for $X_{k,k+1}<0$,  and non-crossing term $\c
 \end{align}
 The probability distribution~(\ref{eq:PTM_k}) can be sampled via the following procedure.
 First, note that the probability distributions involve truncated Gaussians in $x_k$.  The truncation
-occurs at the surface, since the probability distribution was split based on whether path-increments cross
+occurs at the surface $x_k=d$, since the probability distribution was split based on whether path-increments cross
 through the surface or not.
- The truncation ensures that the crossing or no-crossing constraint, $X_{k,k+1}$ is obeyed.  
 At each step the simulation picks the crossing or no-crossing branch of the probability distribution
 cased on the relative weights of $\cN_k^\text{C}$ and $\cN_k^\text{NC}$, picking the crossing branch 
 if $\cN_k^{\text{C}}/\cN_k<r$ where $r$ is a uniform random number.  
 If the crossing branch is chosen, then a deviate is sampled from the truncated Gaussian distribution.
-If the no-crossing branch is chosen, then depending on the sign of $\sgn(d-x_k)$, there are another two options.
+Otherwise, if the no-crossing branch is chosen, then depending on the sign of $\sgn(d-x_k)$, there are another two options.
 If $\sgn(d-x_k)>1$, then one of the Gaussians is picked based on their relative probability of occurring,
 and a deviate is sampled from one of them.
 If however, $\sgn(d-x_k)<1,$ then the rejection method is used to generate a deviate.
@@ -571,29 +594,30 @@ as the path length $N$ is increased.  It is also much more involved to implement
 approach.
 
 \subsubsection{Birth-Death Loop Swarm}
-
+\label{sec:birth_death}
 Both the plain Gaussian and TM-Gaussian paths can be rescued by further adjusting the sampling procedure.
 In both cases, as the trajectory propagates it accumulates a large weight.  After $k$ steps,
 the weight is $w_k=\prod_{j=1}^k\nu_j$, where $\nu_j$ represents either $v_{j,j+1}$ for Gaussians or $\cN_j$
-for the TM-Gaussians.  Most paths propagating around the interface will acquire 
-a number of large weights with $\nu_j>1$ from the vacuum side, 
-and small weights $0<\nu_j<1$ from within the medium.  
+for the TM-Gaussians.  Most paths propagating close to the surface will acquire 
+a number of large weights with $\nu_j>1$ when they are outside the body, 
+and small weights $0<\nu_j<1$ when they are inside the body.  
 The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$.  
-Since the $\nu_j$ are random variables (since both the $v_{k,k+1}$ and $\cN_k$ are functions of an underlying random path),
-then we would expect $\log w_k$ to be normally distributed, with some variance $\sigma$. 
+Since the $\nu_j$ are random variables (both $v_{k,k+1}$ and $\cN_k$ are functions of an underlying random path),
+then from the central limit theorem, we would expect $\log w_k$ to be normally distributed, with some standard deviation $\sigma^2$. 
 Thus, the accumulated weight is expected to grow a log-normal deviate, with variance $\sigma^N$.    
 Note that the mean would still have the correct value, but the variance, and thus sampling error would
 grow unacceptably as $N$ increases.
 
-A large number of paths will yield very low values, and a lot of computer time would be wasted on simulations
-which computing numbers very close to zero.  A few rare paths would skirt outside the surface, accumulating
-very large weights, and contributing a lot to the Casimir energy.  Together these lead to large statistical
-fluctuations, which make it hard to get sufficient averaging for even moderately fine paths $N\sim 100$.
-Note that both types of paths will contribute to the Casimir energy.
+% A large number of paths will yield very low values, and a lot of computer time would be wasted on simulations
+% which computing numbers very close to zero.  A few rare paths would skirt outside the surface, accumulating
+% very large weights, and contributing a lot to the Casimir energy.  Together these lead to large statistical
+% fluctuations, which make it hard to get sufficient averaging for even moderately fine paths $N\sim 100$.
+% Note that both types of paths will contribute to the Casimir energy.
 
 The path generation for either method can be modified as follows.  The weight $w_k$ is effectively treated as 
 the fitness function for the path.  Paths with high weights will spawn further paths (birth), while paths with
-small weights will be terminated and return zero (death).
+small weights will be terminated and return zero (death).  At each step of the path, the 
+accumulated weight must be checked.
 If the weight is becoming small, $w_k<0.5$ then compare $w_k$ with a uniform random number $u$.
 If $w_k<u$, then set $w_k=0$ and stop propagating the path; alternatively, if $w_k>u$, then 
 the path survives and the weight is reset $w_k=1$.  That is the death process.
@@ -608,7 +632,7 @@ more opportunity.  Note that returning zero is still a contribution to the Casim
 from unity will contribute), and the death process speeds up the computation by not computing ever smaller
 values.
 
-The birth-death process is a very simple Markov Chain Monte Carlo (MCMC) method.  The birth-death
+The birth-death process is a very simple Markov Chain Monte Carlo method.  The birth-death
 process modifies the preferred motions based on the accumulated weight.  Paths are likely to be born
 on the vacuum side of interfaces, and they are likely to die on the inside of the interface.
 Far away from the interface on either side, the paths are unlikely to change.  
@@ -620,7 +644,7 @@ In our case, that rate depends on the past behavior of the system, and where it 
 The process used here is closer to the genealogical methods for evaluating path integrals discussed by Del Moral~\cite{DelMoral2004}.
 A similar genealogical idea has been used in quantum trajectory simulations~\cite{Jacobs2010a}, which is another
 technique for simulating open quantum systems.  In that variant, each random trajectory carries 
-a probability weight.  If that weight becomes too small, then that random trajectory is killed,
+a probability weight.  If that weight becomes too small, then that random trajectory is discarded,
 and another more successful trajectory is split in two, and given half the weight.   
 A similar method has been used to discuss simulating rare events, such as the extreme tails of a Gaussian.
 In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\cite{Glasserman1999,Garvels2000}.
@@ -629,9 +653,11 @@ contribution to the integral (or other figure of merit).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig/temp/TM_scalingN}
-  \caption[Scaling of variance TM potential as function of $N$ for four methods.]
-  {Scaling of variance TM potential as function of $N$ for four methods.  
+  \includegraphics[width=0.8\textwidth]{fig/numerics/TM_scalingN}
+  \caption[Scaling of standard deviation for estimated TM potential as function of $N$ for four methods.]
+  {Scaling of standard deviation for estimated TM potential as function of $N$ for four methods.  
+    Eq.~(\ref{eq:Vsimp}) is evaluated for both Gaussian increments, TM-Gaussian increments, 
+    and then for birth-death variants of both methods.  
   All combinations of Gaussian paths increments and combined TM-Gaussian steps, with raw values and 
   birth-death.}
 \label{fig:TM_scalingN}
@@ -647,8 +673,8 @@ use the birth-death process in conjunction with Gaussians throughout the remaind
 \subsection{Monte-Carlo Sampling for Path-Time}
 
 \label{sec:expT-sampling}
-
-The TM polarization requires a slightly different sampling method for generating path-times $\cT$.  
+When using the birth-death method for generating paths, the TM polarization requires a 
+slightly different sampling method for generating path-times $\cT$.  
 In some limited cases it may be possible to estimate a minimum $\cT_0$ where 
 the integrand is small for a given path, and a path is unlikely to have branched or birthed new paths.  
 For paths starting on the vacuum side near a dielectric, the accumulated
@@ -656,7 +682,7 @@ potential at small path-times is approximately ${\prod_k( 1+\tanh\Xi e^{-2(d-x_k
 which turns on smoothly in $\cT$.
 In that case, $\cT_0$ can be estimated from the time an initial, fiducial path would contact a surface and the 
 integrand would turn on.  The path-time can be sampled from the power law distribution~(\ref{eq:Tpower_law}).
-The birth-death process then proceeds starting with the initial path.  
+The birth-death process then proceeds starting with a version of the initial path that is scaled by $\sqrt{\cT}$.  
 
 However, in a two-body geometry that sort of estimation fails.
 The renormalized integrand is only nonzero for paths that come close to both surfaces.
@@ -667,8 +693,8 @@ where the path has no chance of touching the surface, but most computations woul
 As a result, it is not possible to estimate for a single trajectory a lower bound $\cT_0$ 
 for which the path does not branch, but is also close to when the integrand turns on.  
 
-Since the birth-death method essentially enlarges the ensemble of paths selected, it's turn on
-closely mimics the probability for a Brownian bridge to touch a surface.
+Since the birth-death method essentially enlarges the ensemble of paths selected, its turn on
+mimics the probability for a Brownian bridge to touch a surface.
 The probability for a Brownian bridge to touch a surface a distance $d$ away in path-time $\cT$ is 
 \begin{equation}
   P_{\text{touch}}(\cT) = e^{-2d^2/\cT}.
@@ -682,24 +708,27 @@ where $s>1$ and $\cT_0>0$.
 %  The exponential factor effectively models the finite touching 
 % probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
 % away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$. 
-The probability distribution~\ref{eq:expT} can be transformed to $u=\cT_0/\cT$, for 
+The probability distribution~(\ref{eq:expT}) can be transformed to $u=\cT_0/\cT$, for 
 which the probability distribution is
 \begin{equation}
   P_{\text{exp}-1/\cT}(u;s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}.
 \end{equation}
 % where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
 % of measure.  
-The new variable $u=\cT_0/\cT$ has the form of a Gamma distribution, which has probability density 
+The new variable $u=\cT_0/\cT$ has the form of a gamma distribution, which has probability density 
 \begin{equation}
   f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
 \end{equation}
 where $a>0$ and $b>0$ are the shape and scale parameters respectively~\cite{Devroye2003}.  
 For small integer or half-integer powers $a$, there are some simple methods for generating 
 gamma deviates $g_i$.  
-A sum of Gamma deviates $\sum_{i=1}g_i$ with shape parameters $a_i$, is also a Gamma deviate
+A sum of gamma deviates $=\sum_{i=1}g_i$ with shape parameters $a_i$, is also a gamma deviate
 with shape parameter $\sum a_i$~(see pg. 402 of Devroye~\cite{Devroye2003}).  
-In particular, this means the sum of $k$ exponential deviates $e_i=-\log(u_i)$, yields a Gamma 
-deviate gamma(k,1).  Furthermore if $z$ is normally distributed then $z^2/2$ obeys gamma$\left(\frac{1}{2},1\right)$.
+A gamma deviate with shape parameter $a=1$ is an exponential deviate, $e_i=-\log(u)$ where 
+$u$ is a uniform random number.  
+In particular, this means the sum of $n$ exponential deviates yields a gamma 
+deviate with shape parameter $a=n$.  
+In addition, if $z$ is a standard normal variable, then $z^2/2$ is gamma distributed with $a=1/2$.
 For small integer powers, $\cT$ is distributed according to
 \begin{equation}
   \cT\sim \frac{\cT_0}{-\sum_{i=1}^{s}\log u_i},
@@ -713,7 +742,8 @@ naturally emerge when considering the thermal Casimir energy, or derivatives of 
 such as the force.  
 This distribution can also be used to sample times $\cT$
 even for TE integrands.  In that case however, it is possible the generated path will not
-touch all bodies and merely return zero.    
+touch all bodies and merely return zero, which will increase the variance of the numerical
+estimated energy.  
 
 \subsection{Gradient Estimation}
 
@@ -723,7 +753,7 @@ Furthermore, in some experiments on the Casimir--Polder effect such as BEC exper
 the Casimir--Polder potential is estimated from how it shifts the frequency of the atom's oscillations
 in a harmonic potential.  This frequency shift is calculated by taking two derivatives of the Casimir--Polder
 potential.   For the TM polarization within the worldline method, this would require four spatial 
-derivatives, so it is essential to be able to efficiently compute these derivatives.  
+derivatives, so it is essential to be able to efficiently compute these derivatives for worldline path integrals.  
 
 Consider a generic worldline path integral involving pinned Brownian motions in path-time $\cT$ with starting point $\vect{x}_0$
 \begin{equation}
@@ -749,8 +779,8 @@ For example, consider the first derivative of the TE Casimir--Polder worldline i
 at a dielectric step $\epsr=1+\chi\Theta(x-d)$.  The finite difference integrand is
 \begin{equation}
   \partial_0\Bigdlangle \,\langle\epsr[\vect{x}(t)\rangle^{-3/2}-1\Bigdrangle_{\vect{B}_k}
-  = \frac{1}{\Delta s}\Bigdlangle \, \langle\epsr[\vect{x}_0+\Delta s\hat{r}_i+\sqrt{\cT}B_k]\rangle^{-3/2}
-  -\langle\epsr[\vect{x}_0+\sqrt{\cT}B_k]\rangle^{-3/2}\,\Bigdrangle_{\vect{B}_k}
+  \!=\! \frac{1}{\Delta s}\Bigdlangle \, \langle\epsr[\vect{x}_0+\Delta s\hat{r}_i+\sqrt{\cT}B_k]\rangle^{-3/2}
+  -\langle\epsr[\vect{x}_0+\sqrt{\cT}B_k]\rangle^{-3/2}\,\Bigdrangle_{\vect{B}_k},
 \end{equation}
 where $\Delta s$ is the finite difference step size, $\vect{B}_k$ is a closed unit Brownian bridge, 
 and $\hat{r}_i$ is a Cartesian unit vector.
@@ -758,7 +788,7 @@ This can be evaluated on a path-wise basis.
 In order to be accurate, the step size $\Delta s$ must be small, since the error in this approximation 
 to the derivative is $\order[(\Delta s)^2]$.
 Unfortunately, that limit leads to large fluctuations.
-If the finite difference is much smaller than a typical path increment,$\Delta s\ll \sqrt{\Delta\cT}$, 
+If the finite difference is much smaller than a typical path increment, $\Delta s\ll \sqrt{\Delta\cT}$, 
 the estimates for path-averaged dielectric $\langle\epsr(\vect{x}_0)\rangle$ for the two starting positions
 are likely to be the same, so the estimate is zero.  
 In rare circumstances, a point is within $\Delta s$ of the surface, and the finite difference returns
@@ -773,13 +803,13 @@ of birth-death paths may be generated, which further compounds the fluctuation p
 
 \subsection{Malliavin Calculus}
 Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
-product to variations its underlying parameters must be estimated.  This could be done via a finite
+product to variations its underlying parameters must be estimated~\cite{Glasserman2004}.  This could be done via a finite
 difference method, but that behaves poorly.  
 Since financial simulations also typically involved averages over simulated Brownian motions, similar problems emerge.
 One promising approach for worldline applications is based on the Malliavin calculus, which 
 is formally discussed in Ref.~\cite{Nualart2006, Malliavin2006, DiNunno2009}.
 Less formal (and more understandable) discussions of the Malliavin approach are presented in Refs.~\cite{Chen2007,Kohatsu-Higa2003}.
-In the Malliavin approach, the derivative can be estimated by \emph{multiplying} the integrand by
+In the Malliavin approach, the derivative can be estimated by multiplying the integrand by
 a suitably chosen weight function, which depends on the nature of the derivative and the random path.
 The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion, 
 and an associated integration by parts formula.   
@@ -793,9 +823,9 @@ where $\partial_\theta\log P$ is the likelihood function.
 The original sampling method can be used to evaluate this derivative, so $\dlangle\Phi\drangle$ and its derivatives
 $\partial_\theta\dlangle \Phi\drangle$ can be evaluated using the same random samples.}
 in conjunction with partial-averaging along the Brownian motion~\cite{Chen2007}. 
-In either case, one exchanges differentiation for
-evaluating a new reweighted function, which depends on the required derivatives, while still
-using the original paths.  
+In either case, one replaces differentiation for
+evaluating a reweighted function, where the form of the function depends on the required derivatives.
+The advantage is the same sample paths can be used for both the estimate and its derivative.  
 While the Malliavin approach to derivative estimation did not yield better results for the worldline
 method, it did inspire a similar approach, with similar virtues.   
 
@@ -817,7 +847,7 @@ act on the coupled Gaussian.
   \partial_0^nI(x_0)&=\int \prod_{j=1}^{N-1}dx_j
   \frac{\partial^n}{\partial x_0^n}\prod_{k=0}^{N-1}\frac{e^{-(x_{k+1}-x_k)^2/(2\Delta\cT)}}{\sqrt{2\pi\Delta \cT}}\Phi(x_1,\ldots x_{N-1}).
 \end{align}
-We assume that the derivatives acting on $\Phi$ can be neglected, which is the same as assuming that 
+The derivatives acting on $\Phi$ have been neglected, which effectively assumes that 
 $\Phi$ does not vary significantly at the path origin.  
 The derivatives of the Gaussians yield Hermite Polynomials, which are defined via
 \begin{equation}
@@ -841,13 +871,13 @@ The differentiated path integral is then
   \partial_0^nI(x_0)&=\biggdlangle
   \left(\frac{-1}{\sqrt{\Delta\cT}}\right)^n H_n\left(\frac{x_0-\bar{x}_1}{\sqrt{\Delta\cT}}\right)
  \Phi(x_1,\ldots x_{N-1})
-\biggdrangle,
+\biggdrangle_{x_k},
 \end{align}
 where the Gaussians have been restored to their usual form and the path integral has been rewritten in ensemble average form.
 In principle this method would also work for estimating the derivatives.  However as written, this 
 will have large numerical fluctuations.  In particular, the answers will be distributed around zero, with
 with some reweighting due to $\Phi$, which preferentially weights certain values.  However, the overall answer scales
-as $(\Delta\cT)^{-n/2}$.  As the path length $N$ increases, the fluctuations around zero will also increase
+as $(\Delta\cT)^{-n/2}$.  As the path length $N$ increases, the fluctuations will scale
 as $N^{n/2}$ which is unacceptable.    
 
 \begin{figure}
@@ -860,7 +890,7 @@ as $N^{n/2}$ which is unacceptable.
 
 This method can be improved by partial averaging over the path.
 In particular, we assume that $\Phi=\prod_{k=1}^N\phi(x_k)$, 
-and each $\phi(x_k)$ only varies significantly for $x_k\sim d$, and can otherwise
+and each $\phi(x_k)$ only varies significantly for $x_k\sim d$, and when $x_k\ll d$, $\phi(x_k)$ can otherwise
 be approximated as a constant.  An example of this geometry is illustrated in Fig.~\ref{fig:int-by-parts}, 
 for an atom near a dielectric surface.  
 For the first and last $m$ points along the path, the integrals can be carried out assuming that $\Phi$ is 
@@ -879,9 +909,12 @@ The result for integrating out $x_1,\ldots,x_{m-1}$ and $x_{N-m+1},\ldots,x_{N-1
 \end{align}
 % The composition rule for Hermite polynomials and Gaussians follows by first integrating out the intermediate coordinates, 
 % and then differentiating the results.  
-The Hermite polynomial is effectively the desired weighting function.  This approach has replaced differentiation
+The combination of the Hermite polynomial is effectively the desired Malliavin weighting function.
+This approach has replaced differentiation
 with multiplication by a function that does not fluctuate more as the path length changes.
-This method naturally generalizes to other Cartesian derivatives. 
+This method naturally generalizes to other Cartesian derivatives.  The path can be generated 
+using the v-loop algorithm~(\ref{eq:vloop}), and the relevant parts of the path can be 
+used to evaluate Eq.~(\ref{eq:partial_avg_grad}).
 
 Each integration over an intermediate coordinate makes some small error in approximating $\Phi$ as constant.  
 The partial averaging should only be carried out to the point where that error can no longer be ignored.
@@ -1040,7 +1073,7 @@ were evaluated using the Gaussian partial averaging.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TM_atom_wall}
+  \includegraphics[width=0.8\textwidth]{fig/numerics/eff_TM_atom_wall}
   \caption[Numerical TM Casimir--Polder Efficiency]{Numerically computed TM Casimir--Polder Efficiency for Atom-Plane, 
     for $10^9$ paths, with $N=10^3$ points per path.  Birth-death method was used for path generation, and partial averaging was
   used for derivatives.}
@@ -1049,7 +1082,7 @@ were evaluated using the Gaussian partial averaging.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TM_2wall}
+  \includegraphics[width=0.8\textwidth]{fig/numerics/eff_TM_2wall}
   \caption[Numerical TM Casimir Efficiency]{Numerically computed TM Casimir Efficiency for Plane-Plane.
     for $N=200$, with $4.8\times 10^8$ trajectories.}
   \label{fig:eff_TM_2wall}

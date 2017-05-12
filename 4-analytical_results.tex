@@ -291,7 +291,7 @@ than as numbers.)
 The integral over $\cT$ is the solution to the relevant diffusion equation, as discussed in Ch.~\ref{ch:feynman_kac}.
 The solutions must be appropriately scaled with $\lambda\rightarrow \lambda+s$, and $\chi\rightarrow s\chi$.
 
-\section{Analytical  TE CP energy for an atom and a dielectric plane}
+\section{Analytical  TE Casimir--Polder Energy for an Atom and a Dielectric Plane}
 \label{sec:TE_CP}
 
 The TE contribution to the Casimir--Polder energy for an atom interacting with a dielectric body is given 
@@ -348,7 +348,7 @@ The efficiency $\eta\subTE$ smoothly interpolates between $0$ and $1/6$ as $\chi
 In the strong-coupling limit, the TE polarization provides $1/6$ of the Casimir--Polder energy.  
 The remaining $5/6$ is provided by the TM polarization.  
 
-\section{Analytical TM CP energy for atom-plane}
+\section{Analytical TM Casimir--Polder Energy for an Atom and a Dielectric Plane}
 
 The TM calculation for the Casimir--Polder energy proceeds in a similar fashion to the TE case.  
 The renormalized TM Casimir--Polder energy can be split into two pieces 
@@ -412,7 +412,7 @@ The TM polarization provides the majority of the Casimir--Polder energy for an a
 From the worldline point of view, most of that contribution comes from the term involving the second derivative, 
 which suggest it is essential to correctly estimate the derivatives in a numerical procedure.  
 
-\section{Finding the TE Casimir energy}
+\section{Analytical TE Casimir Energy between Two Dielectric Planes}
 
 The Casimir energy for two dielectric planes can also be calculated within this formalism.  
 The dielectric function is given by $\epsrab(x) = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
@@ -521,7 +521,7 @@ In this case, the $\gamma\subTE$ interpolates between $0$ and $1/2$ as $\chi$ in
 both polarizations contribute equally in strong-coupling.  
 This derivation will be extended to the TM component.  
 
-\section{Finding the TM Casimir energy}
+\section{Analytical TM Casimir Energy between Two Dielectric Planes}
 
 The TM Casimir energy calculation is carried out in a similar manner to the TE case.
 Despite the similarities between the two solutions, it is still necessary to check that this calculation also works, 
@@ -725,7 +725,7 @@ Then assuming that the distances $d$ are longer than the dominant resonant wavel
 material response functions can be replaced with their zero-frequency values.  The frequency integrals
 can then carried out, and our earlier expressions will be recovered.
 
-\subsection{Thermal TE Casimir--Polder energy}
+\subsection{Thermal TE Casimir--Polder Energy}
 
 We will limit our discussion to the Casimir--Polder case of an atom near a dielectric plane.  
 The preceding calculations are straightforwardly extended to dispersion and finite temperature.
@@ -835,7 +835,7 @@ which is suppressed by $\order[(\omega d/c)^3]$ relative to the TM contributions
 % As nasty as that two-body expression may be, exactly the same tricks will work on it, 
 % and it will simplify down to exactly the same form as the other polarization.  
 
-\subsection{TM Casimir-Polder: Limiting Cases}
+\subsection{Thermal TM Casimir-Polder Energy}
 
 The TM contribution to the Casimir--Polder free energy for an atom in front of a dielectric plane 
  proceeds in the same manner as the TE case.
@@ -858,7 +858,7 @@ V\supTM\subCP-V_0%=\,& -k_BT{\sum_n}'\frac{ s_n\alpha(i s_n)}{4\pi\epsilon_0c}\i
 \end{align}
 This expression can then be approximated in the near field and high temperature limits.  
 
-\subsection{Zero temperature, near-field}
+\subsubsection{The Zero Temperature, Near Field Limit}
 
 Let us consider the zero temperature, near field limit, in which case the TM Casimir--Polder energy is
 \begin{align}
@@ -889,7 +889,7 @@ V\supTM\subCP-V_0&\approx \frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega
 \end{align}
 which is the well known result for the van der Waals energy for an atom near a dielectric wall~(see Eq. 14.199 of Steck~\cite{SteckNotes}).
 
-\subsection{High temperature, far-field}
+\subsubsection{The High Temperature, Far Field Limit}
 
 In the high temperature limit, only the zero frequency term contributes, so the TM Casimir--Polder
 energy is  

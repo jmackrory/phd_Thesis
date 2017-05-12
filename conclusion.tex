@@ -1,36 +1,85 @@
 \chapter{Conclusion}
 
-Broad summary text.  Note of future directions and applications.
+The goal for this thesis was to develop a general purpose numerical method
+employing the worldline method to evaluate electromagnetic Casimir effects. 
+
+Given the difficulties with applying the full vector path integral~(\ref{eq:vector_path_integral}), 
+we developed a worldline description for the EM field in terms of two independent scalar fields, corresponding 
+to the TE and TM polarizations.   Although the decoupled scalars are adapted to a planar geometry (although they may describe
+a spherical geometry as well), they share some similarities with the potentials in the full vector
+path integral.  
+
+We were able to show that the polarization worldline path integrals recover the known expressions for the 
+Casimir--Polder and Casimir energies in planar geometries, at zero and high temperature.  
+Doing so involved regularizing the singular TM potentials, and finding analytical solutions to the path integral
+in certain geometries.  We found that the TM polarization provides the majority of the Casimir--Polder energy,
+and the extreme near and field field limits.
+
+Even with the regularized solutions, it was necessary to develop a number of techniques to efficiently
+sample the Monte Carlo integrand.  The TE integrand was relatively simple to evaluate and explore, while the TM
+integrand is much more challenging and is still under study.
+The numerical methods we developed were able to reproduce the expected analytical results.
+The birth-death method for sampling paths was essential to the success of the TM method, as it 
+brought the fluctuations under control.  
+The partial averaging method also allowed us to evaluate the derivatives required for the TM method,
+where previously, the finite difference method had been previously plagued by convergence issues.
+
+The methods that were developed could be used as an uncontrolled approximation to the Casimir effect in a general geometry.
+and will be essential in handling the full vector path integral.    
+In cases where path integrals could be found for open Brownian bridges (such as
+Dirichlet and TM boundary conditions), those expressions can be chained together and applied to non-planar
+geometries, such as dielectric wedge.    
+
+One possible approach to leveraging the results contained here into a general method is to consider coupling the two 
+scalar polarizations.  
+At each point along the path, the EM field could be split into the TE and TM polarizations based 
+on the nearest surface normal.
+As the path propagates through space, that nearest surface normal would change direction, which would couple the fields 
+together.  
+
+The simulations carried out here were written for a typical desktop CPU, and parallelized by launching
+many independent jobs on a cluster.  
+The worldline is also a natural fit for simulations on a graphics processing unit (GPU), 
+which contains a large number of processors suited to parallel programming. 
+It may be highly effective to port the TE and TM worldline methods over to a GPU.
+However, programming a GPU is a somewhat involved endeavor, and much of the code would have to be 
+rewritten to take advantage of this new architecture.  
+
+In the introduction we noted that the scattering method is currently the only general
+method for computing Casimir energies in arbitrary geometries. That is still true.  The worldline method,
+while it has a number of attractive features, has not yet been generalized to full electromagnetism.   
+Hopefully, the work presented here brings that prospect closer.  
+
 
 \begin{itemize}
-  \item Developed scalar worldlines.  
-  \item Goal was for Gaussian, geometry independent, method for computing Casimir energies taking
-    into account dielectric properties.
-    Check against known calculations.
+%  \item Developed scalar worldlines.  
+  % \item Goal was for Gaussian, geometry independent, method for computing Casimir energies taking
+  %   into account dielectric properties.
+  %   Check against known calculations.
     
-  \item Really missing on geometry independent, since polarization decomposition is restricted to
-    particular geometries.  Have idea of coupling on each step, with rotation/coupling based on how
-    nearest normal changes direction.
-    Ad-hoc.  Hard to definitively check and debug.
-  \item Carefully studied convergence properties, and developed numerical methods, that while 
-    only tested for planes could generalize as uncontrolled approximations.  (Add fields in quadrature)
-  \item Need markov-chain methods to temper fluctuations.  Introduced monte carlo sampling for both 
-    positino and time.  
-    Effective boundary conditions, and Feynman-Kac formulae for accelerating convergence.
-  \item In comparison with Scattering method - that is mature code, that works quickly.
-    It is currently limited to surface integrals, but apparently, can use effective surface currents
-    to capture slower variation.  State of the art actually employed in research groups looking to 
-    compute their Casimir-Polder potential.
-  \item Worldline may be useful companion for very different underpinnings, and convergence properties.
-    Worldline path resolution may be analogous to fine enough tesselation of surfaces.  
-    As yet, neither method can handle anisotropic media.  
+  % \item Really missing on geometry independent, since polarization decomposition is restricted to
+  %   particular geometries.  Have idea of coupling on each step, with rotation/coupling based on how
+  %   nearest normal changes direction.
+  %   Ad-hoc.  Hard to definitively check and debug.
+  % \item Carefully studied convergence properties, and developed numerical methods, that while 
+  %   only tested for planes could generalize as uncontrolled approximations.  (Add fields in quadrature)
+  % \item Need markov-chain methods to temper fluctuations.  Introduced monte carlo sampling for both 
+  %   positino and time.  
+  %   Effective boundary conditions, and Feynman-Kac formulae for accelerating convergence.
+  % \item In comparison with Scattering method - that is mature code, that works quickly.
+  %   It is currently limited to surface integrals, but apparently, can use effective surface currents
+  %   to capture slower variation.  State of the art actually employed in research groups looking to 
+  %   compute their Casimir-Polder potential.
+  % \item Worldline may be useful companion for very different underpinnings, and convergence properties.
+  %   Worldline path resolution may be analogous to fine enough tesselation of surfaces.  
+  %   As yet, neither method can handle anisotropic media.  
     
-  \item Also developed model for quantum trajectories accounting for camera noise.  
-    May one day be useful to lab in reconstructing atomic trajectories.
+  % \item Also developed model for quantum trajectories accounting for camera noise.  
+  %   May one day be useful to lab in reconstructing atomic trajectories.
 
-  \item Maybe: 
-    Developed CUDA code for both worldlines (path generation, branching) and quantum trajectories
-    (weighting outcomes, FFT for split-operator)
+  % \item Maybe: 
+  %   Developed CUDA code for both worldlines (path generation, branching) and quantum trajectories
+  %   (weighting outcomes, FFT for split-operator)
 \end{itemize}
 
 

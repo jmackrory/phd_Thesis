@@ -2,43 +2,47 @@
 
 The goal for this thesis was to develop a general purpose numerical method
 employing the worldline method to evaluate electromagnetic Casimir effects. 
+We have been partially successful.   % Although we have not verified that the full vector
+% path integral~(\ref{eq:vector_path_integral}) gives the correct answers.
 
-Given the difficulties with applying the full vector path integral~(\ref{eq:vector_path_integral}), 
-we developed a worldline description for the EM field in terms of two independent scalar fields, corresponding 
-to the TE and TM polarizations.   Although the decoupled scalars are adapted to a planar geometry (although they may describe
+We developed a full vector path integral~(\ref{eq:vector_path_integral}), but have not 
+been able to solve it, or verify that it gives the correct answers.
+Instead, we developed a worldline description for the EM field in terms of two independent scalar fields, corresponding 
+to the TE and TM polarizations.   
+Although the decoupled scalars are adapted to a planar geometry (although they may describe
 a spherical geometry as well), they share some similarities with the potentials in the full vector
-path integral.  
+path integral, and a useful test case in their own right.    
 
 We were able to show that the polarization worldline path integrals recover the known expressions for the 
 Casimir--Polder and Casimir energies in planar geometries, at zero and high temperature.  
 Doing so involved regularizing the singular TM potentials, and finding analytical solutions to the path integral
-in certain geometries.  We found that the TM polarization provides the majority of the Casimir--Polder energy,
-and the extreme near and field field limits.
+in certain geometries.  The analytical expressions for the path average of the TM potential are 
+absolutely essential for numerical computations with this method method.  
 
 Even with the regularized solutions, it was necessary to develop a number of techniques to efficiently
 sample the Monte Carlo integrand.  The TE integrand was relatively simple to evaluate and explore, while the TM
 integrand is much more challenging and is still under study.
+The birth-death method for sampling paths was essential for bringing the numerical fluctuations under control.
+The partial averaging method also allowed us to evaluate the derivatives required for the TM method.
 The numerical methods we developed were able to reproduce the expected analytical results.
-The birth-death method for sampling paths was essential to the success of the TM method, as it 
-brought the fluctuations under control.  
-The partial averaging method also allowed us to evaluate the derivatives required for the TM method,
-where previously, the finite difference method had been previously plagued by convergence issues.
+% where previously, the finite difference method had been previously plagued by convergence issues.
 
 The methods that were developed could be used as an uncontrolled approximation to the Casimir effect in a general geometry.
-and will be essential in handling the full vector path integral.    
-In cases where path integrals could be found for open Brownian bridges (such as
-Dirichlet and TM boundary conditions), those expressions can be chained together and applied to non-planar
-geometries, such as dielectric wedge.    
+and will probably be useful in handling the full vector path integral.    
+In cases where path integrals could be found for open Brownian bridges [such as
+Dirichlet~(\ref{eq:Dirichlet}) and TM boundary conditions~(\ref{eq:TM_potential})], 
+those expressions can be applied locally as a path propagates.  
+At each step, the potential could be computed using a local planar approximation to the exact solution,
+which would extend them to a more general method.  
 
-One possible approach to leveraging the results contained here into a general method is to consider coupling the two 
+Another possible approach to leveraging the results contained here into a general method is to consider coupling the two 
 scalar polarizations.  
 At each point along the path, the EM field could be split into the TE and TM polarizations based 
 on the nearest surface normal.
 As the path propagates through space, that nearest surface normal would change direction, which would couple the fields 
 together.  
 
-The simulations carried out here were written for a typical desktop CPU, and parallelized by launching
-many independent jobs on a cluster.  
+The simulations carried out here were written for a typical desktop CPU.
 The worldline is also a natural fit for simulations on a graphics processing unit (GPU), 
 which contains a large number of processors suited to parallel programming. 
 It may be highly effective to port the TE and TM worldline methods over to a GPU.
@@ -49,7 +53,6 @@ In the introduction we noted that the scattering method is currently the only ge
 method for computing Casimir energies in arbitrary geometries. That is still true.  The worldline method,
 while it has a number of attractive features, has not yet been generalized to full electromagnetism.   
 Hopefully, the work presented here brings that prospect closer.  
-
 
 %\begin{itemize}
 %  \item Developed scalar worldlines.  

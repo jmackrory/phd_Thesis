@@ -865,6 +865,69 @@ with a softer distribution that allows paths within $\pm N^{-1/2}$ of the requir
 The potential curvature can be split into two terms, one involving just the strong-coupling limit
 $g_{0,0}$ where paths do not enter the bodies, and another with all of the remaining terms.   
 The second term can be sampled using the generic coupling algorithm from Sec.~\ref{sec:direct_construct}.
+These will be evaluated separately, although they may share random numbers. 
+
+In order to capture the strong-coupling dependence it is necessary to also sample from the no-touching
+set of paths.  For two half-spaces this can be constructed by shifting paths so that the minimum
+point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.
+We then find the maximum point $B_{\text{max}}$ and consider finding the path-times when 
+that point is close to the second surface $d_2$.
+Let us call the index of the maximum location $j$.
+
+The leading exponential potential can be converted into a probability distribution for $\cT$ on a 
+path-wise basis if we consider $x_j = x_0+\sqrt{\cT}B_j$, where $B_j$ is the $j$th coordinate of a 
+unit Brownian bridge.   The exponential factor can be written as 
+\begin{align}
+  \exp\bigg(-\frac{1}{\Delta \cT}[d-(x_{j+1}+x_{j-1})/2]^2/\Delta \cT\bigg) 
+  &= \exp\bigg(-Nd^2\bigg(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\bigg)^2\bigg],
+\end{align}
+where $\bar{B}_j := (B_{j+1}-B_{j-1})/2$.  This is effectively a Gaussian in $1/\sqrt{\cT}$.  
+The normalized probability distribution for $1/\sqrt{\cT}$ is  
+\begin{equation}
+  P_C(\cT;\bar{B}_j,d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right)^2\bigg],
+\label{eq:time_fix_curve}
+\end{equation}
+for $\cT\in[0,(d/\bar{B}_j)^2]$. 
+The probability distribution can be converted to an one-sided normal distribution by defining
+\begin{equation}
+  s = \sqrt{2Nd^2}\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right),
+\end{equation}
+In that case, $s$ is the absolute value of a standard normal deviate, and 
+the path-times are then given by
+\begin{equation}
+  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2}\label{eq:cT-s},
+\end{equation}
+where $z$ is a standard-normal deviate.  
+With the above method of handling the $\delta$-function, there is no need for an additional Gaussian
+pinning factor for planar surfaces.  
+
+The potential curvature can be sampled from this set of paths as
+\begin{align}
+  C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
+  \sum_k \int dy_k \frac{e^{-(y_k-\bar{B}_k)^2/\Delta \cT}}{(\pi\Delta\cT)^{1/2}}
+   e^{(d-\bar{B}_k)^2/\Delta \cT}\I[1]0\I[2]0 g_{0,0}
+   \biggdrangle_{x(\cT)}.
+ \end{align}
+The $\cT$ integral will be solved in Monte Carlo fashion after factoring out the probability density~(\ref{eq:time_fix_curve}),
+and using Eq.~(\ref{eq:cT-s}).  The integral can be cut off at $\cT_0:=(d/\bar{B}_k)^2$, since for $\cT>\cT_0$
+more than one point has definitely entered the bodies. 
+In strong-coupling, only the no-touching terms contribute, and we can use $g_{0,0}=1$.
+\begin{align}
+C^{(S)}_{ij} =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{1+D/2}}
+  \sum_k   \sqrt{\frac{\pi\cT^3}{Nd^2}}\sqrt{\frac{N}{\pi\cT}}
+   \I[1]0\I[2]0 
+   \biggdrangle_{\vect{x}(\cT), \cT}\\
+ =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{D/2}}
+  \sum_k  \frac{1}{d}   \I[1]0\I[2]0 
+   \biggdrangle_{\vect{x}(\cT), \cT}.
+\end{align}
+Note that there are no explicit restrictions on the paths, but the integral is only significant
+when the paths are pass close to the body.
+(For planar surface, the Gaussian integrals over $\vect{y}$ can be carried out, 
+while it is necessary to factor out the cross-sectional area, and consider the second derivative 
+of the energy per unit area).
+
+
 
 \begin{figure}
   \centering
@@ -883,7 +946,7 @@ and there is a transition between the generic coupling, and strong-coupling resu
 further averaging of course improves the results.   The variance is also increased in the cross-over region.
 
 
-\section{Numerical Implementation for TE Potential Curvature}
+%\section{Numerical Implementation for TE Potential Curvature}
 
 % The path integral for the potential curvature in the occupation numbers approach requires paths 
 % that are constrained by $\sigma_1(\vect{x}_j)$ and $\sigma_2(\vect{x}_k)$.  
@@ -935,7 +998,7 @@ further averaging of course improves the results.   The variance is also increas
 % \end{equation}
 % where $x^*$ is the nearest point to the surface to $\vect{x}_j$.
 
-\subsection{Softened $\delta$-function}
+%\subsection{Softened $\delta$-function}
 % There is an alternative formulation for handling the $\delta$-function.  Instead of explicitly constructing 
 % paths to satisfy the $\delta$-function, we can generate an effective potential.  
 % First consider a single integral against a Gaussian distribution, with a $\delta$-function,
@@ -1020,9 +1083,7 @@ further averaging of course improves the results.   The variance is also increas
 % The first factor is effectively Gaussian in $1/\sqrt{\cT}$, while the second factor suppresses terms where the 
 % path is orthogonal to line between the path starting point, and the patch on the surface.  
 % This second factor could in turn be used to sample from the surface for a given path.  
-
-
-\subsection{Direct Construction of constrained paths}
+%\subsection{Direct Construction of constrained paths}
 
 % Alternatively,  we can enforce the touching constraint directly and make the paths touch the bodies by constructing
 % paths which are fixed at steps $j$ and $k$ to touch the surface, and sum over all $j,k\in {1,N}$.  
@@ -1045,7 +1106,7 @@ further averaging of course improves the results.   The variance is also increas
 % \end{equation}
 % where the exponent $s=1+(D+1)/2=7/2$ accounts for the path integral normalization and the Gaussian factors of $T$ at
 % zero temperature.    
- The values for the difference between the pinning indices $\Delta$ are found by numerical root-finding, using bisection.
+% The values for the difference between the pinning indices $\Delta$ are found by numerical root-finding, using bisection.
 % The cumulative probability distribution for $\Delta$ is
 % \begin{gather}
 %  S_\Delta = \frac{1}{S_{N-1}}\sum_{j=1}^\Delta \bigg[\frac{j(N-j)}{N^2}\bigg]^{s-3/2}
@@ -1053,65 +1114,6 @@ further averaging of course improves the results.   The variance is also increas
 % Given a uniform random number $u$, the corresponding index $\Delta$ must satisfy $S_{\Delta-1}<u<S_\Delta$.
 % The difference $\Delta$ can be found by bisection and starting with estimates at $S_0$ and $S_{N-1}$.
 
-\subsection{Strong-Coupling Limits}
-
-In order to capture the strong-coupling dependence it is necessary to also sample from the no-touching
-set of paths.  For two half-spaces this can be constructed by shifting paths so that the minimum
-point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.
-We then find the maximum point $B_{\text{max}}$ and consider fixing that to lie on the second surface $d_2$.
-Let us call the index of the maximum location $j$.
-
-The leading exponential potential can be converted into a probability distribution for $\cT$ on a 
-path-wise basis if we consider $x_j = x_0+\sqrt{\cT}B_j$, where $B_j$ is the $j$th coordinate of a 
-unit Brownian bridge.   The exponential factor can be written as 
-\begin{align}
-  \exp\bigg(-\frac{1}{\Delta \cT}[d-(x_{j+1}+x_{j-1})/2]^2/\Delta \cT\bigg) 
-  &= \exp\bigg(-Nd^2\bigg(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\bigg)^2\bigg],
-\end{align}
-where $\bar{B}_j := (B_{j+1}-B_{j-1})/2$.  This is effectively a Gaussian in $1/\sqrt{\cT}$.  
-The normalized probability distribution for $1/\sqrt{\cT}$ is  
-\begin{equation}
-  P_C(\cT;\bar{B}_j,d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right)^2\bigg],
-\label{eq:time_fix_curve}
-\end{equation}
-for $\cT\in[0,(d/\bar{B}_j)^2]$. 
-The probability distribution can be converted to an one-sided normal distribution by defining
-\begin{equation}
-  s = \sqrt{2Nd^2}\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right),
-\end{equation}
-In that case, $s$ is the absolute value of a standard normal deviate, and 
-the path-times are then given by
-\begin{equation}
-  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2}\label{eq:cT-s},
-\end{equation}
-where $z$ is a standard-normal deviate.  
-In the strong-coupling limit, we sample from a subset of paths that just graze the surface.
-With the above method of handling the $\delta$-function, there is no need for an additional Gaussian
-pinning factor for planar surfaces.  
-\begin{align}
-  C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
-  \sum_j  \frac{1}{(\pi\Delta\cT)^{1/2}}
-   e^{-(d-\bar{B}_j)^2/\Delta \cT}\I[1]0\I[2]0 g_{0,0}
-   \biggdrangle_{x(\cT)}
- \end{align}
-The $\cT$ integral will be solved in Monte Carlo fashion after factoring out the probability density~(\ref{eq:time_fix_curve}),
-and using Eq.~(\ref{eq:cT-s}).  The integral can be cut off at $\cT_0:=(d/\bar{B}_j)^2$, since for $\cT>\cT_0$
-more than one point has definitely entered the bodies. 
-In strong-coupling, only the no-touching terms contribute, and we can use $g_{0,0}=1$.
-\begin{align}
-C^{(S)}_{ij} =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{1+D/2}}
-  \sum_j   \sqrt{\frac{\pi\cT^3}{Nd^2}}\sqrt{\frac{N}{\pi\cT}}
-   \I[1]0\I[2]0 
-   \biggdrangle_{\vect{x}(\cT), \cT}\\
- =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{D/2}}
-  \sum_j  \frac{1}{d}   \I[1]0\I[2]0 
-   \biggdrangle_{\vect{x}(\cT), \cT}.
-\end{align}
-Note that there are no explicit restrictions on the paths, but the integral is only significant
-when the paths are pass close to the body.
-(For planar surface, the Gaussian integrals over $\vect{y}$ can be carried out, 
-while it is necessary to factor out the cross-sectional area, and consider the second derivative 
-of the energy per unit area).
 
 
 

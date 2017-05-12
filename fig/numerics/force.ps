@@ -1,0 +1,88 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+(colors.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (8.2) def
+/xminstr (-0.5) def
+/ymaxstr (.55) def
+/yminstr (0) def
+
+%load utilities
+twocolumndimensions
+(plotlib/plotutilities.ps) run
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+SetLogAxisX NoSetLogAxisY
+
+/symbolsz 3 def % in points
+0 plotcolor
+mark
+(data/TE_2wall_anlt_interp.dat) run % load analytical
+PlotStackDataAuto
+
+col2
+0 selectsymbol
+mark
+(data/TE_force_fd.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col4
+1 selectsymbol
+mark
+(data/TE_force_pin.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col1
+2 selectsymbol
+mark
+(data/TE_force_occ.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+/ytitleoffset  -.35 in def	
+
+[ (0) (0.1) (0.2) (0.3) (0.4) (0.5) ] ExtraYTicks
+[ (0)  (2)  (4) (6) (8) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+col2 
+2 selectsymbol
+0.2 .45 ccnolog pointsymbol
+0.2 .45 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Finite Difference)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+col4
+2 selectsymbol
+0.2 0.35 ccnolog pointsymbol
+0.2 0.35 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Pinning)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+
+col1
+2 selectsymbol
+0.2 0.4 ccnolog pointsymbol
+0.2 0.4 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Occupation)]
+ plotlabelsize .9 mul PrintArrayLeft
+ 
+
+
+endplot

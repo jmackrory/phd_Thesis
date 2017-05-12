@@ -282,6 +282,8 @@ miss it.  There is some finite probability that a sub-path between $x_k$ and $x_
 contribution.  Since the reduction of the contribution is not offset, this more advanced method actually
 fares worse than the straightforward trapezoidal method. 
 
+\label{sec:trapezoid}
+
 \subsection{TE Casimir  and Casimir--Polder Energies - Plane-Plane}
 
 These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
@@ -769,7 +771,7 @@ We will discuss how to evaluate this derivative with both the finite difference 
 and the partial-averaging approach.
 
 \subsection{Finite Differences}
-
+\label{sec:finite_difference}
 The finite difference method is simplest method for numerically evaluating derivatives.
  It has the great virtue of simplicity, since it only requires that we evaluate the function multiple times.  
 For smooth functions, the finite difference method works well, but it behaves poorly when applied to
@@ -913,7 +915,7 @@ The combination of the Hermite polynomial is effectively the desired Malliavin w
 This approach has replaced differentiation
 with multiplication by a function that does not fluctuate more as the path length changes.
 This method naturally generalizes to other Cartesian derivatives.  The path can be generated 
-using the v-loop algorithm~(\ref{eq:vloop}), and the relevant parts of the path can be 
+using the v-loop algorithm~(\ref{eq:unit_vloop}), and the relevant parts of the path can be 
 used to evaluate Eq.~(\ref{eq:partial_avg_grad}).
 
 Each integration over an intermediate coordinate makes some small error in approximating $\Phi$ as constant.  
@@ -1101,11 +1103,12 @@ In addition, each susceptibility $\chi$ is simulated individually, since the bra
 depends on the value of $\Xi$.  
 
 Fig.~\ref{fig:eff_TM_2wall} shows the numerically computed efficiency $\gamma\subTM$ for 
-two planar dielectrics.  The agreement is not good in this case---the error bars do not 
+two planar dielectrics.  The agreement is not good in this case.  At large coupling, the error bars do not 
 overlap with the analytical solution.
-This may be down to the very small $N$ used in this simulation ($N=100$), which would lead
-to a large systematic error. 
-  
+This may be down to the very small $N$ used in this simulation ($N=200$), which would lead
+to a large systematic error.  Surprisingly, the TM Casimir results seem to be biased above the 
+expected result.  
+
 Sampling from the exponential path-time distribution~(\ref{eq:expT}) 
 is essential for the renormalized two-body TM Casimir energy.
 Once paths are large enough to contribute to the energy, they are guaranteed to have intersected both 

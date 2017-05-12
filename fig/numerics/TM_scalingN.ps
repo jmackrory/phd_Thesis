@@ -6,14 +6,21 @@
 (plotlib/plotarrows.ps) run
 %Height and width in inches
 % In plotutilities these are converted to real numbers
-/xmaxstr (4.1) def
+/xmaxstr (4) def
 /xminstr (0.9) def
-/ymaxstr (5) def
+/ymaxstr (4) def
 /yminstr (0) def
+
+/xmax {4} def
+/xmin {0.9} def
+/ymax {4} def
+/ymin {0} def
+
+
 
 %load utilities
 twocolumndimensions
-(casimirutilities.ps) run
+(plotlib/casimirutilities.ps) run
 (plotlib/plotutilities.ps) run
 
 /gausscol{0.8 0.0 0 setrgbcolor} def 
@@ -33,13 +40,15 @@ startplot
 SetLogAxisX SetLogAxisY
 
 /symbolsz 4 def % in points
-gausscol
+
+TMcol
 0 selectsymbol
 mark
 (data/TM_scalingN_var.TM.dat) run % load loop 1
 PlotStackDataPointsAuto
 
-TMcol
+
+gausscol
 1 selectsymbol
 mark
 (data/TM_scalingN_var.gauss.dat) run % load loop 1
@@ -57,13 +66,47 @@ mark
 (data/TM_scalingN_var.TMBD.dat) run % load loop 1
 PlotStackDataPointsAuto
 
+gausscol
+0 selectsymbol
+1.1 2.6 ccnolog pointsymbol
+1.1 2.6 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Gaussian)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+
+TMcol
+0 selectsymbol
+1.1 2.9 ccnolog pointsymbol
+1.1 2.9 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (TM-Gaussian)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+
+ 
+gaussBDcol
+2 selectsymbol
+1.1 3.2 ccnolog pointsymbol
+1.1 3.2 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Gaussian \(Birth-Death\))]
+ plotlabelsize .9 mul PrintArrayLeft
+
+TMBDcol
+3 selectsymbol
+1.1 3.5 ccnolog pointsymbol
+1.1 3.5 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (TM-Gaussian \(Birth-Death\))]
+ plotlabelsize .9 mul PrintArrayLeft
 
 
 
 %XAxisLabelsLog
 %YAxisLabelsLog
 [ (1) (2) (3) (4)  ] ExtraXTicksLog
-[ (1) (2) (3) (4) (5) ] ExtraYTicksLog
+[ (1) (2) (3) (4)  ] ExtraYTicksLog
 [ /ComputerModern-Regular  normal (Points per loop)]  XAxisTitle
 [ /KahoeTechGreek  normal (s  )]  YAxisTitle
 [ /ComputerModern-Regular subscript (  N)]  YAxisTitle

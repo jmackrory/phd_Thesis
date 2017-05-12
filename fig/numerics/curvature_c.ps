@@ -1,0 +1,159 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+(colors.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (8.2) def
+/xminstr (-0.5) def
+/ymaxstr (.55) def
+/yminstr (0) def
+
+%load utilities
+twocolumndimensions
+(plotlib/plotutilities.ps) run
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+SetLogAxisX NoSetLogAxisY
+
+/symbolsz 3 def % in points
+0 plotcolor
+0 selectsymbol
+mark
+(data/TE_2wall_anlt_interp.dat) run % load analytical
+PlotStackDataAuto
+
+% col1
+% 0 selectsymbol
+% mark
+% (data/TE_curve_N1.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+% col6
+% mark
+% 4 selectsymbol
+% (data/TE_curve_N120.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+col1
+1 selectsymbol
+mark
+%(data/TE_curve_N1000.dat) run % load loop 1
+(data/TE_curve_N120_a.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col2
+mark
+2 selectsymbol
+(data/TE_curve_N120_b.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col4
+mark
+3 selectsymbol
+(data/TE_curve_N120_c.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+
+col4
+2 selectsymbol
+0.2 .48 ccnolog pointsymbol
+0.2 .48 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Combination)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+col1
+2 selectsymbol
+0.2 0.44 ccnolog pointsymbol
+0.2 0.44 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Strong-coupling)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+
+col2
+2 selectsymbol
+0.2 0.40 ccnolog pointsymbol
+0.2 0.40 ccnolog moveto
+5 -2 rmoveto
+[ /ComputerModern-Regular  normal (Generic-coupling)]
+ plotlabelsize .9 mul PrintArrayLeft
+
+ 
+
+
+% col4
+% mark
+% %(data/TE_curve_N10000.dat) run % load loop 1
+% (data/TE_curve_N10000.dat) run % load loop 1
+%PlotStackDataPointsYerrAuto
+
+/ytitleoffset  -.35 in def	
+
+[ (0) (0.1) (0.2) (0.3) (0.4) (0.5) ] ExtraYTicks
+[ (0)  (2)  (4) (6) (8) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+% % %start log-linear inset
+
+%  /insetoffx {0.7 in} def
+%  /insetoffy {-0.15 in} def
+%  /insetscale {0.4} def
+
+% % %Unset log scale on y  axis
+% SetLogAxisX SetLogAxisY
+
+% % %Limits
+% /xmaxstr (6) def
+% /xminstr (0.5) def
+% /ymaxstr (0) def
+% /yminstr (-4) def
+% startinset
+
+% %seems to reset 
+% /ytitlevertnudge 0.0 def
+
+% gsave
+% %Energy curve 
+% 1 setlinewidth
+% 0 plotcolor
+% mark
+% (data/TE_2wall_anlt.dat) run % load loop 1
+% PlotStackDataAuto
+
+% TEcol
+% mark
+% (data/TE_curve_N100.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+% grestore
+
+% 	% % tweak settings for 2-column figure, if necessary
+%   % /xlabeloffset  -0.33 in def
+%   % /xtitleoffset  -0.65 in def
+%   % /ylabeloffset  -0.07 in def
+%   % /ytitleoffset  -0.70 in def
+
+%    /ytitleoffset  -.85 in def
+% [ (0) (0.25) (0.5) ] ExtraYTicks
+% %[ (0.05) (0.1) ] ExtraYTicks
+% [ (-6) (-3) (0) (3) (6)] ExtraXTicksLog
+
+% endinset
+
+
+
+endplot

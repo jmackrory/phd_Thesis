@@ -923,23 +923,25 @@ then the error can be estimated from the probability that a path would enter the
 For a Brownian path, the probability that a random walk will touch a surface at $x=d$ after starting 
 at the origin, in time $\cT_m$ is 
 \begin{equation}
-  P_{\text{touch}} = e^{-d^2/2\cT_m}.
+  P_{\text{touch}} = \erfc\left(\frac{d}{\sqrt{2\cT_m}}\right).
 \end{equation}
+For small $\cT_m$, the error function is bounded by $e^{-d^2/(2\cT_m)}$.
 If the maximum acceptable error is denoted $\varepsilon$, then this equation can be solved to find
 the maximum amount of averaging allowed.
 Using $\cT_m=m\cT/N$, the maximum amount of averaging should be 
 \begin{equation}
   \frac{m}{N} = \frac{d^2}{2\cT\log\varepsilon}.
 \end{equation}
-The most important feature of this bound, is that it suggests $m/N$ is a constant.  
+The most important feature of this estimate, is that it suggests $m/N$ is a constant.  
 As a consequence, the fluctuations in Eq.~(\ref{eq:partial_avg_grad}) scale as $\sqrt{N/(m\cT)}^n$,
 but since $m/N$ is a constant, the scale of the fluctuations is also constant.  
 
 In effect, the partial averaging over the initial steps constructs a non-uniform path.  At points 
 close to the path origin, the path steps can be large since these increments are unlikely to intersect
-the surfaces.  However after a certain point, the finer path should be used to accurately 
-estimate any functions along the path.  Since the length of the first and last increment sets the 
+the surfaces.   Since the length of the first and last increment sets the 
 scale of the fluctuations, these should be chosen to be as large as possible, without making any error.
+However after a certain point in the path, the finer path should be used to accurately 
+estimate any functions along the path. 
 
 \subsubsection{Hermite-Gaussian Sampling}
 
@@ -956,7 +958,7 @@ in time $\cT-2\cT_m$ must be accounted for.
 The combined distribution for $x_m,x_{N-m}$ is 
 \begin{align}
   HG'(x_m,x_{N-m})&:=\frac{1}{\sqrt{\pi\cT_m}\sqrt{4\pi\cT_m}\sqrt{2\pi(\cT-2\cT_m)} }
-  (\cT_m)^{-n/2}H_n\left(\frac{x_0-\bar{x}}{\sqrt{\cT_m}} \right)\nonumber\\
+  (\cT_m)^{-n/2}H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{\cT_m}} \right)\nonumber\\
   &\hspace{0.5cm}\times\exp\left[-\frac{(x_0-\bar{x}_m)^2}{\cT_m} - \frac{\cT(\Delta x_m)^2}{4\cT_m(\cT-2\cT_m)}\right],
 \end{align}
 However, this is not normalized, and can even change sign.  
@@ -964,7 +966,7 @@ The samples must be taken from the absolute value of the integrand, with the sig
 function weighting the samples.
 The sign changes will naturally lead to cancellation, but in the presence of a potential $\Phi[x(t)]$,
 the cancellation is not perfect and the result is non-zero.  
-However, for moderately small derivatives, $n\le 2$, the cancellation is not a large problem.
+For moderately small derivatives, $n\le 2$, the cancellation is not a large problem.
 In order to best carry out the cancellation, and reduce fluctuations one should sample multiple times from
 the Hermite-Gaussian.
 The probability distributions for $\bar{x}_m$ and $\Delta x_m$ are
@@ -987,9 +989,9 @@ The numerical average can be computed as
 \begin{equation}
   I = \dlangle (-1)^n(2\sigma_{\text{H}}^2)^{-n/2}\eta_{\text{H}}s_{\text{H}}f\drangle_{\text{HG}},
 \end{equation}
-where $x_m,x_{N-m}$ are sampled from $P_{\text{HG}}$, and the remaining sub-bridge is sampled via
+where $x_m, x_{N-m}$ are sampled from $P_{\text{HG}}$, and the remaining sub-bridge is sampled via
 the open Gaussian probability distribution.  
-where the normalization $\eta_{\text{H}}$ and sign factor $s_{\text{H}}$ are defined as 
+
 
 \subsection{General Method Near Surfaces}
 \label{sec:general_path_averaging}
@@ -1003,11 +1005,11 @@ Gaussian can only be exploited for a very small number of steps.
 This is illustrated in Fig.~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
 surfaces, in the case when the atom is much closer to one surface than the other.  If the two-body
 contribution to the Casimir force is sought, then only paths that touch \emph{both} bodies will 
-contribute.  The path-time when a typical will touch one body is denoted $\cT_1$, while the time to touch
-both bodies is $\cT_2$.
+contribute.  The path-time when a typical will touch one body is denoted $\cT_1$, and $\cT_2$ is the path-time to touch
+both bodies.
 The partial averaging advocated in Sec.~\ref{sec:partial_averaging} is only valid so long as $\Phi$ 
 is approximately constant.  In that case, the integrals can be approximated as Gaussian, which 
-requires the extent of the averaging $\cT_m$ satisfy $\cT_m\ll \cT_1$.  
+requires that $\cT_m\ll \cT_1$, so that the path increments don't intersect or interact with either surface.  
 
 \begin{figure}
   \centering
@@ -1026,23 +1028,23 @@ the further partial averaging is possible.
 In such a two body geometry, the renormalized two-body integration energy would lead to a function $\Phi$ specified by 
 \begin{align}
   \Phi[x(t)] =& \Big(e^{-\int_0^\cT dt\,\{V_1[x(t)] +V_2[x(t)]\}} -e^{-\int_0^\cT dt\,\{V_1(x_0) +V_2(x_0)\}   }\Big)\nonumber\\
- & -\Big( e^{-\int_0^\cT dt\,V_1[x(t)]   } -e^{-\int_0^\cT dt\,V_1(x_0)   }\Big)-\Big( e^{-\int_0^\cT dt\,V_2[x(t)]   } -e^{-\int_0^\cT dt\,V_2(x_0)   }\Big).
+ & -\Big( e^{-\int_0^\cT dt\,V_1[x(t)]   } -e^{-\int_0^\cT dt\,V_1(x_0)   }\Big)-\Big( e^{-\int_0^\cT dt\,V_2[x(t)]   } -e^{-\int_0^\cT dt\,V_2(x_0)   }\Big),
 \end{align}
+where $V_1$ and $V_2$ describe the two surfaces.
 For points much closer to one body, and for short times $\Delta \cT$, then the total potential 
 can be approximated based on the nearest body 
 \begin{equation}
   \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_1[x(t)]+ V_2[x(t)]\}}\Biglinkrangle \approx
-  \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_1[x(t)]\}}\Biglinkrangle,
+  \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_2[x(t)]\}}\Biglinkrangle,
 \end{equation}
 where the presence of the far body can be ignored for short times.  
-
-This relies on the fact that the path integral is a propagator for the diffusion equation. 
+The partial averaging can be carried out by using the fact that the path integral is a propagator for the diffusion equation. 
 The path-integral between two points $x_j$, $x_{j+1}$, interacting with a potential $V(x)$,
 \begin{equation}
   U(x_j,x_{j+1},t):= \frac{e^{-(x_j-x_{j+1}^2/(2t)}}{\sqrt{2\pi t}} 
   \bigglinklangle e^{-\int_0^t dt' V[x(t')] }\bigglinkrangle_{x_j\rightarrow x_{j+1}},
 \end{equation}
-obeys the following composition law,
+obeys the composition law,
 \begin{equation}
   \int dx_j\, U(x_{j-1},x_{j},t_1)U(x_{j},x_{j+1},t_2) = U(x_{j-1},x_{j+1},t_1+t_2).
 \end{equation}
@@ -1056,10 +1058,9 @@ After the partial averaging, the derivatives can be carried out, with the result
 \begin{align}
   \partial_0^nI(x_0)&=\biggdlangle
   \partial_0^n [U(x_0,x_m,\cT_m) U(x_0,x_{N-m},\cT_m]\prod_{j=m}^{N-m-1}U(x_{j+1},x_j,\Delta \cT)
-  \Phi(x_1,\ldots x_{N-1})
-  \biggdrangle.
+   \biggdrangle.
 \end{align}
-In this case, the derivatives act on the whole propagator, rather than just the Gaussians.  
+In this case, the derivatives act on the whole propagator , rather than just the Gaussian parts.  
 This could be applied using the Dirichlet solution to the path integral for evaluating the 
 stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).
 

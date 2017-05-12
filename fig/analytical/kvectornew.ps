@@ -1,0 +1,251 @@
+%!PS-Adobe-2.0
+(plotlib/plotfonts.ps) run
+%%Title: Quantum Optics Diagram -- Two Level Atom
+%%Creator: Daniel A. Steck
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 2/26/10
+%%Pages: 1
+%%
+%%BeginProcSet: Parameters
+%   include parameters from default file, override as needed
+(plotlib/plotparameters.ps) run
+%%EndProcSet
+%%BeginProcSet: Utilities
+(plotlib/plotutilities.ps) run
+(plotlib/plotarrows.ps) run
+(plotlib/plotmisc.ps) run
+%%EndProcSet
+%%EndProlog
+
+startdiagram
+
+% parameters
+/mirrorhi 165 def
+/raylen 95 def
+/thetai 50 def
+/thetat 35 def
+/angrad 40 def
+/angradnudge 1 def
+
+/rayang 35 def
+
+
+%%% media shading
+gsave
+0.9 setgray
+0 mirrorhi -2 div mirrorhi 2 div mirrorhi rectfill
+
+1 setgray
+mirrorhi -2 div mirrorhi -2 div mirrorhi 2 div mirrorhi rectfill
+grestore
+
+
+%%% interface and labels
+mirrorweight setlinewidth
+newpath
+0 mirrorhi -2 div moveto
+0 mirrorhi rlineto
+stroke
+
+%-7 mirrorhi 2 div 0.9 mul moveto
+%[ 
+%  /KahoeTechLatin normal (n) /KahoeTechLatin subscript (1) 
+%] diagramlabelsize PrintArrayRight
+
+7 mirrorhi 2 div 0.9 mul moveto
+[ 
+  /KahoeTechGreek normal (e, m)
+] diagramlabelsize PrintArray
+
+-7 mirrorhi 2 div 0.9 mul moveto
+[ 
+  /KahoeTechGreek normal (e)
+  /ComputerModern-Regular subscript (0)
+  /KahoeTechGreek normal (, m)
+  /ComputerModern-Regular subscript (0)
+] diagramlabelsize PrintArrayRight
+
+
+%0 mirrorhi -2 div 10 sub moveto
+%[ 
+%  /KahoeTechLatin normal (z = 0)
+%] diagramlabelsize PrintArrayCenter
+
+%%% horizontal axis
+linesize setlinewidth
+2 plotdash
+newpath
+mirrorhi -2 div 0 moveto
+mirrorhi 0 rlineto stroke
+0 plotdash
+
+%%% coord system
+gsave
+/veccircrad 3.1 def
+/coordarrlen 24 def
+35 -58 translate
+0 0 0.57 pointdot
+0.5 setlinewidth
+newpath
+0 0 veccircrad 0 360 arc stroke
+0 0 0 coordarrlen 0.4 1 arrowend
+0 0 coordarrlen 0 0.4 1 arrowend
+-3 -7 moveto
+[ /KahoeTechLatin normal (y) ] diagramlabelsize PrintArrayRight
+0 coordarrlen moveto
+3 -4 rmoveto
+[ /KahoeTechLatin normal (x) ] diagramlabelsize PrintArray
+coordarrlen 0 moveto
+-4 -7 rmoveto
+[ /KahoeTechLatin normal (z) ] diagramlabelsize PrintArray
+grestore
+
+%%% angles
+indicatorlinesize setlinewidth
+
+% incident
+%newpath
+%0 0 angrad angradnudge add 180 thetai 180 add arc stroke
+%angrad angradnudge add -1 mul 3 sub -12 moveto
+%[ 
+%  /KahoeTechGreek normal (q) /ComputerModern-Regular subscript (i) 
+%] diagramlabelsize PrintArrayRight
+
+% reflected
+%newpath
+%0 0 angrad 180 thetai sub 180 arc stroke
+%angrad -1 mul 3 sub 7 moveto
+%[ 
+%  /KahoeTechGreek normal (q) /ComputerModern-Regular subscript (r) 
+%] diagramlabelsize PrintArrayRight
+
+% transmitted
+%newpath
+%0 0 angrad 0 thetat arc stroke
+%angrad 1 mul 3 add 7 moveto
+%[ 
+%  /KahoeTechGreek normal (q) /ComputerModern-Regular subscript (t)
+%] diagramlabelsize PrintArray
+
+
+%%% rays
+decayarrowweight setlinewidth
+
+% incident
+newpath
+/arrowoffset raylen .35 mul def
+gsave
+thetai 1 mul rotate
+180 rotate
+0 0 moveto
+raylen 0 lineto stroke
+arrowoffset 0 arrowoffset 1 sub 0 decayarrowweight 1 arrowend
+grestore
+
+% reflected
+newpath
+/arrowoffset raylen .9 mul def
+gsave
+thetai -1 mul rotate
+180 rotate
+0 0 moveto
+raylen 0 lineto stroke
+arrowoffset 0 arrowoffset 1 add 0 decayarrowweight 1 arrowend
+grestore
+
+% transmitted
+newpath
+gsave
+thetat 1 mul rotate
+0 0 moveto
+raylen 0 lineto stroke
+arrowoffset 0 arrowoffset 1 add 0 decayarrowweight 1 arrowend
+grestore
+
+
+%%% field vectors
+/vecloc raylen 0.7 mul def
+/polarrlen 15 def
+
+% incident
+gsave
+thetai 1 mul rotate
+180 rotate
+vecloc 0 outofpagevec
+vecloc 0 vecloc polarrlen 0.4 1 arrowend
+grestore
+
+-47 -48 moveto
+[
+  /ComputerModernExtraBold normal (E)
+  /ComputerModern-Regular subscript (i)
+%  /move -5 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArrayRight
+
+-24 -70 moveto
+[
+  /ComputerModernExtraBold normal (H)
+  /ComputerModern-Regular subscript (i)
+%  /move -5 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArrayRight
+
+
+
+% reflected
+/vecloc raylen 0.55 mul def
+gsave
+thetai -1 mul rotate
+180 rotate
+vecloc 0 outofpagevec
+vecloc 0 vecloc polarrlen -1 mul 0.4 1 arrowend
+grestore
+
+-42 32 moveto
+[
+  /ComputerModernExtraBold normal (E)
+  /ComputerModern-Regular subscript (r)
+  /move -6 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArrayRight
+
+-30 52 moveto
+[
+  /ComputerModernExtraBold normal (H)
+  /ComputerModern-Regular subscript (r)
+  /move -6 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArray
+
+
+
+% transmitted
+gsave
+thetat 1 mul rotate
+vecloc 0 outofpagevec
+vecloc 0 vecloc polarrlen -1 mul 0.4 1 arrowend
+grestore
+
+39 34 moveto
+[
+  /ComputerModernExtraBold normal (E)
+  /ComputerModern-Regular subscript (t)
+%  /move -6 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArrayRight
+
+53 18 moveto
+[
+  /ComputerModernExtraBold normal (H)
+  /ComputerModern-Regular subscript (t)
+%  /move -6 2
+%  /KahoeTechLatin superscript (\(+\))
+] diagramlabelsize PrintArray
+
+
+
+
+enddiagram
+

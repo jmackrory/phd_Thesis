@@ -1,0 +1,88 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+(colors.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (6.2) def
+/xminstr (-6) def
+/ymaxstr (-0.5) def
+/yminstr (-7.5) def
+
+%load utilities
+twocolumndimensions
+(plotlib/plotutilities.ps) run
+
+%/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+/ytitleoffset {-0.35 in}   def  % horizontal offset of y-axis title
+
+
+startplot
+%Energy curve 
+1 setlinewidth
+/symbolsz 3 def % in points
+0 plotcolor
+% (data/TE_atom_chi_anlt.dat) run % load loop 1
+% 20 PlotStackDataLogLog
+(data/TE_atom_anlt.dat) run % load loop 1
+160 PlotStackDataLogLog
+
+TEcol
+(data/TE_atom_chi_num.dat) run % load loop 1
+20 PlotStackDataPointsYerrLogLog
+
+%XAxisLabelsLog
+%YAxisLabelsLog
+[ (-7) (-6) (-5) (-4) (-3) (-2) (-1)] ExtraYTicksLog
+[ (-6) (-4) (-2)  (0) (2) (4) (6) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (h o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+
+
+
+%start log-linear inset
+
+/insetoffx {.7 in} def
+/insetoffy {-0.1 in} def
+/insetscale {0.4} def
+
+/ytitlevertnudge {-0.1 in} def
+SetLogAxisX NoSetLogAxisY
+
+/xmaxstr (6.2) def
+/xminstr (-7) def
+/ymaxstr (0.17) def
+/yminstr (0) def
+/ytitleoffset {-0.35 in}   def  % horizontal offset of y-axis title
+startinset
+
+gsave
+%Energy curve 
+1 setlinewidth
+0 plotcolor
+% (data/TE_atom_chi_anlt.dat) run % load loop 1
+% 20 PlotStackData
+
+(data/TE_atom_anlt.dat) run % load loop 1
+160 PlotStackData
+
+TEcol
+(data/TE_atom_chi_num.dat) run % load loop 1
+20 PlotStackDataPointsYerr
+
+grestore
+
+[ (0.05) (0.1) (0.15)] ExtraYTicks
+[ (-3) (0) (3) ] ExtraXTicksLog
+%[ /KahoeTechGreek normal (h o   (c))]  YAxisTitle
+%[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+endinset
+
+
+endplot

@@ -1,0 +1,36 @@
+% routines for root-finding
+
+/bisectroot { % find root of function with initial bracketing in 1D,
+              %   using bisection method
+              % requires rootfunc operator to be defined (<x> rootfunc)
+              %   to return the value of the function at x
+              % call as: <xmin> <xmax> bisectroot
+  /tol 1e-5 def % iteration tolerance
+  /myxmax exch def
+  /myxmin exch def
+  myxmin rootfunc myxmax rootfunc mul 0 ge {
+    xmin_xmax_do_not_bracket_root % return error if product not negative
+  } if
+  myxmin myxmax gt { % order bounds
+    /myxx myxmax def
+    /myxmax myxmin def
+    /myxmin myxx def
+  } if
+
+  { % loop
+    /myx myxmin myxmax add 2 div def
+    /myymin myxmin rootfunc def
+    /myy myx rootfunc def
+    myymin myy mul 0 lt { % if product < 0, then root bracketed
+      /myxmax myx def
+    }{ % else
+      /myxmin myx def
+      /myymin myy def
+    } ifelse
+    /myw myxmax myxmin sub def
+    myw tol le { exit } if
+  } loop
+
+  myxmin myxmax add 2 div
+} bind def
+

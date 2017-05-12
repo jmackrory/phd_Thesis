@@ -1,0 +1,493 @@
+%%% library of arrow utilities for postscript plots
+
+% standard dimensions for energy level
+/energylevelweight 0.8 def 
+/energylevelwidth  60 def 
+/virtualenergyweight 0.5 def 
+/measurearrowweight  0.36 def 
+/measurearrowfac     1 def 
+
+% standard dimensions for cavities
+/mirrorweight  1.0 def 
+/mirrorheight 45.0 def 
+/bigmirrorheight 100.0 def 
+/mirrorserr   1.25 def 
+/mirrorserrsep 3.125 1.25 sub def
+/mirrorserrweight 0.6 def 
+/bsweight     0.8 def 
+
+% misc dimensions
+/wireweight 0.3 def
+/opticweight 0.3 def
+/opticfillshade { 0.8 setgray } bind def
+/optictransparentfillshade { 0.6 setgray } bind def
+/detectordiam 8.75 def
+/bslength 40 def
+/bswid 3 def
+/opampwidth 30 def
+/opampheight opampwidth def
+/opampwiresep 12 def
+/opampwirelen 10 def
+/lensheight 60 def
+/lenswid 5 def
+/lensc 1.5 def % center thickness of lens
+/lensrad 200 def
+/lensweight 0.8 def
+
+
+/energylevel { % draw energy level centered at x, y
+               % usage: x y energylevel
+  gsave
+  newpath
+  energylevelweight setlinewidth
+  exch energylevelwidth 0.5 mul sub exch moveto
+  energylevelwidth 0 rlineto stroke
+  grestore
+} bind def
+
+/virtualenergylevel { % draw horizonatal dashed energy level
+                      % usage: xleft xright y virtualenergylevel
+  gsave
+  1 plotdash
+  virtualenergyweight setlinewidth
+  newpath
+  2 copy moveto exch pop lineto stroke
+  grestore
+} bind def
+
+/mirror { % draw a vertical mirror, centered at given coordinates
+          % usage: <x> <y> mirror
+  /y exch def /x exch def
+  gsave
+  mirrorweight setlinewidth
+  newpath
+  x y mirrorheight 2 div add moveto
+  x y mirrorheight 2 div sub lineto stroke
+  mirrorserrweight setlinewidth
+  /nserrs mirrorheight mirrorserrsep div floor def
+  nserrs -2 div 1 add 1 nserrs 2 div { % do serrations
+    x exch y exch mirrorserrsep mul add mirrorserrsep .2 mul sub moveto
+    mirrorserr -1 mul mirrorserr -1 mul rlineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/varmirror { % draw a vertical mirror, centered at given point, specified length
+            % usage: <x> <y> <length> varmirror
+  /mymirrorheight exch def
+  /y exch def /x exch def
+  gsave
+  mirrorweight setlinewidth
+  newpath
+  x y mymirrorheight 2 div add moveto
+  x y mymirrorheight 2 div sub lineto stroke
+  mirrorserrweight setlinewidth
+  /nserrs mymirrorheight mirrorserrsep div floor def
+  nserrs -2 div 1 add 1 nserrs 2 div { % do serrations
+    x exch y exch mirrorserrsep mul add mirrorserrsep .2 mul sub moveto
+    mirrorserr -1 mul mirrorserr -1 mul rlineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/varmirrorfancy { 
+            % draw a vertical mirror, centered at given point, specified length
+            % include some thickness (shaded glass)
+            % usage: <x> <y> <length> varmirrorfancy
+  /mymirrorheight exch def
+  /y exch def /x exch def
+  gsave
+  opticweight setlinewidth
+  newpath
+  opticfillshade
+  x y translate
+  0 mymirrorheight -2 div bswid -1 mul mymirrorheight rectfill
+  0 setgray
+  0 mymirrorheight -2 div bswid -1 mul mymirrorheight rectstroke
+  /nserrs mymirrorheight mirrorserrsep div floor def
+  nserrs -2 div 1 add 1 nserrs 2 div { % do serrations
+    bswid -1 mul exch 0 exch 
+      mirrorserrsep mul add mirrorserrsep .2 mul sub moveto
+    mirrorserr -1 mul mirrorserr -1 mul rlineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/varmirrorfancyoutline {
+            % restroke the outline for varmirrorfancy (to cover up
+            % artifacts when faking transparency)
+            % usage: <x> <y> <length> varmirrorfancyoutline
+  /mymirrorheight exch def
+  /y exch def /x exch def
+  gsave
+  opticweight setlinewidth
+  newpath
+  x y translate
+  0 setgray
+  0 mymirrorheight -2 div bswid -1 mul mymirrorheight rectstroke
+  grestore
+} bind def
+
+/beamsplitter { % draw a vertical beamsplitter, centered at current point
+  /y exch def /x exch def
+  gsave
+  bsweight setlinewidth
+  newpath
+  x y mirrorheight 2 div add moveto
+  x y mirrorheight 2 div sub lineto stroke
+  grestore
+} bind def
+
+/atom { % usage <x> <y> <sizefactor> drawatom
+  /sizefactor exch def
+  /myy exch def
+  /myx exch def
+  newpath
+  gsave
+  myx myy translate
+  1.5 sizefactor mul dup scale
+  0 0 1 0 360 arc fill
+  0.6 setlinewidth
+  gsave
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  gsave
+  60 rotate
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  gsave
+  -60 rotate
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  grestore
+} bind def
+
+/pointdot { % usage <x> <y> <sizefactor> pointdot
+  /mysizefactor exch def
+  /myy exch def
+  /myx exch def
+  newpath
+  gsave
+  myx myy translate
+  mysizefactor 2 mul dup scale
+  0  0 1 0 360 arc fill
+  grestore
+} bind def
+
+/detectorwire { % usage <x> <y> detectorwire
+  % wire to go to a detector, displacement given by the following two #s:
+  /detwireendx 7.5 def % orig 7.51
+  /detwireendy -30 def % orig -26.5
+  gsave
+  newpath translate
+  wireweight setlinewidth
+  0 0 moveto
+  3.0823 0.0937  6.595  0.49210 7.8147 -2.3682 curveto
+  9.0149 -5.1846 7.7522 -8.4922 7.3098 -11.333 curveto
+  6.8996 -13.962 5.5383 -16.736 5.9914 -19.457 curveto
+  6.3528 -21.627 7.7102 -24.119 detwireendx detwireendy curveto
+  stroke
+  grestore
+} bind def
+
+/beamsplitterfill { % usage <x> <y> <angle> beamsplitterfill
+  % coords are left center of splitter if angle is zero
+  gsave
+  newpath
+  opticweight setlinewidth
+  opticfillshade
+  3 1 roll translate rotate
+  0 bslength -2 div bswid bslength rectfill
+  0 setgray
+  0 bslength -2 div bswid bslength rectstroke
+  grestore
+} bind def
+
+/beamsplitteroutline { % usage <x> <y> <angle> beamsplitteroutline
+  % coords are left center of splitter if angle is zero
+  gsave
+  newpath
+  3 1 roll translate rotate
+  opticweight setlinewidth
+  0 setgray
+  0 bslength -2 div bswid bslength rectstroke
+  grestore
+} bind def
+
+/detector { % usage <x> <y> <angle> beamsplitteroutline
+  gsave
+  newpath
+  opticweight setlinewidth
+  3 1 roll translate rotate
+  opticfillshade
+  0 0 detectordiam 2 div -90 90 arc fill
+  0 setgray
+  0 0 detectordiam 2 div -90 90 arc stroke
+  0 detectordiam -.5 mul moveto 0 detectordiam rlineto stroke
+  detectordiam .5 mul 0 detectorwire
+  grestore
+} bind def
+
+/opamp { % usage <x> <y> opamp
+         % coords for center of left-hand side
+         % refer to opampwiresep (default 12) and opampwirelen (default 10)
+         % for connection dimensions
+  /myy exch def
+  /myx exch def
+  myx myy moveto
+  wireweight setlinewidth
+  0 setgray
+  % do the main outline
+  myx myy moveto
+  0 opampheight -.5 mul rmoveto
+  0 opampheight rlineto
+  myx opampwidth add myy lineto
+  closepath stroke
+  % connections
+  myx opampwidth add myy moveto opampwirelen 0 rlineto stroke
+  myx myy opampwiresep -.5 mul add moveto opampwirelen -1 mul 0 rlineto stroke
+  myx myy opampwiresep  .5 mul add moveto opampwirelen -1 mul 0 rlineto stroke
+  % minus sign in center
+  /myshft 7.5 def
+  /myw 7.0 cvr def
+  myx myshft add myy moveto  myw 0 rlineto stroke
+  % plus/minus signs for inputs
+  /myshft 2.5 def
+  /myw 4.5 cvr def
+  myx myshft add myy opampwiresep  .5 mul add moveto  myw 0 rlineto stroke
+  myx myshft add myy opampwiresep  -.5 mul add moveto  myw 0 rlineto stroke
+  myx myshft add myw 2 div add myy opampwiresep  -.5 mul add myw 2 div add 
+    moveto  
+    0 myw -1 mul rlineto stroke
+} bind def
+
+/multamp { % usage <x> <y> multamp
+           % coords for center of left-hand side
+           % refer to opampwiresep (default 12) and opampwirelen (default 10)
+           % for connection dimensions
+  /myy exch def
+  /myx exch def
+  myx myy moveto
+  wireweight setlinewidth
+  0 setgray
+  % do the main outline
+  myx myy moveto
+  0 opampheight -.5 mul rmoveto
+  0 opampheight rlineto
+  myx opampwidth add myy lineto
+  closepath stroke
+  % connections
+  myx opampwidth add myy moveto opampwirelen 0 rlineto stroke
+  myx myy opampwiresep -.5 mul add moveto opampwirelen -1 mul 0 rlineto stroke
+  myx myy opampwiresep  .5 mul add moveto opampwirelen -1 mul 0 rlineto stroke
+  % times sign in center
+  /myshft 7 def
+  /myw 6 cvr def
+  myx myshft add myy myw 2 div add moveto  
+  myw myw -1 mul rlineto stroke
+  myx myshft add myy myw 2 div sub moveto  
+  myw myw  1 mul rlineto stroke
+} bind def
+
+/lowpassamp { % usage <x> <y> lowpassamp
+           % coords for center of left-hand side
+           % refer to opampwiresep (default 12) and opampwirelen (default 10)
+           % for connection dimensions
+  /myy exch def
+  /myx exch def
+  myx myy moveto
+  wireweight setlinewidth
+  0 setgray
+  % do the main outline
+  myx myy moveto
+  0 opampheight -.5 mul rmoveto
+  0 opampheight rlineto
+  myx opampwidth add myy lineto
+  closepath stroke
+  % connections
+  myx opampwidth add myy moveto opampwirelen 0 rlineto stroke
+  myx myy moveto opampwirelen -1 mul 0 rlineto stroke
+  % low-pass filter func
+  heavyline
+  newpath
+  myx myy moveto
+  3 4 rmoveto
+  8 0 8 0 12 -7 rcurveto stroke
+  normalline
+} bind def
+
+/tan { % defines tan; usage <x> tan, input in degrees
+  dup sin exch cos div
+} bind def
+
+/asin { % defines arcsin; usage <x> asin
+  % arcsin x = 2 arctan (x/(1+sqrt(1-x^2)))
+  dup dup mul 1 exch sub sqrt 1 add div 1 atan 2 mul
+} bind def
+
+/acos { % defines arccos; usage <x> acos
+  % arcsin x = 2 arctan (x/(1+sqrt(1-x^2)))
+  dup dup mul 1 exch sub sqrt exch 1 add div 1 atan 2 mul
+} bind def
+
+/sinh {
+  expe dup inv sub 2 div
+} bind def
+
+/cosh {
+  expe dup inv add 2 div
+} bind def
+
+/inv {
+  1 exch div
+} bind def
+
+/sgn { % sgn function; usage <x> sgn
+  /myxxx exch def
+  myxxx 0 cvr eq { 0 } {
+    myxxx 0 cvr gt { 1 } { -1 } ifelse
+  } ifelse
+} bind def
+
+/unitstep { % heaviside step function; usage <x> unitstep
+  /myxxx exch def
+  myxxx 0 cvr eq { 0 } {
+    myxxx 0 cvr gt { 1 } { 0 } ifelse
+  } ifelse
+} bind def
+
+/lens { % usage <x> <y> lens
+  % coords are center of lens
+  gsave
+  translate
+  lensweight setlinewidth
+  opticfillshade
+  /myhalfang lensheight 2 div lensrad div asin def % in deg
+  /mydisp lensrad myhalfang cos mul lensc 2 div sub def
+  newpath
+  mydisp 0 lensrad 180 myhalfang sub 180 myhalfang add arc
+  lensc 2 div lensheight -2 div lineto
+  mydisp -1 mul 0 lensrad myhalfang -1 mul myhalfang 1 mul arc
+  lensc -2 div lensheight 2 div lineto
+  fill
+  0 setgray
+  mydisp 0 lensrad 180 myhalfang sub 180 myhalfang add arc
+  lensc 2 div lensheight -2 div lineto
+  mydisp -1 mul 0 lensrad myhalfang -1 mul myhalfang 1 mul arc
+  lensc -2 div lensheight 2 div lineto
+  stroke
+  grestore
+} bind def
+
+/lensconcave { % usage <x> <y> lensconcave
+  % coords are center of lens
+  gsave
+  translate
+  lensweight setlinewidth
+  opticfillshade
+  /myhalfang lensheight 2 div lensrad div asin def % in deg
+  /mydisp lensrad lensc 2 div add def
+  newpath
+  mydisp 0 lensrad 180 myhalfang sub 180 myhalfang add arc
+  lensc 2 div lensheight -2 div lineto
+  mydisp -1 mul 0 lensrad myhalfang -1 mul myhalfang 1 mul arc
+  lensc -2 div lensheight 2 div lineto
+  fill
+  0 setgray
+  mydisp 0 lensrad 180 myhalfang sub 180 myhalfang add arc
+  lensc 2 div lensheight -2 div lineto
+  mydisp -1 mul 0 lensrad myhalfang -1 mul myhalfang 1 mul arc
+  closepath
+  stroke
+  grestore
+} bind def
+
+/outofpagevec { % plots vector, as circle around dot
+                % usage: <x> <y> outofpagevec
+  gsave
+  translate
+  0 0 0.57 pointdot
+  0.5 setlinewidth
+  newpath
+  0 0 veccircrad 0 360 arc stroke
+  grestore
+} bind def
+
+/intopagevec { % plots vector, as circle around cross
+               % usage: <x> <y> outofpagevec
+  gsave
+  translate
+  0.5 setlinewidth
+  newpath
+  0 0 veccircrad 0 360 arc stroke
+  45 rotate
+  veccircrad -1 mul 0 moveto veccircrad 0 lineto stroke
+  90 rotate
+  veccircrad -1 mul 0 moveto veccircrad 0 lineto stroke
+  grestore
+} bind def
+
+%%% random number library
+% constants
+/randq 127773 def
+/randr 2836 def
+/randa 16807 def
+/randm 2147483647 def
+/onebyrandm 4.65661287524580e-10 def
+
+% initial seed
+/randseed 12345 def
+
+/randpl { % portable random number generator, output between 0 and 1
+          % minimal standard from Numerical Recipes
+  /randk randseed randq idiv def
+  /randseed randseed randk randq mul sub randa mul randr randk mul sub def
+  randseed 0 lt {
+    /randseed randseed randm add def
+  } if
+  randseed onebyrandm mul
+} bind def
+
+/nrandpl { % generate standard normal deviate from randpl
+           % 2 calls to randpl for 1 normal deviate (1 is wasted)
+  -2 randpl ln mul sqrt 
+  randpl 2 mul pi mul rad2deg cos mul
+} bind def
+
+/setrandplseed { % set random seed
+  dup 0 eq { % make sure it's not a zero
+    pop 12345
+  } if
+  /randseed exch def
+} bind def
+
+/hbar { % call from within string array; assumes diagramlabelsize font
+  /myhbarx diagramlabelsize 0.5 mul def
+  /myhbary diagramlabelsize -0.05 mul def
+  /mydashw [/KahoeTechLatin superscript (-)] diagramlabelsize
+                                     CalculateStringArrayWidth def
+  /KahoeTechLatin normal (h)
+  /move myhbarx -1 mul myhbary
+  /KahoeTechLatin superscript (-)
+  /move mydashw -1 mul 0
+  /move myhbarx myhbary -1 mul
+} bind def
+
+/hbartitle { % call from within string array; assumes xtitlesize font
+  /myhbarx xtitlesize 0.5 mul def
+  /myhbary xtitlesize -0.05 mul def
+  /mydashw [/KahoeTechLatin superscript (-)] xtitlesize
+                                     CalculateStringArrayWidth def
+  /KahoeTechLatin normal (h)
+  /move myhbarx -1 mul myhbary
+  /KahoeTechLatin superscript (-)
+  /move mydashw -1 mul 0
+  /move myhbarx myhbary -1 mul
+} bind def
+

@@ -1,0 +1,51 @@
+number_of_procs:=100
+
+Ncopy:= 100
+seed := 796708
+parallel_seed := 795735
+base_file_tag := /tmp/TE_2wall_N_fine3.1
+data_directory := /home/jmack/casimir/scalar_TE_monte/data
+casimir := /home/jmack/casimir/scalar_TE_monte/casimir
+casimir_avg := /home/jmack/casimir/scalar_TE_monte/matrix_avg
+walltime := 96
+sleep_time := 100
+
+##Serial code flags
+
+##Flags for integration and loop generation
+Tmethod := T3
+
+##Flags for output 
+param_trace := true
+time_trace := true
+output_integral_flag:=false
+output_loop_flag := false
+debug := false
+debug_Tintegral := false
+T_trace := false
+X_trace := false
+ 
+## Loop and surface parameters
+chi1 := 10
+chi2 := 10
+x1 := 0
+d := 2
+int_tol := 0.01
+
+##parameters for multiple instances 
+chi_base := 100
+Nchi := 7
+Nn := 27
+d_base := 1
+Nd := 1
+Nl := 1
+
+cj := 0.1
+uj := 0.69
+Teval := 4
+Nbin := 201
+
+Nloops := 10000000
+Ntrial := 10000000
+Nperloop := 100000
+Nt := 100

@@ -1,0 +1,217 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+
+/xmaxstr (5.1) def
+/xminstr (0.9) def
+/ymaxstr (0) def
+/yminstr (-4.0) def
+
+twocolumndimensions
+(plotlib/plotutilities.ps) run
+%(fig/casimirutilities.ps) run
+
+SetLogAxisX SetLogAxisY
+startplot
+
+
+
+%Energy curve 
+0.5 setlinewidth
+
+/fitcol{0.7 setgray} def
+
+/col1 { 0 0 1       setrgbcolor}def
+/col2 { 1 0 0  setrgbcolor}def
+/col3 { 1 0.5 0       setrgbcolor}def
+/col4 { 0 .7  0 setrgbcolor}def
+/col5 { 1 0 0       setrgbcolor}def
+/col6 { 1 0.25 0.25 setrgbcolor}def
+
+
+/InvSqrtN{		%Assumes npower, and amp defined elsewhere
+ /x exch def
+ amp x sqrt div  % A/sqrt(N)
+} bind def
+
+/InvN3_2{		%Assumes npower, and amp defined elsewhere
+ /x exch def
+ amp x div x sqrt div % A/n^3/2
+} bind def
+
+%y = Ax^n
+%log(y) = log(A) + nlog(x)
+fitcol
+
+
+
+/amp    0.6  def
+{InvN3_2} 4 PlotFunction
+
+/amp    2.7  def
+{InvSqrtN} 4 PlotFunction
+
+
+2.2 -.55 ccnolog moveto
+gsave -12 rotate
+[
+  /KahoeTechLatin normal (N)
+  /KahoeTechLatin superscript ( -1/2)
+] plotlabelsize PrintArrayLeft
+grestore
+
+1.5 -2.95 ccnolog moveto
+gsave -40 rotate
+[
+  /KahoeTechLatin normal (N)
+  /KahoeTechLatin superscript ( -3/2)
+] plotlabelsize PrintArrayRight
+grestore
+
+
+/symbolsz 3.5 def % in points
+
+col1
+0 selectsymbol
+mark
+(data/TE_atom_N_clean3.0.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+%28 PlotStackDataPointsYerrAuto
+
+
+col2
+1 selectsymbol
+mark
+(data/TE_atom_N_clean3.2.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col3
+2 selectsymbol
+mark
+(data/TE_atom_N_clean3.4.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col4
+3 selectsymbol
+mark
+(data/TE_atom_N_clean3.6.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+0 setgray
+5 selectsymbol
+mark
+(data/TE_atom_N_clean3.inf.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+
+%%% legend
+col1
+0 selectsymbol
+4.2 -1.25 ccnolog pointsymbol
+4.2 -1.25 ccnolog moveto
+5 -2 rmoveto
+[ /KahoeTechGreek normal (c = 10)
+  /KahoeTechLatin superscript (0)
+] plotlabelsize .9 mul PrintArrayLeft
+
+col2
+1 selectsymbol
+4.2 -1. ccnolog pointsymbol
+4.2 -1. ccnolog moveto
+5 -2 rmoveto
+[ /KahoeTechGreek normal (c = 10)
+  /KahoeTechLatin superscript (2)
+] plotlabelsize .9 mul PrintArrayLeft
+
+col3
+2 selectsymbol
+4.2 -.75 ccnolog pointsymbol
+4.2 -.75 ccnolog moveto
+5 -2 rmoveto
+[ /KahoeTechGreek normal (c = 10)
+  /KahoeTechLatin superscript (4)
+] plotlabelsize .9 mul PrintArrayLeft
+
+col4
+3 selectsymbol
+4.2 -.5 ccnolog pointsymbol
+4.2 -.5 ccnolog moveto
+5 -2 rmoveto
+[ /KahoeTechGreek normal (c = 10)
+  /KahoeTechLatin superscript (6)
+] plotlabelsize .9 mul PrintArrayLeft
+
+0 plotcolor
+5 selectsymbol
+4.2 -.25 ccnolog pointsymbol
+4.2 -.25 ccnolog moveto
+5 -2 rmoveto
+[ /KahoeTechGreek normal (c )
+  /KahoeTechSymbols normal (\341) % right arrow
+  /KahoeTechGreek normal ( \042) % infinity
+] plotlabelsize .9 mul PrintArrayLeft
+
+
+
+%XAxisLabelsLog
+%YAxisLabels
+/ytitleoffset  -.35 in def	
+[ (-4) (-3) (-2) (-1) (0) ] ExtraYTicksLog
+[ (1) (2) (3) (4) (5) ] ExtraXTicksLog
+%[ /ComputerModern-Regular normal (Relative error)]  YAxisTitle
+% [
+%   /KahoeTechGreek normal (hoooo')
+%   /move -5 0
+%   /CMCSC10 subscript (TE)
+%   /KahoeTechGreek normal (oo\(c\))
+% ] YAxisTitle
+
+[
+  /KahoeTechGreek normal (\(ho)
+  /CMCSC10 subscript (TE)
+  /KahoeTechGreek normal ( - )
+  /KahoeTechGreek normal (ho)
+  /move -2 -.5
+  /KahoeTechGreek normal (\227)
+  /move 2 .5
+  /CMCSC10 subscript (TE)
+  /KahoeTechGreek normal (\)o/oho)
+  /CMCSC10 subscript (TE)
+] YAxisTitle
+
+
+%[ /ComputerModern-Regular normal (N)]  XAxisTitle
+[ /KahoeTechLatin normal (N)]  XAxisTitle
+
+% NoSetLogAxisX  NoSetLogAxisY
+
+% %Make key.
+% col1
+% 1 selectsymbol
+
+% 4 -0.5 cc pointsymbol
+% 4.1 -0.55 cc moveto
+% 0 setgray
+%  [ /KahoeTechGreek normal (c=10)] xlabelsize PrintArray
+%  [ /KahoeTechGreek superscript (o0)] xlabelsize PrintArray
+
+% col2
+% 2 selectsymbol
+% 4 -1 cc pointsymbol
+% 4.1 -1.05 cc moveto
+% 0 setgray
+%  [ /KahoeTechGreek normal (c=10)] xlabelsize PrintArray
+%  [ /KahoeTechGreek superscript (o2)] xlabelsize PrintArray
+
+% col3
+% 3 selectsymbol
+% 4 -1.5 cc pointsymbol
+% 4.1 -1.55 cc moveto
+% 0 setgray
+%  [ /KahoeTechGreek normal (c=10)] xlabelsize PrintArray
+%  [ /KahoeTechGreek superscript (o4)] xlabelsize PrintArray
+
+endplot

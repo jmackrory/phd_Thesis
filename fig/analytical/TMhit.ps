@@ -1,0 +1,178 @@
+%!PS-Adobe-2.0
+(fig/plotlib/plotfonts.ps) run
+%%Title: Quantum Optics Plot
+%%Creator: Daniel A. Steck
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 2/10/10
+%%Pages: 1
+%%
+%%BeginProcSet: Parameters
+%   include parameters from default file, override as needed
+(fig/plotlib/plotparameters.ps) run
+/xminstr    (-1)            def  % min x-axis value, in parens
+/xmaxstr    (1)           def  % max x-axis value, in parens
+/yminstr    (-1)          def  % min y-axis value, in parens
+/ymaxstr    (1)           def  % max y-axis value, in parens
+%%EndProcSet
+%%BeginProcSet: Utilities
+(fig/casimirutilities.ps) run
+(fig/plotarrows.ps) run
+(fig/plotlib/plotutilities.ps) run
+(fig/plotlib/plotmisc.ps) run
+%%EndProcSet
+%%EndProlog
+
+startplot
+0 4 in translate
+
+19438 setrandplseed % seed random number generator
+
+% crossing threshold
+/d 0.2 def
+
+% random walk starts here
+/nsteps 1000 def
+/xstep xmax cvr 0.3 mul nsteps cvr div def
+/outside 0 def
+/inside 1 def
+
+/status outside def
+1 setlinewidth
+TMcol
+
+/xpos 0  def
+/ypos 0  def
+xpos ypos cc moveto
+
+%first find tot and reset random numbers
+/xtot 0 def
+/ytot 0 def
+1 1 nsteps {
+  /dWx nrandpl xstep sqrt mul def
+	/dWy nrandpl xstep sqrt mul def
+  /xtotold xtot def
+  /ytotold ytot def
+  /xtot xtotold dWx add def
+  /ytot ytotold dWy add def % diffusion	
+} for
+
+/dxtot xtot 1 add nsteps div def
+/dytot ytot 1 add nsteps div def
+
+%reset random number generator
+19438 setrandplseed
+
+1 1 nsteps {
+  pop
+  /dWx nrandpl xstep sqrt mul def
+	/dWy nrandpl xstep sqrt mul def
+  /xposold xpos def
+  /yposold ypos def
+  /xpos xposold dWx add dxtot sub def % diffusion
+  /ypos yposold dWy add dytot sub def
+  xpos ypos cc lineto % put more data on stack
+} for
+stroke
+
+%set up potential
+
+0 -1 in translate
+
+1 setlinewidth 
+0 setgray
+
+%-1.1 -1.5 cc moveto
+%0.35 -1.5 cc lineto
+
+%box
+newpath
+TMcol
+-0.6 -1.5 cc moveto
+-0.6 -0.75 cc lineto
+-0.3 -0.75 cc lineto
+-0.3 -1.5 cc lineto
+-0.6 -1.5 cc lineto
+fill
+
+0 setgray
+newpath
+-0.6 -1.5 cc moveto
+-0.6 -0.75 cc lineto
+-0.3 -0.75 cc lineto
+-0.3 -1.5 cc lineto
+stroke
+
+%delta'
+%stroke
+-0.6 -1.5 cc -0.6 -1.0 cc 2 1 arrowend  
+
+-0.3 -1.5 cc -0.3 -2.0 cc 2 1 arrowend 
+
+
+
+1 setlinewidth 
+0 setgray
+
+-1.1 -1.5 cc -1.1 -.75 cc 1 1 arrowend  %V(z) axis
+
+-1.1 -1.5 cc 0.35 -1.5 cc 1 1 arrowend  %z axis
+%cc 0.5 -1 cc 2 1 arrowend
+
+
+%labels 
+TMcol
+-1.25 -.85 cc moveto 
+[  /KahoeTechLatin normal (V) ]
+		20 PrintArrayCenter
+-1.18 -.85 cc moveto 
+[  /KahoeTechLatin subscript (TM) ]
+		20 PrintArrayCenter
+
+0 setgray
+-1 -0.2 cc moveto 
+[  /KahoeTechLatin normal (x) ]
+		20 PrintArrayCenter
+[  /KahoeTechLatin subscript (k) ]
+		20 PrintArrayCenter
+
+0.2 0.35 cc moveto 
+[  /KahoeTechLatin normal (x) ]
+		20 PrintArrayCenter
+[  /KahoeTechLatin subscript (k+1) ]
+		20 PrintArrayLeft
+
+		
+-0.75 -1.27 cc moveto 
+[  /KahoeTechLatin normal (a) ]
+		20 PrintArrayCenter
+-0.65 -1.25 cc moveto 
+[  /KahoeTechLatin superscript (-1) ]
+		15 PrintArrayRight
+
+
+-0.25 -1.77 cc moveto 
+[  /KahoeTechLatin normal (a) ]
+		20 PrintArrayCenter
+-0.15 -1.75 cc moveto 
+[  /KahoeTechLatin superscript (-1) ]
+		15 PrintArrayRight
+		
+-0.25 -0.75 cc -0.25 -1.5 cc 1 1 arrowboth
+
+
+-0.20 -1.2 cc moveto 
+[  /KahoeTechLatin normal (a) ]
+		20 PrintArrayCenter
+-0.10 -1.2 cc moveto 
+[  /KahoeTechLatin superscript (-2) ]
+		15 PrintArrayRight
+
+
+-0.6 -1.55 cc -0.3 -1.55 cc 1 1 arrowboth
+
+
+-0.45 -1.7 cc moveto 
+[  /KahoeTechLatin normal (a) ]
+		20 PrintArrayCenter
+				

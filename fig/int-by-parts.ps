@@ -1,0 +1,155 @@
+%!PS-Adobe-2.0
+(plotlib/plotfonts.ps) run
+%%Title: Worldline Gradient Diagram -- Two arbitrary bodies with normals
+%%Creator: Jonathan Mackrory
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 11/30/16
+%%Pages: 1
+%%
+%%BeginProcSet: Parameters
+%   include parameters from default file, override as needed
+(plotlib/plotparameters.ps) run
+%%EndProcSet
+
+/xmaxstr (5) def
+/xminstr (-5) def
+/ymaxstr (3) def
+/yminstr (-3) def
+
+%%BeginProcSet: Utilities
+(plotlib/plotutilities.ps) run
+(plotlib/plotarrows.ps) run
+(plotlib/plotmisc.ps) run
+%%EndProcSet
+%%EndProlog
+
+(plotpotato.ps) run
+		
+twocolumndimensions
+
+/fillcol {0.95 setgray} def
+startdiagram
+SetClip
+%origin
+/or_x 0 def
+/or_y -2 def
+/normscale 0.5 def
+
+%Dielectric Body
+
+/x0 8 def
+/y0 0 def
+
+% /ncoeff 3 def
+% /Acoeff [8.4 0 0 ] def
+% /Bcoeff [7 0 0 ] def
+% /freq [1 2 9] def
+% /phi [20.5 30.5 10] def
+% /psi [ 30.5 -60.5 12 ] def
+
+%fill rectangle
+gsave
+newpath
+xmax 1.5 sub ymin cc moveto
+xmax 1.5 sub ymax cc lineto
+xmax ymax  cc lineto
+xmax ymin cc lineto
+closepath
+0.8 setgray
+ fill
+grestore
+%surface line
+gsave
+newpath
+xmax 1.5 sub ymin cc moveto
+xmax 1.5 sub ymax cc lineto
+0 setgray
+stroke
+grestore
+%100 DrawPotato
+
+%Make "open" loop with straight lines joining them.  
+/x0 2.0 def
+/y0 .75 def
+
+/open_angle 90 def
+
+/ncoeff 3 def
+/Acoeff [2.25 0.0 0.00 ] def
+/Bcoeff [1.0 0.0 0.00 ] def
+/freq [1 2 6] def
+/phi [180.5 -20.5 30.5] def
+/psi [ 0.5 -30.5 90.5 ] def
+
+40 DrawBrokenLoop
+
+%x_{N-m} label
+/horiznudge -.25 def
+/vertnudge -0.25 def
+
+		360.0 open_angle 2 div sub PotatoCoord
+		/y exch def
+		/x exch def
+		x horiznudge add
+		y vertnudge add
+		cc	
+		moveto
+[ 
+  /ComputerModernExtraBold normal (x)
+	%  /KahoeTechLatin normal (x)
+  /KahoeTechLatin subscript (N-m)
+] diagramlabelsize PrintArrayRight
+
+%x_{0} label
+/horiznudge -.25 def
+/vertnudge 0.0 def
+
+		0 PotatoCoord
+		/y exch def
+		/x exch def
+		x horiznudge add
+		y vertnudge add
+		cc	
+		moveto
+[
+  /ComputerModernExtraBold normal (x)	
+%  /KahoeTechLatin normal (x)
+  /KahoeTechLatin subscript (0)
+] diagramlabelsize PrintArrayRight
+
+%x_{m} label
+/horiznudge -.25 def
+/vertnudge 0.05 def
+
+		open_angle 2 div PotatoCoord
+		/y exch def
+		/x exch def
+		x horiznudge add
+		y vertnudge add
+		cc	
+		moveto
+[
+  /ComputerModernExtraBold normal (x)
+%  /KahoeTechLatin normal (x)
+  /KahoeTechLatin subscript (m)
+] diagramlabelsize PrintArrayRight
+
+%		openangle 2 div PotatoCoord cc 
+
+4.5 1.5 cc moveto
+[ 
+  /KahoeTechGreek normal (c)
+%  /ComputerModern-Regular subscript (r	)
+] diagramlabelsize PrintArrayRight
+
+
+2.5 2 cc moveto
+[ 
+  /ComputerModernExtraBold normal (x)
+  /KahoeTechLatin normal (o\(t\))
+] diagramlabelsize PrintArrayRight
+
+
+enddiagram
+

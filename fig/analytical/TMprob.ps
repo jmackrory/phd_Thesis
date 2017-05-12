@@ -1,0 +1,77 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {7} bind def
+/height {5} bind def
+/xmax {4} def
+/xmin {-4} def
+/ymin {0} def
+/ymax {0.75} def
+/xmaxstr (6) def
+/xminstr (-6) def
+/yminstr (0) def
+/ymaxstr (0.75) def
+
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
+
+<< /PageSize [20 in 10 in] >> setpagedevice 
+startplot
+
+%Energy curve 
+2 setlinewidth
+
+%1 in 1 in translate
+{Step} 512 PlotFunction
+
+
+/col1{0 .67 0 setrgbcolor} def
+/col2{0 .5 1 setrgbcolor} def
+/col3{0 0 1 setrgbcolor} def
+
+/symbolsz 10 def % in points
+
+col3
+(TMprob3.dat) run % load loop 3
+1001 PlotStackData
+
+col2
+(TMprob2.dat) run % load loop 2
+1001 PlotStackData
+
+col1
+(TMprob1.dat) run % load loop 1
+1001 PlotStackData
+
+[ (0.25) (0.5) (.75) ] ExtraYTicks
+[(-6) (-4) (-2) (0) (2) (4) (6)] ExtraXTicks
+[ /KahoeTechLatin normal (x)]  XAxisTitle
+[ /ComputerModern-Regular normal (Probability)]  YAxisTitle
+
+
+2 in 2 in moveto
+col3
+ [/KahoeTechGreek normal  (c = 10)]  18 PrintArrayCenter
+ [/KahoeTechGreek superscript  (  6)]  14 PrintArrayCenter	
+
+2 in 1.5 in moveto
+col2
+ [/KahoeTechGreek normal  (c = 10)]  18 PrintArrayCenter
+ [/KahoeTechGreek superscript  (  3)]  14 PrintArrayCenter	
+
+ 2 in 1 in moveto
+col1
+ [/KahoeTechGreek normal  (c = 0)]  18 PrintArrayCenter
+
+ 
+endplot

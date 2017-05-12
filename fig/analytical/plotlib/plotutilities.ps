@@ -1,0 +1,1183 @@
+%%% library of plotting utilities for postscript plots
+% last revision: Thu Oct 17 11:51:27 PDT 2013
+
+xmaxstr cvr /xmax exch def
+xminstr cvr /xmin exch def
+ymaxstr cvr /ymax exch def
+yminstr cvr /ymin exch def
+/xspan xmax xmin sub def
+/yspan ymax ymin sub def
+/hby2 height 2 div def
+/wby2 width 2 div def
+
+%%% note for log plots: preferably use logarithmic data,
+%%% and set xmin, xmax, etc. to the exponent values.
+
+/in {72 mul} bind def  % conversion to inches
+
+/centercoordsinpage { % set origin in page center
+  4.25 in 5.5 in translate
+} bind def
+
+% options to set log axes in x and y, implemented in cc
+/SetLogAxisX { /logaxisx true def } bind def
+/SetLogAxisY { /logaxisy true def } bind def
+/NoSetLogAxisX { /logaxisx false def } bind def
+/NoSetLogAxisY { /logaxisy false def } bind def
+% default to non-log axes
+NoSetLogAxisX NoSetLogAxisY
+
+/cc { % convert x, y plot coords to page coords; usage: <x> <y> cc
+  % check for log axes
+  logaxisx { exch log LogBaseX log div exch } if
+  logaxisy { log LogBaseY log div } if
+  % now convert to page coords
+  exch xmin sub xspan div width in mul wby2 in sub
+  exch ymin sub yspan div height in mul hby2 in sub
+} bind def
+
+/ccnolog { % convert x, y plot coords to page coords; usage: <x> <y> cc
+  % ignore log axes
+  exch xmin sub xspan div width in mul wby2 in sub
+  exch ymin sub yspan div height in mul hby2 in sub
+} bind def
+
+/Font { % font selection, usage: <font name> <point size> Font
+  exch findfont exch scalefont setfont
+} bind def
+
+/expe { % exponential, base e
+  e exch exp
+} bind def
+
+/rad2deg { % convert radians to degrees
+  180 mul pi div
+} bind def
+
+/deg2rad { % convert degrees to radians
+  180 div pi mul
+} bind def
+
+/DrawBorder { % Draw border of plot
+  0 setgray
+  borderweight setlinewidth
+  0 setlinecap
+  newpath
+  width in 2 div
+  height in 2 div moveto
+  width in -2 div
+  height in 2 div lineto
+  width in -2 div
+  height in -2 div lineto
+  width in 2 div
+  height in -2 div lineto
+  width in 2 div
+  height in 2 div lineto
+  stroke
+} bind def
+
+% use interface functions PlotClip or NoPlotClip to change clipping
+/PlotClip { /plotclipoption true def } bind def
+/NoPlotClip { /plotclipoption false def } bind def
+PlotClip % default to clipping outside graph window
+
+/SetClip { %Clip outside graph window
+  plotclipoption {
+  newpath
+  width in 2 div
+  height in 2 div moveto
+  width in -2 div
+  height in 2 div lineto
+  width in -2 div
+  height in -2 div lineto
+  width in 2 div
+  height in -2 div lineto
+  width in 2 div
+  height in 2 div lineto
+  closepath clip
+  } if
+} bind def
+
+/PlotFunction { % plot function
+  % to use: give two arguments
+  %   1. the function to plot, in curly braces
+  %   2. number of horizontal points (uniformly spaced)
+  % e.g.:
+  %   {myfunc} 200 PlotFunction
+  /xpoints exch def
+  /plotfunc exch bind def
+  gsave SetClip newpath
+  logaxisx false eq
+  { % regular linear coords
+    xmin dup plotfunc cc moveto
+    1 1 xpoints {
+      xpoints cvr div xmax xmin sub mul xmin add
+      dup plotfunc cc lineto
+    } for
+  } { % log x coords
+    LogBaseX xmin exp dup plotfunc cc moveto
+    1 1 xpoints {
+      xpoints cvr div xmax xmin sub mul xmin add
+      LogBaseX exch exp
+      dup plotfunc cc lineto
+    } for
+  } ifelse
+  stroke
+  grestore
+} def
+
+/PlotStackData { % plot x,y pairs on the stack
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackData
+  /npoints exch def
+  gsave SetClip newpath
+  cc moveto
+  2 1 npoints { pop
+    cc lineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/PlotStackDataAuto { % same as PlotStackDataPoints
+                     %   but gets # of points  automatically
+                     %   by counting stack
+                     %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackData cleartomark
+} bind def
+
+/PlotStackData1Col { % plot y values on the stack, spread over x axis
+  % to use: give
+  %   1. data to plot on stack, y1, y2, ...
+  %   2. number of data points on stack (after data)
+  % e.g.:
+  %   1.1 1.2   2 PlotStackData
+  /npoints exch def
+  gsave SetClip newpath
+  xmax exch
+  cc moveto
+  npoints -1 2 {
+    npoints cvr div xmax xmin sub mul xmin add
+    exch cc lineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/PlotStackData1ColAuto { % same as PlotStackData1Col
+                     %   but gets # of points  automatically
+                     %   by counting stack
+                     %   (need to put mark on stack before data)
+  counttomark PlotStackData1Col cleartomark
+} bind def
+
+/FillStackData { % fill between two curves of x,y pairs on the stack
+  % to use: give
+  %   1. data for curve 1 on stack, x1, y1, x2, y2, ...
+  %   2. data for curve 2 on stack, x1, y1, x2, y2, ...
+  %   3. number of data pairs on stack (curve 1)
+  %   4. number of data pairs on stack (curve 2)
+  %   so curve 2 is read off the stack first
+  % e.g.:
+  %   1.0 1.1 2.0 1.2          % curve #1
+  %   1.0 1.0 1.3 0.9 2.0 1.1  % curve #2
+  %   2 3  FillStackData
+  /npoints2 exch def
+  /npoints1 exch def
+  gsave SetClip newpath
+  cc moveto
+  2 1 npoints2 { pop
+    cc lineto
+  } for
+  1 1 npoints1 { 
+    npoints1 1 add exch sub
+    2 mul -2 roll
+    cc lineto
+  } for
+  fill
+  grestore
+} bind def
+
+/PlotStackDataLogLog { % plot x,y pairs on the stack, taking log of each
+  % for log axes, the plot ranges (e.g., xmin, xmax) should be the 
+  %   logarithms of the boundaries
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataLogLog
+  % logarithm bases are set by LogBaseX and LogBaseY
+  % labels set by LogBaseXstr and LogBaseYstr
+  /npoints exch def
+  gsave SetClip newpath
+  log LogBaseY log div exch log LogBaseX log div exch
+  cc moveto
+  2 1 npoints { pop
+    log LogBaseY log div exch log LogBaseX log div exch
+    cc lineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/PlotStackDataLogY { % plot x,y pairs on the stack, taking log of y
+  % for log axes, the plot ranges (e.g., xmin, xmax) should be the 
+  %   logarithms of the boundaries
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataLogY
+  /npoints exch def
+  gsave SetClip newpath
+  log LogBaseY log div 
+  cc moveto
+  2 1 npoints { pop
+    log LogBaseY log div
+    cc lineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/PlotStackDataLogX { % plot x,y pairs on the stack, taking log of x
+  % for log axes, the plot ranges (e.g., xmin, xmax) should be the 
+  %   logarithms of the boundaries
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataLogY
+  /npoints exch def
+  gsave SetClip newpath
+  exch log LogBaseX log div exch
+  cc moveto
+  2 1 npoints { pop
+    exch log LogBaseX log div exch
+    cc lineto
+  } for
+  stroke
+  grestore
+} bind def
+
+/PlotStackDataLogLogAuto { % same as PlotStackDataLogLog
+                           %   but gets # of points automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataLogLog cleartomark
+} bind def
+
+/PlotStackDataLogYAuto { % same as PlotStackDataLogY
+                           %   but gets # of points automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataLogY cleartomark
+} bind def
+
+/PlotStackDataLogXAuto { % same as PlotStackDataLogX
+                           %   but gets # of points automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataLogX cleartomark
+} bind def
+
+/MakeZeroMarkerV { % make grey line to mark y=0
+  0.7 setgray
+  newpath
+  xmin 0 cc moveto
+  xmax 0 cc lineto
+  stroke
+  0 setgray
+} bind def
+
+%%% various plot symbols
+/circlesymbol {
+  newpath symbolsz 0.5 mul 0 360 arc closepath fill
+} bind def
+/squaresymbol {
+  newpath moveto symbolsz 0.5 mul dup rmoveto
+  0 -1 symbolsz mul rlineto
+  -1 symbolsz mul 0 rlineto
+  0 symbolsz rlineto closepath fill
+} bind def
+/diamondsymbol {
+  newpath moveto 0 symbolsz 0.5 mul rmoveto
+  0.5 symbolsz mul -0.5 symbolsz mul rlineto
+  -0.5 symbolsz mul -0.5 symbolsz mul rlineto
+  -0.5 symbolsz mul 0.5 symbolsz mul rlineto
+  0.5 symbolsz mul 0.5 symbolsz mul rlineto
+  closepath fill
+} bind def
+/trianglesymbol {
+  newpath moveto 0 symbolsz 0.5 mul rmoveto
+  symbolsz 0.5 mul  -1 symbolsz mul rlineto
+  -1 symbolsz mul 0 rlineto
+  closepath fill
+} bind def
+/invertedtrianglesymbol {
+  newpath moveto 0 symbolsz -0.5 mul rmoveto
+  symbolsz 0.5 mul  symbolsz rlineto
+  -1 symbolsz mul 0 rlineto
+  closepath fill
+} bind def
+/starsymbol {
+  gsave
+  newpath translate
+  /myang 0 def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul moveto
+  /myang 72 2 mul def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 4 mul def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 1 mul def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 3 mul def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  closepath fill
+  grestore
+} bind def
+/invertedstarsymbol {
+  gsave
+  newpath translate
+  /myang 0 180 add def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul moveto
+  /myang 72 2 mul 180 add def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 4 mul 180 add def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 1 mul 180 add def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  /myang 72 3 mul 180 add def
+  symbolsz 0.7 mul myang sin mul symbolsz 0.7 mul myang cos mul lineto
+  closepath fill
+  grestore
+} bind def
+
+
+
+/selectsymbol { % takes integer as input, sets plot symbol to use
+                %   point plots
+                % 0 for circles
+                % 1 for squares
+                % 2 for diamonds
+                % 3 for triangles
+                % 4 for inverted triangles
+                % 5 for stars
+                % 6 for invertedstars
+  /indx exch def
+  /pointsymbol { circlesymbol } def 
+  indx 1 eq { /pointsymbol { squaresymbol } def } if
+  indx 2 eq { /pointsymbol { diamondsymbol } def } if
+  indx 3 eq { /pointsymbol { trianglesymbol } def } if
+  indx 4 eq { /pointsymbol { invertedtrianglesymbol } def } if
+  indx 5 eq { /pointsymbol { starsymbol } def } if
+  indx 6 eq { /pointsymbol { invertedstarsymbol } def } if
+} bind def
+0 selectsymbol % default to circles 
+
+/PlotStackDataPoints { % plot x,y pairs on the stack
+                       %   as separate points, not line
+                       %   select point symbol with selectsymbol first
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataPoints
+  /npoints exch def
+  gsave SetClip newpath
+  1 1 npoints { pop
+    cc pointsymbol
+  } for
+  grestore
+} bind def
+
+/PlotStackDataPointsLogX { % plot x,y pairs on the stack, taking log of x,
+                       %   as separate points, not line
+                       %   select point symbol with selectsymbol first
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataPointsLogX
+  %
+  % for log axes, the plot ranges (e.g., xmin, xmax) should be the
+  %   logarithms of the boundaries
+  /npoints exch def
+  gsave SetClip newpath
+  1 1 npoints { pop
+    exch log LogBaseX log div exch
+    cc pointsymbol
+  } for
+  grestore
+} bind def
+
+/PlotStackDataPointsLogY { % plot x,y pairs on the stack, taking log of y,
+                       %   as separate points, not line
+                       %   select point symbol with selectsymbol first
+  % to use: give
+  %   1. data to plot on stack, x1, y1, x2, y2, ...
+  %   2. number of data pairs on stack (after data)
+  % e.g.:
+  %   1.0 1.1 2.0 1.2   2 PlotStackDataPointsLogY
+  %
+  % for log axes, the plot ranges (e.g., ymin, ymax) should be the
+  %   logarithms of the boundaries
+  /npoints exch def
+  gsave SetClip newpath
+  1 1 npoints { pop
+    log LogBaseY log div
+    cc pointsymbol
+  } for
+  grestore
+} bind def
+
+
+/PlotStackDataPointsAuto { % same as PlotStackDataPoints
+                           %   but gets # of points  automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataPoints cleartomark
+} bind def
+
+/PlotStackDataPointsLogXAuto { % same as PlotStackDataPointsLogX
+                           %   but gets # of points  automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataPointsLogX cleartomark
+} bind def
+
+/PlotStackDataPointsLogYAuto { % same as PlotStackDataPointsLogY
+                           %   but gets # of points  automatically
+                           %   by counting stack
+                           %   (need to put mark on stack before data)
+  counttomark 2 div PlotStackDataPointsLogY cleartomark
+} bind def
+
+/PlotStackDataPointsYerr { % plot x,y pairs on the stack
+                           %   as separate points, not line
+                           %   with y error bars
+                           %   select point symbol with selectsymbol first
+  % to use: give
+  %   1. data to plot on stack with errs, x1, y1, e1, x2, y2, e2, ...
+  %   2. number of data triples on stack (after data)
+  % e.g.:
+  %   1.0 1.1 0.1   2.0 1.2 0.2   2 PlotStackDataPointsYerr
+  /npoints exch def
+  gsave SetClip newpath
+  1 1 npoints { pop
+    /myrawerr exch def
+    /myrawy exch def
+    /myrawx exch def
+    myrawx myrawy cc
+    /myy exch def
+    /myx exch def
+    myx myy pointsymbol
+    % compute error bar locations on page
+    myrawx myrawy myrawerr add cc /myyerru exch def pop
+    myrawx myrawy myrawerr sub cc /myyerrl exch def pop
+    newpath
+    errorbarthick setlinewidth
+    myx myyerrl moveto
+    myx myyerru lineto
+    stroke newpath
+    myx myyerrl moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke newpath
+    myx myyerru moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke
+  } for
+  grestore
+} bind def
+
+/PlotStackDataPointsYerrAuto { % same as PlotStackDataPointsYerr
+                               %   but gets # of points  automatically 
+                               %   by counting stack
+                               %   (best to clear stack before loading data)
+  counttomark 3 div PlotStackDataPointsYerr cleartomark
+} bind def
+
+/PlotStackDataPointsYerrLogLog { % plot x,y pairs on the stack
+                           %   as separate points, not line
+                           %   with y error bars
+                           %   select point symbol with selectsymbol first
+                           %   also taking log of each
+    % for log axes, the plot ranges (e.g., xmin, xmax) should be the
+    %   logarithms of the boundaries
+  % to use: give
+  %   1. data to plot on stack with errs, x1, y1, e1, x2, y2, e2, ...
+  %   2. number of data triples on stack (after data)
+  % e.g.:
+  %   1.0 1.1 0.1   2.0 1.2 0.2   2 PlotStackDataPointsYerr
+  /npoints exch def
+  gsave SetClip newpath
+  1 1 npoints { pop
+    /myerrraw exch def
+    /myyraw exch def
+    /myxraw exch def
+    myxraw log LogBaseX log div myyraw log LogBaseY log div
+      cc /myy exch def /myx exch def
+    myxraw log LogBaseX log div myyraw myerrraw add log LogBaseY log div 
+      cc /myerru exch def pop
+    myxraw log LogBaseX log div myyraw myerrraw sub log LogBaseY log div
+      cc /myerrl exch def pop
+    myx myy pointsymbol
+    newpath
+    errorbarthick setlinewidth
+    myx myerrl moveto
+    myx myerru lineto
+    stroke newpath
+    myx myerrl moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke newpath
+    myx myerru moveto
+    errorbarwid -0.5 mul 0 rmoveto
+    errorbarwid 0 rlineto
+    stroke
+  } for
+  grestore
+} bind def
+
+/PlotStackDataPointsYerrLogLogAuto { % same as PlotStackDataPointsYerrLogLog
+                               %   but gets # of points  automatically
+                               %   by counting stack
+                               %   (best to clear stack before loading data)
+  counttomark 3 div PlotStackDataPointsYerrLogLog cleartomark
+} bind def
+
+
+%%% Printing Routines; handle complex text printing by using array for text
+%%%   array is: [ /Font type (string) /Font type (string) ... ]
+%%%   must occur in triples
+%%%     /Font is the font name, preceded by a slash
+%%%     'type' is one of: normal, subscript, or superscript
+%%%     (string) is a text string, in parentheses
+%%%   
+%%%   can also substitute a triple:
+%%%     /move <x> <y>
+%%%     which means to move <x>, <y> points for fine tuning of spacing
+%%%     and backwards stepping.
+
+/normal 0 def
+/subscript 1 def
+/superscript 2 def
+
+/scriptsize {fontsize 0.725 mul} def % size sub/superscripts
+/subscriptoffset {fontsize -0.2 mul} def % offset of subscripts
+/superscriptoffset {fontsize 0.46 mul} def % offest of superscripts
+
+/CalculateStringArrayWidth { % takes string array and font size as input, 
+                             % real # width  as output
+  /fontsize exch def
+  /myarray exch bind def
+  0.0 % total width so far
+  0 3 myarray length 1 sub { % loop over array values
+    /indx exch def
+    /myfont myarray indx 0 add get def
+    /mytype myarray indx 1 add get def
+    /mystring myarray indx 2 add get def
+    myfont /move eq { % if 'move' keyword
+      mytype add
+    } {
+      mytype normal eq {myfont fontsize Font}{myfont scriptsize Font} ifelse
+      mystring stringwidth pop
+      add
+    } ifelse
+  } for
+} bind def
+
+/PrintArray { % do the actual printing of the array
+              % takes string array and font size as input
+  /fontsize exch def
+  /myarray exch bind def
+  0 3 myarray length 1 sub { % loop over array values
+    /indx exch def
+    /myfont myarray indx 0 add get def
+    /mytype myarray indx 1 add get def
+    /mystring myarray indx 2 add get def
+    myfont /move eq { % if 'move' keyword
+      mytype mystring rmoveto
+    } {
+      mytype normal eq {myfont fontsize Font}{myfont scriptsize Font} ifelse
+      mytype subscript eq {0 subscriptoffset rmoveto} if
+      mytype superscript eq {0 superscriptoffset rmoveto} if
+      mystring show
+      mytype subscript eq {0 subscriptoffset -1 mul rmoveto} if
+      mytype superscript eq {0 superscriptoffset -1 mul rmoveto} if
+    } ifelse
+  } for
+} bind def
+
+/PrintArrayLeft { % printing text array, left-justified at current location
+                  % takes string array and font size as input
+  PrintArray
+} bind def
+
+/PrintArrayCenter { % printing text array, center-justified at current location
+                  % takes string array and font size as input
+  /fontsize exch def
+  /myarray exch bind def
+  myarray fontsize CalculateStringArrayWidth
+  -0.5 mul 0 rmoveto
+  myarray fontsize PrintArray
+} bind def
+
+/PrintArrayRight { % printing text array, right-justified at current location
+                  % takes string array and font size as input
+  /fontsize exch def
+  /myarray exch bind def
+  myarray fontsize CalculateStringArrayWidth
+  -1 mul 0 rmoveto
+  myarray fontsize PrintArray
+} bind def
+
+/XAxisTitle { % do x-axis title, takes text array as input
+  gsave
+  0 setgray
+  0 height in -2 div moveto
+  0 xtitleoffset rmoveto
+  xtitlesize PrintArrayCenter
+  grestore
+} bind def
+
+/YAxisTitle { % do y-axis title, takes text array as input
+  gsave
+  0 setgray
+  width in -2 div 0 moveto
+  90 rotate
+  0 ytitleoffset -1 mul rmoveto
+  ytitlesize PrintArrayCenter
+  90 rotate
+  grestore
+} bind def
+
+/XAxisLabels { % make x-axis labels at xmin and xmax
+  0 setgray
+  % left-hand label
+  width in -2 div height in -2 div moveto % do left corner label first
+  0 xlabeloffset rmoveto
+  [xlabelfont normal xminstr] xlabelsize PrintArrayCenter 
+
+  % right-hand label
+  width in 2 div height in -2 div moveto % now do right corner
+  0 xlabeloffset rmoveto
+  [xlabelfont normal xmaxstr] xlabelsize PrintArrayCenter 
+} bind def
+
+/XAxisLabelsLog { % make x-axis labels at xmin and xmax, with 10^x notation
+  0 setgray
+  % left-hand label
+  width in -2 div height in -2 div moveto % do left corner label first
+  0 xlabeloffset rmoveto
+  [xlabelfont normal LogBaseXstr
+   xlabelfont superscript xminstr] xlabelsize PrintArrayCenter
+
+  % right-hand label
+  width in 2 div height in -2 div moveto % now do right corner
+  0 xlabeloffset rmoveto
+  [xlabelfont normal LogBaseXstr
+   xlabelfont superscript xmaxstr] xlabelsize PrintArrayCenter
+} bind def
+
+/YAxisLabels { % make y-axis labels at xmin and xmax
+  0 setgray
+  % upper label
+  width in -2 div height in 2 div moveto
+  ylabeloffset ylabelvertnudge rmoveto
+  [ylabelfont normal ymaxstr] ylabelsize PrintArrayRight
+
+  % lower label
+  width in -2 div height in -2 div moveto
+  ylabeloffset ylabelvertnudge rmoveto
+  [ylabelfont normal yminstr] ylabelsize PrintArrayRight
+} bind def
+
+/YAxisLabelsLog { % make y-axis labels at xmin and xmax, with 10^x notation
+  0 setgray
+  % upper label
+  width in -2 div height in 2 div moveto
+  ylabeloffset ylabelvertnudge rmoveto
+  [ylabelfont normal LogBaseYstr
+   ylabelfont superscript ymaxstr] ylabelsize PrintArrayRight
+
+  % lower label
+  width in -2 div height in -2 div moveto
+  ylabeloffset ylabelvertnudge rmoveto
+  [ylabelfont normal LogBaseYstr
+   ylabelfont superscript yminstr] ylabelsize PrintArrayRight
+} bind def
+
+/XTickText { % make single extra x-axis ticks/label; takes text array
+             % for PrintArrayCenter, font size,  and coordinate string as input
+             % example for log axis:
+             %   [ /ComputerModern-Regular normal (10)
+             %     /ComputerModern-Regular superscript (4) ] xlabelsize (4) 
+             %   XTickText
+             % to print 10^4 on log axis
+  gsave
+  tickweight setlinewidth 0 setgray
+  /mystring exch def
+  /myfontsz exch def
+  /mytextarray exch def
+  newpath
+  mystring cvr 1 ccnolog pop hby2 in -1 mul moveto % move to tick location
+  0 ticklen rlineto 0 ticklen -1 mul rmoveto % draw tick
+  0 height in rmoveto 0 ticklen -1 mul rlineto 0 ticklen rmoveto
+  0 height in -1 mul rmoveto
+  0 xlabeloffset rmoveto
+  mytextarray myfontsz PrintArrayCenter
+  stroke
+  grestore
+} bind def
+
+/ExtraXTicks { % make extra x-axis ticks/labels; takes array of strings as input
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    [xlabelfont normal mystring] xlabelsize mystring XTickText
+  } for
+} bind def
+
+/ExtraXTicksLog { % make extra x-axis ticks/labels, with 10^x notation; 
+                  % takes array of strings as input
+                  % base is overridden by LogBaseX
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    [xlabelfont normal LogBaseXstr
+     xlabelfont superscript mystring] xlabelsize mystring XTickText
+  } for
+} bind def
+
+/ExtraXTicksBotNoLabel { % make extra x-axis ticks on bottom only;
+                         % takes array of strings as input
+  gsave
+  tickweight setlinewidth
+  0 setgray
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    newpath
+    mystring cvr 1 cc pop hby2 in -1 mul moveto % move to tick location
+    0 ticklen -2 div rmoveto
+    0 ticklen rlineto % draw tick
+    stroke
+  } for
+  grestore
+} bind def
+
+/ExtraXTicksMidNoLabel { % make extra x-axis ticks in middle for centered axes
+                         % takes array of strings as input
+  gsave
+  tickweight setlinewidth
+  0 setgray
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    newpath
+    mystring cvr 1 cc pop 0 moveto % move to tick location
+    0 ticklen -2 div rmoveto
+    0 ticklen rlineto % draw tick
+    stroke
+  } for
+  grestore
+} bind def
+
+/XTickMinor { % make single extra x-axis tick, no label, short tick; takes
+             % coordinate number as input
+             % example for log axis:
+             %   1.2 log XTickMinor
+             % to make a tick for 1.2 on log axis
+  gsave
+  minortickweight setlinewidth 0 setgray
+  /mynum exch def
+  newpath
+  mynum 1 ccnolog pop hby2 in -1 mul moveto % move to tick location
+  0 minorticklen rlineto 0 minorticklen -1 mul rmoveto % draw tick
+  0 height in rmoveto 0 minorticklen -1 mul rlineto 0 ticklen rmoveto
+  stroke
+  grestore
+} bind def
+
+
+
+
+/YTickText { % make single extra y-axis ticks/label; takes text array
+             % for PrintArrayRight, font size,  and coordinate string as input
+             % example for log axis:
+             %   [ /ComputerModern-Regular normal (10)
+             %     /ComputerModern-Regular superscript (4) ] xlabelsize (4)
+             %   XTickText
+             % to print 10^4 on log axis
+  gsave
+  tickweight setlinewidth 0 setgray
+  /mystring exch def
+  /myfontsz exch def
+  /mytextarray exch def
+  newpath
+  mystring cvr xmin exch ccnolog moveto % move to tick location
+  ticklen 0 rlineto ticklen -1 mul 0 rmoveto % draw tick
+  width in 0 rmoveto ticklen -1 mul 0 rlineto ticklen 0 rmoveto
+  width in -1 mul 0 rmoveto
+  ylabeloffset ylabelvertnudge rmoveto
+  mytextarray myfontsz PrintArrayRight
+  stroke
+  grestore
+} bind def
+
+/ExtraYTicks { % make extra y-axis ticks/labels; takes array of strings as input
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    [ylabelfont normal mystring] ylabelsize mystring YTickText
+  } for
+} bind def
+
+/ExtraYTicksLog { % make extra y-axis ticks/labels, with 10^x notation; 
+                  % takes array of strings as input
+                  % base is overridden by LogBaseY
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    [ylabelfont normal LogBaseYstr
+     ylabelfont superscript mystring] ylabelsize mystring YTickText
+  } for
+} bind def
+
+/BottomXTicks { % make x-axis ticks/labels; takes array of strings as input
+                % short ticks stick out from bottom
+  gsave
+  tickweight setlinewidth
+  0 setgray
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    newpath
+    mystring cvr 1 cc pop hby2 in -1 mul moveto % move to tick location
+    0 shortticklen -1 mul rlineto 0 shortticklen rmoveto % draw tick
+    0 xlabeloffset rmoveto
+    [xlabelfont normal mystring] xlabelsize PrintArrayCenter
+    stroke
+  } for
+  grestore
+} bind def
+
+/LeftYTicks { % make y-axis ticks/labels; takes array of strings as input
+              % short ticks stick out to left
+  gsave
+  tickweight setlinewidth
+  0 setgray
+  /mytickarray exch def
+  0 1 mytickarray length 1 sub { % loop over labels
+    /indx exch def
+    /mystring mytickarray indx get def
+    newpath
+    mystring cvr xmin exch cc moveto % move to tick location
+    shortticklen -1 mul 0 rlineto shortticklen 0 rmoveto % draw tick
+    ylabeloffset ylabelvertnudge rmoveto
+    [ylabelfont normal mystring] ylabelsize PrintArrayRight
+    stroke
+  } for
+  grestore
+} bind def
+
+/YTickMinor { % make single extra y-axis tick, no label, short tick; takes
+             % coordinate number as input
+             % example for log axis:
+             %   1.2 log YTickMinor
+             % to make a tick for 1.2 on log axis
+  gsave
+  minortickweight setlinewidth 0 setgray
+  /mynum exch def
+  newpath
+  mynum xmin exch ccnolog moveto % move to tick location
+  minorticklen 0 rlineto minorticklen -1 mul 0 rmoveto % draw tick
+  width in 0 rmoveto minorticklen -1 mul 0 rlineto minorticklen 0 rmoveto
+  stroke
+  grestore
+} bind def
+
+
+/Title { % draw title across top of plot
+  0 titleoffset height in 2 div add moveto
+  titlesize PrintArrayCenter
+} bind def
+
+/plotcolor { % takes integer as input, sets to different color
+  /indx exch def
+  /sat 0.7 def
+  /bright 0.7 def
+  /rbri 0.8 def
+  /frbri 1.0 def
+  /fbrbri 0.9 def
+  0 setgray
+  indx 1 eq { rbri 0 0 setrgbcolor } if
+  indx 2 eq { 0 rbri 0 setrgbcolor } if
+  indx 3 eq { 0 0 rbri setrgbcolor } if
+  indx 4 eq { 0 sat bright sethsbcolor } if
+  indx 5 eq { 0.4 sat bright sethsbcolor } if
+  indx 6 eq { 0.6 sat bright sethsbcolor } if
+  indx 7 eq { 0.8 sat bright sethsbcolor } if
+  indx 8 eq { 0.2 sat bright sethsbcolor } if
+  indx 9 eq { 0.7 sat bright sethsbcolor } if
+  indx 10 eq { 0.8 sat bright sethsbcolor } if
+  indx 11 eq { 0.1 sat bright sethsbcolor } if
+  indx 12 eq { 0.3 sat bright sethsbcolor } if
+  indx 101 eq { frbri fbrbri fbrbri setrgbcolor } if
+  indx 102 eq { fbrbri frbri fbrbri setrgbcolor } if
+  indx 103 eq { fbrbri fbrbri frbri setrgbcolor } if
+} bind def
+
+/plotdash { % takes integer as input, sets to different color
+  /indx exch def
+  [] 0 setdash
+  indx 1 eq { [2] 1 setdash } if
+  indx 2 eq { [4] 2 setdash } if
+  indx 3 eq { [4 2] 2 setdash } if
+  indx 4 eq { [6 2] 2 setdash } if
+  indx 5 eq { [4 2 2 2] 0 setdash } if
+  indx 6 eq { [6 2 3 2] 0 setdash } if
+} bind def
+
+/heavyline { linesize 2.5 mul setlinewidth } bind def
+/hheavyline { linesize 3.5 mul setlinewidth } bind def
+/veryheavyline { linesize 5 mul setlinewidth } bind def
+/normalline { linesize setlinewidth } bind def
+
+/startplot {
+  centercoordsinpage gsave
+  linesize setlinewidth
+  1 setlinecap % make round dots
+  0 setgray
+} bind def
+
+/endplot {
+  DrawBorder
+  grestore
+  showpage
+} def
+
+/startinset { % for insets; complete main plot before going into inset
+              % redefine xmin, xmax, etc. before calling this
+  gsave 
+  insetoffx insetoffy translate
+  insetscale dup scale
+  linesize setlinewidth
+  1 setlinecap % make round dots
+  0 setgray
+
+  % override plot dimensions
+  xmaxstr cvr /xmax exch def
+  xminstr cvr /xmin exch def
+  ymaxstr cvr /ymax exch def
+  yminstr cvr /ymin exch def
+  /xspan xmax xmin sub def
+  /yspan ymax ymin sub def
+  /hby2 height 2 div def
+  /wby2 width 2 div def
+
+  % override font sizes
+  /instrscl {insetscale div 0.9 mul} bind def
+  xlabelsize instrscl /xlabelsize exch def
+  xlabeloffset instrscl /xlabeloffset exch def
+  xtitlesize instrscl /xtitlesize exch def
+  xtitleoffset instrscl /xtitleoffset exch def
+  ylabelsize instrscl /ylabelsize exch def
+  ylabeloffset instrscl /ylabeloffset exch def
+  ytitlesize instrscl /ytitlesize exch def
+  ytitleoffset instrscl /ytitleoffset exch def
+  ylabelvertnudge instrscl /ylabelvertnudge exch def
+  ytitlevertnudge instrscl /ytitlevertnudge exch def
+  plotlabelsize instrscl /plotlabelsize exch def
+} bind def
+
+/endinset {
+  DrawBorder
+  grestore
+} def
+
+/endplotnoborder {
+  grestore
+  showpage
+} def
+
+/startdiagram {
+  gsave centercoordsinpage
+  linesize setlinewidth
+  1 setlinecap % make round dots
+  0 setgray
+} def
+
+/enddiagram {
+  grestore
+  showpage
+} def
+
+% KahoeTechSymbols
+/langle (\267) def
+/rangle (\202) def
+/rightarrow (\341) def
+
+/ketbegin { % draw ket verticalbar
+            % usage: fontsize ketbegin
+  /myfontsize exch def
+  [
+  /KahoeTechGreek normal (|o)
+  ] myfontsize PrintArrayLeft
+} bind def
+
+/ketend { % draw ket rangle
+          % usage: fontsize ketend
+  /myfontsize exch def
+  [
+  /KahoeTechSymbols normal rangle
+  ] myfontsize PrintArrayLeft
+} bind def
+
+/leftarrow (\334) def
+/rightarrow (\341) def
+
+%%% musical symbols, for arrays
+%/flat    { /CMMI10 normal (\133) } def
+%/natural { /CMMI10 normal (\134) } def
+%/sharp   { /CMMI10 normal (\135) } def
+/sharp         { /Gonville-Part1 normal (\221) } def
+/doublesharp   { /Gonville-Part1 normal (\231) } def
+/triplesharp   { /Gonville-Part1 normal (\221)
+                 /move 1 0
+                 /Gonville-Part1 normal (\231) 
+               } def
+/natural       { /Gonville-Part1 normal (\160) } def
+/flat          { /move 1 0 /Gonville-Part1 normal (\117) } def
+/doubleflat    { /move 1 0 /Gonville-Part1 normal (\130) } def
+/tripleflat    { /move 1 0  
+                 /Gonville-Part1 normal (\117) 
+                 /move 0.5 0
+                 /Gonville-Part1 normal (\130) 
+               } def
+
+
+/BeginEPS { % from Adobe, call before running an eps file
+  /b4_Inc_state save def           % Save state for cleanup
+  /dict_count countdictstack def   % Count objects on dict stack
+  /op_count count 1 sub def        % Count objects on operand stack
+  userdict begin                   % Push userdict on dict stack
+  /showpage { } def                % Redefine showpage, { } = null proc
+  0 setgray 0 setlinecap           % Prepare graphics state
+  1 setlinewidth 0 setlinejoin 
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where             % If level not equal to 1 then
+  {pop languagelevel               % set strokeadjust and
+  1 ne                             % overprint to their defaults.
+    {false setstrokeadjust false setoverprint
+    } if 
+  } if
+} bind def
+
+/EndEPS { % from Adobe, call after running an eps file
+  count op_count sub {pop} repeat	% Clean up stacks 
+  countdictstack dict_count sub {end} repeat 
+  b4_Inc_state restore
+} bind def
+
+/Yzeroline { % draw light grey line at y = 0
+  gsave
+  0.1 setlinewidth
+  0.7 setgray
+  newpath
+  xmin 0 cc moveto xmax 0 cc lineto stroke
+  grestore
+} bind def
+
+/Xzeroline { % draw light grey line at x = 0
+  gsave
+  0.1 setlinewidth
+  0.7 setgray
+  newpath
+  0 ymin cc moveto 0 ymax cc lineto stroke
+  grestore
+} bind def
+
+/Yconstline { % draw light grey line at y = y0; usage y0 Yconstline
+  /myyzero exch def
+  gsave
+  0.1 setlinewidth
+  0.7 setgray
+  newpath
+  xmin myyzero cc moveto xmax myyzero cc lineto stroke
+  grestore
+} bind def
+
+/Xconstline { % draw light grey line at x = x0; usage x0 Xconstline
+  /myxzero exch def
+  gsave
+  0.1 setlinewidth
+  0.7 setgray
+  newpath
+  myxzero ymin cc moveto myxzero ymax cc lineto stroke
+  grestore
+} bind def
+
+/multdatacolbyx { % assuming we have several columns of data on the stack
+                  % for plotting (with contiguous rows, as loaded from a file)
+                  % use this to multiply any column by a constant
+                  %  usage: <data> numcols numrows col x multdatacolbyx
+                  % will multiply column 'col' of the data set by x,
+                  % assuming the data on the stack consists of numcols columns
+                  % and numrows rows.
+  /myx exch def
+  /mycol exch def
+  /mynumrows exch def
+  /mynumcols exch def
+  /myN mynumrows mynumcols mul def
+  % begin by shifting to the proper column
+  myN mycol -1 mul roll
+  % loop over rows, doing the multiplication
+  1 1 mynumrows {
+    pop
+    myx mul
+    myN mynumcols roll
+  } for
+  % restore data order
+  myN mycol roll
+} bind def
+
+/addxtodatacol { % assuming we have several columns of data on the stack
+                 % for plotting (with contiguous rows, as loaded from a file)
+                 % use this to add a constant to any column
+                 %  usage: <data> numcols numrows col x addxtodatacol
+                 % will multiply column 'col' of the data set by x,
+                 % assuming the data on the stack consists of numcols columns
+                 % and numrows rows.
+  /myx exch def
+  /mycol exch def
+  /mynumrows exch def
+  /mynumcols exch def
+  /myN mynumrows mynumcols mul def
+  % begin by shifting to the proper column
+  myN mycol -1 mul roll
+  % loop over rows, doing the multiplication
+  1 1 mynumrows {
+    pop
+    myx add
+    myN mynumcols roll
+  } for
+  % restore data order
+  myN mycol roll
+} bind def
+
+
+

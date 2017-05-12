@@ -1,0 +1,44 @@
+number_of_procs:=200
+
+Ncopy:= 10
+seed := 3934320
+parallel_seed := 268349
+base_file_tag := TEbody200b
+data_directory := /home/jmack/casimir/data/scalar_TE
+casimir := /home/jmack/casimir/scalar_TE/casimir
+casimir_avg := /home/jmack/casimir/scalar_TE/casimir_avg
+sleep_time := 10000
+
+##Flags for qsub
+queue := normal
+walltime := 24
+node_per_job := 1
+proc_per_job := 1
+
+##Serial code flags
+
+##Flags for output 
+param_trace := true
+time_trace := false
+T_integral_trace := false
+inf_integral_trace :=false
+sub_integral_trace :=false
+output_integral_flag := false
+
+## Loop and surface parameters
+chi := 10000
+d := 1
+x1 := 0
+int_tol := 0.01
+
+##parameters for multiple instances 
+chi_base := 2
+Nchi := 20
+d_base := 4
+Nd := 5
+Nn := 1
+Nl := 1
+
+Nloops := 10000
+Nperloop := 100
+Nx := 20

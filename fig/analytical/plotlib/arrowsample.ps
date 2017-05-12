@@ -1,0 +1,12 @@
+%!PS-Adobe-2.0
+(fig/plotarrows.ps) run
+
+/in {72 mul} bind def  % conversion to inches
+/centercoordsinpage { % set origin in page center
+  4.25 in 5.5 in translate
+} bind def
+centercoordsinpage
+
+% usage: xbegin ybegin xend yend lineweight arrowsizefac arrowboth
+-2 in 0 2 in 0 2 0.8 arrowboth
+

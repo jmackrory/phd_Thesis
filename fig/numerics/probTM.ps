@@ -1,0 +1,78 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/xmaxstr (4) def
+/xminstr (-4) def
+/yminstr (0) def
+/ymaxstr (0.75) def
+
+
+%sizing for two column format. 
+twocolumndimensions
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+%size of ellipse
+% /ComputerModern-Regular findfont 14 scalefont setfont
+% /titlefont {/ComputerModernExtraBold} def
+% /titlesize {30}         bind def % size of plot title
+% /subsize {20}         bind def % size of plot title
+% /cas_xoffset {-6}  def
+% /cas_yoffset {.25}  def
+(plotlib/plotutilities.ps) run
+(casimirutilities.ps) run
+
+startplot
+
+
+
+%Energy curve 
+1 setlinewidth
+
+%1 in 1 in translate
+{Step} 512 PlotFunction
+
+
+/col1{0 .67 0 setrgbcolor} def
+/col2{0 .5 1 setrgbcolor} def
+/col3{0 0 1 setrgbcolor} def
+
+/symbolsz 10 def % in points
+
+col3
+(TMprob3.dat) run % load loop 3
+1001 PlotStackData
+
+
+col2
+(TMprob2.dat) run % load loop 2
+1001 PlotStackData
+
+
+col1
+(TMprob1.dat) run % load loop 1
+1001 PlotStackData
+
+[ (0.25) (0.5) (.75) ] ExtraYTicks
+[ (-4) (-2) (0) (2) (4) ] ExtraXTicks
+[ /KahoeTechLatin normal (x)]  XAxisTitle
+[ /ComputerModern-Regular normal (Probability)]  YAxisTitle
+
+
+2 0.5 ccnolog moveto
+col3
+ [/KahoeTechGreek normal  (c = 10)]  plotlabelsize PrintArrayCenter
+ [/KahoeTechGreek superscript  (  6)]  plotlabelsize PrintArrayCenter	
+
+2 0.4 ccnolog moveto
+col2
+ [/KahoeTechGreek normal  (c = 10)]  plotlabelsize PrintArrayCenter
+ [/KahoeTechGreek superscript  (  3)] plotlabelsize PrintArrayCenter	
+
+2 0.3 ccnolog moveto
+col1
+ [/KahoeTechGreek normal  (c = 0)]  plotlabelsize PrintArrayCenter
+
+ 
+endplot

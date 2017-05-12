@@ -1,0 +1,115 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (3.2) def
+/xminstr (-3.2) def
+/ymaxstr (0) def
+/yminstr (-6.5) def
+
+%load utilities
+twocolumndimensions
+(plotlib/casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+
+/TEcol{0 0.67 0 setrgbcolor} def 
+/TMcol{0 0 1 setrgbcolor} def
+
+%/hitcol{.6 0. 0.7 setrgbcolor} def
+/outcol{0 0 0 setrgbcolor} def
+/hitcol{0.0 0.67 0 setrgbcolor} def
+
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+%SetLogAxisX SetLogAxisY
+
+/symbolsz 3 def % in points
+outcol
+mark
+(data/TM_2wall_anlt.clean.dat) run % load loop 1
+20 PlotStackDataLogLog
+
+TMcol
+mark
+(data/TM_2wall_eff.clean.dat) run % load loop 1
+%10 PlotStackDataLogLogErr  %Casimirutilities version
+20 PlotStackDataPointsYerrLogLog
+
+%XAxisLabelsLog
+%YAxisLabelsLog
+[ (-6) (-5) (-4) (-3) (-2) (-1) (0) ] ExtraYTicksLog
+[ (-3) (-2) (-1) (0) (1) (2) (3) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
+
+% %start log-linear inset
+
+ /insetoffx {0.6 in} def
+ /insetoffy {-0.2 in} def
+ /insetscale {0.3} def
+
+% %Unset log scale on y  axis
+SetLogAxisX NoSetLogAxisY
+
+% %Limits
+
+/xmaxstr (3.5) def
+/xminstr (-3.5) def
+/ymaxstr (1.1) def
+/yminstr (0) def
+
+startinset
+
+%seems to reset 
+/ytitlevertnudge 0.0 def
+
+gsave
+%Energy curve 
+1 setlinewidth
+outcol
+mark
+(data/TM_2wall_eff_anlt.clean.dat) run % load loop 1
+PlotStackDataAuto
+
+ TMcol
+ mark
+ (data/TM_2wall_eff_expT.clean.dat) run % load loop 1
+  10 PlotStackDataPointsYerr
+
+
+
+grestore
+
+	% % tweak settings for 2-column figure, if necessary
+  % /xlabeloffset  -0.33 in def
+  % /xtitleoffset  -0.65 in def
+  % /ylabeloffset  -0.07 in def
+  % /ytitleoffset  -0.70 in def
+
+
+%XAxisLabelsLog
+%YAxisLabels
+[ (0) (0.5) (1.0) ] ExtraYTicks
+%[ (0.05) (0.1) ] ExtraYTicks
+[ (-2) (0) (2) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
+
+endinset
+
+
+
+endplot

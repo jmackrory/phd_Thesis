@@ -1,0 +1,171 @@
+
+
+!-----------------------------------------------------------------------
+!
+! stde.f90
+!
+! Utility to compute standard errors of numeric text files,
+! where all input files are assumed to have the same number of rows
+! and columns. Columns should be delimited by white space and/or a
+! tab. Output is to standard output, and contains for each entry
+! the standard deviation taken over all files.
+! Also averages all lines together
+!
+! Note: standard error is the standard deviation divided by sqrt(n).
+
+! Editted by J. Mackrory: averages of first values, and standard deviation in
+! last quantity.  
+! Written by D. A. Steck, initially Mon Apr 28 17:43:36 MDT 2003
+!
+! $Id: casimir_avg.f90,v 1.1 2011/09/19 21:58:07 jmack Exp jmack $
+!
+!-----------------------------------------------------------------------
+
+program casimir_avg
+
+  implicit none
+
+  integer, parameter :: wp = selected_real_kind(p=14)
+  character(127), parameter :: RCS_ID = &
+    "@(#)$Id: casimir_avg.f90,v 1.1 2011/09/19 21:58:07 jmack Exp jmack $"
+
+  integer, dimension(:), allocatable :: fp
+  real(wp), dimension(:), allocatable :: x, xsum, x2sum, std_err
+  
+  real(wp) :: d
+  character(256) :: fname
+  character(1) :: onechar
+  integer :: nfiles, j, k, stat, ncols, ntotal, wrecl, drecl
+  logical :: last_char_was_space
+
+  interface
+    integer function iargc()
+    end function iargc
+
+    subroutine getarg(argnum, filename)
+      integer, intent(in) :: argnum
+      character(*), intent(out) :: filename
+    end subroutine getarg
+  end interface
+
+  ! if no arguments, give help message and quit
+  nfiles = iargc()
+  if ( nfiles .eq. 0 ) then
+    write(0,*) 'usage: casimir_avg <file1> <file2> ...'
+    write(0,*)
+    write(0,*) '       Utility to compute averages of quantities and '
+    write(0,*) '       std deviations of final quantitiy for numeric text '
+    write(0,*) '       files, where all input files are assumed to have '
+    write(0,*) '       the same number of columns.  Columns should '
+    write(0,*) '       be delimited by white space and/or a tab.'
+    write(0,*) ''
+    write(0,*) '       Specialised to casimir code: Editted to average over '
+    write(0,*) '       rows as well, to allow multiple trajectories in file'
+    write(0,*)
+    write(0,*) '       Std deviations are written to standard output'
+    write(0,*)
+    write(0,*)
+    stop
+  end if
+
+  ! examine first input file for number of columns
+  allocate( fp(nfiles) )
+  fp(1) = getu()
+  call getarg(1, fname)
+  open(unit=fp(1), file=fname, status='old', iostat=stat, &
+       action='read', form='formatted')
+  if ( stat .ne. 0 ) then
+    write(0,*) 'Error (STDE): problem opening file #1, name = ', fname
+    stop
+  end if
+
+  stat = 0
+  ncols = 0
+  ntotal = 0
+  last_char_was_space = .true.
+  do while ( stat .eq. 0 )
+    read(fp(1), '(A)', iostat=stat, advance='no') onechar
+    if ( stat .eq. 0 ) then
+      if ( onechar .eq. char(9) .or. onechar .eq. ' ' ) then
+        last_char_was_space = .true.
+      else
+        if ( last_char_was_space ) then
+          last_char_was_space = .false.
+          ncols = ncols + 1
+        end if
+      end if
+    end if
+  end do
+
+  if ( ncols .eq. 0 ) then
+    write(0,*) 'Error (STDE): no data found in file ', fname
+    stop
+  end if
+
+  write(0,*) 'ncols:',ncols
+
+  ! open and read input files, one at a time, and keep a running average
+  allocate( x(ncols), xsum( ncols))
+  allocate( std_err(ncols), x2sum( ncols) )
+
+  x = 0._wp
+  xsum = 0._wp
+  std_err = 0._wp
+  x2sum = 0._wp
+  !loop over files
+  do j = 1, nfiles
+    fp(j) = getu()
+    call getarg(j, fname)
+    open(unit=fp(j), file=fname, status='old', iostat=stat, &
+         action='read', form='formatted')
+    if ( stat .ne. 0 ) then
+      write(0,*) 'Error (STDE): problem opening file #', j, ', name = ', fname
+      stop
+    end if
+    !read files
+    do while (stat .eq. 0)
+      read(fp(j), *, iostat=stat) x(1:ncols)
+      if (stat .eq. 0) then 
+         xsum = xsum + x
+         x2sum = x2sum + x*x
+         ntotal = ntotal+1
+      endif
+   enddo
+    close(fp(j))
+  end do
+  
+  xsum = xsum / (1._wp*ntotal)
+  x2sum = x2sum / (1._wp*ntotal)
+  std_err = sqrt( abs(x2sum - xsum*xsum)/(ntotal-1) )
+  ! dump output
+  stat = 0
+  do j = 1, ncols
+     write(*,'(E16.8E3)',advance='no') xsum( j)
+     write(*,'(A)',advance='no') char(9)
+  end do !j
+  write(*,'(E16.8E3)',advance='yes') std_err( ncols)
+
+
+
+contains
+
+
+integer function getu()
+   implicit none
+       integer, parameter :: umin = 10
+   integer, parameter :: umax = 9999
+   integer u
+   logical opened
+   getu = -1
+   do u = umin, umax
+      inquire(unit=u,opened=opened)
+      if( .not. opened ) then
+         getu = u
+         return
+      end if
+   end do
+   write(0,*) 'Error (GETU): no available unit number'
+   stop
+end function getu
+
+end program casimir_avg

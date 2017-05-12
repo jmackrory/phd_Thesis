@@ -1,0 +1,155 @@
+%!PS-Adobe-2.0
+(plotlib/plotfonts.ps) run
+%%Title: Worldline Gradient Diagram -- Two arbitrary bodies with normals
+%%Creator: Jonathan Mackrory
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 11/30/16
+%%Pages: 1
+%%
+%%BeginProcSet: Parameters
+%   include parameters from default file, override as needed
+(plotlib/plotparameters.ps) run
+%%EndProcSet
+
+/xmaxstr (5) def
+/xminstr (-5) def
+/ymaxstr (3) def
+/yminstr (-3) def
+
+twocolumndimensions
+
+%%BeginProcSet: Utilities
+(plotlib/plotutilities.ps) run
+(plotlib/plotarrows.ps) run
+(plotlib/plotmisc.ps) run
+%%EndProcSet
+%%EndProlog
+
+%(plotpotato.ps) run
+		
+/xatom 2.0 def
+/yatom 0 def
+/d1 xmin 1.5 add def
+/d2 xmax 1.5 sub def
+
+/fillcol {0.8 setgray} def
+startdiagram
+SetClip
+%origin
+
+%fill rectangle
+gsave
+newpath
+d2 ymin cc moveto
+d2 ymax cc lineto
+xmax ymax  cc lineto
+xmax ymin cc lineto
+closepath
+fillcol
+fill
+grestore
+%surface line
+gsave
+newpath
+d2 ymin cc moveto
+d2 ymax cc lineto
+0 setgray
+stroke
+grestore
+
+%fill rectangle
+gsave
+newpath
+d1 ymin cc moveto
+d1 ymax cc lineto
+xmin ymax  cc lineto
+xmin ymin cc lineto
+closepath
+0.8 setgray
+fillcol
+fill
+grestore
+%surface line
+gsave
+newpath
+d1 ymin cc moveto
+d1 ymax cc lineto
+0 setgray
+stroke
+grestore
+
+0 0 0 setrgbcolor
+gsave
+xatom yatom cc  1 atom
+grestore
+
+%make sphere between atom and d2
+[3 3] 0 setdash
+gsave
+ newpath
+ xatom yatom cc
+ xatom d2 sub 0.5 mul abs 0 cc pop %convert to cc radius, with fictitious y coord.  pop that off
+		 0 360 arc stroke
+grestore
+
+d2 .5 sub -1.1 cc moveto
+[ 
+  /KahoeTechSymbols normal (T)
+  /ComputerModern-Regular subscript (m	)
+] diagramlabelsize PrintArrayRight
+
+
+
+%sphere from atom touching d2
+[3 3] 0 setdash
+gsave
+ newpath
+ xatom yatom cc
+ xatom d2 sub abs 0 cc pop  
+ 0 360 arc stroke
+grestore
+
+d2 .5 sub 1.6 cc moveto
+[ 
+  /KahoeTechSymbols normal (T)
+  /KahoeTechGreek subscript (1	)
+] diagramlabelsize PrintArrayRight
+
+
+
+%sphere from atom to d1
+[3 3] 0 setdash
+gsave
+ newpath
+ xatom yatom cc
+ xatom d1 sub abs	0 cc pop
+ 90 270 arc stroke
+grestore
+
+d1 1.0 add 1.5 cc moveto
+[ 
+  /KahoeTechSymbols normal (T)
+  /KahoeTechGreek subscript (2	)
+] diagramlabelsize PrintArrayRight
+
+
+
+-3.9 0 cc moveto
+[ 
+  /KahoeTechGreek normal (c)
+  /KahoeTechGreek subscript (1	)
+] diagramlabelsize PrintArrayRight
+
+
+4.5 0 cc moveto
+[ 
+  /KahoeTechGreek normal (c)
+  /KahoeTechGreek subscript (2	)
+] diagramlabelsize PrintArrayRight
+
+[1 0] 0 setdash
+
+%DrawBorder
+enddiagram
+

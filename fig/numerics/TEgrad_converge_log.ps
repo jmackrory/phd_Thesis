@@ -1,0 +1,80 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+(colors.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (0) def
+/xminstr (-3) def
+/ymaxstr (1) def
+/yminstr (-3) def
+
+%load utilities
+twocolumndimensions
+(plotlib/plotutilities.ps) run
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+SetLogAxisX SetLogAxisY
+
+/symbolsz 3 def % in points
+
+% col1
+% mark
+% (data/TE_HG_0_c4.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+% col1
+% mark
+% (data/TE_FD_1_c4.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+% col2
+% mark
+% (data/TE_HG_1_c4.dat) run % load loop 1
+% PlotStackDataPointsYerrAuto
+
+
+col1
+0 selectsymbol
+mark
+(data/TE_FD_2_c4.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+col2
+1 selectsymbol
+mark
+(data/TE_HG_2_c4.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+
+/ytitleoffset  -.35 in def	
+
+[ (-3) (-2) (-1) (0) (1) ] ExtraYTicksLog
+[  (-3)  (-2) (-1) (0) ] ExtraXTicksLog
+[ /KahoeTechLatin normal (m/N)]  XAxisTitle
+
+[
+  /KahoeTechGreek normal (\(ho)
+  /CMCSC10 subscript (TE)
+  /KahoeTechGreek normal ( - )
+  /KahoeTechGreek normal (ho)
+  /move -2 -.5 
+  /KahoeTechGreek normal (\227)
+  /move 2 .5
+  /CMCSC10 subscript (TE)
+  /KahoeTechGreek normal (\)o/oho)
+  /CMCSC10 subscript (TE)
+] YAxisTitle
+
+
+endplot

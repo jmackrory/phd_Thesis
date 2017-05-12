@@ -1,0 +1,471 @@
+%%% library of arrow utilities for postscript plots
+
+% dimensions for standard arrowhead, 10 points
+% intended to resemble the arrow of the same size from illustrator
+%   all dimensions in points
+/libarrowext 70 def       % extent from base of arrow to tip (extent from line)
+/libarrowwid 80 def       % width at base of arrow
+/libarrowbck 15 def       % extent of arrow tips from base
+/arcoffset 10 def          % control param for arrowhead (positive, in points)
+/arcblend .7 def         % control param for arrowhead (between 0 and 1)
+/pi 3.14159265358979 def
+/arrowborderweight 0.5 def
+
+% standard dimensions for wiggly decay arrow in an energy diagram
+/decayarrowweight  0.5 def 
+/decayarrowfac     1 def 
+/decayarrowamp     1.2 def 
+/decayarrowperiod  5 def 
+
+/rotxy { % x y angle rotxy, rotate coordinates by angle
+  /rotangle exch def /roty exch def /rotx exch def
+  x angle cos mul y angle sin sub
+  x angle sin mul y angle cos add
+} bind def
+
+/arrcurve { % utility function for arrowhead
+} bind def
+
+/stdarrowh10 { % make standard 10 point arrowhead, pointing up
+              % usage: x y stdarrow 10   (x,y are coords of base)
+  /mybasey exch def /mybasex exch def
+  % right tip
+  /mytiprx mybasex libarrowwid 2 div add def
+  /mytipry mybasey libarrowbck sub def
+  % left tip
+  /mytiplx mybasex libarrowwid 2 div sub def
+  /mytiply mytipry def
+  % front tip
+  /mytipx mybasex def
+  /mytipy mybasey libarrowext add def
+  % trace arrowhead and fill
+  newpath mybasex mybasey moveto   % base
+  mytiprx mytipry lineto
+  % arc control points for right-hand side
+  /myangle mytipy mytipry sub mytipx mytiprx sub atan 90 add def
+  /mycurveptx mytipx mytiprx add 2 div arcoffset myangle cos mul add def
+  /mycurvepty mytipy mytipry add 2 div arcoffset myangle sin mul add def
+  /mycurvept1x mycurveptx arcblend mul mytiprx 1 arcblend sub mul add def
+  /mycurvept1y mycurvepty arcblend mul mytipry 1 arcblend sub mul add def
+  /mycurvept2x mycurveptx arcblend mul mytipx 1 arcblend sub mul add def
+  /mycurvept2y mycurvepty arcblend mul mytipy 1 arcblend sub mul add def
+  mycurvept1x mycurvept1y mycurvept2x mycurvept2y mytipx mytipy curveto
+  % arc control points for left-hand side
+  /myangle mytipy mytiply sub mytipx mytiplx sub atan 90 sub def
+  /mycurveptx mytipx mytiplx add 2 div arcoffset myangle cos mul add def
+  /mycurvepty mytipy mytiply add 2 div arcoffset myangle sin mul add def
+  /mycurvept1x mycurveptx arcblend mul mytipx 1 arcblend sub mul add def
+  /mycurvept1y mycurvepty arcblend mul mytipy 1 arcblend sub mul add def
+  /mycurvept2x mycurveptx arcblend mul mytiplx 1 arcblend sub mul add def
+  /mycurvept2y mycurvepty arcblend mul mytiply 1 arcblend sub mul add def
+  mycurvept1x mycurvept1y mycurvept2x mycurvept2y mytiplx mytiply curveto
+  mybasex mybasey lineto
+  fill
+} bind def
+
+/arrowend { % draw line with arrowhead at end
+            % usage: xbegin ybegin xend yend lineweight arrowsizefac arrowend
+            % size of arrowhead is relative to lineweight, multiples by
+            % size factor arrowsizefac (1 means no change)
+  /myarrowsizefac exch def
+  /mylineweight exch def
+  /myyend       exch def
+  /myxend       exch def
+  /myybegin     exch def
+  /myxbegin     exch def
+  gsave
+  mylineweight setlinewidth
+  /myangle myyend myybegin sub myxend myxbegin sub atan def
+  myxbegin myybegin moveto
+  /myarrowext libarrowext mylineweight mul 10 div myarrowsizefac mul def
+  myxend myarrowext myangle 180 add cos mul add
+  myyend myarrowext myangle 180 add sin mul add
+  2 copy lineto stroke
+  translate
+  myangle 90 sub rotate mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+} bind def
+
+/arrowboth { % draw line with arrowhead at both ends
+            % usage: xbegin ybegin xend yend lineweight arrowsizefac arrowboth
+            % size of arrowhead is relative to lineweight, multiples by
+            % size factor arrowsizefac (1 means no change)
+  /myarrowsizefac exch def
+  /mylineweight exch def
+  /myyend       exch def
+  /myxend       exch def
+  /myybegin     exch def
+  /myxbegin     exch def
+  gsave
+  mylineweight setlinewidth
+  /myarrowext libarrowext mylineweight mul 10 div myarrowsizefac mul def
+  /myangle1 myyend myybegin sub myxend myxbegin sub atan def 
+  /myx1 myxbegin myarrowext myangle1 cos mul add def
+  /myy1 myybegin myarrowext myangle1 sin mul add def
+  /myx2 myxend myarrowext myangle1 180 add cos mul add def
+  /myy2 myyend myarrowext myangle1 180 add sin mul add def
+  myx1 myy1 moveto
+  myx2 myy2 lineto stroke
+  % end arrowhead
+  gsave
+  myx2 myy2
+  translate
+  myangle1 90 sub rotate
+  mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+  % begin arrowhead
+  gsave
+  myx1 myy1
+  translate
+  myangle1 90 add rotate
+  mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+  grestore
+} bind def
+
+/transitionarrow { % arrowboth with standard dimensions
+                   % usage: xbegin ybegin xend yend transitionarrow
+  decayarrowweight decayarrowfac arrowboth
+} bind def
+
+/transitionarrowend { % arrowend with standard dimensions
+                      % usage: xbegin ybegin xend yend transitionarrow
+  decayarrowweight decayarrowfac arrowend
+} bind def
+
+/energymeasurearrowout {% single vertical arrow with standard dimensions
+                        % usage: x ybegin yend energymeasurearrowout
+  3 -1 roll 
+  dup 
+  4 1 roll exch
+  measurearrowweight measurearrowfac arrowend
+} bind def
+
+/energymeasurearrowouth {% single horizontal arrow with standard dimensions
+                         % usage: xbegin xend y energymeasurearrowouth
+  dup
+  3 1 roll
+  measurearrowweight measurearrowfac arrowend
+} bind def
+
+/energymeasurearrow {% double vertical arrow with standard dimensions
+                     % usage: x ybegin yend energymeasurearrow
+  3 -1 roll
+  dup
+  4 1 roll exch
+  measurearrowweight measurearrowfac arrowboth
+} bind def
+
+/energymeasurearrowh {% double horizontal arrow with standard dimensions
+                      % usage: xbegin xend y energymeasurearrowh
+  dup
+  3 1 roll
+  measurearrowweight measurearrowfac arrowboth
+} bind def
+
+
+
+
+/halfsincoords1 {
+  /myx1 myT 12. div def
+  /myy1 myA pi mul 6 div def
+  /myx2 myT 6. div def
+  /myy2 myA def
+  /myx3 myT 4. div def
+  /myy3 myA def
+} bind def
+/halfsincoords2 {
+  /myx1 myT 12. div def
+  /myy1 0 def
+  /myx2 myT 6. div def
+  /myy2 myA pi mul 6 div myA exch sub -1 mul def
+  /myx3 myT 4. div def
+  /myy3 myA -1 mul def
+} bind def
+
+/halfsinup { % draw a half of a sine wave, going from left to right from 
+             % current point
+             % uses bezier splines, adds to path but doesn't stroke
+             % period amplitude halfsineup
+  /myA exch def
+  /myT exch def
+  halfsincoords1
+  myx1 myy1 myx2 myy2 myx3 myy3 rcurveto
+  halfsincoords2
+  myx1 myy1 myx2 myy2 myx3 myy3 rcurveto
+} bind def
+
+/halfsindown { % draw a half of a sine wave, going from left to right from 
+             % current point
+             % uses bezier splines, adds to path but doesn't stroke
+             % usage: period amplitude halfsineup
+  /myA exch def
+  /myT exch def
+  halfsincoords1
+  myx1 myy1 -1 mul myx2 myy2 -1 mul myx3 myy3 -1 mul rcurveto
+  halfsincoords2
+  myx1 myy1 -1 mul myx2 myy2 -1 mul myx3 myy3 -1 mul rcurveto
+} bind def
+
+/endsincoords {
+  /myx1 myT 10. div def
+  /myy1 0 def
+  /myx2 myT 4. div def
+  /myy2 myA -1 mul def
+  /myx3 myT 2. div def
+  /myy3 myA -1 mul def
+} bind def
+
+/halfsinupendright { 
+             % draw a half of a sine wave, going from left to right from 
+             % current point, but distorts to join straight line
+             % uses bezier splines, adds to path but doesn't stroke
+             % also, actually takes up 3/4 of a period, instead of half
+             % usage: period amplitude halfsineup
+  /myA exch def
+  /myT exch def
+  halfsincoords1
+  myx1 myy1 myx2 myy2 myx3 myy3 rcurveto
+  endsincoords
+  myx1 myy1 myx2 myy2 myx3 myy3 rcurveto
+} bind def
+
+/halfsindownendright {
+             % same as halfsineupendright, but down instead of up
+  /myA exch def
+  /myT exch def
+  halfsincoords1
+  myx1 myy1 -1 mul myx2 myy2 -1 mul myx3 myy3 -1 mul rcurveto
+  endsincoords
+  myx1 myy1 -1 mul myx2 myy2 -1 mul myx3 myy3 -1 mul rcurveto
+} bind def
+
+/halfsindownendleft {
+             % same as halfsineupendright, but down/left instead of up/right
+             % but still going from left to right
+  /myA exch def
+  /myT exch def
+  endsincoords
+  myT .5 mul myx2 sub myy1 1 mul myT .5 mul myx1 sub myy2 1 mul myx3 myy3 1 mul rcurveto
+  halfsincoords2
+  myx1 myy1 -1 mul myx2 myy2 -1 mul myx3 myy3 -1 mul rcurveto
+} bind def
+
+/halfsinupendleft {
+             % same as halfsineupendright, but left instead of right
+             % but still going from left to right
+  endsincoords
+  myT .5 mul myx2 sub myy1 -1 mul myT .5 mul myx1 sub myy2 -1 mul myx3 myy3 -1 mul rcurveto
+  halfsincoords2
+  myx1 myy1 myx2 myy2 myx3 myy3 rcurveto
+} bind def
+
+
+/wiggleline { % draw wiggly line with ends, padding as necessary to
+              % get a full number of half wavelengths
+              % usage: 
+              % xbegin ybegin xend yend lineweight period amplitude wiggleline
+  /mywamplitude     exch def
+  /mywperiod        exch def
+  /mylineweight     exch def
+  /myylineend       exch def
+  /myxlineend       exch def
+  /myylinebegin     exch def
+  /myxlinebegin     exch def
+  /mydeltax myxlineend myxlinebegin sub def
+  /mydeltay myylineend myylinebegin sub def
+  /mywangle mydeltay mydeltax atan def
+  /mywlength mydeltax dup mul mydeltay dup mul add sqrt def
+  /mywlengthwoend mywlength mywperiod 6 mul 4 div sub def % subtract off ends
+    % # of half periods
+  /mynumhalfs mywlengthwoend mywperiod 2 div div floor .1 add cvi def 
+    % straight-line padding on either end of line
+  /mypadlength mywlengthwoend mynumhalfs mywperiod mul 2 div sub 2 div def
+  gsave
+  mylineweight setlinewidth
+  myxlinebegin myylinebegin moveto
+  mywangle rotate
+%  mywlength 0 rlineto stroke
+  mypadlength 0 rlineto
+  mywperiod mywamplitude halfsindownendleft
+  mynumhalfs 2 mod 0 eq { % if even number of halfs
+    1 2 mynumhalfs {
+      mywperiod mywamplitude halfsinup
+      mywperiod mywamplitude halfsindown
+    } for
+    mywperiod mywamplitude halfsinupendright
+  }{ % else if odd number of halfs
+    1 2 mynumhalfs 1 sub {
+      mywperiod mywamplitude halfsinup
+      mywperiod mywamplitude halfsindown
+    } for
+    mywperiod mywamplitude halfsinup
+    mywperiod mywamplitude halfsindownendright
+  } ifelse
+  mypadlength 0 rlineto
+  stroke
+  grestore
+} bind def
+
+/wigglearrowend {
+% like arrowend, but with wiggly line
+% usage: 
+%xbegin ybegin xend yend lineweight arrowsizefac period amplitude wigglearrowend
+  /myarramplitude exch def
+  /myarrperiod exch def
+  /myarrowsizefac exch def
+  /mylineweight exch def
+  /myyend       exch def
+  /myxend       exch def
+  /myybegin     exch def
+  /myxbegin     exch def
+  gsave
+  mylineweight setlinewidth
+  /myangle myyend myybegin sub myxend myxbegin sub atan def
+  myxbegin myybegin 
+  /myarrowext libarrowext mylineweight mul 10 div myarrowsizefac mul def
+  /mynewxend myxend myarrowext myangle 180 add cos mul add def
+  /mynewyend myyend myarrowext myangle 180 add sin mul add def
+  mynewxend mynewyend mylineweight myarrperiod myarramplitude wiggleline
+  mynewxend mynewyend translate
+  myangle 90 sub rotate mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+} bind def
+
+/decayarrow { % wigglearrowend, with standard dimensions
+              % usage: 
+              % xbegin ybegin xend yend decayarrow
+  decayarrowweight decayarrowfac decayarrowperiod decayarrowamp wigglearrowend
+} bind def
+
+/wigglearrowboth {
+% like arrowboth, but with wiggly line
+% usage:
+%xbegin ybegin xend yend lineweight arrowsizefac period amplitude wigglearrowboth
+  /myarramplitude exch def
+  /myarrperiod exch def
+  /myarrowsizefac exch def
+  /mylineweight exch def
+  /myyend       exch def
+  /myxend       exch def
+  /myybegin     exch def
+  /myxbegin     exch def
+  gsave
+  mylineweight setlinewidth
+  /myarrowext libarrowext mylineweight mul 10 div myarrowsizefac mul def
+  /myangle1 myyend myybegin sub myxend myxbegin sub atan def
+  /myx1 myxbegin myarrowext myangle1 cos mul add def
+  /myy1 myybegin myarrowext myangle1 sin mul add def
+  /myx2 myxend myarrowext myangle1 180 add cos mul add def
+  /myy2 myyend myarrowext myangle1 180 add sin mul add def
+  % end arrowhead
+  gsave
+  myx2 myy2
+  translate
+  myangle1 90 sub rotate
+  mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+  % begin arrowhead
+  gsave
+  myx1 myy1
+  translate
+  myangle1 90 add rotate
+  mylineweight 10 div myarrowsizefac mul dup scale
+  0 0 stdarrowh10
+  grestore
+  myx1 myy1 myx2 myy2 mylineweight myarrperiod myarramplitude wiggleline
+  grestore
+} bind def
+
+/arrowborders { % draw bottom and left borders with arrows
+  /extraborderbit 18 def
+  gsave
+  0 setgray
+  newpath
+  width in -2 div
+  height in -2 div
+  width in 2 div extraborderbit add
+  height in -2 div
+  arrowborderweight 1 arrowend
+  stroke
+  newpath
+  width in -2 div
+  height in -2 div
+  width in -2 div
+  height in 2 div extraborderbit add
+  arrowborderweight 1 arrowend
+  stroke
+  grestore
+} bind def
+
+/arrowborderscenter { % draw bottom and center borders with arrows
+  /extraborderbit 18 def
+  /extracenterbit 12 def
+  gsave
+  0 setgray
+  newpath
+  width in -2 div
+  height in -2 div
+  width in 2 div extraborderbit add
+  height in -2 div
+  arrowborderweight 1 arrowend
+  stroke
+  newpath
+  0
+  height in -2 div extracenterbit sub
+  0
+  height in 2 div extraborderbit add
+  arrowborderweight 1 arrowend
+  stroke
+  grestore
+} bind def
+
+/arrowborderscentercenter { % draw center and center borders with arrows
+  /extraborderbit 18 def
+  /extracenterbit 12 def
+  gsave
+  0 setgray
+  newpath
+  width in -2 div
+  0
+  width in 2 div extraborderbit add
+  0
+  arrowborderweight 1 arrowend
+  stroke
+  newpath
+  0
+  height in -2 div 
+  0
+  height in 2 div extraborderbit add
+  arrowborderweight 1 arrowend
+  stroke
+  grestore
+} bind def
+
+/arrowbordersleftcenter { % draw left and center borders with arrows
+  /extraborderbit 18 def
+  /extracenterbit 12 def
+  gsave
+  0 setgray
+  newpath
+  width in -2 div extraborderbit sub
+  0
+  width in 2 div extraborderbit add
+  0
+  arrowborderweight 1 arrowend
+  stroke
+  newpath
+  width in -2 div
+  height in -2 div
+  width in -2 div
+  height in 2 div extraborderbit add
+  arrowborderweight 1 arrowend
+  stroke
+  grestore
+} bind def
+

@@ -1,0 +1,58 @@
+Ncopy:= 120
+seed := 15030213
+parallel_seed := 482211
+base_file_tag := TM_normhist
+data_directory := /home4/mackrory/CasimirF90/scalar_TM_monte/data
+casimir := /home4/mackrory/CasimirF90/scalar_TM_monte/casimir
+casimir_avg := /home4/mackrory/CasimirF90/scalar_TM_monte/matrix_avg
+queue := longgen
+walltime := 96
+sleep_time := 100
+
+##Flags for output 
+param_trace := false
+time_trace := false
+T_trace := false
+X_trace := false
+output_integral_flag:= false
+output_loop_flag := false
+debug := false
+debug_Tintegral:= false
+new_seed  := false
+barf_info := false
+blur_info :=false
+
+## Loop and surface parameters
+chi1 := 100
+chi2 := 100
+x1   := 0
+d    := 1
+Teval:= 1.0
+ds   := 0.05
+surf := 2
+log_grad_thresh := -8
+gen_flag :=2
+pot_flag :=1
+Tmethod:=expT
+
+##parameters for multiple instances 
+chi_base := 2
+Nchi := 20
+Nn := 2
+d_base:= 1
+Nd    := 1
+Nbin   := 1001
+
+Ns := 2
+Nnum := 1
+Npos   :=20
+Npix_x :=400
+Npix_t :=400
+Ntime:= 1
+
+Nloops := 1000000
+Nsub := 1
+Nperloop:= 100
+Ncrude := 100
+Nt := 1
+Nx := 1

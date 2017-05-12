@@ -1,0 +1,15 @@
+#!/bin/bash
+#bash script to make PDF files of figures
+
+for name in twoslab_ch3 kvectorTE kvectorTM TMpot TMsoln TMsoln2 probTM TM_regularized_potential; do
+#Dans version
+   # ps2eps -l -f $j
+   # ps2pdf -dAutoRotatePages=/None -DEPSCrop ${j%.ps}.eps
+   # rm -f ${j%.ps}.eps
+ ps2pdf -P $name.ps $name.1.pdf
+ pdfcrop  $name.1.pdf $name.pdf
+ rm $name.1.pdf
+done
+
+
+

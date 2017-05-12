@@ -1,0 +1,57 @@
+number_of_procs:=96
+
+Ncopy:= 96
+seed := 958076
+parallel_seed := 957103
+base_file_tag := /tmp/TM_G3.1
+data_directory := /home/jmack/casimir/data/scalar_TM_monte
+casimir := /home/jmack/casimir/scalar_TM_monte/casimir
+casimir_avg := /home/jmack/casimir/scalar_TM_monte/matrix_avg
+walltime := 96
+sleep_time := 100
+
+##Flags for output 
+param_trace := false
+time_trace := false
+T_trace := false
+X_trace := false
+output_integral_flag:=false
+output_loop_flag := false
+debug := false
+debug_Tintegral := false
+new_seed  := false
+barf_info := false
+
+## Loop and surface parameters
+chi1 := 20300
+chi2 := 20300
+x1 := 0.0
+d  := 2
+ds := 0.1
+surf := 2
+gen_flag :=2
+pot_flag :=0
+
+##parameters for multiple instances 
+chi_base := 2
+Nchi := 20
+Nn := 6
+d_base :=1
+Nd := 1
+Nl := 1
+
+Teval  := 2.5
+Ntrial := 1000
+Niter  := 6
+Nbin   := 201
+
+Ns := 1
+Nnum := 1
+Npos := 1
+Ntime:= 1
+
+Nloops := 100000
+Nsub := 10
+Nperloop:= 100
+Nt := 1000
+Nx := 100

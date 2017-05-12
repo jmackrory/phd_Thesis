@@ -1,0 +1,118 @@
+%%% library of ode utilities for postscript plots
+
+%% RK4 coefficients
+/c2 2 5 div def
+/c3 7 8 div  3 5 sqrt mul 16 div sub def
+/b1 263 24 5 sqrt mul add 1812 div def
+/b2 1 8 5 sqrt mul sub 125 mul 3828 div def
+/b3 1024 4869 5 sqrt mul 10038 sub div def
+/b4 1 4.5 3 5 sqrt div add div def
+/a21 0.4 def
+/a31 476 5 sqrt mul 963 sub 3 mul 1024 div def
+/a32 757 324 5 sqrt mul sub 5 mul 1024 div def
+/a41 2094 5 sqrt mul 3365 sub 6040 div def
+/a42 975 3046 5 sqrt mul add -2552 div def
+/a43 14595 6374 5 sqrt mul add 32 mul 240845 div def
+
+/rk41dplot { % plot solution to 1-D differential equation
+             % requires derivfunc operator to be defined (<t> <y> derivfunc)
+             %   to return the derivative of the differential equation
+             % call as: <tmin> <tmax> <nsteps> <y0> rk41dplot
+  /myy0 exch def
+  /mynsteps exch def
+  /mytmax exch def
+  /mytmin exch def
+  mark % for plot routine
+  mytmin myy0 % first point
+  /mmyt mytmin def
+  /mmyy myy0 def
+  /mydt mytmax mytmin sub mynsteps div def
+  1 1 mynsteps { % main integration loop
+    pop
+    /k1 mydt mmyt mmyy derivfunc mul def
+    /k2 mydt mmyt c2 mydt mul add  mmyy a21 k1 mul add derivfunc mul def
+    /k3 mydt mmyt c3 mydt mul add  mmyy a31 k1 mul add a32 k2 mul add derivfunc
+        mul def
+    /k4 mydt mmyt mydt add  mmyy a41 k1 mul add a42 k2 mul add a43 k3 mul add
+        derivfunc
+        mul def
+    /mmyt mmyt mydt add def
+    /mmyy mmyy b1 k1 mul add b2 k2 mul add b3 k3 mul add b4 k4 mul add def
+    mmyt mmyy
+  } for
+  PlotStackDataAuto
+} bind def
+
+/scalarrmul { % scalar-array multiplication
+              % <x> [arr] scalarrmul
+              % returns array with elements multiplied by x
+  /myarrr exch def
+  /myxx exch def
+  /mynn myarrr length def
+  [
+  0 1 mynn 1 sub { % 0 to dim-1
+    myarrr exch get myxx mul
+  } for
+  ]
+} bind def
+
+/arradd { % array-array addition
+          % [arr1] [arr2] scalarmul
+          % returns array with elements added
+          % length of result matches the shorter array, if they differ
+  /myarry exch def
+  /myarrx exch def
+  /len1 myarrx length def /len2 myarry length def
+  len1 len2 lt {/mynn len1 def}{/mynn len2 def} ifelse % take smaller length
+  [
+  0 1 mynn 1 sub { % 0 to dim-1
+    /myindxx exch def
+    myarrx myindxx get
+    myarry myindxx get add
+  } for
+  ]
+} bind def
+
+/rk4ndplot { % plot solution to N-D differential equation
+             % requires derivfunc operator to be defined (<t> [yarr] derivfunc)
+             %   to return the derivative of the differential equation
+             % call as: <tmin> <tmax> <nsteps> [y0arr] rk41dplot
+             %
+             % note that [yarr] and [y0arr] are solution arrays, must
+             % be of same length; no consistency checking is done.
+             % in derivative function, use get and put to access array
+             % 
+             % in plot, only the first dimension of the solution is plotted
+  /myy0arr exch def
+  /mydim myy0arr length def
+  /mynsteps exch def
+  /mytmax exch def
+  /mytmin exch def
+  mark % for plot routine
+  mytmin myy0arr 0 get % first point
+  /mmyt mytmin def
+  /mmyyarr myy0arr def
+  /mydt mytmax mytmin sub mynsteps div def
+  1 1 mynsteps { % main integration loop
+    pop
+    /k1arr mydt mmyt mmyyarr derivfunc scalarrmul def
+    /k2arr mydt mmyt c2 mydt mul add 
+           mmyyarr a21 k1arr scalarrmul arradd derivfunc scalarrmul def
+    /k3arr mydt mmyt c3 mydt mul add  
+           mmyyarr a31 k1arr scalarrmul arradd 
+                   a32 k2arr scalarrmul arradd derivfunc scalarrmul def
+    /k4arr mydt mmyt mydt add  
+           mmyyarr a41 k1arr scalarrmul arradd 
+                   a42 k2arr scalarrmul arradd 
+                   a43 k3arr scalarrmul arradd derivfunc scalarrmul def
+    /mmyt mmyt mydt add def
+    /mmyyarr mmyyarr b1 k1arr scalarrmul arradd 
+                     b2 k2arr scalarrmul arradd 
+                     b3 k3arr scalarrmul arradd 
+                     b4 k4arr scalarrmul arradd def
+    mmyt mmyyarr 0 get % first component only for plot
+  } for
+  PlotStackDataAuto
+} bind def
+
+

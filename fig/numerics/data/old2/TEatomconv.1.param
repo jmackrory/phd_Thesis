@@ -1,0 +1,36 @@
+number_of_procs:=100
+
+Ncopy:= 10
+seed := 3958075
+parallel_seed := 3957102
+base_file_tag := /tmp/TEatomconv.1
+walltime := 72
+data_directory := /home/jmack/casimir/data/scalar_TE_atom
+casimir := /home/jmack/casimir/scalar_TE_atom/casimir
+casimir_avg := /home/jmack/casimir/scalar_TE_atom/casimir_avg
+sleep_time := 1000
+
+##Serial code flags
+
+##Flags for output 
+param_trace := true
+time_trace := true
+output_integral_flag := false
+
+## Loop and surface parameters
+chi := 1
+x1 := -1
+d := 0
+tol := 0.000001
+
+
+##parameters for multiple instances 
+chi_base := 1
+Nchi := 1
+d_base := 1
+Nd := 1
+Nl := 4
+Nn := 4
+
+Nloops := 100
+Nperloop := 50

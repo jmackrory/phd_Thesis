@@ -1,0 +1,1742 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     70327,       1734]
+NotebookOptionsPosition[     66886,       1630]
+NotebookOutlinePosition[     67219,       1645]
+CellTagsIndexPosition[     67176,       1642]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "TE", " ", "and", " ", "TM", " ", "Reflection", " ", "coefficients"}], 
+    ",", " ", "denominators"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"R1", " ", "=", " ", 
+     FractionBox[
+      RowBox[{"p", " ", "-", " ", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"p", "^", "2"}], " ", "+", " ", "\[Chi]"}]]}], 
+      RowBox[{"p", " ", "+", " ", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"p", "^", "2"}], "+", "\[Chi]"}]]}]]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"R2", "[", 
+      RowBox[{"p_", ",", "\[Chi]_"}], "]"}], ":=", "  ", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "+", "\[Chi]"}], ")"}], "p"}], " ", "-", " ", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"p", "^", "2"}], " ", "+", " ", "\[Chi]"}]]}], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "+", "\[Chi]"}], ")"}], "p"}], " ", "+", " ", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"p", "^", "2"}], "+", "\[Chi]"}]]}]]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.593877726581154*^9, 3.593877726714776*^9}, {
+  3.593877763504074*^9, 3.59387782534778*^9}, {3.593878070952059*^9, 
+  3.593878075946416*^9}, {3.593898853448973*^9, 3.593898863403873*^9}, {
+  3.609261837947588*^9, 3.609261845478659*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"LifshitzInt", "[", "\[Chi]_", "]"}], ":=", 
+   RowBox[{"NIntegrate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        FractionBox[
+         SuperscriptBox["p", "2"], 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["\[ExponentialE]", 
+             RowBox[{"2", " ", "p", " ", "u"}]], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"p", "+", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], ")"}], "2"]}], 
+           
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"p", "-", 
+              SqrtBox[
+               RowBox[{
+                SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], ")"}], "2"]]}]],
+         "+", 
+        FractionBox[
+         SuperscriptBox["p", "2"], 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["\[ExponentialE]", 
+             RowBox[{"2", " ", "p", " ", "u"}]], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"p", " ", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", "\[Chi]"}], ")"}]}], "+", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], ")"}], "2"]}], 
+           
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"p", " ", 
+               RowBox[{"(", 
+                RowBox[{"1", "+", "\[Chi]"}], ")"}]}], "-", 
+              SqrtBox[
+               RowBox[{
+                SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], ")"}], 
+            "2"]]}]]}], ")"}], 
+      RowBox[{"u", "^", "3"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"p", ",", "1", ",", "\[Infinity]"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", "0", ",", "\[Infinity]"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LogIntTE", "[", "\[Chi]_", "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"p", " ", 
+       RowBox[{"u", "^", "2"}], 
+       RowBox[{"Log", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          SuperscriptBox[
+           RowBox[{"(", 
+            FractionBox[
+             RowBox[{"p", " ", "-", 
+              SqrtBox[
+               RowBox[{
+                SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], 
+             RowBox[{"p", " ", "+", 
+              SqrtBox[
+               RowBox[{
+                SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}]], ")"}], "2"], 
+          SuperscriptBox["\[ExponentialE]", 
+           RowBox[{
+            RowBox[{"-", "2"}], " ", "p", " ", "u"}]]}]}], "]"}]}], " ", ",", 
+      
+      RowBox[{"{", 
+       RowBox[{"p", ",", "1", ",", "\[Infinity]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"u", ",", "0", ",", "\[Infinity]"}], "}"}]}], "]"}]}], 
+   RowBox[{"180", "/", 
+    SuperscriptBox["\[Pi]", "4"]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LogIntTM", "[", "\[Chi]_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"-", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"p", " ", 
+        RowBox[{"u", "^", "2"}], " ", 
+        RowBox[{"Log", "[", " ", 
+         RowBox[{"1", " ", "-", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", 
+             FractionBox[
+              RowBox[{
+               RowBox[{"p", " ", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", "\[Chi]"}], ")"}]}], "-", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], 
+              RowBox[{
+               RowBox[{"p", " ", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", "\[Chi]"}], ")"}]}], "+", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}]], ")"}], "2"], "  ", 
+           SuperscriptBox["\[ExponentialE]", 
+            RowBox[{
+             RowBox[{"-", "2"}], " ", "p", " ", "u"}]]}]}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "1", ",", "\[Infinity]"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "0", ",", "\[Infinity]"}], "}"}]}], "]"}]}], 
+    RowBox[{"180", "/", 
+     SuperscriptBox["\[Pi]", "4"]}]}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LogInt", "[", "\[Chi]_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"LogIntTM", "[", "\[Chi]", "]"}], "+", 
+    RowBox[{"LogIntTE", "[", "\[Chi]", "]"}]}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.593896626598965*^9, 3.593896664693067*^9}, 
+   3.593896772358027*^9, 3.593973471275087*^9, {3.593977264813607*^9, 
+   3.593977267236232*^9}, {3.593982543971135*^9, 3.593982556719708*^9}, {
+   3.593982618368028*^9, 3.593982652535324*^9}, {3.593982987278414*^9, 
+   3.59398298923498*^9}, {3.593983033803054*^9, 3.593983036259606*^9}, {
+   3.593996077977011*^9, 3.593996081616321*^9}, {3.593997171498892*^9, 
+   3.593997224929931*^9}, {3.593997296435849*^9, 3.593997352149926*^9}, 
+   3.593997391694888*^9, {3.610567813700849*^9, 3.610567848671203*^9}, {
+   3.610568639048717*^9, 3.61056865353051*^9}, {3.612124574641533*^9, 
+   3.612124590676814*^9}, {3.612125100649308*^9, 3.612125106683443*^9}, {
+   3.61212528997453*^9, 3.612125296086406*^9}, {3.612125345512567*^9, 
+   3.612125357788942*^9}, {3.61212541232588*^9, 3.612125416035871*^9}, 
+   3.671140550116776*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LifshitzInt", "[", "\[Chi]", "]"}], ",", 
+       RowBox[{"SchwingerInt", "[", "\[Chi]", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Chi]", ",", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "3"}]], ",", 
+       SuperscriptBox["10", "3"]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.593996455451088*^9, 3.59399648806393*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1: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
+v1xZ4/sy58j8OrDQQCBLV+MFCf8Cfd6U4A==
+     "]]}, 
+   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+1: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
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0.37},
+  Method->{},
+  PlotRange->NCache[{{
+      Rational[1, 1000], 1000}, {0.37150978503714266`, 
+     0.6478725836566032}}, {{0.001, 1000}, {0.37150978503714266`, 
+     0.6478725836566032}}],
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{3.593996479034447*^9, 3.593996597340513*^9, 
+  3.593997082590274*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"N", "[", 
+   RowBox[{"2", "^", "20"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.671129102592012*^9, 3.6711291045273933`*^9}}],
+
+Cell[BoxData["1.048576`*^6"], "Output",
+ CellChangeTimes->{3.671129104840557*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Eta]TE", "[", "\[Chi]_", "]"}], ":=", 
+  RowBox[{
+   FractionBox["1", "6"], "+", 
+   FractionBox["1", "\[Chi]"], "-", 
+   FractionBox[
+    SqrtBox[
+     RowBox[{"1", "+", "\[Chi]"}]], 
+    RowBox[{"2", "\[Chi]"}]], "-", 
+   FractionBox[
+    RowBox[{"ArcSinh", "[", 
+     SqrtBox["\[Chi]"], "]"}], 
+    RowBox[{"2", 
+     SuperscriptBox["\[Chi]", 
+      RowBox[{"3", "/", "2"}]]}]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Eta]TE1", "[", "\[Chi]_", "]"}], ":=", 
+  RowBox[{
+   FractionBox["1", "3"], "+", 
+   FractionBox["2", "\[Chi]"], "-", 
+   FractionBox[
+    SqrtBox[
+     RowBox[{"\[Chi]", 
+      RowBox[{"(", 
+       RowBox[{"\[Chi]", "+", "1"}], ")"}]}]], 
+    SuperscriptBox["\[Chi]", 
+     RowBox[{"3", "/", "2"}]]], "-", 
+   FractionBox[
+    RowBox[{"Log", "[", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", "\[Chi]"}], "+", 
+      RowBox[{"2", 
+       SqrtBox[
+        RowBox[{"\[Chi]", 
+         RowBox[{"(", 
+          RowBox[{"\[Chi]", "+", "1"}], ")"}]}]]}]}], "]"}], 
+    RowBox[{"4", 
+     SuperscriptBox["\[Chi]", 
+      RowBox[{"3", "/", "2"}]]}]], "-", 
+   FractionBox[
+    RowBox[{"ArcSinh", "[", 
+     SqrtBox["\[Chi]"], "]"}], 
+    RowBox[{"2", 
+     SuperscriptBox["\[Chi]", 
+      RowBox[{"3", "/", "2"}]]}]]}]}]}], "Input",
+ CellChangeTimes->{{3.671129246327248*^9, 3.6711293188133507`*^9}, {
+  3.671131654451696*^9, 3.6711317527192163`*^9}, {3.6711318116185417`*^9, 
+  3.671131811862302*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Eta]TE", "[", "x", "]"}], ",", 
+       RowBox[{
+        RowBox[{"\[Eta]TE1", "[", "x", "]"}], "/", "2"}]}], "}"}], "/.", 
+     RowBox[{"{", 
+      RowBox[{"x", "\[Rule]", ".31"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.671131755810783*^9, 3.671131777976799*^9}, {
+  3.671131823553522*^9, 3.671131830083269*^9}, {3.6711318844455643`*^9, 
+  3.671131898230641*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.007002043898289401`", ",", "0.007002043898289623`"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.671131772410371*^9, 3.671131778386269*^9}, {
+  3.671131814342915*^9, 3.671131830621365*^9}, {3.671131884967019*^9, 
+  3.6711318985858297`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"LogIntTE", "[", 
+       RowBox[{"10", "^", "n"}], "]"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "0", ",", "6"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.671390663664424*^9, 3.671390663954788*^9}, {
+  3.671479649688252*^9, 3.671479654030972*^9}, {3.671482256485409*^9, 
+  3.671482262921173*^9}, {3.6714823097038*^9, 3.671482359915258*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671482360592371*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671482360735531*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671482360936121*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(NIntegrate :: \
+slwcon\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671482360990966*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "0.003313854418629076``", "}"}], ",", 
+   RowBox[{"{", "0.05112879141955042`", "}"}], ",", 
+   RowBox[{"{", "0.1882499465516168`", "}"}], ",", 
+   RowBox[{"{", "0.3315149783012317`", "}"}], ",", 
+   RowBox[{"{", "0.42236821715539724`", "}"}], ",", 
+   RowBox[{"{", "0.46749143986180575`", "}"}], ",", 
+   RowBox[{"{", "0.48717558087443796`", "}"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.671482368021762*^9, 3.671482368076067*^9}}],
+
+Cell[BoxData["0.05112879141955042``"], "Input",
+ CellChangeTimes->{{3.671482265456224*^9, 3.671482265495883*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Ntot", " ", "=", " ", "160"}], ";", " ", 
+    RowBox[{"s2", "=", 
+     RowBox[{
+      RowBox[{"2", "^", "1"}], "/", "4"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataAtom", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"s2", "^", 
+          RowBox[{"(", 
+           RowBox[{"(", 
+            RowBox[{"n", " ", "-", 
+             RowBox[{"Ntot", "/", "2"}]}], ")"}], ")"}]}], ",", 
+         RowBox[{"\[Eta]TE", "[", 
+          RowBox[{"s2", "^", 
+           RowBox[{"(", 
+            RowBox[{"n", "-", 
+             RowBox[{"Ntot", "/", "2"}]}], ")"}]}], "]"}]}], "}"}], ",", " ", 
+       
+       RowBox[{"{", 
+        RowBox[{"n", ",", "Ntot"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+    "\"\</home/jonathan/papers/worldline1/fig/data/TE_atom_anlt.dat\>\"", ",", 
+     RowBox[{"N", "[", "dataAtom", "]"}], ",", "\"\<TSV\>\""}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6711293250076838`*^9, 3.671129345163101*^9}, {
+  3.6711309658463373`*^9, 3.6711309727158937`*^9}, {3.671132182589716*^9, 
+  3.6711321833350677`*^9}, {3.671140592727459*^9, 3.67114059694424*^9}}],
+
+Cell[BoxData["\<\"/home/jonathan/papers/worldline1/fig/data/TE_atom_anlt.dat\"\
+\>"], "Output",
+ CellChangeTimes->{3.6711293478583927`*^9, 3.671131042056685*^9, 
+  3.671131077167692*^9, 3.671131926468*^9, 3.671132183688978*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"s2", "=", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"Sqrt", "[", "2", "]"}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Ntot", " ", "=", " ", "160"}], ";"}], " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"data1", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"s2", "^", 
+          RowBox[{"(", 
+           RowBox[{"n", " ", "-", 
+            RowBox[{"Ntot", "/", "4"}]}], ")"}]}], ",", 
+         RowBox[{"LogIntTE", "[", 
+          RowBox[{"s2", "^", 
+           RowBox[{"(", 
+            RowBox[{"n", "-", 
+             RowBox[{"Ntot", "/", "2"}]}], ")"}]}], "]"}]}], "}"}], ",", " ", 
+       
+       RowBox[{"{", 
+        RowBox[{"n", ",", "Ntot"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+    "\"\</home/jonathan/work/casimir/f90_code/scalar_TE_monte/TE_2wall_anlt_\
+interp.dat\>\"", ",", 
+     RowBox[{"N", "[", "data1", "]"}], ",", "\"\<TSV\>\""}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.609261849086523*^9, 3.609261871333481*^9}, {
+   3.609261907557992*^9, 3.609261928208579*^9}, 3.609266676692553*^9, {
+   3.610487697692319*^9, 3.61048769860329*^9}, {3.671129083004088*^9, 
+   3.6711290937893677`*^9}, {3.6711291640876503`*^9, 
+   3.6711291922965317`*^9}, {3.6711308336727953`*^9, 3.671130847637336*^9}, {
+   3.671130889938016*^9, 3.6711309187701197`*^9}, {3.671131963377843*^9, 
+   3.671131965304893*^9}, {3.671390400273946*^9, 3.671390445740769*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"LogIntTE", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.671390622089467*^9, 3.671390635685754*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "inumr"}], "MessageName"], ":", 
+  " ", "\<\"The integrand \[NoBreak]\\!\\(p\\\\ u\\^2\\\\ \\(\\(Log[\\(\\(1 - \
+\\(\[ExponentialE]\\^\\(\\(\\(-2\\)\\)\\\\ p\\\\ u\\)\\\\ \\((p - \
+\\(\\(Power[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\))\\)\\^2\\)\\/\\((p + \\@\\(Plus[\\(\\(\
+\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\))\\)\\^2\\)\\)]\\)\\)\\)\[NoBreak] has evaluated to \
+non-numerical values for all sampling points in the region with boundaries \
+\[NoBreak]\\!\\({\\(\\({\[Infinity], 1.`}\\)\\), \\(\\({\[Infinity], \
+0.`}\\)\\)}\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/inumr\\\", ButtonNote -> \
+\\\"NIntegrate::inumr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671390636006456*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "inumr"}], "MessageName"], ":", 
+  " ", "\<\"The integrand \[NoBreak]\\!\\(p\\\\ u\\^2\\\\ \\(\\(Log[\\(\\(1 - \
+\\(\[ExponentialE]\\^\\(\\(\\(-2\\)\\)\\\\ p\\\\ u\\)\\\\ \\((p - \
+\\(\\(Power[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\))\\)\\^2\\)\\/\\((p + \\@\\(Plus[\\(\\(\
+\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\))\\)\\^2\\)\\)]\\)\\)\\)\[NoBreak] has evaluated to \
+non-numerical values for all sampling points in the region with boundaries \
+\[NoBreak]\\!\\({\\(\\({\[Infinity], 1.`}\\)\\), \\(\\({\[Infinity], \
+0.`}\\)\\)}\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/inumr\\\", ButtonNote -> \
+\\\"NIntegrate::inumr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671390636059449*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "inumr"}], "MessageName"], ":", 
+  " ", "\<\"The integrand \[NoBreak]\\!\\(p\\\\ u\\^2\\\\ \\(\\(Log[\\(\\(1 - \
+\\(\[ExponentialE]\\^\\(\\(\\(-2\\)\\)\\\\ p\\\\ u\\)\\\\ \\((p - \
+\\(\\(Power[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\))\\)\\^2\\)\\/\\((p + \\@\\(Plus[\\(\\(\
+\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\))\\)\\^2\\)\\)]\\)\\)\\)\[NoBreak] has evaluated to \
+non-numerical values for all sampling points in the region with boundaries \
+\[NoBreak]\\!\\({\\(\\({\[Infinity], 1.`}\\)\\), \\(\\({\[Infinity], \
+0.`}\\)\\)}\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/inumr\\\", ButtonNote -> \
+\\\"NIntegrate::inumr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.67139063617935*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(NIntegrate :: \
+inumr\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671390636223325*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "izero"}], "MessageName"], ":", 
+  " ", "\<\"Integral and error estimates are 0 on all integration subregions. \
+Try increasing the value of the MinRecursion option. If value of integral may \
+be 0, specify a finite value for the AccuracyGoal option. \\!\\(\\*ButtonBox[\
+\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/NIntegrate\\\", ButtonNote -> \
+\\\"NIntegrate::izero\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671390636865213*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671390636963801*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "ncvb"}], "MessageName"], ":", 
+  " ", "\<\"NIntegrate failed to converge to prescribed accuracy after \
+\[NoBreak]\\!\\(9\\)\[NoBreak] recursive bisections in \[NoBreak]\\!\\(u\\)\
+\[NoBreak] near \[NoBreak]\\!\\({u}\\)\[NoBreak] = \
+\[NoBreak]\\!\\({8.169069784662288`*^224}\\)\[NoBreak]. NIntegrate obtained \
+\[NoBreak]\\!\\(8.582639123060543`15.954589770191005*^27949\\)\[NoBreak] and \
+\[NoBreak]\\!\\(8.582639123060543`15.954589770191005*^27949\\)\[NoBreak] for \
+the integral and error estimates. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/NIntegrate/ncvb\\\", \
+ButtonNote -> \\\"NIntegrate::ncvb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6713906370095873`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6713906370624657`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "ncvb"}], "MessageName"], ":", 
+  " ", "\<\"NIntegrate failed to converge to prescribed accuracy after \
+\[NoBreak]\\!\\(9\\)\[NoBreak] recursive bisections in \[NoBreak]\\!\\(p\\)\
+\[NoBreak] near \[NoBreak]\\!\\({p}\\)\[NoBreak] = \
+\[NoBreak]\\!\\({8.169069784662288`*^224}\\)\[NoBreak]. NIntegrate obtained \
+\[NoBreak]\\!\\(7.366169431668945`15.954589770191005*^55899\\)\[NoBreak] and \
+\[NoBreak]\\!\\(7.366169431668945`15.954589770191005*^55899\\)\[NoBreak] for \
+the integral and error estimates. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/NIntegrate/ncvb\\\", \
+ButtonNote -> \\\"NIntegrate::ncvb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6713906371107817`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   FractionBox[
+    RowBox[{
+    "1.361177364069208595946378458569876354167469048112`15.954589770191005*^\
+55900", " ", "p", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "p"}], "+", 
+       SqrtBox[
+        SuperscriptBox["p", "2"]]}], ")"}], " ", 
+     SuperscriptBox["u", "2"], " ", "x"}], 
+    RowBox[{
+     SqrtBox[
+      SuperscriptBox["p", "2"]], " ", 
+     RowBox[{"(", 
+      RowBox[{"p", "+", 
+       SqrtBox[
+        SuperscriptBox["p", "2"]]}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "p"}], "+", 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]], " ", "p"}], "+", 
+       SqrtBox[
+        SuperscriptBox["p", "2"]], "+", 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]], " ", 
+        SqrtBox[
+         SuperscriptBox["p", "2"]]}]}], ")"}]}]], "+", 
+   InterpretationBox[
+    SuperscriptBox[
+     RowBox[{"O", "[", "x", "]"}], "2"],
+    SeriesData[$CellContext`x, 0, {}, 1, 2, 1],
+    Editable->False]}],
+  SeriesData[$CellContext`x, 
+   0, {(((((1.361177364069208595946378458569876354167469048112`15.\
+954589770191005*^55900 $CellContext`p) ($CellContext`p^2)^
+         Rational[-1, 2]) (-$CellContext`p + ($CellContext`p^2)^
+         Rational[1, 2]))/($CellContext`p + ($CellContext`p^2)^
+       Rational[1, 2]))/(-$CellContext`p + 
+     E^((2 $CellContext`p) $CellContext`u) $CellContext`p + \
+($CellContext`p^2)^Rational[1, 2] + 
+     E^((2 $CellContext`p) $CellContext`u) ($CellContext`p^2)^
+       Rational[1, 2])) $CellContext`u^2}, 1, 2, 1],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.671390637237424*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ListPlot", "[", "data1", "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.671390587152759*^9, 3.671390591299796*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+     0.0055000000000000005`], AbsoluteThickness[1.6], PointBox[CompressedData["
+1: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
+gfps1roI9bns+H9QX8hGl3zb/wHxhoc7
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 1.1805916207174113`*^22}, {0, 0.5000000006753171}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.671390592381586*^9, 3.700431581864152*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"s2", "=", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"Sqrt", "[", "2", "]"}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Ntot", " ", "=", " ", "500"}], ";"}], " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"data1", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"s2", "^", 
+          RowBox[{"(", 
+           RowBox[{"n", " ", "-", 
+            RowBox[{"Ntot", "/", "4"}]}], ")"}]}], ",", 
+         RowBox[{"LogIntTE", "[", 
+          RowBox[{"s2", "^", 
+           RowBox[{"(", 
+            RowBox[{"n", "-", 
+             RowBox[{"Ntot", "/", "4"}]}], ")"}]}], "]"}]}], "}"}], ",", " ", 
+       
+       RowBox[{"{", 
+        RowBox[{"n", ",", "Ntot"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+    "\"\</home/jonathan/work/casimir/f90_code/scalar_TE_monte/TE_2wall_anlt_\
+interp.dat\>\"", ",", 
+     RowBox[{"N", "[", "data1", "]"}], ",", "\"\<TSV\>\""}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6713905839307537`*^9, 3.671390584776907*^9}, {
+  3.700431031391268*^9, 3.70043103191436*^9}, {3.700431124982535*^9, 
+  3.700431126094614*^9}}],
+
+Cell[BoxData[
+ SuperscriptBox["2", 
+  RowBox[{"1", "/", "4"}]]], "Output",
+ CellChangeTimes->{
+  3.6711292512753363`*^9, 3.6711308440981283`*^9, {3.6711308865189037`*^9, 
+   3.671130919526313*^9}, 3.6711319707439957`*^9, 3.671390447014676*^9, 
+   3.70043103649279*^9, 3.700431127987114*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","izero",
+   "\"Integral and error estimates are 0 on all integration subregions. Try \
+increasing the value of the MinRecursion option. If value of integral may be \
+0, specify a finite value for the AccuracyGoal option.\"",2,13,5,
+   26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.70043112801583*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","izero",
+   "\"Integral and error estimates are 0 on all integration subregions. Try \
+increasing the value of the MinRecursion option. If value of integral may be \
+0, specify a finite value for the AccuracyGoal option.\"",2,13,6,
+   26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431128042309*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","izero",
+   "\"Integral and error estimates are 0 on all integration subregions. Try \
+increasing the value of the MinRecursion option. If value of integral may be \
+0, specify a finite value for the AccuracyGoal option.\"",2,13,7,
+   26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431128068906*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"NIntegrate\\\", \
+\\\"::\\\", \\\"izero\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,13,8,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431128102116*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","slwcon",
+   "\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small.\"",2,13,9,26212298467626350267,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431128315771*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","eincr",
+   "\"The global error of the strategy GlobalAdaptive has increased more than \
+\\!\\(\\*RowBox[{\\\"2000\\\"}]\\) times. The global error is expected to \
+decrease monotonically after a number of integrand evaluations. Suspect one \
+of the following: the working precision is insufficient for the specified \
+precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \
+\\!\\(\\*RowBox[{\\\"-\\\", \\\"4.0995145287449246`*^-21\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"1.1933799357710315`*^-24\\\"}]\\) for the integral and \
+error estimates.\"",2,13,10,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.7004311315794287`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","slwcon",
+   "\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small.\"",2,13,11,26212298467626350267,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.7004311316006937`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","eincr",
+   "\"The global error of the strategy GlobalAdaptive has increased more than \
+\\!\\(\\*RowBox[{\\\"2000\\\"}]\\) times. The global error is expected to \
+decrease monotonically after a number of integrand evaluations. Suspect one \
+of the following: the working precision is insufficient for the specified \
+precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \
+\\!\\(\\*RowBox[{\\\"-\\\", \\\"6.401900136963935`*^-20\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"1.6457791857758543`*^-23\\\"}]\\) for the integral and \
+error estimates.\"",2,13,12,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.7004311342174273`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","slwcon",
+   "\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small.\"",2,13,13,26212298467626350267,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431134322947*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"NIntegrate\\\", \
+\\\"::\\\", \\\"slwcon\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,13,14,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.70043113435015*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NIntegrate","eincr",
+   "\"The global error of the strategy GlobalAdaptive has increased more than \
+\\!\\(\\*RowBox[{\\\"2000\\\"}]\\) times. The global error is expected to \
+decrease monotonically after a number of integrand evaluations. Suspect one \
+of the following: the working precision is insufficient for the specified \
+precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \
+\\!\\(\\*RowBox[{\\\"-\\\", \\\"3.2103335466925623`*^-19\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"9.826409292805028`*^-23\\\"}]\\) for the integral and \
+error estimates.\"",2,13,15,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.700431137051085*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"NIntegrate\\\", \
+\\\"::\\\", \\\"eincr\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,13,16,26212298467626350267,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6711291968244*^9, {3.6711308350789747`*^9, 3.671130848677423*^9}, {
+   3.671130901389786*^9, 3.671130919597186*^9}, 3.671131970841687*^9, 
+   3.671390447654101*^9, 3.700431037097007*^9, 3.7004311371583643`*^9}],
+
+Cell[BoxData["\<\"/home/jonathan/work/casimir/f90_code/scalar_TE_monte/TE_\
+2wall_anlt_interp.dat\"\>"], "Output",
+ CellChangeTimes->{
+  3.6711292512753363`*^9, 3.6711308440981283`*^9, {3.6711308865189037`*^9, 
+   3.671130919526313*^9}, 3.6711319707439957`*^9, 3.671390447014676*^9, 
+   3.70043103649279*^9, 3.700431366849518*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"s2", "=", "4"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Ntot", " ", "=", " ", "20"}], ";"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data1", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"s2", "^", 
+        RowBox[{"(", 
+         RowBox[{"n", " ", "-", 
+          RowBox[{"Ntot", "/", "2"}]}], ")"}]}], ",", 
+       RowBox[{"LogIntTE", "[", 
+        RowBox[{"s2", "^", 
+         RowBox[{"(", 
+          RowBox[{"n", "-", 
+           RowBox[{"Ntot", "/", "2"}]}], ")"}]}], "]"}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "Ntot"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\</home/jonathan/papers/worldline1/fig/data/TE_2wall_anlt_short.dat\>\"",
+    ",", 
+   RowBox[{"N", "[", "data1", "]"}], ",", "\"\<TSV\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.671142034936245*^9, 3.671142053760132*^9}}],
+
+Cell[BoxData["4"], "Output",
+ CellChangeTimes->{3.671142057352921*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142057415511*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "eincr"}], "MessageName"], ":", 
+  " ", "\<\"The global error of the strategy GlobalAdaptive has increased \
+more than \[NoBreak]\\!\\(2000\\)\[NoBreak] times. The global error is \
+expected to decrease monotonically after a number of integrand evaluations. \
+Suspect one of the following: the working precision is insufficient for the \
+specified precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \[NoBreak]\\!\
+\\(-4.5161898544021805`*^-14\\)\[NoBreak] and \
+\[NoBreak]\\!\\(5.821387370090955`*^-17\\)\[NoBreak] for the integral and \
+error estimates. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/eincr\\\", ButtonNote -> \
+\\\"NIntegrate::eincr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6711420599842253`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142060158086*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "eincr"}], "MessageName"], ":", 
+  " ", "\<\"The global error of the strategy GlobalAdaptive has increased \
+more than \[NoBreak]\\!\\(2000\\)\[NoBreak] times. The global error is \
+expected to decrease monotonically after a number of integrand evaluations. \
+Suspect one of the following: the working precision is insufficient for the \
+specified precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \[NoBreak]\\!\
+\\(-7.270272854016732`*^-13\\)\[NoBreak] and \
+\[NoBreak]\\!\\(2.398711263566202`*^-16\\)\[NoBreak] for the integral and \
+error estimates. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/eincr\\\", ButtonNote -> \
+\\\"NIntegrate::eincr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142062530134*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "slwcon"}], "MessageName"], ":", 
+  " ", "\<\"Numerical integration converging too slowly; suspect one of the \
+following: singularity, value of the integration is 0, highly oscillatory \
+integrand, or WorkingPrecision too small. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/slwcon\\\", ButtonNote -> \
+\\\"NIntegrate::slwcon\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142062671809*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(NIntegrate :: \
+slwcon\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142062718268*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NIntegrate", "::", "eincr"}], "MessageName"], ":", 
+  " ", "\<\"The global error of the strategy GlobalAdaptive has increased \
+more than \[NoBreak]\\!\\(2000\\)\[NoBreak] times. The global error is \
+expected to decrease monotonically after a number of integrand evaluations. \
+Suspect one of the following: the working precision is insufficient for the \
+specified precision goal; the integrand is highly oscillatory or it is not a \
+(piecewise) smooth function; or the true value of the integral is 0. \
+Increasing the value of the GlobalAdaptive option MaxErrorIncreases might \
+lead to a convergent numerical integration. NIntegrate obtained \[NoBreak]\\!\
+\\(-1.1640158669848599`*^-11\\)\[NoBreak] and \
+\[NoBreak]\\!\\(6.191808948295965`*^-16\\)\[NoBreak] for the integral and \
+error estimates. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/NIntegrate/eincr\\\", ButtonNote -> \
+\\\"NIntegrate::eincr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142065126109*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(NIntegrate :: \
+eincr\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.671142065164365*^9}],
+
+Cell[BoxData["\<\"/home/jonathan/papers/worldline1/fig/data/TE_2wall_anlt_\
+short.dat\"\>"], "Output",
+ CellChangeTimes->{3.67114207040654*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Series", " ", "Expand", " ", "integrand"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"IntegrandTE", "[", "\[Chi]_", "]"}], ":=", 
+    RowBox[{"p", " ", 
+     RowBox[{"u", "^", "2"}], 
+     RowBox[{"Log", "[", 
+      RowBox[{"1", "-", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          FractionBox[
+           RowBox[{"p", " ", "-", 
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}], 
+           RowBox[{"p", " ", "+", 
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["p", "2"], "+", "\[Chi]"}]]}]], ")"}], "2"], 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{
+          RowBox[{"-", "2"}], " ", "p", " ", "u"}]]}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.671390667986823*^9, 3.671390703500004*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Series", "[", 
+  RowBox[{
+   RowBox[{"IntegrandTE", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"Assumptions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"p", ">", "1"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.671390705101967*^9, 3.671390757710593*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{
+          RowBox[{"-", "2"}], " ", "p", " ", "u"}]], " ", 
+        SuperscriptBox["u", "2"]}], ")"}], " ", 
+      SuperscriptBox["x", "2"]}], 
+     RowBox[{"4", " ", 
+      RowBox[{"(", 
+       RowBox[{"p", " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"p", "+", 
+           SqrtBox[
+            SuperscriptBox["p", "2"]]}], ")"}], "2"]}], ")"}]}]]}], "+", 
+   InterpretationBox[
+    SuperscriptBox[
+     RowBox[{"O", "[", "x", "]"}], "3"],
+    SeriesData[$CellContext`x, 0, {}, 2, 3, 1],
+    Editable->False]}],
+  SeriesData[$CellContext`x, 
+   0, {(((Rational[-1, 4] 
+       E^(((-2) $CellContext`p) $CellContext`u))/$CellContext`p) \
+($CellContext`p + ($CellContext`p^2)^Rational[1, 2])^(-2)) $CellContext`u^2}, 
+   2, 3, 1],
+  Editable->False]], "Output",
+ CellChangeTimes->{
+  3.671390721898157*^9, {3.671390754253409*^9, 3.671390758056041*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{
+          RowBox[{"-", "2"}], " ", "p", " ", "u"}]], " ", 
+        SuperscriptBox["u", "2"]}], ")"}], " ", 
+      SuperscriptBox["x", "2"]}], 
+     RowBox[{"4", " ", 
+      RowBox[{"(", 
+       RowBox[{"p", " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"p", "+", 
+           SqrtBox[
+            SuperscriptBox["p", "2"]]}], ")"}], "2"]}], ")"}]}]], ",", 
+    RowBox[{"Assumptions", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"p", ">", "1"}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.671390776783819*^9, 3.6713907845306273`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "2"}], " ", "p", " ", "u"}]], " ", 
+    SuperscriptBox["u", "2"], " ", 
+    SuperscriptBox["x", "2"]}], 
+   RowBox[{"16", " ", 
+    SuperscriptBox["p", "3"]}]]}]], "Input",
+ CellChangeTimes->{{3.6713907974983797`*^9, 3.671390801354493*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SmallTE", "[", "\[Chi]_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"-", 
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       FractionBox[
+        RowBox[{
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"-", "2"}], " ", "p", " ", "u"}]], " ", 
+         SuperscriptBox["u", "2"], " ", 
+         SuperscriptBox["\[Chi]", "2"]}], 
+        RowBox[{"16", " ", 
+         SuperscriptBox["p", "3"]}]], " ", ",", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "1", ",", "\[Infinity]"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "0", ",", "\[Infinity]"}], "}"}], ",", 
+       RowBox[{"Assumptions", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\[Chi]", ">", "0"}], "}"}]}]}], "]"}]}], 
+    RowBox[{"180", "/", 
+     SuperscriptBox["\[Pi]", "4"]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.671390823900324*^9, 3.671390859719274*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"SmallTE", "[", "x", "]"}]}]], "Input",
+ CellChangeTimes->{{3.671390864302339*^9, 3.671390867319723*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  FractionBox[
+   RowBox[{"9", " ", 
+    SuperscriptBox["x", "2"]}], 
+   RowBox[{"16", " ", 
+    SuperscriptBox["\[Pi]", "4"]}]]}]], "Output",
+ CellChangeTimes->{3.6713908685834637`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"IntegrandTE", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "\[Infinity]", ",", "2"}], "}"}], ",", 
+    RowBox[{"Assumptions", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"p", ">", "1"}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6713908877785063`*^9, 3.671390896854356*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"p", " ", 
+    SuperscriptBox["u", "2"], " ", 
+    RowBox[{"Log", "[", 
+     RowBox[{"1", "-", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", "p", " ", "u"}]]}], "]"}]}], "+", 
+   FractionBox[
+    RowBox[{"4", " ", 
+     SuperscriptBox["p", "2"], " ", 
+     SuperscriptBox["u", "2"], " ", 
+     SqrtBox[
+      FractionBox["1", "x"]]}], 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"2", " ", "p", " ", "u"}]]}]], "-", 
+   FractionBox[
+    RowBox[{"8", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"2", " ", "p", " ", "u"}]], " ", 
+       SuperscriptBox["p", "3"], " ", 
+       SuperscriptBox["u", "2"]}], ")"}]}], 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]]}], ")"}], "2"], " ", "x"}]], "+", 
+   
+   FractionBox[
+    RowBox[{"2", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       RowBox[{"18", " ", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]]}], "+", 
+       RowBox[{"15", " ", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"4", " ", "p", " ", "u"}]]}]}], ")"}], " ", 
+     SuperscriptBox["p", "4"], " ", 
+     SuperscriptBox["u", "2"], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       FractionBox["1", "x"], ")"}], 
+      RowBox[{"3", "/", "2"}]]}], 
+    RowBox[{"3", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]]}], ")"}], "3"]}]], "-", 
+   FractionBox[
+    RowBox[{"8", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"2", " ", "p", " ", "u"}]], " ", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"6", " ", 
+          SuperscriptBox["\[ExponentialE]", 
+           RowBox[{"2", " ", "p", " ", "u"}]]}], "+", 
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{"4", " ", "p", " ", "u"}]]}], ")"}], " ", 
+       SuperscriptBox["p", "5"], " ", 
+       SuperscriptBox["u", "2"]}], ")"}]}], 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"2", " ", "p", " ", "u"}]]}], ")"}], "4"], " ", 
+     SuperscriptBox["x", "2"]}]], "+", 
+   InterpretationBox[
+    SuperscriptBox[
+     RowBox[{"O", "[", 
+      FractionBox["1", "x"], "]"}], 
+     RowBox[{"5", "/", "2"}]],
+    SeriesData[$CellContext`x, 
+     DirectedInfinity[1], {}, 0, 5, 2],
+    Editable->False]}],
+  SeriesData[$CellContext`x, 
+   DirectedInfinity[
+   1], {($CellContext`p $CellContext`u^2) 
+    Log[1 - E^(((-2) $CellContext`p) $CellContext`u)], ((4/(-1 + 
+      E^((2 $CellContext`p) $CellContext`u))) $CellContext`p^2) \
+$CellContext`u^2, ((((-8) 
+       E^((2 $CellContext`p) $CellContext`u)) (-1 + 
+        E^((2 $CellContext`p) $CellContext`u))^(-2)) $CellContext`p^3) \
+$CellContext`u^2, (((
+       Rational[2, 3] (-1 + E^((2 $CellContext`p) $CellContext`u))^(-3)) (-1 + 
+       18 E^((2 $CellContext`p) $CellContext`u) + 
+       15 E^((4 $CellContext`p) $CellContext`u))) $CellContext`p^4) \
+$CellContext`u^2, (((((-8) 
+        E^((2 $CellContext`p) $CellContext`u)) (-1 + 
+         E^((2 $CellContext`p) $CellContext`u))^(-4)) (1 + 
+       6 E^((2 $CellContext`p) $CellContext`u) + 
+       E^((4 $CellContext`p) $CellContext`u))) $CellContext`p^5) \
+$CellContext`u^2}, 0, 5, 2],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.6713908979078407`*^9}]
+}, Open  ]]
+},
+WindowSize->{1278, 691},
+WindowMargins->{{1, Automatic}, {1, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 1461, 42, 206, "Input"],
+Cell[2009, 64, 5687, 155, 471, "Input"],
+Cell[CellGroupData[{
+Cell[7721, 223, 526, 15, 81, "Input"],
+Cell[8250, 240, 6326, 113, 236, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14613, 358, 183, 4, 51, "Input"],
+Cell[14799, 364, 81, 1, 34, "Output"]
+}, Open  ]],
+Cell[14895, 368, 1465, 48, 147, "Input"],
+Cell[CellGroupData[{
+Cell[16385, 420, 547, 15, 70, "Input"],
+Cell[16935, 437, 282, 6, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17254, 448, 548, 13, 89, "Input"],
+Cell[17805, 463, 565, 10, 41, "Message"],
+Cell[18373, 475, 565, 10, 41, "Message"],
+Cell[18941, 487, 565, 10, 41, "Message"],
+Cell[19509, 499, 522, 10, 23, "Message"]
+}, Open  ]],
+Cell[20046, 512, 489, 10, 59, "Input"],
+Cell[20538, 524, 113, 1, 30, "Input"],
+Cell[CellGroupData[{
+Cell[20676, 529, 1307, 35, 114, "Input"],
+Cell[21986, 566, 227, 3, 32, "Output"]
+}, Open  ]],
+Cell[22228, 572, 1591, 39, 134, "Input"],
+Cell[CellGroupData[{
+Cell[23844, 615, 328, 9, 70, "Input"],
+Cell[24175, 626, 896, 16, 99, "Message"],
+Cell[25074, 644, 896, 16, 99, "Message"],
+Cell[25973, 662, 895, 16, 99, "Message"],
+Cell[26871, 680, 521, 10, 23, "Message"],
+Cell[27395, 692, 570, 10, 41, "Message"],
+Cell[27968, 704, 565, 10, 41, "Message"],
+Cell[28536, 716, 838, 14, 52, "Message"],
+Cell[29377, 732, 567, 10, 41, "Message"],
+Cell[29947, 744, 838, 14, 52, "Message"],
+Cell[30788, 760, 1730, 49, 91, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32555, 814, 167, 3, 51, "Input"],
+Cell[32725, 819, 7189, 129, 227, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39951, 953, 1290, 35, 153, "Input"],
+Cell[41244, 990, 290, 6, 34, "Output"],
+Cell[41537, 998, 582, 11, 41, "Message"],
+Cell[42122, 1011, 583, 11, 41, "Message"],
+Cell[42708, 1024, 583, 11, 41, "Message"],
+Cell[43294, 1037, 534, 10, 23, "Message"],
+Cell[43831, 1049, 562, 11, 40, "Message"],
+Cell[44396, 1062, 1129, 18, 81, "Message"],
+Cell[45528, 1082, 565, 11, 40, "Message"],
+Cell[46096, 1095, 1128, 18, 81, "Message"],
+Cell[47227, 1115, 563, 11, 40, "Message"],
+Cell[47793, 1128, 535, 10, 23, "Message"],
+Cell[48331, 1140, 1126, 18, 81, "Message"],
+Cell[49460, 1160, 537, 10, 23, "Message"],
+Cell[50000, 1172, 330, 5, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50367, 1182, 974, 28, 94, "Input"],
+Cell[51344, 1212, 70, 1, 30, "Output"],
+Cell[51417, 1215, 565, 10, 41, "Message"],
+Cell[51985, 1227, 1119, 18, 81, "Message"],
+Cell[53107, 1247, 565, 10, 41, "Message"],
+Cell[53675, 1259, 1116, 18, 81, "Message"],
+Cell[54794, 1279, 565, 10, 41, "Message"],
+Cell[55362, 1291, 522, 10, 23, "Message"],
+Cell[55887, 1303, 1117, 18, 81, "Message"],
+Cell[57007, 1323, 521, 10, 23, "Message"],
+Cell[57531, 1335, 143, 2, 32, "Output"]
+}, Open  ]],
+Cell[57689, 1340, 953, 28, 158, "Input"],
+Cell[CellGroupData[{
+Cell[58667, 1372, 347, 9, 32, "Input"],
+Cell[59017, 1383, 1065, 33, 76, "Output"]
+}, Open  ]],
+Cell[60097, 1419, 782, 24, 119, "Input"],
+Cell[60882, 1445, 386, 11, 86, "Input"],
+Cell[61271, 1458, 949, 26, 86, "Input"],
+Cell[CellGroupData[{
+Cell[62245, 1488, 162, 3, 55, "Input"],
+Cell[62410, 1493, 215, 7, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62662, 1505, 402, 10, 55, "Input"],
+Cell[63067, 1517, 3803, 110, 85, "Output"]
+}, Open  ]]
+}
+]
+*)
+

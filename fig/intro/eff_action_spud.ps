@@ -1,0 +1,143 @@
+%!PS-Adobe-2.0
+(plotlib/plotfonts.ps) run
+%%Title: Worldline Gradient Diagram -- Two arbitrary bodies with normals
+%%Creator: Jonathan Mackrory
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 11/30/16
+%%Pages: 1
+%%
+%%BeginProcSet: Parameters
+%   include parameters from default file, override as needed
+(../plotlib/plotparameters.ps) run
+%%EndProcSet
+
+/xmaxstr (5) def
+/xminstr (-5) def
+/ymaxstr (3) def
+/yminstr (-3) def
+
+%%BeginProcSet: Utilities
+(plotlib/plotutilities.ps) run
+(plotlib/plotarrows.ps) run
+(plotlib/plotmisc.ps) run
+%%EndProcSet
+%%EndProlog
+
+(../plotpotato.ps) run
+		
+%twocolumndimensions
+
+1 setlinewidth
+/fillcol {0.85 setgray} def
+startdiagram
+
+%origin
+/or_x 0 def
+/or_y -2 def
+/normscale 0.5 def
+
+%First Body
+/x0 -2.5 def
+/y0 0.0 def
+
+/ncoeff 2 def
+/Acoeff [1.5 0.25 0.4] def
+/Bcoeff [1 0.25 0.3 ] def
+/freq [1 2 3 ] def
+/phi [-40 20 50] def
+/psi [ 0 -50 -12 ] def
+
+% /a1 1.5 def
+% /a2 0.25 def
+% /b1 1 def
+% /b2 0.25 def
+
+% /phi1 -40 def
+% /phi2 20 def
+% /psi1 0 def
+% /psi2 -50 def
+
+100 DrawPotato
+8 DrawPotatoNormals
+
+%draw arrow from "Origin" to center of body
+or_x or_y cc  %origin of arrow
+x0 y0 cc %center of body 
+linesize 2  arrowend
+
+/horiznudge 0.45 def
+/vertnudge 0.00 def
+
+x0 or_x sub 2 div or_x add horiznudge add
+y0 or_y sub 2 div or_y add vertnudge add
+cc
+moveto
+
+[ 
+  /ComputerModernExtraBold normal (R)
+  /ComputerModern-Regular subscript (1)
+] diagramlabelsize PrintArrayRight
+
+
+/horiznudge 0.45 def
+/vertnudge 0.15 def
+
+x0 horiznudge add
+y0 vertnudge add
+cc
+moveto
+
+[ 
+  /KahoeTechGreek normal (c)
+  /ComputerModern-Regular subscript (1)
+] diagramlabelsize PrintArrayRight
+
+
+%Second body 
+
+/x0 3.5 def
+/y0 0.5 def
+
+/ncoeff 3 def
+/Acoeff [1.4 0.4 0.2 ] def
+/Bcoeff [0.7 0.2 0.05 ] def
+/phi [20.5 20.5 10] def
+/psi [ 30.5 -60.5 12 ] def
+
+
+100 DrawPotato
+8 DrawPotatoNormals
+
+%draw arrow from "Origin" to center of body
+or_x or_y cc  %origin of arrow
+x0 y0 cc %center of body 
+linesize 2  arrowend
+
+
+
+
+% [ 
+%   /ComputerModernExtraBold normal (R)
+%   /ComputerModern-Regular subscript (2)
+% ] diagramlabelsize PrintArrayRight
+
+
+
+% /horiznudge 0.35 def
+% /vertnudge 0.05 def
+
+% x0 horiznudge add
+% y0 vertnudge add
+% cc
+% moveto
+
+
+
+% [ 
+%   /KahoeTechGreek normal (c)
+%   /ComputerModern-Regular subscript (2)
+% ] diagramlabelsize PrintArrayRight
+
+
+enddiagram

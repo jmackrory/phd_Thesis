@@ -1,0 +1,186 @@
+/DrawPotato{% Parametric plot of rounded potato like object  
+		/npoints exch def
+		/dt {360.0 npoints div} def
+		gsave
+		newpath
+		0 PotatoCoord	cc moveto  
+		1 1 npoints
+		{
+				dt mul PotatoCoord cc
+				lineto	
+		}for
+		gsave
+		closepath
+		fillcol fill
+		grestore
+		stroke
+		grestore
+}def
+
+/DrawBrokenLoop{% Parametric plot of open loop with straight-lines.
+		%Similar to potato plot, but with straight line segments.  
+		/npoints exch def
+		/angle_by_two {open_angle 0.5 mul} def
+		/dt {360.0 open_angle sub npoints div} def
+		gsave
+		newpath
+		angle_by_two PotatoCoord	cc moveto  
+		1 1 npoints
+		{
+				dt mul angle_by_two add PotatoCoord cc
+				lineto	
+		} for
+		stroke
+		grestore
+		gsave
+		newpath
+		1.5 setlinewidth
+		360.0 angle_by_two sub PotatoCoord cc moveto 
+		0 PotatoCoord cc lineto 
+		angle_by_two PotatoCoord cc lineto 
+		stroke
+
+		0.6 setlinewidth
+		360.0 angle_by_two sub PotatoCoord cc Xsymbol
+		 0 PotatoCoord cc Xsymbol
+		 angle_by_two PotatoCoord cc Xsymbol
+
+		grestore
+}def
+
+
+/Xsymbol {
+		%Make diagonal cross symbol
+  newpath moveto symbolsz 0.5 mul dup rmoveto
+  -1 symbolsz mul -1 symbolsz mul rlineto
+  0 symbolsz  rmoveto
+	symbolsz  -1 symbolsz mul rlineto
+  stroke
+} bind def
+
+
+/PotatoCoord{
+		%return coordinates for physics-potato for
+		%"arbitrary shaped body.
+		/t exch def
+		t PotatoXCoord
+		t PotatoYCoord
+		% /x {2 t mul phi2 add cos a2 mul
+		% t phi1 add cos a1 mul
+		% add x0 add} def % %compute y-coord
+		% /y 2 t mul psi2 add sin b2 mul
+		% t psi1 add sin b1 mul
+		% add y0 add	def
+%		x y 
+} def
+
+/PotatoXCoord{
+		%return X-coordinates for physics-potato.
+		% usage: phi PotatoXCoord
+    %	with 0<phi<360.
+		/t exch def
+		x0  %initialize things to adding
+		1 1 ncoeff {
+				1 sub
+				/n exch def
+				freq n get t mul phi n get add cos Acoeff n get mul add
+
+		}  for
+} def
+
+/PotatoYCoord{
+		%return Y coordinates for physics-potato for
+		%"arbitrary shaped body.
+		/t exch def
+		y0  %initialize things to adding
+		1 1 ncoeff{
+				1 sub
+				/n exch def
+				freq n get t mul psi n get add sin Bcoeff n get mul
+				add 
+		} for
+} def
+
+
+/PotatoXTang{
+		%return x-compoento of tangent vector for physics-potato
+		/t exch def
+		0  %initialize things to adding
+		1 1 ncoeff{
+				1 sub
+				/n exch def
+				freq n get t mul phi n get add sin Acoeff n get mul freq n get mul
+				add 
+		} for
+} def
+
+/PotatoYTang{
+		%return y-compoent of tangent vector for physics-potato
+		/t exch def
+		0  %initialize things to adding
+		1 1 ncoeff{
+				1 sub
+				/n exch def
+				freq n get t mul psi n get add cos Bcoeff n get mul freq n get mul
+				add 
+		} 	for
+} def
+
+
+/PotatoNormalCoord{
+		%return coordinates for scaled normal vectors
+		/t exch def
+
+		/x {t PotatoXCoord} def
+		/y {t PotatoYCoord} def
+
+		/nx {t PotatoYTang} def
+		/ny {t PotatoXTang} def
+
+		
+		% %Find spud surface coordinates
+		% /x {2 t mul phi2 add cos a2 mul
+		% t phi1 add cos a1 mul add 
+		% x0 add} def
+		% %compute y-coord
+		% /y {2 t mul psi2 add sin b2 mul
+		% t psi1 add sin b1 mul add
+		% y0 add}	def
+		
+		% %Find normal vector relative coordinates
+		% /nx {
+		% 2 t mul psi2 add cos b2 mul 2 mul
+		% t psi1 add cos b1 mul	add} def 
+
+		% %compute y-coord
+		% /ny {
+		% 2 t mul phi2 add sin a2 mul 2 mul
+		% t phi1 add sin a1 mul add	} def
+
+		/norm {normscale nx nx mul ny ny mul add sqrt div} def
+		/ax {nx norm mul x add } def
+		/ay {ny norm mul y add } def
+%		2 x y ax ay
+		ax ay 
+}def
+
+/DrawPotatoNormals{% Draw normal vectors on rounded
+		%potato like object
+		/npoints exch def
+		/dt {360.0 npoints div} def
+		gsave
+		1 1 npoints		{
+				/m exch def
+				%find surface coordinates
+				m dt mul PotatoCoord 
+				/y exch def
+				/x exch def
+				%find normal vector coordinates
+				m dt mul PotatoNormalCoord 
+				/ny exch def
+				/nx exch def
+				x y cc nx ny cc
+				linesize 2 arrowend
+		} for
+grestore
+}def

@@ -1,0 +1,123 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {5} bind def
+/height {3} bind def
+/xmax {4} def
+/xmin {-4} def
+/ymin {0} def
+/ymax {2} def
+/xmaxstr (4) def
+/xminstr (-4) def
+/yminstr (0) def
+/ymaxstr (2) def
+
+%size of ellipse
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
+
+/chi {0} def
+/sqrteps {1 chi add sqrt} def
+/Xi {sqrteps ln} def
+/d {0} def
+/x1 {-1} def
+/x2 {1} def
+/T {4} def
+
+
+/tanhXi {chi 2.0 chi add div} def
+/sechXi {2.0 sqrteps mul 2.0 chi add div} def
+
+/sgn{
+		/xval exch def
+		xval 0 ge {1} {-1} ifelse
+} def
+
+/ExpTM{
+		/xval exch def
+		/dx {d sub xval} def
+		/dy {d sub x0} def
+		/xarg {dx dy mul 2 mul T div} def
+		xarg 0 ge {  e xarg neg exp
+                 dx sgn neg	mul tanhXi mul 1 add
+		} {sechXi} ifelse
+}def
+
+/TMcol {0.75 0.75 0.75 setrgbcolor} def
+
+
+startplot
+
+%1 in 1 in translate
+/x0 x1 def
+
+/col1{0 .67 0 setrgbcolor} def
+/col2{0 .5 1 setrgbcolor} def
+/col3{0 0 1 setrgbcolor} def
+
+col3
+/chi {1000000} def
+{ExpTM} 1000 PlotFunction
+
+/chi {10} def
+col2
+{ExpTM} 1000 PlotFunction
+
+/chi {1} def
+col1
+{ExpTM} 1000 PlotFunction
+
+
+0 setgray
+/chi {0} def
+{ExpTM} 1000 PlotFunction
+
+/symbolsz 10 def % in points
+
+/x_nudge 0.1 def
+/y_nudge 0.1 def
+
+xmax 0.5 sub 1 chi add 0.25 add cc moveto
+0 setgray
+
+ % [/KahoeTechGreek normal  (e)]  24 PrintArrayCenter
+ % [/KahoeTechLatin subscript  (  r)]  18 PrintArrayCenter	
+
+ [(-4) (-3) (-2) (-1) (0) (1) (2) (3) (4) ] ExtraXTicks
+ [(0) (0.5) (1) (1.5) (2) ] ExtraYTicks
+ 
+gsave
+[ /ComputerModern-Regular normal (Position)]  XAxisTitle
+[ /ComputerModern-Regular normal (Ensemble Averaged Solution)]  YAxisTitle
+grestore
+
+
+col3
+1 in 1.0 in moveto
+ [/KahoeTechGreek normal  (c = 10)]  12 PrintArrayCenter
+ [/KahoeTechGreek superscript  (  6)]  11 PrintArrayCenter	
+
+1 in .75 in moveto
+col2
+ [/KahoeTechGreek normal  (c = 10)]  12 PrintArrayCenter
+% [/KahoeTechGreek superscript  (  3)]  11 PrintArrayCenter	
+
+ 1 in 0.5 in moveto
+ col1
+ [/KahoeTechGreek normal  (c = 1)]  12 PrintArrayCenter
+
+  1 in 0.25 in moveto
+	0 setgray
+ [/KahoeTechGreek normal  (c = 0)]  12 PrintArrayCenter
+
+
+
+
+endplot

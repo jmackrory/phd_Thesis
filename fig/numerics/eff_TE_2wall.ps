@@ -1,0 +1,107 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+(colors.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (6.2) def
+/xminstr (-6) def
+/ymaxstr (0) def
+/yminstr (-14) def
+
+%load utilities
+twocolumndimensions
+%(casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+SetLogAxisX SetLogAxisY
+
+/symbolsz 3 def % in points
+0 plotcolor
+mark
+(data/TE_2wall_anlt.dat) run % load loop 1
+PlotStackDataAuto
+
+
+TEcol
+mark
+(data/TE_2wall_chi_num.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+
+
+/ytitleoffset  -.35 in def	
+
+[ (-12) (-9) (-6) (-3) (0) ] ExtraYTicksLog
+[ (-6)  (-4)  (-2)  (0)  (2)  (4) (6) ] ExtraXTicksLog
+[ /KahoeTechGreek normal (c)]  XAxisTitle
+[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+% %start log-linear inset
+
+ /insetoffx {0.7 in} def
+ /insetoffy {-0.15 in} def
+ /insetscale {0.4} def
+
+% %Unset log scale on y  axis
+SetLogAxisX NoSetLogAxisY
+
+% %Limits
+
+/xmaxstr (7) def
+/xminstr (-7) def
+/ymaxstr (.5) def
+/yminstr (0) def
+startinset
+
+%seems to reset 
+/ytitlevertnudge 0.0 def
+
+gsave
+%Energy curve 
+1 setlinewidth
+0 plotcolor
+mark
+(data/TE_2wall_anlt.dat) run % load loop 1
+PlotStackDataAuto
+
+TEcol
+mark
+(data/TE_2wall_chi_num.dat) run % load loop 1
+PlotStackDataPointsYerrAuto
+
+
+
+grestore
+
+	% % tweak settings for 2-column figure, if necessary
+  % /xlabeloffset  -0.33 in def
+  % /xtitleoffset  -0.65 in def
+  % /ylabeloffset  -0.07 in def
+  % /ytitleoffset  -0.70 in def
+
+   /ytitleoffset  -.85 in def
+[ (0) (0.25) (0.5) ] ExtraYTicks
+%[ (0.05) (0.1) ] ExtraYTicks
+[ (-6) (-3) (0) (3) (6)] ExtraXTicksLog
+%[ /KahoeTechGreek normal (c)]  XAxisTitle
+%[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+%[ /ComputerModern-Regular subscript (TE   )]  YAxisTitle
+
+endinset
+
+
+
+endplot

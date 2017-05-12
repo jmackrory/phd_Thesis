@@ -1,0 +1,108 @@
+# Calculate Casimir TM energy with TM loops.  
+
+clear all
+
+dat = load('TEatomconv.dat')
+
+Nperloop= dat(:,3); 
+Nloops = dat(:,4);
+anlt = dat(:,5);
+num = dat(:,6);
+numerr = dat(:,7);
+
+per = abs((num-anlt)./anlt);
+numerr = abs(numerr./anlt);
+
+#dlmwrite("TEbodyconv_anlt1.dat",[chi(d==1.25E-4),abs(anlt(d==1.25E-4))],"delimiter","\t","precision","%20.10e")
+#dlmwrite("TEbodyconv_anlt2.dat",[chi(d==2E-3),abs(anlt(d==2E-3))],"delimiter","\t","precision","%20.10e")
+
+# dlmwrite("TEatomconv1p.dat",[Nperloop(Nloops==1000),per(Nloops==1000),numerr(Nloops==1000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv2p.dat",[Nperloop(Nloops==10000),per(Nloops==10000),numerr(Nloops==10000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv3p.dat",[Nperloop(Nloops==100000),per(Nloops==100000),numerr(Nloops==100000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv4p.dat",[Nperloop(Nloops==1000000),per(Nloops==1000000),numerr(Nloops==1000000)],"delimiter","\t","precision","%20.10e")
+
+# dlmwrite("TEatomconv1l.dat",[Nloops(Nperloop==50),per(Nperloop==50),numerr(Nperloop==50)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv2l.dat",[Nloops(Nperloop==500),per(Nperloop==500),numerr(Nperloop==500)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv3l.dat",[Nloops(Nperloop==5000),per(Nperloop==5000),numerr(Nperloop==5000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEatomconv4l.dat",[Nloops(Nperloop==50000),per(Nperloop==50000),numerr(Nperloop==50000)],"delimiter","\t","precision","%20.10e")
+
+
+
+figure(1)
+loglog(Nperloop(Nloops==10^3),per(Nloops==10^3),'x-', ...
+ Nperloop(Nloops==10^4),per(Nloops==10^4),'x-', ...
+ Nperloop(Nloops==10^5),per(Nloops==10^5),'x-', ...
+ Nperloop(Nloops==10^6),per(Nloops==10^6),'x-')
+xlabel('Number of points per loop')
+ylabel('Percentage error |Num - Anlt|/Anlt')
+title('Percentage error for atom at chi=1, d=1')
+
+legend(['Np=10^3'; 'Np=10^4'; 'Np=10^5'; 'Np=10^6'])
+
+figure(2)
+loglog(Nloops(Nperloop==5*10^1),per(Nperloop==50),'x-', ...
+ Nloops(Nperloop==5*10^2),per(Nperloop==500),'x-', ...
+ Nloops(Nperloop==5*10^3),per(Nperloop==5*10^3),'x-', ...
+ Nloops(Nperloop==5*10^4),per(Nperloop==5*10^4),'x-')
+xlabel('Number of loops')
+ylabel('Percentage error |Num - Anlt|/Anlt')
+title('Percentage error for atom at chi=1, d=1')
+
+
+legend(['Nl=50'; 'Nl=500'; 'Nl=5000'; 'Nl=50000'])
+
+
+
+%body % body %body
+
+
+%body
+
+dat = load('TEbodyconv.dat');
+
+Nperloop= dat(:,3); 
+Nloops = dat(:,4);
+anlt = dat(:,5);
+num = dat(:,6);
+numerr = dat(:,7);
+
+per = abs((num-anlt)./anlt);
+numerr = abs(numerr)./anlt;
+
+# dlmwrite("TEbodyconv1p.dat",[Nperloop(Nloops==1000),per(Nloops==1000),numerr(Nloops==1000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv2p.dat",[Nperloop(Nloops==2000),per(Nloops==2000),numerr(Nloops==2000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv3p.dat",[Nperloop(Nloops==4000),per(Nloops==4000),numerr(Nloops==4000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv4p.dat",[Nperloop(Nloops==8000),per(Nloops==8000),numerr(Nloops==8000)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv5p.dat",[Nperloop(Nloops==16000),per(Nloops==16000),numerr(Nloops==16000)],"delimiter","\t","precision","%20.10e")
+
+# dlmwrite("TEbodyconv1l.dat",[Nloops(Nperloop==50),per(Nperloop==50),numerr(Nperloop==50)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv2l.dat",[Nloops(Nperloop==100),per(Nperloop==100),numerr(Nperloop==100)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv3l.dat",[Nloops(Nperloop==200),per(Nperloop==200),numerr(Nperloop==200)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv4l.dat",[Nloops(Nperloop==400),per(Nperloop==400),numerr(Nperloop==400)],"delimiter","\t","precision","%20.10e")
+# dlmwrite("TEbodyconv5l.dat",[Nloops(Nperloop==800),per(Nperloop==800),numerr(Nperloop==800)],"delimiter","\t","precision","%20.10e")
+
+
+figure(3)
+loglog(Nperloop(Nloops==1000),per(Nloops==1000),'x-', ...
+ Nperloop(Nloops==2000),per(Nloops==2000),'x-', ...
+ Nperloop(Nloops==4000),per(Nloops==4000),'x-', ...
+ Nperloop(Nloops==8000),per(Nloops==8000),'x-',...
+ Nperloop(Nloops==16000),per(Nloops==16000),'x-')
+xlabel('Number of points per loop')
+ylabel('Percentage error |Num - Anlt|/Anlt')
+title('Percentage error for body at chi=1, d=1')
+
+legend(['Nl=1000'; 'Nl=2000'; 'Nl=4000'; 'Nl=8000';'Nl=16000'])
+
+figure(4)
+loglog(Nloops(Nperloop==50),per(Nperloop==50),'x-', ...
+ Nloops(Nperloop==100),per(Nperloop==100),'x-', ...
+ Nloops(Nperloop==200),per(Nperloop==200),'x-', ...
+ Nloops(Nperloop==400),per(Nperloop==400),'x-', ...
+ Nloops(Nperloop==800),per(Nperloop==800),'x-')
+xlabel('Number of loops')
+ylabel('Percentage error |Num - Anlt|/Anlt')
+title('Percentage error for body at chi=1, d=1')
+
+
+legend(['Np=50'; 'Np=100'; 'Np=200'; 'Np=400';'Np=800'])

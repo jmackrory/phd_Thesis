@@ -1,0 +1,71 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+%Height and width in inches
+% In plotutilities these are converted to real numbers
+/xmaxstr (4.1) def
+/xminstr (0.9) def
+/ymaxstr (5) def
+/yminstr (0) def
+
+%load utilities
+twocolumndimensions
+(casimirutilities.ps) run
+(plotlib/plotutilities.ps) run
+
+/gausscol{0.8 0.0 0 setrgbcolor} def 
+/TMcol{0.6 0 0.7 setrgbcolor} def
+
+/gaussBDcol{0 0 0.7 setrgbcolor} def
+/TMBDcol{0.0 0.67 0 setrgbcolor} def
+
+/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+
+startplot
+
+%Energy curve 
+0.5 setlinewidth
+
+%Set log-log scale
+SetLogAxisX SetLogAxisY
+
+/symbolsz 4 def % in points
+gausscol
+0 selectsymbol
+mark
+(data/TM_scalingN_var.TM.dat) run % load loop 1
+PlotStackDataPointsAuto
+
+TMcol
+1 selectsymbol
+mark
+(data/TM_scalingN_var.gauss.dat) run % load loop 1
+PlotStackDataPointsAuto
+
+gaussBDcol
+2 selectsymbol
+mark
+(data/TM_scalingN_var.gaussBD.dat) run % load loop 1
+PlotStackDataPointsAuto
+
+TMBDcol
+3 selectsymbol
+mark
+(data/TM_scalingN_var.TMBD.dat) run % load loop 1
+PlotStackDataPointsAuto
+
+
+
+
+%XAxisLabelsLog
+%YAxisLabelsLog
+[ (1) (2) (3) (4)  ] ExtraXTicksLog
+[ (1) (2) (3) (4) (5) ] ExtraYTicksLog
+[ /ComputerModern-Regular  normal (Points per loop)]  XAxisTitle
+[ /KahoeTechGreek  normal (s  )]  YAxisTitle
+[ /ComputerModern-Regular subscript (  N)]  YAxisTitle
+
+endplot

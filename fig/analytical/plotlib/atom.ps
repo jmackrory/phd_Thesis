@@ -1,0 +1,66 @@
+%!PS-Adobe-2.0
+%%Title: An Atom
+%%Creator: Daniel A. Steck
+%%         Department of Physics
+%%         University of Oregon
+%%CreationDate: 6/2/12
+%%Pages: 1
+%%EndProlog
+
+%%% subroutines
+/linesize   0.3           def  % size of lines, in points
+
+/in {72 mul} bind def  % conversion to inches
+
+/centercoordsinpage { % set origin in page center
+  4.25 in 5.5 in translate
+} bind def
+
+/startdiagram {
+  gsave centercoordsinpage
+  linesize setlinewidth
+  1 setlinecap % make round dots
+  0 setgray
+} def
+
+/enddiagram {
+  grestore
+  showpage
+} def
+
+/atom { % usage <x> <y> <sizefactor> drawatom
+  /sizefactor exch def
+  /myy exch def
+  /myx exch def
+  newpath
+  gsave
+  myx myy translate
+  1.5 sizefactor mul dup scale
+  0 0 1 0 360 arc fill
+  0.6 setlinewidth
+  gsave
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  gsave
+  60 rotate
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  gsave
+  -60 rotate
+  1 3.52 12 div scale
+  0 0 6 0 360 arc stroke
+  grestore
+  grestore
+} bind def
+
+
+%%% draw the atom
+startdiagram
+
+% draw atom: x y size-multiplier atom
+0 0 1 atom
+
+enddiagram
+

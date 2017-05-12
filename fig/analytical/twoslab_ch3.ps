@@ -1,0 +1,140 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {5} bind def
+/height {3} bind def
+/xmax {4} def
+/xmin {-4} def
+/ymin {-2} def
+/ymax {4} def
+/xmaxstr (4) def
+/xminstr (-4) def
+/yminstr (-2) def
+/ymaxstr (4) def
+
+%size of ellipse
+/titlesize {30}         bind def % size of plot title
+/subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
+
+/d1 {-1.5} def
+/d2 {1.5} def
+
+/fillcol {0.8 0.8 0.8 setrgbcolor} def
+
+startplot
+
+%Energy curve 
+1 setlinewidth
+
+% gsave
+% 0 setgray
+% 1 setlinewidth
+% newpath
+% xmin 0 cc moveto
+% xmax 0 cc lineto
+% stroke
+% grestore
+
+gsave
+newpath
+fillcol
+d1 ymin cc moveto
+d1 ymax cc lineto
+xmin ymax cc lineto
+xmin ymin  cc lineto
+d1 ymin cc lineto
+fill
+
+0 setgray
+newpath
+d1 ymin cc moveto
+d1 ymax cc lineto
+% -0.6 -1.5 cc moveto
+% -0.6 -0.75 cc lineto
+% -0.3 -0.75 cc lineto
+% -0.3 -1.5 cc lineto
+stroke
+grestore
+
+gsave
+newpath
+fillcol
+d2 ymin cc moveto
+d2 ymax cc lineto
+xmax ymax cc lineto
+xmax ymin  cc lineto
+d2 ymin cc lineto
+fill
+
+0 setgray
+newpath
+d2 ymin cc moveto
+d2 ymax cc lineto
+stroke
+grestore
+
+ d2 1.2 ymin mul cc moveto
+	0 setgray
+ [/KahoeTechLatin normal  (d)]  14 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  2)]  12 PrintArrayCenter	
+
+  d1 1.2 ymin mul cc moveto
+	0 setgray
+ [/KahoeTechLatin normal  (d)]  14 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  1)]  12 PrintArrayCenter	
+
+
+xmin 0.75 mul 0.6 ymin mul cc moveto
+0 setgray
+ [/KahoeTechGreek normal  (e)]  14 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  1)]  12 PrintArrayCenter	
+
+ % 20 0 rmoveto
+ % [/KahoeTechGreek normal  (m)]  14 PrintArrayCenter
+ % [/KahoeTechLatin subscript  (  1)]  12 PrintArrayCenter	
+
+xmax 0.75 mul 0.6 ymin mul cc moveto
+0 setgray
+ [/KahoeTechGreek normal  (e)]  14 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  2)]  12 PrintArrayCenter	
+
+ % 20 0 rmoveto
+ % [/KahoeTechGreek normal  (m)]  14 PrintArrayCenter
+ % [/KahoeTechLatin subscript  (  2)]  12 PrintArrayCenter	
+
+ 0 0.6 ymin mul cc moveto
+	0 setgray
+ [/KahoeTechGreek normal  (e)]  14 PrintArrayCenter
+ [/KahoeTechLatin subscript  (  0)]  12 PrintArrayCenter	
+
+ % 20 0 rmoveto
+ % [/KahoeTechGreek normal  (m)]  14 PrintArrayCenter
+ % [/KahoeTechLatin subscript  (  0)]  12 PrintArrayCenter	
+
+
+
+xmin 0.75 mul 0.6 ymax mul cc moveto
+0 setgray
+ [/ComputerModern-Regular normal  (Region I)]  14 PrintArrayCenter
+
+ 0  0.6 ymax mul cc moveto
+0 setgray
+ [/ComputerModern-Regular normal  (Region II)]  14 PrintArrayCenter
+
+ xmax 0.75 mul 0.6 ymax mul cc moveto
+0 setgray
+ [/ComputerModern-Regular normal  (Region III)]  14 PrintArrayCenter
+ 
+gsave
+[ /ComputerModern-Regular normal (Position)]  XAxisTitle
+%[ /ComputerModern-Regular normal (Dielectric / TM Potential)]  YAxisTitle
+grestore
+
+endplot

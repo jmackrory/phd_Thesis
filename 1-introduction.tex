@@ -236,8 +236,8 @@ For an atom in its ground state, the Casimir--Polder potential is given by
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
 $|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)/\hbar$.
-The shift $V\subCP$ can be understood as two virtual transitions---
-one from the atomic ground state with no photons to an atomic excited state with one photon,
+The shift $V\subCP$ can be understood as two virtual transitions---one from the atomic 
+ground state with no photons to an atomic excited state with one photon,
 followed by a return transition.  The total energy shift is found by summing over all possible intermediate states.
 This process is represented schematically via the Feynman diagram in Fig.~\ref{fig:feynman_CP}, where 
 an atom in the ground-state emits a virtual photon, and re-absorbs it.  This transition
@@ -262,7 +262,7 @@ intermediate states are not directly physically observable on a detector.
 \end{fmffile}
 \caption[Feynman Diagram for Casimir-Polder Energy]
 {Feynman diagram representing an atom interacting with electromagnetic field via emitting and absorbing photons.  
-  The wavy line represents the electromagnetic Green function in the presence of boundaries --- as opposed to the usual plane 
+  The wavy line represents the electromagnetic Green function in the presence of boundaries---as opposed to the usual plane 
   waves exploiting in field theory computations.  The atom is excited into intermediate states.
 }
 \label{fig:feynman_CP}
@@ -301,7 +301,7 @@ with $n_i$ integers~(\S 8.4.1 of Steck~\cite{SteckNotes}).
 % \end{align}
 The square-modulus $|\vect{f}\subkz(\vect{r})|^2$ can be simplified under a couple limits.  
 If the atom is close to the $z=0$ plane, but very far from the other walls, the squared-sinusoids in $x$ and $y$
-can be replaced by their average value of a half, since they will be quickly oscillating.   
+can be replaced by their average value of a $1/2$, since they will be quickly oscillating.   
 In addition, the polarization vectors form a resolution of the transverse identity (since Gauss's law 
 implies that the electric field is transverse, $\nabla\cdot\vect{E}=0$),
 \begin{equation}
@@ -562,7 +562,7 @@ The resulting free energy per unit area is
   \int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left[1 - r^{(\zeta)}_{13}(is_n)r^{(\zeta)}_{23}(is_n)e^{-2\sqrt{\epsilon_3}ps_n d/c}\right],
   \label{eq:lifshitz_finite_temp}
 \end{align}
-where the primed sum gives half the weight to the $n=0$ term, and all functions of frequency are evaluated at $s_n.$ 
+where the primed sum gives $1/2$ the weight to the $n=0$ term, and all functions of frequency are evaluated at $s_n.$ 
 At zero temperature, this result passes over to the previous one, 
 by transforming the sum over frequencies into an integral.  This is the most general form of the Lifshitz
 formula, and can recover all of the limiting behaviors in the near and far field, and perfect conducting
@@ -1031,8 +1031,8 @@ which is the scattering matrix as the bodies are removed to spatial infinity, th
 coupling between bodies and serves to remove any self-interactions. 
 The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
 %Since different bodies have different shapes, it is necessary t be able to transform basis.  
-Derivations similar to the argument principle used in Sec.~\ref{sec:lifshitz} can be applied to describe the scattering between modes,
---- instead of reflection coefficients for a surface, one considers the full scattering matrix for each body.
+Derivations similar to the argument principle used in Sec.~\ref{sec:lifshitz} can be applied to describe the scattering 
+between modes---instead of reflection coefficients for a surface, one considers the full scattering matrix for each body.
 %where matrix indices run over the labels (such as wavenumber and polarization) for the modes.
 This version of the scattering method has been applied to two-body systems such as realistic mirrors~\cite{Lambrecht2006}, 
 spheres and planes with investigatons of surface roughness~\cite{Canaguier-Durand2012}.   
@@ -1271,8 +1271,8 @@ the field path integral calculation can be recast in terms of the path
 and gauge fields can also be treated~\cite{Schubert2001}.
 For example, the worldline method has been used to compute relativistic
 field effects for QED such as the Lamb shift~\cite{Schmidt1995},  
-It has also been used as a numerical algorithm for computing these relativistic QED effects~\cite{Mazur2014}---
-however, these methods were developed for free-space interactions at high energy, rather than the 
+It has also been used as a numerical algorithm for computing these relativistic 
+QED effects~\cite{Mazur2014}---however, these methods were developed for free-space interactions at high energy, rather than the 
 low energy Casimir phenomena we seek to describe.  
 
 The worldline method was first used to compute scalar Casimir energies by Gies\etal~\cite{Gies2003,Gies2006, Gies2006a}.
@@ -1431,7 +1431,7 @@ The free energy for the interacting field can be written as
 \log\det\bigg(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\bigg)+C,
   \label{eq:free-energy-det}
 \end{equation}
-where $C$ is a constant.  
+where $C$ is a divergent constant.  
 As it stands this functional determinant is divergent, but finite results can be found by subtracting off the 
 free energy when the bodies are removed to spatial infinity.  Physically this corresponds to 
 computing energy differences between different configurations of bodies.  % The renormalization also cancels off 
@@ -1513,8 +1513,17 @@ $\Delta \cT= \cT/N$, subject to the loop-closure requirement $x_0=x_N$.
 The free energy can be written in a more intuitive form, better suited to numerical calculations,
 if we consider the coupled Gaussians as the probability distribution for paths through space-time.
 Each path increment $\Delta \vect{x}_k=\vect{x}_{k+1}-\vect{x}_k$ is Gaussian with zero mean and variance $\Delta \cT$.
-In addition, the resulting paths must close on themselves --- such Brownian motions with fixed end points are 
-referred to as Brownian bridges in the stochastic processes literature~\cite{Karatzas1991}.  
+In addition, the resulting paths must close on themselves. 
+
+The resulting paths are a specific form of Brownian motion.
+ A Brownian motion (or Wiener process) is a continuous random process $W(t)$, that starts at the origin ${W(t=0)=0}$, 
+and has increments $\Delta W(t):=W(t+\Delta t)-W(t)$, that are Gaussian random variables with $\dlangle \Delta W(t)\drangle=0$,
+$\dlangle \Delta W(t) \Delta W(t')\drangle = 0$ for $t\ne t'$ and $\dlangle [\Delta W(t)]^2\drangle=0$~\cite{Gardiner2009}.  
+A Brownian bridge is a Brownian motion with fixed end points at times $t=0$ and $t=T$, where 
+$B(t=0)=0$, and $B(t=T)=c$, and its increments obey the same statistics as the Wiener process~\cite{Karatzas1991}.  
+Throughout this thesis, we will most often use the discrete form of these processes, for example $W_j=W(t_j)=W(j\Delta t)$.
+Brownian motion can be straightforwardly generalized to multiple-dimensions.  
+
 The result of these manipulations is 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\frac{\hbar c}{2}\int \frac{d\cT}{(2\pi\cT)^{D/2}\cT} \int d\vect{x}_0
@@ -1527,7 +1536,6 @@ starting at $\vect{x}_0$ and returning with $\vect{x}_N=\vect{x}_0$, and
   \langle V\rangle := \frac{1}{\cT}\int_0^\cT dt\,V[\vect{x}(t)] = \frac{1}{N}\sum_{k=0}^{N-1}V(\vect{x}_k)
 \end{equation}  
 is the path-averaged value of the potential. 
-\todo{Define Brownian bridges and motions!}
 The worldline method relies on generating an ensemble of closed Brownian bridges, and evaluating
 the path-averaged potential for each path.  One must also integrate over the starting point $\vect{x}_0$
 of the paths, and the total path time $\cT$.  The total path time $\cT$ governs the spatial extent of the paths, 
@@ -1575,17 +1583,18 @@ can be carried out with the result
   \mathcal{F}-\mathcal{F}_0 =& -\kB T {\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0
   e^{-s_n^2\cT/(2c^2)}\dlangle e^{-\cT\langle V\rangle} - 1\drangle,
 \end{align}
-where the prime on the sum means that the $n=0$ term is multiplied by a half.  
+where the prime on the sum means that the $n=0$ term is multiplied by a $1/2$.  
 Since the $\cT$ dependence differs, there is also a different distance dependence.
 Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)}$,
 which means the renormalized energy scales as $d^{-3}$ in four space-time dimensions.
 % In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
 % can be replaced by a Riemann sum, and the prior zero-temperature results
 \label{sec:worldline_distance_dep}
+
 \subsection{Numerical method}
 
 In order to numerically evaluate the worldline Casimir energy, it is necessary to generate 
-an ensemble of closed, Brownian paths.  Given the probability for a free Brownian motion to close 
+an ensemble of closed, Brownian paths.  Given the probability for a free Brownian motion $W(t)$ to close 
 on itself after $N$ steps is negligible, it is essential to force the closure constraint when
 constructing the paths.  
 
@@ -1619,7 +1628,8 @@ we will discuss this algorithm further in Ch.~\ref{ch:numerical}.
 
 Having constructed a path, it is then necessary to compute the worldline integrand $e^{-\cT\langle V\rangle}-1$ along that path.
 If any point along the path intersects one of the surfaces, then in the strong coupling limit the 
-potential $V=\lambda\delta[\sigma(\vect{x})]$ saturates, and as a result the worldline integrand goes to negative one.  
+potential $V=\lambda\delta[\sigma(\vect{x})]$ is nonzero, and in the $\lambda\rightarrow \infty$ limit, 
+the worldline integrand goes to negative one.  
 If however, no points on the path intersect a surface, then the potential is zero, and the renormalized
 worldline integrand is also zero.  
 

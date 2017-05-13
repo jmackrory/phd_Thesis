@@ -457,12 +457,12 @@ $\epsra$ and $\epsrb$ from the two-body  expressions with $\epsrab$.  The fully 
   \begin{align}
     &\int_{-\infty}^\infty dx_0\bigg(\big[f\supTE_{12}(x_0)-f_{12}\sup0\big] -\big[f\supTE_{1}(x_0)-f_{1}\sup0\big]
     -\big[f\supTE_{2}(x_0)-f_{2}\sup0\big]\bigg)\nonumber\\
-    & = \frac{A\sqrt{\pi}u\supTE_1u\supTE_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{(\lambda+s)}(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2(\lambda+s)}d})}\left(2d
+    & = \frac{A\sqrt{\pi}r\supTE_1r\supTE_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{(\lambda+s)}(1-r\supTE_1r\supTE_2 e^{-2\sqrt{2(\lambda+s)}d})}\left(2d
      + \frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_1)}}+\frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_2)}}\right),
   \end{align}
   where $A$ is the (infinite) transverse area of the dielectric planes, and the reflection coefficients for each surface are
   \begin{equation}
-    u\supTE_i = \frac{\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
+    r\supTE_i = \frac{\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
   \end{equation}
   In order to recover a finite quantity it is necessary to calculate the energy per unit area.  
   The integrals can be transformed into Lifshitz form via similar transformations to those used previously.
@@ -470,40 +470,40 @@ $\epsra$ and $\epsrb$ from the two-body  expressions with $\epsrab$.  The fully 
   \begin{align}
     \frac{E\subTE-E\sup0}{A} &= -\frac{\hbar c}{(2\pi)^{D/2}}\sqrt{\pi}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
   \int_1^\infty dv\, \frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
-  &\times\frac{u\supTE_1u\supTE_2e^{-2\sqrt{2s}vd}}{(1-u\supTE_1u\supTE_2 e^{-2\sqrt{2s}vd})}
+  &\times\frac{r\supTE_1r\supTE_2e^{-2\sqrt{2s}vd}}{(1-r\supTE_1r\supTE_2 e^{-2\sqrt{2s}vd})}
 \left(2d + \frac{\sqrt{2}}{\sqrt{s}\sqrt{v^2+\chi_1}}+\frac{\sqrt{2}}{\sqrt{s}{v^2+\chi_2}}\right),
   \end{align}
   where the reflection coefficients are now given by 
   \begin{equation}
-    u\supTE_i = \frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}.
+    r\supTE_i = \frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}.
   \end{equation}
   Next, change variable from $s$ to $t=\sqrt{2s}$, swap the $t$ and $v$ integrals, and  
   substitute $\alpha=1/2$, $D=4$, with the result
   \begin{align}
      \frac{E\subTE-E\sup0}{A}
     &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{D-1}  \int_1^\infty dv\, (v^2-1)\nonumber\\
-    &\times\frac{u\supTE_1u\supTE_2e^{-2tvd}}{(1-u\supTE_1u\supTE_2 e^{-2tvd})}
+    &\times\frac{r\supTE_1r\supTE_2e^{-2tvd}}{(1-r\supTE_1r\supTE_2 e^{-2tvd})}
     \left(2d + \frac{2}{t\sqrt{v^2+\chi_1}}+\frac{2}{t\sqrt{v^2+\chi_2}}\right).
   \end{align}
 Finally, the integral can be simplified by integrating by parts with respect to $v$.
 The following derivatives will be of use,
 \begin{align}
-  \frac{d u\supTE_i}{dv} &= \frac{d}{dv}\frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
+  \frac{d r\supTE_i}{dv} &= \frac{d}{dv}\frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
     % &= \frac{1-v/\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
     %   - \frac{(v-\sqrt{v^2+\chi_i})(1+v/\sqrt{v^2+\chi_i})}{(v+\sqrt{v^2+\chi_i})^2}\\
     % &= \frac{\sqrt{v^2+\chi_i}-v}{\sqrt{v^2+\chi_i}(v+\sqrt{v^2+\chi_i})}
     %   - \frac{(v-\sqrt{v^2+\chi_i})(\sqrt{v^2+\chi_i}+v)}{\sqrt{v^2+\chi_i}(v+\sqrt{v^2+\chi_i})^2}\\
-    = \frac{-2u\supTE_i}{\sqrt{v^2+\chi_i}}\\
-    \frac{d}{dv}\log[1-u\supTE_1u\supTE_2 e^{-2 t v d}] & = 
-    \frac{u\supTE_1u\supTE_2 e^{-2 t v d}}{1-u\supTE_1u\supTE_2 e^{-2 t v d}}\left( 2 t d+\frac{2}{\sqrt{v^2+\chi_1}}
+    = \frac{-2r\supTE_i}{\sqrt{v^2+\chi_i}}\\
+    \frac{d}{dv}\log[1-r\supTE_1r\supTE_2 e^{-2 t v d}] & = 
+    \frac{r\supTE_1r\supTE_2 e^{-2 t v d}}{1-r\supTE_1r\supTE_2 e^{-2 t v d}}\left( 2 t d+\frac{2}{\sqrt{v^2+\chi_1}}
 +\frac{2}{\sqrt{v^2+\chi_2}}\right).
 \end{align}
 The TE Casimir energy between two half-spaces is then 
 \begin{align}
     \frac{E\subTE-E\sup0}{A}
   &= -\frac{\hbar c}{8\pi^2}\int_0^\infty dt \,t^{3}  \int_1^\infty dv\, (v^2-1) 
-  \frac{d}{dv}\bigg[\frac{1}{t}\log(1-u\supTE_1u\supTE_2 e^{-2tvd})\bigg]\nonumber\\
-  &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dv\, v \log(1-u\supTE_1u\supTE_2 e^{-2tvd}),
+  \frac{d}{dv}\bigg[\frac{1}{t}\log(1-r\supTE_1r\supTE_2 e^{-2tvd})\bigg]\nonumber\\
+  &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dv\, v \log(1-r\supTE_1r\supTE_2 e^{-2tvd}),
 \end{align}
 since the boundary term from the integration by parts vanishes.  
 This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in Sec.~\ref{sec:lifshitz}.
@@ -514,7 +514,7 @@ The TE Casimir energies per unit area can be written as
 \end{equation}
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTE$ is
 \begin{equation}
-  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-u\supTE_1u\supTE_2 e^{-2tvd}].
+  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-r\supTE_1r\supTE_2 e^{-2tvd}].
   \label{eq:gammaTE}
 \end{equation}
 In this case, the $\gamma\subTE$ interpolates between $0$ and $1/2$ as $\chi$ increases.  In the Casimir energy
@@ -559,14 +559,14 @@ In this case, the integrated solution is
 &\int d\vect{x}_0 \left[ \big(f\supTM_{12}(\vect{x}_0)-f_{12}\sup0\big) 
 - \big(f\supTM_{1}(\vect{x}_0)-f_{1}\sup0\big)
 -\big(f\supTM_{2}(\vect{x}_0)-f_{1}\sup0\big)\right]\nonumber\\
-  &=\frac{\sqrt{\pi} A\,u\supTM_1u\supTM_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{\lambda+s}(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2(\lambda+s)}d})}\nonumber\\
+  &=\frac{\sqrt{\pi} A\,r\supTM_1r\supTM_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{\lambda+s}(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2(\lambda+s)}d})}\nonumber\\
   &\hspace{0.5cm}\times\bigg[2d
   -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}s\chi_i}{\sqrt{\lambda+s(1+\chi_i)}[(\lambda+s)\,e^{4\Xi_i}-\lambda-s(1+\chi_i)]}
  \bigg],
 \end{align}
 where there is a factor of the transverse area $A$, and the reflection coefficients are given by, 
 \begin{equation}
-  u\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{e^{2\Xi_i}\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
+  r\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{e^{2\Xi_i}\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
 \end{equation}
 The same transformations can be employed to transform the TM Casimir energy.
 First, change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, % [or $\lambda=s(v^2-1)$]
@@ -575,7 +575,7 @@ First, change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, % [or $\lambda
 &= -\frac{\hbar cA}{(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
   \int_1^\infty dv\,\frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
   &\hspace{0.5cm}
-\times\frac{\sqrt{\pi} \,u\supTM_1u\supTM_2e^{-2\sqrt{2s}vd}}{(1-u\supTM_1u\supTM_2 e^{-2\sqrt{2s}vd})}
+\times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2\sqrt{2s}vd}}{(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2s}vd})}
 %\nonumber\\  &\hspace{0.5cm}\times
 \bigg[2d
   -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}\chi_i}{\sqrt{s}\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
@@ -583,7 +583,7 @@ First, change variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, % [or $\lambda
   \end{align}
 where the reflection coefficients are now given by 
 \begin{equation}
-  u\supTM_i =  \frac{e^{2\Xi_i}v-\sqrt{v^2+\chi_i}}{e^{2\Xi_i}v+\sqrt{v+\chi_i}}.
+  r\supTM_i =  \frac{e^{2\Xi_i}v-\sqrt{v^2+\chi_i}}{e^{2\Xi_i}v+\sqrt{v+\chi_i}}.
 \end{equation}
   Next, change variable from $s$ to $t=\sqrt{2s}$, and substitute $\alpha=1/2$, $D=4$, with the result
   \begin{align}
@@ -591,7 +591,7 @@ where the reflection coefficients are now given by
 %   &= -\frac{\hbar cA}{(2\pi)^{D/2}}\int_0^\infty dt\,\frac{t^{D-1}}{2^{(D-2)/2}\Gamma(\alpha)}
 %   \int_1^\infty dv\,\frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
 %   &\hspace{0.5cm}
-% \times\frac{\sqrt{\pi} \,u\supTM_1u\supTM_2e^{-2tvd}}{(1-u\supTM_1u\supTM_2 e^{-2tvd})}
+% \times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2tvd}}{(1-r\supTM_1r\supTM_2 e^{-2tvd})}
 % %\nonumber\\  &\hspace{0.5cm}\times
 % \bigg[2d
 %   -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
@@ -599,7 +599,7 @@ where the reflection coefficients are now given by
   &= -\frac{\hbar cA}{16\pi^{2}}\int_0^\infty dt\,t^{3}
   \int_1^\infty dv\,(v^2-1)\nonumber\\
   &\hspace{0.5cm}
-\times\frac{\,u\supTM_1u\supTM_2e^{-2tvd}}{(1-u\supTM_1u\supTM_2 e^{-2tvd})}
+\times\frac{\,r\supTM_1r\supTM_2e^{-2tvd}}{(1-r\supTM_1r\supTM_2 e^{-2tvd})}
 %\nonumber\\  &\hspace{0.5cm}\times
 \bigg[2d
   -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
@@ -608,19 +608,19 @@ where the reflection coefficients are now given by
 Once again, an integration by parts with respect to $v$ will put the energy in Lifshitz form. The following
 derivatives will be required:
 \begin{align}
-  \frac{d}{dp}\log[1-u\supTM_1u\supTM_2 e^{-2ptd}] 
-  &= \frac{u\supTM_1u\supTM_2 e^{-2ptd}}{1-u\supTM_1u\supTM_2 e^{-2ptd}}\left( 2td -\sum_{i=1}^2\frac{d\log u\supTM_i}{dp}\right),
+  \frac{d}{dp}\log[1-r\supTM_1r\supTM_2 e^{-2ptd}] 
+  &= \frac{r\supTM_1r\supTM_2 e^{-2ptd}}{1-r\supTM_1r\supTM_2 e^{-2ptd}}\left( 2td -\sum_{i=1}^2\frac{d\log r\supTM_i}{dp}\right),
 \end{align}
 and 
 \begin{align}
-  \frac{d}{dp}\log[u\supTM_i] %=& \frac{d}{dp}\left(\log[e^{2\Xi_i}p - \sqrt{p^2+\chi_i}] -\log[e^{2\Xi_i}p + \sqrt{p^2+\chi_i}]\right) \nonumber\\
+  \frac{d}{dp}\log[r\supTM_i] %=& \frac{d}{dp}\left(\log[e^{2\Xi_i}p - \sqrt{p^2+\chi_i}] -\log[e^{2\Xi_i}p + \sqrt{p^2+\chi_i}]\right) \nonumber\\
   =\,& \frac{2\chi e^{2\Xi_i}}{\sqrt{p^2+\chi_i}[e^{4\Xi_i}p^2-(p^2+\chi_i)]}.
 \end{align}
 After integrating by parts, the TM Casimir energy is 
   \begin{align}
   E\subTM-E\sup0 
   &= \frac{\hbar cA}{8\pi^2}\int_0^\infty dt\,t^{2}
-  \int_1^\infty dv\,\log[1-u\supTM_1u\supTM_2 e^{-2tvd}].
+  \int_1^\infty dv\,\log[1-r\supTM_1r\supTM_2 e^{-2tvd}].
   \end{align}
 \comment{need factor of $4$ - the following assumes it has been found and fixed}.
 The TM Casimir energies per unit area can be written as 
@@ -629,7 +629,7 @@ The TM Casimir energies per unit area can be written as
 \end{equation}
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTM$ is
 \begin{equation}
-  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-u\supTM_1u\supTM_2 e^{-2tvd}].
+  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-r\supTM_1r\supTM_2 e^{-2tvd}].
   \label{eq:gammaTM}
 \end{equation}
 At the end of the computation the relation $e^{2\Xi_i}=(1+\chi_i)$, can be used in the reflection coefficients
@@ -647,10 +647,7 @@ to describe the near-field and high temperature limiting cases.
 %  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 The free energy for the TE and TM polarizations (for non-magnetic media) is
 \begin{align}
-\cF\supTE%& = -k_BT \log \frac{Z_{TE}}{Z_0} \\
-% & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
-%     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
-% -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
+\cF\supTE
 =\,&k_BT{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d\vect{x}_0\,
 %\nonumber\\&\times
 \dlangle  e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}\drangle\\

@@ -980,7 +980,7 @@ starting (and finishing) point.
 %   &=\frac{1}{(2\pi\langle \sigma^2\rangle\cT)^{(D-1)/2}}
 %   \exp\left(-\frac{(\vect{x}_{N}-\vect{x}_0)^2}{2\langle\sigma^2\rangle\cT}\right),\label{eq:tau-integral}
 % \end{align}
-The normalized Gaussian probability density is 
+The normalized Gaussian probability density for a random walk of $N$ steps between $\vect{x}_0$ and $\vect{x}_N$ is 
 % The same reasoning as Eq.~(\ref{eq:tau-integral}) can be used to find the normalization for the Gaussian probability density,
 % which is defined as
 \begin{align}
@@ -1072,11 +1072,11 @@ The Gaussian integrals for each $\phi_n$ can be carried out, so that the free en
 as
 \begin{equation}
 -\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
-\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right),
+\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE(\vect{x},is_n)\right),
 \end{equation}
 where the prime on the sum indicates that the $n=0$ term is multiplied by a $1/2$ and
 \begin{equation}
-  V^{(n)}\subTE(z) := \frac{1}{2}\big[\big(\partial_z\log\sqrt{\mur(z,is_n)}\big)^2-\partial_z^2\log\sqrt{\mur(z,is_n)}\big].
+  V\subTE(\vect{x},is_n) := \frac{1}{2}\big[\big(\nabla\log\sqrt{\mur(\vect{x},is_n)}\big)^2-\nabla^2\log\sqrt{\mur(\vect{x},is_n)}\big].
 \end{equation}
 The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
 Note that the zero frequency contribution vanishes if $\lim_{\omega\rightarrow 0}\omega^2\epsr(\omega)=0$, 
@@ -1099,9 +1099,9 @@ The resulting worldline path integral is
 % & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
 %     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
 % -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
-=&-\frac{k_BT}{2}{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+=&-k_BT{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
 &\times\dlangle e^{-s_n^2\cT /(2c^2)} -  e^{-s_n^2\langle\epsr(\vect{x},is_n)\mur(\vect{x},is_n)\rangle\cT /(2c^2)}
-e^{-\cT\langle V\subTE^{(n)}(\vect{x})\rangle}\drangle,
+e^{-\cT\langle V\subTE(\vect{x},is_n)\rangle}\drangle,
 \label{eq:TEworldline_partition_function}
 \end{align}
 where the paths are $D-1$ dimensional spatial paths.  
@@ -1111,10 +1111,27 @@ where the paths are $D-1$ dimensional spatial paths.
 This $\cT$-dependence also reflects the different $d$-dependent scaling behaviors in the near-field, 
 thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
 
-The zero-temperature limit can be recovered by converting the Matsubara sum into a frequency integral.
-In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi n)/\beta \hbar\rightarrow 0$.
-If we further approximate the material responses by their dc values, then the integral over frequency
-is Gaussian.  After carrying out the frequency integral, the result is the zero temperature TE worldline (\ref{eq:TE_worldline}).
+The zero-temperature, dispersion-free Casimir energy~(\ref{eq:TE_worldline}) can be recovered from the free energy. 
+In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi)/\beta \hbar\rightarrow 0$, 
+so $s_n$ can be approximated as a continuous variable, $s=n\Delta s$, and the sum can be approximate using
+\begin{equation}
+  \lim_{n\rightarrow \infty}\sum_{n}f(n\Delta s)\approx(\Delta s)^{-1}\int ds\, f(s).
+\end{equation}
+In this limit the free energy is 
+\begin{align}
+  \cF\subTE-\cF_0 
+  \approx&-k_BT\frac{\hbar\beta}{2\pi}\int_0^\infty ds\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d^{D-1}x_0\,\nonumber\\
+  &\times\dlangle e^{-s^2\cT /(2c^2)} -  e^{-s^2\langle\epsr(\vect{x},is)\mur(\vect{x},is)\rangle\cT /(2c^2)}
+  e^{-\cT\langle V\subTE(\vect{x},is)\rangle}\drangle,
+\end{align}
+If we further approximate the material responses by their zero frequency values, then the $s$ integral is Gaussian and 
+can be evaluated, with the result that
+\begin{align}
+  \cF\subTE-\cF_0 
+  \approx&-\frac{\hbar c}{2}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{D/2}}\int d^{D-1}x_0\, 
+\dlangle   1 -  \frac{ e^{-\cT\langle V\subTE(\vect{x},0)\rangle}}{\sqrt{\langle\epsr(\vect{x},0)\mur(\vect{x},0)\rangle}} \drangle,
+\end{align}
+which is the anticipated zero temperature, dispersion free TE worldline energy~(\ref{eq:TE_worldline}).
 
 % The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
 % employ in the next chapter.  

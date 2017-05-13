@@ -1,6 +1,6 @@
 \chapter{Electromagnetic Worldlines: Numerical Forces and Curvatures
 for the TE Polarization}
-
+\label{ch:force}
 The preceding work has focused on computing the Casimir energy between dielectric bodies.  However,
 a number of experiments directly measure the force, or even the second spatial derivative of the energy.
 Experiments that detect the shift in frequency of an oscillator, such as 
@@ -18,10 +18,10 @@ the Dirichlet worldline method~\cite{Weber2009, Weber2010}.
 They computed the force between a planar surface and a cylindrical or spherical body, and the
 torque between inclined plates.  Their methods typically rely on finding analytical expressions for 
 when a particular Brownian path will intersect the surfaces, and analytically integrate over 
-the path-time and path starting position.  
+the path time and path starting position.  
 
 In contrast, our approach to the worldline method has further emphasized Monte Carlo integration over
-the path-time and starting position.  
+the path time and starting position.  
 We have therefore developed worldline expressions to directly compute the force, potential curvature
 and torque that apply between arbitrarily shaped bodies.  The resulting path integrals consider 
 paths pinned to start on the surfaces of the bodies.  
@@ -179,7 +179,7 @@ paths that start on a body's surface.  The direction of the
 force from a small patch of the surface is determined by the local
 surface normal. 
 Since each patch is at different distances from the other bodies, 
-the paths from each patch contribute at different path-times.  Once the integral 
+the paths from each patch contribute at different path times.  Once the integral 
 over the surface is carried out, this results in a net force on the body.  
 
 \subsection{Potential Curvature}
@@ -728,7 +728,7 @@ and are explicitly constructed to intersect the second body after $k$ steps, whe
 The paths can be explicitly constructed as Brownian bridges from $x=0$ to $x_k=d$, via the open v-loop
 algorithm~(\ref{eq:open_vloop}).
 The Gaussian factor $\mathcal{G}\big[d,k(N-k)\cT/N^2\big]$ in Eq.~(\ref{eq:curvature_occupy}) is used
-to sample path-times by treating it as the Gamma distribution.  Path times can be sampled 
+to sample path times by treating it as the Gamma distribution.  Path times can be sampled 
 from Eq.~(\ref{eq:expT}), with $\cT_0=N^2d^2/[2k(N-k)]$ and $\alpha=1+(D+1)/2$.
 % The fixed index $k$ for the pinning is determined by randomly selecting from the resulting
 % normalization constant.  
@@ -769,13 +769,13 @@ The final expression for the potential curvature is
   &\hspace{2cm} \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
   \biggdrangle_{\Delta,\cT,\vect{x}_0\leftrightarrow\vect{x}_\Delta},
 \end{align}
-where the ensemble average is over path-times, pinning separations $\Delta$, and 
+where the ensemble average is over path times, pinning separations $\Delta$, and 
 Brownian bridges from $\vect{x}_0$ to $\vect{x}_\Delta$, where $\vect{x}_0$ is on the first 
 surface, and $\vect{x}_\Delta$ is on the second surface.
 % we have used $\dlangle \cdots\drangle_{y; C}$ to denote ensemble averaging over quantities 
 % $y$ subject to possible constraints $C$.  The first pinning position is fixed on the first surface,
 % the second pinnings are sampled from $P_\Delta$ with $k=j+\Delta$, 
-The path-times are sampled from $P_{\text{exp-T}}[\cT;\cT_0,1+(D+1)/2]$, with $\cT_0$ given by 
+The path times are sampled from $P_{\text{exp-T}}[\cT;\cT_0,1+(D+1)/2]$, with $\cT_0$ given by 
 \begin{equation}
   \cT_0 = \frac{N^2d^2}{2\Delta(N-\Delta)} \label{eq:T0_curvature}.
 \end{equation}
@@ -873,7 +873,7 @@ These will be evaluated separately, although they may share random numbers.
 In order to capture the strong-coupling dependence it is necessary to also sample from the no-touching
 set of paths.  For two half-spaces this can be constructed by shifting paths so that the minimum
 point of the path starts on one body, $B(t)\rightarrow B(t) -B_{\text{min}}+d_1$.
-We then find the maximum point $B_{\text{max}}$ and consider finding the path-times when 
+We then find the maximum point $B_{\text{max}}$ and consider finding the path times when 
 that point is close to the second surface $d_2$.
 Let us call the index of the maximum location $j$.
 
@@ -896,7 +896,7 @@ The probability distribution can be converted to an one-sided normal distributio
   s = \sqrt{2Nd^2}\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_j}{d}\right),
 \end{equation}
 In that case, $s$ is the absolute value of a standard normal deviate, and 
-the path-times are then given by
+the path times are then given by
 \begin{equation}
   \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_j}{d}\right)^{-2}\label{eq:cT-s},
 \end{equation}

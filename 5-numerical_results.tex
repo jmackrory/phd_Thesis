@@ -16,7 +16,7 @@ worldline methods.
 
 The primary ingredients for the numerical method are ways of efficiently 
 constructing Brownian paths and a technique for Monte Carlo sampling of the path starting points $x_0$
-and path-time $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
+and path time $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
 However, the TM polarization displays large numerical fluctuations, which must be tempered by changing the methods
 used to construct the paths.  In addition, the TM Casimir--Polder energy involves taking spatial
 derivatives of the worldline path integral.
@@ -40,7 +40,7 @@ Since $\chi(i\omega)$ is a positive real constant, that diverges in some cases
 
 In this section we will discuss numerically simulating the TE Casimir and Casimir--Polder energies 
 from the worldline expressions in Eqs.~(\ref{eq:TE_Casimir}) and (\ref{eq:TE_Casimir_Polder}).
-We will first discuss path generation, sampling starting positions $\vect{x}_0$ and path-times $\cT$,
+We will first discuss path generation, sampling starting positions $\vect{x}_0$ and path times $\cT$,
 and evaluating the dielectric path-average $\langle \epsr\rangle$.  % Despite working with expressions adapted to planar
 % media, we will endeavour to develop general purpose numerical methods that would work in more general
 % geometries.  
@@ -132,7 +132,7 @@ where the ensemble average is taken over open Brownian bridges between $x_0$ and
 The limit of closed paths can be taken by setting $x_N-x_0=0$.
 The v-loop construction is also straightforwardly generalized to vector Brownian bridges.  
 This procedure allows the generation of a unit loop for $\cT=1$, which can then be integrated over
-multiple starting points $x_0$ and total path-times $\cT$.  A closed unit Brownian bridge can be constructed 
+multiple starting points $x_0$ and total path times $\cT$.  A closed unit Brownian bridge can be constructed 
 as
 \begin{equation}
   B_k = c_kB_{k-1} + \sqrt{\frac{c_k}{N}}z_k,\label{eq:unit_vloop}
@@ -154,7 +154,7 @@ the stress-energy tensor is being computed.
 \subsection{Monte Carlo Sampling}
 
 To evaluate the Casimir energy it is necessary to integrate the results for a single path over all
-starting points $\vect{x}_0$, path-times $\cT$, and average over an ensemble of paths.
+starting points $\vect{x}_0$, path times $\cT$, and average over an ensemble of paths.
 % The rationale for also sampling over times is to allow further ensemble averaging over paths,
 % and times. 
 The original Gies\etal computations emphasized computing the $\cT$ and $\vect{x}_0$ integrals for each path~\cite{Gies2003}.
@@ -174,7 +174,7 @@ This becomes impractical for large $N$, as a large computational effort  must be
 %This becomes even more burdensome once the integral over the starting position is accounted for.
 
 Since the $N$-fold integral over positions is being handled in a Monte Carlo fashion, it makes sense to 
-treat the remaining integrals over the starting position $\vect{x}_0$ and path-times $\cT$ in the same manner.
+treat the remaining integrals over the starting position $\vect{x}_0$ and path times $\cT$ in the same manner.
 Each path can be evaluated for a single pair of $\vect{x}_0$ and $\cT$, where those are picked from suitable
 distributions, governed by the form of the integral.  This is a form of importance sampling, which 
 is a powerful tool for accelerating Monte Carlo numerical computations~\cite{Asmussen2007, Glasserman2004}.
@@ -186,15 +186,15 @@ is essential for good convergence.
 
 \subsubsection{Sampling Path-Times from a Power Law}
 
-The simplest method of sampling path-times, is to exploit the presence of $\cT^{-(1+D/2)}$ in the integral.
+The simplest method of sampling path times, is to exploit the presence of $\cT^{-(1+D/2)}$ in the integral.
 For a particular path, the renormalized TE integrand is only non-zero after the path touches all of the bodies,
-which occurs at some path-time $\cT_0$.\footnote{For a Brownian motion $\vect{x}(t)$,
+which occurs at some path time $\cT_0$.\footnote{For a Brownian motion $\vect{x}(t)$,
 the term ``first-touching time'' is reserved for the first time $t_0$ along a path that a Brownian bridge intersects a surface: $\vect{x}(t_0)=d$. 
-This is distinct from the first path-time $\cT$ when any section of the scaled path intersects a surface.
+This is distinct from the first path time $\cT$ when any section of the scaled path intersects a surface.
 }
 For $\cT>T_0$,  the extent of the path grows as $\sqrt{\cT}$, so the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ 
 increases as more points enter the bodies.  
-However, the $\cT^{-(1+D/2)}$ factor decreases the contributions from large path-times $\cT$.
+However, the $\cT^{-(1+D/2)}$ factor decreases the contributions from large path times $\cT$.
 These facts suggest sampling $\cT$ from a probability distribution 
 \begin{equation}
   P(\cT;\cT_0,m)= \frac{(m-1) \cT_0^{m-1}}{\cT^m}\Theta(\cT-\cT_0),\label{eq:Tpower_law}
@@ -202,7 +202,7 @@ These facts suggest sampling $\cT$ from a probability distribution
 where $m>1$ and $\cT_0>0$.  This requires being able to estimate the value of $\cT_0$.  
 For the example of paths starting between parallel planes $\cT_0=\text{min}[\left(\frac{-d_1-x_0}{B_-}\right)^2,
 \left(\frac{d_2-x_0}{B_+}\right)^2]$ where $d_1<x_0<d_2$, and $B_\pm$ are the maximum and minimum points
-of the unit Brownian path.  The path-time $\cT_0$ is the lowest bound on when the path will touch the relevant bodies.
+of the unit Brownian path.  The path time $\cT_0$ is the lowest bound on when the path will touch the relevant bodies.
 In computing Casimir interaction energies, the path must touch \emph{all} of the bodies, while in Casimir--Polder
 calculations, the path must touch \emph{any} of the bodies to contribute.  
 
@@ -223,7 +223,7 @@ The lower-bound $\cT_0$ can be easily found in simple geometries on a path-wise 
 $\cT$ can then be generated for each path, where each path is then guaranteed to contribute.  
 
 In a more complicated arrangement of bodies, the lower-bound $\cT_0$ could be found via root-finding,
-to find the minimum path-time such that the path touches all of the relevant bodies.  It is important for 
+to find the minimum path time such that the path touches all of the relevant bodies.  It is important for 
 $\cT_0$ to be a lower bound on the first time the integrand is nonzero, otherwise this method will miss 
 part of the integral.  However, $\cT_0$ should not be set too low, as otherwise numerous samples will
 be made which generate paths that are too small to contribute.  
@@ -232,12 +232,12 @@ be made which generate paths that are too small to contribute.
 
 The integral over the starting point $x_0$ can also be evaluated in Monte Carlo fashion by exploiting some knowledge 
 about the form of the integrand.  
-For points far from all bodies located around the origin, the expected minimum path-time when the integrand is nonzero 
+For points far from all bodies located around the origin, the expected minimum path time when the integrand is nonzero 
 is $\cT_0\sim x_0^2$.
 If the extent of the finite bodies is $d_{\text{max}}$, then there is also a maximum time $\cT_1$ for when the path is so large 
 that it does not intersect the bodies anymore (this may be infinite in some geometries).
 In that case, and approximating the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ by its strong-coupling limit,
-the path-time integral is approximately 
+the path time integral is approximately 
 \begin{equation}
   \int_{\cT_0}^{\cT_1} \frac{d\cT }{\cT^{1+D/2}} = \frac{1}{x_0^{D}}-\frac{1}{d_{\text{max}}^D}.
 \end{equation}
@@ -300,8 +300,8 @@ The TE Casimir--Polder energy is calculated numerically by evaluating
 where $\dlangle \cdots\drangle_{\vect{x}_k,\cT}$ denotes an ensemble average over discrete Brownian bridges,
 and times $\cT$.  
 The one-dimensional Brownian bridges are constructed using the v-loop algorithm~(\ref{eq:unit_vloop}).
-The minimum path-time $\cT_0$ is determined on a path-wise basis, based on solving $\sqrt{\cT_0}\text{max}(B_k)=d$.
-The path-time is sampled for each path from Eq.~(\ref{eq:Tpower_law}), with $m=1+D/2=3$.
+The minimum path time $\cT_0$ is determined on a path-wise basis, based on solving $\sqrt{\cT_0}\text{max}(B_k)=d$.
+The path time is sampled for each path from Eq.~(\ref{eq:Tpower_law}), with $m=1+D/2=3$.
 The path is then scaled, $x_k = \sqrt{\cT}B_k$, and the trapezoidal method is used to evaluate $\langle\epsr\rangle$
 around each path.  The sojourn time per path $\langle\Theta(x-d)\rangle$ can be estimated once per path,
 and then multiple $\chi$ can be computed at once using $\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.
@@ -327,8 +327,8 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
 \end{figure}
 
 % Each path was generated with the v-loop algorithm~(\ref{eq:vloop}). 
-% A single path-time $\cT$ was sampled for each path by sampling from Eq.~\ref{eq:Tpower_law}, 
-% where $\cT_0$ is the smallest path-time that the part starting at $x_0$ would contact a planar surface a distance $d$ 
+% A single path time $\cT$ was sampled for each path by sampling from Eq.~\ref{eq:Tpower_law}, 
+% where $\cT_0$ is the smallest path time that the part starting at $x_0$ would contact a planar surface a distance $d$ 
 % away.  For TE integrands, a whole range of $\chi$ can be evaluated in parallel for a single path since 
 % $\langle \epsr\rangle = 1+\chi\langle\Theta(x-d)\rangle$.  The path-averaged occupation time can be computed once for a 
 % given path, and re-used to compute the Casimir--Polder energy for various $\chi$.  
@@ -368,7 +368,7 @@ which is twice the size of the region between the interfaces.
 In this case, it is necessary to keep track of both $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
 The dielectric path average and the renormalized worldline integrand can then be quickly computed for multiple $\chi$.
 One upshot of Monte Carlo sampling of positions is that this is \emph{much} faster than directly evaluating 
-the position and path-time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
+the position and path time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
 roughly the same time as the Casimir--Polder energy.  
 
 \subsubsection{Error Scaling with Path Length $N$}
@@ -676,14 +676,14 @@ use the birth-death process in conjunction with Gaussians throughout the remaind
 
 \label{sec:expT-sampling}
 When using the birth-death method for generating paths, the TM polarization requires a 
-slightly different sampling method for generating path-times $\cT$.  
+slightly different sampling method for generating path times $\cT$.  
 In some limited cases it may be possible to estimate a minimum $\cT_0$ where 
 the integrand is small for a given path, and a path is unlikely to have branched or birthed new paths.  
 For paths starting on the vacuum side near a dielectric, the accumulated
-potential at small path-times is approximately ${\prod_k( 1+\tanh\Xi e^{-2(d-x_k)(d-x_{k+1})/\Delta\cT})}$,  
+potential at small path times is approximately ${\prod_k( 1+\tanh\Xi e^{-2(d-x_k)(d-x_{k+1})/\Delta\cT})}$,  
 which turns on smoothly in $\cT$.
 In that case, $\cT_0$ can be estimated from the time an initial, fiducial path would contact a surface and the 
-integrand would turn on.  The path-time can be sampled from the power law distribution~(\ref{eq:Tpower_law}).
+integrand would turn on.  The path time can be sampled from the power law distribution~(\ref{eq:Tpower_law}).
 The birth-death process then proceeds starting with a version of the initial path that is scaled by $\sqrt{\cT}$.  
 
 However, in a two-body geometry that sort of estimation fails.
@@ -697,7 +697,7 @@ for which the path does not branch, but is also close to when the integrand turn
 
 Since the birth-death method essentially enlarges the ensemble of paths selected, its turn on
 mimics the probability for a Brownian bridge to touch a surface.
-The probability for a Brownian bridge to touch a surface a distance $d$ away in path-time $\cT$ is 
+The probability for a Brownian bridge to touch a surface a distance $d$ away in path time $\cT$ is 
 \begin{equation}
   P_{\text{touch}}(\cT) = e^{-2d^2/\cT}.
 \end{equation} 
@@ -757,7 +757,7 @@ in a harmonic potential.  This frequency shift is calculated by taking two deriv
 potential.   For the TM polarization within the worldline method, this would require four spatial 
 derivatives, so it is essential to be able to efficiently compute these derivatives for worldline path integrals.  
 
-Consider a generic worldline path integral involving pinned Brownian motions in path-time $\cT$ with starting point $\vect{x}_0$
+Consider a generic worldline path integral involving pinned Brownian motions in path time $\cT$ with starting point $\vect{x}_0$
 \begin{equation}
   I(x_0)=\dlangle \Phi(x_0,x_1,\ldots,x_{N-1})\drangle_{\vect{x}(t),\vect{x}(0)=\x0}.
 \end{equation}
@@ -1007,7 +1007,7 @@ Gaussian can only be exploited for a very small number of steps.
 This is illustrated in Fig.~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
 surfaces, in the case when the atom is much closer to one surface than the other.  If the two-body
 contribution to the Casimir force is sought, then only paths that touch \emph{both} bodies will 
-contribute.  The path-time when a typical will touch one body is denoted $\cT_1$, and $\cT_2$ is the path-time to touch
+contribute.  The path time when a typical will touch one body is denoted $\cT_1$, and $\cT_2$ is the path time to touch
 both bodies.
 The partial averaging advocated in Sec.~\ref{sec:partial_averaging} is only valid so long as $\Phi$ 
 is approximately constant.  In that case, the integrals can be approximated as Gaussian, which 
@@ -1018,9 +1018,9 @@ requires that $\cT_m\ll \cT_1$, so that the path increments don't intersect or i
   \includegraphics[width=0.5\linewidth]{fig/int-by-parts-gen}
   \caption[Thresholds for partial averaging for atom between two bodies]
   {Thresholds for partial averaging for atom between two dielectric bodies with susceptibilities $\chi_1$ and $\chi_2$.
-    The dashed circles show the typical scales of paths at some important path-times.
-    The extent of the averaging is given by $\cT_m$.  The first path-time when paths touch one body is 
-    $\cT_1$. This is much smaller than the path-time to touch \emph{both} bodies $\cT_2$.  
+    The dashed circles show the typical scales of paths at some important path times.
+    The extent of the averaging is given by $\cT_m$.  The first path time when paths touch one body is 
+    $\cT_1$. This is much smaller than the path time to touch \emph{both} bodies $\cT_2$.  
     These considerations also apply to the calculating stress-energy tensor close to one body.}
   \label{fig:int-by-parts-gen}
 \end{figure}
@@ -1071,7 +1071,7 @@ stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).
 Fig.~\ref{fig:eff_TM_atom_wall} plots the numerical results for the efficiency $\eta\subTM$
 against the analytical expression~(\ref{eq:etaTM}).  The numerical results 
 were collected using the preceding methods using birth-death path swarms to generate paths.
-The path-times were sampled  from Eq.~(\ref{eq:expT}), and the derivatives in Eq.~(\ref{eq:TM_Casimir_Polder})
+The path times were sampled  from Eq.~(\ref{eq:expT}), and the derivatives in Eq.~(\ref{eq:TM_Casimir_Polder})
 were evaluated using the Gaussian partial averaging. 
 
 \begin{figure}
@@ -1109,15 +1109,15 @@ This may be down to the very small $N$ used in this simulation ($N=200$), which 
 to a large systematic error.  Surprisingly, the TM Casimir results seem to be biased above the 
 expected result.  
 
-Sampling from the exponential path-time distribution~(\ref{eq:expT}) 
+Sampling from the exponential path time distribution~(\ref{eq:expT}) 
 is essential for the renormalized two-body TM Casimir energy.
 Once paths are large enough to contribute to the energy, they are guaranteed to have intersected both 
-bodies.  As a result, the intersection path-time of the fiducial path with the surface has little bearing on when
+bodies.  As a result, the intersection path time of the fiducial path with the surface has little bearing on when
 the resulting path swarm would contribute.  For example, the fiducial path might have started next to 
 one surface, and branched immediately.  The fiducial path might extend far more in one direction, 
-and only intersect the second body at much later times than the new path.  Sampling the path-time
+and only intersect the second body at much later times than the new path.  Sampling the path time
 based on when the fiducial path intersects the body would miss that contribution.
-This suggests that the path-time for the birth-death path swarm is best sampled from the 
+This suggests that the path time for the birth-death path swarm is best sampled from the 
 ensemble average estimate of when a path will contact the surface.  
 
 The renormalized Casimir energy has an additional problem.  As currently implemented,

@@ -235,7 +235,7 @@ energies from the worldline path integrals.
 \section{Single Step Potential}
 
 As a first example, consider a step potential $V=\chi\Theta(x-d)$.
-(As noted earlier, this is very closely related to the sojourn time for a Brownian bridge~\cite{Hooghiemstra2002}.)
+(As noted earlier, this is closely related to the sojourn time for a Brownian bridge~\cite{Hooghiemstra2002}.)
 The step potential will be used to compute the Casimir--Polder energy for an atom 
 above a dielectric half-space.
 % It is also related to the Sojourn time statistic, which measures the time a Brownian motion $x(t)$ spends 
@@ -257,16 +257,16 @@ where $\kappa$ will be determined by solving the differential equation in each r
  and $A$ and $B$ will be determined by the boundary conditions at the discontinuities.
 The boundary conditions follow from integrating the diffusion equation across the relevant discontinuity.  
 At finite step discontinuities (such as at $x=d$), the solution and its derivative must be continuous across the surface,
-    \begin{equation}
-      \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0 \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
-    \end{equation}
-    where $0_+$ indicates the limit of approaching zero from above.  
+\begin{equation}
+  \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0 \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
+\end{equation}
+where $0_+$ indicates the limit of approaching zero from above.  
 At a $\delta$-function singularity the derivative of the solution is discontinuous, but the function itself
 is continuous,
-    \begin{equation}
-      \partial_xf(0_+) -\partial_x f(-0_+) = -2  \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
-    \end{equation}
-    Then assuming $d>0$ and taking the bounded solution in each region, the solution is 
+\begin{equation}
+  \partial_xf(0_+) -\partial_x f(-0_+) = -2  \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
+\end{equation}
+Then assuming $d>0$ and taking the bounded solution in each region, the solution is 
 \begin{equation}
   f(x) =\left\{ 
     \begin{array}{lcr}  A e^{\sqrt{2\lambda} x} & \hspace{2cm} & x<0\\
@@ -280,7 +280,7 @@ This was done using Mathematica to speed up the tedious algebraic work.
 The worldline path integral solution only requires $f(x=0)$, so only $A$ needs to be found.  
 It is given by 
 \begin{equation}
-  A = \frac{1}{\sqrt{2\lambda}} - r\supTE\,e^{-2\sqrt{2\lambda}d},
+  A = \frac{1}{\sqrt{2\lambda}} + r\supTE\,e^{-2\sqrt{2\lambda}d},
 \end{equation}
 where
 \begin{equation}
@@ -295,24 +295,24 @@ the medium.
 The solution for both cases is
 \begin{equation}
   f_{\scriptscriptstyle{\text{TE}},1}(x) = \left\{\begin{array}{lcr} 
-      \dfrac{1}{\sqrt{2\lambda}}\left[1+ r\supTE\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-      \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - r\supTE\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d>0.\\
+      \dfrac{1}{\sqrt{2\lambda}}\left[1+ r\supTE\, e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d>0\\
+      \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left[1 - r\supTE\, e^{-2\sqrt{2(\lambda+\chi)}d}\right] & \hspace{2cm} & d<0.\\
     \end{array} \right. 
 \end{equation}
 The subscript denotes the relevance of this solution to a single body in the TE polarization.  
 This solution is explicitly related to the path integral via
 \begin{equation}
- f\subTE= \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \delta(x)e^{-\chi \theta[x(\cT)-d]}\biggdrangle_{W(t)}  
+ f\subTE= \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \delta(x)e^{-\chi \theta[x(\cT)-d]}\biggdrangle
  = \int_0^\infty d\cT e^{-\lambda \cT} \biggdlangle \frac{e^{-\chi \int_0^\cT dt\,\theta[x(\cT)-d]}}{\sqrt{2\pi \cT}}\biggdrangle_{x(\cT)},
   \label{eq:Feynman-Kac TE one step}
 \end{equation}
-where the first ensemble average is over free Wiener paths, while the second is over Brownian bridges that satisfy $x(0)=x(\cT)=0$.
-The factor of $(2\pi \cT)^{-1/2}$ is the normalization for using closed Brownian bridges.  
+where the first ensemble average is over free, unconstrained Wiener paths, while the second is over Brownian bridges that satisfy $x(0)=x(\cT)=0$.
+The factor of $\sqrt{2\pi \cT}$ is the normalization for using closed Brownian bridges.  
 In this case, we will not undo the Laplace transform, since later results can convert the relevant 
 Casimir energies to exploit this form of the energy. 
 
 It is possible to generalize this calculation to compute the equivalent formulae for open Brownian
-bridges from $0\rightarrow c$, as discussed in App. B of Ref.~\cite{Mackrory2016}.
+bridges from $0\rightarrow c$, as discussed in Appendix B of Ref.~\cite{Mackrory2016}.
 These formulae may be useful in accelerating numerical techniques, with relatively coarse bridges.
 % However the formulae are quite complicated and involve diverging integrands, which makes it difficult to implement them 
 % efficient.
@@ -320,12 +320,12 @@ These formulae may be useful in accelerating numerical techniques, with relative
 \subsection{Planar Dirichlet Conditions}
 
 It is possible to take the strong-coupling limit where $\chi\rightarrow \infty$. 
-In that Dirichlet limit, the reflection coefficient goes to negative one, and the solution vanishes on the surface.
+In that Dirichlet limit, $r\rightarrow -1$, and the solution vanishes on the surface.
 The path integral solution is
 \begin{equation}
   f_{D,1}(x) = \left\{\begin{array}{lcr} 
-      \dfrac{1}{\sqrt{2\lambda}}\left[1 - e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d<0\\
-      0 & \hspace{2cm} & d>0\\
+      \dfrac{1}{\sqrt{2\lambda}}\left[1 - e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d>0\\
+      0 & \hspace{2cm} & d<0\\
     \end{array} \right. 
 \end{equation}
 This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
@@ -334,6 +334,21 @@ The path integral can be converted back to the time domain by inverting the Lapl
   \mathcal{L}^{-1}\bigg(\frac{1}{\sqrt{2\lambda}}e^{-2\sqrt{2\lambda}d}\bigg) 
   = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.\label{eq:Laplace_Gaussian}
 \end{equation}
+
+\comment{Fix DIRICHLET}
+
+
+The result is
+\begin{equation}
+  f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
+      \dfrac{1}{\sqrt{2\pi t}}\left(1 - e^{-(x-d)(y-d)/(2t}\right)  & \hspace{0.5cm} & x<d,y<d\\
+      0 & \hspace{0.5cm} & (x-d)(y-d)<0\\
+    \end{array} \right. \label{eq:Dirichlet}
+\end{equation}
+
+This can be extended to considering an idealized Dirichlet boundary condition, which only forces
+the fields to vanish at $x=d$, $V = \lambda\delta(\vect{x}-d) $
+
 The result is
 \begin{equation}
   f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
@@ -392,19 +407,19 @@ be found by keeping $d_1$ fixed, but setting $d=d_2$ to infinity.
 
 The solutions all involve $1-r\supTE_1r\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.
 This factor was previously encountered in deriving the Lifshitz formula in Sec.~\ref{sec:lifshitz},
-so it's presence is perhaps not surprising. 
+so its presence is perhaps not surprising. 
 However, in this case there is no need to make any conditions on which modes contribute.  
 In addition, this derivation assumes there is vacuum between the dielectrics, although it could be easily generalized.
 
 We will not attempt to invert the Laplace transform to find the solution in the time domain.
-Later we will convert the worldline energy into a suitable form to use these results as written.  
+Later we will transform the worldline energy into a suitable form to use these results as written.  
 However, in the strong coupling ($r\supTE_i\rightarrow -1$) limit, 
 the Laplace transform can be inverted. In that case the denominator can be expanded by using
-$(1-e^{-2\sqrt{2\lambda}d})^{-1}=\sum_{n}(-1)^n e^{-2n\sqrt{2\lambda}d}$ since $e^{-2\sqrt{2\lambda}d}<1$.  
+$(1-e^{-2\sqrt{2\lambda}d})^{-1}=\sum_{n=0}^\infty(-1)^n e^{-2n\sqrt{2\lambda}d}$ since $e^{-2\sqrt{2\lambda}d}<1$.  
 The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
 from the far surface.
 After inverting the Laplace transforms, each Gaussian in the sum would be of the form $\exp[-2(n+1)^2d^2/t]$, corresponding
-to the probability for a Brownian path to bounce $n$ times between points a distance $d$ apart.
+to the probability for a Brownian path to bounce $n+1$ times between two surfaces a distance $d$ apart.
 This naturally goes over to the reflection picture for the Dirichlet scalar discussed in \S21.1.5.3 of Steck~\cite{SteckNotes}.
 
 \section{Feynman--Kac Formula for Singular Potentials}
@@ -415,7 +430,8 @@ involving singular potentials, such as $V\subTE$ and $V\subTM$ where
   V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
 \end{equation}
 (We will focus on $V\subTM$, since $\mur=1$ for almost all materials, so $V\subTE=0$.)
-For a dielectric with a step-function discontinuity $\epsr = 1+\chi\Theta(x-d)$, the resulting
+
+For a dielectric half-space immersed in vacuum,  $\epsr = 1+\chi\Theta(x-d)$, the resulting
 potential is highly singular.  
 The first derivative of a step-function is a $\delta$-function, and 
 the second derivative is $\delta'$, or the derivative of a $\delta$-function.

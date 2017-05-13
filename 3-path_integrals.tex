@@ -196,8 +196,8 @@ both open paths where $\vect{c}\ne 0$, and closed paths $\vect{c}=0$. % between
  The path integral results for open paths can be used to find the 
  ensemble averaged solution between two points $\vect{x}=0$ and $\vect{c}$.
   The results can be applied to paths between any pair of positions $\vect{x}_k$ and $\vect{x}_{k+1}$, 
-  by translating all positions in the path integral so that the initial point corresponds with the 
-  origin. 
+  by translating all positions in the path integral by $\vect{x}_k$ so that that the starting point 
+of the path coincides with the origin. 
 %   then this can be 
 %   by shifting all coordinates by $-\vect{x}_k$ from 
 % between one discrete position $\vect{x}_{k}$ to 
@@ -217,9 +217,10 @@ This is not the same approximation as the proximity force approximation discusse
 which approximates the bodies \emph{globally} by the tangent planes. 
 This is a local approximation based on a particular point in space.
 As the path propagates through space, the nearest tangent plane will vary, but assuming that each 
-step is small relative to the geometry, the contribution from each step would be well approximated 
-by the interaction with a single plane.  These contributions could be accumulated along the 
-path to develop the full path integral solution, that might not be directly solvable in a global sense.  
+step is small relative to the scale over which the potential changes,
+ the contribution from each step would be well approximated by the interaction with a single plane. 
+These contributions could be accumulated along the path to develop the full path integral solution,
+ even in potentials that might not be directly solvable in a global sense.  
 
 % An analytical form for the path integral can be derived in conjunction with the diffusion equation.  
 % In what may seem like circular logic, the diffusion equation can be solved, and by 
@@ -323,41 +324,41 @@ It is possible to take the strong-coupling limit where $\chi\rightarrow \infty$.
 In that Dirichlet limit, $r\rightarrow -1$, and the solution vanishes on the surface.
 The path integral solution is
 \begin{equation}
-  f_{D,1}(x) = \left\{\begin{array}{lcr} 
+  f_{\text{D},1}(x) = \left\{\begin{array}{lcr} 
       \dfrac{1}{\sqrt{2\lambda}}\left[1 - e^{-2\sqrt{2\lambda}d}\right]  & \hspace{2cm} & d>0\\
       0 & \hspace{2cm} & d<0\\
     \end{array} \right. 
 \end{equation}
-This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
 The path integral can be converted back to the time domain by inverting the Laplace transform using
 \begin{equation}
   \mathcal{L}^{-1}\bigg(\frac{1}{\sqrt{2\lambda}}e^{-2\sqrt{2\lambda}d}\bigg) 
-  = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)}.\label{eq:Laplace_Gaussian}
+  = \frac{1}{\sqrt{2\pi t}}e^{-d^2/(2t)},\label{eq:Laplace_Gaussian}
 \end{equation}
-
-\comment{Fix DIRICHLET}
-
-
-The result is
+with the result
 \begin{equation}
-  f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
-      \dfrac{1}{\sqrt{2\pi t}}\left(1 - e^{-(x-d)(y-d)/(2t}\right)  & \hspace{0.5cm} & x<d,y<d\\
-      0 & \hspace{0.5cm} & (x-d)(y-d)<0\\
+  f_{\text{D},1}(x) = \left\{\begin{array}{lcr} 
+      \dfrac{1}{\sqrt{2\pi t}}\left(1 - e^{-d^2/2t}\right)  & \hspace{0.5cm} & x<d\\
+      0 & \hspace{0.5cm} & x>d.
     \end{array} \right. \label{eq:Dirichlet}
 \end{equation}
+As paths get closer to the surface, or as the time increases, the probability of touching the surface 
+increases, so the solution approaches zero.   The solution also vanishes for points starting 
+inside the surface.  
 
-This can be extended to considering an idealized Dirichlet boundary condition, which only forces
-the fields to vanish at $x=d$, $V = \lambda\delta(\vect{x}-d) $
-
-The result is
+Given the prevalence of the Dirichlet worldline path integral discussed in Sec.~\ref{sec:dirichlet_worldline},
+it would be useful to develop an analytical expression for open paths from $x=0$ to $x=c$, interacting with $V(x)=\kappa\delta(x-d)$.
+In this case, the solution is non-zero for $x>d$, but only vanishes for paths that touch the surface 
+at $x=d$.
+This result can straightforwardly be generalized to open Brownian bridges for paths between $x$ and $y$, and a surface at $d$.
+The solution can be derived, and after taking $\kappa\rightarrow \infty$, the solution is 
 \begin{equation}
-  f_{D,1}(x,y) = \left\{\begin{array}{lcr} 
-      \dfrac{e^{-(x-y)^2/(2t)}}{\sqrt{2\pi t}}\left(1 - e^{-2(d-x)(d-y)/t}\right)  & \hspace{0.5cm} & (x-d)(y-d)>0\\
-      0 & \hspace{0.5cm} & (x-d)(y-d)<0\\
+  f_{\text{D},1}(x,y) = \left\{\begin{array}{lcr} 
+      \dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}}\left(1 - e^{-2d(d-c)/t}\right)  & \hspace{0.5cm} & (x-d)(y-d)>0\\
+      0 & \hspace{0.5cm} & (x-d)(y-d)<0
     \end{array} \right. \label{eq:Dirichlet}
 \end{equation}
 The lower solution applies when $x$ and $y$ are on different sides of the surface and the path 
-must cross through.  The upper solution applies when the points are both on the same side.
+must cross through.  The upper solution applies when the points are both on the same side.  
 As the points $x$ and $y$ get closer to the surface, the probability of touching the surface increases, 
 and the amplitude of the solution decreases.
 
@@ -431,29 +432,29 @@ involving singular potentials, such as $V\subTE$ and $V\subTM$ where
 \end{equation}
 (We will focus on $V\subTM$, since $\mur=1$ for almost all materials, so $V\subTE=0$.)
 
-For a dielectric half-space immersed in vacuum,  $\epsr = 1+\chi\Theta(x-d)$, the resulting
+For a dielectric-vacuum interface described by $\epsr = 1+\chi\Theta(x-d)$, the resulting
 potential is highly singular.  
-The first derivative of a step-function is a $\delta$-function, and 
+The first derivative of a step function is a $\delta$-function, and 
 the second derivative is $\delta'$, or the derivative of a $\delta$-function.
- We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which means
+ We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which implies
 $\log\sqrt{\epsr}(x) = \Xi\theta(x-d)$.  If the derivatives are taken directly then the potential is given by
 \begin{equation}
   V\subTM(x) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big],
 \end{equation}
 which involves the square of the $\delta$-function!  
-The only way to make sense of this is to regularize the singularity in the step-function,
+The only way to make sense of this is to regularize the singularity in the step function,
 and take the limit of vanishing regularization at the end of the computation. 
 
 We will consider an exponential interpolation of the dielectric between the two values $1$ and $1+\chi$,
-over a distance $a$,
-\begin{equation}
-  \epsr\supa(x)= \left\{\begin{array}{ccr} 
-      1 & \hspace{0.5cm} &x<d\\ 
-      e^{2\Xi (x-d)/a} & \hspace{0.5cm}&d<x<d+a\\
-      1+\chi & \hspace{0.5cm}&x>d+a
-    \end{array}.
-  \right.\label{eq:eps_reg}
-\end{equation}
+over a distance $a$, so that 
+% \begin{equation}
+%   \epsr\supa(x)= \left\{\begin{array}{ccr} 
+%       1 & \hspace{0.5cm} &x<d\\ 
+%       e^{2\Xi (x-d)/a} & \hspace{0.5cm}&d<x<d+a\\
+%       1+\chi & \hspace{0.5cm}&x>d+a
+%     \end{array}.
+%   \right.\label{eq:eps_reg}
+% \end{equation}
 % \begin{equation}
 %   \epsr\supa(x)= \Theta(d-x) + \Theta(x-d)\Theta(d+a-x)e^{2\Xi (x-d)/a} + \Theta(x-d-a)(1+\chi)
 %   %     1 & \hspace{0.5cm} &x<d\\ 
@@ -462,7 +463,7 @@ over a distance $a$,
 %   %   \end{array}.
 %   % \right.
 % \end{equation}
-The logarithm of the dielectric can then be written
+the logarithm of the dielectric can then be written
 \begin{equation}
   \log\sqrt{\epsr\supa}(x)  
 = \left\{\begin{array}{ccr} 
@@ -477,10 +478,10 @@ The regularized TM potential is now given by
   V\subTM\supa(x) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{a}[\delta(x-d)-\delta(x-d-a)\big],
   \label{eq:VTM_reg}
 \end{equation}
-and is sketched in Fig.~\ref{fig:TMpot}.
-The worst singularities present are the $\delta$-functions from the second derivative.
-Although the potential is still singular, and cannot be handled nicely for just a single path, the ensemble
-averaged expression over many such paths is well behaved. 
+as sketched in Fig.~\ref{fig:TMpot}.
+The only singularities present are the $\delta$-functions from the second derivative.
+The potential is still singular, and it is difficult reliabily simulate for a single path as $a\rightarrow 0$.
+However, the ensemble averaged expression over many such paths is well behaved. 
 
 \begin{figure}
   \centering

@@ -845,7 +845,7 @@ The resulting partition function is
   Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
     \bigg(\epsr(\vect{r})(\partial_\tau\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg)\right].
 \end{equation}
-The field $\phi$ can be rescaled as $\phi:=\sqrt{\mur}\tilde{\phi}$ for the same reasons as in the matrix path integral:  
+The field $\phi$ can be rescaled by redefining $\phi:=\sqrt{\mur}\tilde{\phi}$ for the same reasons as in the matrix path integral:  
 The scaled field yields a Gaussian probability density in the worldline formulation, 
 and sidesteps any possible issues related to quantizing a field on a curved manifold.
 The path integral can be rewritten in terms of these new variables, and after an integration by parts is given by
@@ -855,7 +855,7 @@ The path integral can be rewritten in terms of these new variables, and after an
     - \sqrt{\mur}\,\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\bigg)\tilde{\phi}\right].
 \end{equation}
 The gradients can be expanded out in the same fashion as Eq.~(\ref{eq:TM_potential_derivatives}), which
-yields an additional potential, 
+yields the additional potential, 
 \begin{equation}
   V\subTE(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\mur})^2-\partial_z^2\log\sqrt{\mur}\big].
 \end{equation}
@@ -863,15 +863,13 @@ The Gaussian integral over $\phi$ can be carried out, with the result
 \begin{equation}
   Z\subTE = \det\bigg(-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z)  \bigg)^{-1/2}.
 \end{equation}
-
 A similar derivation is possible for fields where $\vect{H}:=\partial_t\psi\hat{y}$.
-In that case electromagnetic duality~(\ref{eq:EM_duality}) can be exploited to rewrite our results.
+In that case electromagnetic duality~(\ref{eq:EM_duality}) can be exploited to rewrite the results.
 % Maxwell's equations are invariant under the following duality transformation in the absence of sources:
 % $\epsr\Leftrightarrow \mu, \vect{D}\Leftrightarrow \vect{B}, \vect{E}\Leftrightarrow-\vect{H}$.
 As one might expect, this field theory can be naturally formulated in terms of the dual potentials, 
-subject to ``dual Coulomb gauge'', $\nabla\cdot\vect{C}=0$.
-Exactly the same manipulations as the TE case can be carried out, but with $\epsr$ and $\mur$ exchanged.
-The TM partition function is 
+subject to ``dual Coulomb gauge,'' $\nabla\cdot\vect{C}=0$.
+Exactly the same manipulations as in the TE case lead to the TM partition function:
 \begin{equation}
   Z\subTM = \det\bigg(-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTM(z)  \bigg)^{-1/2},
 \end{equation}
@@ -880,51 +878,52 @@ where the potential is
   V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big].
 \end{equation}
 Note that the potential depends on the dielectric function in this case, and will play a much larger
-role for most media.  
+role for typical media.  
 The simplicity of this derivation is one reason for working with both magnetic and dielectric media in this geometry.  
 However, we will often set $\mur=1$, since magnetic media are rare in typical quantum optical situations.  
 
 \subsection{TE Polarization Worldline}
 
-It is a straightforward matter to develop the TE worldline path-integral.  In the same fashion
-as the Dirichlet scalar method in Sec.~\ref{sec:dirichlet_worldline}, one uses two formal identities to rewrite the free energy in exponential form.
+It is a straightforward matter to develop the TE worldline path-integral.
+ In the same fashion as the Dirichlet scalar method in Sec.~\ref{sec:dirichlet_worldline}, 
+ two formal identities can be used to rewrite the free energy in exponential form.
 The renormalized TE free energy is 
 \begin{align}
   \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2}(\log\det \op{D}\subTE -\log \det \op{D}\sup0),
 \end{align}
-where the partition functions $Z\subTE$ were rewritten as the functional determinant of a differential operator. 
+where the partition functions $Z\subTE$ has been written as the functional determinant of a differential operator. 
 The differential operators are 
 \begin{align}
   \op{D}\subTE&:=-\frac{1}{2}[\epsr(z)\mur(z)\partial_\tau^2+\nabla^2]+V\subTE(z) \\
   \op{D}\sup0&:=-\frac{1}{2}(\partial_\tau^2+\nabla^2).
 \end{align}
-The vacuum operator $\op{D}\sup0$ is the same for both polarization and is determined by setting $\epsr=\mur=1$ everywhere.  
-The free energy can be written using the $\log-\det$ goes to $\tr-\log$ rule~(\ref{eq:log-det}),
-and the integral representation of the logarithm~(\ref{eq:integral_log}), with the result
+The vacuum operator $\op{D}\sup0$ is the same for both polarizations and is determined by setting 
+moving the dielectric bodies arbitrarily far apart (operationally, this can be done by setting the $\epsr=\mur=1$ everywhere).  
+The free energy rewritten using the identities in Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}), with the result
 \begin{align}
     \cF\subTE-\cF\subTE\sup0 &= \frac{\kB T}{2} \tr(\log \op{D}\subTE -\log \op{D})\\
     &= -\frac{\kB T}{2} \int_0^\infty \frac{d\cT}{\cT}\tr\big[ \exp(-\op{D}\subTE\cT) -\exp(-\op{D}\sup0\cT)\big].
 \end{align}
-For simplicity, we will suppress the renormalization while developing the path integral.  The renormalization 
-is easily recovered by setting $\epsr=\mur=1$ everywhere, and subtracting the result.
+For simplicity, we will suppress the renormalization term while developing the path integral.
+The renormalization is easily recovered by setting $\epsr=\mur=1$ everywhere, and subtracting the result.
 
 The worldline path integrals can be developed in the usual fashion, where differential operators 
-pass over to momentum operators on the auxiliary Hilbert space.  There are no problems with 
-operator ordering or commutation since $\epsr(z)\mur(z)\partial_\tau^2$ is the only case of joint position and momentum operators.
+become momentum operators in the auxiliary Hilbert space.  There are no problems with 
+operator ordering since $\epsr(z)\mur(z)\partial_\tau^2$ is the only term involving joint position and momentum operators,
+and these operators commuting.  
 After converting the operators, the TE partition function is
 \begin{align}
     \cF\subTE &= \frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_0d\tau_0
-    \langle \vect{x}_0,\tau_0|e^{-\epsr(\op{z})\mur(\op{z})\partial_\tau^2+\op{\vect{p}}^2]\cT/2 - V\subTE(\op{z})\cT}
+    \langle \vect{x}_0,\tau_0|e^{-[\epsr(\op{z})\mur(\op{z})\partial_\tau^2+\op{\vect{p}}^2]\cT/2 - V\subTE(\op{z})\cT}
     |\vect{x}_0,\tau_0\rangle.
 \end{align}
 Note that although the potential only varies in one dimension, it is still necessary to evaluate the trace and path integrals
-over all of the dimensions.  The path integral can be developed in the usual fashion, with one minor difference.
+over all of the dimensions.  There is one change from the normal path integral derivation.
 Since the exponential operator is independent of $\tau$, it is not necessary to develop the path integral
 in the $\tau$-direction.  As a result, only single integrals over $\tau$ and $p_\tau$ will be required.
  However, it is still essential to develop the spatial path integral since $\epsr(z)\mur(z)$ and $\op{\vect{p}}^2$
 do not commute.
-After splitting the operator 
-into the product of many terms and inserting the momentum identities, the free energy is
+After splitting the operator into a product of many terms and inserting the momentum identities, the free energy is
 \begin{align}
     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\frac{d\tau_0 dp_\tau}{2\pi}
     \int \prod_{k=0}^{N-1}\frac{d\vect{x}_kd\vect{p}_k}{(2\pi)^{D-1}}
@@ -933,20 +932,19 @@ into the product of many terms and inserting the momentum identities, the free e
      e^{-\vect{p}_j^2\Delta \cT/2 +i\vect{p}_j\cdot(\vect{x}_{j+1}-\vect{x}_j)- V\subTE(z_j)\Delta\cT}
     \bigg),
 \end{align}
-where $\Delta\cT:=\cT/N$, and the $\delta$-functions ensure path-closure. 
-The Gaussian spatial momentum integrals can be evaluated, 
+where $\Delta\cT:=\cT/N$, and the $\delta$-functions ensure path closure. 
+The $\vect{p}_k$ integrals can be evaluated since they are Gaussian,    
 and the $\tau$ integrals can be evaluated at zero temperature using
 \begin{equation}
   \int_{0}^{\beta\hbar c} d\tau \int_{-\infty}^{\infty} \frac{dp_\tau }{2\pi}
   \exp\bigg(-\sum_{j=0}^N\epsr(z_j)\mur(z_j)p_{\tau}^2\frac{\Delta\cT}{2}\bigg)
 = \frac{\beta\hbar c }{\sqrt{2\pi\cT\langle\epsr\mur\rangle}},
 \end{equation}
-where the path-average is defined as
+where the path average is defined as
 \begin{equation}
   \langle\epsr(z)\mur(z)\rangle = \frac{1}{N}\sum_{j=0}^{N-1} \epsr(z_j)\mur(z_j) 
   = \frac{1}{\cT}\int_0^\cT dt\, \epsr[z(t)]\mur[z(t)].
 \end{equation}
-We will use the single angle-brackets to denote the path-average of a quantity around a particular path.  
 The resulting free energy is 
 \begin{align}
     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\int d\tau_0
@@ -956,19 +954,16 @@ The resulting free energy is
     \exp\left(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT} - V\subTE(z_j)\Delta\cT\right)
     \bigg].
 \end{align}
-
-% This can be further simplified by carrying out the Gaussian integrals in $\tau$, since those 
-% terms carry the only $\tau$-dependence.
-After carrying out the $\tau$-integrals, and enforcing $\tau_N=\tau_0$, the path integral is 
-\begin{align}
-    \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\int d\tau_0
-    \int \prod_{k=0}^{N-1}d\vect{x}_k
-    \delta(\vect{x}_N-\vect{x}_0)\frac{1}{\sqrt{2\pi\langle \epsr(z)\mur(z)\rangle\cT}}\nonumber\\
-    &\times\bigg[\prod_{j=0}^{N-1}\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
-    \exp\left(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT} - V\subTE(z_j)\Delta\cT\right)
-    \bigg].
-\end{align}
-We want to use the spatial Gaussians as the probability distribution for paths, where $\vect{x}_0$ is the 
+% After carrying out the $\tau$-integrals, and enforcing $\tau_N=\tau_0$, the path integral is 
+% \begin{align}
+%     \cF\subTE &= -\frac{\kB T}{2}\int_0^\infty\frac{d\cT}{\cT}\int d\vect{x}_N\int d\tau_0
+%     \int \prod_{k=0}^{N-1}d\vect{x}_k
+%     \delta(\vect{x}_N-\vect{x}_0)\frac{1}{\sqrt{2\pi\langle \epsr(z)\mur(z)\rangle\cT}}\nonumber\\
+%     &\times\bigg[\prod_{j=0}^{N-1}\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
+%     \exp\left(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT} - V\subTE(z_j)\Delta\cT\right)
+%     \bigg].
+% \end{align}
+The coupled Gaussians will be used as the probability distribution for paths, where $\vect{x}_0$ is the 
 starting (and finishing) point.  
 % We will need the following Gaussian integral
 % \begin{align}
@@ -989,17 +984,16 @@ The normalized Gaussian probability density is
 % The same reasoning as Eq.~(\ref{eq:tau-integral}) can be used to find the normalization for the Gaussian probability density,
 % which is defined as
 \begin{align}
-  P(\vect{x}_1,\ldots,\vect{x}_N):=&\cN\int \prod_{j=0}^{N}\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
-  \exp\bigg(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT}\bigg).
+  P(\vect{x}_0,\vect{x}_1,\ldots,\vect{x}_{N-1}):=\,&\cN\int \prod_{k=1}^{N-1}d\vect{x}_k\prod_{j=0}^{N-1}\bigg[\frac{1}{(2\pi\Delta\cT)^{(D-1)/2}}
+  \exp\bigg(-\frac{(\vect{x}_{j+1}-\vect{x}_j)^2}{2\Delta\cT}\bigg)\bigg].
 \end{align}
-The normalization constant $\cN$ is determined by requiring that the probability density is normalized to one,
+The normalization constant $\cN$ is determined by requiring that the probability density is normalized,
 \begin{align}
-1&=\int\prod_{j=1}^{N-1} d\vect{x}_k P
+1&=\int\prod_{k=1}^{N-1} d\vect{x}_k P
 \implies \cN=\left[\frac{1}{\sqrt{2\pi\cT}}\exp\left(-\frac{(\vect{x}_{N}-\vect{x}_0)^2}{2\cT}\right)\right]^{-1}.
 \label{eq:Gaussian_normalization}
 \end{align}
-
-The path integral can be written as an ensemble average over closed Brownian bridges,
+Like the Dirichlet scalar worldline path integral~(\ref{eq:scalar_worldline}), the path integral can be written as an ensemble average over closed Brownian bridges
 \begin{align}
     \cF\subTE-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
     \biggdlangle
@@ -1017,86 +1011,60 @@ $V\subTM$ replacing $V\subTE$.
 %     \biggdrangle_{\vect{x}(t)}.\label{eq:TM_worldline}
 % \end{align}
 The main difference between the two path integrals is that $V\subTE$ depends on the magnetic response, while $V\subTM$ 
-depends on the dielectric response.  As a result the TM potential is much more important for typical
-materials.  
+depends on the dielectric response.  % As a result the TM potential is much more important for typical
+% materials.  
 
 Let us contrast the TE worldline (\ref{eq:TE_worldline}) with the Dirichlet worldline path integral (\ref{eq:scalar_worldline}). 
-First, there is a factor $\epsr\mur$ (corresponding to the square of the refractive index) 
-modifying the thermal direction and an additional potential deriving from the discontinuities of the media.
-The potentials will naturally enforce boundary conditions at surfaces in certain limits, far more naturally than the 
+First, there is a factor $\langle\epsr\mur\rangle^{1/2}$ (corresponding to the square of the refractive index) 
+which arose from modifying the thermal direction, and an additional potential $V\subTE$ arising from the derivatives of the media.
+These both derive from the underlying material constants, rather than reflecting imposed boundary conditions. 
 
-Second, the TE path integral is adapted to a planar geometry, whereas the Dirichlet path integral is geometry
-independent.  We can test this path integral in this geometry to verify that
-known electromagnetic results can be recovered from this worldline formalism.  In addition we can develop 
-techniques that will be useful in a general geometry, and evaluate the path integrals in a manner that should straightforwardly
+Second, the TE path integral is related to one polarization of the EM field in a planar geometry.
+While the TE path integral can be evaluated in arbitrary geometries of bodies, its relation to the complete EM field 
+in those cases is unclear. 
+In contrast, the Dirichlet path integral~(\ref{eq:scalar_worldline}) is geometry independent, and is usually only used to impose 
+Dirichlet boundary conditions.  In planar geometries, the Dirichlet worldline recovers part of the perfect conductor Casimir energy.
+In this sense the TE path integral surpasses the Dirichlet worldline.  
+We will test the TE path integral in a planar geometry to verify that 
+known electromagnetic results can be recovered from this worldline formalism.  In addition we will develop 
+techniques that may be useful in a general geometry, and evaluate the path integrals in a manner that should straightforwardly
 generalize.  We will see that this path integral can recover the Dirichlet results in the strong-coupling
 $\epsr\rightarrow\infty$ limit.  So despite being adapted to a particular geometry
 the TE path integral may suggest ways to develop a better uncontrolled approximation to the full path integral.
 
-This derivation assumed zero temperature throughout, or the $\beta\rightarrow\infty$ limit. 
-An alternative, more careful approach does not even develop the path integral in $\tau$, since the only 
-dependence in that direction is carried by $\op{p}_\tau$.   It is essential to develop the spatial
-path integral, since the prefactors of this term do not commute with the spatial momentum operators.  
-The better derivation works with the Matsubara frequencies.  In the above working replace $\op{p}_\tau$ with $s_n$,
-where each separate Matsubara frequency contributes separately.  At the end of the calculation the zero-temperature
-limit can be taken to convert the sum over Matsubara frequencies into an integral.  The integral over the frequency
-yields the answer quoted above.  
+% An alternative, more careful approach does not even develop the path integral in $\tau$, since the only 
+% dependence in that direction is carried by $\op{p}_\tau$.   It is essential to develop the spatial
+% path integral, since the prefactors of this term do not commute with the spatial momentum operators.  
+% The better derivation works with the Matsubara frequencies.  In the above working replace $\op{p}_\tau$ with $s_n$,
+% where each separate Matsubara frequency contributes separately.  At the end of the calculation the zero-temperature
+% limit can be taken to convert the sum over Matsubara frequencies into an integral.  The integral over the frequency
+% yields the answer quoted above.  
 
 \section{Nonzero temperature Worldline Path Integrals}
 
-It has been found that the correct dispersion dependent results can be found by the simple 
-substitution $\epsr(\vect{r})\rightarrow\epsr(\vect{r},i\omega)$.  This was carefully examined 
-in the context of the Lifshitz theory by Barush and Ginzburg~\cite{Barash1975}, and more recently
+The preceding derivation can be extended to finite temperature and dispersion by making 
+the substitution $\epsr(\vect{r})\rightarrow\epsr(\vect{r},i\omega)$.  This was carefully examined 
+in the context of the Lifshitz theory by Barash and Ginzburg~\cite{Barash1975}, and more recently
 Rosa\etal\cite{Rosa2010}.  As noted earlier, Rahi\etal derived their effective Lagrangian at finite
-temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arguments apply here 
-%   Then   
-% \begin{equation}
-%   Z\subTE = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
-%     \left( \epsr(\vect{r})(\partial_{\tau}\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\right)\right].
-% \end{equation}
-% \begin{shaded}
-% \comment{See Dec 2012 notes for how to handle the variable counting from doubling the number of variables}
-% I'm just trying to figure out the factors of 2 here - just think of the transform to Matsubara 
-% frequencies as a ordinary change of variables.
-%   In December I had completely reduced the problem to a discrete problem in $\beta$ as well.
-%   Say I have $N_\beta$ initial time-steps.
-%   I have $N_\beta$ real variables.
-%   If I introduce a Fourier series, then I now have $N-2$ complex variables for $0<n<N_\beta/2$, and 2 real variables at $n=0, N_\beta/2$.
-%   Furthermore we know that $\phi_n^* = \phi_{-n}$.
-%   So from the Gaussian structure of the integrals over $\phi_n$, each of these $(N-2)$ integrals over $\phi_n$ is equal.
-%   When I carry out the integrals I have 
-% \begin{equation}
-% \prod_{n=-N_\beta/2}^{N_\beta/2-1}\int D\phi_n e^{-A_n|\phi_n|^2} 
-% = C\left( \frac{1}{\sqrt{A_0}}\frac{1}{\sqrt{A_{N_\beta/2}}}\prod_{n>0}\frac{1}{A_n}\right),
-% \end{equation}
-% where I have used 
-% \begin{equation}
-% \int D\phi_nD\phi_n^* e^{-A_n|\phi_n|^2} = \int D\phi_r D\phi_ie^{-A_n(\phi_r^2+\phi_n^2)} = \frac{1}{A_n}, 
-% \end{equation}
-% where $\phi_n = \phi_r + i \phi_i$.
-%   We then consider the limit where $N_\beta\rightarrow \infty$.  
-% \end{shaded}
-so assume that the appropriate frequency-dependent, non-zero temperature path integral is 
+temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arguments apply here, 
+so we assume that the appropriate frequency-dependent, non-zero temperature path integral is 
 \begin{equation}
 Z\subTE = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
   \int d\vect{r}\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
     -\nabla\cdot\frac{1}{\mur(\vect{r},is_n)}\nabla\right)\phi_n(\vect{r})\right] .
 \end{equation}
-Since the path integral is periodic (since the partition function started as a trace, implying the starting and ending states 
-are identical), the fields can be expanded 
-in a Fourier series,
+The fields in the path integral are periodic (since the partition function started as a trace, implying the starting and ending states 
+are identical), which implies that the fields can be expanded in a Fourier series,
 \begin{equation}
   \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}).
 \end{equation}
 Here the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
-the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation,
+the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation between different
+Matsubara frequencies,
 \begin{equation}
-\int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau} = \beta\hbar c \delta_{n,-m},
+  \int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau}\phi_n\phi_m = \beta\hbar c \delta_{n,-m}\phi_n\phi_m=\beta\hbar c\delta_{nm}|\phi_n|^2,
 \end{equation}
 where $\phi_n^* = \phi_{-n}$ since the fields are real. 
-
-
-
 
 %Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
 The same field rescalings can be carried out as for the frequency independent case.  
@@ -1106,16 +1074,11 @@ as
 -\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
 \epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right),
 \end{equation}
-where prime on the sum indicates that the $n=0$ is multiplied by a half and
+where the prime on the sum indicates that the $n=0$ term is multiplied by a $1/2$ and
 \begin{equation}
   V^{(n)}\subTE(z) := \frac{1}{2}\big[\big(\partial_z\log\sqrt{\mur(z,is_n)}\big)^2-\partial_z^2\log\sqrt{\mur(z,is_n)}\big].
 \end{equation}
 The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
-% \begin{equation}
-% \log Z\subTE -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ 
-% \frac{1}{2}\left(\epsilon(is_n,\vect{\vect{r}})\frac{s_n^2}{c^2} -\nabla^2\right)\right] 
-% - \log\det\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}
-% \end{equation}
 Note that the zero frequency contribution vanishes if $\lim_{\omega\rightarrow 0}\omega^2\epsr(\omega)=0$, 
 and $\mur=1$.  This is related to the dispute over the role of the zero frequency pole in the dielectric
 response of a metal.  
@@ -1128,11 +1091,11 @@ response of a metal.
 % This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, 
 % such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
 
-The nonzero temperature TE worldline path integral can be developed as before.  In this case only
-a $(D-1)$-dimensional Hilbert space is needed to evaluate the trace, since the thermal dimension is 
-handled with the Matsubara frequencies.
+The nonzero-temperature TE worldline path integral can be developed as before.  However,
+the Hilbert space is only $(D-1)$-dimensional, since the thermal dimension is not present.
+The resulting worldline path integral is
 \begin{align}
-\cF-\cF_0 %& = -k_BT \log \frac{Z\subTE}{Z_0} \\
+\cF\subTE-\cF_0 %& = -k_BT \log \frac{Z\subTE}{Z_0} \\
 % & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
 %     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
 % -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\
@@ -1145,13 +1108,13 @@ where the paths are $D-1$ dimensional spatial paths.
 % where we introduced the path integral.
 %   In this case the operator $ e^{T\nabla^2}$ only needs a 3-dimensional Hilbert space.
 %   So we also only use the normalization for 3D.
-This scaling with $\cT$ also reflects the different scaling behaviors in the near-field, 
+This $\cT$-dependence also reflects the different $d$-dependent scaling behaviors in the near-field, 
 thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
 
 The zero-temperature limit can be recovered by converting the Matsubara sum into a frequency integral.
 In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi n)/\beta \hbar\rightarrow 0$.
-If we treat the material responses as being frequency independent, then the integral over frequency
-is Gaussian, and the zero temperature worldline (\ref{eq:TE_worldline}) is recovered.
+If we further approximate the material responses by their dc values, then the integral over frequency
+is Gaussian.  After carrying out the frequency integral, the result is the zero temperature TE worldline (\ref{eq:TE_worldline}).
 
 % The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
 % employ in the next chapter.  

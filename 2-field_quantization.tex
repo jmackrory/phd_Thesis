@@ -3,13 +3,13 @@
 \label{ch:EM_quantization}
 
 This chapter develops the worldline path integrals for electromagnetism with a space-dependent
-dielectric function, paralleling the treatment of the Dirichlet scalar worldline method in Ch.~\ref{ch:introduction}.
+dielectric function, paralleling the treatment of the Dirichlet scalar worldline method in Ch.~\ref{ch:introduction}.  
 First, we will review prior work on quantizing the EM field inside media.
 Following that, we will review classical EM field theory and quantize the EM field.
 The partition function for the EM field will be developed as a path integral in terms of the scalar and vector potentials.
-However, the resulting worldline path integrals for the full set of potentials have a number of challenges.
+However, the resulting worldline path integrals for the full set of potentials pose a number of challenges.
 As a result, we turn our attention to developing scalar models that better capture the features
-of electromagnetism.  In fact, in planar geometries, the scalar models we develop correspond to 
+of electromagnetism.  In fact, in planar geometries, the scalar models correspond to 
 the amplitudes of the two transverse modes.  
 % Then we introduce the classical field theory for the EM field in both Lagrangian and 
 % Hamiltonian forms.  We quantize the theory, and then develop the partition function.
@@ -20,24 +20,24 @@ the amplitudes of the two transverse modes.
 % In the search for a more tractable model system, we will show that in planar geometries the 
 % EM field can be split into two non-interacting scalar fields.
 We will then develop the worldline path integrals for those scalar fields, which will form
-the basis for our later work.  
+the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
 
 \section{Approaches to Quantizing Electromagnetism in Media}
 
 The quantization of the EM field inside dielectric media provides a number of challenges 
 beyond quantization in vacuum~\cite{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
-
  First, in Casimir problems the dielectric varies spatially.  The usual procedure for
-quantizing the EM field decomposes the field into a set of normal modes, and quantizes the amplitudes for these
-modes.  While it is possible to write down the wave equations for the modes, and quantize the amplitudes
+quantizing the EM field decomposes the field into a set of normal modes, and quantizes their amplitudes.
+  While it is possible to write down the wave equations for the modes, and quantize the amplitudes
  in analogy with free space~\cite{Glauber1991}, a full development of this method still requires finding those mode functions.
- Ideally, the procedure used in quantizing the field would not require solving for the mode functions, 
- nor would it be adapted to any particular geometry.   
+ Ideally, the procedure used in quantizing the field would not require solving for the mode functions in
+general geometries, nor would it be adapted to any particular geometry.   
 
 Second, the dielectric complicates the choice of gauge-fixing.  
-In brief, electromagnetism has a gauge symmetry, or redundant degrees of freedom, which must be 
-excluded from the quantization procedure.  One must fix the gauge by imposing a subsidiary or gauge condition
-on the fields.  In free space this is typically done by fixing Coulomb or Lorenz gauge, which 
+In brief, EM has a gauge symmetry, or redundant degrees of freedom, which must be 
+excluded from the quantization procedure.  
+The gauge symmetry can be removed by imposing a gauge condition on the fields.
+  In free space this is typically done by fixing Coulomb or Lorenz gauge, which 
 decouple the radiative and static electromagnetic problems, or maintain relativistic invariance, respectively.
 However inside a dielectric (starting at the level of macroscopic fields) the usual gauge-fixings lose these nice
 features, and must be replaced by a dielectric-dependent condition.  
@@ -48,7 +48,7 @@ require that there is also loss or dissipation.
 In  quantum optics, dissipation is usually handled by coupling the system to a bath, and then
 integrating or tracing out the bath degrees of freedom.\footnote{If damping is added to the system in an ad hoc
 manner, the canonical commutation relations between operators would decay away.  Adding the bath
-is necessary to preserve the commutation relations for the system operators.  As a result dissipation in quantum systems 
+is necessary to preserve the commutation relations for the system operators.  As a result, dissipation in quantum systems 
 is attended by noise, either as decoherence terms in the master equation or as noise terms in the Langevin equations for the operators~\cite{GardinerZoller2004}}.
 The light field is linearly coupled to the dielectric medium, which is modeled
 as a bath of harmonic oscillators~\cite{Huttner1992,Dung1998,Bechler1999}.
@@ -98,8 +98,8 @@ the EM field inside a spatially varying dielectric neglecting dispersion, starti
 effective Lagrangian description for the macroscopic fields~\cite{Bordag1998}.
 They fix a generalized Lorenz gauge, and set about deriving the heat kernel, which is effectively a small-$\cT$ 
 expansion of the worldline path integral.  
-The primary focus here was to explore the divergence structure of the theory (i.e. how does QED in media
-behave at high frequencies and small wavelengths).
+The primary focus here was to explore the divergence structure of the theory (i.e, how does QED in media
+behave at high frequencies and small wavelengths?).
 Unfortunately, their results are hard to interpret given that the non-physical
 degrees of freedom do not cleanly cancel.  In particular, the contributions from 
 the scalar and longitudinal photons do not cancel the gauge-fixing or ``ghost'' determinant, as happens in 
@@ -186,8 +186,9 @@ In this initial development, we will ignore any frequency dependence in $\epsilo
 The relative permeability and permittivity are defined by 
 $\epsr(\vect{r}):=\epsilon(\vect{r})/\epsilon_0$, and $\mur(\vect{r}):=\mu(\vect{r})/\mu_0$, where 
 $\epsilon_0$ and $\mu_0$ are the permeability and permittivity of free space.  
-In Casimir physics we will be interested in the energy of the field alone, without any external sources.
-  Later, we will extend this work to handle frequency dependence in the .
+In Casimir physics we will be interested in the energy of the field alone, without any external free charges 
+or currents.
+Later, we will extend this work to handle frequency dependence in the medium.
 
 The $\vect{E}$ and $\vect{B}$ fields can be rewritten in terms of the scalar $\phi(\vect{r},t)$ and vector potential
 $\vect{A}(\vect{r},t)$:
@@ -231,71 +232,58 @@ $F_{\mu\nu}.$
 % ~\cite{Gordon1926,Leonhardt2000}.
 Note that the electric and magnetic fields are unchanged under the following gauge transformation 
 \begin{align}
-  \vect A' = \vect A +\nabla\alpha\qquad  \phi' = \phi - \partial_t\alpha,
+  \vect A' = \vect A +\nabla\alpha\qquad  \phi' = \phi - \partial_t\alpha,\label{eq:gauge_transform}
 \end{align}
 where $\alpha$ is an arbitrary function.  Physical results do not depend on the gauge chosen to carry out 
 calculations.  However in order to quantize the theory it is necessary to fix this degree of freedom.
 
-% The classical Lagrangian for electromagnetism in vacuum is 
-% \begin{equation}
-%   L=-\frac{1}{4}\int d^3\vect{r}\, F_{\mu\nu}F^{\mu\nu} =-\frac{1}{2}\int d^3\vect{r}\, (|\vect{E}|^2-|\vect{B}|^2).
-% \end{equation}
-% The remaining two Maxwell equations are then given by
-% \begin{align}
-% \nabla\cdot\left[ \epsilon_0\epsvx\left(-\nabla\phi-\partial_t\vect A\right)\right] &= 0\\
-% \nabla\times\nabla\times\vect A +\mu_0\epsilon_0\epsvx\partial_t\left(\nabla\phi+\partial_t\vect A\right)&=0.
-% \end{align}
-
-%Now since we want to go over to quantum mechanics we must start from a Lagrangian formalism.
-%We will initially work with a spatially varying, but frequency independent dielectric.
-
-The procedure for canonical quantization starts from the classical Lagrangian, finds the equivalent
+The procedure for canonical quantization starts from the classical Lagrangian, and finds the equivalent
 related Hamiltonian.  The theory is quantized by promoting the classical Poisson brackets to 
 quantum commutation relations.  However, this procedure must be modified for gauge theory, 
  since there are redundant degrees of freedom.  Since the gauge degrees of freedom
 are non-dynamical they imply constraints.  
-There are a couple ways to confront this.
+There are a number of ways to confront this.
 The Gupta-Bleuler formulation restricts the allowed states to obey a gauge condition.  
 Dirac's method instead adjusts the classical bracket to account for the constraints~\cite{Dirac1964,Dirac1966}.
 The Dirac bracket is what passes over to the commutation relation.
 Finally in a path integral, it is necessary to remove the gauge degree of freedom via Faddeev-Popov gauge fixing~\cite{Faddeev1991}.
 
-The classical Lagrangian for electromagnetism in non-dispersive media is
+The classical Lagrangian for EM in non-dispersive media is
 \begin{align}
-L &= \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big) %\\
-= \frac{\epsilon_0}{2}\int\! d^3r\,\bigg(
+L\subEM &= \frac{1}{2}\int d\vect{r}\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big) %\\
+= \frac{\epsilon_0}{2}\int\! d\vect{r}\,\bigg(
 \epsr(\vect{r})(\nabla\phi+\partial_t\vect A)^2 - \frac{c^2}{\mur(\vect{r})}(\nabla\times\vect A)^2\bigg).
 \label{eq:EM_Lagrangian}
 \end{align}
 The momentum fields conjugate to the potential fields $A^\mu = (\phi,\vect A)$ are
 \begin{align}
-\Pi_0 & = \frac{\delta L}{\delta (\partial_t\phi)} = 0 \label{eq:Pi0}\\
-\vect{\Pi} & = \frac{\delta L}{\delta (\partial_t\vect A)} = \epsilon_0\epsr(\vect{r})(\nabla\phi+\partial_t\vect A),
+\Pi_0 & = \frac{\delta L\subEM}{\delta (\partial_t\phi)} = 0 \label{eq:Pi0}\\
+\vect{\Pi} & = \frac{\delta L\subEM}{\delta (\partial_t\vect A)} = \epsilon_0\epsr(\vect{r})(\nabla\phi+\partial_t\vect A),
 \end{align}
-where $\delta L/\delta f$ is the functional derivative of the Lagrangian with respect to the function $f$.
+where $\delta L\subEM/\delta f$ is the functional derivative of the Lagrangian with respect to the function $f$.
 The functional derivative for a functional $F[f(x)]$ is loosely defined as 
 \begin{equation}
   \frac{\delta F}{\delta f(x')} := \lim_{a\rightarrow 0} \frac{F[f(x)+a\delta(x-x')]-F[f(x)]}{a}.
 \end{equation}
 % As a practical matter, the functional derivative $\delta f(t)/\delta f(t') = \delta(t-t')$ generalizes
 %  the notation that $\delta x_i/\delta x_j = \delta_{ij}$ from ordinary multivariate calculus. 
-The momentum field $\vect{\Pi}$ that is conjugate to $\vect{A}$ is proportional the electric displacement, $\vect{D}$.
+The momentum field $\vect{\Pi}$ conjugate to $\vect{A}$ is proportional the electric displacement, $\vect{D}$.
 Since $\Pi_0=0$ for all times, there is a constraint on the system.
 Since the constraint equation must also be preserved at all times, there will be a further constraints imposed on the theory.
 That next constraint will turn out to be Gauss's law, which enforces conservation of electric charge. 
 
 The Hamiltonian for the potentials and their conjugate momenta is given by
 \begin{align}
-H &= \int d^3r\,( \Pi_0\dot{A}_0+\vect \Pi\cdot\dot{\vect A}- \mathcal{L})\\
+H\subEM &= \int d\vect{r}\,( \Pi_0\dot{\phi}+\vect \Pi\cdot\dot{\vect A}\big)- L\subEM\\
 % & = \int d^3x \, \vect \Pi\cdot\left(\frac{\vect{\Pi}}{\epsilon_0\epsvx}-\nabla\phi\right)
 % -\frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})} + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2\\
-& = \int d^3r\,\bigg(  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
+& = \int d\vect{r}\,\bigg(  \frac{\vect \Pi^2}{2\epsilon_0\epsr(\vect{r})}+ \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2
 -\vect{\Pi}\cdot\nabla\phi \bigg).
 \end{align}
 The Poisson bracket in 4-vector notation follows from the choice that $A^\mu = (\phi,\vect A)$.
 This implies that the momentum conjugate to $A^\mu$ is given by
 \begin{equation}
-\Pi_\mu = \frac{\delta L}{\delta \dot{A}^\mu}.
+\Pi_\mu = \frac{\delta L\subEM}{\delta \dot{A}^\mu}.
 \end{equation}
 [Note that in this initial classical treatment, the metric is $\eta_{\mu\nu}=\text{diag}(-1,1,1,1)$.]
 The Poisson bracket for fields is 
@@ -304,9 +292,9 @@ The Poisson bracket for fields is
   \frac{\delta F_\mu(\vect{r})}{\delta A^\alpha(\vect{y})}\frac{\delta G_\nu(\vect{r'})}{\delta \Pi_\alpha(\vect{y})}
   -\frac{\delta G_\mu(\vect{r'})}{\delta A^\alpha(\vect{y})}\frac{\delta F_\nu(\vect{r})}{\delta \Pi_\alpha(\vect{y})}\bigg),
 \end{equation}
-because $\Pi_\mu$ is conjugate to $A^\mu$.
+%because $\Pi_\mu$ is conjugate to $A^\mu$.
 %This is the straightforward generalization of the standard particle mechanics Poisson bracket.
-The Poisson bracket between the fields and momenta is
+and the Poisson bracket between the fields and momenta is
 \begin{align}
 \{A_\mu(\vect{r}),\Pi_\nu(\vect{r'})\}%  &= \sum_\alpha\int d\vect{y}  \bigg[
 % \frac{\delta A_\mu(\vect{x})}{\delta A^\alpha(\vect{y})}\frac{\delta \Pi_\nu(\vect{x'})}{\delta \Pi_\alpha(\vect{y})}\\
@@ -318,7 +306,7 @@ The equations of motion can be derived from the Hamiltonian.  The time evolution
 given by its Poisson bracket with the Hamiltonian.
 In particular, the requirement that the first constraint~(\ref{eq:Pi0}) holds for all time implies 
 \begin{equation}
-  \dot{\Pi}_0 = \{\Pi_0,H\}=-\frac{\delta H}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0.
+  \dot{\Pi}_0 = \{\Pi_0,H\subEM\}=-\frac{\delta H\subEM}{\delta \phi} = \nabla\cdot\vect{\Pi} = 0.
 \end{equation}
 Since the momentum $\Pi$ is proportional to the displacement, this is just Gauss's law.  This constraint 
 does not impose any further constraints, since $\{\nabla\cdot\vect{\Pi},H\}=0$.  
@@ -335,12 +323,12 @@ Since the contraints vanish, they can be added in any amount to the Hamiltonian 
 the dynamics.  
 The Hamiltonian can equally well be written as 
 \begin{align}
-  H& = \int d^3r\bigg(\frac{\vect{\Pi}^2}{2\epsilon_0\epsr(\vect{r})}+\phi(\nabla\cdot\vect{\Pi})
+  H\subEM & = \int d\vect{r}\bigg(\frac{\vect{\Pi}^2}{2\epsilon_0\epsr(\vect{r})}+\phi(\nabla\cdot\vect{\Pi})
 + \frac{\epsilon_0c^2}{2}\left(\nabla\times\vect A\right)^2 + f\Pi_0 + g(\nabla\cdot\vect{\Pi})\bigg)
 \end{align}
 where $f$ and $g$ are arbitrary functions.  In this case $f$ and $g$ serve as gauge degrees of freedom, 
 with $\Pi_0$ and $\nabla\cdot\vect{\Pi}$ generating the gauge transformations.
-(An parallel treatment of the Hamiltonian treatment of electromagnetism is presented in \S8.8 of Steck~\cite{SteckNotes}).
+(A parallel treatment of the Hamiltonian treatment of EM is presented in \S8.8 of Steck~\cite{SteckNotes}).
 %  Since the constraints must be satisfied this is equivalent to adding zero.
 %  I don't think this means anything for us - this is just a manifestation of the gauge freedom of the EM field.  
 %  These constraints serve as the generators of gauge transformations.  
@@ -393,63 +381,46 @@ and the allowed states $|\Psi\rangle$ must obey:
 \end{equation}
 The resolutions of the identity for the fields are 
 \begin{align}
-1 &= \int d^3\vect A d\phi\,|\phi,\vect A\rangle\langle \phi,\vect A|\\
+1 &= \int d^3\vect A d\phi\,|\phi,\vect A\rangle\langle \phi,\vect A|\label{eq:gauge_volume}\\
 1 &= \int d^4\Pi\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi})\delta(\Pi_0) 
-= \int d^3\vect{\Pi}\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi}).
+= \int d^3\vect{\Pi}\, |\vect{\Pi}\rangle\langle\vect{\Pi}|\delta(\nabla\cdot\vect{\Pi}).\label{eq:Pi_identity}
 \end{align}
  (Strictly speaking, the identity for the potential states is proportional to the volume of the gauge group 
  because the integral runs over equivalent physical states that are related by gauge transformations.
- Ultimately, this adds an additive constant to the energy, but for electromagnetism this can be ignored.)
+ Ultimately, this adds an additive constant to the energy, but for EM this can be ignored.)
 The $\delta$-functions restrict the momentum states to those that satisfy the constraints, and can 
 be written in the Fourier representation as 
 \begin{equation}
-\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left(-\frac{i}{\hbar}\int d^3r 
+\delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left(-\frac{i}{\hbar}\int d\vect{r} \,
   \varphi(\vect r)\nabla\cdot\vect{\Pi}(\vect r)\right).
 \end{equation}
 Since the fields and momenta obey canonical commutation relations, the overlap between field and momentum states is
 \begin{equation}
-  \langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left(-\frac{i}{\hbar}\int d^3r\, \vect A\cdot\vect{\Pi}\right),
+  \langle \phi,\vect A | \Pi_0,\vect{\Pi} \rangle = \exp\left(-\frac{i}{\hbar}\int d\vect{r}\, \vect A\cdot\vect{\Pi}\right),
 \end{equation}
 where the term in $\phi\Pi_0$ has been dropped due to the $\Pi_0=0$ constraint. 
 
 \section{Electromagnetic Partition Function}
 
-In order to calculate the energy in the field at zero and non-zero temperature, we will
+In order to calculate the energy in the field at zero and nonzero temperature, we will
 evaluate the partition function for the fields, and take the appropriate derivatives.  
 The EM partition function is defined as
 \begin{equation}
-Z\subEM = \mathrm{Tr}\Big(e^{-\beta \op{H}}\Big) = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}}|\phi_0,\vect{A}_0\rangle.
+  Z\subEM = \mathrm{Tr}\Big(e^{-\beta \op{H}\subEM}\Big)
+  = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}\subEM}|\phi_0,\vect{A}_0\rangle.
 \end{equation}
 In analogy with the scalar field path integrals described in Ch.~\ref{ch:introduction}, this is can be converted 
 into a field path integral---a sum over all possible field configurations evolving in imaginary time 
-subject to periodic boundary conditions.
+subject to periodic boundary conditions.  (From here on, the subscript on the Hamiltonian will be suppressed. )
 The path integral is given by
 \begin{align}
-Z &  = \int d\phi_0 d\vect{A}_0 \langle \phi_0, \vect{A}_0| \prod_{i=1}^{N}e^{-\Delta\beta\hat{H}}|\phi_0,\vect{A}_0\rangle,
+Z\subEM &  = \int d\phi_0 d\vect{A}_0 \langle \phi_0, \vect{A}_0| \prod_{i=1}^{N}e^{-\Delta\beta\hat{H}}|\phi_0,\vect{A}_0\rangle,
 \end{align}
 where $\Delta \beta = \beta/N$.
-Next, insert a factor of the gauge volume between each factor of $e^{-\Delta \beta\hat{H}}$,
-and insert a complementary identity for the momentum fields for each matrix element.    
+A factor of the gauge volume~(\ref{eq:gauge_volume}) can be inserted between each factor of $e^{-\Delta \beta\hat{H}\subEM}$.
+Then, a complementary identity for the momentum fields~(\ref{eq:Pi_identity}) can be inserted between each matrix element.    
 Each field will be labeled by a subscript with its ``time'' $A_\beta(\vect{r})$.
-All fields are functions of position $\vect{r}$, so this will be suppressed for the moment.  
-% \begin{equation}
-% Z  = \prod_{i=1}^N\int d\phi_id\vect A_i \delta(\vect A_N-\vect{A}_0)\delta(\phi_N-\phi_0)
-% \langle \phi_i,\vect A_i|e^{-\Delta \beta\hat H}|\phi_{i-1},\vect A_{i-1}\rangle,
-% \end{equation}
-% where we have defined $A^\mu_N=A^\mu_0=A^\mu$.
-%   Now we note that each $A_i$ corresponds to a particular temperature range, 
-% so we can write $A_i = A_{\beta+\Delta \beta}$ and $A_{i-1}=A_\beta$.  
-%Next we insert the identity for the momentum states between each matrix element.
-%  We focus our attention on a particular slice of matrix elements:
-% \begin{align}
-% \langle \phi_{\beta+\Delta \beta}\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle %\\
-% % & = \int d\Pi_0 d\vect{\Pi}_\beta\,\delta(\Pi_0)\delta(\nabla\cdot\vect{\Pi}_\beta)
-% % \langle \phi_{\beta+\Delta \beta},\vect A_{\beta+\Delta \beta}|\Pi_{0,\beta} \vect{\Pi}_\beta\rangle 
-% % \langle \Pi_{0,\beta}\vect{\Pi}_\beta|\exp[-\Delta \beta \hat{H}]|\phi_\beta,\vect A_\beta\rangle\\
-% & = \int d\vect{\Pi}_\beta\,\delta(\nabla\cdot\vect{\Pi}_\beta)
-% \langle \vect A_{\beta+\Delta \beta}| \vect{\Pi}_\beta\rangle
-% \langle \vect{\Pi}_\beta|\exp[-\Delta \beta \hat{H}]|\vect A_\beta\rangle.
-% \end{align}
+All fields are functions of position $\vect{r}$, so this label will be suppressed for the moment.  
 Since $\Pi_0$ (the momentum conjugate to $\phi$) is constrained to vanish, the $\Pi_0$ integrals can be carried out
 for every matrix element.
 In addition, the $\phi$ integrals are independent of the other fields and lead to a (divergent) constant.
@@ -457,17 +428,13 @@ However, since the constant is the same for all configurations of bodies, it wil
 
 Using the Fourier representation of the $\delta$-function, the matrix elements can be written as 
 \begin{align}
-\langle \phi_{\beta+\Delta \beta}\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle
+\langle \phi_{\beta+\Delta \beta},\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle
 =
-% \int\! d\vect{\Pi}_\beta \int\! D\varphi_\beta\exp\bigg[ \int d^3r \,
-% -\frac{i}{\hbar}\varphi_\beta(\nabla\cdot\vect{\Pi}_\beta) +\frac{i}{\hbar}\left(\vect A_{\beta+\Delta \beta}
-% -\vect A_{\beta}\right)\cdot\vect{\Pi}_\beta  -\Delta \beta\left( \ frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})}
-% +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\right)\bigg]\\
-& \int\! d\vect{\Pi}_\beta \int\!D\varphi\,e^{ -\Delta \beta\int d^3r 
+& \int\! d\vect{\Pi}_\beta \int\!D\varphi\,e^{ -\Delta \beta\int d\vect{r} 
 \big[ \mathcal{H}_\beta-i\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta + \nabla\varphi_\beta)/\hbar 
 \big]},
 \end{align}
-where the Hamiltonian for a particular value of $\beta$ is
+where the Hamiltonian density for a particular value of $\beta$ is
 \begin{align}
   \mathcal{H}_\beta = \frac{\vect{\Pi}^2_\beta}{2\epsilon_0\epsr(\vect{r})} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2.
 \end{align}
@@ -476,41 +443,43 @@ and identified $  \partial_\beta\vect A_\beta:=(\vect A_{\beta+\Delta \beta}-\ve
 After the Gaussian momentum integrals have been carried out, the matrix element is
 \begin{multline}
 \langle \phi_{\beta+\Delta \beta}\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle\\
-%  \int\! d\vect{\Pi}_\beta \exp\left[ -\Delta \beta\int d^3r \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
+%  \int\! d\vect{\Pi}_\beta \exp\left[ -\Delta \beta\int d\vect{r} \frac{\vect{\Pi}_\beta^2}{2\epsilon_0\epsr(\vect{r})} 
 % -\frac{i}{\hbar}\vect{\Pi}_\beta\cdot(\partial_\beta \vect A_\beta - \nabla\varphi_\beta) \right] 
 \propto   \det[\epsr]^{3/2}\exp \left\{ -\frac{\epsilon_0\Delta \beta}{\hbar^2}
-  \int d^3r\,\bigg[ \frac{\epsr(\vect{r})}{2}(\partial_\beta \vect A_\beta - \nabla\varphi_\beta)^2
+  \int d\vect{r}\,\bigg[ \frac{\epsr(\vect{r})}{2}(\partial_\beta \vect A_\beta + \nabla\varphi_\beta)^2
   +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2\bigg]\right\},
 \end{multline}
-where the functional determinant $\det[epsr]^{3/2}$ comes from the momentum integrals.  
+where the functional determinant $\det[\epsr]^{3/2}$ comes from the momentum integrals.  
 It is convenient to introduce a notation
 \begin{equation}
-\int D \vect{A} D\varphi \det[\epsr]^{3/2} = \prod_{i=1}^N\prod_{\vect{r}_k,\beta'}\int d\vect{A}(\vect{r}_k,\beta')
-\int d\varphi(\vect{r}_k,\beta')\epsilon^{3/2}(\vect{r}_k),
+\int D \vect{A} D\varphi\, \det[\epsr]^{3/2} = \prod_{i=1}^N\prod_{\vect{r}_k}\int d\vect{A}(\vect{r}_k,\beta_i)
+\int d\varphi(\vect{r}_k,\beta_i)\,\epsilon^{3/2}(\vect{r}_k),
 \end{equation}
-where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3$  and ranges of $\beta'\in[0,\beta)$.  
+where the product $\vect{r}_k$ runs over all positions $\vect{r}\in \mathbb{R}^3$ and inverse temperatures of $\beta_j=j\Delta\beta$.  
 %If we take the product of all of the matrix elements, then the total path integral is given by 
 % \begin{equation}
 % Z = \int D\vect A D\varphi\, \epsr(\vect{r})^{3/2}\exp\left[-\frac{\epsilon_0}{2\hbar^2}\int d^3x\int_0^\beta \Delta \beta\,
 % \epsr(\vect{r})\left(\partial_\beta\vect A-\nabla\varphi\right)^2+\hbar^2c^2(\nabla\times\vect A)^2\right].  
 % \end{equation}
-We can change variables to $\tau=\beta\hbar c$ and $A_4 = \varphi/\hbar c$, and rescale all of the fields
-to eliminate the constants in the exponential.
+We can change variables to $\tau:=\beta\hbar c$,  $A_4(\vect{x},\beta) = \varphi_\beta(\vect{x})/\hbar c$, 
+and $\vect{A}(\vect{x},\beta) = \vect{A}_\beta(\vect{x})$,
+and rescale all of the fields to eliminate the leading constants in the exponential.
 %These rescaling cancel out under renormalization anyway. 
 %Note that $A_4$ has the same dimensions as $\vect{A}$.
-The new parameter $\tau$ is proportional to the thermal deBroglie wavelength.  The resulting partition function is
+The new parameter $\tau$ is proportional to the thermal de Broglie wavelength.
+The resulting partition function is
  \begin{equation}
- Z = \int D\vect{A} DA_4\, \det[\epsr]^{3/2}e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
+ Z\subEM = \int D\vect{A} DA_4\, \det[\epsr]^{3/2}e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
  \end{equation}
 where the Euclidean action is 
 \begin{equation}\label{eq:euclidean_action}
-S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,\int_0^{\beta\hbar c}d\tau\, \bigg(
-\epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
+S\subE[\vect{A},A_4] = \frac{1}{2} \int d\vect{r}\,\int_0^{\beta\hbar c}d\tau\, \bigg(
+\epsr(\vect{r})\left( \partial_\tau\vect{A}+\nabla A_4\right)^2
 +\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg).
 \end{equation}
 The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
 % \begin{equation}
-% Z = \!\int\! D^4\!A \det[\epsr]^{3/2}\exp\left[-\frac{1}{2}\int d^3r\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
+% Z = \!\int\! D^4\!A \det[\epsr]^{3/2}\exp\left[-\frac{1}{2}\int d\vect{r}\int_0^{\beta\hbar c}\hspace{-0.25cm} d\tau\,
 %  \bigg( \epsr(\vect{r})\left(\partial_\tau\vect{A}-\nabla A_4\right)^2+\frac{1}{\mu_r(\vect{r})}(\nabla\times\vect{A})^2\bigg)\right].
 % \end{equation}
 We will compare this partition function to the case when the bodies are infinitely far apart,
@@ -519,39 +488,18 @@ The bodies will still be present, but they will be too far away to interact sign
 % We can write the $\epsr(\vect{r})$ term as a functional determinant,
 %  since it is a product, $\det|\epsr(\vect{r})|=\prod_{r_k}\epsr(r_k)$.
 If the bodies are rigidly translated, then $\det[\epsr(\vect{r})]^{3/2}=\prod_{\vect{r}_k}\epsr(\vect{r}_k)^{3/2}$
-is constant, since the amount of matter in $\epsilon(\vect{r})$ is fixed.  
+is constant, since the amount of matter in $\epsr(\vect{r})$ is fixed.  
 % Ultimately we will calculate energies from the free energy partition function.  In the zero temperature limit
 % \begin{equation}
 % E-E_0 = -\lim_{\beta\rightarrow 0}\frac{1}{\beta} \log Z-\log Z_0.
 % \end{equation}
 Since the determinants are the same in both cases, they will cancel out under this renormalization,
 and we will ignore them.
-% We can then ignore drop these constant determinants and consider 
-% \begin{equation}
-%   Z = \int D^4A\, \exp\left[-\frac{1}{2}\int d^4r\,
-%   \epsr(\vect{r})\left(\partial_4\vect A-\nabla A_4\right)^2+(\nabla\times\vect A)^2\right].
-% \end{equation}
-%The field path integral can be written 
-%  \begin{equation}
-%  Z = \int D\vect{A} DA_4\, e^{-S\subE[\vect{A},A_4]},\label{eq:Z_potential}
-%  \end{equation}
-% where the Euclidean action is 
-% \begin{equation}\label{eq:euclidean_action}
-% S\subE[\vect{A},A_4] = \frac{1}{2} \int d^3r\,d\tau\, \bigg[
-% \epsr(\vect{r})\left( \partial_\tau\vect{A}-\nabla A_4\right)^2
-% +\vect{A}\cdot\nabla\times\frac{1}{\mu_r(\vect{r})}\nabla\times\vect{A}\bigg].
-% \end{equation}
-% The action is the imaginary-time action corresponding to the EM Lagrangian~(\ref{eq:EM_Lagrangian}).
-
-% This change of variable was necessary after the integral over the conjugate momentum fields.
-% We have already used all of the constraints on the fields to write the equations in this form. 
-% We are using the euclidean path integral, with $x_4=\beta$.
 
 \subsection{Faddeev-Popov Gauge Fixing}
 \label{sec:gauge_fixing}
 
-% In order to proceed it is necessary to fix the gauge in the path integral.
-The path integral includes infinitely many physically equivalent fields that are related by a gauge transformation.
+The path integral includes infinitely many physically equivalent fields that are related by a gauge transformation~(\ref{eq:gauge_transform}).
 If that redundancy is not removed, the path integral would give nonsensical infinite results.
 The redundancy is lifted by introducing a gauge-fixing condition so that only one gauge field 
 corresponding to a each physical field configuration in included in the path integral.  %The gauge-fixing  is done by enforcing a delta-function constraint on the gauge degree of freedom.  
@@ -582,15 +530,15 @@ physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}
  Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2}\int d^3rd\tau\, \gamma^2\right)\nonumber\\
+ \exp\left(-S_E-\frac{1}{2}\int d\vect{r}d\tau\, \gamma^2\right)\nonumber\\
  &= \int D\vect{A} DA_4\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2}\int d^3rd\tau\, G^2\right),
+ \exp\left(-S_E-\frac{1}{2}\int d\vect{r}d\tau\, G^2\right),
 \end{align}
 where the Gaussian integral over $\gamma$ was evaluated in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
 %  anti-commuting Grassman variables \cite{Srednicki2008}.  This allows the Feynman rules to be extended
 % to account for the gauge-fixing, since the gauge transformation is non-linear in the fields.  
-  For electromagnetism, since the gauge transformation is independent of the potentials $A^\mu$,
+  For EM, since the gauge transformation is independent of the potentials $A^\mu$,
   the gauge-fixing functional determinant is also independent of the potentials.
   Nonetheless, this determinant is necessary to correctly count the degrees of freedom,
   and it cannot be ignored since it depends on the material properties of the interacting bodies.
@@ -673,7 +621,7 @@ The functional derivative appears as the linear term in $\alpha$ after making a 
 \end{align}
 The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, canceling terms, and integrating by parts, becomes 
 \begin{align}
-  S\subE &=\frac{1}{2}\int d^3r d\tau\,\bigg( A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg),\label{eq:S_pot_vec}
+  S\subE &=\frac{1}{2}\int d\vect{r} d\tau\,\bigg( A_4L^{(4)}A_4   +A_iL^{(V)}_{ij}A_j \bigg),\label{eq:S_pot_vec}
 \end{align}
 where we have started using the Einstein summation convention (where repeated latin and greek indices are summed over).
 The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by 
@@ -847,7 +795,7 @@ The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}
 
 % Recall that the classical action is given by 
 % \begin{equation}
-%   S = \frac{1}{2}\int d^3r\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
+%   S = \frac{1}{2}\int d\vect{r}\, \big(\vect{E}\cdot\vect{D} - \vect{B}\cdot\vect{H}\big). 
 % \end{equation}
 
 
@@ -867,7 +815,7 @@ The partition function can be found via the same procedure
 that was used for the Dirichlet scalar, and full vector path interal.  However, we will just skip to the final
 result in terms of the partition function with the Euclidean action,
 \begin{equation}
-  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
+  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
     \bigg(\epsr(\vect{r})(\partial_\tau\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg)\right].
 \end{equation}
 The field $\phi$ can be rescaled as $\tilde{\phi}:=\sqrt{\mur}\phi$ for the same reasons to the matrix path integral:  
@@ -875,7 +823,7 @@ The scaled field yields a Gaussian probability density in the worldline,
 and sidesteps any possible issues related to quantizing a field on a curved manifold.
 The path integral can be rewritten in terms of these new variables, and after an integration by parts is given by
 \begin{equation}
-  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d^3r \int_0^{\beta\hbar c}d\tau
+  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
     \,\phi\bigg(-\epsr\mur\partial^2_\tau 
     - \sqrt{\mur}\,\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\bigg)\phi\right].
 \end{equation}
@@ -1076,7 +1024,7 @@ Rosa\etal\cite{Rosa2010}.  As noted earlier, Rahi\etal derived their effective L
 temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arguments apply here 
 %   Then   
 % \begin{equation}
-%   Z_{TE} = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
+%   Z\subTE = \int D\phi \exp\left[ -\frac{\epsilon_0 c^2 }{2 \hbar c}\int_0^\beta d\tau'\int d^3\vect{r}\, 
 %     \left( \epsr(\vect{r})(\partial_{\tau}\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\right)\right].
 % \end{equation}
 % \begin{shaded}
@@ -1103,8 +1051,8 @@ temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arg
 % \end{shaded}
 so assume that the appropriate frequency-dependent, non-zero temperature path integral is 
 \begin{equation}
-Z_{TE} = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
-  \int d^3r\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
+Z\subTE = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
+  \int d\vect{r}\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
     -\nabla\cdot\frac{1}{\mur(\vect{r},is_n)}\nabla\right)\phi_n(\vect{r})\right] .
 \end{equation}
 Since the path integral is periodic (since the partition function started as a trace, implying the starting and ending states 
@@ -1128,7 +1076,7 @@ The same field rescalings can be carried out as for the frequency independent ca
 The Gaussian integrals for each $\phi_n$ can be carried out, so that the free energy can be written
 as
 \begin{equation}
--\kB T\log Z_{TE} = -{\sum_{n=0}^\infty}'\log\det\left(
+-\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
 \epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE^{(n)}\right),
 \end{equation}
 where prime on the sum indicates that the $n=0$ is multiplied by a half and
@@ -1137,7 +1085,7 @@ where prime on the sum indicates that the $n=0$ is multiplied by a half and
 \end{equation}
 The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
 % \begin{equation}
-% \log Z_{TE} -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ 
+% \log Z\subTE -\log Z_0= -{\sum_{n=0}^\infty}'\left\{\log\det\left[ 
 % \frac{1}{2}\left(\epsilon(is_n,\vect{\vect{r}})\frac{s_n^2}{c^2} -\nabla^2\right)\right] 
 % - \log\det\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}
 % \end{equation}
@@ -1157,7 +1105,7 @@ The nonzero temperature TE worldline path integral can be developed as before.  
 a $(D-1)$-dimensional Hilbert space is needed to evaluate the trace, since the thermal dimension is 
 handled with the Matsubara frequencies.
 \begin{align}
-\cF-\cF_0 %& = -k_BT \log \frac{Z_{TE}}{Z_0} \\
+\cF-\cF_0 %& = -k_BT \log \frac{Z\subTE}{Z_0} \\
 % & = k_B T \frac{1}{2}{\sum_{n}}'\tr\left\{ \log\left[ \frac{1}{2}
 %     \left(\epsilon(is_n,\vect{x})\frac{s_n^2}{c^2} -\nabla^2\right)\right]
 % -\log\left[ \frac{1}{2}\left(\frac{s_n^2}{c^2} -\nabla^2\right)\right]\right\}\\

@@ -503,36 +503,49 @@ The path integral includes infinitely many physically equivalent fields that are
 If that redundancy is not removed, the path integral would give nonsensical infinite results.
 The redundancy is lifted by introducing a gauge-fixing condition so that only one gauge field 
 corresponding to a each physical field configuration in included in the path integral.  %The gauge-fixing  is done by enforcing a delta-function constraint on the gauge degree of freedom.  
-This gauge fixing is carried out by introducing a gauge fixing function $G[A]$ inside a functional $\delta$-function.
-A further Jacobian determinant must be included to ensure each physically distinct state also receives the same weight.\footnote{
-For example see \S 9.4 of Peskin and Schroeder~\cite{Peskin1995}.}
+This gauge fixing is carried out by introducing a gauge fixing function $G[\vect{A},A_4]$ inside a functional $\delta$-function.
+A further Jacobian determinant must be included to ensure each physically distinct state also receives the same weight.
 
-The Jacobian factor associated with the gauge-fixing can be constructed in analogy
- with the change of variable for a single $\delta$-function:
-\begin{equation}
-\int dx\, \delta[f(x)] = \int df \frac{1}{|\partial_xf|}\delta(f).
-\end{equation}
 In order to fix the gauge, and assign each state equal weight, the following combination should be
 inserted into the path integral 
 \begin{equation}
-  \delta[G(A)]\det\left(\frac{\delta G}{\delta\alpha}\right),
+  \delta[G(\vect{A},A_4,)]\det\left(\frac{\delta G}{\delta\alpha}\right),
 \end{equation}
 where the determinant is known as the Faddeev-Popov determinant~\cite{Faddeev1967,Faddeev1991}.
-This ensures that after integrating over out $\alpha$, each state receives the same weight.  
-One further trick is often used in gauge-fixing the path integral.  Instead of fixing a gauge with
-$G[A]=0$, an alternative gauge $G[A]=\gamma$ can be used.  Since $\gamma$ is a free function,
-it can be integrated against a Gaussian
+The determinant ensures that after integrating over out $\alpha$, each state receives the same weight.\footnote{
+For example see \S 9.4 of Peskin and Schroeder~\cite{Peskin1995}, or \S 71 of Srednicki~\cite{Srednicki2008}}  
+This can be understood in analogy with the change of variable for a double integral with a redundant degree of
+freedom
 \begin{equation}
-  \text{const} = \int D\gamma \exp\left(-\frac{1}{2}\int d^3x d\tau\,\gamma^2(\vect{r},\tau)\right).
+I=\int_{-\infty}^{\infty} dx\int_{-\infty}^{\infty} dy \, h[x].
+\end{equation}
+This integral diverges due to the integral over the redundant variables $y$.  
+If we insert a combination $\delta[g(x,y)]|\partial_y g|$, change integration variable to $g$, and integrate 
+over $g$, the resulting integral is
+\begin{equation}
+I'=\int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dy \, h[x]\delta[g(x,y)]|\partial_y g| 
+=\int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} \frac{dg}{|\partial_y g|} \, h[x]\delta[g]|\partial_y g|  
+=\int dx  h[x],
+\end{equation}
+where the same physical result emerges, regardless of the choice of gauge fixing function. 
+% the derivative $|\partial_xf|$ should be cancelled.
+In higher dimensional integrals, the derivative becomes the Jacobian determinant, and in a
+path integral the Jacobian matrix of derivatives becomes the functional derivative. 
+
+One further trick is often used in gauge-fixing the path integral.  Instead of fixing a gauge with
+$G[\vect{A},A_4]=0$, an alternative gauge $G[\vect{A},A_4]=\gamma$ can be used.  Since $\gamma$ is a free function,
+it can be integrated against a Gaussian with width $\xiFP$,
+\begin{equation}
+  \text{const} = \int D\gamma \exp\left(-\frac{1}{2\xiFP}\int d\vect{r} d\tau\,\gamma^2(\vect{r},\tau)\right).
 \end{equation}
 Such factors are constant in the path integral sense that they will cancel out when considering
 physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}
  Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2}\int d\vect{r}d\tau\, \gamma^2\right)\nonumber\\
+ \exp\left(-S_E-\frac{1}{2\xiFP}\int d\vect{r}d\tau\, \gamma^2\right)\nonumber\\
  &= \int D\vect{A} DA_4\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2}\int d\vect{r}d\tau\, G^2\right),
+ \exp\left(-S_E-\frac{1}{2\xiFP}\int d\vect{r}d\tau\, G^2\right),
 \end{align}
 where the Gaussian integral over $\gamma$ was evaluated in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
@@ -549,7 +562,8 @@ where the Gaussian integral over $\gamma$ was evaluated in the second equality.
 
 There are a number of gauges available, only some of which are naturally suited to the path integral.  %  I have come across the following gauge choices:
 Overall, physical results should be independent of our choice of gauge, which could be done by carrying out
-the calculation within two different gauges.
+the calculation within two different gauges.  In the path integral this can also be done by showing that the final results are independent
+of the choice of $\xiFP$, the width the Gaussian.  
 
 Coulomb gauge ($\nabla\cdot\vect A=0$) is the familiar choice in non-relativistic quantum optics, since in free space 
 it decouples the scalar potential decouples from the vector potential, which then only has two transverse degrees of freedom.
@@ -572,11 +586,11 @@ Surprisingly, this does seem to be a fairly common gauge for people working with
 Given those flaws, we will not pursue it any further.  
 
 Finally, there is a generalized Lorenz gauge
-$\epsr^{-1}\nabla\cdot\epsr\vect A + \epsr\partial_\tau A_4=0$, 
+$\epsr^{-1}\nabla\cdot\epsr\vect A - \epsr\partial_\tau A_4=0$, 
 introduced by Bordag\etal\cite{Bordag1998}.  This gauge allows the derivation to proceed in close parallel
 to the case with no media\footnote{A similar gauge was fixed by Reid\etal\cite{Reid2013} in their development of the 
   numerical scattering method.  However, that work explicitly relies on fixing EM boundary conditions at surfaces.
-That work then proceeded using \emph{homogeneous} formula for all quantities and ignoring any singularities 
+That work then proceeded using homogeneous formulae for all quantities and ignoring any singularities 
 arising at interfaces.  
 In work on the worldline, it is more natural to keep these singularities, anticipating that they will enforce boundary conditions.
 }.
@@ -591,8 +605,11 @@ In this case $\epsr$ acts as a metric in the worldline path integral, which is m
 % which makes worldline calculations simpler.  
 Despite these appealing features, Bordag\etal found the disquieting feature that the longitudinal and scalar degrees of freedom do not
 cancel out the Faddeev-Popov determinant or ``ghost'' degrees of freedom~\cite{Bordag1998}.
-A later calculation adapted to spherical geometries found that using the dual potentials led to more physical results~\cite{Bordag1999}.
-Ultimately, the results will have essentially the same form, so we proceed with the regular potentials for now, and will present 
+A later calculation adapted to spherical geometries found that using the dual potentials led to more physical results
+where the ghost degrees of freedom cancelled~\cite{Bordag1999}.  However any attempt to move away from spherical
+geometry spoiled that, and some degree of mixing is expected in general.  
+Ultimately, the results will have essentially the same form in terms of both the usual potentials and the 
+dual potentials, so we proceed with the regular potentials for now, and will present 
 the dual-potential path integral later.  
 % This perhaps suggests that quantizing and gauge-fixing 
 % the effective field theory has problems, and it may be better to proceed directly via linear-response theory.
@@ -605,19 +622,20 @@ Of these gauges, the generalized Lorenz gauge is best suited to the vector path 
 In this case the gauge function is
 \begin{equation}
   G[A]=\frac{1}{\epsr(\vect{r})\sqrt{\mur(\vect{r})}}\nabla\cdot\epsr(\vect{r})\vect{A}
--\epsr(\vect{r})\sqrt{\mur(\vect{r})}\partial_\tau A_4.
+-\epsr(\vect{r})\sqrt{\mur(\vect{r})}\partial_\tau A_4,
 \end{equation}
+which has also been scaled to include a permittivity.  
 This gauge function eliminates the cross coupling between the $A_4$ and the vector potential $\vect{A}$.  It also eliminates
 the longitudinal projector part of $(\partial_iA_i)^2$, at the cost of extra terms involving derivatives of the 
 permittivity.  
 
 To carry out the Faddeev-Popov gauge fixing, we need the functional derivative
-of the gauge function with respect to the gauge parameter $\alpha$.
-The functional derivative appears as the linear term in $\alpha$ after making a gauge transformation on the gauge condition,
+of the gauge-fixing function with respect to the gauge parameter $\alpha$.
+The functional derivative appears as the linear term in $\alpha$ after making a gauge transformation on the gauge-fixing condition,
 \begin{align}
-  G[A^\nu+\partial^\nu \alpha] &= \frac{1}{\epsr\sqrt{\mur}}\nabla\cdot[\epsr(\vect{A}+\nabla\alpha)]
-  +\epsr\sqrt{\mur}\partial_\tau(A_4+\partial_\tau\alpha)\nonumber\\
-&=G[A^\nu]+\bigg(\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_\tau^2\bigg)\alpha.
+  G[\vect{A}+\nabla\alpha,A_4+\partial_\tau\alpha] &= \frac{1}{\epsr\sqrt{\mur}}\nabla\cdot[\epsr(\vect{A}+\nabla\alpha)]
+  -\epsr\sqrt{\mur}\partial_\tau(A_4+\partial_\tau\alpha)\nonumber\\
+&=G[\vect{A},A_4]+\bigg(\frac{1}{\epsr\sqrt{\mur}}\nabla\cdot\epsr\nabla+\epsr\sqrt{\mur}\partial_\tau^2\bigg)\alpha.
 \end{align}
 The Euclidean action (\ref{eq:euclidean_action}) after gauge-fixing, canceling terms, and integrating by parts, becomes 
 \begin{align}
@@ -632,15 +650,15 @@ The operators $L^{(4)}$ and $L^{(V)}_{ij}$ are given by
 \end{align}
 At this point, it is useful to rescale the fields, 
 \begin{equation}
-  A_4:= \frac{1}{\sqrt{\epsr}}\tilde{A}_4\qquad  \vect{A}:=\sqrt{\mur}\tilde{\vect{A}}.
+  A_4:= \frac{1}{\sqrt{\epsr}}\tilde{A}_4\qquad  \vect{A}:=\sqrt{\mur}\tilde{\vect{A}}.\label{eq:rescaling}
 \end{equation}
 These field scalings are chosen to simplify the worldline path integrals, and for the same reason as the 
 gauge choice.  This rescaling eliminates any combinations like $\partial_x\epsilon\partial_x$, which in path 
-integral terms should be interpreted as a metric.  In this case $\epsilon$ would also mean the diffusion constant of the paths 
-is spatially varying, which complicates path construction.  
+integral terms should be interpreted as a metric.   In this case, $\epsilon(x)$ would also mean the diffusion constant of the paths 
+ vary throughoutt space, which complicates path construction.  
 The field rescaling also leads to functional determinants $\det(\mur)$ and $\det(\epsr)$, but these can be ignored since they
-cancel after renormalization.  
-After the rescaling, the differential operators become 
+disappear after renormalization.  
+After the rescaling~(\ref{eq:rescaling}), the differential operators become 
 \begin{align}
   \tilde{L}^{(4)} &= -\epsr\mur\partial_\tau^2-\frac{1}{\sqrt{\epsr}}\partial_k\epsr\partial_k\frac{1}{\sqrt{\epsr}}.\label{eq:scalar_operator}\\
   \tilde{L}^{(V)}_{ij}&=
@@ -691,8 +709,8 @@ The potentials $V_4$, $V^{(A)}_{ij}, V_\text{g}$ and the operators $u_{ij},u_\te
 \end{align}
 \end{subequations}
 %\comment{right signs/powers of epsilon?}
-These potentials are highly singular for discontinuous media.  If a discontinuity is represented 
-by a step function $\Theta(x)$, then potentials have the form
+These potentials are highly singular for discontinuous media.  If the permittivity or dielectric have a jump discontinuity 
+that can be represented by a step function $\Theta(x)$, then potentials have the form
 \begin{equation}
   [\partial_x\Theta(x)]^2-\partial_x^2\Theta(x)\sim \delta^2(x) - \delta'(x),
 \end{equation}
@@ -717,8 +735,6 @@ from the partition function~(\ref{eq:Z_4pot}).
 The relations from Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) can be used to convert
 the functional determinants into worldline path integrals, where  
 each functional determinant in Eq.~\ref{eq:Z_4pot} leads to an independent path integral.  
-% All of the free gradient operators pass over to momentum operators, but terms like $\partial_i\log\epsr$ are understood
-% as functions of position.  
 The renormalized free energy is given by
 \begin{align}
   \cF -\cF\sup0 =\,&-\kB T (\log Z\subTE - \log Z\subTE\sup0)\\
@@ -746,7 +762,7 @@ in a general medium.
 This path integral involves contributions from three interacting vector degrees of freedom, a scalar, and a subtraction from
 gauge-fixing.  Somehow all of these path integrals with different potentials must conspire 
 to give the energy of two physical polarizations.  
-Investigations by Bordag\etal found that the ghost (gauge-fixing) degrees of freedom
+Investigations by Bordag\etal for a space-dependent dielectric found that the ghost (gauge-fixing) degrees of freedom
 did not completely cancel off the longitudinal and scalar degrees of freedom~\cite{Bordag1998}.  
 Later work examining the spherical problem used the dual potentials and found better results that 
 more closely correspond to the scalar polarizations we will develop~\cite{Bordag1999}. 
@@ -754,10 +770,10 @@ However as they noted, in a general medium the cancellation is expected to be di
 % Even so, those calculations still focused on the divergence structure of the theory and only found partial
 % agreement in the perturbative limit of weak dielectrics.  
 
-It may be possible that this complicated set of path integrals conspires to  yield the correct answer.
+It may be possible that we have not made an error, and this complicated set of path integrals conspires to yield the correct answer.
 Ultimately a correct calculation should reproduce known answers, which in certain geometries only involve two physical degrees of freedom.
 However, it may be that there were errors in the calculation presented here.
-Potential areas for errors include incorrect gauge-fixing of an effective theory, rescaling fields and functional determinants,
+Potential areas for errors include incorrect gauge-fixing of an effective theory, insufficient care in handling rescaling the fields and functional determinants,
  and errors involving the multiplicative anomaly in a matrix path integral.  
 Instead of pursuing the matrix path integral further, we have developed an 
 alternative method explicitly focusing on the two physical degrees of freedom in a simple geometry.% \footnote{
@@ -777,7 +793,7 @@ In each case a scalar field theory can be developed.
 For the TE polarization the electric field behaves as a scalar throughout the problem: 
 while its magnitude may vary, its direction does not.
 The same is true for the magnetic field in the TM polarization.  
-In this case, the two fields will turn out to mirror each other under a duality transformation exchanging
+In this case, the two fields will turn out to mirror each other under the duality transformation exchanging
 electric and magnetic properties of both fields and matter.  
 The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}.
 
@@ -800,7 +816,7 @@ The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}
 
 
 
-\subsection{Scalar Polarization Partition Functions}
+\subsection{Scalar-Polarization Partition Functions}
 
 In the TE polarization the electric field is described by a single scalar field, $\vect{E}=\partial_t\phi\hat{y}$,
 where  $\phi:=\phi(\vect{r},t)$.  In this case $\phi$ corresponds to the y-component of the vector potential.  
@@ -809,23 +825,23 @@ In Coulomb gauge $\nabla\cdot\vect{A}=0$, and using Maxwell's equations, the squ
 field is $|\vect{B}|^2=|\nabla\phi|^2$.
 The action for the TE scalar $\phi:=\phi(\vect{r},t)$ is then given by
 \begin{equation}
-  S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur}|\nabla\phi|^2\bigg).
+  S\subTE = \int_0^T dt\, \bigg( \epsr(\vect{r})\partial_t\phi^2 - \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg).
 \end{equation}
 The partition function can be found via the same procedure 
-that was used for the Dirichlet scalar, and full vector path interal.  However, we will just skip to the final
-result in terms of the partition function with the Euclidean action,
+that was used for the Dirichlet scalar, and full vector path interal. 
+The resulting partition function is 
 \begin{equation}
   Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
     \bigg(\epsr(\vect{r})(\partial_\tau\phi)^2 + \frac{1}{\mur(\vect{r})}|\nabla\phi|^2\bigg)\right].
 \end{equation}
-The field $\phi$ can be rescaled as $\tilde{\phi}:=\sqrt{\mur}\phi$ for the same reasons to the matrix path integral:  
-The scaled field yields a Gaussian probability density in the worldline, 
+The field $\phi$ can be rescaled as $\phi:=\sqrt{\mur}\tilde{\phi}$ for the same reasons as in the matrix path integral:  
+The scaled field yields a Gaussian probability density in the worldline formulation, 
 and sidesteps any possible issues related to quantizing a field on a curved manifold.
 The path integral can be rewritten in terms of these new variables, and after an integration by parts is given by
 \begin{equation}
-  Z\subTE = \int D\phi\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
-    \,\phi\bigg(-\epsr\mur\partial^2_\tau 
-    - \sqrt{\mur}\,\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\bigg)\phi\right].
+  Z\subTE = \int D\tilde{\phi}\, \exp\left[-\frac{1}{2}\int d\vect{r} \int_0^{\beta\hbar c}d\tau
+    \,\tilde{\phi}\bigg(-\epsr\mur\partial^2_\tau 
+    - \sqrt{\mur}\,\nabla\cdot\frac{1}{\mur}\nabla\sqrt{\mur}\bigg)\tilde{\phi}\right].
 \end{equation}
 The gradients can be expanded out in the same fashion as Eq.~(\ref{eq:TM_potential_derivatives}), which
 yields an additional potential, 

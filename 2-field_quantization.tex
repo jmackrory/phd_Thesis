@@ -1068,10 +1068,18 @@ where $\phi_n^* = \phi_{-n}$ since the fields are real.
 
 %Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
 The same field rescalings can be carried out as for the frequency independent case.  
+At nonzero temperature, assuming that the system is in thermal equilibrium, then the free energy $\cF$
+is of interest, rather than the mean energy $E$.\footnote{
+The free energy is defined as $\cF = E-TS$, where $E$ is the mean energy, $S$ is the entropy and $T$ 
+is the temperature.    
+From the fundamental thermodynamic relation, $dE = TdS+\delta W$, where $\delta W$ is the work done on the system,
+the differential for the free energy is $d\cF = SdT + \delta W$.  
+Thus at constant temperature, the work done on the system (such as by moving plates) changes the free energy.  
+}  
 The Gaussian integrals for each $\phi_n$ can be carried out, so that the free energy can be written
 as
 \begin{equation}
--\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
+\cF=-\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
 \epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE(\vect{x},is_n)\right),
 \end{equation}
 where the prime on the sum indicates that the $n=0$ term is multiplied by a $1/2$ and

@@ -427,7 +427,7 @@ the noise floor in Figures~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 As the path length $N$ increases for fixed $\chi$, the systematic error shows two different scaling behaviors.  
 In the weak-coupling limit $\chi/N\ll 1$, the error scales as $N^{-3/2}$, while in the strong-coupling limit
 $\chi/N\gg 1$, the error scales $N^{-1/2}$.  
-These behaviours are analytzed in Ref.~\cite{Mackrory2016}, 
+These behaviors are analyzed in Ref.~\cite{Mackrory2016}, 
 but we will summarize the basic reasoning here.  The numerical computations use discrete paths, 
 while the path integral is only exact in the limit that $N$ is arbitrarily large.  The continuous paths considered by the path integral
 have arbitrarily fine structure, and always have a non-zero probability to touch the dielectric body.
@@ -627,7 +627,7 @@ and accepted with a probability $P_2(x)/P_1(x)$, where  $P_2$ is the target dist
 In the other cases, the truncated Gaussian distributions can be sampled quickly via the inverse error function.  
 
 While this method does improve performance, it still relies on taking a product of $N-1$ normalization factors $\cN_{k+1}$,
-where $0<\cN_{k+1}<2$.  This leads to the same problems with large statistical errrors as the plain Gaussians
+where $0<\cN_{k+1}<2$.  This leads to the same problems with large statistical errors as the plain Gaussians
 as the path length $N$ is increased.  It is also much more involved to implement than the plain Gaussian
 approach.
 
@@ -973,7 +973,7 @@ The result for integrating out $x_1,\ldots,x_{m-1}$ and $x_{N-m+1},\ldots,x_{N-1
 \end{align}
 The combination of the Hermite polynomial and $(m\Delta \cT)^{n/2}$ is effectively the desired Malliavin weighting function.
 This approach has replaced differentiation with multiplication by a function that does not fluctuate more as the path length changes.
-The threshold $m$ can be estimated based on how likely the path of a given timestep is to touch 
+The threshold $m$ can be estimated based on how likely the path of a given time step is to touch 
 the surface.  That threshold will depend on the distances in the problem and the path-time,
 which determines a fraction of the path that can be averaged over.  But, that fraction 
 becomes a constant as $N$ increases, so $m\Delta \cT$ also becomes a constant for a particular $\cT$,
@@ -1198,7 +1198,7 @@ However, the death process occurs on an individual level for each $\chi$.
 Only once the path reaches the end, or all of the weights have died does the path stop.  
 % Given that for small $\chi$ births are unlikely, but at large $\chi$ births and deaths are common there 
 % is a bit of a mismatch in 
-It seems this approach roughly halves the computation time required to simulate multiple susceptibilites,
+It seems this approach roughly halves the computation time required to simulate multiple susceptibilities,
 rather than providing an $\order(N_{\chi})$ speedup.  This perhaps reflects that different classes of paths 
 contribute at different $\chi$, and yoking the simulations together does not offer a great speedup.  
 

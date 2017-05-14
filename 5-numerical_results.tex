@@ -1117,7 +1117,7 @@ For points much closer to one body, and for short times $\Delta \cT$, then the d
 the potential can be approximated based on the nearest body 
 \begin{equation}
   \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_1[x(t)]+ V_2[x(t)]\}}\Biglinkrangle \approx
-  \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_2[x(t)]\}}\Biglinkrangle,
+  \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_2[x(t)]\}}\Biglinkrangle,\label{eq:Vnearest}
 \end{equation}
 where the presence of the far body can be ignored for $\Delta\cT\ll d^2$.  
 The partial averaging can be carried out by using the fact that the path integral is a propagator for the diffusion equation. 
@@ -1144,7 +1144,7 @@ After the partial averaging, the derivatives can be carried out, with the result
   \partial_0^n [U(x_0,x_m,\cT_m) U(x_0,x_{N-m},\cT_m]\prod_{j=m}^{N-m-1}U(x_{j+1},x_j,\Delta \cT)
    \biggdrangle.
 \end{align}
-In this case, the derivatives act on the whole propagator~\ref{eq:Upropator}, rather than just the Gaussian parts.  
+In this case, the derivatives act on the whole propagator~(\ref{eq:Upropagator}), rather than just the Gaussian parts.  
 This could be applied using the Dirichlet solution to the path integral~(\ref{eq:Dirichlet}) to evaluate the 
 stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).  The method suggested here applies to
 any potential $V$ (assuming the solution can be found), so it could also be applied to TE and 
@@ -1152,17 +1152,20 @@ TM potentials under similar circumstances.
 
 \subsection{Results: TM Casimir  and Casimir--Polder Energies for Planar Geometries}
 
-Figure~\ref{fig:eff_TM_atom_wall} plots the numerical results for the efficiency $\eta\subTM$
-against the analytical expression~(\ref{eq:etaTM}).  The numerical results 
-were collected using the preceding methods using birth-death path swarms to generate paths.
+Figure~\ref{fig:eff_TM_atom_wall} shows the numerical results for the efficiency $\eta\subTM$~(\ref{eq:etaTM})
+and compares it to the analytical expression~(\ref{eq:etaTM}).  The numerical results 
+were generated using the preceding methods for birth-death path swarms.
 The path times were sampled  from Eq.~(\ref{eq:expT}), and the derivatives in Eq.~(\ref{eq:TM_Casimir_Polder})
 were evaluated using the Gaussian partial averaging. 
 
 \begin{figure}
 \centering
   \includegraphics[width=0.8\textwidth]{fig/numerics/eff_TM_atom_wall}
-  \caption[Numerical TM Casimir--Polder Efficiency]{Numerically computed TM Casimir--Polder Efficiency for Atom-Plane, 
-    for $10^9$ paths, with $N=10^3$ points per path.  Birth-death method was used for path generation, and partial averaging was
+  \caption[Numerical TM Casimir--Polder Efficiency]{Numerically computed TM Casimir--Polder efficiency between
+    an atom and a dielectric plane.  Efficiency $\eta\subTM$~(\ref{eq:etaTM}) is found 
+    by normalizing the numerical energy to the energy between an atom and a perfect conductor~(\ref{eq:Casimir_Polder}).
+    Calculations used $10^9$ initial paths, with $N=10^3$ points per path.
+  The birth-death method was used for path generation, and partial averaging was
   used for derivatives.}
   \label{fig:eff_TM_atom_wall}
 \end{figure}
@@ -1170,44 +1173,96 @@ were evaluated using the Gaussian partial averaging.
 \begin{figure}
 \centering
   \includegraphics[width=0.8\textwidth]{fig/numerics/eff_TM_2wall}
-  \caption[Numerical TM Casimir Efficiency]{Numerically computed TM Casimir Efficiency for Plane-Plane.
+  \caption[Numerical TM Casimir Efficiency]{Numerically computed TM Casimir efficiency for two planar 
+dielectrics.  Efficiency $\gamma\subTM$~(\ref{eq:gammaTM}) is numerically calculated by finding the energy and normalizing to 
+the perfect conductor limit~(\ref{eq:Casimir_energy}).
     for $N=200$, with $4.8\times 10^8$ trajectories.}
   \label{fig:eff_TM_2wall}
 \end{figure}
 
-The error bars are obviously much larger than their TE counterparts.
-The length of the path $N$ is also smaller.
-Larger paths take much longer to simulate, since there is more branching.  
-Attempts to move to larger $N$ have run into very large numerical fluctuations.  
+The statistical errors are obviously much larger than their TE counterparts.
+The resolution of the path, $N$ is also more coarse.
+Finer paths take much longer to simulate, since there is more opportunity for branching.  
+Attempts to test these methods at larger $N$ have run into very large numerical fluctuations.  
 In the TE case, the convergence was found to improve as $N$ was increased, 
 since the systematic error decreased.    
 In the TM case, the decreased systematic error from larger $N$ conflicts with the growing
 numerical fluctuations.  Of course, the numerical fluctuations can be mitigated by more averaging.
 In addition, each susceptibility $\chi$ is simulated individually, since the branching in the birth-death
-depends on the value of $\Xi$.  
+depends on the value of $\chi$.  
+Alternatively, this effort can be partially reduced by keeping track of the weights 
+associated with multiple susceptibilities on a single path.  The births take place when any of the 
+weights for a given $\chi$ exceeds two.  If a birth or branching occurs, then the weights for all $\chi$
+are split between the two new paths.  
+However, the death process occurs on an individual level for each $\chi$.  
+Only once the path reaches the end, or all of the weights have died does the path stop.  
+% Given that for small $\chi$ births are unlikely, but at large $\chi$ births and deaths are common there 
+% is a bit of a mismatch in 
+It seems this approach roughly halves the computation time required to simulate multiple susceptibilites,
+rather than providing an $\order(N_{\chi})$ speedup.  This perhaps reflects that different classes of paths 
+contribute at different $\chi$, and yoking the simulations together does not offer a great speedup.  
 
-Figure~\ref{fig:eff_TM_2wall} shows the numerically computed efficiency $\gamma\subTM$ for 
-two planar dielectrics.  The agreement is not good in this case.  At large coupling, the error bars do not 
+Figure~\ref{fig:eff_TM_2wall} shows the numerically computed TM Casimir energy for 
+two planar dielectrics.  The numerical efficiency is found by normalizing the calculated energy to the perfect conductor result.
+This numerical calculated efficiency is compared with the integral solution $\gamma\subTM$~(\ref{eq:gammaTM}).
+
+The TM potential in the two body case is handled by splitting the two-body potential into a product 
+of single-body potentials:
+\begin{equation}
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(1)} + \VTM^{(2)})}\bigglinklangle_{x_k\rightarrow x_{k+1}} \approx
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(1)})}\bigglinklangle_{x_k\rightarrow x_{k+1}}
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(2)})}\bigglinklangle_{x_k\rightarrow x_{k+1}}.
+\end{equation}
+This is only valid for $\sqrt{\Delta \cT}\ll d$, which given that $\cT\sim d^2$,
+ implicitly requires that $\sqrt{N}\gg 1$.  For typical simulations used in the TM case, $N\sim100$, so 
+the simulations do not strongly satisfy that criterion.
+Although we are employing analytical solutions, they are the analytical solutions for single bodies,
+rather than two bodies.  The good agreement suggests that the approach of using the solution for the 
+nearest body actually does manage to recover the correct two-body energy when the potential employed 
+varies across a path.  
+
+The birth-death method is handled in a similar manner to the method discussed for multiple $\chi$.  
+The accumulated two-body and respective one-body potentials are tracked around a given path.  If 
+any of those exceeds two, the path splits and all of the weights are shared evenly across the two
+new paths.  However the death-process occurs individually for the two-body and one-body potentials.
+Only at the end of the path, or when all of the paths have died are the results accumulated, or the 
+dielectric path average used.  Given that the dielectric average $\langle\epsr\rangle^{-1/2}$ acts to bring the
+answer closer to zero, this does not miss any contributions.  
+
+The agreement is not great in this case.  At large $\chi$, the error bars do not 
 overlap with the analytical solution.
-This may be down to the very small $N$ used in this calculation ($N=200$), which would lead
-to a large systematic error.  Surprisingly, the TM Casimir results seem to be biased above the 
-expected result.  
+This is likely due to the very small $N$ used in this calculation ($N=200$), which would lead
+to a large systematic error.  In comparison the TE calculations used $N=10^4$.  
+Surprisingly, the TM Casimir results seem to be biased above the expected result.  
+The performance is still surprisingly good.  This might be due to the fact that the TM energy
+relies on using an analytical solution to handle the TM potential.  In the strong-coupling limit,
+that potential provides most of the Casimir energy.  Since the analytical solutions capture more 
+of the dependence, 
 
 Sampling from the exponential path time distribution~(\ref{eq:expT}) 
-is essential for the renormalized two-body TM Casimir energy.
+is essential for the renormalized two-body TM Casimir energy.  As noted earlier, the paths
+must touch both bodies to contribute.  Given that branching is likely to occur near one surface, 
+those new paths may start to contribute to the Casimir energy before the initial path would.  
 
-The renormalized Casimir energy has an additional problem.  As currently implemented,
-the starting position for paths is randomly sampled from Eq.~(\ref{eq:xPower_law}).  As already
-alluded to, the paths can start close to one surface, and spawn a number of child paths
+The renormalized TM Casimir energy path integral has an additional problem.  As currently implemented,
+the starting position for paths is randomly sampled from Eq.~(\ref{eq:xPower_law}).  
+The paths can start close to one surface, and spawn a number of child paths
 immediately.  However, these paths are not guaranteed to intersect both bodies, and thus a
-large number of them contribute zero to the renormalized path integral.  This
-wastes a lot of computational effort on computing zero.
-One possible improvement to this method is to explicitly force the path to touch both bodies.  
+large number of them contribute nothing to the path integral.  This
+wastes a lot of computational effort on unimportant paths.
+One possible improvement to this method is to explicitly condition the path to touch both bodies.  
 This would be another form of importance sampling, since only paths that touch both bodies 
 will actually contribute to the path integral.    
 
-
 \section{Frequency Sampling}
+
+Currently these numerical calculations ignore dispersion.  Given that each frequency contributes
+independently to the Casimir energy,  the integral over frequencies could be handled in a similar 
+fashion to handling multiple constant $\chi$.  In the TE case, the sojourn time for each body $\langle\Theta_i\rangle$
+must be estimated on a pathwise basis, and then the results could be used to evaluate multiple 
+frequencies at once using $\langle\epsr(i\omega)\rangle = 1+\sum_j\chi_j(i\omega)\langle\Theta_j\rangle$.
+Alternatively, further Monte Carlo sampling could be used to randomly select a single frequency for 
+each path.  
 
 
 % \subsection{Path Construction Revisited: Path-Pinning as Importance Sampling}

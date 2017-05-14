@@ -58,15 +58,15 @@ dlmwrite('TM_2wall_anlt.clean.dat',[TMdat(:,1),abs(TMdat(:,4))],"  ")
 ## ## dlmwrite('TM_2wall_eff_expT.clean.dat',[TMdat(msk,1),TMdat(msk,5)/n,TMdat(msk,6)/(n*1E3)]," ")
 
 ## #Output variance.  
-Ndat=load('TM_scalingN3.dat');
-msk = Ndat(:,2)==1;
-dlmwrite('TM_scalingN_var.TM.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
-msk = Ndat(:,2)==2;
-dlmwrite('TM_scalingN_var.gauss.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
-msk = Ndat(:,2)==4;
-dlmwrite('TM_scalingN_var.TMBD.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
-msk = Ndat(:,2)==3;
-dlmwrite('TM_scalingN_var.gaussBD.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
+## Ndat=load('TM_scalingN3.dat');
+## msk = Ndat(:,2)==1;
+## dlmwrite('TM_scalingN_var.TM.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
+## msk = Ndat(:,2)==2;
+## dlmwrite('TM_scalingN_var.gauss.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
+## msk = Ndat(:,2)==4;
+## dlmwrite('TM_scalingN_var.TMBD.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
+## msk = Ndat(:,2)==3;
+## dlmwrite('TM_scalingN_var.gaussBD.dat',[Ndat(msk,1),Ndat(msk,9)]," ")
 
 
 

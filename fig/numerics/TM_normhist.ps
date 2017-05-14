@@ -7,11 +7,11 @@
 /xmaxstr (4) def
 /xminstr (-4) def
 /ymaxstr (0) def
-/yminstr (-5) def
+/yminstr (-6) def
 
 %sizing for two column format. 
-twocolumndimensions
-/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+%twocolumndimensions
+/ytitleoffset {-0.4 in}   def  % horizontal offset of y-axis title
 (plotlib/plotutilities.ps) run
 
 startplot
@@ -41,7 +41,7 @@ PlotStackDataAuto
 
 SetLogAxisX
 
-[ (-5) (-4) (-3) (-2) (-1) ] ExtraYTicksLog
+[ (-6) (-5) (-4) (-3) (-2) (-1) ] ExtraYTicksLog
 [ (-4) (-3) (-2) (-1) (0) (1) (2) (3) (4) ] ExtraXTicksLog
 [ /ComputerModern-Regular normal (Trajectory Weight)]  XAxisTitle
 [ /ComputerModern-Regular normal (Probability)]  YAxisTitle

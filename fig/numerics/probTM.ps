@@ -11,8 +11,8 @@
 
 
 %sizing for two column format. 
-twocolumndimensions
-/ytitleoffset {-0.3 in}   def  % horizontal offset of y-axis title
+%twocolumndimensions
+/ytitleoffset {-0.4 in}   def  % horizontal offset of y-axis title
 %size of ellipse
 % /ComputerModern-Regular findfont 14 scalefont setfont
 % /titlefont {/ComputerModernExtraBold} def
@@ -21,7 +21,7 @@ twocolumndimensions
 % /cas_xoffset {-6}  def
 % /cas_yoffset {.25}  def
 (plotlib/plotutilities.ps) run
-(casimirutilities.ps) run
+(plotlib/casimirutilities.ps) run
 
 startplot
 
@@ -41,17 +41,17 @@ startplot
 /symbolsz 10 def % in points
 
 col3
-(TMprob3.dat) run % load loop 3
+(data/TMprob3.dat) run % load loop 3
 1001 PlotStackData
 
 
 col2
-(TMprob2.dat) run % load loop 2
+(data/TMprob2.dat) run % load loop 2
 1001 PlotStackData
 
 
 col1
-(TMprob1.dat) run % load loop 1
+(data/TMprob1.dat) run % load loop 1
 1001 PlotStackData
 
 [ (0.25) (0.5) (.75) ] ExtraYTicks

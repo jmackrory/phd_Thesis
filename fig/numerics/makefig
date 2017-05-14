@@ -1,8 +1,8 @@
 #!/bin/bash
 #bash script to make PDF files of figures
 
-#for name in TM_normhist eff_TM_atom_wall eff_TM_2wall TM_scalingN; do
-for name in force curvature_a curvature_c; do
+for name in TM_scalingN; do
+#for name in force curvature_a curvature_c; do
  ps2pdf -P $name.ps $name.1.pdf
  pdfcrop  $name.1.pdf $name.pdf
  rm $name.1.pdf

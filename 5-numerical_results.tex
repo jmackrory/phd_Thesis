@@ -700,22 +700,24 @@ regions with significant contributions to the result.
   \centering
   \includegraphics[width=0.8\textwidth]{fig/numerics/TM_scalingN}
   \caption[Scaling of standard deviation for estimated TM potential as function of $N$ for four methods.]
-  {Scaling of standard deviation for estimated TM potential as function of $N$ for four methods.  
-    Eq.~(\ref{eq:Vsimp}) is evaluated for both Gaussian increments, TM-Gaussian increments, 
-    and then for birth-death variants of both methods.  
-  All combinations of Gaussian paths increments and combined TM-Gaussian steps, with raw values and 
-  birth-death.}
+  {Scaling of standard deviation for the accumulated TM potential as function of $N$ for four methods.  
+    Eq.~(\ref{eq:Vsimp}) is evaluated for both plain Gaussian steps, TM-Gaussian steps, 
+    and then for birth-death variants of both methods.      Calculations used $10^9$ trials, with $\chi=12$, $d=1$, and $\cT=2.$
+}
 \label{fig:TM_scalingN}
 \end{figure}
 
-Figure~\ref{fig:TM_scalingN} shows how the Gaussian and TM-Gaussians estimates of the simple path integral
-scale with the path resolution.  The birth-death process has been applied to both ways of generating paths.
+Figure~\ref{fig:TM_scalingN} shows how the plain Gaussian and TM-Gaussian estimates of the simple path integral
+scale with the path resolution.  This figure contains preliminary data, since there are still very large 
+statistical fluctuations on the Gaussian estimates, and a very large number of samples is required 
+to ensure decent convergence.
+The birth-death process has been applied to both ways of generating paths.
 The birth-death process reduces the variance, and makes both methods much more tractable.
 The difference between Gaussian and TM-Gaussians is small under the birth-death process.
-Given that small difference, and the relative simplicity of the Gaussians, we have opted to 
-use the birth-death process in conjunction with Gaussians throughout the remainder. 
+Given that small difference, and the relative simplicity of the plain Gaussian paths, we have opted to 
+use the birth-death process in conjunction with plain Gaussian paths throughout the remainder. 
 
-\subsection{Monte Carlo Sampling for the Path-Time}
+\subsection{Monte Carlo Sampling for the Path Time}
 
 \label{sec:expT-sampling}
 When using the birth-death method for generating paths, the TM polarization requires a 
@@ -723,20 +725,33 @@ slightly different sampling method for generating path times $\cT$.
 In some limited cases it may be possible to estimate a minimum $\cT_0$ where 
 the integrand is small for a given path, and a path is unlikely to have branched or birthed new paths.  
 For paths starting on the vacuum side near a dielectric, the accumulated
-potential at small path times is approximately ${\prod_k( 1+\tanh\Xi e^{-2(d-x_k)(d-x_{k+1})/\Delta\cT})}$,  
-which turns on smoothly in $\cT$.
+potential at small path times is approximately ${\prod_k( 1+\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/\Delta\cT})}$,  
+which increases smoothly with $\cT$.
 In that case, $\cT_0$ can be estimated from the time an initial, fiducial path would contact a surface and the 
 integrand would turn on.  The path time can be sampled from the power law distribution~(\ref{eq:Tpower_law}).
 The birth-death process then proceeds starting with a version of the initial path that is scaled by $\sqrt{\cT}$.  
 
-However, in a two-body geometry that sort of estimation fails.
+However, in a two-body geometry that estimate fails.
 The renormalized integrand is only nonzero for paths that come close to both surfaces.
 Since the birth-death method may split the trajectory, it is not always possible to reliably
-find a minimum time $\cT_0$ when the renormalized integrand turns on.  (A very small $\cT_0$ could be picked, 
+find a minimum time $\cT_0$ when the renormalized integrand turns on.  
+(In principle, a small value of $\cT_0$ could be picked, 
 where the path has no chance of touching the surface, but most computations would return zero,
- since the most probable $\cT$ are close to $\cT_0$.)
+since the most sampled values of $\cT$ are close to $\cT_0$.)
+
+Once paths are large enough to contribute to the energy, they are guaranteed to have intersected both 
+bodies.  As a result, the intersection path time of the fiducial path with the surface has little bearing on when
+the resulting path swarm would contribute.  For example, the fiducial path might have started next to 
+one surface, and branched immediately.  The fiducial path might extend further in one direction, 
+and only intersect the second body at much later times than the branched path.  Sampling the path time
+based on when the fiducial path intersects the body would miss that contribution.
+This suggests that the path time for the birth-death path swarm is best sampled from the 
+ensemble average estimate of when a path will contact the surface.  
+
 As a result, it is not possible to estimate for a single trajectory a lower bound $\cT_0$ 
 for which the path does not branch, but is also close to when the integrand turns on.  
+
+
 
 Since the birth-death method essentially enlarges the ensemble of paths selected, its turn on
 mimics the probability for a Brownian bridge to touch a surface.
@@ -753,28 +768,29 @@ where $s>1$ and $\cT_0>0$.
 %  The exponential factor effectively models the finite touching 
 % probability for Brownian bridges starting at the origin to touch a planar surface a distance $d$ 
 % away in time $\cT$, $P_\text{touch}=e^{-2d^2/\cT}$. 
-The probability distribution~(\ref{eq:expT}) can be transformed to $u=\cT_0/\cT$, for 
+The probability distribution~(\ref{eq:expT}) can be transformed by setting $u=\cT_0/\cT$, for 
 which the probability distribution is
 \begin{equation}
   P_{\text{exp}-1/\cT}(u;s) = \frac{u^{s-2}}{\Gamma[s-1]}e^{-u}.
 \end{equation}
 % where we had to include $du/d\cT= -(\cT_0)/\cT^2=-1/(\cT_0u^2)$ for the change
 % of measure.  
-The new variable $u=\cT_0/\cT$ has the form of a gamma distribution, which has probability density 
+This% e new variable $u=\cT_0/\cT$
+has the form of a gamma distribution, which has probability density 
 \begin{equation}
-  f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a}.  
+  f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a},  
 \end{equation}
 where $a>0$ and $b>0$ are the shape and scale parameters respectively~\cite{Devroye2003}.  
 For small integer or half-integer powers $a$, there are some simple methods for generating 
 gamma deviates $g_i$.  
 A sum of gamma deviates $=\sum_{i=1}g_i$ with shape parameters $a_i$, is also a gamma deviate
-with shape parameter $\sum a_i$~(see pg. 402 of Devroye~\cite{Devroye2003}).  
-A gamma deviate with shape parameter $a=1$ is an exponential deviate, $e_i=-\log(u)$ where 
-$u$ is a uniform random number.  
+with shape parameter $\sum_i a_i$~(see pg. 402 of Devroye~\cite{Devroye2003}).  
+A gamma deviate with shape parameter $a=1$ is an exponential deviate, which can in turn be recast as 
+$e_i=-\log(u)$ where $u$ is a uniform random number.  
 In particular, this means the sum of $n$ exponential deviates yields a gamma 
 deviate with shape parameter $a=n$.  
 In addition, if $z$ is a standard normal variable, then $z^2/2$ is gamma distributed with $a=1/2$.
-For small integer powers, $\cT$ is distributed according to
+For small integer powers of $s$, $\cT$ is distributed according to
 \begin{equation}
   \cT\sim \frac{\cT_0}{-\sum_{i=1}^{s}\log u_i},
 \end{equation}
@@ -787,59 +803,62 @@ naturally emerge when considering the thermal Casimir energy, or derivatives of 
 such as the force.  
 This distribution can also be used to sample times $\cT$
 even for TE integrands.  In that case however, it is possible the generated path will not
-touch all bodies and merely return zero, which will increase the variance of the numerical
+touch all of the relevant bodies and merely return zero, which will increase the variance of the numerical
 estimated energy.  
 
 \subsection{Gradient Estimation}
 
-Computing the TM Casimir--Polder energy~\ref{eq:TM_Casimir_Polder}, requires taking two spatial derivatives
+Computing the TM Casimir--Polder energy~(\ref{eq:TM_Casimir_Polder}), requires taking two spatial derivatives
 of the worldline path integral.
 Furthermore, in some experiments on the Casimir--Polder effect such as BEC experiments~\cite{Harber2005}, 
 the Casimir--Polder potential is estimated from how it shifts the frequency of the atom's oscillations
 in a harmonic potential.  This frequency shift is calculated by taking two derivatives of the Casimir--Polder
-potential.   For the TM polarization within the worldline method, this would require four spatial 
-derivatives, so it is essential to be able to efficiently compute these derivatives for worldline path integrals.  
+potential, which corresponds to finding the potential curvature.  
+For the TM polarization within the worldline method, this would require a fourth spatial 
+derivative, so it is essential to be able to efficiently compute these derivatives for worldline path integrals.  
 
-Consider a generic worldline path integral involving pinned Brownian motions in path time $\cT$ with starting point $\vect{x}_0$
+Consider a generic worldline path integral involving pinned Brownian motions in path time $\cT$ with starting point $\vect{x}_0$:
 \begin{equation}
   I(x_0)=\dlangle \Phi(x_0,x_1,\ldots,x_{N-1})\drangle_{\vect{x}(t),\vect{x}(0)=\x0}.
 \end{equation}
 The function $\Phi$ depends on the whole path, and serves as a placeholder for the path averaged dielectric
 or TM potentials.  The $n^\text{th}$ derivative of this path integral with respect to the starting
 position is 
-\begin{equation}
-  \partial_0^nI(x_0)=\frac{\partial^n}{\partial x_0^n}\dlangle \Phi\drangle_{\vect{x}(t),\vect{x}(0)=\x0}.
-\end{equation}
-We will discuss how to evaluate this derivative with both the finite difference method 
-and the partial-averaging approach.
+$  \partial_0^nI(x_0)=\frac{\partial^n}{\partial x_0^n}\dlangle \Phi\drangle_{\vect{x}(t),\vect{x}(0)=\x0}.$
+We will discuss how to evaluate these derivatives with both the standard finite difference method 
+and a new partial-averaging approach.
 
 \subsubsection{Finite Differences}
 \label{sec:finite_difference}
-The finite difference method is simplest method for numerically evaluating derivatives.
- It has the great virtue of simplicity, since it only requires that we evaluate the function multiple times.  
-For smooth functions, the finite difference method works well, but it behaves poorly when applied to
+The finite-difference method is straightforward method for numerically evaluating derivatives.
+It has the great virtue of simplicity, since it only requires that we evaluate the function multiple times.  
+For smooth functions, the finite-difference method works well, but it behaves poorly when applied to
 stochastic, discontinuous functions such as the worldline path integral. 
 
 For example, consider the first derivative of the TE Casimir--Polder worldline integrand,
 at a dielectric step $\epsr=1+\chi\Theta(x-d)$.  The finite difference integrand is
 \begin{equation}
-  \partial_0\Bigdlangle \,\langle\epsr[\vect{x}(t)\rangle^{-3/2}-1\Bigdrangle_{\vect{B}_k}
-  \!=\! \frac{1}{\Delta s}\Bigdlangle \, \langle\epsr[\vect{x}_0+\Delta s\hat{r}_i+\sqrt{\cT}B_k]\rangle^{-3/2}
-  -\langle\epsr[\vect{x}_0+\sqrt{\cT}B_k]\rangle^{-3/2}\,\Bigdrangle_{\vect{B}_k},
+  \partial_0\Bigdlangle \,\langle\epsr[x(t)]\rangle^{-3/2}-1\Bigdrangle_{B_k}
+  \!=\! \frac{1}{\Delta s}\Bigdlangle \, \langle\epsr[x_0+\Delta s+\sqrt{\cT}B_k]\rangle^{-3/2}
+  -\langle\epsr[x_0+\sqrt{\cT}B_k]\rangle^{-3/2}\,\Bigdrangle_{B_k},
 \end{equation}
-where $\Delta s$ is the finite difference step size, $\vect{B}_k$ is a closed unit Brownian bridge, 
-and $\hat{r}_i$ is a Cartesian unit vector.
-This can be evaluated on a path-wise basis.  
+where $\Delta s$ is the finite difference step size, $B_k$ is a closed unit Brownian bridge. 
+This estimate can be evaluated on a pathwise basis, in keeping with the suggestion that 
+using common random numbers yields the best results for finite differences (as discussed in \S7.2A of Asmussen
+and Glynn~\cite{Asmussen2007}).
 In order to be accurate, the step size $\Delta s$ must be small, since the error in this approximation 
-to the derivative is $\order[(\Delta s)^2]$.
-Unfortunately, that limit leads to large fluctuations.
+to the derivative is $\order(\Delta s)$.
+Unfortunately, that limit leads to large statistical uncertainty.
 If the finite difference is much smaller than a typical path increment, $\Delta s\ll \sqrt{\Delta\cT}$, 
 the estimates for path averaged dielectric $\langle\epsr(\vect{x}_0)\rangle$ for the two starting positions
 are likely to be the same, so the estimate is zero.  
 In rare circumstances, a point is within $\Delta s$ of the surface, and the finite difference returns
-the large value of $(\Delta s)^{-1}$.
-Thus most paths estimate zero derivative, but a few paths return a large answer.  This leads to 
-growing fluctuations.  This problem is even worse for higher derivatives.  
+the large value of $(\Delta s)^{-1}$.  
+However, this arguments neglects that as $\Delta s\rightarrow 0$, the probability for a point to be within 
+$\Delta s$ of the surface, also approaches zero.  For the first order finite difference, 
+the error is constant as $\Delta s\rightarrow 0$.  However, at higher derivatives this is no longer
+true and the variance grows as $\Delta s\rightarrow 0$.  
+
 %In evaluating the finite difference it is best to use the same random numbers to generate the path~\cite{Asmussen2008,Glasserman2004}.
 
 The finite difference method is also problematic for the birth-death method for TM potentials.  
@@ -848,31 +867,33 @@ of birth-death paths may be generated, which further compounds the fluctuation p
 
 \subsubsection{Malliavin Calculus}
 Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
-product to variations its underlying parameters must be estimated~\cite{Glasserman2004}.  This could be done via a finite
-difference method, but that behaves poorly.  
-Since financial simulations also typically involved averages over simulated Brownian motions, similar problems emerge.
-One promising approach for worldline applications is based on the Malliavin calculus, which 
+product to variations its underlying parameters must be estimated~\cite{Glasserman2004}.  
+Since financial simulations also typically involved averages over stochastic processes, similar problems emerge
+when trying to estimate derivatives with finite differences.
+One approach with a number of appealing properties is based on the Malliavin calculus, which 
 is formally discussed in Ref.~\cite{Nualart2006, Malliavin2006, DiNunno2009}.
-Less formal (and more understandable) discussions of the Malliavin approach are presented in Refs.~\cite{Chen2007,Kohatsu-Higa2003}.
-In the Malliavin approach, the derivative can be estimated by multiplying the integrand by
+Less formal (and far more understandable) discussions of the Malliavin approach are presented in Refs.~\cite{Chen2007,Kohatsu-Higa2003,Kohatsu-Higa2004}.
+In this approach, the derivative can be estimated by multiplying the integrand by
 a suitably chosen weight function, which depends on the nature of the derivative and the random path.
 The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion, 
 and an associated integration by parts formula.   
-The Malliavin weights can be derived by exchanging derivatives with respect to a parameter for
+The weights can be derived by exchanging derivatives with respect to a parameter for
 derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
-The Malliavin results can also be recovered via the likelihood-ratio method\footnote{
-In the likelihood ratio method~\cite{Broadie1996}, a derivative with respect to a parameter $\theta$ of a stochastic average is evaluated 
-as $\partial_\theta\dlangle \Phi(x)\drangle = \int dx\,\Phi(x)\partial_\theta P(x,\theta) 
-= \dlangle \Phi(x)\partial_\theta\log P(x,\theta)\drangle$,
-where $\partial_\theta\log P$ is the likelihood function.  
-The original sampling method can be used to evaluate this derivative, so $\dlangle\Phi\drangle$ and its derivatives
-$\partial_\theta\dlangle \Phi\drangle$ can be evaluated using the same random samples.}
-in conjunction with partial-averaging along the Brownian motion~\cite{Chen2007}. 
-In either case, one replaces differentiation for
+% These results can also be recovered via the likelihood-ratio method\footnote{
+% In the likelihood ratio method~\cite{Broadie1996}, a derivative with respect to a parameter $\theta$ of a stochastic average is evaluated 
+% as $\partial_\theta\dlangle \Phi(x)\drangle = \int dx\,\Phi(x)\partial_\theta P(x,\theta) 
+% = \dlangle \Phi(x)\partial_\theta\log P(x,\theta)\drangle$,
+% where $\partial_\theta\log P= \partial_\theta P(x,\theta)/P(x,\theta)$ is the likelihood-ratio.  
+% The original sampling method can be used to evaluate this derivative, so $\dlangle\Phi\drangle$ and its derivatives
+% $\partial_\theta\dlangle \Phi\drangle$ can be evaluated using the same random samples.}
+% in conjunction with averaging over which terms are differentiated along the Brownian motion~\cite{Chen2007}. 
+In either case, one replaces differentiation with
 evaluating a reweighted function, where the form of the function depends on the required derivatives.
-The advantage is the same sample paths can be used for both the estimate and its derivative.  
+The advantage is the same sample paths can be used for both the estimate and its derivative.  In addition
+the derivative estimates are well behaved, since the weight functions are typically simple, smooth functions
+of the stochastic path.   
 While the Malliavin approach to derivative estimation did not yield better results for the worldline
-method, it did inspire a similar approach, with similar virtues.   
+method, it did inspire an approach, with similar virtues.   
 
 \subsubsection{Partial Averaging Gaussian Paths}
 
@@ -894,11 +915,11 @@ act on the coupled Gaussian.
 \end{align}
 The derivatives acting on $\Phi$ have been neglected, which effectively assumes that 
 $\Phi$ does not vary significantly at the path origin.  
-The derivatives of the Gaussians yield Hermite Polynomials, which are defined via
+The derivatives of the Gaussian distributions yield Hermite Polynomials, which are defined via
 \begin{equation}
   \frac{d^n}{dx^n} e^{-(x-\mu)^2/a^2} = (-a)^{-n} H_n\bigg(\frac{x-\mu}{a}\bigg)e^{-(x-\mu)^2/a^2}.
 \end{equation}
-The Gaussians for the first and last steps can be differentiated $n$ times with respect to $x_0$,
+The Gaussian distributions for the first and last steps can be differentiated $n$ times with respect to $x_0$,
 with the result
 \begin{align}
 &\partial_0^n\frac{1}{2\pi \Delta\cT^2}e^{-(x_0-x_1)^2/(2\Delta\cT)-(x_0-x_2)^2/(2\Delta\cT)}\nonumber\\
@@ -906,7 +927,7 @@ with the result
 \left(\frac{-1}{\sqrt{\Delta\cT}}\right)^n H_n\left(\frac{x_0-\bar{x}_1}{\sqrt{\Delta\cT}} \right)
 \exp\left[-\frac{(x_0-\bar{x}_1)^2}{\Delta\cT} - \frac{(\Delta x_1)^2}{4\Delta\cT}\right],\label{eq:Hermite_init}
 \end{align}
-where the following have been defined
+where the follow variables were defined,
 \begin{equation}
 \Delta x_k:=x_{N-k}-x_k \qquad \bar{x}_k:=(x_k+x_{N-k})/2,
 \end{equation}
@@ -920,16 +941,15 @@ The differentiated path integral is then
 \end{align}
 where the Gaussians have been restored to their usual form and the path integral has been rewritten in ensemble average form.
 In principle this method would also work for estimating the derivatives.  However as written, this 
-will have large numerical fluctuations.  In particular, the answers will be distributed around zero, with
+will have a large statistical error.  In particular, the answers will be distributed around zero,
 with some reweighting due to $\Phi$, which preferentially weights certain values.  However, the overall answer scales
-as $(\Delta\cT)^{-n/2}$.  As the path length $N$ increases, the fluctuations will scale
-as $N^{n/2}$ which is unacceptable.    
+as $(\Delta\cT)^{-n/2}$.  As $N$ increases, the fluctuations will scale as $N^{n/2}$ which is unacceptable.    
 
 \begin{figure}
   \centering
   \includegraphics[width=0.4\linewidth]{fig/int-by-parts}
   \caption[Partial averaging along a path]{Partial averaging along a path close to a surface.  The extent 
-    of the averaging is chosen that $x_m$ and $x_{N-m}$ are as large as possible, while being unlikely to enter the dielectric.}
+    of the averaging $m$ is chosen to be as large as possible, while ensuring that $x_m$ and $x_{N-m}$ are unlikely to enter the dielectric.}
   \label{fig:int-by-parts}
 \end{figure}
 
@@ -939,54 +959,68 @@ and each $\phi(x_k)$ only varies significantly for $x_k\sim d$, and when $x_k\ll
 be approximated as a constant.  An example of this geometry is illustrated in Figure~\ref{fig:int-by-parts}, 
 for an atom near a dielectric surface.  
 For the first and last $m$ points along the path, the integrals can be carried out assuming that $\Phi$ is 
-approximately constant.  
+approximately independent of these coordinates.  
 The result for integrating out $x_1,\ldots,x_{m-1}$ and $x_{N-m+1},\ldots,x_{N-1}$ in Eq.~(\ref{eq:Hermite_init}) is
 \begin{align}
-  \partial_0^nI(x_0)&=\int\prod_{k=m}^{N-m}dx_k\left(\frac{-1}{\sqrt{\Delta\cT}}\right)^n 
+  \partial_0^nI(x_0)&=\int\prod_{k=m}^{N-m}dx_k\left(\frac{-1}{\sqrt{m\Delta\cT}}\right)^n 
   H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{m\Delta\cT}}\right)
   e^{-(x_0-\bar{x}_m)^2/\cT_m -(\Delta x_m^2)/4\cT_m}\nonumber\\
-  &\times \prod_{k=m}^{N-m+1}
-\frac{e^{-(x_{k+1}-x_k)^2/(2\Delta\cT)}}{\sqrt{2\pi\Delta \cT}}\Phi(x_1,\ldots x_{N-1}).\\
+  &\times \prod_{k=m}^{N-m+1}\frac{e^{-(x_{k+1}-x_k)^2/(2\Delta\cT)}}{\sqrt{2\pi\Delta \cT}}\Phi(x_1,\ldots x_{N-1}).\\
  &= \biggdlangle
   \left(\frac{-1}{\sqrt{m\Delta\cT}}\right)^n H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{m\Delta\cT}}\right)
   \Phi(x_m,\ldots x_{N-m})\label{eq:partial_avg_grad}
   \biggdrangle.
 \end{align}
-% The composition rule for Hermite polynomials and Gaussians follows by first integrating out the intermediate coordinates, 
-% and then differentiating the results.  
-The combination of the Hermite polynomial is effectively the desired Malliavin weighting function.
-This approach has replaced differentiation
-with multiplication by a function that does not fluctuate more as the path length changes.
-This method naturally generalizes to other Cartesian derivatives.  The path can be generated 
-using the v-loop algorithm~(\ref{eq:unit_vloop}), and the relevant parts of the path can be 
-used to evaluate Eq.~(\ref{eq:partial_avg_grad}).
+The combination of the Hermite polynomial and $(m\Delta \cT)^{n/2}$ is effectively the desired Malliavin weighting function.
+This approach has replaced differentiation with multiplication by a function that does not fluctuate more as the path length changes.
+The threshold $m$ can be estimated based on how likely the path of a given timestep is to touch 
+the surface.  That threshold will depend on the distances in the problem and the path-time,
+which determines a fraction of the path that can be averaged over.  But, that fraction 
+becomes a constant as $N$ increases, so $m\Delta \cT$ also becomes a constant for a particular $\cT$,
+and the variance no longer grows as $N$ increases.
 
-Each integration over an intermediate coordinate makes some small error in approximating $\Phi$ as constant.  
+Each integration over an intermediate coordinate makes some small error in approximating $\Phi$ as independent 
+of that coordinate.  
 The partial averaging should only be carried out to the point where that error can no longer be ignored.
-If the function $\Phi$ starts to deviate from a constant at $x=d$, such as for the TE Casimir worldline integrand, 
-then the error can be estimated from the probability that a path would enter the region $x>d$.
-For a Brownian path, the probability that a random walk will touch a surface at $x=d$ after starting 
-at the origin, in time $\cT_m$ is 
+If the function $\Phi$ starts to vary when any of its arguments approach $d$, such as for the TE Casimir worldline integrand, 
+then the error can be estimated from the probability that $x_m$ would enter the region $x_m>d$.
+Although the paths are actually Brownian bridges, for small times they can be approximated as 
+a Brownian walk in order to estimate the touching probability.  
+The probability that a Brownian walk will touch a surface at $x=d$ after starting 
+at the origin, in time $\cT_m:=m\Delta\cT$ is 
 \begin{equation}
   P_{\text{touch}} = \erfc\left(\frac{d}{\sqrt{2\cT_m}}\right).
 \end{equation}
-For small $\cT_m$, the error function is bounded by $e^{-d^2/(2\cT_m)}$.
-If the maximum acceptable error is denoted $\varepsilon$, then this equation can be solved to find
+For small $\cT_m$, the error function is bounded by $e^{-d^2/(2\cT_m)}$.  
+If the maximum acceptable error is denoted $\varepsilon$, then this equation can be solved to estimate
 the maximum amount of averaging allowed.
 Using $\cT_m=m\cT/N$, the maximum amount of averaging should be 
 \begin{equation}
   \frac{m}{N} = \frac{d^2}{2\cT\log\varepsilon}.
 \end{equation}
-The most important feature of this estimate, is that it suggests $m/N$ is a constant.  
-As a consequence, the fluctuations in Eq.~(\ref{eq:partial_avg_grad}) scale as $\sqrt{N/(m\cT)}^n$,
-but since $m/N$ is a constant, the scale of the fluctuations is also constant.  
+The most important feature of this estimate, is that it suggests $m/N$ is a constant fraction as $N$ increases.  
+As a consequence, the fluctuations in Eq.~(\ref{eq:partial_avg_grad}) scale as $[N/(m\cT)]^{n/2}$,
+but since $m/N$ is a constant, the scale of the fluctuations is also constant as $N$ increases.  However,
+the size of that fraction will vary as a function of $d/\sqrt{\cT}$ and the desired tolerance $\varepsilon$.
+As a practical matter, $m/N$ should not exceed $1/2$, so that there are at least two points in the path.
 
-In effect, the partial averaging over the initial steps constructs a non-uniform path.  At points 
+The partial averaging effectively constructs a path with a variable step size.  At points 
 close to the path origin, the path steps can be large since these increments are unlikely to intersect
-the surfaces.   Since the length of the first and last increment sets the 
-scale of the fluctuations, these should be chosen to be as large as possible, without making any error.
-However after a certain point in the path, the finer path should be used to accurately 
-estimate any functions along the path. 
+the surfaces.   Since the length of the first and last increments sets the 
+scale of the fluctuations by their presence in $(N/m\cT)^{n/2}$, the steps should be chosen to be as large as possible, without making any error.
+However, once the path gets close to the interface, it is necessary to accurately estimate quantities
+such as the touching time or sojourn time.  The accuracy of these estimates depends sensitively on the 
+size of the steps, and thus the path should have a finer resolution when it is close to the interface.  
+
+The path can be generated using the v-loop algorithm~(\ref{eq:unit_vloop}), and the larger 
+steps can be constructed by identifying them with the $m$th step on the initial path.  Those
+steps are used to evaluate the Hermite-Gaussian terms.   
+The rest of the path between $x_m$ and $x_{N-m}$ can then be used to evaluate any potentials or spatial
+functions in the path integral.  
+In the context of the birth-death algorithm, these gradients are only evaluated on paths that survive 
+to the end to contribute to the path swarm.  
+This method naturally generalizes to include multiple Cartesian derivatives.  
+
 
 \subsubsection{Hermite-Gaussian Sampling}
 
@@ -1154,14 +1188,6 @@ expected result.
 
 Sampling from the exponential path time distribution~(\ref{eq:expT}) 
 is essential for the renormalized two-body TM Casimir energy.
-Once paths are large enough to contribute to the energy, they are guaranteed to have intersected both 
-bodies.  As a result, the intersection path time of the fiducial path with the surface has little bearing on when
-the resulting path swarm would contribute.  For example, the fiducial path might have started next to 
-one surface, and branched immediately.  The fiducial path might extend far more in one direction, 
-and only intersect the second body at much later times than the new path.  Sampling the path time
-based on when the fiducial path intersects the body would miss that contribution.
-This suggests that the path time for the birth-death path swarm is best sampled from the 
-ensemble average estimate of when a path will contact the surface.  
 
 The renormalized Casimir energy has an additional problem.  As currently implemented,
 the starting position for paths is randomly sampled from Eq.~(\ref{eq:xPower_law}).  As already

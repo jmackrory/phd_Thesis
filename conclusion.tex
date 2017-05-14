@@ -6,11 +6,11 @@ We have been partially successful in those aims.   % Although we have not verifi
 % path integral~(\ref{eq:vector_path_integral}) gives the correct answers.
 
 Following Bordag~\cite{Bordag1998,Bordag1999}, we developed a full vector path integral~(\ref{eq:vector_path_integral}) for
-the EM field.  So far it has not be implemented as a numberical method.
+the EM field.  So far it has not be implemented as a numerical method.
 Instead, we developed an approximate worldline description for the EM field in terms of two independent scalar fields, corresponding 
 to the TE and TM polarizations.   
-Although the decoupled scalars are adapted to a planar geometry (although they may describe
-a spherical geometry as well), they share some similarities with the potentials in the full vector
+Although the decoupled scalars are adapted to a planar geometry, 
+they share some similarities with the potentials in the full vector
 path integral, and are a useful test case in their own right.  
 
 We showed analytically and numerically that the polarization worldline path integrals recover the known expressions for the 
@@ -22,65 +22,31 @@ in certain geometries.  The analytical expressions for the path average of the T
 Even with regularized solutions, it was necessary to develop techniques to efficiently
 sample the worldline path integral.  The TE integrand was relatively simple to evaluate, while the TM
 integrand is much more challenging and still under study.
-The birth-death method for sampling paths was essential for bringing the statistical errors under control.
-The partial averaging method also allowed us to evaluate the derivatives required for the TM method.
+The birth-death method for sampling paths was essential for bringing the statistical errors under control, 
+and the partial averaging method also allowed us to evaluate the derivatives required for the TM method.
 The numerical methods we developed are in agreement with the expected analytical results.
 % where previously, the finite difference method had been previously plagued by convergence issues.
 
 The methods that were developed could be used as an (uncontrolled) approximation to the Casimir effect in a general geometry.
 They will also probably be useful in handling the vector path integral.    
-In cases where path integrals could be analytically solved for open Brownian bridges [such as
+In cases where path integrals can be analytically solved for open Brownian bridges [such as
 Dirichlet~(\ref{eq:Dirichlet}) and TM boundary conditions~(\ref{eq:TM_potential})], 
-those expressions can be applied locally at each step of the  path.  
+those expressions can be applied locally at each step of the path.  
 At each step, the potential could be computed using a local planar approximation to the exact solution.
-The local solutions, thus joined together along the path, would form a basis for solving a path integral
-in general based on the local approximations throughout the path.  
-
+The local solutions joined together along the path, could form a basis for solving a path integral
+in general, based on the local approximations throughout the path.  
 
 Another possible approach to leveraging the results contained here into a general method is to consider 
 how the two scalar polarizations are coupled.  
 At each point along the path, the EM field could be split into the TE and TM polarizations based 
 on the nearest surface normal.
-At each step, the fields could be coupled together via a 2x2 rotation matrix where the rotation
+At each step, the fields could be coupled together via a rotation matrix where the rotation
 angle depends on the change in the surface normal.  
-(in effect coupling together the Hertz potentials, which correspond to TE and TM polarizations for planar
-media)
 
 In the introduction we noted that the scattering method is currently the only general
-method for computing EM Casimir energies in arbitrary geometries.  That is still true.  The worldline method,
-while it has a number of attractive features, has not yet been generalized to full electromagnetism.   
+method for computing EM Casimir energies in arbitrary geometries, and that is still true.  
+The worldline method, while it has a number of attractive features, has not yet been generalized to full electromagnetism.   
 The work presented here brings that prospect closer.  
-
-%\begin{itemize}
-%  \item Developed scalar worldlines.  
-  % \item Goal was for Gaussian, geometry independent, method for computing Casimir energies taking
-  %   into account dielectric properties.
-  %   Check against known calculations.
-    
-  % \item Really missing on geometry independent, since polarization decomposition is restricted to
-  %   particular geometries.  Have idea of coupling on each step, with rotation/coupling based on how
-  %   nearest normal changes direction.
-  %   Ad-hoc.  Hard to definitively check and debug.
-  % \item Carefully studied convergence properties, and developed numerical methods, that while 
-  %   only tested for planes could generalize as uncontrolled approximations.  (Add fields in quadrature)
-  % \item Need markov-chain methods to temper fluctuations.  Introduced monte carlo sampling for both 
-  %   positino and time.  
-  %   Effective boundary conditions, and Feynman-Kac formulae for accelerating convergence.
-  % \item In comparison with Scattering method - that is mature code, that works quickly.
-  %   It is currently limited to surface integrals, but apparently, can use effective surface currents
-  %   to capture slower variation.  State of the art actually employed in research groups looking to 
-  %   compute their Casimir-Polder potential.
-  % \item Worldline may be useful companion for very different underpinnings, and convergence properties.
-  %   Worldline path resolution may be analogous to fine enough tesselation of surfaces.  
-  %   As yet, neither method can handle anisotropic media.  
-    
-  % \item Also developed model for quantum trajectories accounting for camera noise.  
-  %   May one day be useful to lab in reconstructing atomic trajectories.
-
-  % \item Maybe: 
-  %   Developed CUDA code for both worldlines (path generation, branching) and quantum trajectories
-  %   (weighting outcomes, FFT for split-operator)
-%\end{itemize}
 
 
 

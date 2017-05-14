@@ -461,13 +461,13 @@ The most daunting feature of the TM Casimir worldline~(\ref{eq:TM_Casimir}) is t
  A closed-form solution for the TM potential $V\subTM$ at a single planar boundary was found in Chapter~\ref{ch:feynman_kac}.
 The ensemble-averaged solution for all Brownian paths between points $x_k$ and $x_{k+1}$ in time ${\Delta\cT}$ is 
 \begin{align}
-  v_{k,k+1}&:=  \Bigdlangle e^{-\int_0^{\Delta\cT} dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
+  v_{k,k+1}(x_k,x_{k+1})&:=\!  \Bigdlangle e^{-\int_0^{\Delta\cT} dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
   %  =\,& \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]
   % +\Theta[-X_{k,k+1}]\sech\Xi,
    \label{eq:TM_pot}
-      &\,\,=\left\{ \begin{array}{lc} 
-          1  + \sgn(d-x_k)\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/{\Delta\cT}} & (d-x_k)(d-x_{k+1})>0\\
-          \sech\Xi & (d-x_k)(d-x_{k+1})<0.
+      &\,=\!\left\{\!\! \begin{array}{lc} 
+          1  + \sgn(d\!-\!x_k)\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/{\Delta\cT}} &\!\! (d\!-\!x_k)(d\!-\!x_{k+1})\!>0\\
+          \sech\Xi & \!\!(d\!-\!x_k)(d\!-\!x_{k+1})<0.
         \end{array}
         \right.  
 \end{align}
@@ -523,118 +523,129 @@ Figure~\ref{fig:TM_histogram} shows a histogram of numerically estimated values 
 interacting with the TM potential.  Each Brownian path is generated via the v-loop algorithm~(\ref{eq:unit_vloop}),
 and scaled by $\sqrt{\cT}$.  The total contribution from each path is the product of the TM solutions~(\ref{eq:TM_pot}) for every
 step along the path.
-The direct estimate of the TM potential shows a wide spread of values.
+The direct estimate of the TM potential shows a wide spread of values over different paths.
  Most paths return values close to zero, while a few rare paths return very large values.  
 This suggests that the plain Gaussian paths 
 are poorly suited to this problem, and that the path generation scheme should be modified.
-Given a large enough ensemble, this eventually converges to the right answer, but it displays
-unacceptably large numerical fluctuations.  
+Given a large enough ensemble, this method eventually converges to the right answer, but it displays
+unacceptably large statistical errors.  
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/numerics/TM_normhist}
   \caption[Histogram of Accumulated Numerical TM Estimates]
-  {Histogram of accumulated numerical TM estimates, for raw Gaussian (blue) and birth-death Gaussian (red).
-    Calculations used $10^6$ paths, with $N=100$ points per path, $\chi=100$, $d=1,T=1.$
-    (The birth-death method is discussed in Sec.\ref{sec:birth_death}.)
-    The raw Gaussian distribution extends off to negative infinity, 
-    while the birth-death distribution has truncated peak at zero weight.}
+  {Histogram of accumulated numerical TM estimates, for Gaussian (blue) and birth-death Gaussian (red).
+    Calculations used $10^6$ paths, with $N=200$ points per path, $\chi=100$, $d=1$, and $\cT=1.$
+    The correct value for the integral at these parameters is $(I=1.595)$.  The Gaussian estimate is $(1.40\pm 0.14)$.
+    The birth-death estimate is $(1.602\pm 0.006)$.
+    (The birth-death method is discussed in Sec.~\ref{sec:birth_death}.)
+    The Gaussian distribution extends off to zero, 
+    while the birth-death distribution has truncated peak at zero.}
 \label{fig:TM_histogram}
 \end{figure}
 
-\subsubsection{TM-Gaussian Paths}
+\subsubsection{``TM-Gaussian'' Paths}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig/analytical/probTM}
-  \caption[Combined TM Potential and Gaussian probability distribution.]{
-    Combined TM-Gaussian probability distribution plotted for various $\chi$.
-    Increment starting position is $x=-1$, and $\cT=1$.  The TM boundary is at the origin. }
+  \includegraphics[width=0.8\textwidth]{fig/numerics/probTM}
+  \caption[Combined TM-Gaussian probability distribution.]{
+    Combined TM-Gaussian probability distribution plotted for various $\chi$.  Corresponds
+    to a single term in the product in Eq.~(\ref{eq:TMGaussian_joint}).
+    Increment starting position is $x=-1$, and $\cT=1$.  The boundary is at the origin. }
 \end{figure}
 
 One possible solution to the fluctuations is to sample from a combination of a Gaussian
-and the path averaged exponential~(\ref{eq:TM_pot}) for the path increment.
+and the path-averaged exponential~(\ref{eq:TM_pot}) for the path increment.  Since the 
+path-averaged exponential is taken into account in the sampling, more representative values should 
+be chosen, which should reduce the number of extreme values of the estimates.
 In this case, the total probability distribution for the paths is 
 \begin{align}
   P(x_1,\ldots ,x_{N-1}) = \prod_{k=0}^{N-1}\frac{e^{-(x_{k+1}-x_k)^2/(2\Delta\cT)}}{\sqrt{2\pi\Delta\cT}}
-  \bigglinklangle e^{-\int_0^{\Delta \cT}dt\, \VTM}\bigglinkrangle_{x_k\rightarrow x_{k+1}}
+  \bigglinklangle e^{-\int_0^{\Delta \cT}dt\, \VTM}\bigglinkrangle_{x_k\rightarrow x_{k+1}}.\label{eq:TMGaussian_joint}
 \end{align}
 In the same manner as the v-loops, the Gaussian probability distribution can be decoupled into a
 set of random variables, where from Eq.~(\ref{eq:open_vloop}), the argument of each of those Gaussians 
 involves ${z_k = (x_k-c_{k}x_{k-1})/\sqrt{c_k\Delta \cT}}$.
+After implementing the v-loop change of variables, 
+the probability distribution~(\ref{eq:TMGaussian_joint}) can be written as
 \begin{align}
   P(x_1,\ldots ,x_{N-1}) = v_{N,N-1}\prod_{k=0}^{N-1}\cN_{k+1}P\supTM_{k+1}(x_{k+1}),
 \end{align}
-where the new probability distribution for $x_k$ is 
+where the new probability distribution for $x_{k+1}$ is 
 \begin{align}
-P\supTM(x_{k+1}):=\cN^{-1}_{k+1}\frac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,x_{k+1}),
+  P\supTM_{k+1}(x_{k+1}):=\cN^{-1}_{k+1}\frac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,x_{k+1}),
   \end{align}
 with normalization constant 
 \begin{align}
   \cN_k=\int dy\, \frac{e^{-(y-c_k x_k)^2/(2c_k\Delta\cT)}}{\sqrt{2\pi c_k\Delta\cT}}v_{k,k+1}(x_k,y).
 \end{align}
-The crucial point is that the $P\supTM_{k}$ can be sampled from, accounting only for the present position. 
-Although the present position $x_k$ is still coupled to future positions via $v_{k+1,k}$, the sampling procedure ignores
-that and samples $x_k$ based solely on $P_k$.  
+The crucial point is that the $P\supTM_{k+1}$ can act as the probability distribution for $x_{k+1}$, accounting only for the present position $x_k$. 
+Although the present position $x_k$ is still coupled to future positions via $v_{k+1,k+2}$, the sampling procedure ignores
+that and samples $x_{k+1}$ based solely on $P\supTM_{k+1}$.  
 The probability distribution can be put into a convenient numerical form by completing the square to account
 for $v_{k,k+1}$.  The resulting piecewise Gaussian probability distributions can be split 
 into ``no-crossing'' and  ``crossing'' terms, where
 \begin{align}
-  P\supTM(x_{k+1})
-  = \cN_k\big\{ \Theta[(d-x_k)(d-x_{k+1})]P\supTM_{\text{NC}}(x_{k+1}) +  \Theta[-(d-x_k)(d-x_{k+1})]P\supTM_{\text{C}}(x_{k+1})\big\}
+  P\supTM_{k+1}(x_{k+1})
+  = \cN_{k+1}\big\{& \Theta[(d-x_k)(d-x_{k+1})]P\supTM_{\text{NC},k+1}(x_{k+1})\nonumber\\
+  &+  \Theta[-(d-x_k)(d-x_{k+1})]P\supTM_{\text{C},k+1}(x_{k+1})\big\}
 \label{eq:PTM_k}
 \end{align}
 and
 \begin{align}
-P\supTM_{\text{NC}}(x_{k+1})&=  \sgn(d-x_k)\dfrac{\tanh\Xi}{\sqrt{2\pi c_k \Delta\cT}} e^{-2(1-c_k)d(d-x_k)/\Delta\cT} e^{-(x_{k+1}-c_k(2d-x_k))^2/(2c_k \Delta\cT)}\nonumber\\
+P\supTM_{\text{NC},k+1}(x_{k+1})&=  \sgn(d-x_k)\dfrac{\tanh\Xi}{\sqrt{2\pi c_k \Delta\cT}} e^{-2(1-c_k)d(d-x_k)/\Delta\cT} e^{-(x_{k+1}-c_k(2d-x_k))^2/(2c_k \Delta\cT)}\nonumber\\
 &  \hspace{0.5cm}+ \dfrac{e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}}{\sqrt{2\pi c_k \Delta\cT}}  \\
-P\supTM_{\text{C}}(x_{k+1}) &=\dfrac{\sech \Xi}{\sqrt{2\pi c_k \Delta\cT}}e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}
+P\supTM_{\text{C},k+1}(x_{k+1}) &=\dfrac{\sech \Xi}{\sqrt{2\pi c_k \Delta\cT}}e^{-(x_{k+1}-c_k x_k)^2/(2c_k \Delta\cT)}.
 \end{align}
-The normalization constant can be evaluated in two parts $\cN_k=\cN_k^{\text{C}}+\cN_k^{\text{NC}}$, 
+The normalization constant can be evaluated in two parts, $\cN_{k+1}=\cN_{k+1}^{\text{C}}+\cN_{k+1}^{\text{NC}}$, 
  with the result
 \begin{align}
-  \cN_k^{\text{C}}=\,& \frac{1}{2}\left[1+\sgn(d-x_k)\, \erf\!\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right] \nonumber\\
+  \cN_{k+1}^{\text{C}}=\,& \frac{1}{2}\left[1+\sgn(d-x_k)\, \erf\!\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right] \nonumber\\
   &+\sgn(d-x_k) \frac{\tanh\Xi}{2}\left[1+ \sgn(d-x_k)\,\erf\!\left(\frac{d(1-2c_k)+ c_kx_k}{\sqrt{2c_k \Delta\cT}}\right)\right]\nonumber\\
   & \hspace{2cm}\times e^{-2(1-c_k)d(d-x_k)/\Delta\cT} \\
  %  &=\frac{1}{2}\left[1- \erf\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right]
  % - \frac{\tanh\Xi}{2}\left[1- \erf\left(\frac{d(1-2c_k)+ c_kx_k}{\sqrt{2c_k \Delta\cT}}\right)\right]e^{-\frac{2(1-c_k)d(d-x_k)}{\Delta\cT}}\text{d<x_k}.
 % \end{align}
 % \begin{align}
-\cN_k^{\text{NC}}=\,& \frac{\sech\Xi}{2}\left[1-\sgn(d-x_k) \erf\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right].
+\cN_{k+1}^{\text{NC}}=\,& \frac{\sech\Xi}{2}\left[1-\sgn(d-x_k) \erf\left(\frac{d-c_k x_k}{\sqrt{2 c_k \Delta\cT}}\right)\right].
 \end{align}
 The probability distribution~(\ref{eq:PTM_k}) can be sampled via the following procedure.
-First, note that the probability distributions involve truncated Gaussians in $x_k$.  The truncation
-occurs at the surface $x_k=d$, since the probability distribution was split based on whether path-increments cross
+First, note that the probability distributions involve truncated Gaussians in $x_{k+1}$.  The truncation
+occurs at the surface $x_{k+1}=d$, since the probability distribution was split based on whether path increments cross
 through the surface or not.
 At each step the simulation picks the crossing or no-crossing branch of the probability distribution
-cased on the relative weights of $\cN_k^\text{C}$ and $\cN_k^\text{NC}$, picking the crossing branch 
-if $\cN_k^{\text{C}}/\cN_k<r$ where $r$ is a uniform random number.  
+cased on the relative weights of $\cN_{k+1}^\text{C}$ and $\cN_{k+1}^\text{NC}$, picking the crossing branch 
+if $\cN_{k+1}^{\text{C}}/\cN_{k+1}<u$ where $u$ is a uniform random number.  
 If the crossing branch is chosen, then a deviate is sampled from the truncated Gaussian distribution.
-Otherwise, if the no-crossing branch is chosen, then depending on the sign of $\sgn(d-x_k)$, there are another two options.
-If $\sgn(d-x_k)>1$, then one of the Gaussians is picked based on their relative probability of occurring,
+Otherwise, if the no-crossing branch is chosen, then depending on the sign of $\sgn(d-x_{k+1})$, there are another two options.
+If $\sgn(d-x_{k+1})>1$, then one of the Gaussians is picked based on their relative probability of occurring,
 and a deviate is sampled from one of them.
-If however, $\sgn(d-x_k)<1,$ then the rejection method is used to generate a deviate.
-In the rejection method, a deviate is sampled from a proposal distribution $P_1(x)$(such as one of the Gaussians),
+If however, $\sgn(d-x_{k+1})<1,$ then the rejection method is used to generate a deviate.
+In the rejection method, a deviate is sampled from a ``proposal'' distribution $P_1(x)$(such as one of the Gaussians),
 and accepted with a probability $P_2(x)/P_1(x)$, where  $P_2$ is the target distribution~\cite{NumRecipe}.
 In the other cases, the truncated Gaussian distributions can be sampled quickly via the inverse error function.  
 
-While this method does improve performance, it still relies on taking a product of $N-1$ normalization factors $\cN_k$,
-where $0<\cN_k<2$.  This leads to the same problems with numerical fluctuations as the plain Gaussians
+While this method does improve performance, it still relies on taking a product of $N-1$ normalization factors $\cN_{k+1}$,
+where $0<\cN_{k+1}<2$.  This leads to the same problems with large statistical errrors as the plain Gaussians
 as the path length $N$ is increased.  It is also much more involved to implement than the plain Gaussian
 approach.
 
-\subsubsection{Birth-Death Loop Swarm}
+\subsubsection{Birth-Death Path Swarm}
 \label{sec:birth_death}
 Both the plain Gaussian and TM-Gaussian paths can be rescued by further adjusting the sampling procedure.
-In both cases, as the trajectory propagates it accumulates a large weight.  After $k$ steps,
-the weight is $w_k=\prod_{j=1}^k\nu_j$, where $\nu_j$ represents either $v_{j,j+1}$ for Gaussians or $\cN_j$
-for the TM-Gaussians.  Most paths propagating close to the surface will acquire 
-a number of large weights with $\nu_j>1$ when they are outside the body, 
-and small weights $0<\nu_j<1$ when they are inside the body.  
+In both cases, the path can accumulate a large weight.  After $k$ steps,
+the weight is $w_k=\prod_{j=1}^k\nu_j$, where $\nu_j$ represents either $v_{j,j+1}$ for Gaussian paths or $\cN_j$
+for TM-Gaussian paths.  Most paths propagating close to the surface will acquire 
+a number of large weights with $\nu_j>1$ when they are on the vacuum side of the interface, 
+and small weights $0<\nu_j<1$ when they are on the dielectric side of the interface.  
 The logarithm of the accumulated weight is $\log w_k = \sum_{j=1}^k\log \nu_j$.  
 Since the $\nu_j$ are random variables (both $v_{k,k+1}$ and $\cN_k$ are functions of an underlying random path),
 then from the central limit theorem, we would expect $\log w_k$ to be normally distributed, with some standard deviation $\sigma^2$. 
-Thus, the accumulated weight is expected to grow a log-normal deviate, with variance $\sigma^N$.    
+(The central limit theorem applies to the sum of a large number of independent random variables---it maybe 
+that the independence assumption is violated in this case, as the path position acts as a memory.)
+Nevertheless, this predicts that the accumulated weight is expected to behave as a log-normal deviate, with variance ${e^{\sigma^2}(e^{\sigma^2}-1)}$.    
+Since $\sigma^2$ grows linearly with $N$, the variance of the product $w_k$ would grow exponentially with $N$.  
 Note that the mean would still have the correct value, but the variance, and thus sampling error would
 grow unacceptably as $N$ increases.
 
@@ -645,41 +656,45 @@ grow unacceptably as $N$ increases.
 % Note that both types of paths will contribute to the Casimir energy.
 
 The path generation for either method can be modified as follows.  The weight $w_k$ is effectively treated as 
-the fitness function for the path.  Paths with high weights will spawn further paths (birth), while paths with
-small weights will be terminated and return zero (death).  At each step of the path, the 
+the fitness function for the path.  Paths with large weights will spawn further paths (``birth''), while paths with
+small weights will be terminated and return zero (``death'').  At each step of the path, the 
 accumulated weight must be checked.
-If the weight is becoming small, $w_k<0.5$ then compare $w_k$ with a uniform random number $u$.
-If $w_k<u$, then set $w_k=0$ and stop propagating the path; alternatively, if $w_k>u$, then 
+If the weight is becoming small, $w_k<0.5$ then the weight should be compared with a uniform random number $u$.
+If $w_k<u$, then the path dies; alternatively, if $w_k>u$, then 
 the path survives and the weight is reset $w_k=1$.  That is the death process.
 In an ensemble average, an average fraction of the paths $u$ survive the death process, which gives 
 the correct average value.
-If the weight is becoming large, $w_k>2$, then split the weight in half, and assign each half to 
-two independent trajectories.
-Altogether, this is called the birth-death process, and should be applied at every step of the random path.
-Implementing the deaths ensures that the memory requirements do not grow exponentially as a function 
+If the weight becomes large, $w_k>2$, then divide the weight in two, and assign each half to 
+two independent paths.
+Altogether, this is called a ``birth-death'' process, and should be applied at every step of the random path.
+If a path survives for $N$ steps, then its contribution is added to a running total for this swarm.
+Once all of the paths have either died, or reached the end, the accumulated total for this swarm is then
+renormalized (by subtracting 1), and added to the running totals used to estimate the mean and variance.  
+Implementing the deaths ensures that the number of computations  does not grow exponentially as a function 
 of path length, while the birth process ensures that successful trajectories with a large weight have 
-more opportunity.  Note that returning zero is still a contribution to the Casimir energy (anything different
-from unity will contribute), and the death process speeds up the computation by not computing ever smaller
-values.
+contribute more to the path integral.  The death process speeds up the computation by not computing 
+negligible corrections to the swarm value.  
 
 The birth-death process is a very simple Markov Chain Monte Carlo method.  The birth-death
 process modifies the preferred motions based on the accumulated weight.  Paths are likely to be born
-on the vacuum side of interfaces, and they are likely to die on the inside of the interface.
-Far away from the interface on either side, the paths are unlikely to change.  
+on the vacuum side of interfaces, and they are likely to die on the dielectric side of the interface.
+Far away from the interface on either side, the paths are unlikely to branch or terminate.  
 
-Similar, but different terms are discussed throughout stochastic processes literature.
-The more typical birth-death process is used in queuing theory, where 
+Similar terms are discussed throughout stochastic processes literature.
+As a matter of nomenclature, it is worth distinguishing the birth-death process we are 
+using from the more popular birth-death process used in queuing theory.  In queuing theory, 
 the number of objects in a queue randomly increases and decreases at a fixed average rate.
 In our case, that rate depends on the past behavior of the system, and where it has gone.  
 The process used here is closer to the genealogical methods for evaluating path integrals discussed by Del Moral~\cite{DelMoral2004}.
-A similar genealogical idea has been used in quantum trajectory simulations~\cite{Jacobs2010a}, which is another
-technique for simulating open quantum systems.  In that variant, each random trajectory carries 
+A similar genealogical idea has been used in quantum trajectory simulations~\cite{Jacobs2010a}, which is a
+technique for simulating open quantum systems.  In that variant, each quantum state in an ensemble carries 
 a probability weight.  If that weight becomes too small, then that random trajectory is discarded,
 and another more successful trajectory is split in two, and given half the weight.   
 A similar method has been used to discuss simulating rare events, such as the extreme tails of a Gaussian.
 In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\cite{Glasserman1999,Garvels2000}.
 These methods essentially reward the trajectories or paths of the system that enter regions with a large
-contribution to the integral (or other figure of merit).  
+contribution to the integral (or other figure of merit).  Thus more computational effort is spent in 
+regions with significant contributions to the result.  
 
 \begin{figure}
   \centering
@@ -1027,7 +1042,7 @@ the open Gaussian probability distribution.
 \label{sec:general_path_averaging}
 
 While estimating gradients for the stress-tensor it may be necessary to estimate 
-gradients while close to one surface.  For a renormalized energy, only loops that touch both
+gradients while close to one surface.  For a renormalized energy, only paths that touch both
 surfaces will contribute.   In this case, the above approach based on integrating out Gaussians
 is of limited utility in reducing the fluctuations.  The assumption that the integrals are approximately
 Gaussian can only be exploited for a very small number of steps.  

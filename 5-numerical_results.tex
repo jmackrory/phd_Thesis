@@ -300,7 +300,7 @@ fares worse than the straightforward trapezoidal method.
 \subsection{Results: TE Casimir  and Casimir--Polder Energies for Planar Geometries}
 
 %These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
-Fig.~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
+Figure~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
 at over a wide range of $\chi$.  
  The atom is located at the origin in the vacuum, with a dielectric half-space 
 a distance $d$ away with a constant susceptibility $\chi$.
@@ -369,7 +369,7 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
   \label{fig:eff_TE_2wall}
 \end{figure}
 
-Fig.~\ref{fig:eff_TE_2wall} shows the numerically computed Casimir energy between two planar dielectric interfaces
+Figure~\ref{fig:eff_TE_2wall} shows the numerically computed Casimir energy between two planar dielectric interfaces
 a distance $d$ apart, with dielectric function $\epsr(x) = 1+\chi\Theta(-x+d/2)+\chi\Theta(x-d/2)$.  
 This is computed numerically by evaluating
 \begin{align}
@@ -457,39 +457,39 @@ Even after regularization, and analytical path averaging, is still challenging t
 We will develop a number of techniques to temper these difficulties.
 As a side effect, they should have applications for more general Casimir worldlines.
 
-The most daunting feature of the TM Casimir worldline is the singular TM potential~(\ref{eq:VsubTM}).
+The most daunting feature of the TM Casimir worldline~(\ref{eq:TM_Casimir}) is the singular TM potential~(\ref{eq:VsubTM}).
  A closed-form solution for the TM potential $V\subTM$ at a single planar boundary was found in Chapter~\ref{ch:feynman_kac}.
-The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is 
+The ensemble-averaged solution for all Brownian paths between points $x_k$ and $x_{k+1}$ in time ${\Delta\cT}$ is 
 \begin{align}
-  v_k(x_k,x_{k+1}):=\,&  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
+  v_{k,k+1}&:=  \Bigdlangle e^{-\int_0^{\Delta\cT} dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
   %  =\,& \Theta[X_{k,k+1}]\big[1 + \sgn(d-x_k)e^{-2X_{k,k+1}/t}\tanh\Xi\big]
   % +\Theta[-X_{k,k+1}]\sech\Xi,
    \label{eq:TM_pot}
-      =&\left\{ \begin{array}{lc} 
-          1   + \sgn(d-x_k)\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/t} & (d-x_k)(d-x_{k+1})>0\\
+      &\,\,=\left\{ \begin{array}{lc} 
+          1  + \sgn(d-x_k)\tanh\Xi\, e^{-2(d-x_k)(d-x_{k+1})/{\Delta\cT}} & (d-x_k)(d-x_{k+1})>0\\
           \sech\Xi & (d-x_k)(d-x_{k+1})<0.
         \end{array}
         \right.  
 \end{align}
-This ensemble-averaged solution was plotted in Fig.~\ref{fig:TMpot}, 
-for starting points on either side of the interface at various values of $\Xi$.
-The solution is between zero and one for paths that start inside a body, or cross an interface.
-For paths starting outside a body, the solution is between one and two.  The extreme values of zero and 
+This ensemble-averaged solution was plotted in Figure~\ref{fig:TMpot}, 
+for $x_k$ and $x_{k+1}$ on either side of the interface at various values of $\Xi$.
+The solution varies between zero and one for paths that start inside a dielectric body, or cross an vacuum-dielectric interface.
+For paths starting in vacuum outside a dielectric body, the solution varies between one and two.  The extreme values of zero and 
 two only appear in the strong-coupling limit close to the surface.
 
 This solution can be used in the path integral by identifying averages of sub-paths
 between discrete points with the analytical solutions.
-The path averaged exponential potential can be split into many steps between $\vect{x}_k$ and $\vect{x}_{k+1}$
-at times $\cT_k$ and $\cT_{k+1}$.  Each exponential potential can be averaged against all possible sub-paths
-between these points,
+The path averaged exponential potential can be refined into arbitrarily many steps between $\vect{x}_k$ and $\vect{x}_{k+1}$
+at times $\cT_k$ and $\cT_{k+1}$.  Each exponential potential can be averaged over all possible continuous sub-paths
+between $x_k$ and $x_{k+1}$, with the result,
 \begin{align}
-  \biggdlangle \frac{e^{-\cT\langle V\rangle}}{\langle\epsr\rangle^{1/2}}\biggdrangle = &
+  \biggdlangle \frac{e^{-\cT\langle V\subTM\rangle}}{\langle\epsr\rangle^{1/2}}\biggdrangle \approx &
   \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N
-  \bigglinklangle \exp\left(-\int_{\cT_k}^{\cT_{k+1}} dt\, V[x(t)]\right)\bigglinkrangle_{x_k\rightarrow x_{k+1}}
+  \bigglinklangle \exp\left(-\int_{\cT_k}^{\cT_{k+1}} dt\, V\subTM[x(t)]\right)\bigglinkrangle_{x_k\rightarrow x_{k+1}}
     \biggdrangle\\
  =& \biggdlangle \frac{1}{\langle \epsr\rangle^{1/2}}\prod_{k=1}^N  v_{k,k+1}    \biggdrangle,
   \end{align}
-  where $\linklangle\cdots\linkrangle$ denotes an average over continuous sub-paths between two points.
+  where $\linklangle\cdots\linkrangle$ denotes an average over continuous sub-paths between $x_k$ and $x_{k+1}$.
 %   It is not strictly necessary to include the dielectric average in the averaging over
 % sub-paths, since the dielectric average is a much smoother function that varies more slowly.  % Taking the dielectric into the average of sub-paths would lead to 
 % even better results, but those analytical solutions are difficult to calculate.
@@ -501,24 +501,25 @@ between these points,
 % is a powerful one.  This technique also offers an improvement on the accuracy for Dirichlet boundary conditions,
 % and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref{sec:accel_converge}.
 
-\subsection{Scaling of Averaged TM Potential with Path Length $N$}
+\subsection{Scaling of the Averaged TM Potential with Path Length $N$}
 
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
 \begin{align}
-  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)} =\,& \Biggdlangle \prod_{k=0}^{N-1}
+  I=\dlangle e^{-\int_0^\cT dt\,\VTM[x(t)]}\drangle_{\vect{x}(t)}
+=\,& \Biggdlangle \prod_{k=0}^{N-1}
   \bigglinklangle  e^{-\int_0^{\Delta \cT} dt\,\VTM[x(t)]}\bigglinkrangle_{x_k\rightarrow x_{k+1}}\Biggdrangle_{\vect{x}_k}\\
 =\,&\Biggdlangle \prod_{k=0}^{N-1}
   v_{k,k+1}\Biggdrangle_{\vect{x}_k}.
   \label{eq:Vsimp}
 \end{align}
 The left-hand ensemble average is over continuous Brownian bridges, whereas the second ensemble
-average runs over discrete Brownian bridges (and averaging over continuous sub-paths indicated by $\linklangle\cdots\linkrangle$).
-In this case, the exact value of the integral is just the TM potential solution Eq.~\ref{eq:TM_pot},
-for $x_k=x_{k+1}=x_0$.  The right hand side can be computed numerically, its scaling with $N$ can be
-examined.
+average runs over discrete Brownian bridges (and averaging over continuous sub-paths between points on the 
+discrete path, as indicated by $\linklangle\cdots\linkrangle$).
+In this case, the exact value of the integral is just the TM potential solution Eq.~(\ref{eq:TM_pot}),
+for $x_k,x_{k+1}\rightarrow x_0$.  The right hand side can be computed numerically to examine its scaling with $N$.
 
-Fig.~\ref{fig:TM_histogram} shows a histogram of numerical estimated values for closed Brownian paths 
+Figure~\ref{fig:TM_histogram} shows a histogram of numerically estimated values for closed Brownian paths 
 interacting with the TM potential.  Each Brownian path is generated via the v-loop algorithm~(\ref{eq:unit_vloop}),
 and scaled by $\sqrt{\cT}$.  The total contribution from each path is the product of the TM solutions~(\ref{eq:TM_pot}) for every
 step along the path.
@@ -692,7 +693,7 @@ contribution to the integral (or other figure of merit).
 \label{fig:TM_scalingN}
 \end{figure}
 
-Fig.~\ref{fig:TM_scalingN} shows how the Gaussian and TM-Gaussians estimates of the simple path integral
+Figure~\ref{fig:TM_scalingN} shows how the Gaussian and TM-Gaussians estimates of the simple path integral
 scale with the path resolution.  The birth-death process has been applied to both ways of generating paths.
 The birth-death process reduces the variance, and makes both methods much more tractable.
 The difference between Gaussian and TM-Gaussians is small under the birth-death process.
@@ -920,7 +921,7 @@ as $N^{n/2}$ which is unacceptable.
 This method can be improved by partial averaging over the path.
 In particular, we assume that $\Phi=\prod_{k=1}^N\phi(x_k)$, 
 and each $\phi(x_k)$ only varies significantly for $x_k\sim d$, and when $x_k\ll d$, $\phi(x_k)$ can otherwise
-be approximated as a constant.  An example of this geometry is illustrated in Fig.~\ref{fig:int-by-parts}, 
+be approximated as a constant.  An example of this geometry is illustrated in Figure~\ref{fig:int-by-parts}, 
 for an atom near a dielectric surface.  
 For the first and last $m$ points along the path, the integrals can be carried out assuming that $\Phi$ is 
 approximately constant.  
@@ -1031,7 +1032,7 @@ surfaces will contribute.   In this case, the above approach based on integratin
 is of limited utility in reducing the fluctuations.  The assumption that the integrals are approximately
 Gaussian can only be exploited for a very small number of steps.  
 
-This is illustrated in Fig.~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
+This is illustrated in Figure~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
 surfaces, in the case when the atom is much closer to one surface than the other.  If the two-body
 contribution to the Casimir force is sought, then only paths that touch \emph{both} bodies will 
 contribute.  The path time when a typical will touch one body is denoted $\cT_1$, and $\cT_2$ is the path time to touch
@@ -1095,7 +1096,7 @@ stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).
 
 \subsection{Results: TM Casimir  and Casimir--Polder Energies for Planar Geometries}
 
-Fig.~\ref{fig:eff_TM_atom_wall} plots the numerical results for the efficiency $\eta\subTM$
+Figure~\ref{fig:eff_TM_atom_wall} plots the numerical results for the efficiency $\eta\subTM$
 against the analytical expression~(\ref{eq:etaTM}).  The numerical results 
 were collected using the preceding methods using birth-death path swarms to generate paths.
 The path times were sampled  from Eq.~(\ref{eq:expT}), and the derivatives in Eq.~(\ref{eq:TM_Casimir_Polder})
@@ -1129,7 +1130,7 @@ numerical fluctuations.  Of course, the numerical fluctuations can be mitigated 
 In addition, each susceptibility $\chi$ is simulated individually, since the branching in the birth-death
 depends on the value of $\Xi$.  
 
-Fig.~\ref{fig:eff_TM_2wall} shows the numerically computed efficiency $\gamma\subTM$ for 
+Figure~\ref{fig:eff_TM_2wall} shows the numerically computed efficiency $\gamma\subTM$ for 
 two planar dielectrics.  The agreement is not good in this case.  At large coupling, the error bars do not 
 overlap with the analytical solution.
 This may be down to the very small $N$ used in this calculation ($N=200$), which would lead

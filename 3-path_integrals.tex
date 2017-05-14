@@ -16,7 +16,7 @@ work applying this to the diffusion equation~\cite{Kac1949}.
 This chapter is devoted to deriving the Feynman--Kac formula with a source term.
 We will develop analytical expressions for both TE and TM worldline path integrals 
 in planar geometries.
-These analytical formulae will be used in Ch.~\ref{ch:analytical} to demonstrate agreement 
+These analytical formulae will be used in Chapter~\ref{ch:analytical} to demonstrate agreement 
 with known results for both Casimir and Casimir--Polder energies.
 The analytical expressions for ensemble-averaged path integrals are essential for handling the singular 
 TM potential.  
@@ -204,7 +204,7 @@ of the path coincides with the origin.
 % another $\vect{x}_{k+1}$ can be found by subtracting $\vect{x}_k$ from all coordinates in the problem
 %  so that $\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.
  This is particularly useful 
- in applying these results to accelerating numerical computations, as will be discussed further in Ch.~\ref{ch:numerical}.
+ in applying these results to accelerating numerical computations, as will be discussed further in Chapter~\ref{ch:numerical}.
 
 It might seem circular having passed from wave equations that are too hard to solve, to path integrals,
 and back to diffusion equations that can only be solved in particular geometries.
@@ -429,6 +429,7 @@ The same methods can be used to yield sensible, finite results for worldline pat
 involving singular potentials, such as $V\subTE$ and $V\subTM$ where
 \begin{equation}
   V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
+  \label{eq:VsubTM}
 \end{equation}
 (We will focus on $V\subTM$, since $\mur=1$ for almost all materials, so $V\subTE=0$.)
 
@@ -478,7 +479,7 @@ The regularized TM potential is now given by
   V\subTM\supa(x) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{2a}[\delta(x-d)-\delta(x-d-a)\big],
   \label{eq:VTM_reg}
 \end{equation}
-as sketched in Fig.~\ref{fig:TMpot}.
+as sketched in Figure~\ref{fig:TMpot}.
 The only singularities present are the $\delta$-functions from the second derivative.
 The potential is still singular, and it is difficult reliabily simulate for a single path as $a\rightarrow 0$.
 However, the ensemble averaged expression over many such paths is well behaved. 
@@ -654,7 +655,7 @@ side of the surface,  and when they are on different sides.
       \label{fig:TM_plot}
     \end{figure}
 
-      The potential has been plotted in Fig.~\ref{fig:TM_plot} as a function of ending point
+      The potential has been plotted in Figure~\ref{fig:TM_plot} as a function of ending point
       for paths starting inside and outside the dielectric step.  
       Note that the potential leads to larger values on the vacuum side of the medium, 
       and suppresses values for starting points inside the surface or paths that must cross the surface.  

@@ -74,13 +74,13 @@ easy to parallelize.
 It is the goal of this thesis to extend the worldline method to computing electromagnetic Casimir effects.
 This requires accounting for the vector nature of the electromagnetic field, and including realistic coupling to 
 material properties, while attempting to retain as many of its appealing properties as possible.    
-In Ch.~\ref{ch:EM_quantization}, we will discuss quantization of the electromagnetic field, and introduce
+In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the electromagnetic field, and introduce
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
-We will develop analytical and numerical methods in Ch.~\ref{ch:analytical} and \ref{ch:numerical}, 
+We will develop analytical and numerical methods in Chapter~\ref{ch:analytical} and \ref{ch:numerical}, 
 showing agreement with known electromagnetic Casimir results.
-% In Ch.~\ref{ch:general}, we discuss the prospects for a general method based on coupling the scalar polarizations
+% In Chapter~\ref{ch:general}, we discuss the prospects for a general method based on coupling the scalar polarizations
 % in a spatially-dependent manner.
 
 The rest of this chapter will cover simple examples of Casimir effects, and expand on background material.
@@ -181,7 +181,7 @@ and $\epsilon_0$ is the permittivity of free space.
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the electromagnetic field.  We will consider the attraction between
 an atom and a perfectly conducting wall.  
-(This derivation is adapted from Ch.~13 and \S14.3 of Steck~\cite{SteckNotes}.)
+(This derivation is adapted from Chapter~13 and \S14.3 of Steck~\cite{SteckNotes}.)
 The Hamiltonian for the whole atom-field system is
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
@@ -457,7 +457,7 @@ The Lifshitz formula for the Casimir energy can be found with an ingenious argum
 In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants 
 $\epsilon_1$ and $\epsilon_2$,
 separated by a medium with dielectric constant $\epsilon_3$.  
-(This derivation parallels those in \S~7.2 of Milonni~\cite{Milonni1994}, and Ch.~12 of Bordag\etal\cite{Bordag2009}.
+(This derivation parallels those in \S~7.2 of Milonni~\cite{Milonni1994}, and Chapter~12 of Bordag\etal\cite{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by Lambrecht\etal\cite{Lambrecht2011}.)
 The energy for the EM field in its ground state is 
 \begin{equation}
@@ -1609,7 +1609,7 @@ off a pro-rated fraction of the final position from each increment.  So if we ha
 where $\dlangle \Delta W_k \drangle =0$ and $\dlangle \Delta W_k\Delta W_j\drangle = \delta_{jk}\Delta \cT$,
 then a closed Brownian bridge can be constructed as 
 \begin{equation}
-  B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.
+  B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.\label{eq:prorate-loop}
 \end{equation}
 This algorithm has the virtue of simplicity, but it does require that one know the whole Brownian path 
 in order to construct the closed version.
@@ -1627,7 +1627,7 @@ Brownian paths~\cite{Gies2003}.
 %   c_k = \frac{N-k}{N-k+1}, \quad k=1,\cdots,N-1.
 % \end{equation}
 Since we will use the v-loop algorithm in our own simulations, 
-we will discuss this algorithm further in Ch.~\ref{ch:numerical}. 
+we will discuss this algorithm further in Chapter~\ref{ch:numerical}. 
 
 Having constructed a path, it is then necessary to compute the worldline integrand $e^{-\cT\langle V\rangle}-1$ along that path.
 If any point along the path intersects one of the surfaces, then in the strong coupling limit the 
@@ -1750,36 +1750,36 @@ no guarantee of correctness.
 \section{Thesis outline}
 
 The rest of this thesis is laid out as follows: 
-In Ch.~\ref{ch:EM_quantization} we formally quantize
+In Chapter~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
 We will carry this out both for splitting the EM field into two noninteracting scalar polarizations,
 as well as the fully coupled path integral.
 %We will also review others work on quantizing the EM field in media.
 
-In Ch.~\ref{ch:feynman_kac} we will discuss the general methods of solving single-particle path 
+In Chapter~\ref{ch:feynman_kac} we will discuss the general methods of solving single-particle path 
 integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
  is the solution to a diffusion equation.  In simple cases, the Feynman-Kac formula can be solved,
 and we will derive those solutions for some simple planar geometries. 
 
-In Ch.~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
+In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
-We will also discuss the transition between high and low temperature, and near field within the
+We will also discuss the transition between high and low temperature, and near field limits within the
 worldline context.  
 
-In Ch.~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals
+In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals
 This will includes efficient methods for computing derivatives, as well as Monte Carlo sampling methods
 for generating paths.  We will examine the convergence of the methods as the path resolution is increased.
 
-In Ch.~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
-for the TE Casimir energy between arbitrarily shaped, piece-wise constant dielectric media.  
+In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
+for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  
 We will then discuss how to efficiently sample these expressions, and numerically test them in the case of planar media.  
 
-% In Ch.~\ref{ch:general} we will discuss the prospects for a general method based on the current
+% In Chapter~\ref{ch:general} we will discuss the prospects for a general method based on the current
 % results and examine both an approximate method coupling the two polarizations together as well
 % as the fully coupled path integral method.  % (We will test this for a mixed geometry for which
 % there are other tested methods to compare the worldline method against. 
 
-% In Ch.~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
+% In Chapter~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
 % of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
 % to account for variable measurement strength, and how to reconstruct the atomic trajectory
 % given the output of a realistic camera.  

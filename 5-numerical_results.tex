@@ -1025,9 +1025,9 @@ This method naturally generalizes to include multiple Cartesian derivatives.
 \subsubsection{Hermite-Gaussian Sampling}
 
 In order to apply the partial averaging method to method to high order derivatives, 
-it is best to sample from the combined Hermite-Gaussian.
+it is best to sample from the combined Hermite-Gaussian distribution.
 The simplest approach uses Gaussian samples, weighted by the appropriate Hermite-Gaussian function.
-While this is acceptable for the first or second derivatives, it breaks down for higher derivatives.
+While this is acceptable for one or two derivatives, it breaks down for higher derivatives.
 In particular, the Gaussian samples are most likely to be in a narrow range $x\in(-3\sigma,3\sigma)$.
 The Hermite-Gaussian oscillates in sign in this range, and
 the dominant contributions come from the tails $x\sim \sqrt{n}\sigma$.
@@ -1036,37 +1036,37 @@ In order to make samples that are useful for closed paths the normalization fact
 in time $\cT-2\cT_m$ must be accounted for.  
 The combined distribution for $x_m,x_{N-m}$ is 
 \begin{align}
-  HG'(x_m,x_{N-m})&:=\frac{1}{\sqrt{\pi\cT_m}\sqrt{4\pi\cT_m}\sqrt{2\pi(\cT-2\cT_m)} }
+  \text{HG}(x_m,x_{N-m})&:=\frac{1}{\sqrt{\pi\cT_m}\sqrt{4\pi\cT_m}\sqrt{2\pi(\cT-2\cT_m)} }
   (\cT_m)^{-n/2}H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{\cT_m}} \right)\nonumber\\
   &\hspace{0.5cm}\times\exp\left[-\frac{(x_0-\bar{x}_m)^2}{\cT_m} - \frac{\cT(\Delta x_m)^2}{4\cT_m(\cT-2\cT_m)}\right],
 \end{align}
 However, this is not normalized, and can even change sign.  
 The samples must be taken from the absolute value of the integrand, with the sign of the Hermite-Gaussian
 function weighting the samples.
-The sign changes will naturally lead to cancellation, but in the presence of a potential $\Phi[x(t)]$,
+The sign changes will naturally lead to some cancellation, but in the presence of a function $\Phi[x(t)]$,
 the cancellation is not perfect and the result is non-zero.  
-For moderately small derivatives, $n\le 2$, the cancellation is not a large problem.
-In order to best carry out the cancellation, and reduce fluctuations one should sample multiple times from
-the Hermite-Gaussian.
+In general, for few derivatives, $n\le 2$, the cancellation is not a large problem.
+In order to best carry out the cancellation one should sample multiple times from the Hermite-Gaussian
+distribution.
 The probability distributions for $\bar{x}_m$ and $\Delta x_m$ are
 \begin{align}
   P_{\text{HG},1}(\bar{x})&:=\frac{\eta_{\text{H}}^{-1}}{\sqrt{\pi\cT_m}} 
   \bigg|H_n\bigg(\frac{x_0-\bar{x}_m}{\sqrt{\cT_m}} \bigg)\bigg|
   %\nonumber\\  &\hspace{0.5cm}\times
   \exp\left[-\frac{(x_0-\bar{x}_m)^2}{\cT_m}\right]\\
-  P_{\text{HG},2}(\Delta x) &:=\sqrt{\frac{\cT}{4\pi\cT_m)(\cT-2\cT_m)}}
+  P_{\text{HG},2}(\Delta x) &:=\sqrt{\frac{\cT}{4\pi\cT_m(\cT-2\cT_m)}}
 \exp\left[- \frac{\cT(\Delta x_m)^2}{4\cT_m(\cT-2\cT_m)}\right],
 \end{align}
 where the normalization and sign factors are 
 \begin{align}
-  s_{\text{H}} &:= \sgn\bigg[H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{\cT_m}} \right)\bigg] \\
-  \eta_{\text{H}} &:=\frac{1}{\sqrt{2\pi \cT}}\int dy \frac{1}{\sqrt{\pi\cT_m}}
-  \big|H_n\left(\frac{x_0-y}{\sqrt{\cT_m}} \right)\big|
+  s_{\text{H}} &:= (-1)^n\sgn\bigg[H_n\left(\frac{x_0-\bar{x}_m}{\sqrt{\cT_m}} \right)\bigg] \\
+  \eta_{\text{H}} &:=\int dy \frac{1}{\sqrt{\pi\cT_m}}
+  \bigg|H_n\left(\frac{x_0-y}{\sqrt{\cT_m}} \right)\bigg|
   \exp\left[-\frac{(x_0-y)^2}{\cT_m}\right].
 \end{align}
 The numerical average can be computed as 
 \begin{equation}
-  I = \dlangle (-1)^n(2\sigma_{\text{H}}^2)^{-n/2}\eta_{\text{H}}s_{\text{H}}f\drangle_{\text{HG}},
+  I = \dlangle (\cT_m)^{-n/2}\eta_{\text{H}}s_{\text{H}}\Phi(x_m,\ldots,x_{N-m}\drangle_{\text{HG}},
 \end{equation}
 where $x_m, x_{N-m}$ are sampled from $P_{\text{HG}}$, and the remaining sub-bridge is sampled via
 the open Gaussian probability distribution.  
@@ -1075,63 +1075,68 @@ the open Gaussian probability distribution.
 \subsubsection{General Method Near Surfaces}
 \label{sec:general_path_averaging}
 
-While estimating gradients for the stress-tensor it may be necessary to estimate 
-gradients while close to one surface.  For a renormalized energy, only paths that touch both
-surfaces will contribute.   In this case, the above approach based on integrating out Gaussians
-is of limited utility in reducing the fluctuations.  The assumption that the integrals are approximately
-Gaussian can only be exploited for a very small number of steps.  
+In some cases, it might be necessary to take derivatives a two body energy while much closer 
+to one body than another.  This could be necessary when trying to calculate the two body energy 
+shift for an atom, or when computing the stress-tensor close to one surface~\cite{Schafer2016}. 
+For a renormalized energy, only paths that touch both
+surfaces will contribute.   The preceding approach was based on integrating out intermediate
+coordinates by approximating the integrals as Gaussians [as used in Eq.~(\ref{eq:partial_avg_grad})]. 
+In this case however, that approach can only be used to average out a very small number of steps.  
 
-This is illustrated in Figure~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
+This problem is illustrated in Figure~\ref{fig:int-by-parts-gen}, for the example of an atom near two dielectric
 surfaces, in the case when the atom is much closer to one surface than the other.  If the two-body
-contribution to the Casimir force is sought, then only paths that touch \emph{both} bodies will 
-contribute.  The path time when a typical will touch one body is denoted $\cT_1$, and $\cT_2$ is the path time to touch
+contribution to the Casimir--Polder force is sought, then only paths that touch \emph{both} bodies will 
+contribute.  The path time when a typical path will touch one body is denoted $\cT_1$, and $\cT_2$ is the typical path time to touch
 both bodies.
 The partial averaging advocated in Sec.~\ref{sec:partial_averaging} is only valid so long as $\Phi$ 
-is approximately constant.  In that case, the integrals can be approximated as Gaussian, which 
-requires that $\cT_m\ll \cT_1$, so that the path increments don't intersect or interact with either surface.  
+is approximately independent of the coordinates.
+In that case, the integrals are approximately Gaussian, provided that $\cT_m\ll \cT_1$, 
+so that the first and last $m$ path increments are not likely to intersect or interact with either surface.  
 
 \begin{figure}
   \centering
   \includegraphics[width=0.5\linewidth]{fig/int-by-parts-gen}
   \caption[Thresholds for partial averaging for atom between two bodies]
-  {Thresholds for partial averaging for atom between two dielectric bodies with susceptibilities $\chi_1$ and $\chi_2$.
+  {Thresholds for partial averaging for the case of an atom between two dielectric bodies.
     The dashed circles show the typical scales of paths at some important path times.
     The extent of the averaging is given by $\cT_m$.  The first path time when paths touch one body is 
-    $\cT_1$. This is much smaller than the path time to touch \emph{both} bodies $\cT_2$.  
+    $\cT_1$. This is much smaller than the path time to touch \emph{both} bodies is $\cT_2$.  
     These considerations also apply to the calculating stress-energy tensor close to one body.}
   \label{fig:int-by-parts-gen}
 \end{figure}
 
-However, if there is an analytical expression path integral near one surface, 
-the further partial averaging is possible.  
-In such a two body geometry, the renormalized two-body integration energy would lead to a function $\Phi$ specified by 
+However, if there is an analytical expression for the path integral near one surface, 
+then further partial averaging is possible.  
+In such a two-body geometry, the renormalized interaction energy would lead to a function $\Phi$ of the form,
 \begin{align}
   \Phi[x(t)] =& \Big(e^{-\int_0^\cT dt\,\{V_1[x(t)] +V_2[x(t)]\}} -e^{-\int_0^\cT dt\,\{V_1(x_0) +V_2(x_0)\}   }\Big)\nonumber\\
  & -\Big( e^{-\int_0^\cT dt\,V_1[x(t)]   } -e^{-\int_0^\cT dt\,V_1(x_0)   }\Big)-\Big( e^{-\int_0^\cT dt\,V_2[x(t)]   } -e^{-\int_0^\cT dt\,V_2(x_0)   }\Big),
 \end{align}
-where $V_1$ and $V_2$ describe the two surfaces.
-For points much closer to one body, and for short times $\Delta \cT$, then the total potential 
-can be approximated based on the nearest body 
+where $V_1$ and $V_2$ describe the two surfaces.  
+For points much closer to one body, and for short times $\Delta \cT$, then the dominant contribution to 
+the potential can be approximated based on the nearest body 
 \begin{equation}
   \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_1[x(t)]+ V_2[x(t)]\}}\Biglinkrangle \approx
   \Biglinklangle e^{-\int_0^{\Delta\cT}dt\,\{ V_2[x(t)]\}}\Biglinkrangle,
 \end{equation}
-where the presence of the far body can be ignored for short times.  
+where the presence of the far body can be ignored for $\Delta\cT\ll d^2$.  
 The partial averaging can be carried out by using the fact that the path integral is a propagator for the diffusion equation. 
-The path-integral between two points $x_j$, $x_{j+1}$, interacting with a potential $V(x)$,
+The path integral between two points $x_j$ and $x_{j+1}$, interacting with a potential $V(x)$, is
 \begin{equation}
-  U(x_j,x_{j+1},t):= \frac{e^{-(x_j-x_{j+1}^2/(2t)}}{\sqrt{2\pi t}} 
-  \bigglinklangle e^{-\int_0^t dt' V[x(t')] }\bigglinkrangle_{x_j\rightarrow x_{j+1}},
+  U(x_j,x_{j+1},t):= \frac{e^{-(x_j-x_{j+1})^2/(2t)}}{\sqrt{2\pi t}} 
+  \bigglinklangle e^{-\int_0^t dt' V[x(t')] }\bigglinkrangle_{x_j\rightarrow x_{j+1}}.\label{eq:Upropagator}
 \end{equation}
-obeys the composition law,
+The path integral expression for the propagator~(\ref{eq:Upropagator}) obeys the composition law,
 \begin{equation}
   \int dx_j\, U(x_{j-1},x_{j},t_1)U(x_{j},x_{j+1},t_2) = U(x_{j-1},x_{j+1},t_1+t_2).
 \end{equation}
-So if such a potential $V$, and a closed solution can be found, then the partial averaging can be 
-carried out to a threshold $\cT_m$ where the analytical path integral is no longer an acceptable approximation
-to the true solution for multiple bodies.  
+If the geometry can be described by some potential $V$, and if an analytical expression for the path integral can be found, 
+then the partial averaging can be carried out to a threshold $\cT_m$ where the analytical solution 
+for the path integral is no longer an acceptable approximation to the true solution for multiple bodies.  
 This could happen either due to the presence of multiple bodies, or the path exploring a region where
-the geometry differs from that assumed in the analytical expression.  
+the geometry differs from that assumed in the analytical expression.  For example, if a curved surface
+is approximated by its nearest tangent plane solution, then the partial averaging is limited to 
+regions smaller than the typical radius of curvature. 
 
 After the partial averaging, the derivatives can be carried out, with the result
 \begin{align}
@@ -1139,9 +1144,11 @@ After the partial averaging, the derivatives can be carried out, with the result
   \partial_0^n [U(x_0,x_m,\cT_m) U(x_0,x_{N-m},\cT_m]\prod_{j=m}^{N-m-1}U(x_{j+1},x_j,\Delta \cT)
    \biggdrangle.
 \end{align}
-In this case, the derivatives act on the whole propagator , rather than just the Gaussian parts.  
-This could be applied using the Dirichlet solution to the path integral for evaluating the 
-stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).
+In this case, the derivatives act on the whole propagator~\ref{eq:Upropator}, rather than just the Gaussian parts.  
+This could be applied using the Dirichlet solution to the path integral~(\ref{eq:Dirichlet}) to evaluate the 
+stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).  The method suggested here applies to
+any potential $V$ (assuming the solution can be found), so it could also be applied to TE and 
+TM potentials under similar circumstances.    
 
 \subsection{Results: TM Casimir  and Casimir--Polder Energies for Planar Geometries}
 

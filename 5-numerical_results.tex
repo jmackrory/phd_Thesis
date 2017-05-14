@@ -330,12 +330,14 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
   \centering
  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_atom_wall}
   \caption[Planar Casimir--Polder TE energy as function of $\chi$]
-  {Planar Casimir--Polder TE energy as function of susceptibility $\chi$.  
-    The simulations used $10^8$ paths, with $10^4$ points per path.
-    Results for each $\chi$ were computed using the same ensemble of paths.
+  {Planar Casimir--Polder TE energy normalized to atom-conductor Casimir--Polder energy, plotted as a function of susceptibility $\chi$.  
+    The calculations used $10^8$ paths, with $10^4$ points per path.
+    The results for each $\chi$ were computed using the same ensemble of paths.
     The solid black line is the analytical result~(\ref{eq:etaTE}), and the points are the numerical
-    values computed using Eq.~(\ref{eq:TE_CP_num}).
-    (The inset is same data on a linear vertical scale.)
+    values computed using Eq.~(\ref{eq:TE_CP_num}).  
+    All values of $\chi$ were computed 
+    using the same ensemble of paths.
+    (The inset shows same data on a linear vertical scale.)
     }
   \label{fig:eff_TE_atom_wall}
 \end{figure}
@@ -357,12 +359,13 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_2wall}
   \caption[Planar TE Casimir energy as function of $\chi$.]{
-    Numerically calculated planar TE Casimir energy as function of $\chi$.
-    The black lines show the analytical solution~(\ref{eq:gammaTE}), and the points show the numerical
-    estimates.
-    The simulations used $10^8$ paths, with $10^4$ points per path.  All values of $\chi$ were computed in parallel
+    Numerically calculated TE Casimir energy for two planes, normalized to Casimir energy between perfect-conducting plates,
+    plotted as function of $\chi$.
+    The black line shows the integral solution~(\ref{eq:gammaTE}), and the points show the numerical
+    estimates computed using Eq.~(\ref{eq:TE_Casimir_num}).
+    The calculations used $10^8$ paths, with $10^4$ points per path.  All values of $\chi$ were computed 
     using the same ensemble of paths.
-    (Inset is same data on a linear vertical scale.)}
+    (Inset shows same data on a linear vertical scale.)}
   \label{fig:eff_TE_2wall}
 \end{figure}
 
@@ -371,81 +374,91 @@ a distance $d$ apart, with dielectric function $\epsr(x) = 1+\chi\Theta(-x+d/2)+
 This is computed numerically by evaluating
 \begin{align}
   E\supTE\subCP-E_0 
-  &=\biggdlangle \frac{\hbar c\alpha_0}{8\pi^2} \frac{1}{2\cT_0^{2}P_x(x_0)}
+  &=-\frac{\hbar c\alpha_0}{8\pi^2}\biggdlangle  \frac{1}{2\cT_0^{2}P_x(x_0)}
   \bigg(1+\frac{1}{\langle\epsrab(x_k)\rangle^{3/2}}\nonumber\\
     &\hspace{5cm}-\frac{1}{\langle\epsra(x_k)\rangle^{3/2}}-\frac{1}{\langle\epsrb(x_k)\rangle^{3/2}}\bigg) 
 \biggdrangle_{x_k,\cT,x_0},\label{eq:TE_Casimir_num}
 \end{align}
-where the ensemble average now also includes the starting positions $x_0$.
+where the ensemble average now also includes the integral over the starting positions $x_0$.
 The starting positions are sampled from Eq.~(\ref{eq:xPower_law}), with $d_0=d$, 
-which is twice the size of the region between the interfaces.  
-In this case, it is necessary to keep track of both $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
-The dielectric path average and the renormalized worldline integrand can then be quickly computed for multiple $\chi$.
-One upshot of Monte Carlo sampling of positions is that this is \emph{much} faster than directly evaluating 
-the position and path time integrals on a path-wise basis.  In fact, evaluating the Casimir energy takes 
-roughly the same time as the Casimir--Polder energy.  
+which is twice the size of the region between the interfaces.  The results are robust
+as this threshold is varied.   
+In this case, it is necessary to compute both $\langle \theta(x-d_2)\rangle$ and $\langle \theta(d_1-x)\rangle$.
+%The dielectric path average and the renormalized worldline integrand can then be quickly computed for multiple $\chi$.
+One upshot of Monte Carlo sampling of $x_0$ and $\cT$ is that this is \emph{much} faster than directly evaluating 
+the position and path time integrals on a path-wise basis.  However, it does give a larger sample
+variance.  In fact, evaluating the Casimir energy takes roughly the same amount of time as the Casimir--Polder energy.  
 
 \subsubsection{Error Scaling with Path Length $N$}
 \label{sec:TE_convergence}
-Some interesting scaling behavior was found by examining the relative error between the numerical 
-estimates and the exact analytical value.  
-In this case the primary systematic error is due to the discretization of the path.
+Some interesting scaling behavior was found by examining the relative error of the numerical 
+estimates.  
+In this case the systematic error is due to the discretization of the path.
 The path integral was derived under the assumption that $N\rightarrow\infty$, while the numerical
 calculations use a discrete path with a finite $N$.  
-There is an additional random error associated with the finite number of paths.   However, for $N_{\text{path}}$ paths,
-this error scales as $N_{\text{path}}^{-1/2}$, as is typical for Monte Carlo sampling error.  This is what provides
-the noise floor in Fig.~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
+There is an additional statistical error associated with the finite number of paths.   However, for $N_{\text{path}}$ paths,
+this error scales as $N_{\text{path}}^{-1/2}$, as is typical for Monte Carlo sampling error.  This is what determines
+the noise floor in Figures~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TEatomN3}
-  \caption[Convergence of planar TE Casimir--Polder energy  as function of $N$.  ]{
-    Convergence of planar TE Casimir--Polder energy as function of $N$.  
+  \caption[Convergence of planar TE Casimir--Polder energy as function of $N$.  ]{
+    Convergence of planar TE Casimir--Polder energy as a function of $N$.  
+    Results plot the absolute relative error between the numerical estimates from Eq.~(\ref{eq:TE_CP_num})
+    and the analytical result~(\ref{eq:etaTE}). 
     Different values of $\chi$ use the same ensemble of paths.
-    Simulations used $10^8$ paths, which sets the $10^{-4}$ noise floor.}
+    Simulations used $10^8$ paths.}
   \label{fig:conv_atom}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TE2wallN3}
-  \caption[Convergence planar TE Casimir energy as function of $N$ for various $\chi$.]{
-    Convergence planar TE Casimir energy as function of $N$ for various $\chi$, using the same ensemble of paths for all $\chi$.
+  \caption[Convergence of planar TE Casimir energy as function of $N$ for various $\chi$.]{
+    Convergence of planar TE Casimir energy as function of $N$.  Results plot the 
+    absolute relative error between the numerical estimates from Eq.~(\ref{eq:TE_Casimir_num})
+    and the analytical result~(\ref{eq:gammaTE}).
+    Different values of $\chi$ use the same ensemble of paths.
     Calculations used $10^8$ paths, which sets the $10^{-4}$ noise floor.}
   \label{fig:conv_wall}
 \end{figure}
 
-As the path length $N$ increases for fixed $\chi$, the error shows two different scaling behaviors.  
-In Ref.~\cite{Mackrory2016}, some arguments are given to explain this scaling, which will not be repeated here,
-but we will explain the basic reasoning.  The numerical computations use discrete paths, 
-while the path integral assumes $N$ is arbitrarily large.  The continuous paths considered by the path integral
-have arbitrarily fine structure, and always have a non-zero probability to touch, or enter the dielectric body.
+As the path length $N$ increases for fixed $\chi$, the systematic error shows two different scaling behaviors.  
+In the weak-coupling limit $\chi/N\ll 1$, the error scales as $N^{-3/2}$, while in the strong-coupling limit
+$\chi/N\gg 1$, the error scales $N^{-1/2}$.  
+These behaviours are analytzed in Ref.~\cite{Mackrory2016}, 
+but we will summarize the basic reasoning here.  The numerical computations use discrete paths, 
+while the path integral is only exact in the limit that $N$ is arbitrarily large.  The continuous paths considered by the path integral
+have arbitrarily fine structure, and always have a non-zero probability to touch the dielectric body.
 The discrete paths used in the numerical method miss those contributions, leading to a systematic error.  
 
 In the weak-coupling limit $\chi/N\ll 1$, the numerical estimate is dominated by accurately estimating the sojourn
-time $\langle\theta\rangle$ for a given path.  Further increasing $N$ increases the accuracy of this 
-estimate and renormalized integrand.  The $N^{-3/2}$ scaling can be estimated by integrating up the probability for a nonzero sojourn time
+time $\langle\Theta\rangle$ for a given path.  Further increasing $N$ increases the accuracy of this 
+estimate and the renormalized integrand.  The $N^{-3/2}$ scaling can be deduced by integrating the probability for a nonzero sojourn time
 from each increment.  
 
-In the strong-coupling limit $\chi/N\gg 1$, the integrand immediately saturates, and returns one.
-Thus the dominant error comes from underestimating the time that this occurs.  The error scaling
-is estimated by integrating up the probability that a continuous path \emph{did} touch the surface
+In the strong-coupling limit $\chi/N\gg 1$, as soon as a path touches the surface the integrand immediately saturates
+to its extreme value of negative one.
+Thus the dominant error comes from underestimating the path time that this occurs.  The error 
+is estimated by integrating the probability that a continuous path touched the surface
 prior to the estimated first contact time.  This leads to a $N^{-1/2}$ scaling.
 
 For a fixed $\chi$, the transition between both behaviors is observed at $N\sim\chi$. 
 In the strict $\chi\rightarrow\infty$ Dirichlet limit, the numerical results and scaling 
-arguments suggests that the there will always be a $N^{-1/2}$ systematic error scaling.  
+arguments indicate that there will always be a $N^{-1/2}$ systematic error scaling in this case.   
 
 \section{TM Casimir Numerics}
 \label{sec:TM_numerics}
 
-Numerically calculating the Casimir energy due to the TM polarization is much harder than the TE case. 
-This is due to the TM potential.
+Numerically calculating Casimir energies due to the TM polarization is much harder than the TE case. 
+This is due to the singular nature of the TM potential.
 Even after regularization, and analytical path averaging, is still challenging to handle numerically.
-We will develop a number of techniques to temper these difficulties that should have applications for more general Casimir worldlines.
+We will develop a number of techniques to temper these difficulties.
+As a side effect, they should have applications for more general Casimir worldlines.
 
-The most daunting feature of the TM Casimir worldline is the singular TM potential.
- A closed form solution for the TM potential $V\subTM$ at a single planar boundary was found in Ch.~\ref{ch:feynman_kac}.
+The most daunting feature of the TM Casimir worldline is the singular TM potential~(\ref{eq:VsubTM}).
+ A closed-form solution for the TM potential $V\subTM$ at a single planar boundary was found in Chapter~\ref{ch:feynman_kac}.
 The ensemble averaged solution between points $x_k$ and $x_{k+1}$ in time $t$ is 
 \begin{align}
   v_k(x_k,x_{k+1}):=\,&  \Bigdlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\

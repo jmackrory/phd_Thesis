@@ -104,12 +104,12 @@ the components of the body position $\mathbf{R}_2$.  The resulting force is
 \end{align}
 where $\sigma_2 = \sigma_2[\vect{x}(t)-\vect{R}_2]$ in this expression, and $\nablaR{i}$ denotes the gradient with
 respect $\vect{R}_i$.
-The path-averaged $\delta$-function acts to pin the paths to the surface where $\sigma_2=0$.
-% The path integration can be simplified by viewing the $\delta$-function,
+The path-averaged delta function acts to pin the paths to the surface where $\sigma_2=0$.
+% The path integration can be simplified by viewing the delta function,
 % whose argument involves $\vect{x}(t)$, as a constraint on the
 % source point $\vect{x}_0$ of the paths.
 Writing out the relevant part of the path integral (\ref{eq:forcepathint}),
-the $\delta$-function reduces the $D$-dimensional integration
+the delta function reduces the $D$-dimensional integration
 over $\vect{x}_0$ to a $(D-1)$-dimensional integration over
 the surface of body 2 with the result
 \begin{align}
@@ -134,13 +134,13 @@ is a surface integral over the
 surface of body 2.  % The first equality here can be understood
 % in terms of a discrete path (i.e., in a ``time-slicing'' regularization
 % of the path integral), where the path average in the numerator
-% amounts to a sum of terms, each involving a $\delta$-function
+% amounts to a sum of terms, each involving a delta function
 % involving a path coordinate $\vect{x}_j$.  In the average over all
 % paths and sum over all source points $\vect{x}_0$,
-% the $\delta$-function is equivalently a function of the
+% the delta function is equivalently a function of the
 % source point, since $\vect{x}_j$ is the source point
 % of another equivalent path.
-This relation follows from simplifying the path-averaged $\delta$-function using Eq.~(\ref{eq:delta_pin}),
+This relation follows from simplifying the path-averaged delta function using Eq.~(\ref{eq:delta_pin}),
 and the result~\cite{Hormander1983} 
 \begin{equation}
   \int d\mathbf{x}\, \delta[h(\vect{x})]\,f(\vect{x})
@@ -228,7 +228,7 @@ then acts on the Gaussian probability density,
  and yields a term proportional to ${\sum_{k}(\vect{x}_k-\vect{x}_{k+1})}$.
 This sum of path increments vanishes for closed paths, and thus this term can be dropped.  
 The remaining gradient $\nablaR{1}$ can be straightforwardly evaluated, which yields 
-a second independent path-averaged $\delta$-function:  
+a second independent path-averaged delta function:  
 \begin{align}
   C_{ij} = &
 \frac{\alpha(\alpha+1)\chi_1\chi_2\hbar c}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
@@ -241,8 +241,8 @@ a second independent path-averaged $\delta$-function:
 \end{align}
 % and using Eq.~(\ref{eq:delta-normal}), there are now two path-averaged delta-functions which 
 % pin the paths to lie on both the first and second surfaces
-One $\delta$-function can be manipulated as in Eq.~(\ref{eq:delta-normal}) to pin the paths to start on
-the first body, while the second path-averaged $\delta$-function pins another point of the path to the second body.
+One delta function can be manipulated as in Eq.~(\ref{eq:delta-normal}) to pin the paths to start on
+the first body, while the second path-averaged delta function pins another point of the path to the second body.
 There is then a further average over which point is pinned to the second surface.  
 The resulting expression for the potential curvature is 
 \begin{align}
@@ -373,7 +373,7 @@ where $\hat{r}_i$ is a Cartesian unit vector.
 This path integral considers the change in energy as the whole path is rigidly translated,
 while the results in Sec.~\ref{sec:partial_averaging}
 correspond to shifting only the origin of the path, while keeping the rest of the path fixed.
-The derivatives create $\delta$-functions for piece-wise constant media.
+The derivatives create delta functions for piece-wise constant media.
 In analogy with the potential curvature, since the starting point is fixed, it is necessary to 
 average over pinning other path points to the dielectric surface for each of the bodies.  
 The Casimir--Polder force, after summing over all force components, is 
@@ -401,7 +401,7 @@ The Gaussian factor $\mathcal{G}$ exponentially suppresses contributions from pi
 which would be the problematic terms as $\Delta \cT\rightarrow 0$, 
 and thus this method does not require careful handling as $N$ increases.  This is 
 in contrast to the Hermite-Gaussian method which required partial averaging to avoid growing 
-stastical errors as $N$ increased.  
+statistical errors as $N$ increased.  
 
 \section{Occupation Number}
 \label{sec:occupation}
@@ -467,7 +467,7 @@ We define the indicator functions as
 where $\I[b]n=1$ when there are exactly $n$ points inside body $i$, and zero otherwise;  
 there are $n$ sums over indices $j_{n}$, each of which terminates at $j_n=N$.  
 There are further restrictions on which of these terms contribute to the integrand.
-Due to the presence of the $\delta$-functions, only $N-1$ points are free to 
+Due to the presence of the delta functions, only $N-1$ points are free to 
 enter the bodies.  This further implies that the number of points inside both bodies must be less than $N-1$. 
 Finally, due to the renormalization, only paths with at least one point inside the first body contribute.  
 Using the indicator functions, the rearranged spatial path integral for the force is 
@@ -479,7 +479,7 @@ Using the indicator functions, the rearranged spatial path integral for the forc
 \sum_{m=1}^{N-n-1}\big(1- e^{-s m \chi_1/N} \big)\I[1]m
   \biggdrangle_{\vect{x}(t)},
 \end{align}
-The $s$ integral can be carried out term by term, and the $\delta$-function can be used to pin paths onto the surface.
+The $s$ integral can be carried out term by term, and the delta function can be used to pin paths onto the surface.
 The cyclic-permutation invariance of the path can be used to remove the path-average over pinning, 
 as in Eq.~(\ref{eq:delta-normal}).
 The force path integral becomes
@@ -672,7 +672,7 @@ and translating it via
 $\vect{x}_k=\vect{y}_k-\vect{y}_j+\vect{d}$, so that that each point $\vect{x}_j$ lies
 on the surface.  The results are then averaged over all such pinnings. 
 However, naively implementing this method leads to $N$ evaluations of the path integral, which could
-be inefficienct.
+be inefficient.
 It may be possible to capture both strong-coupling and weak-coupling limits with only two samples.
 First, to capture the strong coupling limit, the path integral can be computed for a path where only one point is on the first surface,
 and no points are inside the first body.
@@ -754,7 +754,7 @@ The expression for the potential curvature for generic coupling is
 \oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0} \hspace{-4ex} dS_k\,\frac{3c'_{N}[\hat{r}_i\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_j\cdot\hat{n}_2(\vect{x}_{k})]}{|\vect{x}_0-\vect{x}_{k}|^{5}}
   \nonumber\\
   &\hspace{2cm} \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
-  \biggdrangle_{k,\cT,\vect{x}_0\leftrightarrow\vect{x}_k},
+  \biggdrangle_{k,\cT,\vect{x}_0\leftrightarrow\vect{x}_k},\label{eq:generic_coupling}
 \end{align}
 where the ensemble average is over path times, pinning separations $k$, and 
 Brownian bridges from $\vect{x}_0$ to $\vect{x}_k$, where $\vect{x}_0$ is on the first 
@@ -793,88 +793,100 @@ bodies (which will capture large $\chi$).
 \label{fig:curvature_a}
 \end{figure}
 
-\subsection{Softened $\delta$-Function Pinning for Strong Coupling Limit for Potential Curvature}
+\subsection{``Softened'' Delta Function Pinning for Strong-Coupling Limit for Potential Curvature}
 
-An alternative method, more suited to the strong-coupling limit, arises by treating the second $\delta$-function
-differently.  In this case, the first $\delta$-function is still used to pin the paths to start 
-on the first body.  The paths are assumed to start on the surface of the first body, but not 
+An alternative method to the one presented in Sec.~(\ref{eq:generic_coupling}),  one more suited to the strong-coupling limit, 
+arises from a different treatmeant of the second delta function $\delta[\sigma_2(\vect{x}_k-\vect{R}_2)]$.
+In this case, the first delta function $\delta[\sigma_1(\vect{x}_0-\vect{R}_1 )]$, is still used to pin the paths to start 
+on the first body.  Although the paths are assumed to start on the surface of the first body, they do not
 enter that body.  In order to contribute to the curvature path integral in the strong-coupling limit,
- the paths should propagate to the second body, and just graze its surface.  
+the paths should move towards the second body, and just graze its surface.  
 
-\subsubsection{Softened $\delta$-Function Pinning}
-Since the pinning arising from $\delta[\sigma_2(\vect{x}_j-\vect{R}_2)]$ is proving to be difficult to handle, 
-a different approach to handling the $\delta$-function is called for.  
-As an example of the manipulation we propose to use in the curvature path-integral~(\ref{eq:curvature_occupy}),
-let us consider the following constrained path integral:
+\subsubsection{Softened Delta Function Pinning}
+
+Let us consider the term involving $\delta[\sigma_2(\vect{x}_k-\vect{R}_2)]$ from the curvature path integral~(\ref{eq:curvature_occupy}).
+After supressing the integrals over $S_0$ and $\cT$, as well as the leading constants, the remaining spatial path integral
+can be written in a schematic form as 
+% As an example of the manipulation we propose to use in the curvature path integral~(\ref{eq:curvature_occupy}),
+% let us consider the following constrained path integral:
 \begin{align}
-  I&=\frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \delta[f(\vect{x}_j)]\Phi(\vect{x}_1,\cdots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}\\
+  I&=\frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}\\
   &= \int \prod_{n=1}^{N-1}d\vect{x}_n\, \prod_{k=0}^{N-1}\bigg(\frac{e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}}{
-    (2\pi\Delta \cT)^{D/2}}\bigg)\delta[f(\vect{x}_j)]\Phi(\vect{x}_1,\cdots,\vect{x}_{N-1}),\label{eq:constrain_int}
+    (2\pi\Delta \cT)^{D/2}}\bigg)\delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1}),\label{eq:constrain_int}
 \end{align}
-where $\Phi$ is some function of the whole path.  
-Instead of just evaluating the integral over $\vect{x}_j$ (which results in constrained paths), the integral can
-be multiplied by a factor of unity of the form,
+where $f(\vect{x}_k)$ and $\Phi$ are placeholders for the constraint $\sigma_2(\vect{x}_k-\vect{R}_2)$, 
+integrand $\sum_n\sum_m\I[1]m\I[2]n g_{m,n}$, respectively.  There is no Gaussian term
+$\mathcal{G}[\vect{x}_0-\vect{x}_k,k(N-k)\cT/N^2]$, since that only arises after pinning the paths, and normalizing
+for pinned Brownian bridges.   
+
+Instead of just evaluating the integral over $\vect{x}_k$ (which pins the paths), the integral can
+be multiplied by a factor of unity of the form:
 \begin{equation}
-  1 = \dfrac{(2\pi\Delta \cT)^{-D}\int d\vect{y}_j\, e^{-(\vect{x}_{j+1}-\vect{y}_j)^2/(2\Delta \cT)-(\vect{y}_{j}-\vect{x}_{j-1})^2/(2\Delta \cT)}}{
-    (4\pi\Delta T)^{-D/2}\,e^{-(\vect{x}_{j+1}-\vect{x}_{j-1})^2/(4\Delta \cT)}}.\label{eq:fac_one}
+  1 = \dfrac{(2\pi\Delta \cT)^{-D}\int d\vect{y}_k\, e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{
+    (4\pi\Delta T)^{-D/2}\,e^{-(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}}.\label{eq:fac_one}
 \end{equation}
-This involves multiplying and dividing by an unconstrained integral connecting $\vect{x}_{j-1}$
-and $\vect{x}_{j+1}$ via the new coordinate $\vect{y}_j$.  The integral has been evaluated in the denominator.  
+This involves multiplying and dividing by an unconstrained integral connecting $\vect{x}_{k-1}$
+and $\vect{x}_{k+1}$ via a new coordinate $\vect{y}_k$.  The integral has been evaluated in the denominator.  
 Then the constrained integral~(\ref{eq:constrain_int}) can now be written
 \begin{align}
-  I&= \int d\vect{y}_j\int \prod_{n=1}^{N-1}d\vect{x}_n\, \prod_{k=0}^{N-1}\bigg(\frac{e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}}
-  {(2\pi\Delta \cT)^{D/2}}\bigg) \frac{e^{-(\vect{x}_{j+1}-\vect{y}_j)^2/(2\Delta \cT)-(\vect{y}_{j}-\vect{x}_{j-1})^2/(2\Delta \cT)}}{(2\pi\Delta\cT)^{D}}\nonumber\\
-  &\hspace{0.5cm}\times    (4\pi\Delta T)^{D/2}\,e^{(\vect{x}_{j+1}-\vect{x}_{j-1})^2/(4\Delta \cT)}\delta[f(\vect{x}_j)]\Phi(\vect{x}_1,\cdots,\vect{x}_j,\ldots,\vect{x}_{N-1}).
+  I&= \int d\vect{y}_k\int \prod_{n=1}^{N-1}d\vect{x}_n\, \prod_{k=0}^{N-1}\bigg(\frac{e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}}
+  {(2\pi\Delta \cT)^{D/2}}\bigg) \frac{e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{(2\pi\Delta\cT)^{D}}\nonumber\\
+  &\hspace{0.5cm}\times    (4\pi\Delta T)^{D/2}\,e^{(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}
+  \delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_k,\ldots,\vect{x}_{N-1}).
 \end{align}
-The constrained $\vect{x}_j$ and unconstrained coordinates $\vect{y}_j$ can be swapped using $\vect{x}_j\leftrightarrow\vect{y}_j$.
-The unconstrained coordinates will then be used with all of the other coordinates to create free Brownian bridges,
-and $\delta[f(\vect{y}_j)]$ is now isolated in an auxiliary integral.  
+The label for the constrained coordinate $\vect{x}_k$ and the unconstrained coordinate $\vect{y}_k$ can be swapped using $\vect{x}_k\leftrightarrow\vect{y}_k$.
+The unconstrained coordinates $\vect{x}_k$ will then be used with all of the other coordinates to create free Brownian bridges,
+and $\delta[f(\vect{y}_k)]$ is now isolated in an auxiliary integral.  
 %The Gaussian factors in $\vect{y}_k-\vect{x}_{k+1}$ can be swapped with their counterparts involving $\vect{x}_k-\vect{x}_{k+1}$.
-The path integral can be written in ensemble average form,
+The path integral can be written in ensemble-averaged form,
 \begin{align}
-  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \int d\vect{y}_j \frac{e^{-(\vect{y}_{j}-\bar{\vect{x}}_j)^2/\Delta \cT}}
-  {(\pi\Delta \cT)^{D/2}}\delta[f(\vect{y}_j)]\Phi(\vect{x}_1,\cdots,\vect{y}_j,\ldots,\vect{x}_{N-1})\biggdrangle.
+  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \int d\vect{y}_k \frac{e^{-(\vect{y}_{k}-\bar{\vect{x}}_k)^2/\Delta \cT}}
+  {(\pi\Delta \cT)^{D/2}}\delta[f(\vect{y}_k)]\Phi(\vect{x}_1,\ldots,\vect{y}_k,\ldots,\vect{x}_{N-1})\biggdrangle,
 \end{align}
-where $\vect{\bar{x}}_j:=(\vect{x}_{j-1}+\vect{x}_{j+1})^2$, and the exponential terms were combined using
+where $\vect{\bar{x}}_k:=(\vect{x}_{k-1}+\vect{x}_{k+1})^2$, and the exponential terms were combined using
 \begin{align}
-&  (\vect{x}_{j+1}-\vect{y}_j)^2+(\vect{y}_{j}-\vect{x}_{j-1})^2 -\frac{(\vect{x}_{j+1}-\vect{x}_{j-1})^2}{2}%\nonumber\\
-% &=  \vect{x}_{j+1}^2-2\vect{x}_{j+1}\cdot\vect{y}_j+\vect{y}_j^2
-% +\vect{x}_{j-1}^2-2\vect{x}_{j-1}\cdot\vect{y}_j+\vect{y}_j^2
-%  -\frac{(\vect{x}^2_{j+1}-2\vect{x}_{j+1}\cdot\vect{x}_{j-1}+\vect{x}_{j-1}^2}{2}\nonumber\\
-% &=  \frac{(\vect{x}_{j+1}+\vect{x}_{j-1})^2}{2}-2\vect{x}_{j+1}\cdot\vect{y}_j+2\vect{y}_j^2
-% -2\vect{x}_{j-1}\cdot\vect{y}_j
+&  (\vect{x}_{k+1}-\vect{y}_k)^2+(\vect{y}_{k}-\vect{x}_{k-1})^2 -\frac{(\vect{x}_{k+1}-\vect{x}_{k-1})^2}{2}%\nonumber\\
+% &=  \vect{x}_{k+1}^2-2\vect{x}_{k+1}\cdot\vect{y}_k+\vect{y}_k^2
+% +\vect{x}_{k-1}^2-2\vect{x}_{k-1}\cdot\vect{y}_k+\vect{y}_k^2
+%  -\frac{(\vect{x}^2_{k+1}-2\vect{x}_{k+1}\cdot\vect{x}_{k-1}+\vect{x}_{k-1}^2}{2}\nonumber\\
+% &=  \frac{(\vect{x}_{k+1}+\vect{x}_{k-1})^2}{2}-2\vect{x}_{k+1}\cdot\vect{y}_k+2\vect{y}_k^2
+% -2\vect{x}_{k-1}\cdot\vect{y}_k
 %  \nonumber\\
-% &=  \frac{(\vect{x}_{j+1}+\vect{x}_{j-1})^2}{2}-2(\vect{x}_{j+1}+\vect{x}_{j-1})\cdot\vect{y}_j+2\vect{y}_j^2
-% -2\vect{x}_{j-1}\cdot\vect{y}_j\\
-=  2(\vect{y}-\vect{\bar{x}}_j)^2.
+% &=  \frac{(\vect{x}_{k+1}+\vect{x}_{k-1})^2}{2}-2(\vect{x}_{k+1}+\vect{x}_{k-1})\cdot\vect{y}_k+2\vect{y}_k^2
+% -2\vect{x}_{k-1}\cdot\vect{y}_k\\
+=  2(\vect{y}-\vect{\bar{x}}_k)^2.
 \end{align}
-Now the $\delta$-function can be integrated over using Eq.~(\ref{hormander1}), with the result 
+Now the delta function can be integrated over using Eq.~(\ref{hormander1}), with the result 
 \begin{align}
-  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \oint_{f(\vect{y})=0} \hspace{-4ex}dS(\vect{y})\, \frac{1}{|\nabla_yf(\vect{y})|}\frac{e^{-(\vect{y}-\bar{\vect{x}}_j)^2/\Delta \cT}}
-  {(\pi\Delta \cT)^{D/2}}\Phi(\vect{x}_1,\cdots,\vect{y},\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}.\label{eq:soft_delta_general}
+  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \oint_{f(\vect{y})=0} \hspace{-4ex}dS(\vect{y})\, \frac{1}{|\nabla_yf(\vect{y})|}\frac{e^{-(\vect{y}-\bar{\vect{x}}_k)^2/\Delta \cT}}
+  {(\pi\Delta \cT)^{D/2}}\Phi(\vect{x}_1,\ldots,\vect{y},\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}.\label{eq:soft_delta_general}
 \end{align}
-There is an integral over the surface of constraint $f(\vect{y}_j)$, and the functionals $\Phi$ is constrained such that 
-its $j$th point is on the surface.  The paths can be  constructed without any concern for the constraints,
-however they will be suppressed by the Gaussian if they strongly violate the constraint that $\vect{y}\sim\vect{\bar{x}}_j$.  
-In effect, this manipulation has softened the constraints. Previously, $\vect{x}_j$ had to lie exactly on the 
-surface, whereas now $\bar{\vect{x}}_j$ should be within $\sqrt{\Delta \cT}$ of the surface to contribute.  
+There is an integral over the surface of constraint $f(\vect{y})$, and the functional $\Phi$ is constrained such that 
+its $k$th coordinate is on the surface.  The paths can be  constructed without any concern for the constraints,
+but they will be suppressed by the Gaussian if they strongly violate the constraint that $\vect{y}\sim\vect{\bar{x}}_k$.  
+In effect, this manipulation has ``softened'' the constraints. Previously, $\vect{x}_k$ had to lie exactly on the 
+surface, whereas now $\bar{\vect{x}}_k$ should be within $\sqrt{\Delta \cT}$ of the surface to contribute to the path
+integral.  
+Since a broader class of paths can be considered, it maybe easier to find sample paths where 
+that almost obey the constraint $\vect{y}\sim\vect{\bar{x}}_k$.
+Those paths can then contribute to the path integral in regions where $\Phi$ is nonzero.     
 
 \subsubsection{Splitting the Potential Curvature}
 
 Since the strong-coupling limit in the curvature~(\ref{eq:curvature_occupy}) 
 comes from the terms proportional to $\I[1]0\I[2]0$, 
-those terms can be separated out, and treated using the softened $\delta$-function approach.
+those terms can be separated out, and treated using the softened delta function approach.
 The remaining terms will be treated using the generic coupling discussed in Sec.~\ref{sec:generic_coupling}.
 The curvature can be split into a strong-coupling and generic-coupling term
 \begin{align}
-  C_{ij} =& C_{ij}^{(\text{S})} + C_{ij}^{(\text{g})},
+  C_{ij} =\,& C_{ij}^{(\text{S})} + C_{ij}^{(\text{g})},
 \end{align}
 where the strong-coupling term is
 \begin{align}
 C^{(\text{S})}_{ij}&=\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
  \oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0}  \hspace{-4ex} dS_0\, 
   \hat{r}_i\cdot\hat{n}_1(\vect{x}_0)
- \oint\limits_{\sigma_2(\vect{y}-\vect{R}_2)=0}  \hspace{-4ex} dS_k(\vect{y})\, 
+ \oint\limits_{\sigma_2(\vect{y}-\vect{R}_2)=0}  \hspace{-4ex} dS(\vect{y})\, 
   \hat{r}_j\cdot\hat{n}_2(\vect{y})
   \nonumber\\
 &\hspace{0.5cm}\times\biggdlangle 
@@ -882,22 +894,40 @@ C^{(\text{S})}_{ij}&=\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D
   \I[1]0\,\I[2]0\, g_{0,0}
   \biggdrangle_{\vect{x}(t)},\label{eq:curvature_strong}
 \end{align}
-and the generic-coupling term $C^{(\text{g})}_{ij}$ has the same form as Eq.~(\ref{eq:curvature_occupy}), but with the $n=m=0$ terms
-deleted.  This integral is only significantly nonzero when there are some points within $\sqrt{\Delta\cT}$ of the 
-surface, but the paths also do not enter either body.
+and the generic-coupling term $C^{(\text{g})}_{ij}$ is
+\begin{align}
+C^{\text{(g)}}_{ij}
+=& \frac{\hbar c N}{2(2\pi)^{D/2}}\sum_{k=1}^{N-1}\intzinf\frac{d\cT}{\cT^{1+D/2}}
+  % \nonumber\\ 
+  % &\times
+ \oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0}  \hspace{-4ex} dS_0\, 
+  \hat{r}_i\cdot\hat{n}_1(\vect{x}_0)
+ \oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0}  \hspace{-4ex} dS_k\, 
+  \hat{r}_j\cdot\hat{n}_2(\vect{x}_k)
+  \nonumber\\
+&\times\sum_{m,n\ne 0}\biggdlangle 
+  \mathcal{G}(\vect{x}_0-\vect{x}_k,k(N-k)\cT/N^2)
+  % \nonumber\\
+  % &\hspace{0.75cm} \times
+  \I[1]m\,\I[2]n\, g_{m,n}
+  \biggdrangle_{\sigma_2(\vect{x}_k-\vect{R}_2)=0},\label{eq:curvature_generic}
+\end{align}
+The integral~(\ref{eq:curvature_strong}) is only substantially nonzero under two conditions.
+First, the path must pass within a distance $\sqrt{\Delta\cT}$ of the 
+surface, and second the paths must not enter either body.
  Note that due to the pinning the indicator functions $\I[1]0\,\I[2]0$ are currently defined with $\vect{y}$ in the $k$th spot
-This means that if $\vect{x}_k$ should enter the bodies, that does not influence the action.  
+This means that if $\vect{x}_k$ lies inside either body, that does not influence the integrand.  
 The indicators only go to zero when one of the \emph{other} points on the path cross into the bodies.  
 
-In a planar geometry, the $(D-1)$-dimensional surface integrals can be evaluated readily.  
+In a planar geometry, the $(D-2)$-dimensional surface integrals can be evaluated.  
 The integral over $S(\vect{y})$ eliminates the transverse Gaussian integrals, and 
 integral over the starting surface gives a factor of the transverse area.  
-In $D=4$ dimensions, the integral simplifies to 
+In $D=4$ dimensions, Eq.~(\ref{eq:curvature_strong}) then simplifies to 
 \begin{align}
 C^{(\text{S})}_{ij}&=\frac{\hbar c N A}{2(2\pi)^{2}}\intzinf\frac{d\cT}{\cT^{3}}\biggdlangle 
   \sum_{k=1}^{N-1}\frac{e^{-(d_2-\bar{x}_k)^2/\Delta \cT}}  {(\pi\Delta \cT)^{1/2}}
   \I[1]0\,\I[2]0\, g_{0,0}
-  \biggdrangle_{\vect{x}(t),x_0=d_1},\label{eq:curvature_strong}
+  \biggdrangle_{\vect{x}(t),x_0=d_1},\label{eq:curvature_strong_simple}
 \end{align}
 % One downside of this approach is that there is an additional $(\Delta\cT)^{-1/2}$ factor from the constrained Gaussian factors.
 % This factor can be absorbed if the combined constrained Gaussian factors are treated as the probability
@@ -912,84 +942,68 @@ C^{(\text{S})}_{ij}&=\frac{\hbar c N A}{2(2\pi)^{2}}\intzinf\frac{d\cT}{\cT^{3}}
 % point of the surface $\vect{y}_j$.
 % The second term is vanishes for the planar geometries.  
 %This second factor could in turn be used to sample from the surface for a given path.  
-% In essence, this method for handling the $\delta$-function has replaced the $\delta$-function 
+% In essence, this method for handling the delta function has replaced the delta function 
 % with a softer distribution that allows paths within $\pm N^{-1/2}$ of the required times and directions.  
 
 % The potential curvature can be split into two terms, one involving just the strong-coupling limit
 % $g_{0,0}$ where paths do not enter the bodies, and another with all of the remaining terms.   
 % The second term can be sampled using the generic coupling algorithm from Sec.~\ref{sec:direct_construct}.
 % The two terms will be evaluated separately, although they may reuse the same random numbers. 
-In order to capture the strong-coupling dependence it is necessary to sample from the no-touching
-set of paths.  For two half-spaces this can be constructed by shifting the paths so they start on the 
-first surface.   
-For paths determined by scaling unit Brownian bridges, $x_k=d_1+\sqrt{\cT}B_k$,
-this can be done by translating the unit Brownian bridge $B(t)\rightarrow =B(t) -B_{\text{min}}$,
+In order to capture the strong-coupling dependence it is necessary to sample from the 
+set of paths that do not enter either body.  For two dielectric planes with dielectric function~(\ref{eq:eps12})
+the paths can be constructed by shifting the paths so they start on the 
+first surface at $x=d_1$.   
+For paths constructed by scaling unit Brownian bridges, $x_k=d_1+\sqrt{\cT}B_k$,
+this can be done by translating the unit Brownian bridge $B(t)\rightarrow B(t) -B_{\text{min}}$,
 where $B_{\text{min}}$ is the minimum value of the path.  This ensures that 
 the paths start at $x=d_1$, but since $\sqrt{\cT}B(t)>0$ for all points of the path, the paths 
 will not enter the first body.    
-Then suppose that the maximum point of the bridge is $B_{\text{max}}$.  Only this point will have 
-an opportunity to contribute, since it passes through the surface, the integrand goes to zero
-due to $\I[1]0\I[2]0$ going to zero.
+Then suppose that the maximum point of the bridge is $B_{\text{max}}$, and the maximum point of the 
+path is $x_{\text{max}}=d_1+\sqrt{\cT}B_{\text{max}}$.  Only this point will have 
+an opportunity to contribute.  Once it passes through the surface, $\I[1]0\I[2]0$ is zero, and 
+so the integrand is also zero.  
 Then the Gaussian $e^{-(d_2-\bar{x}_{\text{max}})^2/\Delta \cT}$ can be used to sample a path-time, 
 while ensuring that the path does not actually enter the surface.  
-That crossing time definitely happens when $\sqrt{\cT}B_{\text{max}}=d$, where $d=d_2-d_1$.  
-At this time one of $B_{\text{max}+1}$ or $B_{\text{max}+1}$ has definitely entered the surface.  
-However, a crossing might have happened at an earlier path time, when some other another point crossed through
-the surface.  
-
-The exponential factor can be written using $\bar{x}_\text{max}=\sqrt{\cT}B_{\text{max}}$,  
-and $\cT$ can be factored inside using
+That crossing time $\cT_{\text{max}}$ definitely happens when $\sqrt{\cT_{\text{max}}}B_{\text{max}}=d$, where $d=d_2-d_1$.  
+The exponential factor in Eq.~(\ref{eq:curvature_strong_simple}) can be written using the definition of $x_{\text{max}}$ 
+as
 \begin{align}
   \exp\bigg(-\frac{1}{\Delta \cT}[d-\sqrt{\cT}\bar{B}_{\text{max}}]^2\bigg) 
   &= \exp\bigg[-Nd^2\bigg(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_\text{max}}{d}\bigg)^2\bigg],
 \end{align}
-where $\bar{B}_\text{max} := (B_{\text{max}+1}-B_{\text{max}-1})/2$.  This is effectively a Gaussian in $1/\sqrt{\cT}$.  
+where $\bar{B}_\text{max} := (B_{m^*+1}-B_{m^*-1})/2$, and $m^*$ is the index of the maximum value.
+This can be regarded as the probability distribution for $\cT$.  
 The normalized probability distribution for $1/\sqrt{\cT}$ is  
 \begin{equation}
   P_S(\cT;\bar{B}_\text{max},d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_\text{max}}{d}\right)^2\bigg]\Theta\left(\frac{d^2}{\bar{B}^2_\text{max}}-\cT\right)
   \label{eq:time_fix_curve}
 \end{equation}
-The probability distribution can be converted to an one-sided normal distribution by defining
+The probability distribution can simplified by defining
 \begin{equation}
   s = \sqrt{2Nd^2}\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_\text{max}}{d}\right),
 \end{equation}
 where 
 \begin{equation}
-  P_S(s) = \bigg| \frac{dT}{ds}\bigg| P_S(\cT) = \sqrt{\frac{2}{\pi}} e^{-s^2/2}\Theta(s).
+  P_S(s) = \bigg| \frac{dT}{ds}\bigg| P_S(\cT) = \sqrt{\frac{2}{\pi}} e^{-s^2/2}\Theta(s),
 \end{equation}
-In that case, $s$ is the absolute value of a standard normal deviate, and 
-the path times are then given by
+is a one-sided normal distribution.  In this case, $s$ is the absolute value of a standard normal deviate, and 
+the path times can be written in terms of standard normal deviates as
 \begin{equation}
-  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_\text{max}}{d}\right)^{-2}\label{eq:cT-s},
+  \cT = \left( \frac{|z|}{\sqrt{2Nd^2}}+\frac{\bar{B}_\text{max}}{d}\right)^{-2}\label{eq:cT-s}.
 \end{equation}
-where $z$ is a standard-normal deviate.  
-% The potential curvature can be sampled from this set of paths as
-% \begin{align}
-%   C^{(S)}_{ij}  =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}
-%   \sum_k \int dy_k \frac{e^{-(y_k-\bar{B}_k)^2/\Delta \cT}}{(\pi\Delta\cT)^{1/2}}
-%    e^{(d-\bar{B}_k)^2/\Delta \cT}\I[1]0\I[2]0 g_{0,0}
-%    \biggdrangle_{x(\cT)}.
-%  \end{align}
-The $\cT$ integral will be solved in Monte Carlo fashion after factoring out the probability density~(\ref{eq:time_fix_curve}),
-and using Eq.~(\ref{eq:cT-s}).  The sum over $k$ is assumed to only contribute at the maximum point.  
+The $\cT$ integral will be comuted in Monte Carlo fashion after factoring out the probability density~(\ref{eq:time_fix_curve}),
+and using Eq.~(\ref{eq:cT-s}).  The sum over $k$ is assumed to be dominated by the contribution at the maximum point,  
 \begin{align}
 C^{(S)}_{ij} % &=\frac{\hbar c N A}{2(2\pi)^{2}}\biggdlangle 
   % \intzinf\frac{d\cT}{\cT^{3}}\sqrt{\frac{\pi\cT^3}{Nd^2}}\sqrt{\frac{N}{\pi \cT}}\bigg(\sqrt{\frac{Nd^2}{\pi\cT^3}}e^{-(d_2-\bar{x}_k)^2/\Delta \cT}\bigg)
   % \I[1]0\,\I[2]0\, g_{0,0}
   % \biggdrangle_{\vect{x}(\cT),x_0=d_1},\\
  &=\frac{\hbar c N A}{2(2\pi)^{2}}\biggdlangle 
- \frac{1}{\cT^{2}d}\bigg(\sqrt{\frac{Nd^2}{\pi\cT^3}}e^{-(d_2-\bar{x}_k)^2/\Delta \cT}\bigg)
+ \frac{1}{\cT^{2}d}\bigg(\sqrt{\frac{Nd^2}{\pi\cT^3}}e^{-(d_2-\bar{x}_\text{max})^2/\Delta \cT}\bigg)
   \I[1]0\,\I[2]0\, g_{0,0}
-  \biggdrangle_{\vect{x}(\cT),x_0=d_1},\\
-% =& \frac{NA\hbar c}{2(2\pi)^{2}}\biggdlangle  \frac{1}{\cT^{1+D/2}}
-%   \sum_k   \sqrt{\frac{\pi\cT^3}{Nd^2}}\sqrt{\frac{N}{\pi\cT}}
-%    \I[1]0\I[2]0 
-%    \biggdrangle_{\vect{x}(\cT), \cT}\\
-% =& \frac{N\hbar c}{2(2\pi)^{D/2}}\biggdlangle  \frac{1}{\cT^{D/2}}
-%   \sum_k  \frac{1}{d}   \I[1]0\I[2]0 
-%    \biggdrangle_{x(\cT), \cT}.
+  \biggdrangle_{\vect{x}(\cT),x_0=d_1}.\label{eq:strong_coupling_final}
 \end{align}
-Note that there are no explicit restrictions on the paths, but this integrand is only non-zero 
+Note that there are no explicit pinnined on the paths, but this integrand is only non-zero 
 if the paths do not enter the bodies.  
 
 \begin{figure}
@@ -1005,22 +1019,30 @@ if the paths do not enter the bodies.
 \label{fig:curvature_c}
 \end{figure}
 
-Figure~\ref{fig:curvature_c} shows the effects of including of the strong coupling term.  
+Figure~\ref{fig:curvature_c} shows the effects of including the strong coupling term~(\ref{eq:strong_coupling_final}).  
 The strong-coupling term only becomes important for $\chi/N\gg 1$,
-and there is a transition between the generic coupling, and strong coupling results.  Carrying out 
-further averaging of course improves the results.   The variance is also increased in the cross-over region.
-The method suggested manages to improve on the generic coupling results significantly.
-However, the presented results have larger error than the simpler generic coupling.  This is
+and there is a transition between the generic coupling and strong-coupling regimes. 
+The variance of the total estimated potential is also increased in the cross-over region, 
+dominated by the statistical error from the generic coupling estimate.  
+The method used here manages to improve on the generic coupling results significantly, since 
+it does not rely on rare paths from a very large ensemble to capture the behaviour in the strong-coupling regime.
+However, the presented results have a larger statistical error than the simpler generic coupling, but this is 
+perhaps due to a slightly smaller ensemble of paths.  There are $N=10^8$ sample paths in Fig.~\ref{fig:curvature_c}, versus $N=10^9$ 
+sample paths in Fig.~\ref{fig:curvature_a}).  This is
 still under study.   
 
-Yet another way of treating the $\delta$-function is even more direct.  
+There is yet another way of treating the delta function in terms of restricting $\cT$. 
 If the paths are assumed to start on the surface of the first body, and not enter, 
-then the $\delta$-function can be interpreted as a $\delta$-function in the path time $\cT$. 
-(Since there is only one $\cT$ integral, only one $\delta$ function can be handled in this manner.)
+then the delta function can be interpreted as a delta function in the path time $\cT$. 
+(Since there is only one $\cT$ integral in the path integral, only one of the $\delta$ functions can be handled in this manner.
+The remainder should be accounted for in the spatial integrals.)
 For a given Brownian bridge $\vect{B}_k$, the times $\cT_*$ that it intersects the  surfaces, or 
 satisfies $\sigma_2(\vect{x}_0+\sqrt{\cT_*}\vect{B}_k-\vect{R}_2)=0$ could be found.  
-This has not yet been fully implemented, but would be much simpler.  However, the softened $\delta$-function
-approach may be also be useful in handling other constraints.    
+This has not yet been fully implemented, but would be much simpler.  However, the softened delta function
+approach may be also be useful in handling other constraints.    For example, let us consider 
+computing the potential in a complicated geometry.  It might be it is hard to construct paths that 
+touch both surfaces, and yet enter neither from randomly constructing Brownian bridges.
+This softened style of pinning could allow a broader class of paths to contribute in that case.    
 
 %\section{Numerical Implementation for TE Potential Curvature}
 
@@ -1074,10 +1096,10 @@ approach may be also be useful in handling other constraints.
 % \end{equation}
 % where $x^*$ is the nearest point to the surface to $\vect{x}_j$.
 
-%\subsection{Softened $\delta$-function}
-% There is an alternative formulation for handling the $\delta$-function.  Instead of explicitly constructing 
-% paths to satisfy the $\delta$-function, we can generate an effective potential.  
-% First consider a single integral against a Gaussian distribution, with a $\delta$-function,
+%\subsection{Softened delta function}
+% There is an alternative formulation for handling the delta function.  Instead of explicitly constructing 
+% paths to satisfy the delta function, we can generate an effective potential.  
+% First consider a single integral against a Gaussian distribution, with a delta function,
 % \begin{align}
 %   I &= \int dx_j \frac{1}{2\pi\Delta\cT}
 %   e^{-(x_{j+1}-x_j)^2/(2\Delta \cT)-(x_{j}-x_{j+1})^2/(2\Delta \cT)} f(x_j)\delta(x_j-d) \\

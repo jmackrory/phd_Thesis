@@ -179,7 +179,7 @@ which has the form of a Laplace transform in $\lambda$, where the Laplace transf
 \begin{equation}
   \mathcal{L}[f(t)](\lambda):=\int_0^\infty d\lambda\, e^{-\lambda t} f(t).\label{eq:Laplace}
 \end{equation}
-The $\delta$-function selects paths that satisfy $\vect{W}(s)=\vect{c-x}$.  The Brownian motion $\vect{W}(0)$
+The delta function selects paths that satisfy $\vect{W}(s)=\vect{c-x}$.  The Brownian motion $\vect{W}(0)$
 starts at the origin.  So in order to select
 Brownian paths starting from $\vect{W}=0$ and propagating to $\vect{W}=\vect{c}$, we should only
 consider the solution at the origin $f(\vect{x}=0)$.  
@@ -262,7 +262,7 @@ At finite step discontinuities (such as at $x=d$), the solution and its derivati
   \partial_xf(d+0_+) - \partial_x f(d-0_+) = 0 \qquad f(d+0_+)-f(d-0_+) = 0,  \label{eq:step_BC}
 \end{equation}
 where $0_+$ indicates the limit of approaching zero from above.  
-At a $\delta$-function singularity the derivative of the solution is discontinuous, but the function itself
+At a delta function singularity the derivative of the solution is discontinuous, but the function itself
 is continuous,
 \begin{equation}
   \partial_xf(0_+) -\partial_x f(-0_+) = -2  \qquad f(d+0_+)-f(d-0_+) = 0.\label{eq:delta_BC}
@@ -435,14 +435,14 @@ involving singular potentials, such as $V\subTE$ and $V\subTM$ where
 
 For a dielectric-vacuum interface described by $\epsr = 1+\chi\Theta(x-d)$, the resulting
 potential is highly singular.  
-The first derivative of a step function is a $\delta$-function, and 
-the second derivative is $\delta'$, or the derivative of a $\delta$-function.
+The first derivative of a step function is a delta function, and 
+the second derivative is $\delta'$, or the derivative of a delta function.
  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which implies
 $\log\sqrt{\epsr}(x) = \Xi\Theta(x-d)$.  If the derivatives are taken directly then the potential is given by
 \begin{equation}
   V\subTM(x) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big],
 \end{equation}
-which involves the square of the $\delta$-function!  
+which involves the square of the delta function!  
 The only way to make sense of this is to regularize the singularity in the step function,
 and take the limit of vanishing regularization at the end of the computation. 
 
@@ -480,7 +480,7 @@ The regularized TM potential is now given by
   \label{eq:VTM_reg}
 \end{equation}
 as sketched in Figure~\ref{fig:TMpot}.
-The only singularities present are the $\delta$-functions from the second derivative.
+The only singularities present are the delta functions from the second derivative.
 The potential is still singular, and it is difficult reliably simulate for a single path as $a\rightarrow 0$.
 However, the ensemble averaged expression over many such paths is well behaved. 
 
@@ -489,7 +489,7 @@ However, the ensemble averaged expression over many such paths is well behaved.
   \includegraphics[width=0.4\linewidth,angle=90]{fig/analytical/TMpot}
   \caption[Regularized TM Potential]{Schematic drawing of a regularized TM potential~(\ref{eq:VTM_reg})
     at a regularized dielectric surface.  
-    Vertical arrows denote $\delta$-functions with heights $\Xi/a$, and solid rectangle marks the 
+    Vertical arrows denote delta functions with heights $\Xi/a$, and solid rectangle marks the 
     step function of height $(\Xi/a)^2$.  }
   \label{fig:TMpot}
 \end{figure}
@@ -509,7 +509,7 @@ The analytical solutions for the path integral obey
   - \frac{\Xi}{2a}[\delta(x-d)-\delta(x-d-a)]\bigg)f
 \end{equation}
 Since $a$ is small, $\Xi/a$ is large relative to $\lambda$, so $\lambda$ can be ignored in the thin-surface limit.    
-At $x=d$, and $x=d+a$, the $\delta$-function boundary conditions~(\ref{eq:delta_BC}) will be enforced.
+At $x=d$, and $x=d+a$, the delta function boundary conditions~(\ref{eq:delta_BC}) will be enforced.
 
 Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,   
     \begin{align}
@@ -594,12 +594,9 @@ This path integral is found by solving
   0 = \frac{1}{2} \partial_x^2 f\subTM - (V\subTM+\lambda)f\subTM + \delta(x-c),
 \end{equation}
 where TM boundary conditions~(\ref{eq:TM_boundary_conditions}) are imposed at $x=d$,
-and $\delta$-function boundary conditions~(\ref{eq:delta_BC}) are imposed at $x=c$.  
+and delta function boundary conditions~(\ref{eq:delta_BC}) are imposed at $x=c$.  
 The solutions naturally decompose into two cases: when the end points of the path are on the same
 side of the surface,  and when they are on different sides.
-% \comment{    Note how to recover various cases by flipping signs etc.  
-%     Simplify down to crossing/no-crossing cases.}
-%    That seems complicated, but we can note that if there is a crossing ($|c|<|d|$) then we get 
     When both points are on the same side, or $d(d-c)>0$, the solution is 
     \begin{equation}
       f\subTM=\dfrac{e^{-\sqrt{2\lambda}|c|}}{\sqrt{2\lambda}} 
@@ -708,7 +705,7 @@ The path integral
     \end{equation}
     The analytical expression is found by solving the diffusion equation directly, with 
     TM boundary conditions~(\ref{eq:TM_boundary_conditions}) at $x=d$ and 
-    $\delta$-function boundary conditions~(\ref{eq:delta_BC}) at $x=0$.
+    delta function boundary conditions~(\ref{eq:delta_BC}) at $x=0$.
     The solution for a single TM body is 
   \begin{equation}
       f_{TM,1}(x) = \left\{\begin{array}{lcr} 
@@ -784,15 +781,6 @@ The two-body TM solution can be written in the same three regions as two-body TE
       r\supTM_i = \frac{e^{2\Xi_i}\sqrt{\lambda} -\sqrt{\lambda+\chi_i}}{e^{2\Xi_i}\sqrt{\lambda} + \sqrt{\lambda+\chi_i}}.
       \label{eq:uTM_i}
     \end{equation}
-  % \item {Integrate over position}
-%     In exactly the same fashion, we can integrate over position.  
-%     \begin{align}
-%       I_{TM,12} =& -I_{div} + \dfrac{r\supTM_2 e^{-2\sqrt{2\lambda}d}-r\supTM_1}{4(\lambda+\chi_1)(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2\lambda}d})} +\frac{2r\supTM_1r\supTM_2 e^{-\sqrt{2\lambda}d}d}{\sqrt{2\lambda}(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2\lambda}d})} + (r\supTM_1+r\supTM_2)\frac{(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-r\supTM_1r\supTM_2e^{-2\sqrt{2\lambda}d})}\nonumber\\
-%       & +\frac{r\supTM_1 e^{-2\sqrt{2\lambda}d} - r\supTM_2}{4(\lambda+\chi_2)(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2\lambda}d})},
-%     \end{align}
-%     where $I_{div} = [2(\lambda+\chi_1)]^{-1/2}\int_{-\infty}^h dx_0  +  [2(\lambda+\chi_2)]^{-1/2}\int_{h+d}^\infty dx_0  + (2\lambda)^{-1/2}d$.
-%   \item Comment on divergent parts cancelling out. 
-% \end{enumerate}
 This result contains all of the previous results for closed paths.  
 The TE results are recovered by taking $\Xi\rightarrow 0$.
 In taking $\chi\rightarrow 0$, only the TM potentials are present, and this is the solution for 

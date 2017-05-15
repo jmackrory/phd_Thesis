@@ -21,9 +21,9 @@ and permeability $\mur(\vect{r})\rightarrow \mur(\vect{r})+\delta\mur(\vect{r})$
   \delta\epsr(\vect{r})=\frac{\alpha}{\epsilon_0}\delta(\vect{r}-\rA), 
   \quad \delta\mu_r(\vect{r})=\mu_0\beta\delta(\vect{r}-\rA).
 \end{equation}
-Note that the $\delta$-functions are being used a short-hand notation for a sharply localized function which has unit integral.
-All expansions involving these $\delta$-functions can be carried out with a finite regularization of the 
-$\delta$-function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
+Note that the delta functions are being used a short-hand notation for a sharply localized function which has unit integral.
+All expansions involving these delta functions can be carried out with a finite regularization of the 
+delta function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
 We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
 to nonzero temperature will be considered in Sec.~\ref{sec:nonzero_temp}.
 
@@ -92,10 +92,10 @@ The terms involving $\nabla \delta\mur$ will yield derivatives (such as $\nabla^
 % \begin{equation}
 %   \int d\vect{x} f(\vect{x})\nabla\delta(\vect{x}-\rA)  = -\nabla f(\vect{x})\bigg|_{\vect{x}=\rA}.
 % \end{equation}
-In all of these expansions, the path-averaged $\delta$-functions act to restrict the path integrals to paths starting at the atom's
+In all of these expansions, the path-averaged delta functions act to restrict the path integrals to paths starting at the atom's
 position $\rA$.  
 The path integral can be written schematically as some path-averaged function that depends the whole path and includes 
- a path-averaged $\delta$-function,
+ a path-averaged delta function,
 \begin{equation}
   I = \int d\vect{x}_0\Bigdlangle \,\langle f(\vect{x})\rangle\langle g(\vect{x})\delta(\vect{x}-\rA)\rangle\,\Bigdrangle_{\vect{x}(t)}.
 \end{equation}
@@ -103,7 +103,7 @@ In discrete notation this is
 \begin{equation}
   I = \int \prod_{n=0}^{N-1}dx_n\,P(x_0,\cdots, x_{N-1}) \frac{1}{N}\sum_{k=0}^{N-1}f(x_k)\frac{1}{N}\sum_{j=0}^{N-1}\delta(\vect{x}_j-\rA)g(\vect{x}_j)
 \end{equation}
-where the $\delta$-function enforces path closure.  All of the functions are invariant under cyclic permutations 
+where the delta function enforces path closure.  All of the functions are invariant under cyclic permutations 
 of the path labels.  This is true of the path-averaged functions such as $\langle \epsr \mur\rangle$ and $\langle \VTM\rangle$,
 and the Gaussian probability for closed Brownian bridges.
 Then for each term $\delta(\vect{x}_j-\rA)$, the labels can be permuted $j$ times so that in the shifted
@@ -115,9 +115,9 @@ path integral can be written as
 \end{equation}
 % For a closed path, integrated over all space, with integrands athat are all written as averaged around the path, 
 % there is some freedom in which point of the path is called the origin.  
-Since only paths the satisfy the $\delta$-function constraint will contribute to the path integral, 
+Since only paths the satisfy the delta function constraint will contribute to the path integral, 
 we are free to call the point at $\rA$ the path origin.  
-% The end result is that the path-averaged $\delta$-function restricts the starting point of the paths to the atom's
+% The end result is that the path-averaged delta function restricts the starting point of the paths to the atom's
 % position $\rA$.
 
 Using the results in Eqs.~(\ref{eq:mueps_expansion}) and (\ref{eq:VTE_expansion}), the Casimir--Polder energy
@@ -133,7 +133,7 @@ for the TE polarization can be written
       -\nabla^2\frac{\delta\mur}{\mur}\right> \right)
     \biggdrangle_{\vect{x}(t)}.
 \end{align}
-Then after manipulating the path-averaged $\delta$-functions using Eq.~(\ref{eq:delta_pin}), 
+Then after manipulating the path-averaged delta functions using Eq.~(\ref{eq:delta_pin}), 
 and integrating by parts, the Casimir--Polder energy is
 \begin{align}
     V\supTE\subCP(\vect{\rA}) &= \frac{\hbar c}{4}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}
@@ -396,7 +396,7 @@ are equivalent to derivatives with respect to the distance $d$, and can be strai
 evaluated.  
 After substituting this back into the atom-surface energy~(\ref{eq:TM_CP_inter}), the TM Casimir--Polder energy is given by 
 \begin{align}
-  V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\comment{$\frac{1}{4}$}\frac{1}{2}
+  V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\frac{1}{2}
   \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}},\label{eq:TM_CP}
 \end{align}
 where we used $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
@@ -418,7 +418,10 @@ which suggest it is essential to correctly estimate the derivatives in a numeric
 \section{Analytical TE Casimir Energy between Two Dielectric Planes}
 \label{sec:TE_energy}
 The Casimir energy for two dielectric planes can also be calculated within this formalism.  
-The dielectric function is given by $\epsrab(x) = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)$.
+The dielectric function is given by 
+\begin{equation}
+  \epsrab(x) = 1+\chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2).\label{eq:eps12}
+\end{equation}
 The calculation proceeds in the same way, except for two changes.  
 First, the Casimir energy requires a further integral over the starting points of the paths.
 Second, the two-body interaction energy is found by subtracting the one-body energies involving 
@@ -630,7 +633,6 @@ After integrating by parts, the TM Casimir energy is
   &= \frac{\hbar cA}{8\pi^2}\int_0^\infty dt\,t^{2}
   \int_1^\infty dv\,\log[1-r\supTM_1r\supTM_2 e^{-2tvd}].
   \end{align}
-\comment{need factor of $4$ - the following assumes it has been found and fixed}.
 The TM Casimir energy per unit area can be written as 
 \begin{equation}
   \frac{E\subTM-E\sup0}{A} = -\frac{\hbar c\pi^2}{720d^3}\gamma\subTM(\chi_1,\chi_2),

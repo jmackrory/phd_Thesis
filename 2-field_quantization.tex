@@ -11,16 +11,10 @@ However, the resulting worldline path integrals for the full set of potentials p
 As a result, we turn our attention to developing scalar models that better capture the features
 of electromagnetism.  In fact, in planar geometries, the scalar models correspond to 
 the amplitudes of the two transverse modes.  
-% Then we introduce the classical field theory for the EM field in both Lagrangian and 
-% Hamiltonian forms.  We quantize the theory, and then develop the partition function.
-%The partition function can be converted to a Euclidean path integral, which still has a residual gauge-freedom.
-%The gauge freedom is removed via Faddeev-Popov gauge fixing, with a space-dependent gauge. 
-% We then develop the worldline path integral for the full gauge theory, and comment on the resulting
-% structure.
-% In the search for a more tractable model system, we will show that in planar geometries the 
-% EM field can be split into two non-interacting scalar fields.
 We will then develop the worldline path integrals for those scalar fields, which will form
 the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
+(The decomposition of the EM field into two scalars, and the derivation of the associated 
+worldline path integrals was carried out in Ref.~\ref{Mackrory2016}.)
 
 \section{Approaches to Quantizing Electromagnetism in Media}
 
@@ -71,16 +65,6 @@ work on the scattering method~\cite{Rahi2009}.
 More recently Philbin carried out a full canonical quantization of EM in media, without explicitly 
 assuming a harmonic medium~\cite{Philbin2010}.
 
-%It is not strictly necessary to start at the microscopic level of the interaction of the 
-% The field action is quadratic in the fields, and there are only linear couplings between other
-% harmonic fields, the resulting path integrals are also Gaussians.  Such Gaussian path integrals 
-% are straightforward to evaluate (certainly in comparison with the nonlinear field theories condensed
-% in condensed matter and high energy physics where perturbation theory is the only recourse.)
-% The primary results in Bechler's work were finding the form of the field propagator, and showing consistency with the 
-% other approaches by Huttner and Barnett~\cite{Huttner1992} and Langevin equations by Dung\etal\cite{Dung1998},
-%  rather than new computations exploiting the propagator. 
-%  The results were all framed in terms of the 
-% Fourier decompositions of the fields in terms of wavenumber, which is unsuitable for a worldline procedure.
 
 Focusing on Casimir physics, in modern treatments the EM field has been quantized via path integration.
 Reid\etal quantize the EM field, under the assumption of piecewise constant dielectric media, where the EM
@@ -89,7 +73,7 @@ Enforcing those boundary conditions allows the remaining computations to proceed
 as if the media were homogeneous and filled all of space, based on a version of Green's theorem~\cite{Emig2004}.
 Fixing the boundary conditions also simplifies the algebra, since derivatives and material functions effectively commute with
 one another.  Any commutator terms would arise on the surface, but since the fields are restricted on the 
-surface via functional $\delta$-functions, those corrections can be ignored.
+surface via functional delta functions, those corrections can be ignored.
 The resulting derivations proceed in analogy with the case of a homogeneous dielectric, but with the 
 fields in different regions coupled by the currents on the surfaces.  
 
@@ -352,7 +336,7 @@ In the example of QED, the Dirac bracket is
 \begin{equation}
   [A_i(\vect{r},t),\Pi_j(\vect{r'},t)] = i\hbar\bigg(\delta_{ij}-\frac{\partial_i\partial_j}{\nabla^2}\bigg)\delta(\vect{r-r'}),
 \end{equation}
-where the right-hand side is proportional to the transverse $\delta$-function.  In this version, there are no 
+where the right-hand side is proportional to the transverse delta function.  In this version, there are no 
 restrictions on the states, but the change in commutator leads to different state overlap.  
 We will not pursue this any further.  
 % To quantize the theory, the Poisson brackets are promoted to commutation relations 
@@ -388,7 +372,7 @@ The resolutions of the identity for the fields are
  (Strictly speaking, the identity for the potential states is proportional to the volume of the gauge group 
  because the integral runs over equivalent physical states that are related by gauge transformations.
  Ultimately, this adds an additive constant to the energy, but for EM this can be ignored.)
-The $\delta$-functions restrict the momentum states to those that satisfy the constraints, and can 
+The delta functions restrict the momentum states to those that satisfy the constraints, and can 
 be written in the Fourier representation as 
 \begin{equation}
 \delta(\nabla\cdot\vect{\Pi}) = \int D\varphi \exp\left(-\frac{i}{\hbar}\int d\vect{r} \,
@@ -426,7 +410,7 @@ for every matrix element.
 In addition, the $\phi$ integrals are independent of the other fields and lead to a (divergent) constant.
 However, since the constant is the same for all configurations of bodies, it will cancel out under renormalization.  
 
-Using the Fourier representation of the $\delta$-function, the matrix elements can be written as 
+Using the Fourier representation of the delta function, the matrix elements can be written as 
 \begin{align}
 \langle \phi_{\beta+\Delta \beta},\vect A_{\beta+\Delta \beta}| e^{-\Delta \beta \hat{H}}|\phi_\beta, \vect A_\beta\rangle
 =
@@ -438,7 +422,7 @@ where the Hamiltonian density for a particular value of $\beta$ is
 \begin{align}
   \mathcal{H}_\beta = \frac{\vect{\Pi}^2_\beta}{2\epsilon_0\epsr(\vect{r})} +\frac{1}{2}\epsilon_0c^2(\nabla\times \vect A_\beta)^2.
 \end{align}
- We have also integrated by parts on the term coming from the Fourier representation of the $\delta$-function, 
+ We have also integrated by parts on the term coming from the Fourier representation of the delta function, 
 and identified $  \partial_\beta\vect A_\beta:=(\vect A_{\beta+\Delta \beta}-\vect A_\beta)/\Delta \beta.$
 After the Gaussian momentum integrals have been carried out, the matrix element is
 \begin{multline}
@@ -503,7 +487,7 @@ The path integral includes infinitely many physically equivalent fields that are
 If that redundancy is not removed, the path integral would give nonsensical infinite results.
 The redundancy is lifted by introducing a gauge-fixing condition so that only one gauge field 
 corresponding to a each physical field configuration in included in the path integral.  %The gauge-fixing  is done by enforcing a delta-function constraint on the gauge degree of freedom.  
-This gauge fixing is carried out by introducing a gauge fixing function $G[\vect{A},A_4]$ inside a functional $\delta$-function.
+This gauge fixing is carried out by introducing a gauge fixing function $G[\vect{A},A_4]$ inside a functional delta function.
 A further Jacobian determinant must be included to ensure each physically distinct state also receives the same weight.
 
 In order to fix the gauge, and assign each state equal weight, the following combination should be
@@ -932,7 +916,7 @@ After splitting the operator into a product of many terms and inserting the mome
      e^{-\vect{p}_j^2\Delta \cT/2 +i\vect{p}_j\cdot(\vect{x}_{j+1}-\vect{x}_j)- V\subTE(z_j)\Delta\cT}
     \bigg),
 \end{align}
-where $\Delta\cT:=\cT/N$, and the $\delta$-functions ensure path closure. 
+where $\Delta\cT:=\cT/N$, and the delta functions ensure path closure. 
 The $\vect{p}_k$ integrals can be evaluated since they are Gaussian,    
 and the $\tau$ integrals can be evaluated at zero temperature using
 \begin{equation}

@@ -78,10 +78,9 @@ In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the electro
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
-We will develop analytical and numerical methods in Chapter~\ref{ch:analytical} and \ref{ch:numerical}, 
-showing agreement with known electromagnetic Casimir results.
-% In Chapter~\ref{ch:general}, we discuss the prospects for a general method based on coupling the scalar polarizations
-% in a spatially-dependent manner.
+We will develop analytical and numerical methods in Chapters~\ref{ch:analytical}, \ref{ch:numerical},
+and \ref{ch:force}, 
+and show agreement with known electromagnetic Casimir results.
 
 The rest of this chapter will cover simple examples of Casimir effects, and expand on background material.
 In Sec.~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
@@ -594,10 +593,6 @@ and the material functions used in the Casimir effect.\footnote{
   This relationship was pointed out by Rahi\etal\cite{Rahi2009}, as a justification for their starting point
   in quantizing the electromagnetic field in media.}
 
-%\todo{Details of Kubo?}
-% \comment{Effective interaction: expanding out perturbation theory leads to $\langle j_\mu j_\nu\rangle$
-% correlation functions.  Via Kubo formalism for linear response, this is related to the conductivity
-% tensor $\sigma_{\mu\nu}$, which is in turn related to the dielectric constant $\chi$}
 
  \begin{figure}
  \centering
@@ -702,11 +697,6 @@ Some early confirmations used the Casimir effect to explain the thickness of liq
 the wall of its container~\cite{Sabisky1973,Dzyaloshinskii1961}.
 In that case, helium satisfies the repulsive Casimir criterion and it is energetically favorable
 to have a thin film of helium between the vacuum and the walls.  
-% An early indirect measurement was liquid Helium flowing up the walls of a container.  \todo{Citations!  Lifshitz/Dzyaloshinskii}
-% Lifshitz and co-workers applied the Casimir pressure to explain the phenomenon of liquid helium
-% flowing out of a jar.  
-% The presence of the liquid helium crawling up the surface reduces the Casimir energy,
-% between the vacuum and the sides of the jar, so the liquid helium experiences an attractive pressure up the walls.  
 
 The Casimir effect was only precisely measured in 1997 by Lamoreaux~\cite{Lamoreaux1997}.   
 This experiment measured the Casimir force between a sphere above a metal plate
@@ -723,7 +713,7 @@ Despite the aforementioned difficulties, the Casimir force between parallel plat
 
 The Casimir force is also important in applications of microelectromechanical systems (MEMS), 
 as a source of stiction~\cite{Tas1996, Serry1998, Buks2001}.  This is particularly important
-in free standing structures such as nano-oscillators.  %\todo{Comment on non-linear actuation blah?}
+in free standing structures such as nano-oscillators.  
 Given that the Casimir force is an attractive potential, if parts of the device get too close to the substrate
 they will permanently stick to one another, leading to device failure.  
 
@@ -956,7 +946,6 @@ or fluctuating surface current approach, and the worldline method.
 \label{sec:PFA}
 The proximity force approximation (PFA) or Derjaguin approximation, is an uncontrolled approximation to
 the Casimir force between arbitrarily shaped objects~\cite{Derjaguin1934,Blocki1977}.  
-%\todo{Earlier citation is available}
 The PFA treats each infinitesimal patch of the surfaces as if they were planar bodies,
 and sums up the pairwise interactions between different patches.
 The PFA is assumed to be valid if the radius of curvature of the bodies $R$ is large relative to 
@@ -977,24 +966,6 @@ As a crude justification, the Casimir energy involves a sum over the frequencies
 of the systems.  Since the mode functions are changed in a global, nonlinear fashion by introducing another
 body, the sum over frequencies also changes in a nonlinear fashion as more bodies are added.  
 
-% Finally, the PFA allows only for strictly attractive forces.  
-% In contrast, the Casimir force can be repulsive, albeit under difficult to engineer circumstances 
-% such as media with a strong magnetic response, or anisotropic media.
-%\todo{PFA with frequency response for material?}
-
-% \begin{enumerate}
-% %\item Find first use?  Lamoreaux mentions usage.  Derjaguin?
-% % \item Note problem with non-additivity. The PFA explicitly assumes that the force
-% % can be found by adding up the pair-wise contributions from each surface patch.  
-% % However, the Casimir force is a global phenomenon, and the total Casimir force
-% % Useful if very limited curvature, or effectively approximate geometry as planar.  
-% \item Only attractive.  (real electromagnetic casimir forces have possibility of 
-% being repulsive, even if hard to realize in general.)
-% \item ever extended to include material properties?
-% \item Despite these limitations, the PFA is relatively straightforward to implement,
-% and functions as an order of magnitude estimate for the Casimir force.  In the limit
-% of vanishing curvature, the PFA converges to the correct Casimir force.  
-% \end{enumerate}
 
 \subsection{Scattering Approach}
 \label{sec:scattering}
@@ -1050,8 +1021,8 @@ energies for piecewise continuous linear dielectric and magnetic media~\cite{Rei
 In essence the method calculates the interaction between electric and magnetic surface currents 
 on different bodies, mediated by the electromagnetic field.  Mathematically this is derived 
 from a path integral for the electromagnetic field, where the fields are restricted to obeying EM boundary conditions at the 
-surfaces via functional $\delta$-functions (simpler boundary conditions were handled in this fashion in
-Refs.~\cite{Bordag1985,Li1991}).  The $\delta$-functions introduce fields 
+surfaces via functional delta functions (simpler boundary conditions were handled in this fashion in
+Refs.~\cite{Bordag1985,Li1991}).  The delta functions introduce fields 
 bound to the surfaces, which can be interpreted as surface currents flowing to enforce boundary conditions.
 After integrating out the EM field in the interior and exterior regions, 
 these surface currents interact with one another via the electromagnetic Green functions.
@@ -1111,12 +1082,6 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     since the paths are weighted by real, decaying exponentials, as opposed to the oscillatory integrals
     in Feynman's path integral.  
 
-    % The path integral is one way to view stochastic processes, along side stochastic differential
-    % equations and diffusion or Fokker-Planck equations. 
-    % The path integral is an infinite dimensional integral, which is the solution to an associated 
-    % diffusion equation.  One can randomly sample from the 
-    % dominant portions of the integral via Monte Carlo numerical methods.  These random sample paths can
-    % in turn be described by a stochastic differential equations.  %\todo{Gardiner citation for SDE-> PDE}
         
     Path integrals underlie most of the work carried out in this thesis: we will use path integrals
     to quantize the electromagnetic field, and the worldline method relies heavily on path integrals.
@@ -1125,10 +1090,6 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     calculations.  Considering their importance to this thesis, we will 
     now derive Feynman's path integral, which will serve as a prototype for all of the path integrals
     that follow.  (Our derivation follows the simple one given in Sakurai~\cite{Sakurai1994}.)
-    % They have even been used in studying quantum chaos---the study of the quantum analogues 
-    % of classically chaotic systems~\cite{Gutzwiller1990}.  In the semiclassical limit
-    % where the classical action $S[x(t)]$ is large, the path integral for a chaotic system
-    % can be approximated by only considering paths with periodic orbits.  %\todo{Gutzwiller trace formula citation}
 
     \subsection{Derivation of Feynman's Path Integral}
 
@@ -1497,7 +1458,7 @@ The final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar 
 There is also a normalization constant of $(2\pi\cT)^{-1/2}$ for each dimension due to the loop 
 closure condition.  This can be thought of as the total normalization for $N$ Gaussian steps of length 
 $\Delta \cT= \cT/N$, subject to the loop-closure requirement $\vect{x}_0=\vect{x}_N$.
-% The normalization can be understood from manipulations on the $\delta$-function, where 
+% The normalization can be understood from manipulations on the delta function, where 
 % we require the multidimensional version of 
 % \begin{equation}
 %   \int dx \delta[h(x)]f(x) = \sum_{f(x)=0}\frac{f(x)}{|h'(x)|},

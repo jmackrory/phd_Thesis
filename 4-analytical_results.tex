@@ -25,7 +25,7 @@ Note that the delta functions are being used a short-hand notation for a sharply
 All expansions involving these delta functions can be carried out with a finite regularization of the 
 delta function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
 We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
-to nonzero temperature will be considered in Sec.~\ref{sec:nonzero_temp}.
+to nonzero temperature will be considered in Section~\ref{sec:nonzero_temp}.
 
 The Casimir energy for TE and TM polarizations was derived in Chapter~\ref{ch:EM_quantization}.
 In the zero-temperature limit, the energy in the EM field in the TE polarization is 
@@ -230,8 +230,8 @@ result
 \end{align}
 % In words, the Mellin transform of a function is proportional to the Mellin transform of the Laplace transform of the function,
 %  and subject to a change of variable $z\rightarrow 1-z$. 
-This is directly useful in rewriting worldline path integrals in terms of their Laplace transforms, 
-since the solution method in Chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the function.
+This result can be used to rewrite worldline path integrals in terms of their Laplace transforms. 
+This is useful since the solution method in Chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the path integral.
 
 \subsection{Inverse Moment Theorem}
 
@@ -313,36 +313,43 @@ The integral over $s$ and $\lambda$ have the form:
   J=\int_0^\infty ds\, s^{\alpha-1}\int_0^\infty d\lambda\, \lambda^{(D-1)/2-\alpha}\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
 \frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}.
 \end{equation}
-This can be transformed by changing variable from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, 
-\begin{equation}
-  J% =2\int_0^\infty ds\, s^{\alpha-1}s^{(D-1)/2-\alpha+1-1/2}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
-  % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v},
-  =2\int_0^\infty ds\, s^{D/2-1}\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}v}
-  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}.
-\end{equation}
-After change of variables from $s$ to $t:=\sqrt{8d^2 s}\,v$, and swapping the $t$ and $v$ integrals, the result is
+This can be transformed by changing variable from $\lambda$ to $p:=\sqrt{\lambda/s+1}$, 
 \begin{align}
-  J % =4\int_1^\infty dv\, (v^2-1)^{(D-1)/2-\alpha} \int_0^\infty dt\, \frac{2t}{8d^2v^2}\left(\frac{t^2}{8d^2v^2}\right)^{D/2-1}e^{-t}
-  % \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\\
-=\frac{1}{8^{D/2-1}d^D}\int_1^\infty dv\,v^{-D} (v^2-1)^{(D-1)/2-\alpha} 
-  \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}\int_0^\infty dt\, t^{D-1}e^{-t}.\label{eq:J}
+  J %&=2\int_0^\infty ds\, s^{\alpha-1}s^{(D-1)/2-\alpha+1-1/2}\int_1^\infty dv\, (p^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}p}
+ %  \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p},\\
+  &=2\int_0^\infty ds\, s^{D/2-1}\int_1^\infty dp\, (p^2-1)^{(D-1)/2-\alpha}e^{-\sqrt{8 d^2s}p}
+  \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}.
 \end{align}
-The $t$ integral has the value, $\Gamma[D-1]$.  
+After changing variables from $s$ to $t:=\sqrt{8d^2 s}\,p$, and swapping the $t$ and $p$ integrals, the result is
+\begin{align}
+  J % =4\int_1^\infty dp\, (p^2-1)^{(D-1)/2-\alpha} \int_0^\infty dt\, \frac{2t}{8d^2p^2}\left(\frac{t^2}{8d^2p^2}\right)^{D/2-1}e^{-t}
+  % \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}\\
+=\frac{1}{2^{3D/2-2}d^D}\int_1^\infty dp\,p^{-D} (p^2-1)^{(D-1)/2-\alpha} 
+  \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}\int_0^\infty dt\, t^{D-1}e^{-t}.\label{eq:J}
+\end{align}
+The $t$ integral has the value, $\Gamma[D]$.  
 Substituting the transformed integral~(\ref{eq:J}) back into the Casimir--Polder energy~(\ref{eq:VCP_TE_inter}), while setting $D=4$
 and $\alpha=3/2$ yields
 \begin{align}
-  V\subCP\supTE-V\subCP\sup0=&-\frac{3\hbar c\alpha_0}{32\epsilon_0\pi^{2}d^4}
-  \int_1^\infty dv\,\frac{1}{2v^4} \frac{\sqrt{v^2+\chi}-v}{\sqrt{v^2+\chi}+v}.
+  V\subCP\supTE-V\subCP\sup0
+% =\,&-\frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}
+% \frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma\left[(D+1)/2-\alpha\right]}\frac{\Gamma[D]}{2^{3D/2-2}d^D}\int_1^\infty dp\,p^{-D} (p^2-1)^{(D-1)/2-\alpha} 
+%   \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}\\
+% =\,&-\frac{\hbar c\alpha_0}{2^{2D-2} \pi^{D/2}\epsilon_0d^D}
+% \frac{\sqrt{\pi}6}{(\sqrt{\pi}/2}\int_1^\infty dp\,p^{-D} (p^2-1)^{(D-1)/2-\alpha} 
+%   \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}\\
+=\,&-\frac{3\hbar c\alpha_0}{32\epsilon_0\pi^{2}d^4}
+  \int_1^\infty dp\,\frac{1}{2p^4} \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}.
 \end{align}
 The prefactor is the Casimir--Polder energy for an atom above a perfect conductor~(\ref{eq:CP_conductor}).
 This result agrees with the known result for the TE contribution to the Casimir--Polder energy~(
-(see Eq. 14.210 in \S 14.3 of Steck~\cite{SteckNotes}).
+[see Eq.~(14.210) in \S 14.3 of Steck~\cite{SteckNotes}].
 An ``efficiency'' $\eta\subTE$ can be defined by dividing the Casimir--Polder energy for an atom 
 and a dielectric by the Casimir--Polder energy between an atom and a perfect conductor.  
-The integral over $v$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
+The integral over $p$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
  evaluated in closed form
 \begin{align}
-\eta\subTE(\chi)=\,&\frac{1}{2}\int_{1}^\infty dv\,v^{-4}\frac{v-\sqrt{v^2+\chi}}{v+\sqrt{v^2+\chi  }}\nonumber \\
+\eta\subTE(\chi)=\,&\frac{1}{2}\int_{1}^\infty dp\,p^{-4}\frac{p-\sqrt{p^2+\chi}}{p+\sqrt{p^2+\chi  }}\nonumber \\
 =\,&\frac{1}{3}+\frac{2}{\chi}- \frac{\sqrt{\chi  (\chi +1)}}{\chi^{3/2}}
 -\frac{1}{4\chi^{3/2}}\log \left[2 \chi +2 \sqrt{\chi  (\chi+1)}+1\right]
 -\frac{\text{arcsinh}\left(\sqrt{\chi }\right)}{2\chi^{3/2}}.
@@ -358,7 +365,7 @@ The calculation for the TM Casimir--Polder energy proceeds in a similar fashion 
 The renormalized TM Casimir--Polder energy can be split into two pieces 
 \begin{align}
   V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}
-  \bigg(\cV_{D/2,3/2}-\frac{1}{2}\nabla^2\cV_{(D-2)/2,1/2}\bigg),\label{eq:TM_CP_inter}
+  \bigg(\cV_{D,3/2}-\frac{1}{2}\nabla^2\cV_{(D-2),1/2}\bigg),\label{eq:TM_CP_inter}
 \end{align}
 where 
 \begin{equation}
@@ -369,7 +376,7 @@ where
 Each term $\cV_{\nu,\alpha}$ can in turn be transformed using the combination of the Laplace-Mellin theorem
 and the inverse moment theorem.  
 \begin{align}
-  \cV_{\nu,\alpha}:=\,&\frac{1}{\Gamma[\alpha]\Gamma[\nu-\alpha+1/2]}\int_0^\infty d\lambda\,\lambda^{\nu-1/2-\alpha}
+  \cV_{\nu,\alpha}:=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
   \int_0^\infty ds\,s^{\alpha-1}\nonumber\\
   &\times\int_0^\infty d\cT \frac{e^{-(\lambda+s)\cT}}{\sqrt{\cT}}
   \Bigdlangle e^{-\int_0^\cT dt\,[V\subTM(\vect{x}) + s\chi(\vect{x)]}}-1  \Bigdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\label{eq:TM_subpart}.
@@ -377,19 +384,38 @@ and the inverse moment theorem.
 Note that the TM-potential is already in the exponential, so the TM potential and $\Xi$ does not need to be rescaled by $s$. 
 In this sense $\Xi$ is an independent parameter from $\chi$. 
 The analytical result~(\ref{eq:Feynman-Kac TM one step}) can be substituted into Eq.~(\ref{eq:TM_subpart}),
-and the integral can be transformed in the same manner as in Sec.~\ref{sec:TE_CP}, 
+and the integral can be transformed in the same manner as in Section~\ref{sec:TE_CP}, 
 \begin{align}
-  \cV_{\nu,\alpha}% =&\frac{(-1)\sqrt{2\pi}}{\Gamma[\alpha]\Gamma[z-\alpha+1/2]}\int_0^\infty d\lambda\,\lambda^{z-1/2-\alpha}
-=\,&-\frac{\sqrt{\pi}\Gamma[2\nu ]}{8^\nu d^{2\nu }\Gamma[\alpha]\Gamma[\nu -\alpha+1/2]}\int_1^\infty dv\,\frac{1}{v^{2\nu }}(v^2-1)^{\nu -1/2-\alpha}
-  \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}}.
+  \cV_{\nu,\alpha}=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
+  \int_0^\infty ds\,s^{\alpha-1}  \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} r\subTM\\
+%
+% =\,&\frac{1}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{\alpha-1} \int_1^\infty dp\,2sp s^{(\nu-1)/2-\alpha}(p^2-1)^{(\nu-1)/2-\alpha}
+%  \frac{e^{-\sqrt{8sd^2}p}}{\sqrt{s}p} % r\subTM\\
+% =\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
+%  e^{-\sqrt{8sd^2}p}r\subTM\\
+=\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty dt\,
+\left(\frac{2t}{2^3 d^2p^2}\right)\left(\frac{t^2}{8 d^2p^2}\right)^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
+ e^{-t}r\subTM\\
+=\,&\frac{\sqrt{\pi}\Gamma[\nu]}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]2^{3(\nu-2)/2+1} d^{\nu}}
+\int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha} p^{-\nu}
+r\subTM\\
+%
+% =&\frac{(-1)\sqrt{2\pi}}{\Gamma[\alpha]\Gamma[z-\alpha+1/2]}\int_0^\infty d\lambda\,\lambda^{z-1/2-\alpha}
 \end{align}
-The two cases of interest are for $\nu =2,\alpha=3/2$ and $\nu =1,\alpha=1/2$.
+
+
 \begin{align}
-\cV_{2,3/2} %=&-\frac{\sqrt{\pi}\Gamma(4)}{8^{2}d^{4}\frac{\sqrt{\pi}}{2}\Gamma(1)}\int_1^\infty dv\,\frac{1}{v^{4}}(v^2-1)^{2-1/2-3/2}
-  % \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}}.
-=\,&-\frac{6}{32d^{4}}\int_1^\infty dv\,\frac{1}{v^{4}}\frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}},\\
-\cV_{1,1/2}=\,&-\frac{1}{8d^{2}}\int_1^\infty dv\,\frac{1}{v^{2}}
-  \frac{ ve^{2\Xi}-\sqrt{v^2+\chi}} {v e^{2\Xi}+\sqrt{v^2+\chi}}.
+  \cV_{\nu,\alpha}  =\,&-\frac{\sqrt{\pi}\Gamma[\nu]}{2^{3\nu/2+2} d^{\nu }\Gamma[\alpha]\Gamma[(\nu+1)/2 -\alpha]}
+  \int_1^\infty dp\,\frac{1}{p^{\nu }}(p^2-1)^{(\nu -1)/2-\alpha}
+  \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
+\end{align}
+The two cases of interest are for $\nu =4, \alpha=3/2$ and $\nu =2,\alpha=1/2$.
+\begin{align}
+\cV_{2,3/2} %=&-\frac{\sqrt{\pi}\Gamma(4)}{8^{2}d^{4}\frac{\sqrt{\pi}}{2}\Gamma(1)}\int_1^\infty dp\,\frac{1}{p^{4}}(p^2-1)^{2-1/2-3/2}
+  % \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
+=\,&-\frac{6}{32d^{4}}\int_1^\infty dp\,\frac{1}{p^{4}}\frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}},\\
+\cV_{1,1/2}=\,&-\frac{1}{8d^{2}}\int_1^\infty dp\,\frac{1}{p^{2}}
+  \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
 \end{align}
 In Eq.~(\ref{eq:TM_CP_inter}), the derivatives with respect to the starting position $\rA$ 
 are equivalent to derivatives with respect to the distance $d$, and can be straightforwardly
@@ -397,14 +423,14 @@ evaluated.
 After substituting this back into the atom-surface energy~(\ref{eq:TM_CP_inter}), the TM Casimir--Polder energy is given by 
 \begin{align}
   V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\frac{1}{2}
-  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}},\label{eq:TM_CP}
+  \int_1^\infty dp\,p^{-4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}},\label{eq:TM_CP}
 \end{align}
 where we used $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
 for an atom near a dielectric half-space [Eq.~(14.205) in Steck~\cite{SteckNotes}].
 The TM efficiency $\eta\subTM$ also has a closed-form solution, 
 \begin{align}
   \eta\subTM(\chi):=\,&\frac{1}{2}
-  \int_1^\infty dv\,v^{-4}(1-2v^2)  \frac{ v(1+\chi)-\sqrt{v^2+\chi}}{v(1+\chi)+\sqrt{v^2+\chi}}\nonumber\\
+  \int_1^\infty dp\,p^{-4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}}\nonumber\\
   =\,& \frac{7}{6} + \chi + \frac{2 - (1+\chi)^{3/2}}{2\chi} 
   - \frac{\text{arcsinh}\sqrt{\chi}}{2\chi^{3/2}}[1 + \chi + 2\chi^2(1 + \chi)] \nonumber\\ 
   &+ \frac{(1+\chi)^2}{\sqrt{2+\chi}}\left[\text{arcsinh}\sqrt{1+\chi} - \text{arcsinh}\left(\frac{1}{\sqrt{1+\chi}}\right)\right],
@@ -479,47 +505,47 @@ The fully renormalized Casimir energy between two planes is
   \end{equation}
   In order to recover a finite quantity it is necessary to calculate the energy per unit area.  
   The integrals can be transformed into Lifshitz form via similar transformations to those used previously.
-  The integration variable $\lambda$ is transformed to $v:=\sqrt{\lambda/s+1}$, with the result % [or $\lambda=s(v^2-1)$]
+  The integration variable $\lambda$ is transformed to $p:=\sqrt{\lambda/s+1}$, with the result % [or $\lambda=s(p^2-1)$]
   \begin{align}
     \frac{E\subTE-E\sup0}{A} &= -\frac{\hbar c}{(2\pi)^{D/2}}\sqrt{\pi}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
-  \int_1^\infty dv\, \frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
-  &\times\frac{r\supTE_1r\supTE_2e^{-2\sqrt{2s}vd}}{(1-r\supTE_1r\supTE_2 e^{-2\sqrt{2s}vd})}
-\left(2d + \frac{\sqrt{2}}{\sqrt{s}\sqrt{v^2+\chi_1}}+\frac{\sqrt{2}}{\sqrt{s}{v^2+\chi_2}}\right),
+  \int_1^\infty dp\, \frac{(p^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
+  &\times\frac{r\supTE_1r\supTE_2e^{-2\sqrt{2s}pd}}{(1-r\supTE_1r\supTE_2 e^{-2\sqrt{2s}pd})}
+\left(2d + \frac{\sqrt{2}}{\sqrt{s(p^2+\chi_1)}}+\frac{\sqrt{2}}{\sqrt{s(p^2+\chi_2)}}\right),
   \end{align}
   where the reflection coefficients are now given by 
   \begin{equation}
-    r\supTE_i = \frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}.
+    r\supTE_i = \frac{p-\sqrt{p^2+\chi_i}}{p+\sqrt{p^2+\chi_i}}.
   \end{equation}
-  Next, the $s$ integral is transformed $s$ to $t=\sqrt{2s}$, then the $t$ and $v$ integrals are swapped, and  
+  Next, the $s$ integral is transformed $s$ to $t=\sqrt{2s}$, then the $t$ and $p$ integrals are swapped, and  
   finally the values of $\alpha=1/2$ and $D=4$ are used. The result of those manipulations is
   \begin{align}
      \frac{E\subTE-E\sup0}{A}
-    &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{D-1}  \int_1^\infty dv\, (v^2-1)\nonumber\\
-    &\times\frac{r\supTE_1r\supTE_2e^{-2tvd}}{(1-r\supTE_1r\supTE_2 e^{-2tvd})}
-    \left(2d + \frac{2}{t\sqrt{v^2+\chi_1}}+\frac{2}{t\sqrt{v^2+\chi_2}}\right).
+    &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{D-1}  \int_1^\infty dp\, (p^2-1)\nonumber\\
+    &\times\frac{r\supTE_1r\supTE_2e^{-2tpd}}{(1-r\supTE_1r\supTE_2 e^{-2tpd})}
+    \left(2d + \frac{2}{t\sqrt{p^2+\chi_1}}+\frac{2}{t\sqrt{p^2+\chi_2}}\right).
   \end{align}
-Finally, the integral can be simplified by integrating by parts with respect to $v$.
+Finally, the integral can be simplified by integrating by parts with respect to $p$.
 The following derivatives will be of use:
 \begin{align}
-  \frac{d r\supTE_i}{dv} &= \frac{d}{dv}\frac{v-\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
-    % &= \frac{1-v/\sqrt{v^2+\chi_i}}{v+\sqrt{v^2+\chi_i}}
-    %   - \frac{(v-\sqrt{v^2+\chi_i})(1+v/\sqrt{v^2+\chi_i})}{(v+\sqrt{v^2+\chi_i})^2}\\
-    % &= \frac{\sqrt{v^2+\chi_i}-v}{\sqrt{v^2+\chi_i}(v+\sqrt{v^2+\chi_i})}
-    %   - \frac{(v-\sqrt{v^2+\chi_i})(\sqrt{v^2+\chi_i}+v)}{\sqrt{v^2+\chi_i}(v+\sqrt{v^2+\chi_i})^2}\\
-    = \frac{-2r\supTE_i}{\sqrt{v^2+\chi_i}}\\
-    \frac{d}{dv}\log[1-r\supTE_1r\supTE_2 e^{-2 t v d}] & = 
-    \frac{r\supTE_1r\supTE_2 e^{-2 t v d}}{1-r\supTE_1r\supTE_2 e^{-2 t v d}}\left( 2 t d+\frac{2}{\sqrt{v^2+\chi_1}}
-+\frac{2}{\sqrt{v^2+\chi_2}}\right).
+  \frac{d r\supTE_i}{dp} &= \frac{d}{dp}\frac{p-\sqrt{p^2+\chi_i}}{p+\sqrt{p^2+\chi_i}}
+    % &= \frac{1-p/\sqrt{p^2+\chi_i}}{p+\sqrt{p^2+\chi_i}}
+    %   - \frac{(p-\sqrt{p^2+\chi_i})(1+p/\sqrt{p^2+\chi_i})}{(p+\sqrt{p^2+\chi_i})^2}\\
+    % &= \frac{\sqrt{p^2+\chi_i}-p}{\sqrt{p^2+\chi_i}(p+\sqrt{p^2+\chi_i})}
+    %   - \frac{(p-\sqrt{p^2+\chi_i})(\sqrt{p^2+\chi_i}+p)}{\sqrt{p^2+\chi_i}(p+\sqrt{p^2+\chi_i})^2}\\
+    = \frac{-2r\supTE_i}{\sqrt{p^2+\chi_i}}\\
+    \frac{d}{dp}\log[1-r\supTE_1r\supTE_2 e^{-2 t p d}] & = 
+    \frac{r\supTE_1r\supTE_2 e^{-2 t p d}}{1-r\supTE_1r\supTE_2 e^{-2 t p d}}\left( 2 t d+\frac{2}{\sqrt{p^2+\chi_1}}
++\frac{2}{\sqrt{p^2+\chi_2}}\right).
 \end{align}
 The TE Casimir energy between two half-spaces is then 
 \begin{align}
     \frac{E\subTE-E\sup0}{A}
-  &= -\frac{\hbar c}{8\pi^2}\int_0^\infty dt \,t^{3}  \int_1^\infty dv\, (v^2-1) 
-  \frac{d}{dv}\bigg[\frac{1}{t}\log(1-r\supTE_1r\supTE_2 e^{-2tvd})\bigg]\nonumber\\
-  &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dv\, v \log(1-r\supTE_1r\supTE_2 e^{-2tvd}),
+  &= -\frac{\hbar c}{8\pi^2}\int_0^\infty dt \,t^{3}  \int_1^\infty dp\, (p^2-1) 
+  \frac{d}{dp}\bigg[\frac{1}{t}\log(1-r\supTE_1r\supTE_2 e^{-2tpd})\bigg]\nonumber\\
+  &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dp\, p \log(1-r\supTE_1r\supTE_2 e^{-2tpd}),
 \end{align}
 since the boundary term from the integration by parts vanishes.  
-This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in Sec.~\ref{sec:lifshitz}.
+This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in Section~\ref{sec:lifshitz}.
 In this derivation, the gap between the spaces was filled with vacuum~$(\epsilon_3=1)$.  
 The TE Casimir energy per unit area can be written as 
 \begin{equation}
@@ -527,7 +553,7 @@ The TE Casimir energy per unit area can be written as
 \end{equation}
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTE$ is
 \begin{equation}
-  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-r\supTE_1r\supTE_2 e^{-2tvd}].
+  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTE_1r\supTE_2 e^{-2tpd}].
   \label{eq:gammaTE}
 \end{equation}
 The efficiency is the ratio of the TE Casimir energy between the dielectrics to the total Casimir energy
@@ -581,45 +607,45 @@ where the integral over the transverse coordinates introduced the area $A$, and 
 \begin{equation}
   r\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{e^{2\Xi_i}\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
 \end{equation}
-The same transformations as in Sec.~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
-After changing integration variables from $\lambda$ to $v:=\sqrt{\lambda/s+1}$, the result is 
+The same transformations as in Section~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
+After changing integration variables from $\lambda$ to $p:=\sqrt{\lambda/s+1}$, the result is 
   \begin{align}
   E\subTM-E\sup0 % &= -\frac{\hbar cA}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
 &= -\frac{\hbar cA}{(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{(D-2)/2}}{\Gamma(\alpha)}
-  \int_1^\infty dv\,\frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
+  \int_1^\infty dp\,\frac{(p^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
   &\hspace{0.5cm}
-\times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2\sqrt{2s}vd}}{(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2s}vd})}
+\times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2\sqrt{2s}pd}}{(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2s}pd})}
 %\nonumber\\  &\hspace{0.5cm}\times
 \bigg[2d
-  -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}\chi_i}{\sqrt{s}\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
+  -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}\chi_i}{\sqrt{s}\sqrt{p^2+\chi_i}[p^2\,e^{4\Xi_i}-p^2-\chi_i]}
  \bigg],
   \end{align}
 where the reflection coefficients are now given by 
 \begin{equation}
-  r\supTM_i =  \frac{e^{2\Xi_i}v-\sqrt{v^2+\chi_i}}{e^{2\Xi_i}v+\sqrt{v+\chi_i}}.
+  r\supTM_i =  \frac{e^{2\Xi_i}p-\sqrt{p^2+\chi_i}}{e^{2\Xi_i}p+\sqrt{p^2+\chi_i}}.
 \end{equation}
  The $s$ integral can be transformed using $t=\sqrt{2s}$, and the values for $\alpha=1/2$ and $D=4$ can
 be used, with the result
   \begin{align}
   E\subTM-E\sup0 
 %   &= -\frac{\hbar cA}{(2\pi)^{D/2}}\int_0^\infty dt\,\frac{t^{D-1}}{2^{(D-2)/2}\Gamma(\alpha)}
-%   \int_1^\infty dv\,\frac{(v^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
+%   \int_1^\infty dp\,\frac{(p^2-1)^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
 %   &\hspace{0.5cm}
-% \times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2tvd}}{(1-r\supTM_1r\supTM_2 e^{-2tvd})}
+% \times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2tpd}}{(1-r\supTM_1r\supTM_2 e^{-2tpd})}
 % %\nonumber\\  &\hspace{0.5cm}\times
 % \bigg[2d
-%   -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
+%   -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{p^2+\chi_i}[p^2\,e^{4\Xi_i}-p^2-\chi_i]}
 %  \bigg]
   &= -\frac{\hbar cA}{16\pi^{2}}\int_0^\infty dt\,t^{3}
-  \int_1^\infty dv\,(v^2-1)\nonumber\\
+  \int_1^\infty dp\,(p^2-1)\nonumber\\
   &\hspace{0.5cm}
-\times\frac{\,r\supTM_1r\supTM_2e^{-2tvd}}{(1-r\supTM_1r\supTM_2 e^{-2tvd})}
+\times\frac{\,r\supTM_1r\supTM_2e^{-2tpd}}{(1-r\supTM_1r\supTM_2 e^{-2tpd})}
 %\nonumber\\  &\hspace{0.5cm}\times
 \bigg[2d
-  -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{v^2+\chi_i}[v^2\,e^{4\Xi_i}-v^2-\chi_i]}
+  -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{p^2+\chi_i}[p^2\,e^{4\Xi_i}-p^2-\chi_i]}
  \bigg].
   \end{align}
-Once again, an integration by parts with respect to $v$ will put the energy in standard form. The following
+Once again, an integration by parts with respect to $p$ will put the energy in standard form. The following
 derivatives will be required:
 \begin{align}
   \frac{d}{dp}\log[1-r\supTM_1r\supTM_2 e^{-2ptd}] 
@@ -631,7 +657,7 @@ After integrating by parts, the TM Casimir energy is
   \begin{align}
   E\subTM-E\sup0 
   &= \frac{\hbar cA}{8\pi^2}\int_0^\infty dt\,t^{2}
-  \int_1^\infty dv\,\log[1-r\supTM_1r\supTM_2 e^{-2tvd}].
+  \int_1^\infty dp\,\log[1-r\supTM_1r\supTM_2 e^{-2tpd}].
   \end{align}
 The TM Casimir energy per unit area can be written as 
 \begin{equation}
@@ -639,9 +665,11 @@ The TM Casimir energy per unit area can be written as
 \end{equation}
 where the prefactor is the perfect-conductor Casimir energy, and the efficiency $\gamma\subTM$ is
 \begin{equation}
-  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dv\,\log[1-r\supTM_1r\supTM_2 e^{-2tvd}].
+  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTM_1r\supTM_2 e^{-2tpd}].
   \label{eq:gammaTM}
 \end{equation}
+This result has the same form as the corresponding TE result~(\ref{eq:gammaTE}), but with the TE reflection coefficients
+replaced by their TM counterparts.
 At the end of the computation the relation $e^{2\Xi_i}=(1+\chi_i)$ can be used in the reflection coefficients.
 Similarly to the TE case, $\gamma\subTM$ increases monotonically between $0$ and $1/2$ as both $\chi_1$ and $\chi_2$ 
 increase from $0$ to $\infty$.  Despite the TE and TM polarizations having equal contributions to the 
@@ -673,7 +701,7 @@ The free energy for the TE and TM polarizations (for non-magnetic media) is
 e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle_{\vect{x}(t)},
 \end{align}
 where we have suppressed renormalization terms.  
-The Casimir--Polder energies can be derived by the same reasoning used in Sec.~\ref{sec:casimir-polder_worldline},
+The Casimir--Polder energies can be derived by the same reasoning used in Section~\ref{sec:casimir-polder_worldline},
 extending the energies~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) to nonzero temperature.
 In this case, the results are 
 \begin{align}
@@ -728,7 +756,7 @@ diverges.  As a result, only the first term significantly contributes.
 \end{equation}
 Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
 similarly dominant at small distances at zero temperature.
-As noted at the end of Sec.~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
+As noted at the end of Section~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
 be recovered by replacing the Matsubara sum with a frequency integral.  In a similar fashion,
  Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) can be recovered from Eqs.~(\ref{eq:TE_CP_thermal})
  and (\ref{eq:TE_CP_thermal}).

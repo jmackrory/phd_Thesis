@@ -342,8 +342,8 @@ and $\alpha=3/2$ yields
   \int_1^\infty dp\,\frac{1}{2p^4} \frac{\sqrt{p^2+\chi}-p}{\sqrt{p^2+\chi}+p}.
 \end{align}
 The prefactor is the Casimir--Polder energy for an atom above a perfect conductor~(\ref{eq:CP_conductor}).
-This result agrees with the known result for the TE contribution to the Casimir--Polder energy~(
-[see Eq.~(14.210) in \S 14.3 of Steck~\cite{SteckNotes}].
+This result agrees with the known result for the TE contribution to the Casimir--Polder energy~[
+see Eq.~(14.210) in \S 14.3 of Steck~\cite{SteckNotes}\,].
 An ``efficiency'' $\eta\subTE$ can be defined by dividing the Casimir--Polder energy for an atom 
 and a dielectric by the Casimir--Polder energy between an atom and a perfect conductor.  
 The integral over $p$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
@@ -385,27 +385,25 @@ Note that the TM-potential is already in the exponential, so the TM potential an
 In this sense $\Xi$ is an independent parameter from $\chi$. 
 The analytical result~(\ref{eq:Feynman-Kac TM one step}) can be substituted into Eq.~(\ref{eq:TM_subpart}),
 and the integral can be transformed in the same manner as in Section~\ref{sec:TE_CP}, 
-\begin{align}
-  \cV_{\nu,\alpha}=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
-  \int_0^\infty ds\,s^{\alpha-1}  \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} r\subTM\\
-%
-% =\,&\frac{1}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{\alpha-1} \int_1^\infty dp\,2sp s^{(\nu-1)/2-\alpha}(p^2-1)^{(\nu-1)/2-\alpha}
-%  \frac{e^{-\sqrt{8sd^2}p}}{\sqrt{s}p} % r\subTM\\
-% =\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
-%  e^{-\sqrt{8sd^2}p}r\subTM\\
-=\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty dt\,
-\left(\frac{2t}{2^3 d^2p^2}\right)\left(\frac{t^2}{8 d^2p^2}\right)^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
- e^{-t}r\subTM\\
-=\,&\frac{\sqrt{\pi}\Gamma[\nu]}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]2^{3(\nu-2)/2+1} d^{\nu}}
-\int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha} p^{-\nu}
-r\subTM\\
+% \begin{align}
+%   \cV_{\nu,\alpha}=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
+%   \int_0^\infty ds\,s^{\alpha-1}  \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} r\subTM\\
+% %
+% % =\,&\frac{1}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{\alpha-1} \int_1^\infty dp\,2sp s^{(\nu-1)/2-\alpha}(p^2-1)^{(\nu-1)/2-\alpha}
+% %  \frac{e^{-\sqrt{8sd^2}p}}{\sqrt{s}p} % r\subTM\\
+% % =\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty ds\,s^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
+% %  e^{-\sqrt{8sd^2}p}r\subTM\\
+% =\,&\frac{2}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty dt\,
+% \left(\frac{2t}{2^3 d^2p^2}\right)\left(\frac{t^2}{8 d^2p^2}\right)^{(\nu-2)/2} \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha}
+%  e^{-t}r\subTM\\
+% =\,&\frac{\sqrt{\pi}\Gamma[\nu]}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]2^{3(\nu-2)/2+1} d^{\nu}}
+% \int_1^\infty dp\,(p^2-1)^{(\nu-1)/2-\alpha} p^{-\nu}
+% r\subTM\\
 %
 % =&\frac{(-1)\sqrt{2\pi}}{\Gamma[\alpha]\Gamma[z-\alpha+1/2]}\int_0^\infty d\lambda\,\lambda^{z-1/2-\alpha}
-\end{align}
-
-
+%\end{align}
 \begin{align}
-  \cV_{\nu,\alpha}  =\,&-\frac{\sqrt{\pi}\Gamma[\nu]}{2^{3\nu/2+2} d^{\nu }\Gamma[\alpha]\Gamma[(\nu+1)/2 -\alpha]}
+  \cV_{\nu,\alpha}  =\,&-\frac{\sqrt{\pi}\Gamma[\nu]}{2^{3\nu/2-2} d^{\nu }\Gamma[\alpha]\Gamma[(\nu+1)/2 -\alpha]}
   \int_1^\infty dp\,\frac{1}{p^{\nu }}(p^2-1)^{(\nu -1)/2-\alpha}
   \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
 \end{align}
@@ -413,8 +411,8 @@ The two cases of interest are for $\nu =4, \alpha=3/2$ and $\nu =2,\alpha=1/2$.
 \begin{align}
 \cV_{2,3/2} %=&-\frac{\sqrt{\pi}\Gamma(4)}{8^{2}d^{4}\frac{\sqrt{\pi}}{2}\Gamma(1)}\int_1^\infty dp\,\frac{1}{p^{4}}(p^2-1)^{2-1/2-3/2}
   % \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
-=\,&-\frac{6}{32d^{4}}\int_1^\infty dp\,\frac{1}{p^{4}}\frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}},\\
-\cV_{1,1/2}=\,&-\frac{1}{8d^{2}}\int_1^\infty dp\,\frac{1}{p^{2}}
+=\,&-\frac{3}{4d^{4}}\int_1^\infty dp\,\frac{1}{p^{4}}\frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}},\\
+\cV_{1,1/2}=\,&-\frac{1}{2d^{2}}\int_1^\infty dp\,\frac{1}{p^{2}}
   \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
 \end{align}
 In Eq.~(\ref{eq:TM_CP_inter}), the derivatives with respect to the starting position $\rA$ 
@@ -422,11 +420,11 @@ are equivalent to derivatives with respect to the distance $d$, and can be strai
 evaluated.  
 After substituting this back into the atom-surface energy~(\ref{eq:TM_CP_inter}), the TM Casimir--Polder energy is given by 
 \begin{align}
-  V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}\frac{1}{2}
-  \int_1^\infty dp\,p^{-4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}},\label{eq:TM_CP}
+  V\supTM\subCP(\vect{\rA})-V\subCP\sup0 &= -\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0d^4}
+  \int_1^\infty dp\,\frac{1}{2p^4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}},\label{eq:TM_CP}
 \end{align}
 where we used $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
-for an atom near a dielectric half-space [Eq.~(14.205) in Steck~\cite{SteckNotes}].
+for an atom near a dielectric half-space [Eq.~(14.205) in Steck~\cite{SteckNotes}\,].
 The TM efficiency $\eta\subTM$ also has a closed-form solution, 
 \begin{align}
   \eta\subTM(\chi):=\,&\frac{1}{2}
@@ -520,7 +518,7 @@ The fully renormalized Casimir energy between two planes is
   finally the values of $\alpha=1/2$ and $D=4$ are used. The result of those manipulations is
   \begin{align}
      \frac{E\subTE-E\sup0}{A}
-    &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{D-1}  \int_1^\infty dp\, (p^2-1)\nonumber\\
+    &= -\frac{\hbar c}{8\pi^{2}}\int_0^\infty dt \,t^{3}  \int_1^\infty dp\, (p^2-1)\nonumber\\
     &\times\frac{r\supTE_1r\supTE_2e^{-2tpd}}{(1-r\supTE_1r\supTE_2 e^{-2tpd})}
     \left(2d + \frac{2}{t\sqrt{p^2+\chi_1}}+\frac{2}{t\sqrt{p^2+\chi_2}}\right).
   \end{align}
@@ -553,7 +551,7 @@ The TE Casimir energy per unit area can be written as
 \end{equation}
 where the prefactor is the perfect conductor Casimir energy, and the ``efficiency'' $\gamma\subTE$ is
 \begin{equation}
-  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTE_1r\supTE_2 e^{-2tpd}].
+  \gamma\subTE(\chi_1,\chi_2):=-\frac{180}{\pi^4d^3}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTE_1r\supTE_2 e^{-2tpd}].
   \label{eq:gammaTE}
 \end{equation}
 The efficiency is the ratio of the TE Casimir energy between the dielectrics to the total Casimir energy
@@ -636,7 +634,7 @@ be used, with the result
 % \bigg[2d
 %   -\sum_{i=1}^2\frac{2e^{2\Xi_i}\chi_i}{t\sqrt{p^2+\chi_i}[p^2\,e^{4\Xi_i}-p^2-\chi_i]}
 %  \bigg]
-  &= -\frac{\hbar cA}{16\pi^{2}}\int_0^\infty dt\,t^{3}
+  &= -\frac{\hbar cA}{4\pi^{2}}\int_0^\infty dt\,t^{3}
   \int_1^\infty dp\,(p^2-1)\nonumber\\
   &\hspace{0.5cm}
 \times\frac{\,r\supTM_1r\supTM_2e^{-2tpd}}{(1-r\supTM_1r\supTM_2 e^{-2tpd})}
@@ -656,7 +654,7 @@ derivatives will be required:
 After integrating by parts, the TM Casimir energy is 
   \begin{align}
   E\subTM-E\sup0 
-  &= \frac{\hbar cA}{8\pi^2}\int_0^\infty dt\,t^{2}
+  &= \frac{\hbar cA}{4\pi^2}\int_0^\infty dt\,t^{2}
   \int_1^\infty dp\,\log[1-r\supTM_1r\supTM_2 e^{-2tpd}].
   \end{align}
 The TM Casimir energy per unit area can be written as 
@@ -665,7 +663,7 @@ The TM Casimir energy per unit area can be written as
 \end{equation}
 where the prefactor is the perfect-conductor Casimir energy, and the efficiency $\gamma\subTM$ is
 \begin{equation}
-  \gamma\subTM(\chi_1,\chi_2):=-\frac{180}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTM_1r\supTM_2 e^{-2tpd}].
+  \gamma\subTM(\chi_1,\chi_2):=-\frac{180d^3}{\pi^4}\int_0^\infty dt\,t^{2} \int_1^\infty dp\,\log[1-r\supTM_1r\supTM_2 e^{-2tpd}].
   \label{eq:gammaTM}
 \end{equation}
 This result has the same form as the corresponding TE result~(\ref{eq:gammaTE}), but with the TE reflection coefficients
@@ -933,7 +931,8 @@ V\supTM\subCP-V_0&\approx \frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega
 &\approx -\frac{\hbar }{16\pi^2\epsilon_0 d^3}\int_0^\infty d\omega \,
 \alpha(i\omega)\frac{\epsr(i\omega)-1}{\epsr(i\omega)+1},
 \end{align}
-which is the well known result for the van der Waals energy for an atom near a dielectric wall~(see Eq. 14.199 of Steck~\cite{SteckNotes}).
+which is the well known result for the van der Waals energy for an atom near a dielectric wall~[
+see Eq.~(14.199) of Steck~\cite{SteckNotes}\,].
 
 \subsubsection{The High Temperature, Far Field Limit}
 
@@ -951,7 +950,7 @@ V\supTM\subCP-V_0=\,&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsr(0)-1}{\eps
 \int_0^\infty d\cT\,\partial_d^2\frac{1}{\sqrt{2\pi }\cT^{3/2}} e^{-2 d^2/\cT}\\
 =\,&-\frac{k_BT\alpha_0}{16\pi\epsilon_0d^3}\frac{\epsr(0)-1}{\epsr(0)+1}.
 \end{align}
-This is the expected high temperature result for an atom and a dielectric wall~[see Eq.~(14.324) of Steck~\cite{SteckNotes}].
+This is the expected high temperature result for an atom and a dielectric wall~[see Eq.~(14.324) of Steck~\cite{SteckNotes}\,].
 Although we have not examined the equivalent Casimir expressions, they could be readily evaluated. 
 As noted in Eq.~(\ref{eq:high_temp}), it is expected that the dominant contribution comes from the TM polarization,
 due to the TM potential.  

@@ -31,9 +31,9 @@ That is still true within the context of electromagnetic worldlines.
 All of the simulations are carried out for a non-dispersive media at zero temperature.
 At the end we will suggest how to generalize the calculations to include dispersion.  
 
-(The numerical results on the TE Casimir energies were published in Ref.~\cite{Mackrory2016}.
+[The numerical results on the TE Casimir energies were published as \citet{Mackrory2016}.
 A manuscript discussing the gradient estimations presented here and in the next chapter is in
-preparation, and the TM results and methods will also be published.)
+preparation, and the TM results and methods will also be published.]
 
 \section{TE Casimir Numerics}
 
@@ -66,7 +66,7 @@ It is of primary importance to be able to efficiently generate these Gaussian sa
 % The v-loop algorithm is derived by decoupling the product of $N$ Gaussian probability densities 
 % into $N-1$ independent Gaussian deviates.
 Since the numerical methods will require open and closed Brownian bridges of fixed length $N$, 
-we will derive the ``v-loop'' algorithm for generating open paths~\cite{Gies2003}.   
+we will derive the ``v-loop'' algorithm for generating open paths~\citep{Gies2003}.   
 For open paths the starting and end points $x_0$ and $x_N$ differ, while for closed paths $x_N=x_0$
 Consider a Gaussian density of $N$ steps in one dimension, where the end points $x_0$ and $x_N$ 
 are fixed:
@@ -143,11 +143,13 @@ and a shifted, scaled Brownian bridge can then be constructed as
 where $x_0$ is the shifted starting position of the path, and $\cT$ is the path time.
 
 The v-loop constructed here has an advantage over other methods of generating Brownian bridges, since it only needs to keep 
-track of the current position $x_k$ and index $k$ to develop a Brownian bridge.  Other methods such as pro-rated Brownian motion~(\ref{eq:prorate-loop})
-or ``d-loops'' (which start with a coarse path, and then refine it by doubling the number of points~\cite{Gies2005})
+track of the current position $x_k$ and index $k$ to develop a Brownian bridge.
+Other methods such as pro-rated Brownian motion~(\ref{eq:prorate-loop})
+or ``d-loops'' (which start with a coarse path, and then refine it by doubling the number of points~\citep{Gies2005})
 require knowledge of the whole Brownian motion.  
 
-The original v-loop algorithm used centered paths, where the average position $\langle x\rangle$ is subtracted from the path~\cite{Gies2003}.
+The original v-loop algorithm used centered paths, 
+where the average position $\langle x\rangle$ is subtracted from the path~\citep{Gies2003}.
 This requires first constructing the Brownian bridge, and then subtracting off the mean position.  
 This is inconvenient if the path is being generated on the fly 
 without storage, or if there are stochastic elements to path construction.  % However it is slightly 
@@ -161,13 +163,13 @@ the stress-energy tensor is being computed.
 
 To evaluate the Casimir energy it is necessary to take an ensemble average over many path realizations,
 at all starting positions $\vect{x}_0$ and path times $\cT$.  
-The original Gies\etal computations emphasized computing the $\cT$ and $\vect{x}_0$ integrals for each path~\cite{Gies2003}.
+The original \citet{Gies2003} computations emphasized computing the $\cT$ and $\vect{x}_0$ integrals for each path.
 For Dirichlet worldlines, the path integrand is either zero or one based on whether the path intersects
 all of the bodies.  This makes evaluating these integrals a tractable problem, since 
 it only requires finding the set of times $\{\cT_k\}$ when paths enter the body, and evaluating 
 $\int d\cT\,\cT^{-(1+D/2)}$ during those  times the integral is nonzero.
-For example, in their paper computing forces in a sphere-plane geometry, Weber and Gies found analytical
-expressions in terms of $\vect{x}_0$ and $\cT$ for when each random path will intersect both bodies~\cite{Weber2010}.
+For example, in their paper computing forces in a sphere-plane geometry, \citet{Weber2010} found analytical
+expressions in terms of $\vect{x}_0$ and $\cT$ for when each random path will intersect both bodies.
 The remaining integrals over $\vect{x}_0$ and $\cT$ were then evaluated on a path-wise basis.
 
 However, for the dielectric integrands of the TE and TM path integrals, 
@@ -180,7 +182,7 @@ Since the $N$-fold integral over positions is being handled in a Monte Carlo fas
 treat the remaining integrals over the starting position $\vect{x}_0$ and path times $\cT$ in the same manner.
 Each path can be evaluated for a single pair of $\vect{x}_0, \cT$ picked from suitable
 distributions.  This is a form of importance sampling, which 
-is a powerful tool for accelerating Monte Carlo numerical computations~\cite{Asmussen2007, Glasserman2004}.
+is a powerful tool for accelerating Monte Carlo numerical computations~\citep{Asmussen2007, Glasserman2004}.
 This style of importance sampling goes beyond just using the Gaussian probability density to evaluate the 
 spatial integrals over the intermediate positions $\vect{x}_k$.  In this case, the importance sampling
 relies on estimating which positions and times are likely to contribute the most to the integral. 
@@ -215,7 +217,7 @@ In computing Casimir interaction energies, the path must touch \emph{all} of the
 calculations, the path must touch \emph{any} of the bodies to contribute.  
 
 Samples from the distribution~(\ref{eq:Tpower_law}) can be generated by inverting the cumulative probability distribution.
-(Inversion is a general purpose method of generating random deviates from a given distribution~\cite{NumRecipe}.)
+(Inversion is a general purpose method of generating random deviates from a given distribution~\citep{NumRecipe}.)
 In this case, the inversion requires solving
 \begin{equation}
   u=(m-1) \cT_0^{m-1}\int_{\cT_0}^\cT dt\, t^{-m},\label{eq:Tsamp}
@@ -281,7 +283,7 @@ This corresponds to the trapezoidal rule for evaluating the path average,
   \approx \frac{\Delta \cT}{N}\sum_{k=0}^{N-1}\frac{\epsr(x_k)+\epsr(x_{k+1})}{2}=\frac{1}{N}\sum_{k=1}^N\epsr(x_k),\label{eq:trapezoid}
 \end{equation}
 where the trapezoidal rule $\int_a^b dx\,f(x)=(b-a)[f(a)+f(b)]/2$ was used for each time integral.
-As discussed in \S 5.C.3 of Ref.~\cite{Mackrory2016}, the trapezoidal rule outperforms some ``improved'' methods.  
+As discussed in \citet[\S 5.C.3]{Mackrory2016}, the trapezoidal rule outperforms some ``improved'' methods.  
 One alternative is to approximate the contribution from each path increment for a dielectric step as 
  \begin{equation}
    \frac{1}{\cT}\int_{k\Delta \cT}^{(k+1)\Delta\cT} dx\, \Theta[x(t)-d] 
@@ -427,7 +429,7 @@ the noise floor in Figures~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 As the path length $N$ increases for fixed $\chi$, the systematic error shows two different scaling behaviors.  
 In the weak-coupling limit $\chi/N\ll 1$, the error scales as $N^{-3/2}$, while in the strong-coupling limit
 $\chi/N\gg 1$, the error scales $N^{-1/2}$.  
-These behaviors are analyzed in Ref.~\cite{Mackrory2016}, 
+These behaviors are analyzed in \citet{Mackrory2016}, 
 but we will summarize the basic reasoning here.  The numerical computations use discrete paths, 
 while the path integral is only exact in the limit that $N$ is arbitrarily large.  The continuous paths considered by the path integral
 have arbitrarily fine structure, and always have a non-zero probability to touch the dielectric body.
@@ -623,7 +625,7 @@ If $\sgn(d-x_{k+1})>1$, then one of the Gaussians is picked based on their relat
 and a deviate is sampled from one of them.
 If however, $\sgn(d-x_{k+1})<1,$ then the rejection method is used to generate a deviate.
 In the rejection method, a deviate is sampled from a ``proposal'' distribution $P_1(x)$(such as one of the Gaussians),
-and accepted with a probability $P_2(x)/P_1(x)$, where  $P_2$ is the target distribution~\cite{NumRecipe}.
+and accepted with a probability $P_2(x)/P_1(x)$, where  $P_2$ is the target distribution~\citep{NumRecipe}.
 In the other cases, the truncated Gaussian distributions can be sampled quickly via the inverse error function.  
 
 While this method does improve performance, it still relies on taking a product of $N-1$ normalization factors $\cN_{k+1}$,
@@ -685,13 +687,13 @@ As a matter of nomenclature, it is worth distinguishing the birth-death process 
 using from the more popular birth-death process used in queuing theory.  In queuing theory, 
 the number of objects in a queue randomly increases and decreases at a fixed average rate.
 In our case, that rate depends on the past behavior of the system, and where it has gone.  
-The process used here is closer to the genealogical methods for evaluating path integrals discussed by Del Moral~\cite{DelMoral2004}.
-A similar genealogical idea has been used in quantum trajectory simulations~\cite{Jacobs2010a}, which is a
+The process used here is closer to the genealogical methods for evaluating path integrals~\citep{DelMoral2004}.
+A similar genealogical idea has been used in quantum trajectory simulations~\citep{Jacobs2010a}, which is a
 technique for simulating open quantum systems.  In that variant, each quantum state in an ensemble carries 
 a probability weight.  If that weight becomes too small, then that random trajectory is discarded,
 and another more successful trajectory is split in two, and given half the weight.   
 A similar method has been used to discuss simulating rare events, such as the extreme tails of a Gaussian.
-In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\cite{Glasserman1999,Garvels2000}.
+In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\citep{Glasserman1999,Garvels2000}.
 These methods essentially reward the trajectories or paths of the system that enter regions with a large
 contribution to the integral (or other figure of merit).  Thus more computational effort is spent in 
 regions with significant contributions to the result.  
@@ -780,11 +782,11 @@ has the form of a gamma distribution, which has probability density
 \begin{equation}
   f(x) = \frac{x^{a-1} e^{-x/b}}{\Gamma(a)b^a},  
 \end{equation}
-where $a>0$ and $b>0$ are the shape and scale parameters respectively~\cite{Devroye2003}.  
+where $a>0$ and $b>0$ are the shape and scale parameters respectively~\citep{Devroye2003}.  
 For small integer or half-integer powers $a$, there are some simple methods for generating 
 gamma deviates $g_i$.  
 A sum of gamma deviates $=\sum_{i=1}g_i$ with shape parameters $a_i$, is also a gamma deviate
-with shape parameter $\sum_i a_i$~(see pg. 402 of Devroye~\cite{Devroye2003}).  
+with shape parameter $\sum_i a_i$~\citep[pg. 402]{Devroye2003}.  
 A gamma deviate with shape parameter $a=1$ is an exponential deviate, which can in turn be recast as 
 $e_i=-\log(u)$ where $u$ is a uniform random number.  
 In particular, this means the sum of $n$ exponential deviates yields a gamma 
@@ -810,7 +812,7 @@ estimated energy.
 
 Computing the TM Casimir--Polder energy~(\ref{eq:TM_Casimir_Polder}), requires taking two spatial derivatives
 of the worldline path integral.
-Furthermore, in some experiments on the Casimir--Polder effect such as BEC experiments~\cite{Harber2005}, 
+Furthermore, in some experiments on the Casimir--Polder effect such as BEC experiments~\citep{Harber2005}, 
 the Casimir--Polder potential is estimated from how it shifts the frequency of the atom's oscillations
 in a harmonic potential.  This frequency shift is calculated by taking two derivatives of the Casimir--Polder
 potential, which corresponds to finding the potential curvature.  
@@ -844,8 +846,7 @@ at a dielectric step $\epsr=1+\chi\Theta(x-d)$.  The finite difference integrand
 \end{equation}
 where $\Delta s$ is the finite difference step size, $B_k$ is a closed unit Brownian bridge. 
 This estimate can be evaluated on a pathwise basis, in keeping with the suggestion that 
-using common random numbers yields the best results for finite differences (as discussed in \S7.2A of Asmussen
-and Glynn~\cite{Asmussen2007}).
+using common random numbers yields the best results for finite differences (as discussed in ~\citet[\S7.2A]{Asmussen2007}).
 In order to be accurate, the step size $\Delta s$ must be small, since the error in this approximation 
 to the derivative is $\order(\Delta s)$.
 Unfortunately, that limit leads to large statistical uncertainty.
@@ -867,18 +868,19 @@ of birth-death paths may be generated, which further compounds the fluctuation p
 
 \subsubsection{Malliavin Calculus}
 Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
-product to variations its underlying parameters must be estimated~\cite{Glasserman2004}.  
+product to variations its underlying parameters must be estimated~\citep{Glasserman2004}.  
 Since financial simulations also typically involved averages over stochastic processes, similar problems emerge
 when trying to estimate derivatives with finite differences.
 One approach with a number of appealing properties is based on the Malliavin calculus, which 
-is formally discussed in Ref.~\cite{Nualart2006, Malliavin2006, DiNunno2009}.
-Less formal (and far more understandable) discussions of the Malliavin approach are presented in Refs.~\cite{Chen2007,Kohatsu-Higa2003,Kohatsu-Higa2004}.
+is formally discussed by \citet{Nualart2006, Malliavin2006, DiNunno2009}.
+Less formal (and far more understandable) discussions of the Malliavin approach are presented in 
+\citet{Chen2007,Kohatsu-Higa2003,Kohatsu-Higa2004}.
 In this approach, the derivative can be estimated by multiplying the integrand by
 a suitably chosen weight function, which depends on the nature of the derivative and the random path.
 The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion, 
 and an associated integration by parts formula.   
 The weights can be derived by exchanging derivatives with respect to a parameter for
-derivatives with respect to the Brownian motion, and integrating by parts~\cite{Kohatsu-Higa2004}.  
+derivatives with respect to the Brownian motion, and integrating by parts~\citep{Kohatsu-Higa2004}.  
 % These results can also be recovered via the likelihood-ratio method\footnote{
 % In the likelihood ratio method~\cite{Broadie1996}, a derivative with respect to a parameter $\theta$ of a stochastic average is evaluated 
 % as $\partial_\theta\dlangle \Phi(x)\drangle = \int dx\,\Phi(x)\partial_\theta P(x,\theta) 
@@ -1077,7 +1079,7 @@ the open Gaussian probability distribution.
 
 In some cases, it might be necessary to take derivatives a two body energy while much closer 
 to one body than another.  This could be necessary when trying to calculate the two body energy 
-shift for an atom, or when computing the stress-tensor close to one surface~\cite{Schafer2016}. 
+shift for an atom, or when computing the stress-tensor close to one surface~\citep{Schafer2016}. 
 For a renormalized energy, only paths that touch both
 surfaces will contribute.   The preceding approach was based on integrating out intermediate
 coordinates by approximating the integrals as Gaussians [as used in Eq.~(\ref{eq:partial_avg_grad})]. 
@@ -1146,7 +1148,7 @@ After the partial averaging, the derivatives can be carried out, with the result
 \end{align}
 In this case, the derivatives act on the whole propagator~(\ref{eq:Upropagator}), rather than just the Gaussian parts.  
 This could be applied using the Dirichlet solution to the path integral~(\ref{eq:Dirichlet}) to evaluate the 
-stress-energy tensor (as was studied in Ref.~\cite{Schafer2016}).  The method suggested here applies to
+stress-energy tensor [as was studied by \citet{Schafer2016}].  The method suggested here applies to
 any potential $V$ (assuming the solution can be found), so it could also be applied to TE and 
 TM potentials under similar circumstances.    
 

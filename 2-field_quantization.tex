@@ -330,7 +330,7 @@ prescription which restricts the allowed quantum states to those that obey the c
 % \begin{equation}
 %   [F,G]_D= [F,G] + [F,\chi_r]([\chi_r,\chi_s])^{-1}[\chi_s,G]
 % \end{equation}
-% (For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
+% (For the example of QED in free space see ~\citet{Dirac1966}, or \citet[\S7.6]{WeinbergQFT1}.)
 % In the example of QED, the Dirac bracket is 
 % \begin{equation}
 %   [A_i(\vect{r},t),\Pi_j(\vect{r'},t)] = i\hbar\bigg(\delta_{ij}-\frac{\partial_i\partial_j}{\nabla^2}\bigg)\delta(\vect{r-r'}),
@@ -342,9 +342,9 @@ prescription which restricts the allowed quantum states to those that obey the c
 % between operators.
 % In the Gupta-Bleuler formalism, one restrict the states allowed in the theory to obey the constraints,
 % rather than the operators.  
-% We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac1964, Dirac1966}
+% We will try to follow the \citet{Dirac1964, Dirac1966} program for dealing with constraints in quantization
 % Ultimately, in developing the Hamiltonian formulation it is necessary to correctly account for the constraints.
-% We are going to follow the approach suggested by Paul Dirac in Ref.~\cite{Dirac1964, Dirac1966}, 
+% We are going to follow the approach suggested by \citet{Dirac1964,Dirac1966}, 
 % which is analogous to the Gupta-Bleuler formulation.
 % In that method the fields have canonical commutation relations imposed upon them, 
 % and the gauge freedom restricts the states allowed the theory.  
@@ -491,9 +491,9 @@ inserted into the path integral
 \begin{equation}
   \delta[G(\vect{A},A_4,)]\det\left(\frac{\delta G}{\delta\alpha}\right),
 \end{equation}
-where the determinant is known as the Faddeev-Popov determinant~\cite{Faddeev1967,Faddeev1991}.
+where the determinant is known as the Faddeev-Popov determinant~\citep{Faddeev1967,Faddeev1991}.
 The determinant ensures that after integrating over out $\alpha$, each state receives the same weight.\footnote{
-For example see \S 9.4 of Peskin and Schroeder~\cite{Peskin1995}, or \S 71 of Srednicki~\cite{Srednicki2008}}  
+For example see \citet[\S9.4]{Peskin1995}, or ~\citet[\S 71]{Srednicki2008}}  
 This can be understood in analogy with the change of variable for a double integral with a redundant degree of
 freedom
 \begin{equation}
@@ -516,16 +516,16 @@ One further trick is often used in gauge-fixing the path integral.  Instead of f
 $G[\vect{A},A_4]=0$, an alternative gauge $G[\vect{A},A_4]=\gamma$ can be used.  Since $\gamma$ is a free function,
 it can be integrated against a Gaussian with width $\xiFP$,
 \begin{equation}
-  \text{const} = \int D\gamma \exp\left(-\frac{1}{2\xiFP}\int d\vect{r} d\tau\,\gamma^2(\vect{r},\tau)\right).
+  \text{const} = \int D\gamma \exp\left(-\int d\vect{r} d\tau\,\frac{\gamma^2(\vect{r},\tau)}{2\xiFP}\right).
 \end{equation}
 Such factors are constant in the path integral sense that they will cancel out when considering
 physical energies, which require renormalization.
 Finally, the gauge-fixed partition function is
 \begin{align}
  Z &= \int D\vect{A} DA_4 D\gamma \delta[G[A]-\gamma]\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2\xiFP}\int d\vect{r}d\tau\, \gamma^2\right)\nonumber\\
+ \exp\left(-S_E-\int d\vect{r}d\tau\, \frac{\gamma^2}{2\xiFP}\right)\nonumber\\
  &= \int D\vect{A} DA_4\det\bigg(\frac{\delta G}{\delta \alpha} \bigg)
- \exp\left(-S_E-\frac{1}{2\xiFP}\int d\vect{r}d\tau\, G^2\right),
+ \exp\left(-S_E-\int d\vect{r}d\tau\, \frac{G^2}{2\xiFP}\right),
 \end{align}
 where the Gaussian integral over $\gamma$ was evaluated in the second equality.  
 %  For non-Abelian field theories, the functional determinant is often turned into an integral over 
@@ -562,15 +562,15 @@ Another common choice of gauge is Weyl or temporal gauge where the scalar potent
 This gauge simply removes the scalar field, and the longitudinal part of $\vect A$ would be responsible for the 
 electrostatic potential if any charges were present.
 This condition does not completely fix the gauge, since there are still gauge transformations from fields independent of $\tau$.
-Surprisingly, this does seem to be a fairly common gauge for people working with path integrals in dielectrics~\cite{Bechler1999,Rahi2009}.
+Surprisingly, this does seem to be a fairly common gauge for people working with path integrals in dielectrics~\citep{Bechler1999,Rahi2009}.
 Given those flaws, we will not pursue it any further.  
 
 Finally, there is a generalized Lorenz gauge
 $\epsr^{-1}\nabla\cdot\epsr\vect A - \epsr\partial_\tau A_4=0$, 
-introduced by Bordag\etal\cite{Bordag1998}.  This gauge allows the derivation to proceed in close parallel
-to the case with no media\footnote{A similar gauge was fixed by Reid\etal\cite{Reid2013} in their development of the 
+introduced by \citet{Bordag1998}.  This gauge allows the derivation to proceed in close parallel
+to the case with no media\footnote{A similar gauge was fixed by \citet{Reid2013} in their development of the 
   numerical scattering method.  However, that work explicitly relies on fixing EM boundary conditions at surfaces.
-That work then proceeded using homogeneous formulae for all quantities and ignoring any singularities 
+The resulting computations can proceeding using homogeneous formulae for all quantities and ignoring any singularities 
 arising at interfaces.  
 In work on the worldline, it is more natural to keep these singularities, anticipating that they will enforce boundary conditions.
 }.
@@ -583,14 +583,13 @@ $\sum_{ij}A_i(-\partial_i \epsr\partial_j )A_j$.
 In this case $\epsr$ acts as a metric in the worldline path integral, which is more complicated.  
 % ensures that once the gradients have been expanded out in the path integral, the leading terms have no $\epsilon$-dependence,
 % which makes worldline calculations simpler.  
-Despite these appealing features, Bordag\etal found the disquieting feature that the longitudinal and scalar degrees of freedom do not
-cancel out the Faddeev-Popov determinant or ``ghost'' degrees of freedom~\cite{Bordag1998}.
-A later calculation adapted to spherical geometries found that using the dual potentials led to more physical results
-where the ghost degrees of freedom canceled~\cite{Bordag1999}.  However any attempt to move away from spherical
+Despite these appealing features, \citet{Bordag1998} found the disquieting feature that the longitudinal and scalar degrees of freedom do not
+cancel out the Faddeev-Popov determinant or ``ghost'' degrees of freedom.
+In a later calculation adapted to spherical geometries, \citet{Bordag1999} found that using the dual potentials led to more physical results
+where the ghost degrees of freedom canceled.  However any attempt to move away from spherical
 geometry spoiled that, and some degree of mixing is expected in general.  
 Ultimately, the results will have essentially the same form in terms of both the usual potentials and the 
-dual potentials, so we proceed with the regular potentials for now, and will present 
-the dual-potential path integral later.  
+dual potentials, so we proceed with the regular potentials for now.
 % This perhaps suggests that quantizing and gauge-fixing 
 % the effective field theory has problems, and it may be better to proceed directly via linear-response theory.
 %The resulting functional determinant from gauge-fixing depends on $\epsilon$, so we cannot drop the determinant.  
@@ -703,12 +702,12 @@ We also assume that the functional determinant of a matrix operator does not pos
 %This is a large assumption,since extra terms can appear in such matrix functional determinants in a regularization dependent manner.
 %Even greater care is required in treating matrix functional determinants of matrix differential operators.
 While $\det(AB)=\det(A)\det(B)$ for finite matrices, for infinite matrices this is not strictly true. 
-Instead, a regularization-dependent factor can arise, known as the ``multiplicative anomaly''~\cite{Elizalde1998}.
-As discussed by McKenzie-Smith and Parker~\cite{McKenzieSmith1998}, 
+Instead, a regularization-dependent factor can arise, known as the ``multiplicative anomaly''~\citep{Elizalde1998}.
+As discussed by \citet{McKenzieSmith1998}, 
 the multiplicative anomaly is essential to ensure agreement between 
 formal path integral calculations and more straightforward canonical methods.  
 This is important for $\zeta$-function regularization of functional determinants, 
-which is closely allied with the worldline method~\cite{Elizalde2008}.
+which is closely allied with the worldline method~\citep{Elizalde2008}.
 
 The vector worldline path integral for the EM field can be computed straightforwardly
 from the partition function~(\ref{eq:Z_4pot}).
@@ -742,11 +741,11 @@ in a general medium.
 This path integral involves contributions from three interacting vector degrees of freedom, a scalar, and a subtraction from
 gauge-fixing.  Somehow all of these path integrals with different potentials must conspire 
 to give the energy of two physical polarizations.  
-Investigations by Bordag\etal for a space-dependent dielectric found that the ghost (gauge-fixing) degrees of freedom
-did not completely cancel off the longitudinal and scalar degrees of freedom~\cite{Bordag1998}.  
-Later work examining the spherical problem used the dual potentials and found better results that 
-more closely correspond to the scalar polarizations we will develop~\cite{Bordag1999}. 
-However as they noted, in a general medium the cancellation is expected to be disrupted.  
+% Investigations by Bordag\etal for a space-dependent dielectric found that the ghost (gauge-fixing) degrees of freedom
+% did not completely cancel off the longitudinal and scalar degrees of freedom~\cite{Bordag1998}.  
+% Later work examining the spherical problem used the dual potentials and found better results that 
+% more closely correspond to the scalar polarizations we will develop~\cite{Bordag1999}. 
+% However as they noted, in a general medium the cancellation is expected to be disrupted.  
 % Even so, those calculations still focused on the divergence structure of the theory and only found partial
 % agreement in the perturbative limit of weak dielectrics.  
 
@@ -775,7 +774,7 @@ while its magnitude may vary, its direction does not.
 The same is true for the magnetic field in the TM polarization.  
 In this case, the two fields will turn out to mirror each other under the duality transformation exchanging
 electric and magnetic properties of both fields and matter.  
-The following work is expanded from the presentation in Ref.~\cite{Mackrory2016}.
+[The following work is expanded from the presentation in \citet{Mackrory2016}.]
 
 \begin{figure}
   \begin{minipage}{0.5\linewidth}
@@ -1024,9 +1023,9 @@ the TE path integral may suggest ways to develop a better uncontrolled approxima
 \label{sec:nonzero_temp_path_integral}
 The preceding derivation can be extended to finite temperature and dispersion by making 
 the substitution $\epsr(\vect{r})\rightarrow\epsr(\vect{r},i\omega)$.  This was carefully examined 
-in the context of the Lifshitz theory by Barash and Ginzburg~\cite{Barash1975}, and more recently
-Rosa\etal\cite{Rosa2010}.  As noted earlier, Rahi\etal derived their effective Lagrangian at finite
-temperature via linear-response theory~\cite{Rahi2009}.  Presumably the same arguments apply here, 
+in the context of the Lifshitz theory by \citet{Barash1975}, and more recently
+\citet{Rosa2010}.  As noted earlier, \citet{Rahi2009} derived their effective Lagrangian at finite
+temperature via linear-response theory.  Presumably the same arguments apply here, 
 so we assume that the appropriate frequency-dependent, non-zero temperature path integral is 
 \begin{equation}
 Z\subTE = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
@@ -1132,7 +1131,7 @@ which is the anticipated zero temperature, dispersion free TE worldline energy~(
 % to a medium. 
 % We will derive the Hamiltonian, and then compute the partition function.
 %  We will then gauge-fix, and integrate out the harmonic medium.  This is essentially
-% based on the approach of deriving the dielectric via linear response theory advocated in Rosa~\etal\cite{Rosa2008}.
+% based on the approach of deriving the dielectric via linear response theory advocated in \citet{Rosa2008}.
 % We will integrate out the matter-fields, and treat the interaction out to second order in the interaction.  
 % We will then carry out the remaining integral over the fields.  
 

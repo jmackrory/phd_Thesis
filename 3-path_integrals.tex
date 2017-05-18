@@ -6,12 +6,12 @@ The imaginary-time path integral is closely connected with other ways of describ
 such as stochastic differential equations and Fokker-Planck equations.
 If stochastic paths are sampled from the path integral, then the path's evolution is governed by stochastic
 differential equations or Langevin equations, where the noise is associated with the random sampling.
-The path integral is also the solution to the diffusion or Fokker-Planck equation~\cite{Karatzas1991, Durrett1996}.
+The path integral is also the solution to the diffusion or Fokker-Planck equation~\citep{Karatzas1991, Durrett1996}.
 While stochastic differential equations describe single trajectories, the Fokker-Planck equation gives
-the equation of motion for the ensemble-averaged probability distribution for the paths~\cite{Gardiner2009}.
+the equation of motion for the ensemble-averaged probability distribution for the paths~\citep{Gardiner2009}.
 The path integral solution to the diffusion equations is known as the Feynman--Kac formula,
-after Feynman's work in describing the evolution of a quantum particle~\cite{Feynman1948},  and Kac's
-work applying this to the diffusion equation~\cite{Kac1949}.
+after the work by \citet{Feynman1948} in describing the evolution of a quantum particle, and \citet{Kac1949}
+ applying this to the diffusion equation.
 
 This chapter is devoted to deriving the Feynman--Kac formula with a source term.
 We will develop analytical expressions for both TE and TM worldline path integrals 
@@ -28,11 +28,11 @@ on stochastic simulations.
 
 In this section, we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.
-The derivation will stay close in spirit to the one presented in Sakurai~\cite{Sakurai1994}, but it will
+The derivation will stay close in spirit to the one presented by \citet{Sakurai1994}, but it will
 be extended to include a source term.%, as is more common for stochastic processes.
-More formal derivations are available from mathematical~\cite{Cartier2004},
-and probabilistic perspectives~\cite{Karatzas1991, Durrett1996}.  
-A detailed discussion of the more formal probabilistic derivation is available in Steck \S 17.9~\cite{SteckNotes}.
+More formal derivations are available from mathematical~\citep{Cartier2004},
+and probabilistic perspectives~\citep{Karatzas1991, Durrett1996}.  
+A detailed discussion of the more formal probabilistic derivation is covered by \citet[\S 17.9]{SteckNotes}.
 
 The goal of this section is to find a solution $f(\vect{x},t)$ to the driven diffusion equation
 \begin{equation}
@@ -141,7 +141,7 @@ After substituting this result in to Eq.~(\ref{eq:op_soln}), the solution to the
   &+\int_0^t ds\,\biggdlangle  g[\vect{x}+\vect{W}(s),s]\exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle.
   \label{eq:feynman-kac}
 \end{align}
-This agrees with the results of the more formal methods presented in Durrett~\cite{Durrett1996}, and Steck~\cite{SteckNotes}.
+This agrees with the results of the more formal methods presented in \citet{Durrett1996}, and \citet{SteckNotes}.
 In this case the ensemble average is over free Brownian motions, 
 This result was derived under the assumption that the potential is independent of time, since that is 
 all that is required for this dissertation.  
@@ -152,9 +152,8 @@ In worldline path integrals such as Eq.~(\ref{eq:TE_worldline}),
 the Brownian motions are closed, with the same beginning and ending point.  
 The solution to the diffusion equation~(\ref{eq:feynman-kac}) can be converted into an 
 ensemble average over pinned Brownian bridges  with some manipulation.
-We will follow a solution method used by Hooghiemstra to compute the sojourn time~\cite{
-Hooghiemstra2002}.  
-This solution method is explained in detail by Steck in \S 17.9 -- \S 17.11~\cite{SteckNotes}.
+We will follow a solution method used by \citet{Hooghiemstra2002} to compute the sojourn time.  
+This solution method is explained in detail by \citet[\S 17.9 -- \S 17.11]{SteckNotes}.
 % In brief, the sojourn time $T_{\text{S}}$
 % is the amount of time a Brownian process $x(t)$ spends on one side of an interface at $d$,
 % $T_{\text{S}}:= \int_0^T dt\,\Theta[x(t)-d].$  %Here $\Theta$ is the Heaviside step function.
@@ -236,15 +235,15 @@ energies from the worldline path integrals.
 \section{Single Step Potential}
 
 As a first example, consider a step potential $V=\chi\Theta(x-d)$.
-(As noted earlier, this is closely related to the sojourn time for a Brownian bridge~\cite{Hooghiemstra2002}.)
+[As noted earlier, this is closely related to the sojourn time for a Brownian bridge~\citep{Hooghiemstra2002}.]
 The step potential will be used to compute the Casimir--Polder energy for an atom 
 above a dielectric half-space.
 % It is also related to the Sojourn time statistic, which measures the time a Brownian motion $x(t)$ spends 
 % beyond a certain point $d$,
 % (The following is a much briefer discussion of the sojourn time, 
 % which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
-% we follow~\cite{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
-% in \S17.10 of Steck~\cite{SteckNotes}.)
+% we follow~\citep{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
+% in \S17.10 of \citet{Steck}.)
 Throughout what follows, we will work in one spatial dimension.  
 In this case, $f$ solves
 \begin{equation}
@@ -313,7 +312,7 @@ In this case, we will not undo the Laplace transform, since later results can co
 Casimir energies to exploit this form of the energy. 
 
 It is possible to generalize this calculation to compute the equivalent formulae for open Brownian
-bridges from $0\rightarrow c$, as discussed in Appendix B of Ref.~\cite{Mackrory2016}.
+bridges from $0\rightarrow c$, as discussed in Appendix B of ~\cite{Mackrory2016}.
 These formulae may be useful in accelerating numerical techniques, with relatively coarse bridges.
 % However the formulae are quite complicated and involve diverging integrands, which makes it difficult to implement them 
 % efficient.
@@ -421,7 +420,7 @@ The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
 from the far surface.
 After inverting the Laplace transforms, each Gaussian in the sum would be of the form $\exp[-2(n+1)^2d^2/t]$, corresponding
 to the probability for a Brownian path to bounce $n+1$ times between two surfaces a distance $d$ apart.
-This naturally goes over to the reflection picture for the Dirichlet scalar discussed in \S21.1.5.3 of Steck~\cite{SteckNotes}.
+This naturally goes over to the reflection picture for the Dirichlet scalar discussed by \citet[\S21.1.5.3 ]{SteckNotes}.
 
 \section{Feynman--Kac Formula for Singular Potentials}
 \label{sec:TM_potential}
@@ -469,7 +468,7 @@ the logarithm of the dielectric can then be written
   \log\sqrt{\epsr\supa}(x)  
 = \left\{\begin{array}{ccr} 
       0 & \hspace{0.5cm} &x<d\\ 
-      \frac{\Xi}{a}(x-d)& \hspace{0.5cm}&d<x<d+a\\
+      \dfrac{\Xi}{a}(x-d)& \hspace{0.5cm}&d<x<d+a\\
       \Xi & \hspace{0.5cm}&x>d+a
     \end{array}.
   \right.

@@ -14,16 +14,16 @@ the amplitudes of the two transverse modes.
 We will then develop the worldline path integrals for those scalar fields, which will form
 the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
 (The decomposition of the EM field into two scalars, and the derivation of the associated 
-worldline path integrals was carried out in Ref.~\cite{Mackrory2016}.)
+worldline path integrals was carried out in \citet{Mackrory2016}.)
 
 \section{Approaches to Quantizing Electromagnetism in Media}
 
 The quantization of the EM field inside dielectric media provides a number of challenges 
-beyond quantization in vacuum~\cite{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
+beyond quantization in vacuum~\citep{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
  First, in Casimir problems the dielectric varies spatially.  The usual procedure for
 quantizing the EM field decomposes the field into a set of normal modes, and quantizes their amplitudes.
   While it is possible to write down the wave equations for the modes, and quantize the amplitudes
- in analogy with free space~\cite{Glauber1991}, a full development of this method still requires finding those mode functions.
+ in analogy with free space~\citep{Glauber1991}, a full development of this method still requires finding those mode functions.
  Ideally, the procedure used in quantizing the field would not require solving for the mode functions in
 general geometries, nor would it be adapted to any particular geometry.   
 
@@ -43,43 +43,43 @@ In  quantum optics, dissipation is usually handled by coupling the system to a b
 integrating or tracing out the bath degrees of freedom.\footnote{If damping is added to the system in an ad hoc
 manner, the canonical commutation relations between operators would decay away.  Adding the bath
 is necessary to preserve the commutation relations for the system operators.  As a result, dissipation in quantum systems 
-is attended by noise, either as decoherence terms in the master equation or as noise terms in the Langevin equations for the operators~\cite{GardinerZoller2004}}.
+is attended by noise, either as decoherence terms in the master equation or as noise terms in the Langevin equations for the operators~\citep{GardinerZoller2004}}.
 The light field is linearly coupled to the dielectric medium, which is modeled
-as a bath of harmonic oscillators~\cite{Huttner1992,Dung1998,Bechler1999}.
+as a bath of harmonic oscillators~\citep{Huttner1992,Dung1998,Bechler1999}.
 The dielectric medium is in turn coupled to a bath of harmonic oscillators, which provides the damping.
 Integrating out the bath degrees of freedom yields the required dispersion and dissipation for the medium, 
 while integrating out the medium's degrees of freedom yields a frequency dependent dielectric constant $\epsilon(\omega)$.
-Huttner and Barnett were the first to use this harmonic model to quantize the EM field in media. Their
+\citet{Huttner1992} were the first to use this harmonic model to quantize the EM field in media. Their
 work directly diagonalized the whole system of fields and bath in terms of the modes of 
-a single combined harmonic oscillator~\cite{Huttner1992}.
+a single combined harmonic oscillator.
 Another approach to the same problem directly couples the medium to white noise sources to represent the fluctuations 
-inside the medium that lead to dissipation~\cite{Scheel1998,Dung1998,Tip2001}.
-Bechler carried out path integral quantization for a harmonic medium 
+inside the medium that lead to dissipation~\citep{Scheel1998,Dung1998,Tip2001}.
+\citet{Bechler1999,Bechler2006} carried out path integral quantization for a harmonic medium 
 including dispersion, and shown agreement with previous results in terms 
-of noise operators and commutators for the fields~\cite{Bechler1999,Bechler2006}.  
+of noise operators and commutators for the fields.  
 It is not strictly necessary to assume that the fields are directly coupled to harmonic oscillators. 
 The dielectric function can be understood in terms of the linear response of the underlying 
-medium (which might not be harmonic) to the EM field~\cite{Altland2011}.  
-This was used by Rahi\etal to motivate the effective Lagrangian description in terms of macroscopic field in their 
-work on the scattering method~\cite{Rahi2009}.  
-More recently Philbin carried out a full canonical quantization of EM in media, without explicitly 
-assuming a harmonic medium~\cite{Philbin2010}.
+medium (which might not be harmonic) to the EM field~\citep{Altland2011}.  
+This was used by \citet{Rahi2009} to motivate the effective Lagrangian description in terms of macroscopic field in their 
+work on the scattering method.  
+More recently \citet{Philbin2010} carried out a full canonical quantization of EM in media, without explicitly 
+assuming a harmonic medium.
 
 
 Focusing on Casimir physics, in modern treatments the EM field has been quantized via path integration.
-Reid\etal quantize the EM field, under the assumption of piecewise constant dielectric media, where the EM
-boundary conditions are explicitly enforced at the interfaces~\cite{Reid2013}.
+\citet{Reid2013} quantize the EM field, under the assumption of piecewise constant dielectric media, where the EM
+boundary conditions are explicitly enforced at the interfaces.
 Enforcing those boundary conditions allows the remaining computations to proceed
-as if the media were homogeneous and filled all of space, based on a version of Green's theorem~\cite{Emig2004}.
+as if the media were homogeneous and filled all of space, based on a version of Green's theorem~\citep{Emig2004}.
 Fixing the boundary conditions also simplifies the algebra, since derivatives and material functions effectively commute with
 one another.  Any commutator terms would arise on the surface, but since the fields are restricted on the 
 surface via functional delta functions, those corrections can be ignored.
 The resulting derivations proceed in analogy with the case of a homogeneous dielectric, but with the 
 fields in different regions coupled by the currents on the surfaces.  
 
-Bordag\etal also carried out path integral quantization of
+\citet{Bordag1998} also carried out path integral quantization of
 the EM field inside a spatially varying dielectric neglecting dispersion, starting from the 
-effective Lagrangian description for the macroscopic fields~\cite{Bordag1998}.
+effective Lagrangian description for the macroscopic fields.
 They fix a generalized Lorenz gauge, and set about deriving the heat kernel, which is effectively a small-$\cT$ 
 expansion of the worldline path integral.  
 The primary focus here was to explore the divergence structure of the theory (i.e, how does QED in media
@@ -88,11 +88,11 @@ Unfortunately, their results are hard to interpret given that the non-physical
 degrees of freedom do not cleanly cancel.  In particular, the contributions from 
 the scalar and longitudinal photons do not cancel the gauge-fixing or ``ghost'' determinant, as happens in 
 vacuum.  
-A later paper by the same authors considering the quantization for EM in a spherical dielectric ball found better 
-results by exploiting the dual potentials~\cite{Bordag1999}.  In this latter paper they split the EM field
+In later work \citet{Bordag1999} considered the quantization for EM in a spherical dielectric ball and found better 
+results by exploiting the dual potentials.  In this latter paper they split the EM field
 into two scalar fields, corresponding to the TE and TM polarizations.  
-Schwinger\etal also split the EM field into two non-interacting scalars in their works on the Casimir 
-effect in planar and spherical geometries~\cite{Schwinger1978, Milton1978,Schwinger1992}.
+\citet{Schwinger1978,Milton1978,Schwinger1992} also split the EM field into two non-interacting scalars in their works on the Casimir 
+effect in planar and spherical geometries.
 
 Our work on the EM path integral will parallel Bordag\etal, with some difference in aims.
 The primary goal of Bordag\etal
@@ -228,9 +228,9 @@ quantum commutation relations.  However, this procedure must be modified for gau
 are non-dynamical they imply constraints.  
 There are a number of ways to confront this.
 The Gupta-Bleuler formulation restricts the allowed states to obey a gauge condition.  
-Dirac's method instead adjusts the classical bracket to account for the constraints~\cite{Dirac1964,Dirac1966}.
-The Dirac bracket is what passes over to the commutation relation.
-Finally in a path integral, it is necessary to remove the gauge degree of freedom via Faddeev-Popov gauge fixing~\cite{Faddeev1991}.
+ \citet{Dirac1950,Dirac1964,Dirac1966} developed another method that instead adjusts the classical bracket to account for the constraints.
+ The Dirac bracket is what passes over to the commutation relation.
+Finally in a path integral, it is necessary to remove the gauge degree of freedom via Faddeev-Popov gauge fixing~\citep{Faddeev1991}.
 
 The classical Lagrangian for EM in non-dispersive media is
 \begin{align}
@@ -312,7 +312,7 @@ The Hamiltonian can equally well be written as
 \end{align}
 where $f$ and $g$ are arbitrary functions.  In this case $f$ and $g$ serve as gauge degrees of freedom, 
 with $\Pi_0$ and $\nabla\cdot\vect{\Pi}$ generating the gauge transformations.
-(A parallel treatment of the Hamiltonian treatment of EM is presented in \S8.8 of Steck~\cite{SteckNotes}).
+[A parallel treatment of the Hamiltonian treatment of EM is given by  \citet[\S8.8]{SteckNotes}.]
 %  Since the constraints must be satisfied this is equivalent to adding zero.
 %  I don't think this means anything for us - this is just a manifestation of the gauge freedom of the EM field.  
 %  These constraints serve as the generators of gauge transformations.  
@@ -322,30 +322,27 @@ with $\Pi_0$ and $\nabla\cdot\vect{\Pi}$ generating the gauge transformations.
 The Hamiltonian theory can be quantized by promoting the Poisson bracket to a commutator
 between field operators.  However, there is the matter of the constraints.  We will follow the Gupta-Bleuler
 prescription which restricts the allowed quantum states to those that obey the constraints.  
-
-In the Dirac formulation for handling constraints, the commutator is now the Poisson bracket augmented by the 
-Poisson brackets between the constraints. 
-In these derivations, the constraints are only to be enforced after all calculations have been completed,
-including evaluating all Poisson brackets.
-The Dirac bracket between two variables $F$ and $G$, subject to a set of constraints $\{\chi_r\}$ is
-\begin{equation}
-  [F,G]_D= [F,G] + [F,\chi_r]([\chi_r,\chi_s])^{-1}[\chi_s,G]
-\end{equation}
-(For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
-In the example of QED, the Dirac bracket is 
-\begin{equation}
-  [A_i(\vect{r},t),\Pi_j(\vect{r'},t)] = i\hbar\bigg(\delta_{ij}-\frac{\partial_i\partial_j}{\nabla^2}\bigg)\delta(\vect{r-r'}),
-\end{equation}
-where the right-hand side is proportional to the transverse delta function.  In this version, there are no 
-restrictions on the states, but the change in commutator leads to different state overlap.  
-We will not pursue this any further.  
+% In the Dirac formulation for handling constraints, the commutator is now the Poisson bracket augmented by the 
+% Poisson brackets between the constraints. 
+% In these derivations, the constraints are only to be enforced after all calculations have been completed,
+% including evaluating all Poisson brackets.
+% The Dirac bracket between two variables $F$ and $G$, subject to a set of constraints $\{\chi_r\}$ is
+% \begin{equation}
+%   [F,G]_D= [F,G] + [F,\chi_r]([\chi_r,\chi_s])^{-1}[\chi_s,G]
+% \end{equation}
+% (For the example of QED in free space see Dirac's treatment~\cite{Dirac1966}, or \S7.6 in Weinberg~\cite{WeinbergQFT1}.)
+% In the example of QED, the Dirac bracket is 
+% \begin{equation}
+%   [A_i(\vect{r},t),\Pi_j(\vect{r'},t)] = i\hbar\bigg(\delta_{ij}-\frac{\partial_i\partial_j}{\nabla^2}\bigg)\delta(\vect{r-r'}),
+% \end{equation}
+% where the right-hand side is proportional to the transverse delta function.  In this version, there are no 
+% restrictions on the states, but the change in commutator leads to different state overlap.  
+% We will not pursue this any further.  
 % To quantize the theory, the Poisson brackets are promoted to commutation relations 
 % between operators.
 % In the Gupta-Bleuler formalism, one restrict the states allowed in the theory to obey the constraints,
 % rather than the operators.  
-
 % We will try to follow Dirac's program for dealing with constraints in quantization~\cite{Dirac1964, Dirac1966}
-
 % Ultimately, in developing the Hamiltonian formulation it is necessary to correctly account for the constraints.
 % We are going to follow the approach suggested by Paul Dirac in Ref.~\cite{Dirac1964, Dirac1966}, 
 % which is analogous to the Gupta-Bleuler formulation.
@@ -354,7 +351,6 @@ We will not pursue this any further.
 % Eq.~(\ref{eq:Pi0}) is a constraint on the Hamiltonian and we must check for any further constraints implied by that.
 % We must take all of these into account, \emph{after} we take over the classical Poisson brackets
 % over to quantum commutation relations. 
-
 In the Gupta-Bleuler formulation, the equal-time commutation relations are given by 
 \begin{equation}
 [A_\mu(\vect{r},t),\Pi_\nu(\vect{r'},t)] = i\hbar \eta_{\mu\nu}\delta^{3}(\vect{r-r'}),
@@ -554,8 +550,8 @@ it decouples the scalar potential decouples from the vector potential, which the
 However, in the presence of a space-dependent dielectric, this is no longer true and this gauge couples $\vect A$ to $A_4$.
 Generalized Coulomb gauge ($\nabla\cdot\epsilon\vect A=0$) does remove that coupling, 
   and is in fact the choice used in other attempts to quantize the EM field inside 
-  a dielectric~\cite{Knoell1987, Glauber1991}.  However, it is not essential, since Philbin fixes Coulomb gauge
-  in his work on quantization within media~\cite{Philbin2010}.  
+  a dielectric~\citep{Knoell1987, Glauber1991}.  However, it is not essential, since \citet{Philbin2010} fixes Coulomb gauge
+  in his work on quantization within media.  
   % This choice removes any coupling between $\vect{A}$ and $A_4$.
   % As can be seen from the equations of motion.
   % The functional determinant then depends on $\epsilon$, so we should track it.

@@ -1238,7 +1238,7 @@ QED effects~\citep{Mazur2014}---however, these methods were developed for free-s
 low energy Casimir phenomena we seek to describe.  
 
 The worldline method was first used to compute scalar Casimir energies by Gies\etal\citep{Gies2003,Gies2006, Gies2006a}.
-The scalar worldline method has been extended to finite temperatures~\citep{Klingmueller2008},
+The scalar worldline method has been extended to nonzero temperatures \citep{Klingmueller2008},
  used to study the torsion of inclined planes~\citep{Weber2009},
 and forces in the sphere-plane and cylinder-plane geometries~\citep{Weber2010, Weber2010a}.  
 In these non-trivial geometries the worldline method has also been used to examine the failure of the proximity force approximation.
@@ -1542,7 +1542,7 @@ the energy density at a point $d$ from the surface is approximately $\int_{d^2}^
 After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
 space-time dimensions.
 
-The worldline method has also been extended to non-zero temperatures~\citep{Klingmueller2008}.
+The worldline method has also been extended to non-zero temperatures \citep{Klingmueller2008}.
 The generalization is straightforward---in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
 since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace.  This motivates
 expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
@@ -1581,9 +1581,6 @@ This algorithm has the virtue of simplicity, but it does require that one know t
 in order to construct the closed version.
 \citet{Gies2003} developed an improved algorithm, the so-called ``v-loop'' algorithm for generating
 Brownian paths. 
-This algorithm decouples the Gaussian probability density of $N$ steps that must return
-to their origin into $N-1$ independent Gaussian random variables, 
-by essentially completing the square sequentially starting at $x_{N-1}$ and working downwards. 
 A Brownian bridge can be constructed as 
 \begin{equation}
   B_k = c_k B_{k-1} + \sqrt{c_k} \Delta W_k,

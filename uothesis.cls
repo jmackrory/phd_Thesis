@@ -142,7 +142,7 @@
 \RequirePackage{lipsum}
 \fi
 \ifnatbib
-\RequirePackage{natbib}
+\RequirePackage[authoryear,colon]{natbib}
 \fi
 
 \ifdraft

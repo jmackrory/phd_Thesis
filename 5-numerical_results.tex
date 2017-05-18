@@ -145,7 +145,7 @@ where $x_0$ is the shifted starting position of the path, and $\cT$ is the path 
 The v-loop constructed here has an advantage over other methods of generating Brownian bridges, since it only needs to keep 
 track of the current position $x_k$ and index $k$ to develop a Brownian bridge.
 Other methods such as pro-rated Brownian motion~(\ref{eq:prorate-loop})
-or ``d-loops'' (which start with a coarse path, and then refine it by doubling the number of points~\citep{Gies2005})
+or ``d-loops'' [which start with a coarse path, and then refine the path by doubling the number of points~\citep{Gies2005}]
 require knowledge of the whole Brownian motion.  
 
 The original v-loop algorithm used centered paths, 
@@ -154,7 +154,7 @@ This requires first constructing the Brownian bridge, and then subtracting off t
 This is inconvenient if the path is being generated on the fly 
 without storage, or if there are stochastic elements to path construction.  % However it is slightly 
 % more adapted to computing Casimir energies. 
-In Casimir--Polder applications (or when computing the stress-energy tensor~\cite{Schafer2016}),
+In Casimir--Polder applications [or when computing the stress-energy tensor~\cite{Schafer2016}],
  it is preferable to consider paths emanating from a single point $\vect{x}_0$.
   The starting point corresponds to the atom's location, or the point where
 the stress-energy tensor is being computed.  
@@ -182,7 +182,7 @@ Since the $N$-fold integral over positions is being handled in a Monte Carlo fas
 treat the remaining integrals over the starting position $\vect{x}_0$ and path times $\cT$ in the same manner.
 Each path can be evaluated for a single pair of $\vect{x}_0, \cT$ picked from suitable
 distributions.  This is a form of importance sampling, which 
-is a powerful tool for accelerating Monte Carlo numerical computations~\citep{Asmussen2007, Glasserman2004}.
+is a powerful tool for accelerating Monte Carlo numerical computations \citep{Asmussen2007, Glasserman2004}.
 This style of importance sampling goes beyond just using the Gaussian probability density to evaluate the 
 spatial integrals over the intermediate positions $\vect{x}_k$.  In this case, the importance sampling
 relies on estimating which positions and times are likely to contribute the most to the integral. 
@@ -687,13 +687,14 @@ As a matter of nomenclature, it is worth distinguishing the birth-death process 
 using from the more popular birth-death process used in queuing theory.  In queuing theory, 
 the number of objects in a queue randomly increases and decreases at a fixed average rate.
 In our case, that rate depends on the past behavior of the system, and where it has gone.  
-The process used here is closer to the genealogical methods for evaluating path integrals~\citep{DelMoral2004}.
-A similar genealogical idea has been used in quantum trajectory simulations~\citep{Jacobs2010a}, which is a
+The process used here is closer to the genealogical methods for evaluating path integrals \citep{DelMoral2004}.
+A similar genealogical idea has been used in quantum trajectory simulations \citep{Jacobs2010a}, which is a
 technique for simulating open quantum systems.  In that variant, each quantum state in an ensemble carries 
 a probability weight.  If that weight becomes too small, then that random trajectory is discarded,
 and another more successful trajectory is split in two, and given half the weight.   
 A similar method has been used to discuss simulating rare events, such as the extreme tails of a Gaussian.
-In that case, one splits trajectories based on whether they exceed a certain threshold criterion~\citep{Glasserman1999,Garvels2000}.
+In that case, one splits trajectories based on whether they exceed a certain threshold criterion 
+\citep{Glasserman1999,Garvels2000}.
 These methods essentially reward the trajectories or paths of the system that enter regions with a large
 contribution to the integral (or other figure of merit).  Thus more computational effort is spent in 
 regions with significant contributions to the result.  
@@ -868,13 +869,13 @@ of birth-death paths may be generated, which further compounds the fluctuation p
 
 \subsubsection{Malliavin Calculus}
 Similar derivatives are required in quantitative finance, where the sensitivity of a financial 
-product to variations its underlying parameters must be estimated~\citep{Glasserman2004}.  
+product to variations its underlying parameters must be estimated \citep{Glasserman2004}.  
 Since financial simulations also typically involved averages over stochastic processes, similar problems emerge
 when trying to estimate derivatives with finite differences.
 One approach with a number of appealing properties is based on the Malliavin calculus, which 
-is formally discussed by \citet{Nualart2006, Malliavin2006, DiNunno2009}.
+is formally discussed by \citet{Nualart2006}, \citet{Malliavin2006}, and \cite{DiNunno2009}.
 Less formal (and far more understandable) discussions of the Malliavin approach are presented in 
-\citet{Chen2007,Kohatsu-Higa2003,Kohatsu-Higa2004}.
+\citet{Chen2007}, and \citet{Kohatsu-Higa2003,Kohatsu-Higa2004}.
 In this approach, the derivative can be estimated by multiplying the integrand by
 a suitably chosen weight function, which depends on the nature of the derivative and the random path.
 The Malliavin calculus is essentially functional differentiation with respect to the Brownian motion, 

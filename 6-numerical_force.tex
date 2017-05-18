@@ -5,8 +5,8 @@ for the TE Polarization}
 The preceding work has focused on computing the Casimir energy between dielectric bodies.  However,
 a number of experiments directly measure the force, or even the second spatial derivative of the energy.
 Experiments that detect the shift in frequency of an oscillator, such as 
-measuring the motion of a BEC in a harmonic trap~\cite{Harber2005,Obrecht2007}, or  
-a nanoelectromechanical oscillators~\cite{Chan2001}, are sensitive the curvature of the Casimir energy.
+measuring the motion of a BEC in a harmonic trap~\citep{Harber2005,Obrecht2007}, or  
+a nanoelectromechanical oscillators~\citep{Chan2001}, are sensitive the curvature of the Casimir energy.
 
 As already noted in Section~\ref{sec:finite_difference}, the finite difference method has some drawbacks
 when applied to worldline path integrals.  
@@ -14,8 +14,8 @@ Derivatives of discontinuous functions such as those required in worldline path 
 In Section~\ref{sec:partial_averaging}, we developed specialized techniques for handling derivatives of Casimir--Polder 
 energies.  This chapter develops a parallel discussion for computing the force on macroscopic bodies.  
 
-Prior investigations by Weber and Gies computed the Casimir force in the worldline method for
-the Dirichlet boundary conditions~\cite{Weber2009, Weber2010}.
+Prior investigations by ~\citet{Weber2009, Weber2010} computed the Casimir force in the worldline method for
+the Dirichlet boundary conditions.
 They computed the force between a planar surface and a cylindrical or spherical body, and the
 torque between inclined plates.  Their methods typically rely on finding analytical expressions for 
 the path times $\cT$ when a particular Brownian path will intersect the surfaces, and analytically integrate over 
@@ -141,7 +141,7 @@ surface of body 2.  % The first equality here can be understood
 % source point, since $\vect{x}_j$ is the source point
 % of another equivalent path.
 This relation follows from simplifying the path-averaged delta function using Eq.~(\ref{eq:delta_pin}),
-and the result~\cite{Hormander1983} 
+and the result~\citep{Hormander1983} 
 \begin{equation}
   \int d\mathbf{x}\, \delta[h(\vect{x})]\,f(\vect{x})
   = \int_{h^{-1}(0)} \!\!\!\!\!dS_0\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
@@ -579,8 +579,8 @@ In the strong-coupling limit, the potential curvature is dominated by terms with
 which correspond to paths that graze both bodies, while not entering either one.  
 
 The formulation for the Casimir force in Eq.~(\ref{eq:occupation_force}) 
-is analogous to the construction of paths employed by Gies and Weber for computing 
-forces in the sphere-plane and cylinder-plane geometries in the Dirichlet limit~\cite{Weber2010}.  
+is analogous to the construction of paths employed by \citet{Weber2010} for computing 
+forces in the sphere-plane and cylinder-plane geometries in the Dirichlet limit.  
 In that work paths, are shifted so that they just graze the plane.  The force on the planar
 surface is computed by integrating over the values of $\cT$ when the path intersects the other surface.
 The expressions presented here extend their results by accounting for finite $\chi$, 
@@ -590,8 +590,8 @@ In general, different classes of paths are important in the finite-$\chi$ and st
 cases.  At small $\chi$, the most important path statistic is the sojourn time,
 while in the strong-coupling regime, the first-touching time is the most important statistic.    
 This correspondence was used to discuss the numerical convergence properties of the method as 
-the path length was varied.  (There is a brief discussion on this point in Section~\ref{sec:TE_convergence},
-and an extended discussion in Ref.~\cite{Mackrory2016}.)
+the path length was varied.  [There is a brief discussion on this point in Section~\ref{sec:TE_convergence},
+and an extended discussion in \citet{Mackrory2016}.]
 More practically, these different requirements make it difficult to use a single class of path to efficiently evaluate the potential at all $\chi$:
 in weak coupling one wants a path ensemble that enters all of the bodies, while in strong coupling
 it is the paths that just touch the surfaces that are most important.

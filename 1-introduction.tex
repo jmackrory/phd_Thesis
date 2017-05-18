@@ -213,12 +213,17 @@ H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
   \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})].
   \label{eq:Hint}
 \end{equation}
+The interaction Hamiltonian is written in the dipole approximation, which assumes that the atom is much smaller than
+the relevant wavelengths.  In this case, the dominant wavelengths are typically on the order of the separation between the atom
+and the wall.  
 In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
 on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
 are then sensitive to the arrangements of the bodies.  
 %This is distinct from the case in most field theory calculations where the modes are described by plane waves.  
 
-Note that some of the terms in the interaction Hamiltonian violate energy conservation. 
+Note that some of the terms in the interaction Hamiltonian violate energy conservation, in the sense that 
+$[H_{\text{atom}}+H_{\text{field}},H_{\text{int}}]\ne 0$, so $H_{\text{int}}$ causes transitions between the eigenstates of the 
+non-interacting Hamiltonians $H_{\text{atom}}+H_{\text{field}}$. 
 For example,
 $\sigma_j^\dag a^\dag\subkz$ creates a photon with frequency $\omega_k$ and raises the atom from the ground state to an excited state
 with energy $\hbar\omega_j$.
@@ -262,7 +267,7 @@ intermediate states are not directly physically observable on a detector.
 \caption[Feynman Diagram for Casimir--Polder Energy]
 {Feynman diagram representing an atom interacting with electromagnetic field via emitting and absorbing photons.  
   The wavy line represents the electromagnetic Green function in the presence of boundaries---as opposed to the usual plane 
-  waves exploiting in field theory computations.  The atom is excited into intermediate states.
+  waves exploited in field theory computations.  The atom is excited into intermediate states.
 }
 \label{fig:feynman_CP}
 \end{figure}
@@ -279,7 +284,7 @@ $|\langle E_0|d_i|E_n\rangle|^2=|\langle E_0|\vect{d}|E_n\rangle|^2/3$,
 which corresponds to assuming that all components of dipole matrix elements are equal.
 
 The mode functions for the electric field near a perfectly conducting plane 
-can be substituted in to the energy.
+can be substituted into the energy.
 Following Milonni (\S3.12 in Ref.~\cite{Milonni1994}), we assume the atom is close to one wall 
 of a perfectly conducting box, but far from all other walls.
 The electromagnetic mode functions for a perfectly conducting box are given by 
@@ -452,7 +457,7 @@ since this can naturally also compute the Casimir energy.
 
 \subsubsection{Derivation of Lifshitz Formula}
 \label{sec:lifshitz}
-The Lifshitz formula for the Casimir energy can be found with an ingenious argument due to van Kampen\etal\cite{vanKampen1968}.
+The Lifshitz formula for the Casimir energy can be found with an argument due to van Kampen\etal\cite{vanKampen1968}.
 In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants 
 $\epsilon_1$ and $\epsilon_2$,
 separated by a medium with dielectric constant $\epsilon_3$.  

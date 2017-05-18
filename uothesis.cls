@@ -16,7 +16,7 @@
 %% numbered lines in toc and lists were aligned to the left, & reduced the spacing from the numbering. Jun2014 S.F.
 
 
-%% JBM May 2017 
+%% JBM May 2017: 
 %% Added subsubsections to contents by changing tocdepth.
 %% Added phantomsection before addcontentsline.  This fixes pdf bookmark hierarchy.
 %% Added fix for lineno and mathmode with "patch".

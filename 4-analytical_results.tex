@@ -7,8 +7,8 @@ The analytical energies can be derived by evaluating an analytical average over 
 The worldline Casimir energies can be put in the right form to use the solutions from Chapter~\ref{ch:feynman_kac}.  
 Finally, we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
 and show how known results for the near-field and high temperature results emerge from this formalism.    
-The work presented on the TE polarization has been published in Ref.~\cite{Mackrory2016}, 
-and the work on the TM polarization is also to be published.
+[The work presented on the TE polarization has been published as \citet{Mackrory2016}, 
+and the work on the TM polarization is also to be published.]
 
 \section{Extracting Casimir--Polder Energies}
 \label{sec:casimir-polder_worldline}
@@ -42,7 +42,7 @@ Considering the similarities between the polarizations, we will carry these expa
 one polarization, since the others follow by duality.  
 
 % It is important be clear about exactly what the energy is, and how it is computed.  
-% As discussed in \S 4.7 of Jackson~\cite{Jackson1998}, the electrostatic energy for a system depends on the 
+% As discussed in \citep[\S 4.7]{Jackson1998}, the electrostatic energy for a system depends on the 
 % manner in which the system was arranged.  Different energies are found if the free charge or potential
 % are specified.  The same is true of magnetostatic systems: are the potentials on the boundaries, or the free 
 % currents specified.  
@@ -202,16 +202,16 @@ The Mellin transform of a function $f$ is defined as
 \begin{equation}
 \mathcal{M}[f](z)= \int_0^\infty dt\, t^{z-1}f(t).
 \end{equation}
-The Mellin transform also appears in the context of $\zeta$-function renormalization for functional determinants~\cite{Elizalde2008},
+The Mellin transform also appears in the context of $\zeta$-function renormalization for functional determinants~\citep{Elizalde2008},
 which is closely related to the worldline path integral.  
 In the application to the worldline path integral, $f$ will be the ensemble-averaged path integral and $z$ will be $1+D/2$.
 
-There is a useful relationship between Laplace transforms and Mellin transforms~\cite{Lew1975}.  
+There is a useful relationship between Laplace transforms and Mellin transforms~\citep{Lew1975}.  
 The Laplace transform was defined in Eq.~(\ref{eq:Laplace}), and the $\Gamma$ function is defined as  
 \begin{equation}
 \Gamma(z) = \int_0^\infty ds\, s^{z-1} e^{-s} = \mathcal{M}[e^{-s}](z).
 \end{equation}
-The Laplace-Mellin theorem~\cite{Lew1975} states that
+The Laplace-Mellin theorem~\citep{Lew1975} states that
 \begin{equation}
   \Gamma(1-z)\mathcal{M}[f](z) = \mathcal{M}\big[\mathcal{L}[f]\big](1-z)\label{eq:Laplace-Mellin}.
 \end{equation}
@@ -343,7 +343,7 @@ and $\alpha=3/2$ yields
 \end{align}
 The prefactor is the Casimir--Polder energy for an atom above a perfect conductor~(\ref{eq:CP_conductor}).
 This result agrees with the known result for the TE contribution to the Casimir--Polder energy~[
-see Eq.~(14.210) in \S 14.3 of Steck~\cite{SteckNotes}\,].
+see Eq.~(14.210) in \S 14.3 of \citet{SteckNotes}\,].
 An ``efficiency'' $\eta\subTE$ can be defined by dividing the Casimir--Polder energy for an atom 
 and a dielectric by the Casimir--Polder energy between an atom and a perfect conductor.  
 The integral over $p$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
@@ -424,7 +424,7 @@ After substituting this back into the atom-surface energy~(\ref{eq:TM_CP_inter})
   \int_1^\infty dp\,\frac{1}{2p^4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}},\label{eq:TM_CP}
 \end{align}
 where we used $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
-for an atom near a dielectric half-space [Eq.~(14.205) in Steck~\cite{SteckNotes}\,].
+for an atom near a dielectric half-space [Eq.~(14.205) in \citet{SteckNotes}\,].
 The TM efficiency $\eta\subTM$ also has a closed-form solution, 
 \begin{align}
   \eta\subTM(\chi):=\,&\frac{1}{2}
@@ -680,7 +680,7 @@ These calculations can be extended to nonzero temperature and to account for dis
 to describe the near-field and high temperature limiting cases.  
 % So I read Babb's paper\footnote{Babb, J. F. and Klimchitskaya, G. L., and Mostepanenko, V. M., 
 % ``Casimir-Polder interaction between an atom and a cavity wall under the influence of real conditions'',
-%  Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.~\cite{Babb2004})
+%  Phys. Rev. A, \textbf{70},042901,(2004)} (which Dan cites for thermal Casimir-Polder calculations.~\citep{Babb2004})
 %   In it they use the free energy, which is $\mathcal{F} = -k_BT\log Z$, as the basis of their calculations.
 %  I've been trying to use the mean energy, $E= -\partial_\beta\log Z$. 
 For systems in thermal equilibrium at nonzero temperature, the free energy $\cF$ is used instead of the mean energy $E$.
@@ -726,8 +726,8 @@ This has important ramifications for the near-field and high temperature limits.
 In those limits, the Casimir effect is dominated by the TM polarization.  
 
 The high temperature limit touches on one of the arguments in the literature.  
-There has been a dispute over the correct model for the frequency dependence of a realistic metal,
-and the correct contribution from the TE mode at zero frequency~(Bordag\etal give a summary in Chapter~14 of Ref.~\cite{Bordag2009}).
+There has been a dispute in the literature over the correct model for the frequency dependence of a realistic metal,
+and the correct contribution from the TE mode at zero frequency~[a summary is given by \citet[Ch. 14]{Bordag2009}].
 This is particularly relevant for describing metals with effective dielectric functions.  
 The Drude and plasma models of the dielectric function of a metal are given respectively by
 \begin{equation}
@@ -740,7 +740,7 @@ whereas the plasma model diverges as $\omega^{-2}$.  The faster divergence of th
 model would 
 lead to an extra contribution from the TE polarization at zero frequency.  Early experiments were 
 unable to distinguish between the two models, although recent measurements have claimed to eliminate the 
-plasma model from consideration~\cite{Sushkov2011}.  We will assume that 
+plasma model from consideration~\citep{Sushkov2011}.  We will assume that 
 $\lim_{s\rightarrow 0}s^2\epsr(is)=0$ in the remainder of this section.
 
 At high temperature, $\beta\rightarrow 0$, so the spacing between the Matsubara frequencies $s_n=2\pi n/(\hbar \beta)$
@@ -932,7 +932,7 @@ V\supTM\subCP-V_0&\approx \frac{\hbar}{8\pi^2\epsilon_0c^3}\int_0^\infty d\omega
 \alpha(i\omega)\frac{\epsr(i\omega)-1}{\epsr(i\omega)+1},
 \end{align}
 which is the well known result for the van der Waals energy for an atom near a dielectric wall~[
-see Eq.~(14.199) of Steck~\cite{SteckNotes}\,].
+see Eq.~(14.199) of \citet{SteckNotes}\,].
 
 \subsubsection{The High Temperature, Far Field Limit}
 
@@ -950,7 +950,7 @@ V\supTM\subCP-V_0=\,&-\frac{k_BT\alpha_0}{16\pi\epsilon_0}\frac{\epsr(0)-1}{\eps
 \int_0^\infty d\cT\,\partial_d^2\frac{1}{\sqrt{2\pi }\cT^{3/2}} e^{-2 d^2/\cT}\\
 =\,&-\frac{k_BT\alpha_0}{16\pi\epsilon_0d^3}\frac{\epsr(0)-1}{\epsr(0)+1}.
 \end{align}
-This is the expected high temperature result for an atom and a dielectric wall~[see Eq.~(14.324) of Steck~\cite{SteckNotes}\,].
+This is the expected high temperature result for an atom and a dielectric wall~[see Eq.~(14.324) of \citet{SteckNotes}\,].
 Although we have not examined the equivalent Casimir expressions, they could be readily evaluated. 
 As noted in Eq.~(\ref{eq:high_temp}), it is expected that the dominant contribution comes from the TM polarization,
 due to the TM potential.  

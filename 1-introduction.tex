@@ -4,7 +4,7 @@
 The Casimir effect is one of the more surprising consequences of quantum electrodynamics (QED), the quantum theory
 describing the interaction of matter and photons.
 According to QED a pair of  electrically neutral, conducting bodies will be attracted to one another due to their mutual interaction
-with the quantized electromagnetic field, even if the electromagnetic field is in its vacuum state~\cite{Casimir1948}.  
+with the quantized electromagnetic (EM) field, even if the EM field is in its vacuum state~\cite{Casimir1948}.  
 In brief, the total energy of in the field is the sum of the energies of each of the field modes, 
 where each mode has vacuum energy proportional to its frequency.   
 The presence of the conducting bodies restricts the electric field on the plates.
@@ -19,7 +19,7 @@ between the plates.
 
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the electromagnetic Casimir effect is the most important example.  
-This is because photons (the quanta of the electromagnetic field) are massless which makes their interaction long-ranged, 
+This is because photons (the quanta of the EM field) are massless which makes their interaction long-ranged, 
 and the coupling of electromagnetism to matter is much stronger than gravity, the only other long-ranged fundamental force.  
 In the electromagnetic Casimir effect, one can think of the electrons in a body emitting and absorbing virtual photons that can in turn
 interact with electrons in other bodies. %  The fluctuating electric dipoles in the bodies then become correlated with one
@@ -30,7 +30,7 @@ macroscopic bodies such as metallic planes and dielectric slabs~\cite{Lifshitz19
 Alternatively, the Casimir effect can be attributed to the attraction between instantaneous dipoles forming in the bodies.  
 This interpretation is intimately related to the van der Waals force, where 
 molecules with fluctuating dipole moments are attracted to one another~\cite{vanderWaals}.
-While the emphasis on fluctuating electromagnetic fields or fluctuating dipoles may differ between Casimir and van der Waals forces,
+While the emphasis on fluctuating EM fields or fluctuating dipoles may differ between Casimir and van der Waals forces,
 they ultimately describe the same phenomenon.%, albeit at slightly different distance scales.  
 
 Despite the prediction of the Casimir force in 1948, precise measurements of the Casimir force were only
@@ -72,9 +72,9 @@ In contrast to the scattering method, the worldline method is a Monte Carlo meth
 easy to parallelize.  
 
 It is the goal of this thesis to extend the worldline method to computing electromagnetic Casimir effects.
-This requires accounting for the vector nature of the electromagnetic field, and including realistic coupling to 
+This requires accounting for the vector nature of the EM field, and including realistic coupling to 
 material properties, while attempting to retain as many of its appealing properties as possible.    
-In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the electromagnetic field, and introduce
+In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the EM field, and introduce
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
@@ -126,8 +126,8 @@ where they accounted for the retardation due to the finite speed of light.
 The retardation causes the potential to decay more quickly at larger distances~\cite{CasimirPolder1948}.  
 
 Casimir then showed that uncharged, conducting plates would be attracted by their mutual
-interaction with the quantized electromagnetic field~\cite{Casimir1948}.
-% This arises since the total energy in the quantized electromagnetic field is reduced due to the field's interaction
+interaction with the quantized EM field~\cite{Casimir1948}.
+% This arises since the total energy in the quantized EM field is reduced due to the field's interaction
 % with the conducting plates.
 This calculation emphasizes the role played by the fields, and suggests
 a global interaction due to the effective boundary conditions imposed by the plates.
@@ -178,14 +178,14 @@ and $\epsilon_0$ is the permittivity of free space.
 \subsubsection{Derivation of the Atom-Perfect Conductor Potential}
 \label{sec:CP_calc}
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
-in the coupling of the atom to the electromagnetic field.  We will consider the attraction between
+in the coupling of the atom to the EM field.  We will consider the attraction between
 an atom and a perfectly conducting wall.  
 (This derivation is adapted from Chapter~13 and \S14.3 of Steck~\cite{SteckNotes}.)
 The Hamiltonian for the whole atom-field system is
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
 \end{equation}
-where we have split the energy into energy for atom, the electromagnetic field, and a term describing their
+where we have split the energy into energy for atom, the EM field, and a term describing their
 interaction.  
 The atomic Hamiltonian is 
 \begin{gather}
@@ -216,8 +216,8 @@ H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
 The interaction Hamiltonian is written in the dipole approximation, which assumes that the atom is much smaller than
 the relevant wavelengths.  In this case, the dominant wavelengths are typically on the order of the separation between the atom
 and the wall.  
-In this calculation the mode functions $\vect{f}\subkz$ must satisfy the electromagnetic boundary conditions
-on the surfaces of the bodies.  The resulting electromagnetic mode functions (and thus the potential)
+In this calculation the mode functions $\vect{f}\subkz$ must satisfy the EM boundary conditions
+on the surfaces of the bodies.  The resulting EM mode functions (and thus the potential)
 are then sensitive to the arrangements of the bodies.  
 %This is distinct from the case in most field theory calculations where the modes are described by plane waves.  
 
@@ -239,7 +239,7 @@ For an atom in its ground state, the Casimir--Polder potential is given by
     \langle E_0, 0|  H_{\text{int}}|E_n, 1\subkz\rangle\langle E_n, 1\subkz|  H_{\text{int}}|E_0, 0\rangle}{\hbar(\omega_k+\omega_{n0})},
 \end{equation}
 where $|E_n,1\subkz\rangle$ denotes the state with the atom in energy level $n$ and one photon in mode $\vect{k}$,
-$|0\rangle$ denotes the vacuum state of the electromagnetic field, and the transition frequency $\omega_{n0}=(E_n-E_0)/\hbar$.
+$|0\rangle$ denotes the vacuum state of the EM field, and the transition frequency $\omega_{n0}=(E_n-E_0)/\hbar$.
 The shift $V\subCP$ can be understood as two virtual transitions---one from the atomic 
 ground state with no photons to an atomic excited state with one photon,
 followed by a return transition.  The total energy shift is found by summing over all possible intermediate states.
@@ -265,8 +265,8 @@ intermediate states are not directly physically observable on a detector.
   \end{fmfgraph*}
 \end{fmffile}
 \caption[Feynman Diagram for Casimir--Polder Energy]
-{Feynman diagram representing an atom interacting with electromagnetic field via emitting and absorbing photons.  
-  The wavy line represents the electromagnetic Green function in the presence of boundaries---as opposed to the usual plane 
+{Feynman diagram representing an atom interacting with EM field via emitting and absorbing photons.  
+  The wavy line represents the EM Green function in the presence of boundaries---as opposed to the usual plane 
   waves exploited in field theory computations.  The atom is excited into intermediate states.
 }
 \label{fig:feynman_CP}
@@ -287,7 +287,7 @@ The mode functions for the electric field near a perfectly conducting plane
 can be substituted into the energy.
 Following Milonni (\S3.12 in Ref.~\cite{Milonni1994}), we assume the atom is close to one wall 
 of a perfectly conducting box, but far from all other walls.
-The electromagnetic mode functions for a perfectly conducting box are given by 
+The EM mode functions for a perfectly conducting box are given by 
 \begin{align}
   \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg(&
   \hat{x}(\hat{\varepsilon}\subkz\cdot\hat{x})\cos(k_xx)\sin(k_y y)\sin(k_zz)\nonumber\\
@@ -367,8 +367,8 @@ Note that this type of calculation relies on having analytical expressions avail
 which limits this approach to simple geometries.  
 
 % The Casimir--Polder energy can be further factored in terms of atomic polarizabilities,
-% and Green functions for the electromagnetic field~\cite{McLachlan1963}. 
-% The atomic polarizability measures the linear response of an atom to the electromagnetic field,
+% and Green functions for the EM field~\cite{McLachlan1963}. 
+% The atomic polarizability measures the linear response of an atom to the EM field,
 % and is given by 
 % where $d_i$ is the $i^\text{th}$ component of the dipole operator $\vect{d}=e\vect{r}$.
 % %\todo{What does polarizability look like for a simple atom?}
@@ -404,12 +404,12 @@ which limits this approach to simple geometries.
 \subsection{Forces between Bodies: Casimir Energy}
 
 We now turn our attention to the Casimir effect where macroscopic bodies are attracted to 
-one another via their interaction with the quantized electromagnetic (EM) field~\cite{Casimir1948}.  
+one another via their interaction with the quantized EM field~\cite{Casimir1948}.  
 The presence of the bodies restricts the allowed modes of the electric field, 
 which is illustrated for perfectly conducting planes in Figure~\ref{fig:Casimir_sketch}.
-Each quantized mode of the electromagnetic field contributes
+Each quantized mode of the EM field contributes
 to the energy, even in the ground state with zero photons.
-The total ground state energy in the electromagnetic field is 
+The total ground state energy in the EM field is 
 \begin{equation}
   E=\sum_\alpha\frac{\hbar\omega_{\alpha}}{2},
 \end{equation}
@@ -521,7 +521,7 @@ separated by a gap of thickness filled with permittivity $\epsilon_3$ is given b
 \int_1^\infty dp\,p\sum_{\zeta=\text{TE, TM}}\log\left(1 - r^{(\zeta)}_{13}r^{(\zeta)}_{23}e^{-2\sqrt{\epsilon_3}ps d/c}\right),
 \label{eq:lifshitz}
 \end{align}
-where the electromagnetic reflection coefficients are given by 
+where the EM reflection coefficients are given by 
 \begin{align}
   r\supTE_{ij}  = \frac{\kappa_i-\kappa_j}{\kappa_i+\kappa_j} \quad
   r\supTM_{ij}  = \frac{\epsilon_j \kappa_i - \epsilon_i \kappa_j}{\epsilon_j \kappa_i + \epsilon_i \kappa_j},
@@ -547,7 +547,7 @@ The Casimir--Polder results for interacting atoms can be recovered from the Lifs
 $\epsilon \approx 1+\alpha_0n$, where $n\ll 1$ is the density, and $\alpha_0$ is the static polarizability.
 
 The Lifshitz theory can be extended to account for dispersion and finite temperature.  
-Some care is required in quantizing the electromagnetic field within dielectric media,
+Some care is required in quantizing the EM field within dielectric media,
 since according to the Kramers-Kr\"onig relations, the presence of dispersion implies dissipation.
 However, it has been observed that one gets the correct answers by a direct substitution
 $\epsilon(\vect{x})\rightarrow \epsilon(\omega,\vect{x})$.  This issue has been investigated more carefully in~
@@ -579,12 +579,12 @@ Casimir's original calculation vividly shows the importance of vacuum fields, an
 of the vacuum field~\cite{Jaffe2005}.  This is due to the emphasis given to the imposed boundary conditions,
 which are emphasized over the matter that created the boundary conditions.  
 It is the author's opinion that the Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
-mediated via the electromagnetic field~\cite{Jaffe2005, Rahi2009}.  This picture is also
+mediated via the EM field~\cite{Jaffe2005, Rahi2009}.  This picture is also
 analogous to the intuitive photon exchange picture used to explain the Casimir--Polder potential.
 % This view makes the clearest connection to the underlying fundamental physics, rather than emphasizing idealized
 % boundary conditions.
   Figure~\ref{fig:electron-effective-interaction} shows a term contributing to the Casimir effect where 
-electrons on different bodies interact with one another via the electromagnetic field.
+electrons on different bodies interact with one another via the EM field.
   The solid lines should
 be understood as the current operators for the electrons bound to a particular, separate media, while the 
 wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles,''
@@ -596,7 +596,7 @@ tensor $\sigma_{\mu\nu}$~\cite{Kubo1957,Altland2011}.  The conductivity tensor i
 via Ohm's Law $j_i=\sigma_{ij}E_j,$ which makes the connection between the underlying fundamental physics,
 and the material functions used in the Casimir effect.\footnote{
   This relationship was pointed out by Rahi\etal\cite{Rahi2009}, as a justification for their starting point
-  in quantizing the electromagnetic field in media.}
+  in quantizing the EM field in media.}
 
 
  \begin{figure}
@@ -975,11 +975,11 @@ body, the sum over frequencies also changes in a nonlinear fashion as more bodie
 \subsection{Scattering Approach}
 \label{sec:scattering}
 The scattering approach is currently the only general method of computing 
-electromagnetic Casimir forces between media.\footnote{The following is an extremely short introduction to the scattering
+EM Casimir forces between media.\footnote{The following is an extremely short introduction to the scattering
 method.  The book chapters by Lambrecht\etal~\cite{Lambrecht2011}, Rahi\etal~\cite{Rahi2011} and Johnson\etal~\cite{Johnson2011} 
 provide an excellent, varied introduction to the topic from the main contributors.}
 The scattering method 
-is based on scattering techniques from classical electromagnetic theory and quantum mechanics~\cite{Rahi2009}.
+is based on scattering techniques from classical EM theory and quantum mechanics~\cite{Rahi2009}.
 %The roots of the scattering method in Casimir physics go back a number of decades.  
 This method has been developed by a number of groups as an analytical method for general geometries~\cite{Emig2004, Lambrecht2006,
 Kenneth2006, Emig2007,
@@ -992,7 +992,7 @@ The Casimir energy can be written as
   E = \frac{\hbar c}{2\pi}\int_{0}^\infty d\xi \log\det[\mathbb{M}\mathbb{M}^{-1}_{\infty}]
   \label{eq:scattering}
 \end{equation}
-where $\mathbb{M}$ is the scattering matrix describing scattering between the free modes of the electromagnetic
+where $\mathbb{M}$ is the scattering matrix describing scattering between the free modes of the EM
 field induced by the presence of bodies, and $\xi$ is the imaginary frequency~\cite{Rahi2009}.
 The energy is renormalized via $\mathbb{M}^{-1}_\infty$,
 which is the scattering matrix as the bodies are removed to spatial infinity, this basically removes any
@@ -1024,13 +1024,13 @@ applications for piecewise constant media~\cite{Rodriguez2007,Rodriguez2007a, Ro
 The fluctuating-surface-current formulation is a general method for computing Casimir
 energies for piecewise continuous linear dielectric and magnetic media~\cite{Reid2009,Reid2011, Reid2013}.  
 In essence the method calculates the interaction between electric and magnetic surface currents 
-on different bodies, mediated by the electromagnetic field.  Mathematically this is derived 
-from a path integral for the electromagnetic field, where the fields are restricted to obeying EM boundary conditions at the 
+on different bodies, mediated by the EM field.  Mathematically this is derived 
+from a path integral for the EM field, where the fields are restricted to obeying EM boundary conditions at the 
 surfaces via functional delta functions (simpler boundary conditions were handled in this fashion in
 Refs.~\cite{Bordag1985,Li1991}).  The delta functions introduce fields 
 bound to the surfaces, which can be interpreted as surface currents flowing to enforce boundary conditions.
 After integrating out the EM field in the interior and exterior regions, 
-these surface currents interact with one another via the electromagnetic Green functions.
+these surface currents interact with one another via the EM Green functions.
 Since the method assumes piecewise, homogeneous media and enforces EM boundary
 conditions, it is the relatively simple homogeneous EM Green function that appears in these expressions.
 These surface integrals are then discretized by splitting the surface into a finite number of patches.
@@ -1089,7 +1089,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
 
         
     Path integrals underlie most of the work carried out in this thesis: we will use path integrals
-    to quantize the electromagnetic field, and the worldline method relies heavily on path integrals.
+    to quantize the EM field, and the worldline method relies heavily on path integrals.
     In addition, we will use the connection between path integrals and diffusion equations
     to verify analytically that the worldline path integral gives the correct results, and enhance our numerical
     calculations.  Considering their importance to this thesis, we will 
@@ -1657,7 +1657,7 @@ from, or reduce the time required to reach a given accuracy.
 
 However, the worldline method has some prominent shortcomings.  First of all, it only applies 
 to scalar fields.
-  The most important Casimir effects are due to electromagnetic radiation field, 
+  The most important Casimir effects are due to EM radiation field, 
 which is a transverse vector field.
   Second, it has only been applied for idealized potentials that effectively impose 
 Dirichlet boundary conditions on the surfaces.  As a result it is missing any 

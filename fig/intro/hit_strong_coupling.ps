@@ -4,6 +4,7 @@
 (plotlib/plotfonts.ps) run
 (plotlib/plotparameters.ps) run
 (plotlib/plotarrows.ps) run
+(plotlib/plotmisc.ps) run
 /width {6 } bind def
 /height {6} bind def
 /xmax {3} def
@@ -21,6 +22,60 @@
 (plotlib/casimirutilities.ps) run
 
 startplot
+
+
+
+
+% random walk starts here
+/nsteps 1000 def
+/xstep xmax cvr 0.1 mul nsteps cvr div def
+/outside 0 def
+/inside 1 def
+
+/status outside def
+1 setlinewidth
+TMcol
+
+/xpos 0  def
+/ypos 0  def
+/seed 19438 def
+xpos ypos cc moveto
+
+/BrownianBridge{
+		%Make Closed Brownian Bridge at origin
+		%first find tot and reset random numbers
+		gsave
+/xtot 0 def
+/ytot 0 def
+1 1 nsteps {
+  /dWx nrandpl xstep sqrt mul def
+	/dWy nrandpl xstep sqrt mul def
+  /xtotold xtot def
+  /ytotold ytot def
+  /xtot xtotold dWx add def
+  /ytot ytotold dWy add def % diffusion	
+} for
+
+/dxtot xtot 1 add nsteps div def
+/dytot ytot 1 add nsteps div def
+
+%reset random number generator
+seed setrandplseed
+
+1 1 nsteps {
+  pop
+  /dWx nrandpl xstep sqrt mul def
+	/dWy nrandpl xstep sqrt mul def
+  /xposold xpos def
+  /yposold ypos def
+  /xpos xposold dWx add dxtot sub def % diffusion
+  /ypos yposold dWy add dytot sub def
+  xpos ypos cc lineto % put more data on stack
+} for
+stroke
+grestore
+} def
+
 
 %<< /PageSize [20 in 10 in] >> setpagedevice 
 %0 4 in translate
@@ -103,30 +158,27 @@ grestore
 %Labels
 gsave
 -2.0 in -0.5 in translate
-mark
-90 rotate
-2 0.25 scale
-(intro/data/cp2.loop) run % load loop 1
+
+0 1 cc moveto
 TMcol
-NoPlotClip
-10000 PlotStackData
-% plot data points
-mark
-grestore
+BrownianBridge
+
+% mark
+% 90 rotate
+% 2 0.25 scale
+% (intro/data/cp2.loop) run % load loop 1
+% TMcol
+% NoPlotClip
+% 10000 PlotStackData
+% % plot data points
+% mark
+% grestore
 
 %Labels
-gsave
-2.0 in .5 in translate
-mark
--90 rotate
-2 0.24 scale
-(intro/data/cp1.loop) run % load loop 1
+0 0 cc moveto
+/seed 4534 def
 hitcol
-NoPlotClip
-10000 PlotStackData
-% plot data points
-mark
-grestore
+BrownianBridge
 
 
 

@@ -926,27 +926,12 @@ and the ability to handle arbitrary shapes.
 For a simple, symmetric geometry (like the perfectly conducting planes we used in Section~\ref{sec:CP_calc})
 it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.
-%   However for general geometries 
-% such an expansion may not be possible, or converge well.
 However, for completely general geometries these requirements force one to adopt a general 
 numerical approach to computing Casimir forces~\citep{Johnson2011}.
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
 
 
-
-
-% \begin{enumerate}
-% %\item Experiments spurred development of theory.  
-% % \item Prior methods relied on mode-function expansion of fields, which is only possible
-% % for simple geometries.  
-% % \item Theory must account for material properties.  Surface roughness.  
-% % \item Need general methods, tend to result in numerical integrals.
-% % \item Crudest method available is the proximity force approximation.  
-% % \item Analytical theory based on green function methods.  (Russian school, McLachlan, Schwinger)
-% % \item Scattering approach.  
-% % \item Worldline method.  
-% \end{enumerate}
 
 \subsection{Proximity Force Approximation}
 \label{sec:PFA}
@@ -1220,13 +1205,13 @@ quantum mechanics~\citep{McKeon1993, Strassler1992,Schubert2001}.
 % where each path acquires a phase proportional to the classical action for that path~\cite{Feynman1948,Feynman1965}.
 The basic insight of the worldline method is that for one-loop effective actions\footnote{
 One loop order in quantum field theory corresponds to processes such as the Casimir effect,
-where the field emits and absorbs a virtual particle.  These are often the first 
-correction from quantum effects, and as such are often computed.  For example, the Lamb shift and Casimir--Polder 
+where the field emits and absorbs a virtual particle, such as in Figure~\ref{fig:feynman_CP}.  
+These are the first correction from quantum effects.  For example, the Lamb shift and Casimir--Polder 
 effect involve one loop, since the electron emits and reabsorbed a photon.  Higher loop orders 
 corresponds to more virtual processes.  
-The effective action, gives the equations of motion
-in the absence of any external driving on the system~\citep[Ch. 16]{WeinbergQFT2}).  Often self-interactions or other
-quantum effects lead to a non-trivial effective actions.}, 
+The effective action, gives the equations of motion in the absence of any external driving on the system~\citep[Ch. 16]{WeinbergQFT2}).  
+The one-loop effective action then gives calculates action accounting for the lowest order contributions from quantum fluctuations
+around the classical solution.}, 
 the field path integral calculation can be recast in terms of the path
  integral for particles traveling in closed space-time paths.
   Higher order loop calculations can also be carried out with more particles, 
@@ -1236,6 +1221,10 @@ field effects for QED such as the Lamb shift~\citep{Schmidt1995},
 It has also been used as a numerical algorithm for computing these relativistic 
 QED effects~\citep{Mazur2014}---however, these methods were developed for free-space interactions at high energy, rather than the 
 low energy Casimir phenomena we seek to describe.  
+The worldline method is also closely related to the Heat Kernel~[which is reviewed in \citet{Vassilevich2003}].
+The Heat Kernel examines the divergence structure of a field theory by examining the short time behaviour of the 
+worldline.  
+
 
 The worldline method was first used to compute scalar Casimir energies by Gies\etal\citep{Gies2003,Gies2006, Gies2006a}.
 The scalar worldline method has been extended to nonzero temperatures \citep{Klingmueller2008},

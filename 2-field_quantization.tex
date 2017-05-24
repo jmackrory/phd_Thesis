@@ -390,7 +390,7 @@ evaluate the partition function for the fields, and take the appropriate derivat
 The EM partition function is defined as
 \begin{equation}
   Z\subEM = \mathrm{Tr}\Big(e^{-\beta \op{H}\subEM}\Big)
-  = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}\subEM}|\phi_0,\vect{A}_0\rangle.
+  = \int d\phi_0 d\vect{A}_0 \langle \phi_0,\vect{A}_0|e^{-\beta \op{H}\subEM}|\phi_0,\vect{A}_0\rangle.\label{eq:ZEM_trace}
 \end{equation}
 In analogy with the scalar field path integrals described in Chapter~\ref{ch:introduction}, this is can be converted 
 into a field path integral---a sum over all possible field configurations evolving in imaginary time 
@@ -1023,26 +1023,27 @@ the substitution $\epsr(\vect{r})\rightarrow\epsr(\vect{r},i\omega)$.  This was 
 in the context of the Lifshitz theory by \citet{Barash1975}, and more recently
 \citet{Rosa2010}.  As noted earlier, \citet{Rahi2009} derived their effective Lagrangian at finite
 temperature via linear-response theory.  Presumably the same arguments apply here, 
-so we assume that the appropriate frequency-dependent, non-zero temperature path integral is 
+for the frequency-dependent, non-zero temperature path integral.  
+
+The fields $\phi(\vect{r},\tau)$ in the partition function path integral are periodic, since 
+${Z=\tr[e^{-\beta \op{H}}] = \int d\phi\langle \phi| e^{-\beta \op{H}}|\phi\rangle}$, so that the starting and ending states 
+are identical.  The fields can then be expanded in a Fourier series,
+\begin{equation}
+  \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}),
+\end{equation}
+where the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
+the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation between different
+Matsubara frequencies,
+\begin{equation}
+  \int_0^{\beta \hbar c}d\tau\, e^{i(s_n+s_m)\tau/c}\phi_n\phi_m = \beta\hbar c \delta_{n,-m}\phi_n\phi_m=\beta\hbar c\delta_{nm}|\phi_n|^2,
+\end{equation}
+where $\phi_n^* = \phi_{-n}$ since the fields are real. 
+The partition function can then be written as 
 \begin{equation}
 Z\subTE = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilon_0 c^2 }{2}
   \int d\vect{r}\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
     -\nabla\cdot\frac{1}{\mur(\vect{r},is_n)}\nabla\right)\phi_n(\vect{r})\right] .
 \end{equation}
-The fields in the path integral are periodic (since the partition function started as a trace, implying the starting and ending states 
-are identical), which implies that the fields can be expanded in a Fourier series,
-\begin{equation}
-  \phi(\tau,\vect{r}) = \sum_{n=-\infty}^{\infty}e^{is_n \tau/c} \phi_n(\vect{r}).
-\end{equation}
-Here the Matsubara frequencies are defined as $s_n:=2\pi n/(\beta\hbar)$, and
-the $\phi_n$ are complex fields.  We will also need to use the orthogonality relation between different
-Matsubara frequencies,
-\begin{equation}
-  \int_0^{\beta \hbar c}d\tau e^{i\frac{(s_n+s_m)}{c}\tau}\phi_n\phi_m = \beta\hbar c \delta_{n,-m}\phi_n\phi_m=\beta\hbar c\delta_{nm}|\phi_n|^2,
-\end{equation}
-where $\phi_n^* = \phi_{-n}$ since the fields are real. 
-
-%Now let's \comment{assume} we just handle dispersion by taking $\epsilon(\vect{r})\rightarrow \epsilon(is_n,\vect{r})$.
 The same field rescalings can be carried out as for the frequency independent case.  
 At nonzero temperature, assuming that the system is in thermal equilibrium, then the free energy $\cF$
 is of interest, rather than the mean energy $E$.\footnote{

@@ -1044,7 +1044,7 @@ Z\subTE = \prod_{n=-\infty}^{\infty} \int D\phi_n\exp\left[ -\frac{\beta \epsilo
   \int d\vect{r}\, \phi_n^*(\vect{r})\left(\epsr(\vect{r},is_n)\frac{s_n^2}{c^2} 
     -\nabla\cdot\frac{1}{\mur(\vect{r},is_n)}\nabla\right)\phi_n(\vect{r})\right] .
 \end{equation}
-The same field rescalings can be carried out as for the frequency independent case.  
+The same field rescaling $\phi_n\rightarrow \sqrt{\mur}\phi_n$, can be carried out as for the frequency independent case.  
 At nonzero temperature, assuming that the system is in thermal equilibrium, then the free energy $\cF$
 is of interest, rather than the mean energy $E$.\footnote{
 The free energy is defined as $\cF = E-TS$, where $E$ is the mean energy, $S$ is the entropy and $T$ 
@@ -1057,11 +1057,11 @@ The Gaussian integrals for each $\phi_n$ can be carried out, so that the free en
 as
 \begin{equation}
 \cF=-\kB T\log Z\subTE = -{\sum_{n=0}^\infty}'\log\det\left(
-\epsr(is_n,\vect{\vect{r}})\mur(is_n,\vect{\vect{r}})\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE(\vect{x},is_n)\right),
+\epsr(\vect{r},is_n)\mur(\vect{r},is_n)\frac{s_n^2}{2c^2} -\frac{1}{2}\nabla^2+V\subTE(\vect{r},is_n)\right),
 \end{equation}
 where the prime on the sum indicates that the $n=0$ term is multiplied by a $1/2$ and
 \begin{equation}
-  V\subTE(\vect{x},is_n) := \frac{1}{2}\big[\big(\nabla\log\sqrt{\mur(\vect{x},is_n)}\big)^2-\nabla^2\log\sqrt{\mur(\vect{x},is_n)}\big].
+  V\subTE(\vect{r},is_n) := \frac{1}{2}\Big\{\big[\nabla\log\sqrt{\mur(\vect{r},is_n)}\big]^2-\nabla^2\log\sqrt{\mur(\vect{r},is_n)}\Big\}.
 \end{equation}
 The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
 Note that the zero frequency contribution vanishes if $\lim_{\omega\rightarrow 0}\omega^2\epsr(\omega)=0$, 
@@ -1076,8 +1076,9 @@ response of a metal.
 % This assumes that $\epsilon(\omega)$ has at most a simple pole at zero frequency, 
 % such that $\lim_{\omega\rightarrow 0}\omega^2\epsilon(\omega)=0.$    
 
-The nonzero-temperature TE worldline path integral can be developed as before.  However,
-the Hilbert space is only $(D-1)$-dimensional, since the thermal dimension is not present.
+The nonzero-temperature TE worldline path integral can be developed as before.
+The Hilbert space is only $(D-1)$-dimensional, 
+since the thermal dimension has already been treated with the Matsubara frequencies.
 The resulting worldline path integral is
 \begin{align}
 \cF\subTE-\cF_0 %& = -k_BT \log \frac{Z\subTE}{Z_0} \\
@@ -1095,10 +1096,12 @@ where the paths are $D-1$ dimensional spatial paths.
 %   So we also only use the normalization for 3D.
 This $\cT$-dependence also reflects the different $d$-dependent scaling behaviors in the near-field, 
 thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
+This will be discussed further in Section~\ref{sec:nonzero_temp}.
 
-The zero-temperature, dispersion-free Casimir energy~(\ref{eq:TE_worldline}) can be recovered from the free energy. 
+The zero-temperature, dispersion-free Casimir energy~(\ref{eq:TE_worldline}) can be recovered from the free energy
+~(\ref{eq:TEworldline_partition_function}). 
 In the limit $T\rightarrow 0$, the spacing between frequencies $\Delta s = (2\pi)/\beta \hbar\rightarrow 0$, 
-so $s_n$ can be approximated as a continuous variable, $s=n\Delta s$, and the sum can be approximate using
+so $s_n$ can be approximated as a continuous variable, $s=n\Delta s$, and the sum can be approximated using
 \begin{equation}
   \lim_{n\rightarrow \infty}\sum_{n}f(n\Delta s)\approx(\Delta s)^{-1}\int ds\, f(s).
 \end{equation}
@@ -1116,7 +1119,10 @@ can be evaluated, with the result that
   \approx&-\frac{\hbar c}{2}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{D/2}}\int d^{D-1}x_0\, 
 \dlangle   1 -  \frac{ e^{-\cT\langle V\subTE(\vect{x},0)\rangle}}{\sqrt{\langle\epsr(\vect{x},0)\mur(\vect{x},0)\rangle}} \drangle,
 \end{align}
-which is the anticipated zero temperature, dispersion free TE worldline energy~(\ref{eq:TE_worldline}).
+which is the anticipated zero-temperature, dispersion-free TE worldline energy~(\ref{eq:TE_worldline}).
+The next chapter develops analytical methods for evaluating the scalar worldline path integrals we have derived 
+here.  
+
 
 % The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
 % employ in the next chapter.  

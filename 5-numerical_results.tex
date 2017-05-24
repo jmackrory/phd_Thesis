@@ -1212,9 +1212,9 @@ This numerical calculated efficiency is compared with the integral solution $\ga
 The TM potential in the two body case is handled by splitting the two-body potential into a product 
 of single-body potentials:
 \begin{equation}
-  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(1)} + \VTM^{(2)})}\bigglinklangle_{x_k\rightarrow x_{k+1}} \approx
-  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(1)})}\bigglinklangle_{x_k\rightarrow x_{k+1}}
-  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(2)})}\bigglinklangle_{x_k\rightarrow x_{k+1}}.
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt (\VTM^{(1)} + \VTM^{(2)})}\bigglinkrangle_{x_k\rightarrow x_{k+1}} \approx
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt\, \VTM^{(1)}}\bigglinkrangle_{x_k\rightarrow x_{k+1}}
+  \bigglinklangle e^{-\int_0^{\Delta\cT} dt\, \VTM^{(2)}}\bigglinkrangle_{x_k\rightarrow x_{k+1}}.
 \end{equation}
 This is only valid for $\sqrt{\Delta \cT}\ll d$, which given that $\cT\sim d^2$,
  implicitly requires that $\sqrt{N}\gg 1$.  For typical simulations used in the TM case, $N\sim100$, so 

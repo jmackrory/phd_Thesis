@@ -1022,7 +1022,7 @@ conditions, it is the relatively simple homogeneous EM Green function that appea
 These surface integrals are then discretized by splitting the surface into a finite number of patches.
 All of the surface currents can then be integrated over, leaving a functional determinant analogous to Eq.~(\ref{eq:scattering})
 where now the matrix elements $\mathbb{M}$ describe the coupling between different surface-patches induced
-by the Green function.  
+by the EM Green functions.  
 
 Numerically, this method comes down to computing the determinant of a large matrix, which is 
 an intensive operation.  If a matrix has $N$ non-zero entries, the determinant for a dense matrix requires $\order(N^3)$ operations.
@@ -1085,7 +1085,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
 
     Let us consider the quantum mechanical treatment of a particle moving in a $D$-dimensional space time, 
     in a time-independent potential $V(\vect{x})$. 
-    The particle is described by the following Hamiltonian 
+    The particle is described by the following Hamiltonian:
     \begin{equation}
       \op{H} =  \frac{\op{\vect{p}}^2}{2m} + V(\op{\vect{x}}).
     \end{equation}
@@ -1110,14 +1110,14 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       \langle \vect{x}_N,t| \vect{x}_0, t_0\rangle = \langle \vect{x}_N| e^{-i\op{H}t/\hbar}|\vect{x}_0\rangle.
     \end{equation}
     The amplitude to propagate from $\vect{x}_0$ to $\vect{x}_N$ can be developed into a path integral in a number of steps.
-    First, split the evolution operator into $N$ pieces, and insert $(N-1)$ resolutions of the $\vect{x}$-identity 
-    and $N$ resolutions of the $\vect{p}$-identity between  the pieces
+    First,  the evolution operator is split into $N$ pieces, and $(N-1)$ resolutions of the $\vect{x}$-identity 
+    and $N$ resolutions of the $\vect{p}$-identity are inserted between  the pieces
     \begin{align}
       \langle \vect{x}_N,t| \vect{x}_0, t_0\rangle % &= \int \prod_{k=1}^{N-1} d\vect{x}_k 
       % \langle \vect{x}_f|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle
       % \langle \vect{x}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       % \cdots \langle \vect{x}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle\\
-      &=\int \prod_{k=1}^{N-1} d\vect{x}_k \prod_{j=0}^{N-1} \frac{d\vect{p}_j }{(2\pi\hbar)^D}
+      &=\int \prod_{k=1}^{N-1} d\vect{x}_k \prod_{j=1}^{N-1} \frac{d\vect{p}_j }{(2\pi\hbar)^D}
       \langle \vect{x}_N|\vect{p}_{N}\rangle\langle\vect{p}_{N}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-1}\rangle\nonumber\\
       & \hspace{0.5cm}\times\langle \vect{x}_{N-1}|\vect{p}_{N-1}\rangle\langle\vect{p}_{N-1}|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{N-2}\rangle
       \cdots \langle \vect{x}_1|\vect{p}_1\rangle\langle \vect{p}_1|e^{-i\op{H}\Delta t/\hbar}|\vect{x}_{0}\rangle
@@ -1125,7 +1125,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     where $\Delta t:=t/N$. 
     At this point we can note the basic structure: The total amplitude for 
     the particle to propagate from $\vect{x}_0$ to $\vect{x}_N$ is the product of the amplitudes to propagate 
-    from one point to the next, with the total amplitude being the sum over all
+    from one point $\vect{x}_k$ to the next $\vect{x}_{k+1}$, with the total amplitude being the sum over all
     such paths.  
     Each infinitesimal time evolution operator can factored into a kinetic and potential piece, 
     \begin{equation}
@@ -1145,9 +1145,10 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
       % \prod_{n=0}^{N-1}\bigg[\langle \vect{x}_{n+1}|\vect{p}_{n+1}\rangle
       % \langle\vect{p}_{n+1}|e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}
       %   e^{-iV(\vect{x}_n)\Delta t/\hbar }|\vect{x}_{n}\rangle\bigg]\\
-        &= \int \prod_{k=1}^{N-1} d\vect{x}_k \prod_{k=1}^{N-1} \frac{d\vect{p}_k }{(2\pi\hbar)^D}\nonumber\\
-      &\times\bigg(\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)}     e^{-iV(\vect{x}_n)\Delta t/\hbar }
-      e^{i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg).
+        &= \int \prod_{k=1}^{N-1} \frac{d\vect{x}_k d\vect{p}_k }{(2\pi\hbar)^D}% \nonumber\\
+      % &\times
+\bigg(\prod_{n=0}^{N-1}  e^{-i\vect{p}^2_{n+1}\Delta t/(2m\hbar)-iV(\vect{x}_n)\Delta t/\hbar 
+      +i(\vect{x}_{n+1}-\vect{x}_n)\cdot\vect{p}_{n+1}/\hbar}\bigg).
     \end{align}
     Since the momentum integrals are Gaussian, they can be straightforwardly evaluated,
     with the result
@@ -1186,17 +1187,17 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     The extension to field path integrals over fields is straightforward: the field $\phi(\vect{x})$ 
     is described by its value at finitely many points $\phi(\vect{x}_k)$, where the field at each point
     varies independently.  The field path integral involves an integral over the field values at all of these 
-    points.  At the end of the calculation, the spacing between grid points go to zero, 
-    and the size of the grid extend to infinity so as to encompass all of the bodies.  
+    points.  At the end of the calculation, the spacing between grid points goes to zero, 
+    and the size of the grid is taken to be arbitrarily large.  
     We will also only need to consider Gaussian path integrals, of the type considered here.  
-    In a later chapter we will extend this derivation to include sources.
+    This derivation will extended to include sources in Chapter~\ref{ch:feynman_kac}.
 
 \section{Scalar Worldline Casimir Energies}
 \label{sec:dirichlet_worldline}
-The worldline method is an alternative method for computing Casimir energies.
+The worldline method is an alternative method for computing Casimir energies~\citep{Gies2003}.
 The worldline method is a descendant of the scalar electrodynamics 
 discussed by \citet{Feynman1950}, where the dynamics of a scalar field 
-is described by in terms of a particle propagating in an artificial proper-time through the fixed background field. 
+is described in terms of a particle propagating in an artificial proper-time through a fixed background potential. 
 The worldline method was later developed as an alternative method for 
 carrying out general quantum field theory calculations in terms of single particle 
 quantum mechanics~\citep{McKeon1993, Strassler1992,Schubert2001}.  
@@ -1217,7 +1218,7 @@ the field path integral calculation can be recast in terms of the path
   Higher order loop calculations can also be carried out with more particles, 
 and gauge fields can also be treated~\citep{Schubert2001}.
 For example, the worldline method has been used to compute relativistic
-field effects for QED such as the Lamb shift~\citep{Schmidt1995},  
+field effects for QED such as the Lamb shift~\citep{Schmidt1995}.  
 It has also been used as a numerical algorithm for computing these relativistic 
 QED effects~\citep{Mazur2014}---however, these methods were developed for free-space interactions at high energy, rather than the 
 low energy Casimir phenomena we seek to describe.  
@@ -1270,17 +1271,17 @@ We now introduce the basic scalar worldline method, to discuss its positive feat
 We will use terminology and scaling of dimensions in common with our later work, rather than the 
 choices used in the original papers by \citet{Gies2003}.
 [See also Chapter 20 of Steck's Quantum Optics notes for an alternative perspective on this work, including
-some of the analytical techniques we will use later~\citep{SteckNotes}.]
+some of the analytical techniques will be used in later chapters~\citep{SteckNotes}.]
 
-Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r},t)$.  
+Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r})$.  
 As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
  and $\vect{x}$, the coordinate of a path integral.
 The action for the field $\phi$ is given by the time integral of the Lagrangian density $\cL$, 
 \begin{equation}
   S = \int_0^T dt \int d\vect{r}\, \cL = \int_0^T dt \int d\vect{r} 
-  \left( \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r},t)\phi^2\right).
+  \left( \frac{1}{2c^2}(\partial_t\phi)^2-\frac{1}{2}|\nabla\phi|^2-V(\vect{r})\phi^2\right).
 \end{equation}
-The potential $V(\vect{r},t)$ defines the surfaces of the interacting objects
+The potential $V(\vect{r})$ defines the surfaces of the interacting objects
 \begin{equation}
   V(\vect{r}) := \lambda \sum_r \delta[\sigma_r(\vect{r}-\vect{R}_r)],
 \end{equation}
@@ -1295,32 +1296,32 @@ From the Lagrangian, one can find the Hamiltonian and quantize the theory.
 %  and useful to follow in cases where there may be ambiguities).
 The momentum conjugate to $\phi$ is given by
 \begin{equation}
-  \Pi := \frac{\delta \cL}{\delta(\partial_t\phi)} = \frac{1}{c^2}\partial_t\phi,
+  \Pi(\vect{r},t) := \frac{\partial \cL}{\partial(\partial_t\phi)} = \frac{1}{c^2}\partial_t\phi(\vect{r},t).
 \end{equation}
-where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
+%where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
 The Hamiltonian is then given by
 \begin{align}
-  H &:= \int d\vect{r}\,(\Pi\partial_t\phi -  L)= \int d\vect{r}\,\bigg(\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r},t)\phi^2\bigg).  
+  H &:= \int d\vect{r}\,(\Pi\partial_t\phi -  L)
+= \int d\vect{r}\,\bigg(\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r})\phi^2\bigg).  
 \end{align}
 The theory can now be quantized by promoting the classical fields to quantum operators, 
-$\phi\rightarrow \op{\phi},\, \Pi\rightarrow\op{\Pi}$.
-The fields can be promoted to operators with equal-time commutation relations
+$\phi\rightarrow \op{\phi},\, \Pi\rightarrow\op{\Pi}$, with equal-time commutation relations
 \begin{equation}
   [\op{\phi}(\vect{r},t),\op{\Pi}(\vect{r'},t)] = i\hbar \delta(\vect{r}-\vect{r'}).
 \end{equation}
 In exactly analogous fashion to quantum mechanics, the overlap between states is given by 
 \begin{equation}
-  \langle \phi|\Pi\rangle = \exp\bigg(\frac{i}{\hbar}\int d\vect{r} \phi(\vect{r})\Pi(\vect{r})\bigg).
+  \langle \phi|\Pi\rangle = \exp\bigg(\frac{i}{\hbar}\int d\vect{r}\, \phi(\vect{r})\Pi(\vect{r})\bigg).
 \end{equation}
 Physical quantities of interest such as Casimir energies and forces can be computed
-by taking suitable derivatives of the partition function. 
+by taking suitable derivatives of the field partition function. 
 The quantum partition function for the field is 
 \begin{equation}
-  Z = \tr\left( e^{-\beta\op{H}}\right) = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,
+  Z = \tr\left( e^{-\beta\op{H}}\right) = \int d\phi \langle \phi| e^{-\beta \op{H}}|\phi\rangle,\label{eq:Zphi}
 \end{equation}
 and the trace is evaluated over the complete set of field states.  
 It is actually more useful to carry out calculations with the free energy $\mathcal{F}=-\kB T \log Z$.
-In classic path integral fashion the exponential operator can be split into $N$ pieces, and resolutions of the identity
+As in Section~\ref{sec:feynman_path_integral}, the exponential operator can be split into $N$ pieces, and resolutions of the identity
 in both fields and conjugate-momentum fields can be inserted between each piece.  
 % \begin{align}
 %   Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\rangle
@@ -1336,9 +1337,9 @@ where $\tau=\beta\hbar c$.  The partition function can be cast into a more sugge
 by integrating by parts in the exponential integrand, 
 \begin{equation}
   Z = \int D\phi \exp\left[-\int_0^{\hbar\beta c} d\tau \int d\vect{r}\,\phi(\vect{r},\tau)
-    \left(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right)\phi(\vect{r},\tau)\right],
+    \left(-\frac{1}{2}\partial_\tau^2-\frac{1}{2}\nabla^2+V(\vect{r})\right)\phi(\vect{r},\tau)\right].
 \end{equation}
-where the surface terms can be discarded by assuming the fields tend to zero at spatial (and temporal)
+The surface terms from integrating by parts were discarded by assuming the fields tend to zero at spatial (and temporal)
 infinity.% \comment{Actually need frequencies for periodic functions.  Especially for finite temperature,
 % dispersion.  Will discuss more carefully later.}
 
@@ -1348,27 +1349,28 @@ Some care is required in regularizing such infinite determinants.
 This is done in analogy with finite dimensional Gaussian integrals.  
 The fields can be considered as only being evaluated on a finite lattice of space-time points,
 with the lattice also having a finite extent which bounds all bodies.  
+The field at each point is treated as an independent variable from the others.   
 The gradient operators can be treated via their finite difference approximations, 
 which can be thought of as sparse matrices.
-For example, $\partial_x^2\phi(x_k) \approx [\phi(x_k+\Delta)-2\phi(x_k)+\phi(x_k-\Delta)]/\Delta^2$
+For example, $\partial_x^2\phi(x_k) \approx [\phi(x_k+\Delta)-2\phi(x_k)+\phi(x_k-\Delta)]/\Delta^2$.
 In that case the partition function is a large, finite Gaussian integral of the form, 
 \begin{equation}
   Z_{\text{reg}} = \int d\phi_k\exp\left(-\sum_{j,k}\Delta \tau (\Delta x)^{D-1}\phi_k A_{jk}\phi_j\right).
 \end{equation}
 where the fields have been labeled with position indices and the matrix $A$ represents the differential
 operator.  
-This regularized expression can be integrated, under the assumption that the eigenbasis of $A$ can be found,
-where $A_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_k$.  In that case, each Gaussian integral decouples and the 
+This regularized expression can be integrated, under the assumption that the eigenvectors of $A$ can be found,
+where $\sum_kA_{jk}\psi^{(n)}_k=\lambda_{(n)}\psi^{(n)}_j$.  In that case, each Gaussian integral decouples and the 
 regularized partition function can be written as 
 \begin{equation}
-   Z_{\text{reg}} = C \prod_k \lambda_{(n)}^{-1/2} = C \det(A),
+   Z_{\text{reg}} = C \prod_n \lambda_{(n)}^{-1/2} = C \det(A)^{-1/2},
 \end{equation}
 where the determinant is understood to be the product of the eigenvalues of the operator $A$.\footnote{
 In fact, there is an approach to computing van der Waals energies based on directly 
 evaluating a functional determinant for electric fields on a discrete spatial grid~\citep{Maggs2006,Pasquali2008}. This approach 
 omits any time evolution of the fields, but it does offer a direct method of trying to evaluate the field path integral.
 That work relied on direct spatial discretization to evaluate the functional determinants, which limits
-the size of medium that can be considered.)
+the size of medium that can be considered.
 }
 The limit of an arbitrarily large volume, and lattice resolution can be taken after integration.
 
@@ -1381,8 +1383,8 @@ functional determinant,
 % action for the scalar field.  This yields essentially the same expression.  This expression has
 % also retained a factor of $2$ on the gradients --- this will simplify the representation of the 
 % worldline path integral.
-The proportionality is due to an additional (infinite) normalization constant, which will
-be divided out in the renormalization process.  
+The proportionality is due to an additional (infinite) normalization constant which will
+be cancelled in the renormalization process.  
 The free energy for the interacting field can be written as 
 \begin{equation}
   \mathcal{F} = -\kB T\log Z = \frac{1}{2}\kB T 
@@ -1391,26 +1393,24 @@ The free energy for the interacting field can be written as
 \end{equation}
 where $C$ is a divergent constant.  
 As it stands this functional determinant is divergent, but finite results can be found by subtracting off the 
-free energy when the bodies are removed arbitrarily far apart.  Physically this corresponds to 
-computing energy differences between different configurations of bodies.  % The renormalization also cancels off 
-% the infinite constant normalization factors.  
+free energy $\cF_0$ when the bodies are removed arbitrarily far apart.  
 The renormalized free energy can now be written in terms of a single-particle path integral via some formal 
-manipulations.  First, we will use the identity $\log\det A=\tr\log A$, which can be readily
-verified for positive finite matrices.  
+manipulations.  First, we will use the identity $\log\det A=\tr\log A$, which can be 
+verified for positive finite matrices,  
 \begin{align}
   \log\det A &= \log\prod_j \alpha_j
   =\sum_j \log\alpha_j
   = \tr\log A,\label{eq:log-det}
 \end{align}
-where we used the facts that the trace and determinant of a matrix are given by the sum
-and product of its eigenvalues respectively. 
+where we used the facts that the trace and determinant of a matrix $A$ are given by the sum
+and product of its eigenvalues $\alpha_j$ respectively. 
 Second, the logarithm can be rewritten in an integral representation,
 \begin{equation}
   \log A -\log B= -\int_0^\infty \frac{d\cT}{\cT} (e^{-A\cT} - e^{-B\cT}),\label{eq:integral_log}
 \end{equation}
 where $A$ and $B$ are positive operators (i.e. $A$ and $B$ have strictly positive eigenvalues).
 This expression also relies on a difference of terms to cancel out divergent terms at $\cT=0$.  The 
-earlier renormalization by subtracting off the vacuum energy provides exactly this subtraction. 
+earlier renormalization by subtracting off the vacuum energy when the bodies are far apart provides exactly this subtraction. 
 
 By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to the free energy~(\ref{eq:free-energy-det}),
  the renormalized free energy can be rewritten as
@@ -1420,15 +1420,15 @@ By applying Eqs.~(\ref{eq:log-det}) and (\ref{eq:integral_log}) to the free ener
 \end{equation}
 The trace can be evaluated by introducing a $D$-dimensional auxiliary Hilbert space, where 
 $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x},x_{\tau}|\psi\rangle$,
-$[\op{x}_i,\op{p}_j]=i\delta_{ij}$, with the result that 
+$[\op{x}_i,\op{p}_j]=i\delta_{ij}$.  Note that $\hbar=1$ in this auxiliary Hilbert space.  The free energy is then
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
   \int d\vect{x}_0d\tau_0\, \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2 -\cT V(\op{\vect{x}})}
 -e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2}  |\vect{x}_0,\tau_0\rangle.
 \end{equation}
-The free energy is then in the form of the imaginary-time transition amplitude for a quantum particle
+The free energy is now in the form of the imaginary-time transition amplitude for a quantum particle
 in $D$ space-time dimensions, in a potential $V$.
-  In the same fashion as in Section~\ref{sec:feynman_path_integral},
+In the same fashion as in Section~\ref{sec:feynman_path_integral},
 this can be converted into a single-particle path integral, although 
 there are some minor differences.  First, the starting and ending points are the same,
 so the paths form closed loops.  
@@ -1477,30 +1477,31 @@ The resulting paths are a specific form of Brownian motion.
  A Brownian motion (or Wiener process) is a continuous random process $W(t)$, that starts at the origin ${W(t=0)=0}$, 
 and has increments $\Delta W(t):=W(t+\Delta t)-W(t)$, that are Gaussian random variables with $\dlangle \Delta W(t)\drangle=0$,
 $\dlangle \Delta W(t) \Delta W(t')\drangle = 0$ for $t\ne t'$ and $\dlangle [\Delta W(t)]^2\drangle=0$~\citep{Gardiner2009}.  
+(Note that we are using $\dlangle\cdots\drangle$ to denote the ensemble average.)
 A Brownian bridge is a Brownian motion with fixed end points at times $t=0$ and $t=T$, where 
 $B(t=0)=0$, and $B(t=T)=c$, and its increments obey the same statistics as the Wiener process~\citep{Karatzas1991}.  
-Throughout this thesis, we will most often use the discrete form of these processes, for example $W_j=W(t_j)=W(j\Delta t)$.
+Throughout this thesis, we will most often use the discrete form of these processes where $W_j=W(t_j)=W(j\Delta t)$.
 Brownian motion can be straightforwardly generalized to multiple-dimensions.  
 
 The result of these manipulations is 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\frac{\hbar c}{2}\int \frac{d\cT}{(2\pi\cT)^{D/2}\cT} \int d\vect{x}_0
-  \dlangle e^{-\cT\langle V\rangle} - 1\drangle,
+  \dlangle e^{-\cT\langle V\rangle} - 1\drangle_{\vect{x}(t)},
   \label{eq:scalar_worldline}
 \end{align}
- where $\dlangle\cdots\drangle$ denotes an ensemble average over closed Brownian bridges $\vect{x}(t)$
+ where $\dlangle\cdots\drangle_{\vect{x}(t)}$ denotes an ensemble average over closed Brownian bridges $\vect{x}(t)$
 starting at $\vect{x}_0$ and returning with $\vect{x}_N=\vect{x}_0$, and 
 \begin{equation}
   \langle V\rangle := \frac{1}{\cT}\int_0^\cT dt\,V[\vect{x}(t)] = \frac{1}{N}\sum_{k=0}^{N-1}V(\vect{x}_k)
 \end{equation}  
 is the path-averaged value of the potential. 
 The worldline method relies on generating an ensemble of closed Brownian bridges, and evaluating
-the path-averaged potential for each path.  One must also integrate over the starting point $\vect{x}_0$
-of the paths, and the total path time $\cT$.  The total path time $\cT$ governs the spatial extent of the paths, 
-where the typical extent of is given by $x\sim\sqrt{\cT}$.
+the path-averaged potential for each path.  The total Casimir energy then requires further integrals over the starting point $\vect{x}_0$
+of the paths, and the total path time $\cT$.  The path time $\cT$ governs the spatial extent of the paths, 
+where the typical extent of a path is given by $x\sim\sqrt{\cT}$.
 The renormalization against vacuum ensures that only paths that touch one of the bodies contribute.  
-In order to extract interaction energies (such as the two-body Casimir energy) one subtracts the 
-one-body energies, which only account for the potential from one body.  As a result, only
+In order to extract interaction energies between two bodies (such as the two-body Casimir energy), the single body
+energies for each body must also be subtracted from the total energy.  As a result, only
 paths that touch both bodies contribute.  This is depicted in Figure~\ref{fig:strong_coupling_cartoon},
 where the upper path would contribute to the Casimir energy, while the lower path would not.  
 At small times $\cT$, both paths would shrink down around their starting points, 
@@ -1514,7 +1515,7 @@ to the $\cT^{-(1+D/2)}$ dependence, the lower path would have a smaller contribu
 \center
 \includegraphics[width=10cm]{fig/intro/hit_strong_coupling}
 \caption[Schematic of worldline paths interacting with plane and sphere]
-{Schematic of worldline paths interacting with plane and sphere.  
+{Schematic of worldline paths interacting with a plane and a sphere.  
   Only paths which touch \emph{both} bodies will contribute at a given path time $\cT$.  
   The upper path touches both objects and will contribute to Casimir energy,
   while the lower path only touches one body, and does not contribute to Casimir energy.}
@@ -1526,14 +1527,15 @@ to the $\cT^{-(1+D/2)}$ dependence, the lower path would have a smaller contribu
 The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).
   The typical extent of a Brownian motion of total path time $\cT$ is $\sqrt{\cT}$. 
 A typical path will touch a surface a distance $d$ away, at total path time $\cT\sim d^2$.
-Since the integral is only non-zero after a path intersects the bodies, and the integrand is unity otherwise,
+Since the integrand~(\ref{eq:scalar_worldline}) is either zero or one, depending on whether any points
+on the path intersect the bodies,
 the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D}$.  
-After integration over the starting point, one finds the Casimir energy scales as $d^{-3}$ in four
-space-time dimensions.
+After integration over the starting point $\vect{x}_0$, the Casimir energy scales as $d^{-3}$ in four
+ dimensions.
 
-The worldline method has also been extended to non-zero temperatures \citep{Klingmueller2008}.
-The generalization is straightforward---in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$
-since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace.  This motivates
+The worldline method has also been extended to nonzero temperatures \citep{Klingmueller2008}.
+The generalization is straightforward---in essence the fields must be periodic on $\tau\in[0,\beta\hbar c]$,
+since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace in Eq.~(\ref{eq:Zphi}).  This motivates
 expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
 where each Fourier component contributes independently of the others.  The same sort of manipulations
 can be carried out with the result 
@@ -1544,9 +1546,8 @@ can be carried out with the result
 where the prime on the sum means that the $n=0$ term is multiplied by a $1/2$.  
 Since the $\cT$ dependence differs, there is also a different distance dependence.
 Since the effective dimension has been reduced by one, the energy density now scales as $d^{-(D-1)}$,
-which means the renormalized energy density scales as $d^{-3}$ in four space-time dimensions.
-% In the zero-temperature limit where $\beta\rightarrow \infty$, the sum over Matsubara frequencies
-% can be replaced by a Riemann sum, and the prior zero-temperature results
+which means the renormalized energy density scales as $d^{-3}$, and the total energy scales as $d^{-2}$ in four dimensions.
+
 \label{sec:worldline_distance_dep}
 
 \subsection{Numerical Method}
@@ -1566,7 +1567,7 @@ then a closed Brownian bridge can be constructed as
 \begin{equation}
   B_k = \sum_{j=1}^k \Delta W_k -\frac{k}{N}W_N.\label{eq:prorate-loop}
 \end{equation}
-This algorithm has the virtue of simplicity, but it does require that one know the whole Brownian path 
+This algorithm has the virtue of simplicity, but it does require that knowledge the whole Brownian path 
 in order to construct the closed version.
 \citet{Gies2003} developed an improved algorithm, the so-called ``v-loop'' algorithm for generating
 Brownian paths. 
@@ -1588,14 +1589,8 @@ the worldline integrand goes to negative one.
 If however, no points on the path intersect a surface, then the potential is zero, and the renormalized
 worldline integrand is also zero.  
 
-Once a particular random path has been constructed, it is necessary to integrate over the starting
-point $\vect{x}_0$, and the total path time $\cT$.  
-% At small times, the paths will note intersect any of the bodies so that the potential is zero,
-% and the renormalized energy integrand $e^{-\cT\langle V\rangle}-1\rightarrow 0$.
-% At later times, the paths will intersect the bodies, and the potential will be non-zero.
-% In most work on worldlines, the potential is assumed
-% to saturate so that $e^{-\cT\langle V\rangle}\rightarrow 0$ if any part of the path intersects one of
-% the bodies, so the renormalized integrand $e^{-\cT\langle V\rangle}-1\rightarrow -1$.
+Once a particular random path has been constructed, it is necessary to integrate the contributions from each starting
+point $\vect{x}_0$, and path time $\cT$.  
 Thus the worldline algorithm relies on finding the times $\cT$ when at least one path point intersects
 the bodies, and integrating over those times.  This must further be integrated over every possible path starting point.
 For simple geometries, these touching times can be found analytically for a particular random path,
@@ -1616,12 +1611,12 @@ and accumulate a contribution to the Casimir energy based on the potential $V$ t
 
 Second, it offers a geometry independent method of handling Casimir forces.  The paths are 
 created without reference to the underlying body geometry or a spatial discretization, so the method can be easily applied to arbitrarily
-complicated arrangements of bodies.  The only requirement would be that the paths are fine enough
+complicated arrangements of bodies.  The only requirement is that the paths are fine enough
 to resolve the structure of the surfaces.  
 
 Third, since each path is independent, the algorithm is trivially parallelizable: each path
 can be handled by a separate computing process, without any requirement that the processes communicate
-with one another, except for accumulating results.  This has the advantage of exploiting the growth of computing clusters with many nodes,
+with one another, except when accumulating results.  This has the advantage of exploiting the growth of computing clusters with many nodes,
 where that power can be harnessed with minimal effort: once the algorithm works on a single computer,
 it can be easily extended to arbitrarily many computers to increase the size of the ensemble sampled
 from, or reduce the time required to reach a given accuracy.  
@@ -1704,23 +1699,26 @@ no guarantee of correctness.
 The rest of this thesis is laid out as follows: 
 In Chapter~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
-We will carry this out both for splitting the EM field into two noninteracting scalar polarizations,
-as well as the fully coupled path integral.
+We will attempt to carry this out in two ways. 
+First, we will develop the full vector path integral for the EM field.  Unfortunately, this path integral has a number of worrisome features.
+Second, we will split the EM field into two noninteracting scalar polarizations,
+the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
 %We will also review others work on quantizing the EM field in media.
 
-In Chapter~\ref{ch:feynman_kac} we will discuss the general methods of solving single-particle path 
+In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
 integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
- is the solution to a diffusion equation.  In simple cases, the Feynman-Kac formula can be solved,
-and we will derive those solutions for some simple planar geometries. 
+ is the solution to a diffusion equation.  In simple cases, the diffusion equation can be solved.
+We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
 
 In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
 We will also discuss the transition between high and low temperature, and near field limits within the
 worldline context.  
 
-In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals
-This will includes efficient methods for computing derivatives, as well as Monte Carlo sampling methods
-for generating paths.  We will examine the convergence of the methods as the path resolution is increased.
+In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
+This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
+for generating paths and sampling $\vect{x}_0$ and $\cT$.  
+We will examine the convergence of the methods as the path resolution is increased.
 
 In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
 for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  

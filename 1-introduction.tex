@@ -729,7 +729,7 @@ Two of the primary experimental errors are due to
 patch potentials, and surface roughness.  
 The patch potentials are randomly distributed, localized surface charge distributions on the surface of a conductor.  
 Their Coulombic interaction leads to a $d^{-1}$ power law contribution to the total force, 
-which must be subtracted off to extract the weaker Casimir force, which decays as $d^{-2}$ or $d^{-3}$~\citep{Sushkov2011}.  
+which must be subtracted off to extract the weaker Casimir force, which decays as $d^{-3}$ or $d^{-4}$~\citep{Sushkov2011}.  
 
 % The patch potentials are localized surface 
 % charge distributions, which due to the longer range Coulomb interaction must be subtracted off to extract the weaker
@@ -799,7 +799,7 @@ where atoms are trapped within a few microns of the surface via a combination of
 the surface.  %The atoms are typically trapped within a micron of the surface.  
 In most applications the Casimir effect imposes a lower bound on how close bodies can be brought 
 to each other, which in turn limits the coupling strength, as well as how small devices can be made.
-In the atom-chip example bringing the atoms closer than a micron lead to most of the atoms escaping the 
+In the atom-chip example, bringing the atoms closer than a micron lead to most of the atoms escaping the 
 trap~\citep{Lin2004}.
 
 Another direction that has been pursued is strong coupling of atoms to light via cavity QED.  
@@ -851,9 +851,9 @@ Casimir forces, and carefully remove all known backgrounds.
 
 Given that Casimir effects tend to enforce lower bounds for how close bodies can approach each other,
 there has been a search for repulsive Casimir effects.  This would open the possibility
-of trapping particles, and allow smaller devices to be constructed.  
+of trapping particles, and potentially allow smaller devices to be constructed.  
 Unfortunately, these prospects are somewhat limited, due to requiring unusual material properties.
-From the Lifshitz formula, the sign of the force changes sign if $r_{12}r_{23}<0$.
+From the Lifshitz formula, the force is repulsive if $r_{12}r_{23}<0$.
 This implies Casimir repulsion should be possible if $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad range of frequencies.
 This was experimentally demonstrated for a gold sphere immersed in bromobenzene above a silica plate
 by \citet{Munday2009}.  However, this is method is little help for Casimir forces between
@@ -865,7 +865,7 @@ in exploiting materials with strong magnetic responses~\citep{Kenneth2002}.
 Since these are relatively rare, there was some interest in exploiting metamaterials (arrays of micropatterned circuits with
 effective magnetic response at certain wavelengths~\citep{Pendry1999}).  However, this was shown to be ineffective
 for Casimir applications since the underlying metallic dielectric response dominates for the most important long wavelengths.
-Since the metallic response implies an attractive potential, the overall Casimir effect would be attractive~
+Since the metallic response implies an attractive potential, the overall Casimir effect is attractive~
 \citep{Ianuzzi2003comment,Rosa2008,Pirozhenko2008,Yannopapas2009}.  
 
 While the preceding discussion emphasized varying materials for Casimir applications, it may 
@@ -877,19 +877,19 @@ These proposals require an anisotropic response from the atom, which might be po
 Another method of generating repulsive Casimir effects is by varying the geometry of the bodies.  
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
 \citep{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
-In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\citep{Rahi2010}.
+%In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\citep{Rahi2010}.
 A stability criterion can be derived for the Casimir energy from within the scattering approach to Casimir theory~\citep{Rahi2010,Rahi2011}.
 (The scattering approach which will be briefly discussed in Section~\ref{sec:scattering}.)  Only bodies
 composed of media for which the planar Casimir force is repulsive can be stably levitated~\citep{Rahi2011}.
 
 \citet{Boyer1968} found that the renormalized Casimir self-stress of a conducting shell 
-on itself is repulsive.  In this case, a great deal of care is required in isolating 
+is repulsive.  In this case, a great deal of care is required in isolating 
 divergent terms to find a finite result.
 This surprising result has been verified multiple times [the issue of self-stresses
- is reviewed in \citet{Milton2011}, and Chapters 5 and 6 of \citet{Milton2004}].
-The repulsive Casimir effect is also true for a dielectric sphere.  
+ is reviewed in \citet{Milton2011}, and Chapters 5 and 6 of \citet{Milton2001}].
+There is also a similar repulsive Casimir effect for a dielectric sphere.  
 While the stress on a spherical shell is repulsive, the force between two spherical half-shells is attractive.  
-This self-stress has not been directly measured, nor is it clear how it could be measured.  
+Thus it is not clear how this self-stress could be measured.  
 
 \subsubsection{Searches for New Physics}
 
@@ -898,11 +898,11 @@ scale~\citep{Dimopoulos2003, Bezerra2011}.  Since the new physics must be relati
 it is typically modeled with a Yukawa potential, $V_{\text{Yuk}}=\alpha e^{-\lambda r}/r$,
 which models the interaction with a new massive particle.    
 On the micron scale however, the Casimir effect is the dominant interaction between neutral bodies,
- and must be carefully subtracted in an experimental procedure.
+ and must be carefully subtracted in any experimental procedure.
  Experiments then look for deviations from the expected Casimir effect, which means that the 
 theory and experiment must be in good agreement with one another.  
 This approach has already been used to exclude regions of the parameter space for the hypothetical
-Yukawa interaction~\citep{Obrecht2007,Bezerra2011}.  
+Yukawa interaction~\citep{Obrecht2007,Bezerra2011,Sushkov2011a,Chen2016}.  
 Experiments searching for modifications of gravity typically employ a thin gold layer over
 a density modulation.  The gold layer provides a common short-ranged Casimir interaction, while the 
 a density modulation allows measuring variations due to gravity~\citep{Sorrentino2009, Geraci2015}.
@@ -935,7 +935,7 @@ and the ability to handle arbitrary shapes.
 For a simple, symmetric geometry (like the perfectly conducting planes we used in Section~\ref{sec:CP_calc})
 it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.
-However, for completely general geometries these requirements force one to adopt a general 
+However, for completely general geometries these requirements force one to adopt a  
 numerical approach to computing Casimir forces~\citep{Johnson2011}.
 We will discuss three of these methods: the proximity-force approximation (PFA), the scattering
 or fluctuating surface current approach, and the worldline method.
@@ -969,8 +969,7 @@ The scattering approach is currently the only general method of computing
 EM Casimir forces between media.\footnote{The following is an extremely short introduction to the scattering
 method.  The book chapters by \citet{Lambrecht2011}, \citet{Rahi2011} and \citet{Johnson2011} 
 provide a varied introduction to the topic from some of the main contributors.}
-The scattering method 
-is based on scattering techniques from classical EM theory and quantum mechanics. %.~\citep{Rahi2009}.
+The scattering method is based on techniques from classical EM theory and quantum mechanics. %.~\citep{Rahi2009}.
 %The roots of the scattering method in Casimir physics go back a number of decades.  
 This method has been developed by a number of groups as an analytical method for general geometries~\citep{Emig2004, Lambrecht2006,
 Kenneth2006, Emig2007, MaiaNeto2008,Canaguier-Durand2012,Rahi2009}.  
@@ -982,8 +981,8 @@ The Casimir energy can be written as
 where $\mathbb{M}$ is the scattering matrix describing scattering between the free modes of the EM
 field induced by the presence of bodies, and $\xi$ is the imaginary frequency~\citep{Rahi2009}.
 The energy is renormalized via $\mathbb{M}^{-1}_\infty$,
-which is the scattering matrix as the bodies are removed to spatial infinity, this basically removes any
-coupling between bodies and serves to remove any self-interactions. 
+which is the scattering matrix as the bodies are moved arbitrarily far apart; this renormalization removes any
+self-coupling of the bodies to themselves. 
 The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
 %Since different bodies have different shapes, it is necessary t be able to transform basis.  
 Derivations similar to the argument principle used in Section~\ref{sec:lifshitz} can be applied to describe the scattering 

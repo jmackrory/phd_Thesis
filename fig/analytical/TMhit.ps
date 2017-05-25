@@ -45,7 +45,9 @@ TMcol
 /ypos 0  def
 xpos ypos cc moveto
 
-%first find tot and reset random numbers
+/BrownianBridge{
+		%Make Closed Brownian Bridge at origin
+		%first find tot and reset random numbers
 /xtot 0 def
 /ytot 0 def
 1 1 nsteps {
@@ -74,8 +76,10 @@ xpos ypos cc moveto
   xpos ypos cc lineto % put more data on stack
 } for
 stroke
-
+} def
 %set up potential
+
+BrownianBridge
 
 0 -1 in translate
 

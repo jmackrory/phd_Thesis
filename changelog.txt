@@ -1,0 +1,24 @@
+May 24 
+
+* Fixed numerous typos, hopefully without just making different ones.
+* Promoted Sec 5.2.3 to vector path integrals (no actual change in results).
+*
+
+
+mackrory_thesis_1.2.pdf     Time: May 17 pm
+
+*Updated references to Author-Year style.  
+*Made clearer that Eq 1.5 is in dipole approximation.
+*added word "typically" to abstract.
+*removed duplicate comments from Ch 2 on Bordag's ghost's not cancelling out.
+*Removed Dirac Bracket material from Sec. 2.3 as it is never used.
+*restored v-loop discussion to Sec. 1.5.3 in Eq. 1.65 and 1.66
+
+mackrory_thesis_1.1.pdf:   Time:  May 15 10.30pm
+
+#Fixed names on dissertation approval page, and acknowledgements.
+#Fixed factors of 2 in Casimir energies in Chap 4
+#Updated Sec 6.3.2
+
+
+mackrory_thesis_1.0.pdf:    Original distributed to committee

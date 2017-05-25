@@ -4,13 +4,12 @@
 (plotlib/plotfonts.ps) run
 (plotlib/plotparameters.ps) run
 (plotlib/plotarrows.ps) run
-(plotlib/plotmisc.ps) run
-/width {6 } bind def
-/height {6} bind def
-/xmax {3} def
-/xmin {-10} def
-/ymin {0} def
-/ymax {2} def
+/width {5 } bind def
+/height {3} bind def
+/xmaxstr (5) def
+/xminstr (-5) def
+/ymaxstr (3) def
+/yminstr (-3) def
 /sigma {3} bind def
 /linesize {0.5} bind def
 %size of ellipse
@@ -18,72 +17,24 @@
 /titlefont {/ComputerModernExtraBold} def
 /titlesize {30}         bind def % size of plot title
 /subsize {20}         bind def % size of plot title
+/cas_xoffset {-6}  def
+/cas_yoffset {.25}  def
 (plotlib/plotutilities.ps) run
 (plotlib/casimirutilities.ps) run
 
 startplot
 
-
-
-
-% random walk starts here
-/nsteps 1000 def
-/xstep xmax cvr 0.1 mul nsteps cvr div def
-/outside 0 def
-/inside 1 def
-
-/status outside def
-1 setlinewidth
-TMcol
-
-/xpos 0  def
-/ypos 0  def
-/seed 19438 def
-xpos ypos cc moveto
-
-/BrownianBridge{
-		%Make Closed Brownian Bridge at origin
-		%first find tot and reset random numbers
-		gsave
-/xtot 0 def
-/ytot 0 def
-1 1 nsteps {
-  /dWx nrandpl xstep sqrt mul def
-	/dWy nrandpl xstep sqrt mul def
-  /xtotold xtot def
-  /ytotold ytot def
-  /xtot xtotold dWx add def
-  /ytot ytotold dWy add def % diffusion	
-} for
-
-/dxtot xtot 1 add nsteps div def
-/dytot ytot 1 add nsteps div def
-
-%reset random number generator
-seed setrandplseed
-
-1 1 nsteps {
-  pop
-  /dWx nrandpl xstep sqrt mul def
-	/dWy nrandpl xstep sqrt mul def
-  /xposold xpos def
-  /yposold ypos def
-  /xpos xposold dWx add dxtot sub def % diffusion
-  /ypos yposold dWy add dytot sub def
-  xpos ypos cc lineto % put more data on stack
-} for
-stroke
-grestore
-} def
-
-
-%<< /PageSize [20 in 10 in] >> setpagedevice 
-%0 4 in translate
-
 %TwoSlab
 %Wall
 gsave
 2 in 0 translate
+0 setgray
+2 setlinewidth
+
+newpath
+0 in 2 in moveto
+0 in -4 in rlineto
+stroke
 
 newpath
 fillcol
@@ -93,35 +44,27 @@ fillcol
 0 in 4 in rlineto
 -1.5 in 0 in rlineto
 fill
-
-0 setgray
-1 setlinewidth
-
-newpath
-0 in 2 in moveto
-0 in -4 in rlineto
-stroke
-
-
 grestore
 
 %Wall 2
 gsave
-0 in 0 translate
+-1 in 0 translate
+0 setgray
+2 setlinewidth
+
+newpath
+0 in 0 in 1 in 0 360 arc closepath
+stroke
 
 newpath
 fillcol
 0 in 0 in 1 in 0 360 arc closepath
 fill
-
-0 setgray
-1 setlinewidth
-
-newpath
-0 in 0 in 1 in 0 360 arc closepath
-stroke
-
 grestore
+
+
+
+
 
 %Force arrows
 gsave
@@ -155,30 +98,32 @@ gsave
 		
 grestore
 
-%Labels
+% %Labels
 gsave
--2.0 in -0.5 in translate
+-1 in -0.5 in translate
+mark
+90 rotate
+4 0.45 scale
+0 0 moveto
+(cp2.loop) run % load loop 1
+hitcol
+10000 PlotStackDataAuto
+% plot data points
+mark
+grestore
 
-0 1 cc moveto
-TMcol
-BrownianBridge
-
+% %Labels
+% gsave
+% 2.5 in .5 in translate
 % mark
-% 90 rotate
-% 2 0.25 scale
-% (intro/data/cp2.loop) run % load loop 1
+% -90 rotate
+% 2 0.4 scale
+% (cp1.loop) run % load loop 1
 % TMcol
-% NoPlotClip
-% 10000 PlotStackData
+% 10000 PlotStackDataNoClip
 % % plot data points
 % mark
-% grestore
-
-%Labels
-0 0 cc moveto
-/seed 4534 def
-hitcol
-BrownianBridge
+grestore
 
 
 

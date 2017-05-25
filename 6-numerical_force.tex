@@ -647,10 +647,11 @@ is the appropriate normalized result.
     The calculations used $N=10^4$ points per path, and $10^8$ trajectories.}
   \label{fig:force}
 \end{figure}
-In Figure~\ref{fig:force}, we plot the numerically calculated force on two dielectric planes of equal dielectric
-constant, normalized to the total EM force between perfect-conducting plates.  This was carried out for the pinning, occupation
-and finite-difference methods.  In all cases, we generate paths using the v-loop algorithm~(\ref{eq:unit_vloop}),
-and evaluate the dielectric path averages using Eq.~(\ref{eq:trapezoid}).
+Figure~\ref{fig:force} shows the numerically calculated force on two dielectric planes of equal dielectric
+constant, normalized to the total EM force between perfect-conducting plates.
+This computation was carried out for the pinning, occupation and finite-difference methods.
+In all cases, the paths were generated using the v-loop algorithm~(\ref{eq:unit_vloop}),
+and the dielectric path averages were calculated using the trapezoidal method~(\ref{eq:trapezoid}).
 Note that in computing path averages for the occupation method, only points \emph{inside} the body
 contribute---any points pinned to the surface do not contribute to the dielectric path-average.
 
@@ -660,17 +661,17 @@ For a finite susceptibility, it should be possible to carry out the calculation 
 but if one is interested in the strong-coupling regime of this theory, then the pinning method is unsuitable.
 
 By contrast, the occupation method is better behaved in the strong-coupling limit.
-The occupation-method estimate for the force is computed by generating a fiducial path $\{\vect{y}_k\}$, 
+The occupation-method estimate for the force is computed by generating an initial path $\{\vect{y}_k\}$, 
 and translating it via
 $\vect{x}_k=\vect{y}_k-\vect{y}_j+\vect{d}$, so that that each point $\vect{x}_j$ lies
 on the surface.  The results are then averaged over all such pinnings. 
 However, naively implementing this method leads to $N$ evaluations of the path integral, which could
 be inefficient.
 It may be possible to capture both strong-coupling and general-coupling regimes with only two samples.
-First, to capture the strong-coupling limit, the path integral can be computed for a path where only one point is on the first surface,
+First, in order to capture the strong-coupling limit the path integral can be computed for a path where only one point is on the first surface,
 and no points are inside the first body.
-Second, to capture the remaining $\chi$-dependence, calculate the path integral for a path where a 
-randomly selected point is pinned to the first surface, with no constraints on the other occupation numbers.
+Second, to capture the remaining $\chi$-dependence, the integrand should be calculated again for a path where a 
+randomly selected point is pinned to the first surface, without any constraints on the other occupation numbers.
 The strong coupling estimate for the force $f_s$, and the 
 general-$\chi$ estimate $f_g$, are combined with weights $N^{-1}$ and $(N-1)/N$ respectively, which
 account for enforcing the restrictions.
@@ -680,7 +681,7 @@ only very rare paths will contribute, since most random paths
 starting on the surface are equally like to explore both positive and negative regions. 
 Most paths will intersect both bodies, and contribute zero to the force.  For small ensembles ($N_{\text{trial}}\le 10^7$)
 this causes similar convergence problems to the pinning methods at large $\chi$. 
-However, this would be a statistical error due to insufficient sampling, rather than due to the 
+However, this would be a statistical error due to insufficient sampling, as opposed to the 
 intrinsic problems in the pinning method.  Similar methods will be discussed in more detail
 regarding the potential curvature.  
 
@@ -690,8 +691,8 @@ uniform strata.  This basically splits the sum into multiple pieces and samples 
   \sum_{k=1}^N a_k = \sum_{j=1}^{N_{\text{strata}}}\sum_{n=1}^{N_{\text{sub}}} a_{n+j\,N_{\text{sub}}},  
 \end{equation}
 where $N_{\text{sub}}N_{\text{strata}}=N$.
-Each stratum was then sampled from uniformly.  In the simulations in Figure~\ref{fig:force},
-ten strata were used.  
+Each stratum was then sampled from uniformly.
+In the calculations in Figure~\ref{fig:force}, ten strata were used.  
 % The occupation method also has an advantage in that there are no explicit tuning parameters, unlike the finite
 % difference.   
 
@@ -717,33 +718,17 @@ from Eq.~(\ref{eq:expT}), with $\cT_0=N^2d^2/[2k(N-k)]$ and $\alpha=1+(D+1)/2$.
 % \begin{equation}
 %   P(u;\alpha) = \frac{u^{\alpha-2}}{\Gamma[\alpha-1]}e^{-u}.
 % \end{equation}
-% This technique can also be used more generally in worldline path integrals where 
-% $\alpha$ is either a small integer or half-integer, and deviates can be easily generated
-% as a sum of exponential deviates (and a Gaussian random variable for half-integer values)~\cite{Devroye2003}.
-% For the case of two-planar surfaces a distance $d$ apart, , 
-% and for the second derivative of the potential .
 The pinned point $k$ can be sampled from the combination of $\cT_0^{1-\alpha}$ for normalization $P(\cT)$
-and the normalization constant from $\mathcal{G}(d,k(N-k)\cT/N^2)$,  with distribution
+and the normalization constant from $\mathcal{G}[d,k(N-k)\cT/N^2]$,  with distribution
 \begin{equation}
-  P(k;N)=c'_N \bigg(\frac{k(N-k)}{N^2}\bigg)^{\alpha-1-1/2},
+  P_{\text{pin}}(k;N)=\cN_{\text{pin}} \bigg(\frac{k(N-k)}{N^2}\bigg)^{D/2},
 \end{equation}
-where $c'_N = \sum_{k=1}^NP(k;N)\approx 1/30$ for large $N$.  
+where $\cN_{\text{pin}} = \sum_{k=1}^NP(k;N)\approx 1/30$ for large $N$.  
 In addition for planar surfaces, the integral over the transverse dimensions amounts to an area factor. 
 
 The expression for the potential curvature for general-$\chi$  coupling is
 \begin{align}
-  C_{ij}%   =& \frac{\hbar c}{2(2\pi)^{D/2}}\sum_{j,\Delta>0}\int \frac{d\cT}{\cT^{1+D/2}}\biggdlangle \int d\vect{x}_0
-%   \frac{N^2e^{-N^2d^2/[2 \Delta(N-\Delta)\cT]}}{\sqrt{2\pi \cT \Delta(N-\Delta)}}\nonumber\\
-%   &\times
-%    \hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_{k})
-%    \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
-%    \biggdrangle_{\vect{x}(\cT);{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_{j+\Delta}-\vect{R}_2)=0}}\\
-% =& \frac{\hbar c}{2(2\pi)^{D/2}}\sum_{j}\int d\vect{x}_0\biggdlangle 
-% \frac{2^{s-1}\Gamma(s-1)S_{N-1}}{\sqrt{2\pi}|\vect{x}_j-\vect{x}_{j+\Delta}|^{2(s-1)}}
-%   \hat{n}_1(\vect{x}_j)\hat{n}_2(\vect{x}_{k})
-%   \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
-%   \biggdrangle_{\Delta,\cT,\vect{x}(\cT);{\sigma_1(\vect{x}_j-\vect{R}_1)=0\atop \sigma_2(\vect{x}_k-\vect{R}_2)=0}},
-=& \frac{\hbar c N }{2(2\pi)^{D/2}}\sum_{k=1}^{N-1}\oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0} \hspace{-4ex} dS_0\,\biggdlangle 
+  C_{ij}=& \frac{\hbar c N }{2(2\pi)^{D/2}}\sum_{k=1}^{N-1}\oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0} \hspace{-4ex} dS_0\,\biggdlangle 
 \oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0} \hspace{-4ex} dS_k\,\frac{3c'_{N}[\hat{r}_i\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_j\cdot\hat{n}_2(\vect{x}_{k})]}{|\vect{x}_0-\vect{x}_{k}|^{5}}
   \nonumber\\
   &\hspace{2cm} \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
@@ -752,27 +737,24 @@ The expression for the potential curvature for general-$\chi$  coupling is
 where the ensemble average is over path times, pinning separations $k$, and 
 Brownian bridges from $\vect{x}_0$ to $\vect{x}_k$, where $\vect{x}_0$ is on the first 
 surface, and $\vect{x}_k$ is on the second surface.
-% we have used $\dlangle \cdots\drangle_{y; C}$ to denote ensemble averaging over quantities 
-% $y$ subject to possible constraints $C$.  The first pinning position is fixed on the first surface,
-% the second pinnings are sampled from $P_\Delta$ with $k=j+\Delta$, 
-The path times are sampled from $P_{\text{exp-T}}[\cT;\cT_0,1+(D+1)/2]$, with $\cT_0$ given by 
-\begin{equation}
-  \cT_0 = \frac{N^2d^2}{2\Delta(N-\Delta)} \label{eq:T0_curvature}.
-\end{equation}
-The paths are still then constructed subject to the constraints of touching the bodies at the appropriate
-indices.  The remaining integrand is evaluated for the resulting paths.  
+% The path times are sampled from $P_{\text{exp-T}}[\cT;\cT_0,1+(D+1)/2]$, with $\cT_0$ given by 
+% \begin{equation}
+%   \cT_0 = \frac{N^2d^2}{2\Delta(N-\Delta)} \label{eq:T0_curvature}.
+% \end{equation}
+% The paths are still then constructed subject to the constraints of touching the bodies at the appropriate
+% indices.  The remaining integrand is evaluated for the resulting paths.  
 
 In Figure~\ref{fig:curvature_a}, we have used this general-$\chi$ coupling method to compute the potential curvature
 without special treatment for strong coupling, with two different ensemble sizes to show the effect of additional averaging.  
 %Figure~\ref{fig:curvature_a} shows improved convergence at large $\chi$ once the sample size is increased.  
-While the general-$\chi$ coupling integrand leads to the correct answer in the strong-coupling limit once enough
-averaging has been done, achieving that convergence requires a large ensemble to capture the relatively rare, but important,
+The general-$\chi$ coupling integrand does eventually lead to the correct answer in the strong-coupling limit once enough
+averaging has taken place.  However, achieving that convergence requires a large ensemble to capture the relatively rare, but important,
  paths that just graze both surfaces.
 Performance can be improved by introducing separate estimates adapted for the strong-coupling limit.  
 
-This suggests a two-fold approach: generate paths constrained to touch both surfaces without regard for their
-occupation time (which will capture general $\chi$), and also isolate a subset of paths which just touch the 
-bodies (which will capture large $\chi$).  
+This suggests a two-fold approach: First, paths should be generated under the constraint that they touch both surfaces
+ without regard for their occupation time (which will capture general $\chi$).  Second, another
+set of paths should be generated which just touch the bodies (which will capture large $\chi$).  
 
 \begin{figure}
   \centering
@@ -792,7 +774,7 @@ An alternative method to the one presented in Section~(\ref{eq:generic_coupling}
 arises from a different treatment of the second delta function $\delta[\sigma_2(\vect{x}_k-\vect{R}_2)]$.
 In this case, the first delta function $\delta[\sigma_1(\vect{x}_0-\vect{R}_1 )]$, is still used to pin the paths to start 
 on the first body.  Although the paths are assumed to start on the surface of the first body, they do not
-enter that body.  In order to contribute to the curvature path integral in the strong-coupling limit,
+enter the bulk of that body.  In order to contribute to the curvature path integral in the strong-coupling limit,
 the paths should move towards the second body, and just graze its surface.  
 
 The goal of this method is to develop a way of handling delta function constraints within a path integral
@@ -815,8 +797,8 @@ can be written in a schematic form as
     (2\pi\Delta \cT)^{D/2}}\bigg)\delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1}),\label{eq:constrain_int}
 \end{align}
 where $f(\vect{x}_k)$ and $\Phi$ are placeholders for the constraint $\sigma_2(\vect{x}_k-\vect{R}_2)$, 
-integrand $\sum_n\sum_m\I[1]m\I[2]n g_{m,n}$, respectively.  There is no Gaussian term
-$\mathcal{G}[\vect{x}_0-\vect{x}_k,k(N-k)\cT/N^2]$, since that only arises after pinning the paths, and normalizing
+integrand $\sum_n\sum_m\I[1]m\I[2]n g_{m,n}$, respectively.  There is no Gaussian term,
+ since that only arises after pinning the paths, and normalizing
 for pinned Brownian bridges.   
 
 Instead of just evaluating the integral over $\vect{x}_k$ (which pins the paths), the integral can
@@ -915,7 +897,7 @@ C^{\text{(g)}}_{ij}
 The integral~(\ref{eq:curvature_strong}) is only substantially nonzero under two conditions.
 First, the path must pass within a distance $\sqrt{\Delta\cT}$ of the 
 surface, and second the paths must not enter either body.
- Note that due to the pinning the indicator functions $\I[1]0\,\I[2]0$ are currently defined with $\vect{y}$ in the $k$th spot
+Note that due to the pinning, the indicator functions $\I[1]0\,\I[2]0$ are currently defined with $\vect{y}$ in the $k$th spot.
 This means that if $\vect{x}_k$ lies inside either body, that does not influence the integrand.  
 The indicators only go to zero when one of the \emph{other} points on the path cross into the bodies.  
 
@@ -927,28 +909,8 @@ In $D=4$ dimensions, Eq.~(\ref{eq:curvature_strong}) then simplifies to
 C^{(\text{S})}_{ij}&=\frac{\hbar c N A}{2(2\pi)^{2}}\intzinf\frac{d\cT}{\cT^{3}}\biggdlangle 
   \sum_{k=1}^{N-1}\frac{e^{-(d_2-\bar{x}_k)^2/\Delta \cT}}  {(\pi\Delta \cT)^{1/2}}
   \I[1]0\,\I[2]0\, g_{0,0}
-  \biggdrangle_{\vect{x}(t),x_0=d_1},\label{eq:curvature_strong_simple}
+  \biggdrangle_{x(t),x_0=d_1},\label{eq:curvature_strong_simple}
 \end{align}
-% One downside of this approach is that there is an additional $(\Delta\cT)^{-1/2}$ factor from the constrained Gaussian factors.
-% This factor can be absorbed if the combined constrained Gaussian factors are treated as the probability
-% distribution for $\cT$.
-% Paths sampled from this distribution would be more likely to pass close to the surface, and can 
-% be distorted to actually contact without significant penalty.  
-% We would then effectively sample from paths that are nearly contacting the surface,
-% and with a greater probability of finding paths that have \emph{not} entered into the body.  
-
-% The second factor suppresses terms where 
-% $\bar{B}_j$ is pointed in the wrong direction, i.e. away from the starting point $\vect{x}_0$ and the desired
-% point of the surface $\vect{y}_j$.
-% The second term is vanishes for the planar geometries.  
-%This second factor could in turn be used to sample from the surface for a given path.  
-% In essence, this method for handling the delta function has replaced the delta function 
-% with a softer distribution that allows paths within $\pm N^{-1/2}$ of the required times and directions.  
-
-% The potential curvature can be split into two terms, one involving just the strong-coupling limit
-% $g_{0,0}$ where paths do not enter the bodies, and another with all of the remaining terms.   
-% The second term can be sampled using the generic coupling algorithm from Section~\ref{sec:direct_construct}.
-% The two terms will be evaluated separately, although they may reuse the same random numbers. 
 In order to capture the strong-coupling dependence it is necessary to sample from the 
 set of paths that do not enter either body.  For two dielectric planes with dielectric function~(\ref{eq:eps12})
 the paths can be constructed by shifting the paths so they start on the 
@@ -1039,8 +1001,8 @@ The remainder should be accounted for in the spatial integrals.)
 For a given Brownian bridge $\vect{B}_k$, the times $\cT_*$ that it intersects the  surfaces, or 
 satisfies $\sigma_2(\vect{x}_0+\sqrt{\cT_*}\vect{B}_k-\vect{R}_2)=0$ could be found.  
 This has not yet been fully implemented, but would be much simpler.  However, the softened delta function
-approach may be also be useful in handling other constraints.    For example, let us consider 
-computing the potential in a complicated geometry.  It might be it is hard to construct paths that 
+approach may be also be useful in handling other constraints.    For example, it may be useful when 
+computing the potential in a complicated geometry.  It might be hard to construct paths that 
 touch both surfaces, and yet enter neither from randomly constructing Brownian bridges.
 This softened style of pinning could allow a broader class of paths to contribute in that case.    
 

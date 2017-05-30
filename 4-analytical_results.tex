@@ -2,9 +2,9 @@
 \label{ch:analytical}
 
 This chapter will show that in planar media the worldline path integrals yield the same results as the more direct 
-calculations outlined in Chapter~\ref{ch:introduction}.  
+calculations outlined in chapter~\ref{ch:introduction}.  
 The analytical energies can be derived by evaluating an analytical average over paths for the relevant path integrals.
-The worldline Casimir energies will be rewritten in the right form to use the solutions from Chapter~\ref{ch:feynman_kac}.  
+The worldline Casimir energies will be rewritten in the right form to use the solutions from chapter~\ref{ch:feynman_kac}.  
 Finally, we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
 and show how known results for the near-field and high temperature results emerge from this formalism.    
 [The work presented on the TE polarization was published as \citet{Mackrory2016}, 
@@ -25,9 +25,9 @@ Note that the delta functions are being used a short-hand notation for a sharply
 All expansions involving these delta functions can be carried out with a finite regularization of the 
 delta function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
 We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
-to nonzero temperature will be considered in Section~\ref{sec:nonzero_temp}.
+to nonzero temperature will be considered in section~\ref{sec:nonzero_temp}.
 
-The Casimir energy for TE and TM polarizations was derived in Chapter~\ref{ch:EM_quantization}.
+The Casimir energy for TE and TM polarizations was derived in chapter~\ref{ch:EM_quantization}.
 In the zero-temperature limit, the energy in the EM field in the TE polarization is 
 \begin{equation}
   E\subTE-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
@@ -191,13 +191,13 @@ discontinuous or singular potentials.
 \section{Rearranging Worldline Casimir Energies}
 
 The TE and TM worldline energies can be some rewritten in a form better suited to use the analytical results 
-that were derived in Chapter~\ref{ch:feynman_kac}.
+that were derived in chapter~\ref{ch:feynman_kac}.
  This can be done with two integral identities.
 The first identity converts the worldline path integral into a form involving the Laplace transform of the path
 integral.
 The second identity puts the prefactor $\langle\epsr\rangle$ in exponential form by means of the Gamma function.  
 
-\subsection{ Laplace-Mellin Transforms}
+\subsection{ Laplace--Mellin Transforms}
 
 The worldline path integral has the form of a Mellin transform.  
 The Mellin transform of a function $f$ is defined as 
@@ -213,9 +213,9 @@ The Laplace transform was defined in Eq.~(\ref{eq:Laplace}), and the $\Gamma$ fu
 \begin{equation}
 \Gamma(z) = \int_0^\infty ds\, s^{z-1} e^{-s} = \mathcal{M}[e^{-s}](z).
 \end{equation}
-The Laplace-Mellin theorem~\citep{Lew1975} states that
+The Laplace--Mellin theorem~\citep{Lew1975} states that
 \begin{equation}
-  \Gamma(1-z)\mathcal{M}[f](z) = \mathcal{M}\big[\mathcal{L}[f]\big](1-z)\label{eq:Laplace-Mellin}.
+  \Gamma(1-z)\mathcal{M}[f](z) = \mathcal{M}\big[\mathcal{L}[f]\big](1-z)\label{eq:Laplace--Mellin}.
 \end{equation}
 This relation is most easily motivated by starting with the right hand side:
 \begin{equation}
@@ -233,7 +233,7 @@ result
 % In words, the Mellin transform of a function is proportional to the Mellin transform of the Laplace transform of the function,
 %  and subject to a change of variable $z\rightarrow 1-z$. 
 This result can be used to rewrite worldline path integrals in terms of their Laplace transforms. 
-This is useful since the solution method in Chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the path integral.
+This is useful since the solution method in chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the path integral.
 
 \subsection{Inverse Moment Theorem}
 
@@ -273,7 +273,7 @@ In the second equality the integration variable was rescaled to $s\rightarrow s\
  and the definition of the path average, $\langle f\rangle = \cT^{-1}\int_0^\cT dt\, f(t)$ was used.
 % where we used the inverse moment theorem, rescaled the $\lambda\rightarrow \lambda T$,
 %  and swapped the order of integration. We can see that that $T$ integral has the form of a Mellin transform.
-The energy density can be further transformed with the Laplace-Mellin theorem~(\ref{eq:Laplace-Mellin}), 
+The energy density can be further transformed with the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}), 
 \begin{align}
 \int_0^\infty \frac{d\cT}{\cT^{1+D/2}}\biggdlangle\frac{1}{\langle 1+\chi(\vect{x})\rangle^\alpha} \biggdrangle_{\vect{x}(t)}
 % =& \int_0^\infty \frac{dT}{T^{1+z-1/2}}e^{-sT}\dlangle \frac{e^{-s \chi \int dt_0^T dt \Theta(x-d)}}{\sqrt{T}}\drangle\\
@@ -290,9 +290,10 @@ which assumes that the path integral solution was computed in $n$-dimensions.
 We will typically work with planar media where $n=1$.  
 (Despite knowing the specific values for $\alpha, D$ and $n$, it is useful to track them as algebraic variables in calculations.)
 The Laplace transformed path integral can be computed as the solution~(\ref{eq:f_soln}) 
-to the relevant diffusion equation~(\ref{eq:diffusion_eq}), as discussed in Chapter~\ref{ch:feynman_kac}.
+to the relevant diffusion equation~(\ref{eq:diffusion_eq}), as discussed in chapter~\ref{ch:feynman_kac}.
 
-\section{Analytical  TE Casimir--Polder Energy for an Atom and a Dielectric Plane}
+\section[{Analytical  TE Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}]
+{Analytical  TE Casimir--Polder Energy for an Atom and a Dielectric Plane}
 \label{sec:TE_CP}
 
 The TE contribution to the Casimir--Polder energy for an atom interacting with a dielectric body is given 
@@ -361,7 +362,8 @@ The efficiency $\eta\subTE$ smoothly interpolates between $0$ and $1/6$ as $\chi
 In the strong-coupling limit, the TE polarization provides $1/6$ of the Casimir--Polder energy,
 and the remaining $5/6$ is provided by the TM polarization.  
 
-\section{Analytical TM Casimir--Polder Energy for an Atom and a Dielectric Plane}
+\section[{Analytical TM Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}]
+{Analytical TM Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}
 
 The calculation for the TM Casimir--Polder energy proceeds in a similar fashion to the TE case.  
 The renormalized TM Casimir--Polder energy can be split into two pieces 
@@ -375,7 +377,7 @@ where
   \biggdlangle\frac{e^{-\langle V\subTM\rangle\cT}}{\langle \epsr\rangle^{\alpha}}-1
   \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{equation}
-Each term $\cV_{\nu,\alpha}$ can in turn be transformed using the combination of the Laplace-Mellin theorem
+Each term $\cV_{\nu,\alpha}$ can in turn be transformed using the combination of the Laplace--Mellin theorem
 and the inverse moment theorem:  
 \begin{align}
   \cV_{\nu,\alpha}:=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
@@ -386,7 +388,7 @@ and the inverse moment theorem:
 Note that the TM-potential is already in the exponential, so the TM potential and $\Xi$ does not need to be rescaled by $s$. 
 In this sense $\Xi$ is an independent parameter from $\chi$. 
 The analytical result~(\ref{eq:Feynman-Kac TM one step}) can be substituted into Eq.~(\ref{eq:TM_subpart}),
-and the integral can be transformed in the same manner as in Section~\ref{sec:TE_CP}, with the result
+and the integral can be transformed in the same manner as in section~\ref{sec:TE_CP}, with the result
 % \begin{align}
 %   \cV_{\nu,\alpha}=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
 %   \int_0^\infty ds\,s^{\alpha-1}  \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} r\subTM\\
@@ -440,7 +442,8 @@ The TM polarization provides the majority of the Casimir--Polder energy for betw
 From the worldline point of view, most of the TM energy comes from the term involving $-\partial_d^2\cV_{1,1/2}/2$, 
 which suggest it is essential to correctly estimate the derivatives in a numerical procedure.  
 
-\section{Analytical TE Casimir Energy between Two Dielectric Planes}
+\section[{Analytical TE Casimir Energy between \\ Two Dielectric Planes}]
+{Analytical TE Casimir Energy between \\ Two Dielectric Planes}
 \label{sec:TE_energy}
 The Casimir energy for two dielectric planes can also be calculated within this formalism.  
 The dielectric function is given by 
@@ -469,7 +472,7 @@ The fully renormalized Casimir energy between two planes is
   the divergences that occur at the interfaces at $x_0= d_1$ and $x_0= d_2$, 
   where at small $\cT$ paths can enter a region of different dielectric constant, leading to a non-zero integrand.
 
-  The Casimir energy can be recast using the inverse moment Laplace-Mellin theorems as  
+  The Casimir energy can be recast using the inverse moment Laplace--Mellin theorems as  
   \begin{align}
   E\subTE-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
   \int d\lambda \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
@@ -544,7 +547,7 @@ The TE Casimir energy between two half-spaces is then
   &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dp\, p \log(1-r\supTE_1r\supTE_2 e^{-2tpd}),
 \end{align}
 since the boundary term from the integration by parts vanishes.  
-This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in Section~\ref{sec:lifshitz}.
+This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in section~\ref{sec:lifshitz}.
 In this derivation, the gap between the spaces was filled with vacuum~$(\epsilon_3=1)$.  
 The TE Casimir energy per unit area can be written as 
 \begin{equation}
@@ -561,7 +564,8 @@ In this case, $\gamma\subTE$ increases monotonically between $0$ and $1/2$ as bo
 increase from $0$ to $\infty$.  
 Both polarizations contribute equally to the Casimir energy in strong-coupling.  
 
-\section{Analytical TM Casimir Energy between Two Dielectric Planes}
+\section[{Analytical TM Casimir Energy between \\ Two Dielectric Planes}]
+{Analytical TM Casimir Energy between \\ Two Dielectric Planes}
 \label{eq:TM_energy}
 The TM Casimir energy calculation is carried out in a similar manner to the TE case.
 Despite the similarities between the two solutions, it is still necessary to check that this calculation also works, 
@@ -578,7 +582,7 @@ The renormalized two-body TM Casimir interaction energy is
 In addition to the two-body dielectric function $\epsrab$, the path integral is augmented by the TM potentials 
 at both surfaces $\VTM\sup1$ and $\VTM\sup2$.
 The TM potentials all vanish in the renormalization terms, which are evaluated for the case of a constant dielectric.  
-After the Laplace-Mellin and inverse moment transforms, the TM Casimir energy is 
+After the Laplace--Mellin and inverse moment transforms, the TM Casimir energy is 
   \begin{align}
   E\subTM-E\sup0 &= -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
   \int_0^\infty d\lambda \frac{\lambda^{(D-1)/2-\alpha}}{\Gamma[(D+1)/2-\alpha]}\nonumber\\
@@ -605,7 +609,7 @@ where the integral over the transverse coordinates introduced the area $A$, and 
 \begin{equation}
   r\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{e^{2\Xi_i}\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
 \end{equation}
-The same transformations as in Section~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
+The same transformations as in section~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
 After changing integration variables from $\lambda$ to $p:=\sqrt{\lambda/s+1}$, the result is 
   \begin{align}
   E\subTM-E\sup0 % &= -\frac{\hbar cA}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
@@ -699,7 +703,7 @@ The free energy for the TE and TM polarizations (for non-magnetic media) is
 e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle_{\vect{x}(t)},
 \end{align}
 where we have suppressed renormalization terms.  
-The Casimir--Polder energies can be derived by the same reasoning used in Section~\ref{sec:casimir-polder_worldline},
+The Casimir--Polder energies can be derived by the same reasoning used in section~\ref{sec:casimir-polder_worldline},
 extending the energies~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) to nonzero temperature.
 In this case, the results are 
 \begin{align}
@@ -715,7 +719,7 @@ e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\biggdrangle_{\vect{x}(t),\vect{x}
 \end{align}
 There are some noteworthy features of the finite-temperature worldline expression.  
 First, all material functions are already in the exponent, so there is no need for the inverse moment
-theorem when using results from Chapter~\ref{ch:feynman_kac} to analytically evaluate the finite-temperature Casimir energy.
+theorem when using results from chapter~\ref{ch:feynman_kac} to analytically evaluate the finite-temperature Casimir energy.
 In fact, at zero temperature the Matsubara sum is replaced by an integral, which
 corresponds to the Gamma function used in the inverse moment theorem.  
 
@@ -756,7 +760,7 @@ diverges.  As a result, only the first term significantly contributes.
 \end{equation}
 Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
 similarly dominant at small distances at zero temperature.
-As noted at the end of Section~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
+As noted at the end of section~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
 be recovered by replacing the Matsubara sum with a frequency integral.  In a similar fashion,
  Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) can be recovered from Eqs.~(\ref{eq:TE_CP_thermal})
  and (\ref{eq:TE_CP_thermal}).
@@ -788,14 +792,14 @@ The preceding calculations are straightforwardly extended to dispersion and fini
 The analytical solutions for the TE and TM path integrals for a single dielectric plane
 in Eqs.~(\ref{eq:Feynman-Kac TE one step})
 and (\ref{eq:Feynman-Kac TM one step}) can be substituted into the appropriate path integrals.  
-After using the Laplace-Mellin theorem~(\ref{eq:Laplace-Mellin}), the renormalized 
+After using the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}), the renormalized 
 TE worldline path integral is 
 \begin{align}
 &\int_0^\infty d\cT\,\frac{1}{(2\pi \cT)^{(D-1)/2}}\dlangle e^{-v\cT} - e^{-v\cT \langle\epsr(is_n)\rangle}\drangle \nonumber\\
 & =\frac{1}{2\pi}\int_0^\infty d\lambda\, \frac{e^{-2\sqrt{2(\lambda+v)}|d|}}{\sqrt{2(\lambda+v)}}
 \frac{\sqrt{\lambda+v[1+\chi(is_n)]}-\sqrt{\lambda+v}}{\sqrt{\lambda+v[1+\chi(is_n)]}+\sqrt{\lambda+v}}.
 \end{align}
-There are no extra $\lambda$ terms from the Laplace-Mellin theorem since ${\lambda^{(D-3)/2-1/2}=1}$
+There are no extra $\lambda$ terms from the Laplace--Mellin theorem since ${\lambda^{(D-3)/2-1/2}=1}$
 when $D=4$.
 This result can be used in the TE Casimir free energy if $v$ is transformed according to $v\rightarrow s_n^2/(2c^2)$.
 After changing integration variable to $p = \sqrt{1+2c^2\lambda/s_n^2}$, the free energy is
@@ -845,10 +849,10 @@ This is suppressed by $\order[(\omega d/c)^3]$ relative to the TM contributions 
 % \label{eq:TM_CP_zero_temperature},
 % \end{align}
 
-% \subsubsection{Laplace-Mellin and Feynman-Kac Formulae}
-% We will again need to use the Laplace-Mellin theorems, and Feynman-Kac Formulae.
+% \subsubsection{Laplace--Mellin and Feynman-Kac Formulae}
+% We will again need to use the Laplace--Mellin theorems, and Feynman-Kac Formulae.
 %   We quote the results:
-% The Laplace-Mellin theorem is
+% The Laplace--Mellin theorem is
 % \begin{align}
 % \int_0^\infty \frac{dT}{T^{1+z}}\dlangle e^{-sT\langle\epsr\rangle - T\langle V\subTM\rangle}\drangle =&
 %  \frac{1}{\Gamma[z+1/2]}\int_0^\infty d\lambda\, \lambda^{z-1/2}\int_0^\infty dT e^{-(\lambda+s)T}
@@ -886,7 +890,7 @@ The TM contribution to the Casimir--Polder free energy for an atom near a dielec
  proceeds in the same manner as in the TE case.
 This time, the nonzero contribution comes from the presence of the TM potential, which is reflected in
 the presence of $\Xi$ in the TM reflection coefficients.   
-The relevant analytical expression~(\ref{eq:Feynman-Kac TM one step}) for the path integral can be substituted in, and the Laplace-Mellin
+The relevant analytical expression~(\ref{eq:Feynman-Kac TM one step}) for the path integral can be substituted in, and the Laplace--Mellin
 transform can be used to write
 \begin{align}
 V\supTM\subCP-V_0%=\,& -k_BT{\sum_n}'\frac{\alpha(i s_n)}{4\pi\epsilon_0}\left(\frac{ s_n^2}{c^2}  - \frac{1}{2}\partial_d^2\right)\int_0^\infty d\kappa\, \frac{ s_n^2}{2c^2}\frac{e^{-2\sqrt{\kappa+1} s_n d/c}c}{ s_n\sqrt{\kappa+1}}\frac{\sqrt{\kappa+1+\chi}-\sqrt{\kappa+1}e^{2\Xi}}{\sqrt{\kappa+1+\chi}+\sqrt{\kappa+1}e^{2\Xi}} \\

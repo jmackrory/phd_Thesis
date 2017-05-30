@@ -26,7 +26,7 @@ used to construct the paths.  In addition, the TM Casimir--Polder energy involve
 
 The numerical results will be compared against the expected analytical results.
 The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
-integration over $\cT$, as was briefly discussed in Section~\ref{sec:worldline_distance_dep}. 
+integration over $\cT$, as was briefly discussed in section~\ref{sec:worldline_distance_dep}. 
 That is still true within the context of electromagnetic worldlines. 
 All of the simulations are carried out for a non-dispersive media at zero temperature.
 At the end we will suggest how to generalize the calculations to include dispersion.  
@@ -60,7 +60,7 @@ paths.  This allows the $N$-dimensional integral over positions to be efficientl
 Monte Carlo fashion by generating an ensemble of Brownian bridges.
 It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
 
-\subsubsection{Open Brownian Bridges: V-loop Construction}
+\subsubsection[{Open Brownian Bridges: \\ V-loop Construction}]{Open Brownian Bridges: v-loop Construction}
 
 
 % The v-loop algorithm is derived by decoupling the product of $N$ Gaussian probability densities 
@@ -329,7 +329,7 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
 
 % As the results show, the agreement with between the numerical results
 % and the analytical expression is excellent.  A more careful discussion of the numerical error is 
-% deferred to Section~\ref{sec:TE_convergence}.
+% deferred to section~\ref{sec:TE_convergence}.
 \begin{figure}
   \centering
  \includegraphics[width=0.8\textwidth]{fig/temp/eff_TE_atom_wall}
@@ -355,7 +355,7 @@ which cancels out the leading constants and the $d^{-4}$ distance dependence.
 % efficiency $\eta(\chi)$.  The efficiency is the ratio of the TE Casimir--Polder energy between an atom and a dielectric 
 % to the total Casimir--Polder energy for an atom and a perfectly conducting plate.  This approaches $1/6$ in the 
 % strong-coupling limit---the remainder of the Casimir--Polder energy is provided by the TM polarization, which
-% will be discussed further in Section~\ref{sec:TM_numerics}.
+% will be discussed further in section~\ref{sec:TM_numerics}.
 
 \begin{figure}
   \centering
@@ -460,7 +460,7 @@ We will develop a number of techniques to temper these difficulties.
 As a side effect, they should have applications for more general Casimir worldlines.
 
 The most daunting feature of the TM Casimir worldline~(\ref{eq:TM_Casimir}) is the singular TM potential~(\ref{eq:VsubTM}).
- A closed-form solution for the TM potential $V\subTM$ at a single planar boundary was found in Chapter~\ref{ch:feynman_kac}.
+ A closed-form solution for the TM potential $V\subTM$ at a single planar boundary was found in chapter~\ref{ch:feynman_kac}.
 The ensemble-averaged solution for all Brownian paths between points $x_k$ and $x_{k+1}$ in time ${\Delta\cT}$ is 
 \begin{align}
   v_{k,k+1}(x_k,x_{k+1})&:=\!  \Bigdlangle e^{-\int_0^{\Delta\cT} dt'\, V\subTM(x-d)}\Bigdrangle_{x_k\rightarrow x_{k+1}} \\
@@ -505,7 +505,7 @@ between $x_k$ and $x_{k+1}$, with the result,
 % and which will be discussed further in Secs.~\ref{sec:general_gradient} and \ref{sec:accel_converge}.
 
 \subsection{Scaling of the Averaged TM Potential with Path Length $N$}
-
+\label{sec:TM_scaling}
 The numerical properties of the solution can be examined by considering a simplified path integral
 that only includes a single TM potential a distance $d$ away,
 \begin{align}
@@ -541,7 +541,7 @@ unacceptably large statistical errors.
     Calculations used $10^6$ paths, with $N=200$ points per path, $\chi=100$, $d=1$, and $\cT=1.$
     The correct value for the integral at these parameters is $(I=1.595)$.  The Gaussian estimate is $(1.40\pm 0.14)$.
     The birth-death estimate is $(1.602\pm 0.006)$.
-    (The birth-death method is discussed in Section~\ref{sec:birth_death}.)
+    (The birth-death method is discussed in section~\ref{sec:birth_death}.)
     The Gaussian distribution extends off to zero, 
     while the birth-death distribution has truncated peak at zero.}
 \label{fig:TM_histogram}
@@ -1103,7 +1103,7 @@ surfaces, in the case when the atom is much closer to one surface than the other
 contribution to the Casimir--Polder force is sought, then only paths that touch \emph{both} bodies will 
 contribute.  The path time when a typical path will touch one body is denoted $\cT_1$, and $\cT_2$ is the typical path time to touch
 both bodies.
-The partial averaging advocated in Section~\ref{sec:partial_averaging} is only valid so long as $\Phi$ 
+The partial averaging advocated in section~\ref{sec:partial_averaging} is only valid so long as $\Phi$ 
 is approximately independent of the coordinates, and the probability of touching either surface is small.
 In that case, the integrals are approximately Gaussian, provided that $\cT_m\ll \cT_1$, 
 so that the first and last $m$ path increments are not likely to intersect or interact with either surface.  
@@ -1253,7 +1253,7 @@ The performance is still surprisingly good.  This might be due to the fact that 
 relies on using an analytical solution to handle the TM potential.  In the strong-coupling limit,
 that potential provides most of the Casimir energy.  The analytical solutions capture more 
 of the first-touching dependence than the simple estimates used for $\langle\epsr\rangle$ discussed in
-Section~\ref{sec:trapezoid}.  So the TM integrand performs relatively well even for a small $N$.  
+section~\ref{sec:trapezoid}.  So the TM integrand performs relatively well even for a small $N$.  
 However, this is probably outweighed by the increased statistical errors.  
 
 Sampling from the exponential path time distribution~(\ref{eq:expT}) 

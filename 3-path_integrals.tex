@@ -13,10 +13,11 @@ The path integral solution to the diffusion equations is known as the Feynman--K
 after the work by \citet{Feynman1948} in describing the evolution of a quantum particle, and \citet{Kac1949}
  applying this to the diffusion equation.
 
-This chapter is devoted to deriving the Feynman--Kac formula with a source term.
-We will develop analytical expressions for both TE and TM worldline path integrals 
-in planar geometries.
-These analytical formulae will be used in Chapter~\ref{ch:analytical} to demonstrate agreement 
+Section~\ref{sec:derive_feynman_kac} presents the path integral solution~(\ref{eq:feynman_kac}) to the diffusion equation~(\ref{eq:diffusion_equation}).
+In sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK}, we will develop analytical expressions relevant for the TE
+worldline path integral in planar geometries, with key results in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
+(\ref{eq:Feynman-Kac TE two step}).
+These analytical formulae will be used in chapter~\ref{ch:analytical} to demonstrate agreement 
 with known results for both Casimir and Casimir--Polder energies.
 The analytical expressions for ensemble-averaged path integrals are essential for handling the singular 
 TM potential.  
@@ -25,10 +26,10 @@ These analytical solutions are also useful in accelerating numerical methods rel
 on stochastic simulations.  
 
 \section{Derivation of the Feynman--Kac formula }
-
+\label{sec:derive_feynman_kac}
 In this section, we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.
-The derivation will stay close in spirit to the one presented by \citet{Sakurai1994} and Section~\ref{sec:feynman_path_integral}, 
+The derivation will stay close in spirit to the one presented by \citet{Sakurai1994} and section~\ref{sec:feynman_path_integral}, 
 but it will be extended to include a source term.  
 More formal derivations are available from mathematical~\citep{Cartier2004},
 and probabilistic perspectives~\citep{Karatzas1991, Durrett1996}.  
@@ -102,7 +103,7 @@ After carrying out the Gaussian momentum integrals, the matrix element is
 This is the traditional discrete form of the imaginary-time path integral.
 The connection to Brownian motion can be made even clearer by changing integration variables.
 The arguments of the Gaussians $\vect{x}_{j+1}-\vect{x}_{j}$, are zero mean random variables, with
-variance $\Delta t$.  The Gaussians  can be interpreted as the probability distributions for the  vector Wiener increments discussed in Section~\ref{sec:dirichlet_worldline_derivation}.
+variance $\Delta t$.  The Gaussians  can be interpreted as the probability distributions for the  vector Wiener increments discussed in section~\ref{sec:dirichlet_worldline_derivation}.
 In this particular case, the vector Wiener increments are defined $\Delta \vect{W}_j := \vect{x}_{N-j-1}-\vect{x}_{N-j}$.
 Note that this labeling is backwards in time from the usual convention, but it 
 ensures that the solutions are defined in reference to the final coordinate $\vect{x}_N$.
@@ -203,7 +204,7 @@ of the path coincides with the origin.
 % another $\vect{x}_{k+1}$ can be found by subtracting $\vect{x}_k$ from all coordinates in the problem
 %  so that $\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.
  This is particularly useful 
- in applying these results to accelerating numerical computations, as will be discussed further in Chapter~\ref{ch:numerical}.
+ in applying these results to accelerating numerical computations, as will be discussed further in chapter~\ref{ch:numerical}.
 
 It might seem circular having passed from wave equations that are too hard to solve, to path integrals,
 and back to diffusion equations that can only be solved in particular geometries.
@@ -212,7 +213,7 @@ results in a more complicated geometry.
 For example, at each step of the path, planar results could be used to estimate a potential,
 by treating the bodies in terms of their nearest tangent planes.  
 %notion of locally planar could be defined in terms of the nearest surface-normal.  
-This is not the same approximation as the proximity force approximation discussed in Section~\ref{sec:PFA}, 
+This is not the same approximation as the proximity force approximation discussed in section~\ref{sec:PFA}, 
 which approximates the bodies \emph{globally} by the tangent planes. 
 This is a local approximation based on a particular point in space.
 As the path steps through space, the nearest tangent plane will vary, but assuming that each 
@@ -233,7 +234,7 @@ These geometries are important for analytically calculating Casimir and Casimir-
 energies from the worldline path integrals.  
     
 \section{Single Step Potential}
-
+\label{sec:TE_onebody_FK}
 As a first example, consider a step potential $V=\chi\Theta(x-d)$.
 [As noted earlier, this is closely related to the sojourn time for a Brownian bridge~\citep{Hooghiemstra2002}.]
 The step potential will be used to compute the Casimir--Polder energy for an atom 
@@ -344,7 +345,7 @@ As paths get closer to the surface, or as the time increases, the probability of
 increases, so the solution approaches zero.   The solution also vanishes for points starting 
 inside the surface.  
 
-Given the prevalence of the Dirichlet worldline path integral discussed in Section~\ref{sec:dirichlet_worldline},
+Given the prevalence of the Dirichlet worldline path integral discussed in section~\ref{sec:dirichlet_worldline},
 it would be useful to develop an analytical expression for open paths from $x=0$ to $x=c$, interacting with $V(x)=\kappa\delta(x-d)$.
 In this case, the solution is non-zero for $x>d$, but only vanishes for paths that touch the surface 
 at $x=d$.
@@ -363,7 +364,7 @@ As the points $x$ and $y$ get closer to the surface, the probability of touching
 and the amplitude of the solution decreases.
 
 \section{Two Step Potentials}
-
+\label{sec:TE_twobody_FK}
 The next case of importance is for two step potentials with interfaces at $x=d_1$ and $x=d_2$, where the 
 distance between them is $d=d_1-d_2$.
 The combined potential is $V=\chi_1\Theta[d_1-x]+\chi_2\Theta[x-d_2]$.
@@ -407,7 +408,7 @@ be found by keeping $d_1$ fixed, but taking the limit where $d$ and $d_2$ approa
 \end{figure}
 
 The solutions all involve $1-r\supTE_1r\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.
-This factor was previously encountered in deriving the Lifshitz formula in Section~\ref{sec:lifshitz},
+This factor was previously encountered in deriving the Lifshitz formula in section~\ref{sec:lifshitz},
 so its presence is perhaps not surprising. 
 However, in this case there is no need to make any conditions on which modes contribute.  
 In addition, this derivation assumes there is vacuum between the dielectrics, although it could be easily generalized.
@@ -495,7 +496,8 @@ However, the ensemble averaged expression over many such paths is well behaved.
 \end{figure}
 
 
-\subsection{Transfer Layer Boundary Conditions for the TM Potential}
+\subsection[Transfer Layer Boundary Conditions for the \\ TM Potential]
+{Transfer Layer Boundary Conditions for the TM Potential}
 
 We will show that the regularized TM potential imposes an effective boundary condition at the interface. 
 The diffusion equation can be solved inside the boundary layer $x\in(d,d+a)$, and all references 
@@ -578,7 +580,8 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     regularized TM potential.  
     \label{sec:TM boundary condition}
 
-\subsection{Finding the Path Integral Solution for the TM Potential}
+\subsection[Finding the Path Integral Solution for the \\ TM Potential]
+{Finding the Path Integral Solution for the TM Potential}
 
 % We can now find the Feynman--Kac formula for open Brownian bridges near a single TM-potential, which 
 % imposes the boundary conditions~\ref{eq:TM_boundary_conditions}.  This solution is the ensemble average 
@@ -721,7 +724,7 @@ The path integral
       \label{eq:TM_coeff}
     \end{equation}
     The reflection coefficient $r\supTM$ corresponds to the TM reflection coefficient 
-    used in Section~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
+    used in section~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
     This calculation can also be naturally extended to include a magnetic response.  % , since $\Xi$ and $\chi$
     % can be treated as independent parameters.  
     The parameter $\Xi$ is defined in relation to the potential $V\subTM$, 

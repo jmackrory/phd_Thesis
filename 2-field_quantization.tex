@@ -4,20 +4,24 @@
 
 This chapter develops the worldline path integrals for electromagnetism with a space-dependent
 dielectric function, paralleling the treatment of the Dirichlet scalar worldline method in Chapter~\ref{ch:introduction}.  
-First, we will review prior work on quantizing the EM field inside media.
-Following that, we will review classical EM field theory and quantize the EM field.
-The partition function for the EM field will be developed as a path integral in terms of the scalar and vector potentials.
-However, the resulting worldline path integrals for the vector potentials pose a number of challenges.
-As a result, we turn our attention to developing scalar models that better capture the features
-of electromagnetism.  In fact, in planar geometries, the scalar models correspond to 
-the amplitudes of the two transverse modes.  
-We will then develop the worldline path integrals for those scalar fields, which will form
+First, in section~\ref{sec:quantizing} we will review prior work on quantizing the EM field inside media.
+Following that, we will review classical EM field theory and quantize the EM field in section~\ref{sec:classical_EM}.
+The partition function for the EM field will be developed as a gauge-fixed path integral in terms of the scalar and vector potentials
+in section~\ref{sec:gauge_path_integral}, with the result in Eq.~(\ref{eq:EM_partition}).
+However, the resulting worldline path integrals~(\ref{eq:vector_path_integral}) for the vector potentials pose a number of challenges, as 
+it is not clear how the two physical degrees of freedom emerge. 
+As a result, in section~\ref{sec:scalar_decomposition} we turn our attention to developing scalar models that better capture the features
+of electromagnetism.
+In planar geometries the scalar models correspond to the amplitudes of the TE and TM polarizations.  
+We will then develop the worldline path integrals for those scalar fields, one of which is presented in
+Eq.~(\ref{eq:TE_worldline}).  Those path integrals will form
 the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
+
 [The decomposition of the EM field into two scalars, and the derivation of the associated 
 worldline path integrals was carried out in \citet{Mackrory2016}.]
 
 \section{Approaches to Quantizing Electromagnetism in Media}
-
+\label{sec:quantizing}
 The quantization of the EM field inside dielectric media provides a number of challenges 
 beyond quantization in vacuum~\citep{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
  First, in Casimir problems the dielectric varies spatially.  The usual procedure for
@@ -35,7 +39,7 @@ The gauge symmetry can be removed by imposing a gauge condition on the fields.
 decouple the radiative and static electromagnetic problems, or maintain relativistic invariance, respectively.
 However for macroscopic EM inside a dielectric, the usual gauge-fixings lose these nice
 features, and must be replaced by a dielectric-dependent condition.  
-This issue will be discussed further in Section~\ref{sec:gauge_fixing}.
+This issue will be discussed further in section~\ref{sec:gauge_fixing}.
 
 Third, since the dielectric has some frequency response or dispersion, the Kramers-Kr\"onig relations 
 require that there is also loss or dissipation.  
@@ -155,7 +159,7 @@ just making small-$\cT$ expansions.
 % necessary to update the polarizations, and convert the amplitudes into the new coordinates.
 
 \section{Classical Electromagnetic Field Theory}
-
+\label{sec:classical_EM}
 Maxwell's equations govern the classical evolution for the electric and magnetic fields $\vect{E}(\vect{r},t)$ and $\vect{B}(\vect{r},t)$.
 In a medium, with permeability $\epsilon(\vect{r})$ and permittivity $\mu(\vect{r})$, 
 but no external source charges or currents, Maxwell's equations are
@@ -384,7 +388,7 @@ Since the fields and momenta obey canonical commutation relations, the overlap b
 where the term in $\phi\Pi_0$ has been dropped due to the $\Pi_0=0$ constraint. 
 
 \section{Electromagnetic Partition Function}
-
+\label{eq:EM_partition}
 In order to calculate the energy in the field at zero and nonzero temperature, we will
 evaluate the partition function for the fields, and take the appropriate derivatives.  
 The EM partition function is defined as
@@ -595,7 +599,7 @@ dual potentials, so we proceed with the regular potentials for now.
 %The resulting functional determinant from gauge-fixing depends on $\epsilon$, so we cannot drop the determinant.  
 
 \section{Gauge-Fixing: Generalized Lorenz Gauge}
-
+\label{sec:gauge_path_integral}
 Of these gauges, the generalized Lorenz gauge is best suited to the vector path integral~(\ref{eq:Z_potential}).  
 %(In later work on the scalar path integrals in planar geometries, Coulomb gauge can be used to naturally.)
 In this case the gauge function is
@@ -767,7 +771,7 @@ and \citet{Bordag1999}.  In fact, they also agree with the Hertz potentials for 
 % failures to make sense of the matrix path integral.}  
 
 \section{Scalar Decomposition for Planar Geometries}
-
+\label{sec:scalar_decomposition}
 The EM field can be split into two non-interacting polarizations for media where 
 the material properties $\epsr(z)$ and $\mur(z)$ only vary in one Cartesian direction.  
 These are the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
@@ -861,7 +865,7 @@ However, we will often set $\mur=1$, since magnetic media are rare in typical qu
 \subsection{TE Polarization Worldline}
 
 It is a straightforward matter to develop the TE worldline path-integral.
- In the same fashion as the Dirichlet scalar method in Section~\ref{sec:dirichlet_worldline}, 
+ In the same fashion as the Dirichlet scalar method in section~\ref{sec:dirichlet_worldline}, 
  two formal identities can be used to rewrite the free energy in exponential form.
 The renormalized TE free energy is 
 \begin{align}
@@ -1096,7 +1100,7 @@ where the paths are $D-1$ dimensional spatial paths.
 %   So we also only use the normalization for 3D.
 This $\cT$-dependence also reflects the different $d$-dependent scaling behaviors in the near-field, 
 thermal and far-field regions, as these will each have different approximations to the Matsubara sum.  
-This will be discussed further in Section~\ref{sec:nonzero_temp}.
+This will be discussed further in section~\ref{sec:nonzero_temp}.
 
 The zero-temperature, dispersion-free Casimir energy~(\ref{eq:TE_worldline}) can be recovered from the free energy
 ~(\ref{eq:TEworldline_partition_function}). 

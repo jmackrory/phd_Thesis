@@ -1838,7 +1838,26 @@ discussed further in Sections~\ref{sec:generic_coupling} and \ref{sec:softened_d
 
 Finally, we will summarize our findings and directions for future work in the conclusion.  
 
+\begin{figure}
+\centering
+\tikzstyle{chap} = [rectangle, rounded corners, minimum width=3cm, 
+minimum height=1cm,text centered, draw=black, fill=gray!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
+  \begin{tikzpicture}[node distance=2cm]
+    \node (intro) [chap] {Ch I: Introduction};
+    \node (EM) [chap, below of=intro] {Ch II: EM Quantization};
+    \node (Feynman) [chap, below of=EM] {Ch III: Feynman--Kac Formulae};
+    \node (Analytical) [chap, below of=Feynman, xshift=-4cm] {Ch IV: Analytical Worldlines};
+    \node (Numerical) [chap,  right of=Analytical,xshift=+6cm ] {Ch V: Numerical Worldlines};
+    \node (Force) [chap, below of=Numerical] {Ch VI: TE Forces and Torques};
+    \draw [arrow] (intro)--(EM);
+    \draw [arrow] (EM)--(Feynman);
+    \draw [arrow] (Feynman)--(Analytical);
+    \draw [arrow] (Feynman)--(Numerical);
+    \draw [arrow] (Numerical)--(Force);
+  \end{tikzpicture}
+\end{figure}
 
 
 %%% Local Variables: 

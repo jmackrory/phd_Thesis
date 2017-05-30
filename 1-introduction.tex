@@ -360,7 +360,7 @@ While we have carried out the calculation for the case of perfectly-conducting p
 can be carried out for dielectric interfaces and more general shapes of macroscopic bodies.  
 In the case of an atom near a planar, dielectric interface the Casimir--Polder potential is 
 \begin{equation}
-  V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0z^4}\eta(\chi),
+  V\subCP(\vect{r})-V\sup0=-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0z^4}\eta(\chi),\label{eq:VCP_eta}
 \end{equation}
 where $\chi$ is the static susceptibility of the medium, and the efficiency factor $\eta$ approaches zero
 as $\chi\rightarrow 0$ and unity as $\chi\rightarrow\infty$.  
@@ -1265,7 +1265,7 @@ and did not have concrete, correct results.
 % for a fictitious single-particle.  This single-particle path integral forms the basis of the numerical
 % world line method.   
 
-\subsection{Derivation of the Scalar Casimir Worldline Path Integral}
+\subsection[Derivation of the Scalar Casimir Worldline Path\\ Integral]{Derivation of the Scalar Casimir Worldline Path Integral}
 \label{sec:dirichlet_worldline_derivation}
 We now introduce the basic scalar worldline method, to discuss its positive features and limitations. 
 We will use terminology and scaling of dimensions in common with our later work, rather than the 
@@ -1602,7 +1602,7 @@ which simplifies the method further~\citep{Weber2009,Weber2010}.
 %   % \item Can also create open Brownian walk, then force to close by pro-rating final position around walk.
 %   \item Corresponds to IR vs BT?
 
-\subsection{Advantages and Shortcomings of the Scalar Method}
+\subsection[Advantages and Shortcomings of the Scalar \\ Method]{Advantages and Shortcomings of the Scalar Method}
 
 The worldline method has a number of attractive features.  
 First, it offers an intuitive picture of Casimir energies emerging from the spatial paths 
@@ -1666,13 +1666,6 @@ and only needing an ensemble of simple Brownian motions.
 In addition, we aim to improve the method to account for the two physical polarization
 states of the EM field, and properly account for the material properties of the medium.  
 Finally, the method must agree with known results in simple geometries.  
-% \begin{itemize}
-%   \item The paths should be simple Brownian motions.
-%   \item The algorithm should be independent of the geometry.
-%   \item The potential should emerge from the dielectric properties of the medium
-%   \item The physical degrees of freedom should be correctly accounted for
-%   \item The method must agree with other calculations where the solution is known.    
-% \end{itemize}
 
 As later chapters in this thesis will show, we have partially met those goals.  We have developed analytical
 and numerical techniques that can be applied to improving existing worldline algorithms.
@@ -1680,19 +1673,38 @@ This thesis focuses primarily on solving the planar problem---although this is w
 it is a good platform for exploring and testing worldline methods.  
 The methods we develop here could be used as uncontrolled approximations in general geometries, but with
 no guarantee of correctness.  
-% \begin{shaded}
-%   The presence of $\delta(\vect{x}_N-\vect{x}_0)$ leads to an overall normalization constant $(2\pi\cT)^{-(D-1)/2}$.
-%   This follows either from Hormander's argument, that 
-%   \begin{equation}
-%     \int d^nx\, \delta[h(\vect{x})]f(\vect{x}) = \int_{h^{-1}(0)} dS\,\frac{1}{|\nabla h(\vect{x})|}f(\vect{x}),
-%   \end{equation}
-% where $S$ is defined as the surface satisfying $h(\vect{x})=0$, and 
-% $|\nabla h(\vect{x})|=\sqrt{\sum_k \left(\frac{\partial h}{\partial x_k}\right)^2}$.
-%   In our case, we are restricting a sum of $N$ Gaussian integrals to have zero total.
-%   If we define the increments $d\vect{x}_n = \vect{x}_{n+1}-\vect{x}_n$, then the loop constraint is $\delta(\sum_{k=0}^{N-1} \vect{x}_k)$.
-%   If we account for the remaining normalizations of the $\vect{x}_n$ integral, then the normalization for the loop path integral is $\sqrt{2\pi\Delta \cT N} = \sqrt{2\pi\cT}$.  
-% \footnote{See pages 826-828 of Dan's notes.}
-% \end{shaded}
+
+% \section{Thesis outline}
+
+% The rest of this thesis is laid out as follows: 
+% In Chapter~\ref{ch:EM_quantization} we formally quantize
+% the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
+% We will attempt to carry this out in two ways. 
+% First, we will develop the full vector path integral for the EM field.  Unfortunately, this path integral has a number of worrisome features.
+% Second, we will split the EM field into two noninteracting scalar polarizations,
+% the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
+% %We will also review others work on quantizing the EM field in media.
+
+% In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
+% integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
+%  is the solution to a diffusion equation.  In simple cases, the diffusion equation can be solved.
+% We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
+
+% In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
+% results showing agreement between the worldline method and prior results, at least for planar media.
+% We will also discuss the transition between high and low temperature, and near field limits within the
+% worldline context.  
+
+% In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
+% This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
+% for generating paths and sampling $\vect{x}_0$ and $\cT$.  
+% We will examine the convergence of the methods as the path resolution is increased.
+
+% In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
+% for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  
+% We will then discuss how to efficiently sample these expressions, and numerically test them in the case of planar media.  
+
+% Finally, we will summarize our findings and directions for future work in the conclusion.  
 
 \section{Thesis outline}
 
@@ -1700,48 +1712,134 @@ The rest of this thesis is laid out as follows:
 In Chapter~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
 We will attempt to carry this out in two ways. 
-First, we will develop the full vector path integral for the EM field.  Unfortunately, this path integral has a number of worrisome features.
+First, we will develop the full vector path integral for the EM field.  
+Unfortunately, this path integral has a number of worrisome features.
 Second, we will split the EM field into two noninteracting scalar polarizations,
 the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
-%We will also review others work on quantizing the EM field in media.
+
+The TE worldline path integral~(\ref{eq:TE_worldline}) is 
+\begin{align}
+    \cF\subTE-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
+    \biggdlangle
+    \frac{e^{-\langle V\subTE(z)\rangle\cT}}{\sqrt{\langle \epsr(z)\mur(z)\rangle}} -1
+    \biggdrangle_{\vect{x}(t)},\label{eq:FTE_loc}
+\end{align}
+where 
+\begin{equation}
+  V\subTE(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\mur})^2-\partial_z^2\log\sqrt{\mur}\big].
+\end{equation}
+The equivalent TM polarization is recovered by exchanging $\epsr$ and $\mur$.  
 
 In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
 integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
- is the solution to a diffusion equation.  In simple cases, the diffusion equation can be solved.
+ is the solution to a diffusion equation.
+In particular, as shown in Section~\ref{sec:derive_feynman_kac}, the following path integral [Eq.~(\ref{eq:f_soln})],
+\begin{align}
+  f(\vect{x}) = \int_0^{\infty} ds\,
+  \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] \exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle,
+\end{align}
+is the steady-state solution to diffusion equation~(\ref{eq:diffusion_equation}),
+\begin{equation}
+  \partial_t f = \frac{1}{2}\nabla^2 f  - [V(\vect{x})+\lambda]f +\delta[\vect{x-c}],
+\end{equation}
+where we have substituted $g=\delta(\vect{x}-\vect{c})$.  
+In simple cases, the diffusion equation can be solved directly.
 We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
+Most importantly, in Section~\ref{sec:TM boundary condition} we will show that a regularized form of the TM potential 
+\begin{equation}
+  V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big],
+\end{equation}
+leads to an effective boundary condition~[Eq.~(\ref{eq:TM_boundary_conditions})],
+\begin{align}
+  f(d+0_+) =& e^{-\Xi}f(d-0_+) \qquad
+  \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+),
+\end{align}
+where $e^{\Xi}=\sqrt{1+\chi}$.
+It can then be shown that the path-averaged analytical solution for paths from $x=0$ to $x=c$ in time $t$,
+interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}]
+\begin{align}
+  \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
+  &=\left\{ \begin{array}{lc} 
+      1   + \sgn(d)\tanh\Xi\, e^{-2d(d-c)/t} & d(d-c)>0\\
+      \sech\Xi & d(d-c)<0.
+    \end{array}
+  \right.  
+\end{align}
+This result is crucial to regularizing the TM potential and allowing the numerical calculations 
+with the TM polarization to proceed.  
+The path integral solutions for the step potentials $V=\chi\Theta(x-d)$ are given in Eqs.~(\ref{eq:Feynman-Kac TE one step})
+and (\ref{eq:Feynman-Kac TE two step}), which are particularly relevant for TE calculations.  
+The equivalent results also including TM Boundary conditions are given in Eqs.~(\ref{eq:Feynman-Kac TM two step})
+and (\ref{eq:Feynman-Kac TE two step}).
 
 In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
+The Casimir--Polder energy can be derived, and for non-magnetic media ($\mur=1$) the resulting 
+worldline Casimir--Polder energies are [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref{eq:TM_Casimir_Polder})]:
+\begin{align}
+    V\supTE\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
+    \biggdlangle
+      \frac{1}{\langle \epsr\rangle^{3/2}} -       \frac{1}{[\epsr(\rA)]^{3/2}}
+    %   \right) \nonumber\\
+    % &\hspace{1cm}
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\label{eq:VTE_CP_loc}
+      \\
+    V\supTM\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
+    \biggdlangle
+      \frac{e^{-\langle V\subTM\rangle\cT}}{\langle \epsr\rangle^{3/2}}-  \frac{1}{[\epsr(\rA)]^{3/2}}\nonumber\\
+      &\hspace{5cm}       -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\rangle^{1/2}}
+      \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:VTM_CP_loc}
+\end{align}
+The analytical results from Chapter~\ref{ch:feynman_kac} can used by transforming the worldline path integrals 
+,such as Eqs.~(\ref{eq:VTE_CP_loc}) and (\ref{eq:VTE_CP_loc}), by using 
+the inverse moment theorem~(\ref{eq:moment_theorem}) and the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}).
+The worldline method can then be shown to recover prior results such as the Lifshitz expression for the energy~(\ref{eq:lifshitz}), 
+and the Casimir--Polder energy~(\ref{eq:VCP_eta}).
 We will also discuss the transition between high and low temperature, and near field limits within the
 worldline context.  
 
 In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
 This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
 for generating paths and sampling $\vect{x}_0$ and $\cT$.  
-We will examine the convergence of the methods as the path resolution is increased.
+We will examine the convergence of the TE methods as the path resolution is increased.
+The TM polarization is still quite a challenge to deal with numerically.
+As discussed in Section~\ref{sec:TM_scaling}, the numerically estimated TM path integral 
+shows growing statistical errors as the number of steps $N$ increases.  
+The ``birth-death path swarm'' is introduced in Section~\ref{sec:birth_death}, and is essential
+for reducing the statistical errors associated with multipling $N$ copies of the sub-path-averaged
+potential together.  The birth-death method acts as a simple Markov Chain Monte Carlo method for 
+generating more paths in regions with a large contribution to the path integral. 
+The derivatives are estimated using a ``partial-averaging method'' discussed in Section~\ref{sec:partial_averaging},
+which in effect considers paths with a non-uniform step-size.  
 
 In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
-for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  
-We will then discuss how to efficiently sample these expressions, and numerically test them in the case of planar media.  
+for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  For example
+the ``pinning'' expression for the TE force is [Eq.~(\ref{eq:pinning_force})]
+\begin{align}
+  \vect{F}_{2}&=
+  -\frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}
+\int\limits_0^\infty \!\frac{d\cT}{\cT^{1+D/2}}    
+\hspace{-3ex}
+ \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}^{}
+  \hspace{-4ex} dS\hspace{1ex} 
+  \hat{n}_2(\vect{x}_0) % \nonumber\\
+  % &\hspace{0.5cm}\times 
+  \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}
+  \Biggdrangle_{\vect{x}(t)},
+\end{align}
+where $\hat{n}_2$ is the surface normal of the body where the force is being calculated.  
+Unfortunately, the pinning method fails to recover the correct answer for strong-coupling cases where $\chi/N\gg 1$,
+which prompts developing the ``occupation'' method in Sec.~\ref{sec:occupation}.  
+Even the occupation method requires that additional sampling be done in the strong-coupling limit.
+In that case, only paths the just touch the surfaces will contribute, but these paths are rare in a naive
+sampling procedure.  However, both paths the enter the bodies, and paths that just touch the surfaces 
+are relevant for $\chi/N\ll 1$ and $\chi/N\gg 1$ respectively.  This numerical sampling is 
+discussed further in Sections~\ref{sec:generic_coupling} and \ref{sec:softened_delta}.
 
-% In Chapter~\ref{ch:general} we will discuss the prospects for a general method based on the current
-% results and examine both an approximate method coupling the two polarizations together as well
-% as the fully coupled path integral method.  % (We will test this for a mixed geometry for which
-% there are other tested methods to compare the worldline method against. 
-
-% In Chapter~\ref{ch:trajectory} we change topic to discussing continuous position measurements 
-% of single atoms.  We will derive the quantum trajectories for this case, and develop the framework
-% to account for variable measurement strength, and how to reconstruct the atomic trajectory
-% given the output of a realistic camera.  
 Finally, we will summarize our findings and directions for future work in the conclusion.  
 
-% \begin{enumerate}
-% \item Background for path integrals, scalar worldlines, and EM field quantization.
-% \item Cover 
-% \item Analytical methods and computations in simple geometries.
-% \item General method and numerical results.
-% \item Shift to quantum trajectories.  
-% \end{enumerate}
+
+
 
 %%% Local Variables: 
 %%% mode: latex

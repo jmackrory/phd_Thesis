@@ -3,9 +3,16 @@
 
 This chapter will show that in planar media the worldline path integrals yield the same results as the more direct 
 calculations outlined in chapter~\ref{ch:introduction}.  
-The analytical energies can be derived by evaluating an analytical average over paths for the relevant path integrals.
-The worldline Casimir energies will be rewritten in the right form to use the solutions from chapter~\ref{ch:feynman_kac}.  
-Finally, we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
+We start by showing how to extract the Casimir--Polder energy from the worldline expressions by treating
+the atom as a localized perturbation. The resulting Casimir--Polder worldline path integrals given for non-magnetic media 
+by Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}).
+%The analytical energies can be derived by evaluating an analytical average over paths for the relevant path integrals.
+We will use the inverse moment theorem~(\ref{eq:moment theorem}) and the Laplace--Mellin transform~(\ref{eq:Laplace--Mellin})
+to rewrite the worldline expressions so that the analytical solutions from chapter~\ref{ch:feynman_kac}
+can be substituted into the worldline.  Sections~\ref{sec:TE_CP}--\ref{sec:TM_energy} show that 
+the worldline expressions yield the correct Casimir and Casimir--Polder energies for the TE and TM 
+polarizations in planar geometries.  
+Finally, in section~\ref{sec:nonzero_temperature},  we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
 and show how known results for the near-field and high temperature results emerge from this formalism.    
 [The work presented on the TE polarization was published as \citet{Mackrory2016}, 
 and the work on the TM polarization is being prepared for publication.]
@@ -364,7 +371,7 @@ and the remaining $5/6$ is provided by the TM polarization.
 
 \section[{Analytical TM Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}]
 {Analytical TM Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}
-
+\label{sec:TM_CP}
 The calculation for the TM Casimir--Polder energy proceeds in a similar fashion to the TE case.  
 The renormalized TM Casimir--Polder energy can be split into two pieces 
 \begin{align}

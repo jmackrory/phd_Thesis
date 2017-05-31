@@ -1708,14 +1708,16 @@ no guarantee of correctness.
 \label{sec:thesis_outline}
 The rest of this thesis is laid out as follows: 
 In Chapter~\ref{ch:EM_quantization} we formally quantize
-the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
-We will attempt to carry this out in two ways. 
-First, we will develop the full vector path integral for the EM field.  
-Unfortunately, this path integral has a number of worrisome features.
-Second, we will split the EM field into two noninteracting scalar polarizations,
+the EM field in media characterized by their relative permeability $\epsr$ and permittivity $\mur$.
+We then develop two sets of worldline expressions for the electromagnetic Casimir energy.
+Initially, we will develop the full vector path integral for the EM field partition function~(\ref{eq:Z_4pot}).  
+This can be further developed into a worldline path integral expression~(\ref{eq:vector_path_integral}).
+Unfortunately, it is not clear how to extract the two physical degrees of freedom from that complicated
+expression, which involves the cancellation of a number of degrees of freedom.
+Instead of that approach, we will split the EM field into two noninteracting scalar polarizations:
 the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
-
-The TE worldline path integral~(\ref{eq:TE_worldline}) is 
+The worldline path integral for the free energy in the TE polarization 
+at zero temperature in dispersion-free media is [Eq.~(\ref{eq:TE_worldline})]
 \begin{align}
     \cF\subTE-\cF\sup0 &= -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
     \biggdlangle
@@ -1729,32 +1731,32 @@ where
 The equivalent TM polarization is recovered by exchanging $\epsr$ and $\mur$.  
 
 In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
-integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
+integrals.  The central expression underlying this analytical approach is the Feynman-Kac formula, which states the path integral
  is the solution to a diffusion equation.
-In particular, as shown in Section~\ref{sec:derive_feynman_kac}, the following path integral [Eq.~(\ref{eq:f_soln})],
+As shown in Section~\ref{sec:derive_feynman_kac}, the diffusion equation~(\ref{eq:diffusion_equation}),
+\begin{equation}
+  \partial_t f = \frac{1}{2}\nabla^2 f  - [V(\vect{x})+\lambda]f +\delta(\vect{x-c}),
+\end{equation}
+can be solved by the following path integral [Eq.~(\ref{eq:f_soln})],
 \begin{align}
   f(\vect{x}) = \int_0^{\infty} ds\,
   \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] \exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle,
 \end{align}
-is the steady-state solution to diffusion equation~(\ref{eq:diffusion_equation}),
-\begin{equation}
-  \partial_t f = \frac{1}{2}\nabla^2 f  - [V(\vect{x})+\lambda]f +\delta[\vect{x-c}],
-\end{equation}
-where we have substituted $g=\delta(\vect{x}-\vect{c})$.  
-In simple cases, the diffusion equation can be solved directly.
-We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
-Most importantly, in Section~\ref{sec:TM boundary condition} we will show that a regularized form of the TM potential 
+where we have substituted $g=\delta(\vect{x}-\vect{c})$ as the ``source'' term.  
+In simple cases, the diffusion equation~(\ref{eq:diffusion_equation}) can be solved directly.
+Most importantly, in Section~\ref{sec:TM boundary condition} we will show that a regularized form of the TM potential [Eq.~(\ref{eq:VsubTM})]
 \begin{equation}
   V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big],
 \end{equation}
-leads to an effective boundary condition~[Eq.~(\ref{eq:TM_boundary_conditions})],
+leads to an effective boundary condition in the diffusion equation.
+For a dielectric step characterized by $\epsr = 1+\chi\Theta(x-d)$, the effective boundary condition is given by~[Eq.~(\ref{eq:TM_boundary_conditions})],
 \begin{align}
   f(d+0_+) =& e^{-\Xi}f(d-0_+) \qquad
   \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+),
 \end{align}
 where $e^{\Xi}=\sqrt{1+\chi}$.
-It can then be shown that the path-averaged analytical solution for paths from $x=0$ to $x=c$ in time $t$,
-interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}]
+Using that boundary condition, Section~\ref{sec:TM_potential} shows that the path-averaged analytical solution for paths from $x=0$ to $x=c$ in time $t$,
+interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}],
 \begin{align}
   \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
   &=\left\{ \begin{array}{lc} 
@@ -1766,14 +1768,18 @@ interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}]
 This result is crucial to regularizing the TM potential and allowing the numerical calculations 
 with the TM polarization to proceed.  
 The path integral solutions for the step potentials $V=\chi\Theta(x-d)$ are given in Eqs.~(\ref{eq:Feynman-Kac TE one step})
-and (\ref{eq:Feynman-Kac TE two step}), which are particularly relevant for TE calculations.  
-The equivalent results also including TM Boundary conditions are given in Eqs.~(\ref{eq:Feynman-Kac TM two step})
-and (\ref{eq:Feynman-Kac TE two step}).
+and (\ref{eq:Feynman-Kac TE two step}), and are particularly relevant for TE calculations.  
+The equivalent results also including TM boundary conditions are given in Eqs.~(\ref{eq:Feynman-Kac TM one step})
+and (\ref{eq:Feynman-Kac TM two step}).
 
 In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
-results showing agreement between the worldline method and prior results, at least for planar media.
-The Casimir--Polder energy can be derived, and for non-magnetic media ($\mur=1$) the resulting 
-worldline Casimir--Polder energies are [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref{eq:TM_Casimir_Polder})]:
+results showing agreement between the worldline method and other calculations.
+In Section~\ref{sec:casimir-polder_worldline}, the worldline Casimir--Polder energy is derived 
+by treating the atom as a small perturbation to the material functions, where the 
+atom is located at $\rA$,    with static polarizability $\alpha_0$.
+We will typically simplify these expressions by assuming that the media are non-magnetic ($\mur=1$),
+ and the atom's magnetic response can also be neglected.
+In that case, the worldline expressions for the Casimir--Polder energy are given by [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref{eq:TM_Casimir_Polder})]:
 \begin{align}
     V\supTE\subCP(\vect{\rA}) &= \frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}
     \biggdlangle
@@ -1788,75 +1794,78 @@ worldline Casimir--Polder energies are [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref
       &\hspace{5cm}       -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\rangle^{1/2}}
       \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:VTM_CP_loc}
 \end{align}
-The analytical results from Chapter~\ref{ch:feynman_kac} can used by transforming the worldline path integrals 
-,such as Eqs.~(\ref{eq:VTE_CP_loc}) and (\ref{eq:VTE_CP_loc}), by using 
-the inverse moment theorem~(\ref{eq:moment_theorem}) and the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}).
-The worldline method can then be shown to recover prior results such as the Lifshitz expression for the energy~(\ref{eq:lifshitz}), 
-and the Casimir--Polder energy~(\ref{eq:VCP_eta}).
+Note that these Casimir--Polder worldline path integrals only involve paths emanating from the atom's position.  
+The analytical results from Chapter~\ref{ch:feynman_kac} can used in the worldline path integrals 
+after transforming the path integrals by using the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}) and the inverse moment theorem~(\ref{eq:moment_theorem}).
+The worldline method can then be shown to recover prior results such as the Casimir--Polder energy~(\ref{eq:VCP_eta}), 
+and the Lifshitz expression for the energy~(\ref{eq:lifshitz}).
 We will also discuss the transition between high and low temperature, and near field limits within the
 worldline context.  
 
 In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
-This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
-for generating paths and sampling $\vect{x}_0$ and $\cT$.  
-We will examine the convergence of the TE methods as the path resolution is increased.
-The TM polarization is still quite a challenge to deal with numerically.
+This will typically involve using Monte Carlo sampling methods for generating paths and sampling $\vect{x}_0$ and $\cT$.  
+These methods are discussed for the TE polarization in Section~\ref{sec:TE_Casimir_numerics}.
+In Section~\ref{sec:TE_results}, we will present the numerical results for the TE polarization,
+ and examine the convergence of the TE results as the path resolution is increased.
+Numerical calculations involving the TM polarization are more challenging than their TE counterparts,
+ even after regularization and analytical averaging.
 As discussed in Section~\ref{sec:TM_scaling}, the numerically estimated TM path integral 
 shows growing statistical errors as the number of steps $N$ increases.  
 The ``birth-death path swarm'' is introduced in Section~\ref{sec:birth_death}, and is essential
-for reducing the statistical errors associated with multipling $N$ copies of the sub-path-averaged
-potential together.  The birth-death method acts as a simple Markov Chain Monte Carlo method for 
-generating more paths in regions with a large contribution to the path integral. 
-The derivatives are estimated using a ``partial-averaging method'' discussed in Section~\ref{sec:partial_averaging},
-which in effect considers paths with a non-uniform step-size.  
+for reducing the statistical errors associated with accumulating the product of the path-averaged
+potential along the path.  
+The derivatives required for the TM Casimir--Polder energy are estimated using a ``partial-averaging method'' discussed in Section~\ref{sec:partial_averaging}.
+The numerical results for the TM polarization are presented in Section~\ref{sec:TM_results}, where
+they show some agreement with the analytical results.
 
 In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
-for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  For example
-the ``pinning'' expression for the TE force is [Eq.~(\ref{eq:pinning_force})]
+for the TE worldline path integral.  These expressions emphasize that the Casimir force emerges from paths that
+start on the surfaces of the bodies.  
+For example, the ``pinning'' expression for the Casimir force on the second body is
+is [Eq.~(\ref{eq:pinning_force})]:
 \begin{align}
   \vect{F}_{2}&=
-  -\frac{\alpha\chi_2\hbar c}{2(2\pi)^{D/2}}
+  -\frac{a\chi_2\hbar c}{2(2\pi)^{D/2}}
 \int\limits_0^\infty \!\frac{d\cT}{\cT^{1+D/2}}    
 \hspace{-3ex}
  \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0}^{}
   \hspace{-4ex} dS\hspace{1ex} 
   \hat{n}_2(\vect{x}_0) % \nonumber\\
   % &\hspace{0.5cm}\times 
-  \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}
-  \Biggdrangle_{\vect{x}(t)},
+  \Biggdlangle\frac{1}{\langle\epsilon_{\mathrm{r},12}\rangle^{a+1}}-\frac{1}{\langle\epsilon_{\mathrm{r},2}\rangle^{a+1}}
+  \Biggdrangle_{\vect{x}(t)}.
 \end{align}
-where $\hat{n}_2$ is the surface normal of the body where the force is being calculated.  
+Here $\sigma_2=0$ defines the surface of the second body, $\hat{n}_2$ is the surface normal of the body, while $\epsilon_{\mathrm{r},12}$ 
+and $\epsilon_{\mathrm{r},2}$ are the dielectric functions involving both bodies, and only the second body, respectively.
 Unfortunately, the pinning method fails to recover the correct answer for strong-coupling cases where $\chi/N\gg 1$,
 which prompts developing the ``occupation'' method in Sec.~\ref{sec:occupation}.  
-Even the occupation method requires that additional sampling be done in the strong-coupling limit.
-In that case, only paths the just touch the surfaces will contribute, but these paths are rare in a naive
-sampling procedure.  However, both paths the enter the bodies, and paths that just touch the surfaces 
-are relevant for $\chi/N\ll 1$ and $\chi/N\gg 1$ respectively.  This numerical sampling is 
-discussed further in sections~\ref{sec:generic_coupling} and \ref{sec:softened_delta}.
+Some care is still required when using the occupation method numerically, since in the strong-coupling
+limit, only rare paths that just touch the surfaces will contribute.  
+A hybrid approach designed to capture the weak coupling and strong-coupling cases is discussed further in sections~\ref{sec:generic_coupling} and \ref{sec:softened_delta}.
 
 Finally, we will summarize our findings and directions for future work in the conclusion.  
 
-\begin{figure}
-\centering
-\tikzstyle{chap} = [rectangle, rounded corners, minimum width=3cm, 
-minimum height=1cm,text centered, draw=black, fill=gray!30]
-\tikzstyle{arrow} = [thick,->,>=stealth]
+% \begin{figure}
+% \centering
+% \tikzstyle{chap} = [rectangle, rounded corners, minimum width=3cm, 
+% minimum height=1cm,text centered, draw=black, fill=gray!30]
+% \tikzstyle{arrow} = [thick,->,>=stealth]
 
-  \begin{tikzpicture}[node distance=2cm]
-    \node (intro) [chap] {Ch I: Introduction};
-    \node (EM) [chap, below of=intro] {Ch II: EM Quantization};
-    \node (Feynman) [chap, below of=EM] {Ch III: Feynman--Kac Formulae};
-    \node (Analytical) [chap, below of=Feynman, xshift=-4cm] {Ch IV: Analytical Worldlines};
-    \node (Numerical) [chap,  right of=Analytical,xshift=+6cm ] {Ch V: Numerical Worldlines};
-    \node (Force) [chap, below of=Numerical] {Ch VI: TE Forces and Torques};
-    \draw [arrow] (intro)--(EM);
-    \draw [arrow] (EM)--(Feynman);
-    \draw [arrow] (Feynman)--(Analytical);
-    \draw [arrow] (Feynman)--(Numerical);
-    \draw [arrow] (Numerical)--(Force);
-  \end{tikzpicture}
-  \caption[Chapter Dependencies]{Chapter Dependencies in this thesis.}
-\end{figure}
+%   \begin{tikzpicture}[node distance=2cm]
+%     \node (intro) [chap] {Ch I: Introduction};
+%     \node (EM) [chap, below of=intro] {Ch II: EM Quantization};
+%     \node (Feynman) [chap, below of=EM] {Ch III: Feynman--Kac Formulae};
+%     \node (Analytical) [chap, below of=Feynman, xshift=-4cm] {Ch IV: Analytical Worldlines};
+%     \node (Numerical) [chap,  right of=Analytical,xshift=+6cm ] {Ch V: Numerical Worldlines};
+%     \node (Force) [chap, below of=Numerical] {Ch VI: TE Forces and Torques};
+%     \draw [arrow] (intro)--(EM);
+%     \draw [arrow] (EM)--(Feynman);
+%     \draw [arrow] (Feynman)--(Analytical);
+%     \draw [arrow] (Feynman)--(Numerical);
+%     \draw [arrow] (Numerical)--(Force);
+%   \end{tikzpicture}
+%   \caption[Chapter Dependencies]{Chapter Dependencies in this thesis.}
+% \end{figure}
 
 
 %%% Local Variables: 

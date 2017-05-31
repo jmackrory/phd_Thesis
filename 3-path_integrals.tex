@@ -10,21 +10,21 @@ The path integral is also the solution to the diffusion or Fokker-Planck equatio
 While stochastic differential equations describe single trajectories, the Fokker-Planck equation gives
 the equation of motion for the ensemble-averaged probability distribution for the paths~\citep{Gardiner2009}.
 The path integral solution to the diffusion equations is known as the Feynman--Kac formula,
-after the work by \citet{Feynman1948} in describing the evolution of a quantum particle, and \citet{Kac1949}
- applying this to the diffusion equation.
+after the work by \citet{Feynman1948} describing the evolution of a quantum particle, and \citet{Kac1949}
+ where analogous methods were applied to the diffusion equation.
 
 Section~\ref{sec:derive_feynman_kac} presents the path integral solution~(\ref{eq:feynman-kac}) 
 to the diffusion equation~(\ref{eq:diffusion_equation}).
-In sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK}, we will develop analytical expressions relevant for the TE
-worldline path integral in planar geometries, with key results in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
-(\ref{eq:Feynman-Kac TE two step}).
-The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}), and in Section~\ref{sec:TM_potential}
-this potential is regularized, and found to lead to an effective boundary condition~(\ref{eq:TM_boundary_conditions})
+Sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK} then develop the analytical expressions relevant for the TE
+worldline path integral in planar geometries.  The key results for one and two planar surfaces are given by  Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
+(\ref{eq:Feynman-Kac TE two step}), respectively..
+The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}). In Section~\ref{sec:TM_potential}
+this potential is regularized, and found to lead to an effective boundary condition~(\ref{eq:TM_boundary_conditions}).
 The path integral solution corresponding to the TM potential for open paths is given in Eq.~(\ref{eq:TM_potential}).
 This result is essential for the numerical methods involving the TM polarization.  
-In sections~\ref{sec:TM_onebody_FK} and \ref{sec:TM_twobody_FK}, 
-we derive analytical TM path integrals that include the TM potential, as well as a step-potential
-which models the dielectric average.  These results are given in Eqs.~(\ref{eq:Feynman-Kac TM one step})
+Sections~\ref{sec:TM_onebody_FK} and \ref{sec:TM_twobody_FK}, 
+present the analytical expressions for path integrals that include the TM potential, as well as a step potential.
+These results are given in Eqs.~(\ref{eq:Feynman-Kac TM one step})
 and (\ref{eq:Feynman-Kac TM two step}).
 These analytical formulae will be used in Chapter~\ref{ch:analytical} to demonstrate agreement 
 with known results for both Casimir and Casimir--Polder energies.
@@ -161,7 +161,7 @@ the Brownian motions are closed, with the same beginning and ending point.
 The solution to the diffusion equation~(\ref{eq:feynman-kac}) can be converted into an 
 ensemble average over pinned Brownian bridges  with some manipulation.
 We will follow a solution method used by \citet{Hooghiemstra2002} to compute the sojourn time.  
-This solution method is explained in detail by \citet[sections~17.9--17.11]{SteckNotes}.
+This solution method is explained in detail by \citet[Sections~17.9--17.11]{SteckNotes}.
 % In brief, the sojourn time $T_{\text{S}}$
 % is the amount of time a Brownian process $x(t)$ spends on one side of an interface at $d$,
 % $T_{\text{S}}:= \int_0^T dt\,\Theta[x(t)-d].$  %Here $\Theta$ is the Heaviside step function.

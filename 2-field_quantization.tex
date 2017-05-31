@@ -5,17 +5,19 @@
 This chapter develops the worldline path integrals for electromagnetism with a space-dependent
 dielectric function, paralleling the treatment of the Dirichlet scalar worldline method in Chapter~\ref{ch:introduction}.  
 First, in Section~\ref{sec:quantizing} we will review prior work on quantizing the EM field inside media.
-Following that, we will review classical EM field theory and quantize the EM field in Section~\ref{sec:classical_EM}.
+Following that, we will review classical EM field theory in Section~\ref{sec:classical_EM}, 
+quantize the EM field in Section~\ref{sec:EM_quantization}, and develop the EM partition function in 
+Section~\ref{sec:EM_partition}.
 The partition function for the EM field will be developed as a gauge-fixed path integral in terms of the scalar and vector potentials
-in Section~\ref{sec:gauge_path_integral}, with the result in Eq.~(\ref{eq:EM_partition}).
-However, the resulting worldline path integrals~(\ref{eq:vector_path_integral}) for the vector potentials pose a number of challenges, as 
-it is not clear how the two physical degrees of freedom emerge. 
+in Section~\ref{sec:gauge_path_integral}.
+However, the resulting worldline path integrals~(\ref{eq:vector_path_integral}) pose a number of challenges, as 
+it is not clear how the two physical contributions emerge from these complicated expressions.. 
 As a result, in Section~\ref{sec:scalar_decomposition} we turn our attention to developing scalar models that better capture the features
 of electromagnetism.
 In planar geometries the scalar models correspond to the amplitudes of the TE and TM polarizations.  
-We will then develop the worldline path integrals for those scalar fields, one of which is presented in
-Eq.~(\ref{eq:TE_worldline}).  Those path integrals will form
-the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
+We will then develop the worldline path integrals for those scalar fields [the TE worldline path integral is presented in
+Eq.~(\ref{eq:TE_worldline}), and the equivalent TM path integral follows from EM duality~(\ref{eq:EM_duality})].
+Those path integrals will form the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
 
 [The decomposition of the EM field into two scalars, and the derivation of the associated 
 worldline path integrals was carried out in \citet{Mackrory2016}.]
@@ -325,7 +327,7 @@ with $\Pi_0$ and $\nabla\cdot\vect{\Pi}$ generating the gauge transformations.
 %  These constraints serve as the generators of gauge transformations.  
 
 \section{Quantum Theory}
-
+\label{sec:EM_quantization}
 The Hamiltonian theory can be quantized by promoting the Poisson bracket to a commutator
 between field operators.  However, there is the matter of the constraints.  We will follow the Gupta-Bleuler
 prescription which restricts the allowed quantum states to those that obey the constraints.  
@@ -388,7 +390,7 @@ Since the fields and momenta obey canonical commutation relations, the overlap b
 where the term in $\phi\Pi_0$ has been dropped due to the $\Pi_0=0$ constraint. 
 
 \section{Electromagnetic Partition Function}
-\label{eq:EM_partition}
+\label{sec:EM_partition}
 In order to calculate the energy in the field at zero and nonzero temperature, we will
 evaluate the partition function for the fields, and take the appropriate derivatives.  
 The EM partition function is defined as
@@ -1070,7 +1072,7 @@ where the prime on the sum indicates that the $n=0$ term is multiplied by a $1/2
 The free energy is renormalized by subtracting off the vacuum energy where $\epsr=\mur=1$ and $V\subTE^{(n)}$ is zero. 
 Note that the zero frequency contribution vanishes if $\lim_{\omega\rightarrow 0}\omega^2\epsr(\omega)=0$, 
 and $\mur=1$.  This is related to the dispute over the role of the zero frequency pole in the dielectric
-response of a metal.  
+response of a metal.\footnote{One perspective on this dispute is given in \citet[Chapter 14]{Bordag2009}.}  
 
 % for $n=0$ the Matsubara frequency $s_n=0$, so we have 
 % \begin{align}
@@ -1127,134 +1129,6 @@ which is the anticipated zero-temperature, dispersion-free TE worldline energy~(
 The next chapter develops analytical methods for evaluating the scalar worldline path integrals we have derived 
 here.  
 
-
-% The nonzero temperature path integral is also a more natural fit for the analytical techniques we will
-% employ in the next chapter.  
-
-
-% \section{Quantization with Harmonic Medium and Linear Response}
-
-% In this section we will attempt to carry out the full quantization procedure for a harmonic
-% medium.  We will start from a gauge-invariant Lagrangian for the EM field coupled
-% to a medium. 
-% We will derive the Hamiltonian, and then compute the partition function.
-%  We will then gauge-fix, and integrate out the harmonic medium.  This is essentially
-% based on the approach of deriving the dielectric via linear response theory advocated in \citet{Rosa2008}.
-% We will integrate out the matter-fields, and treat the interaction out to second order in the interaction.  
-% We will then carry out the remaining integral over the fields.  
-
-% This method should be well-defined perturbation theory, and follow the usual physical reasoning.  This
-% should avoid any of the strange features of trying to quantize the field while it is already
-% interacting with an effective medium.  
-
-% The combined field-matter Lagrangian for the EM field interacting with a charged scalar field is
-% \begin{align}
-%   L =& \int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_t\vect{A})^2
-%   - \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
-% &+\bigg(\partial_t+i\frac{e}{c}A_0\bigg)\phi^*\bigg(\partial_t-i\frac{e}{c}A_0\bigg)\phi
-% - \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
-% -\phi^*(u(x)+m^2)\phi\bigg],
-% \end{align}
-% where there is a potential $u(x)$ binding the charged scalar to exist only in certain regions.  We
-% will take $u(x)=0$ inside the bodies, and $u(x)\rightarrow\infty$ outside the bodies.  
-% The action is invariant under the combined gauge transformations,
-% \begin{align}
-%  A_0&\rightarrow A_0-\partial_t\alpha\\
-% \vect{A} & \rightarrow \vect{A}+\nabla\alpha\\
-% \phi &\rightarrow e^{-i\frac{e}{c}\alpha}\phi.
-% \end{align}
-
-% The canonical momenta are found to be
-% \begin{align}
-%   \pi_0 &:= \frac{\delta L}{\delta (\partial_t A_0)} = 0\\
-%   \vect{\Pi} & := \frac{\delta L}{\delta(\partial_t\vect{A})} = \epsilon_0(\nabla A_0+\partial_t\vect{A})\\
-%   \vect{\pi} & := \frac{\delta L}{\delta(\partial_t\phi)} = \bigg(\partial_t+i\frac{e}{c}A_0\bigg)\phi^*.
-% \end{align}
-% As noted before, the vanishing of $\pi_0$ is a constraint which must be maintained by the dynamics.
-% Preserving this constraint will require that $\partial_t\vect{\Pi}=\nabla\cdot\vect{\Pi}=0$.
-% We will employ the Gupta-Bleuler quantization, which restricts the allowed states. 
-
-% The full Hamiltonian is 
-% \begin{align}
-%   H &:= \int d\vect{x}(\pi_0 \partial_t A_0+\vect{\Pi}\cdot\partial_t\vect{A}+\pi\partial_t\phi 
-%   +\pi^*\partial_t\phi^*) - L\\
-% %   &:= \int d\vect{x}\bigg[\vect{\Pi}\cdot\frac{(\Pi-\nabla A_0)}{\epsilon_0}
-% %   +\pi(\pi^*+i\frac{e}{c}A_0\phi^*) +\pi^*(\pi-i\frac{e}{c}A_0\phi^) \\
-% %  &-\frac{\vect{\Pi}^2}{2\epsilon_0} + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
-% % &-\frac{\pi^*\pi}{2}+ \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
-% % +\phi^*(u(x)+m^2)\phi\\
-%   &:= \int d\vect{x}\bigg[\frac{\vect{\Pi}^2}{2\epsilon_0}+\frac{1}{2\mu_0}(\nabla\times\vect{A})^2+\pi^*\pi 
-%  +\phi^*(-\nabla^2 + u(x)+m^2)\phi\nonumber\\
-%  &\hspace{1cm}  +i\frac{e}{c}A_0(\pi \phi^*-\pi^*\phi) 
-%    +i\frac{e}{c}\vect{A}\cdot \big(\phi\nabla\phi^*-\phi^*\nabla\phi\big)+\frac{e^2}{c^2}|\vect{A}|^2\phi^*\phi
-% +A_0\frac{\nabla\cdot\vect{\Pi}}{\epsilon_0}
-%  \bigg]
-% \end{align}
-
-% Given the Hamiltonian, the partition function can be readily computed, given the Gaussian
-% nature of the integrals.  The long-and-short of this procedure should be that we will find 
-% $Z\sim\int D()e^{-S_E}.$
-% \begin{align}
-%   Z &= \tr[e^{-\beta \op{H}}]\\
-%   &= \int d^2\phi d\vect{A} dA_0 \langle A_0,\vect{A}| e^{-\beta \op{H}}|A_0,\vect{A}\rangle\\
-%   &= \int D\phi^*D\phi D\vect{A} DA_0 D\pi^*D\pi D\vect{\Pi}D\Pi_0\delta(\pi_0)\delta(\nabla\cdot\Pi)
-%   e^{-\Delta \beta H_n +\frac{i}{\hbar}(\vect{\Pi}\cdot\partial_\beta \vect{A}+\pi^*\partial_\beta\phi )}
-% \end{align}
-% \comment{should probably split $\phi = \phi_1+i\phi_2$ integrating over complex fields requires some
-% care with the book-keeping.  Then find $\pi_1,\pi_2$.  Can use $\langle \phi_1|\pi_1\rangle = e^{i\phi_1\pi_1/\hbar}$.
-% }
-
-% End result of careful integration over two independent real fields for matter, we can just skip to 
-% \begin{align}
-%   Z = \int D\phi^*D\phi D\vect{A}DA_0 e^{-S_E},
-% \end{align}
-% where
-% \begin{align}
-%   S_E =& \int_0^{\hbar\beta} d\tau\int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_\tau\vect{A})^2
-%   + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2\nonumber\\
-%   &+\bigg(\partial_\tau+i\frac{e}{c}A_0\bigg)\phi^*\bigg(\partial_\tau-i\frac{e}{c}A_0\bigg)\phi
-%   + \bigg(\nabla+i\frac{e}{c}\vect{A}\bigg)\phi^*\bigg(\nabla-i\frac{e}{c}\vect{A}\bigg)\phi
-%   +\phi^*(u(x)+m^2)\phi\bigg],
-% \end{align}
-% and $\tau=\hbar \beta$, and we also scaled $A_0\rightarrow \hbar^{-1} A_0$.  
-
-% Now expand the matter part out to quadratic order in the coupling.
-% \begin{align}
-%   S_E =& \int_0^{\hbar\beta} d\tau\int d^3\vect{x}\,\bigg[ \frac{\epsilon_0}{2}(\nabla A_0+\partial_\tau\vect{A})^2
-%   + \frac{1}{2\mu_0}(\nabla\times\vect{A})^2
-%   +\phi^*\big(-\partial_\tau^2-\nabla^2+u(x)+m^2\big)\phi\nonumber\\
-%   &+ i\frac{e}{c}A^\mu(\phi^*\partial_\mu\phi -\phi\partial_\mu\phi^*)
-%   +\frac{e^2}{c^2}A^\mu A_\mu\phi^*\phi-i\frac{e}{c}\partial_\mu A^\mu\phi^*\phi\bigg] 
-% \end{align}
-% where we are using the Euclidean inner product for 4-vectors.  
-
-
-% \subsection{Rahi approach}
-% \begin{enumerate}
-%   \item Expand exponential to second order in $e$.
-%     \begin{equation}
-%     e^{-\int d^4x A_\mu j^\mu} \approx (1 - \int d^4x A_\mu(x)j^\mu(x) +\frac{1}{2}\int d^4x A_\mu(x) A_\nu(y)
-%     j^\mu(x)j^\nu(y))
-%   \end{equation}
-%   \item Evaluate Gaussian integrals,
-%     \begin{equation}
-%       \int D\phi D\phi^* \phi^*(x)\phi(x) e^{-\int d^4x \phi^*(x)G^{-1}\phi(x)} = G(x)
-%     \end{equation}
-%   \item Simplify, Re-exponentiate.
-%     Some people use Kubo formula.
-%     By definition for linear response, with Ohm's law 
-%     \begin{equation}
-%       \vect{J} = \sigma \vect{E},
-%     \end{equation}
-%     so $\sigma = \epsilon-1$.  
-%     Kubo formula for conductivity in linear response is 
-%     $\sigma^{\mu\nu}(\omega) = \int dt \langle[ j^\mu(t),j^\nu(t')] e^{-i\omega t}.$
-%     Quite general relationship.  $\sigma$ is susceptibility, $[j,j]$ is Green function response.  
-    
-%     Hopefully can do this calculation for general 
-
-
-% \end{enumerate}
 
 
 

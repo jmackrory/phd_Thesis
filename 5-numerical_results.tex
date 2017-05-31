@@ -1,4 +1,4 @@
-\chapter{Electromagnetic Worldlines - Numerical Methods and Results}
+\chapter{Electromagnetic Worldlines: Numerical Methods and Results}
 \label{ch:numerical}
 
 The goal of this project is to build a general numerical method for computing 
@@ -13,50 +13,55 @@ The TM polarization is challenging, and has prompted most of these developments.
 The same developments have been used to enhance the TE polarization methods, and could be applied to improve existing Dirichlet
 worldline methods.
 
-The primary ingredients for the numerical methods are ways of efficiently 
-constructing Brownian paths, and Monte Carlo sampling of the path starting points $\vect{x}_0$
-and path time $\cT$.  In the case of the TE polarization, these are all quite straightforward. 
-Path construction is discussed in Section~\ref{sec:vloop}, while the sampling in $\cT$ and $\vect{x}_0$ are 
-discussed in sections~\ref{sec:T3_sample} and \ref{sec:pos_sample}.  In Section~\ref{sec:trapezoid}, 
-we discuss the method for computing the path-averaged dielectric constant $\langle\epsr\rangle$, which
-is needed in the TE worldline integrand.
+The basic approach of the worldline method relies on Monte Carlo simulation of the worldline path integral.
+The numerical methods for the TE polarization are presented in Section~\ref{sec:TE_Casimir_numerics}.
+In Section~\ref{sec:vloop} we discuss the ``v-loop'' method for constructing paths,
+and in Sections~\ref{sec:T3_sample} and \ref{sec:pos_sample} we discuss the methods for 
+Monte Carlo sampling for the path time $\cT$, and the path starting points $\vect{x}_0$, respectively.  
+In Section~\ref{sec:trapezoid}, we discuss some approaches to computing the 
+path-averaged dielectric constant $\langle\epsr\rangle$, which
+is needed in the TE worldline integrand.  We then discuss the numerical results and briefly outline 
+their convergence properties in Sections~\ref{sec:TE_results} and \ref{sec:TE_convergence}.
 
 The numerics for the TM polarization are more complicated than the TE case, since there is an 
 additional potential $V\subTM$, given by Eq.~(\ref{eq:VsubTM}).
-Section~\ref{sec:TM_potential_numerics} presents our strategy for computing the 
-accumulated potential $\exp[-\int_0^\cT dt\,V\subTM]$ along
-the entire path.  We will compute the total contribution from the TM potential by using Eq.~(\ref{eq:TM_potential}) 
-to calculate the potential for a single step from $x_k$ to $x_{k+1}$, and multiplying those together along
+Section~\ref{sec:TM_numerics} presents our strategy for computing the 
+accumulated potential $\exp\{-\int_0^\cT dt\,V\subTM[\vect{x}(t)]\}$ along
+the entire path.  The total contribution from the TM potential by using Eq.~(\ref{eq:TM_potential}) 
+to calculate the potential for a single step from $x_k$ to $x_{k+1}$, and multiplying all of those contributions along
 the entire path.  
 Unfortunately, as shown in Section~\ref{sec:TM_scaling}, 
 the simplest numerical estimates of the TM Casimir energy have a large variance which
-grows as the path resolution $N$ is increased.  We introduce two methods to reduce the growth
-of the variance, by changing the methods used to construct the paths. 
+grows as the path resolution $N$ is increased.  We reduce the growth
+of the variance, by introducing two different methods for constructing the paths. 
 The first is the ``TM-Gaussian'' approach is covered in Section~\ref{sec:TM-Gaussian}
 which includes the TM potential in constructing the path increments.
-However, this method while it behaves better, also shows the problem
+However, while this method has better convergence, it still shows the problem
 of growing statistical errors.  In Section~\ref{sec:birth_death} we develop the ``birth-death'' method,
 where paths branch, or are truncated based on the accumulated potential along the path thus far.
 This effectively changes the path creation to sample more from important regions of the integral.  
+The birth-death method reduces the statistical errors to manageable levels for both Gaussian and TM-Gaussian
+methods for constructing the paths.  
 In addition, the TM Casimir--Polder energy involves spatial derivatives of the worldline path integral.
 In Section~\ref{sec:partial_averaging}, we introduce a ``partial averaging'' method for evaluating the 
 derivatives that bypasses some of the errors in even simpler approaches.
 Altogether, these methods reproduce the TM Casimir--Polder energy, and partially reproduce the 
-TM Casimir energy, as shown in Section~\ref{sec:TM_numerics}.  
+TM Casimir energy, as shown in Section~\ref{sec:TM_results}.  
 
 %The numerical results will be compared against the expected analytical results.
+Our numerical tests rely on comparing the numerically computed efficiency to the known analytical value.
 The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
 integration over $\cT$, as was briefly discussed in Section~\ref{sec:worldline_distance_dep}. 
 That is still true within the context of electromagnetic worldlines. 
 All of the simulations are carried out for a non-dispersive media at zero temperature.
-At the end we will suggest how to generalize the calculations to include dispersion.  
+In Section~\ref{sec:freq_sampling}, we will suggest how to generalize the calculations to include dispersion.  
 
 [The numerical results on the TE Casimir energies were published as \citet{Mackrory2016}.
 A manuscript discussing the derivative estimation methods presented here and in the next chapter is in
 preparation, and the TM results and methods will also be published.]
 
 \section{TE Casimir Numerics}
-
+\label{sec:TE_Casimir_numerics}
 In this section we will discuss numerically calculating the TE Casimir and Casimir--Polder energies 
 from the worldline expressions in Eqs.~(\ref{eq:TE_Casimir}) and (\ref{eq:TE_Casimir_Polder}).
 We will first discuss generating the paths, sampling starting positions $\vect{x}_0$ and path times $\cT$,
@@ -207,7 +212,7 @@ which occurs at some path time $\cT_0$.\footnote{For a Brownian motion $\vect{x}
 the term ``first-touching time'' is reserved for the first time $t_0$ along a path that a Brownian bridge intersects a surface: $\vect{x}(t_0)=d$. 
 This is distinct from the first path time $\cT$ when the scaled path intersects a surface.
 }
-For $\cT>\cT_0$,  the extent of the path grows as $\sqrt{\cT}$, so the magnitude of the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ 
+For $\cT>\cT_0$,  the extent of the path grows as $\sqrt{\cT}$, so the magnitude of the integrand $(\langle\epsr\rangle^{-a}-1)$ 
 increases as more points enter the bodies.  
 However, the $\cT^{-(1+D/2)}$ factor decreases the contributions from large $\cT$.
 These facts suggest sampling $\cT$ from a probability distribution 
@@ -256,7 +261,7 @@ For points far from all bodies, which are clustered around the origin, the expec
 is $\cT_0\sim x_0^2$.
 % If the extent of the finite bodies is $d_{\text{max}}$, then there is also a maximum time $\cT_1$ for when the path is so large 
 % that it does not intersect the bodies anymore (this may be infinite in some geometries).
-In that case, and approximating the integrand $(\langle\epsr\rangle^{-\alpha}-1)$ by its strong-coupling limit,
+In that case, and approximating the integrand $(\langle\epsr\rangle^{-a}-1)$ by its strong-coupling limit,
 the path time integral is bounded by
 \begin{equation}
   \int_{\cT_0}^{\infty} \frac{d\cT }{\cT^{1+D/2}} \sim \frac{1}{x_0^{D}}
@@ -1175,7 +1180,7 @@ any potential $V$ (assuming the solution can be found), so it could also be appl
 TM potentials under similar circumstances.    
 
 \subsection{Results: TM Casimir  and Casimir--Polder Energies for Planar Geometries}
-
+\label{sec:TM_results}
 Figure~\ref{fig:eff_TM_atom_wall} shows the numerical results for the efficiency $\eta\subTM$~(\ref{eq:etaTM})
 and compares it to the analytical expression~(\ref{eq:etaTM}).  The numerical results 
 were generated using the preceding methods for birth-death path swarms.
@@ -1281,7 +1286,7 @@ This would be another form of importance sampling, since only paths that touch b
 will actually contribute to the path integral.    
 
 \section{Frequency Sampling}
-
+\label{sec:freq_sampling}
 Currently these numerical calculations ignore dispersion.  Given that each frequency contributes
 independently to the Casimir energy,  the integral over frequencies could be handled in a similar 
 fashion to handling multiple constant $\chi$.  In the TE case, the sojourn time for each body $\langle\Theta_i\rangle$

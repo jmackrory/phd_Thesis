@@ -2,17 +2,17 @@
 \label{ch:analytical}
 
 This chapter will show that in planar media the worldline path integrals yield the same results as the more direct 
-calculations outlined in chapter~\ref{ch:introduction}.  
+calculations outlined in Chapter~\ref{ch:introduction}.  
 We start by showing how to extract the Casimir--Polder energy from the worldline expressions by treating
 the atom as a localized perturbation. The resulting Casimir--Polder worldline path integrals given for non-magnetic media 
 by Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}).
 %The analytical energies can be derived by evaluating an analytical average over paths for the relevant path integrals.
 We will use the inverse moment theorem~(\ref{eq:moment theorem}) and the Laplace--Mellin transform~(\ref{eq:Laplace--Mellin})
-to rewrite the worldline expressions so that the analytical solutions from chapter~\ref{ch:feynman_kac}
+to rewrite the worldline expressions so that the analytical solutions from Chapter~\ref{ch:feynman_kac}
 can be substituted into the worldline.  Sections~\ref{sec:TE_CP}--\ref{sec:TM_energy} show that 
 the worldline expressions yield the correct Casimir and Casimir--Polder energies for the TE and TM 
 polarizations in planar geometries.
-Finally, in section~\ref{sec:nonzero_temperature},  we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
+Finally, in Section~\ref{sec:nonzero_temperature},  we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
 and show how known results for the near-field and high temperature results emerge from this formalism.    
 [The work presented on the TE polarization was published as \citet{Mackrory2016}, 
 and the work on the TM polarization is being prepared for publication.]
@@ -32,9 +32,9 @@ Note that the delta functions are being used a short-hand notation for a sharply
 All expansions involving these delta functions can be carried out with a finite regularization of the 
 delta function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
 We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
-to nonzero temperature will be considered in section~\ref{sec:nonzero_temp}.
+to nonzero temperature will be considered in Section~\ref{sec:nonzero_temp}.
 
-The Casimir energy for TE and TM polarizations was derived in chapter~\ref{ch:EM_quantization}.
+The Casimir energy for TE and TM polarizations was derived in Chapter~\ref{ch:EM_quantization}.
 In the zero-temperature limit, the energy in the EM field in the TE polarization is 
 \begin{equation}
   E\subTE-E\sup0 = -\frac{\hbar c}{2}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}\int d\vect{x}_0
@@ -49,7 +49,7 @@ Considering the similarities between the polarizations, we will carry these expa
 one polarization, since the others follow by duality.  
 
 % It is important be clear about exactly what the energy is, and how it is computed.  
-% As discussed in \citep[section~ 4.7]{Jackson1998}, the electrostatic energy for a system depends on the 
+% As discussed in \citep[Section~ 4.7]{Jackson1998}, the electrostatic energy for a system depends on the 
 % manner in which the system was arranged.  Different energies are found if the free charge or potential
 % are specified.  The same is true of magnetostatic systems: are the potentials on the boundaries, or the free 
 % currents specified.  
@@ -198,7 +198,7 @@ discontinuous or singular potentials.
 \section{Rearranging Worldline Casimir Energies}
 
 The TE and TM worldline energies can be some rewritten in a form better suited to use the analytical results 
-that were derived in chapter~\ref{ch:feynman_kac}.
+that were derived in Chapter~\ref{ch:feynman_kac}.
  This can be done with two integral identities.
 The first identity converts the worldline path integral into a form involving the Laplace transform of the path
 integral.
@@ -240,7 +240,7 @@ result
 % In words, the Mellin transform of a function is proportional to the Mellin transform of the Laplace transform of the function,
 %  and subject to a change of variable $z\rightarrow 1-z$. 
 This result can be used to rewrite worldline path integrals in terms of their Laplace transforms. 
-This is useful since the solution method in chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the path integral.
+This is useful since the solution method in Chapter~\ref{ch:feynman_kac} naturally yields the Laplace transform of the path integral.
 
 \subsection{Inverse Moment Theorem}
 
@@ -297,7 +297,7 @@ which assumes that the path integral solution was computed in $n$-dimensions.
 We will typically work with planar media where $n=1$.  
 (Despite knowing the specific values for $\alpha, D$ and $n$, it is useful to track them as algebraic variables in calculations.)
 The Laplace transformed path integral can be computed as the solution~(\ref{eq:f_soln}) 
-to the relevant diffusion equation~(\ref{eq:diffusion_eq}), as discussed in chapter~\ref{ch:feynman_kac}.
+to the relevant diffusion equation~(\ref{eq:diffusion_eq}), as discussed in Chapter~\ref{ch:feynman_kac}.
 
 \section[{Analytical  TE Casimir--Polder Energy for an Atom \\ and a Dielectric Plane}]
 {Analytical  TE Casimir--Polder Energy for an Atom and a Dielectric Plane}
@@ -353,7 +353,7 @@ and $\alpha=3/2$ yields
 \end{align}
 The prefactor is the Casimir--Polder energy for an atom above a perfect conductor~(\ref{eq:CP_conductor}).
 This result agrees with the known result for the TE contribution to the Casimir--Polder energy~[
-see Eq.~(14.210) in section~14.3 of \citet{SteckNotes}\,].
+see Eq.~(14.210) in Section~14.3 of \citet{SteckNotes}\,].
 An ``efficiency'' $\eta\subTE$ can be defined by the ratio of the Casimir--Polder energy for an atom 
 and a dielectric to the Casimir--Polder energy between an atom and a perfect conductor.  
 The integral over $p$ is the TE contribution to the efficiency, $\eta\subTE$, and can be   
@@ -395,7 +395,7 @@ and the inverse moment theorem:
 Note that the TM-potential is already in the exponential, so the TM potential and $\Xi$ does not need to be rescaled by $s$. 
 In this sense $\Xi$ is an independent parameter from $\chi$. 
 The analytical result~(\ref{eq:Feynman-Kac TM one step}) can be substituted into Eq.~(\ref{eq:TM_subpart}),
-and the integral can be transformed in the same manner as in section~\ref{sec:TE_CP}, with the result
+and the integral can be transformed in the same manner as in Section~\ref{sec:TE_CP}, with the result
 % \begin{align}
 %   \cV_{\nu,\alpha}=\,&\frac{\sqrt{\pi}}{\Gamma[\alpha]\Gamma[(\nu+1)/2-\alpha]}\int_0^\infty d\lambda\,\lambda^{(\nu-1)/2-\alpha}
 %   \int_0^\infty ds\,s^{\alpha-1}  \frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} r\subTM\\
@@ -554,7 +554,7 @@ The TE Casimir energy between two half-spaces is then
   &= \frac{\hbar c}{4\pi^2}\int_0^\infty dt \,t^{2}  \int_1^\infty dp\, p \log(1-r\supTE_1r\supTE_2 e^{-2tpd}),
 \end{align}
 since the boundary term from the integration by parts vanishes.  
-This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in section~\ref{sec:lifshitz}.
+This is exactly the TE component of the Lifshitz energy that was derived by more straightforward means in Section~\ref{sec:lifshitz}.
 In this derivation, the gap between the spaces was filled with vacuum~$(\epsilon_3=1)$.  
 The TE Casimir energy per unit area can be written as 
 \begin{equation}
@@ -616,7 +616,7 @@ where the integral over the transverse coordinates introduced the area $A$, and 
 \begin{equation}
   r\supTM_i =  \frac{e^{2\Xi_i}\sqrt{\lambda+s}-\sqrt{\lambda+s(1+\chi_i)}}{e^{2\Xi_i}\sqrt{\lambda+s}+\sqrt{\lambda+s(1+\chi_i)}}.
 \end{equation}
-The same transformations as in section~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
+The same transformations as in Section~\ref{eq:TE_energy} can be employed to find the TM Casimir energy.
 After changing integration variables from $\lambda$ to $p:=\sqrt{\lambda/s+1}$, the result is 
   \begin{align}
   E\subTM-E\sup0 % &= -\frac{\hbar cA}{2(2\pi)^{D/2}}\int_0^\infty ds\,\frac{s^{\alpha-1}}{\Gamma(\alpha)}
@@ -710,7 +710,7 @@ The free energy for the TE and TM polarizations (for non-magnetic media) is
 e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle_{\vect{x}(t)},
 \end{align}
 where we have suppressed renormalization terms.  
-The Casimir--Polder energies can be derived by the same reasoning used in section~\ref{sec:casimir-polder_worldline},
+The Casimir--Polder energies can be derived by the same reasoning used in Section~\ref{sec:casimir-polder_worldline},
 extending the energies~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) to nonzero temperature.
 In this case, the results are 
 \begin{align}
@@ -726,7 +726,7 @@ e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\biggdrangle_{\vect{x}(t),\vect{x}
 \end{align}
 There are some noteworthy features of the finite-temperature worldline expression.  
 First, all material functions are already in the exponent, so there is no need for the inverse moment
-theorem when using results from chapter~\ref{ch:feynman_kac} to analytically evaluate the finite-temperature Casimir energy.
+theorem when using results from Chapter~\ref{ch:feynman_kac} to analytically evaluate the finite-temperature Casimir energy.
 In fact, at zero temperature the Matsubara sum is replaced by an integral, which
 corresponds to the Gamma function used in the inverse moment theorem.  
 
@@ -767,7 +767,7 @@ diverges.  As a result, only the first term significantly contributes.
 \end{equation}
 Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
 similarly dominant at small distances at zero temperature.
-As noted at the end of section~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
+As noted at the end of Section~\ref{sec:nonzero_temp_path_integral}, the zero-temperature, far-field limit can
 be recovered by replacing the Matsubara sum with a frequency integral.  In a similar fashion,
  Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}) can be recovered from Eqs.~(\ref{eq:TE_CP_thermal})
  and (\ref{eq:TE_CP_thermal}).

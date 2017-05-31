@@ -8,10 +8,10 @@ Experiments that detect the shift in frequency of an oscillator, such as
 measuring the motion of a BEC in a harmonic trap~\citep{Harber2005,Obrecht2007}, or  
 a nanoelectromechanical oscillators~\citep{Chan2001}, are sensitive the curvature of the Casimir energy.
 
-As already noted in section~\ref{sec:finite_difference}, the finite difference method has some drawbacks
+As already noted in Section~\ref{sec:finite_difference}, the finite difference method has some drawbacks
 when applied to worldline path integrals.  
 Derivatives of discontinuous functions such as those required in worldline path integrals lead to large statistical errors.
-In section~\ref{sec:partial_averaging}, we developed specialized techniques for handling derivatives of Casimir--Polder 
+In Section~\ref{sec:partial_averaging}, we developed specialized techniques for handling derivatives of Casimir--Polder 
 energies.  This chapter develops a parallel discussion for computing the force on macroscopic bodies.  
 
 Prior investigations by ~\citet{Weber2009, Weber2010} computed the Casimir force in the worldline method for
@@ -23,13 +23,27 @@ the path time $\cT$ and path starting position $\vect{x}_0$.
 
 In contrast, our approach to the worldline method has further emphasized Monte Carlo integration over
 the path time and starting position.  
-We have therefore developed worldline expressions to directly compute the force, potential curvature
-and torque that apply between arbitrarily shaped bodies within the worldline formalism.  The resulting path integrals consider 
-paths ``pinned'' to the surfaces of the bodies.  
+In Section~\ref{sec:path-pinning}, we derive some intuitive worldline expressions for the force~(\ref{eq:pinning_force}),
+ potential curvature~(\ref{eq:potential_curvature}) and torque~(\ref{eq:pinning_torque}).
+In these expressions the forces emerge from paths that are just touch the bodies, or are ``pinned'' to the surfaces.
+Unfortunately, when $\chi/N\ll 1$, these expressions give too small an answer, which prompts developing the 
+``occupation'' method in Section~\ref{sec:occupation}.  
+Using the occupation method, we can derive alternative expressions for the force~(\ref{eq:occupation_force}), 
+potential curvature~(\ref{eq:curvature_occupy})
+and torque~(\ref{eq:torque_occupy}).  These expressions in principle still work at large $\chi/N$,
+but some care si needed to sample from all of the relevant classes of paths.  This is discussed
+in particular for the potential curvature where a hybrid approach is used. 
+In Section~\ref{sec:generic_coupling}, a ``general-$chi$'' approach is used
+for small $\chi$, and in Section~\ref{sec:softened_delta} one approach to capturing the strong-coupling
+limit is presented.  
+
 The following results are explicitly derived for
 the TE polarization, although presumably these results can be generalized to the TM polarization
-by exploiting the partial averaging methods discussed in section~\ref{sec:partial_averaging}.
-[The results presented here, along with the material on partial averaging in section~\ref{sec:partial_averaging}
+by exploiting the partial averaging methods discussed in Section~\ref{sec:partial_averaging}.
+This would necessary since directly evaluating the derivatives on the TM potential would lead to terms 
+like $(d-x_k)/\Delta \cT$.  With partial averaging, these terms would be well behaved even as $N$
+increases.
+[The results presented here, along with the material on partial averaging in Section~\ref{sec:partial_averaging}
 is in preparation for publication.]
 
 \section{Surface Pinned Paths}
@@ -351,6 +365,7 @@ The renormalized torque worldline path integral is
   \biggdlangle 
 \frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{\alpha+1}}
   -\frac{1}{\langle \epsilon_{\mathrm{r},2}\rangle^{\alpha+1}}\biggdrangle_{\vect{x}(t)}.
+\label{eq:pinning_torque}
 \end{align}
 This has a similar form to the force path integral~(\ref{eq:pinning_force}).  
 Here the integrand is weighted by the cross product of the vector from the body's center the surface,
@@ -364,7 +379,7 @@ This is in direct analogy with the expression for the torque $\vect{K}=\vect{r}\
 An alternative expression for the Casimir--Polder force on an atom near a surface
 can be found in analogy to the potential curvature in Eq.~(\ref{eq:potential_curvature}).
 The force on the atom due to the TE Casimir effect is $F\supTE\subCPi = -\hat{r}_i\cdot\nabla_{\rA}V\subCP\supTE$.
-  In section~\ref{sec:partial_averaging} the derivatives of the path integral were taken directly,
+  In Section~\ref{sec:partial_averaging} the derivatives of the path integral were taken directly,
   and the only contribution to the derivative came from the Gaussian probability distribution.  
   Alternatively, one can change the coordinates to $\vect{x}(t)=\rA+\vect{y}(t)$, where 
   $\vect{y}(t)$ is a Brownian bridge starting and returning to the origin, $\vect{y}(0)=\vect{y}(\cT)=0$.
@@ -377,7 +392,7 @@ The force on the atom due to the TE Casimir effect is $F\supTE\subCPi = -\hat{r}
 \end{align}
 where $\hat{r}_i$ is a Cartesian unit vector.  
 This path integral considers the change in energy as the whole path is rigidly translated,
-while the results in section~\ref{sec:partial_averaging}
+while the results in Section~\ref{sec:partial_averaging}
 correspond to shifting only the origin of the path, while keeping the rest of the path fixed.
 The derivatives create delta functions for piece-wise constant media.
 In analogy with the potential curvature, since the starting point is fixed, it is necessary to 
@@ -399,7 +414,7 @@ The Casimir--Polder force, after summing over all force components, is
  Eq.~(\ref{eq:Gauss_normalization}).  %, and $i$ indexes each of the $N_b$ dielectric bodies.
 In this method the paths are constrained to touch the bodies.  This must be taken into account numerically
 by averaging over which index along the paths is constrained.
-By contrast, the Hermite-Gaussian method discussed in section~\ref{sec:partial_averaging} 
+By contrast, the Hermite-Gaussian method discussed in Section~\ref{sec:partial_averaging} 
 can use the same ensemble of paths regardless of the dielectric background.
 While the path-pinning method requires more complicated methods for path generation,
 it does not suffer from diverging fluctuations as the path resolution is increased.
@@ -408,7 +423,7 @@ which would be the problematic terms as $\Delta \cT\rightarrow 0$,
 and thus this method does not require careful handling as $N$ increases.  This is 
 in contrast to the Hermite-Gaussian method which required partial averaging to avoid growing 
 statistical errors as $N$ increased.  
-However, any further derivatives would require the techniques used in section~\ref{sec:partial_averaging}.
+However, any further derivatives would require the techniques used in Section~\ref{sec:partial_averaging}.
 
 \section{Occupation Number}
 \label{sec:occupation}
@@ -447,7 +462,7 @@ The exponentials can be simplified as
 = \prod_{k=0}^{N-1}
   \left[1+\Theta_i(\vect{x}_k)(e^{-s\chi_i/N}-1)\right].\label{eq:exp_step_limit1}
 \end{align}
-(The results in section~\ref{sec:path-pinning} can be recovered when $\chi/N\ll 1$.)
+(The results in Section~\ref{sec:path-pinning} can be recovered when $\chi/N\ll 1$.)
 
 The force on the second body can be computed by differentiating
 the energy with respect to the body position $\vect{R}_2$.  The spatial part of the force integral
@@ -524,7 +539,7 @@ the terms where $n=0$ and $m>0$ contribute.  In the strong-coupling limit, the m
 force comes from paths that ``graze'' the second surface, while also overlapping the first body.  
 
 For completeness we note the analogous expressions for the torque and potential curvature.  
-The manipulations and reasoning used in section~\ref{sec:path-pinning} for the torque and potential curvature
+The manipulations and reasoning used in Section~\ref{sec:path-pinning} for the torque and potential curvature
 apply here---the only difference is the form chosen for the derivative, 
 and the use of  the indicator functions in the integrand.  
 The torque path integral is 
@@ -536,6 +551,7 @@ The torque path integral is
   \hspace{2ex}
   \sum_{m=0}^{N-1}\sum_{n=1}^{N-m-1}   \nonumber\\
   &\hspace{2.5cm} \times\Bigdlangle[(\vect{x}_0-\vect{R}_2)\wedge\hat{n}_2(\vect{x}_0)]\I[1]m \,\I[2]n\,  f_{m,n}\Bigdrangle_{\vect{x}(t)}.
+  \label{eq:torque_occupy}
 \end{align}
 % \begin{align}
 %   \vect{K}_2 =& -\frac{\hbar c N}{2(2\pi)^{D/2}}\intzinf\frac{d\cT}{\cT^{1+D/2}}
@@ -600,7 +616,7 @@ In general, different classes of paths are important in the finite-$\chi$ and st
 cases.  At small $\chi$, the most important path statistic is the sojourn time,
 while in the strong-coupling regime, the first-touching time is the most important statistic.    
 This correspondence was used to discuss the numerical convergence properties of the method as 
-the path length was varied.  [There is a brief discussion on this point in section~\ref{sec:TE_convergence},
+the path length was varied.  [There is a brief discussion on this point in Section~\ref{sec:TE_convergence},
 and an extended discussion in \citet{Mackrory2016}.]
 More practically, these different requirements make it difficult to use a single class of path to efficiently evaluate the potential at all $\chi$:
 in weak coupling one wants a path ensemble that enters all of the bodies, while in strong coupling
@@ -655,7 +671,7 @@ and the dielectric path averages were calculated using the trapezoidal method~(\
 Note that in computing path averages for the occupation method, only points \emph{inside} the body
 contribute---any points pinned to the surface do not contribute to the dielectric path-average.
 
-The pinning methods discussed in section~\ref{sec:path-pinning} start to fail for $\chi\gtrsim N$, as expected.
+The pinning methods discussed in Section~\ref{sec:path-pinning} start to fail for $\chi\gtrsim N$, as expected.
 For $\chi\gg N$, the estimate of the force shows the expected $\chi^{-1/2}$ decay.  
 For a finite susceptibility, it should be possible to carry out the calculation for large enough $N$, 
 but if one is interested in the strong-coupling regime of this theory, then the pinning method is unsuitable.
@@ -769,7 +785,7 @@ set of paths should be generated which just touch the bodies (which will capture
 
 \subsection{``Softened'' Delta Function Pinning for Strong-Coupling Limit for Potential Curvature}
 \label{sec:softened_delta}
-An alternative method to the one presented in section~(\ref{sec:generic_coupling}),  one more suited to the strong-coupling limit, 
+An alternative method to the one presented in Section~(\ref{sec:generic_coupling}),  one more suited to the strong-coupling limit, 
 arises from a different treatment of the second delta function $\delta[\sigma_2(\vect{x}_k-\vect{R}_2)]$.
 In this case, the first delta function $\delta[\sigma_1(\vect{x}_0-\vect{R}_1 )]$, is still used to pin the paths to start 
 on the first body.  Although the paths are assumed to start on the surface of the first body, they do not
@@ -779,7 +795,7 @@ the paths should move towards the second body, and just graze its surface.
 The goal of this method is to develop a way of handling delta function constraints within a path integral
 without having to drastically change the way the paths are generated.  This would be particularly
 useful for handling pinning in an application involving paths that are hard to construct, such as the TM-Gaussian
-paths discussed in section~\ref{sec:TM-Gaussian}.
+paths discussed in Section~\ref{sec:TM-Gaussian}.
 In the resulting method, any path can in principle contribute, even if only a few of them 
 will give an important contribution.  
 
@@ -857,7 +873,7 @@ Those paths can then contribute to the path integral in regions where $\Phi$ is 
 Since the strong-coupling limit in the curvature~(\ref{eq:curvature_occupy}) 
 comes from the terms proportional to $\I[1]0\I[2]0$, 
 those terms can be separated out, and treated using the softened delta function approach.
-The remaining terms will be treated using the generic coupling discussed in section~\ref{sec:generic_coupling}.
+The remaining terms will be treated using the generic coupling discussed in Section~\ref{sec:generic_coupling}.
 The curvature can be split into a strong-coupling and general-$\chi$ coupling term
 \begin{align}
   C_{ij} =\,& C_{ij}^{(\text{S})} + C_{ij}^{(\text{g})},

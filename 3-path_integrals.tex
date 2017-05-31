@@ -18,7 +18,7 @@ to the diffusion equation~(\ref{eq:diffusion_equation}).
 In sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK}, we will develop analytical expressions relevant for the TE
 worldline path integral in planar geometries, with key results in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
 (\ref{eq:Feynman-Kac TE two step}).
-The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}), and in section~\ref{sec:TM_potential}
+The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}), and in Section~\ref{sec:TM_potential}
 this potential is regularized, and found to lead to an effective boundary condition~(\ref{eq:TM_boundary_conditions})
 The path integral solution corresponding to the TM potential for open paths is given in Eq.~(\ref{eq:TM_potential}).
 This result is essential for the numerical methods involving the TM polarization.  
@@ -26,7 +26,7 @@ In sections~\ref{sec:TM_onebody_FK} and \ref{sec:TM_twobody_FK},
 we derive analytical TM path integrals that include the TM potential, as well as a step-potential
 which models the dielectric average.  These results are given in Eqs.~(\ref{eq:Feynman-Kac TM one step})
 and (\ref{eq:Feynman-Kac TM two step}).
-These analytical formulae will be used in chapter~\ref{ch:analytical} to demonstrate agreement 
+These analytical formulae will be used in Chapter~\ref{ch:analytical} to demonstrate agreement 
 with known results for both Casimir and Casimir--Polder energies.
 %In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
 % These analytical solutions (such as for Dirichlet )may also be useful in accelerating numerical methods relying 
@@ -36,11 +36,11 @@ with known results for both Casimir and Casimir--Polder energies.
 \label{sec:derive_feynman_kac}
 In this section, we will derive the path integral as the solution to a diffusion equation,
 using techniques from quantum mechanics.
-The derivation will stay close in spirit to the one presented by \citet{Sakurai1994} and section~\ref{sec:feynman_path_integral}, 
+The derivation will stay close in spirit to the one presented by \citet{Sakurai1994} and Section~\ref{sec:feynman_path_integral}, 
 but it will be extended to include a source term.  
 More formal derivations are available from mathematical~\citep{Cartier2004},
 and probabilistic perspectives~\citep{Karatzas1991, Durrett1996}.  
-A detailed discussion of the more formal probabilistic derivation is given by \citet[section~17.9]{SteckNotes}.
+A detailed discussion of the more formal probabilistic derivation is given by \citet[Section~17.9]{SteckNotes}.
 
 The goal of this section is to find a solution $f(\vect{x},t)$ to the driven diffusion equation
 \begin{equation}
@@ -110,7 +110,7 @@ After carrying out the Gaussian momentum integrals, the matrix element is
 This is the traditional discrete form of the imaginary-time path integral.
 The connection to Brownian motion can be made even clearer by changing integration variables.
 The arguments of the Gaussians $\vect{x}_{j+1}-\vect{x}_{j}$, are zero mean random variables, with
-variance $\Delta t$.  The Gaussians  can be interpreted as the probability distributions for the  vector Wiener increments discussed in section~\ref{sec:dirichlet_worldline_derivation}.
+variance $\Delta t$.  The Gaussians  can be interpreted as the probability distributions for the  vector Wiener increments discussed in Section~\ref{sec:dirichlet_worldline_derivation}.
 In this particular case, the vector Wiener increments are defined $\Delta \vect{W}_j := \vect{x}_{N-j-1}-\vect{x}_{N-j}$.
 Note that this labeling is backwards in time from the usual convention, but it 
 ensures that the solutions are defined in reference to the final coordinate $\vect{x}_N$.
@@ -152,7 +152,7 @@ In this case the ensemble average is over free Brownian motions.
 This result was derived under the assumption that the potential is independent of time, since that is 
 all that is required for this dissertation.
  This derivation can be extended to a time-dependent potential $V(\vect{x},t)$ by using the time-ordered evolution operator, 
-as used in the Dyson series~\citep[section~6.6]{Sakurai1994}.  
+as used in the Dyson series~\citep[Section~6.6]{Sakurai1994}.  
 
 \subsection{Steady-State Brownian Bridge Path Integral}
 
@@ -211,7 +211,7 @@ of the path coincides with the origin.
 % another $\vect{x}_{k+1}$ can be found by subtracting $\vect{x}_k$ from all coordinates in the problem
 %  so that $\vect{x}_k=0$, and $\vect{c}=\vect{x}_{k+1}-\vect{x}_k$.
  This is particularly useful 
- in applying these results to accelerating numerical computations, as will be discussed further in chapter~\ref{ch:numerical}.
+ in applying these results to accelerating numerical computations, as will be discussed further in Chapter~\ref{ch:numerical}.
 
 It might seem circular having passed from wave equations that are too hard to solve, to path integrals,
 and back to diffusion equations that can only be solved in particular geometries.
@@ -220,7 +220,7 @@ results in a more complicated geometry.
 For example, at each step of the path, planar results could be used to estimate a potential,
 by treating the bodies in terms of their nearest tangent planes.  
 %notion of locally planar could be defined in terms of the nearest surface-normal.  
-This is not the same approximation as the proximity force approximation discussed in section~\ref{sec:PFA}, 
+This is not the same approximation as the proximity force approximation discussed in Section~\ref{sec:PFA}, 
 which approximates the bodies \emph{globally} by the tangent planes. 
 This is a local approximation based on a particular point in space.
 As the path steps through space, the nearest tangent plane will vary, but assuming that each 
@@ -251,7 +251,7 @@ above a dielectric half-space.
 % (The following is a much briefer discussion of the sojourn time, 
 % which is discussed for various Brownian motions by Hooghiemstra who used the procedure 
 % we follow~\citep{Hooghiemstra2002}.  Hooghiemstra's derivation is expanded and discussed in more detail
-% in section~17.10 of \citet{Steck}.)
+% in Section~17.10 of \citet{Steck}.)
 Throughout what follows, we will work in one spatial dimension.  
 In this case, $f$ solves
 \begin{equation}
@@ -352,7 +352,7 @@ As paths get closer to the surface, or as the time increases, the probability of
 increases, so the solution approaches zero.   The solution also vanishes for points starting 
 inside the surface.  
 
-Given the prevalence of the Dirichlet worldline path integral discussed in section~\ref{sec:dirichlet_worldline},
+Given the prevalence of the Dirichlet worldline path integral discussed in Section~\ref{sec:dirichlet_worldline},
 it would be useful to develop an analytical expression for open paths from $x=0$ to $x=c$, interacting with $V(x)=\kappa\delta(x-d)$.
 In this case, the solution is non-zero for $x>d$, but only vanishes for paths that touch the surface 
 at $x=d$.
@@ -415,7 +415,7 @@ be found by keeping $d_1$ fixed, but taking the limit where $d$ and $d_2$ approa
 \end{figure}
 
 The solutions all involve $1-r\supTE_1r\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.
-This factor was previously encountered in deriving the Lifshitz formula in section~\ref{sec:lifshitz},
+This factor was previously encountered in deriving the Lifshitz formula in Section~\ref{sec:lifshitz},
 so its presence is perhaps not surprising. 
 However, in this case there is no need to make any conditions on which modes contribute.  
 In addition, this derivation assumes there is vacuum between the dielectrics, although it could be easily generalized.
@@ -429,7 +429,7 @@ The $n^{\text{th}}$ order term corresponds to the $n^\text{th}$ reflection
 from the far surface.
 After inverting the Laplace transforms, each Gaussian in the sum would be of the form $\exp[-2(n+1)^2d^2/t]$, corresponding
 to the probability for a Brownian path to bounce $n+1$ times between two surfaces a distance $d$ apart.
-This naturally goes over to the reflection picture for the Dirichlet scalar discussed by \citet[section~21.1.5.3 ]{SteckNotes}.
+This naturally goes over to the reflection picture for the Dirichlet scalar discussed by \citet[Section~21.1.5.3 ]{SteckNotes}.
 
 \section{Feynman--Kac Formula for Singular Potentials}
 \label{sec:TM_potential}
@@ -731,7 +731,7 @@ The path integral
       \label{eq:TM_coeff}
     \end{equation}
     The reflection coefficient $r\supTM$ corresponds to the TM reflection coefficient 
-    used in section~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
+    used in Section~\ref{sec:lifshitz}, since $e^{2\Xi}=1+\chi$.  
     This calculation can also be naturally extended to include a magnetic response.  % , since $\Xi$ and $\chi$
     % can be treated as independent parameters.  
     The parameter $\Xi$ is defined in relation to the potential $V\subTM$, 

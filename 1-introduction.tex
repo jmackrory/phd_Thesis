@@ -74,7 +74,7 @@ easy to parallelize.
 It is the goal of this thesis to extend the worldline method to computing electromagnetic Casimir effects.
 This requires accounting for the vector nature of the EM field, and including realistic coupling to 
 material properties, while attempting to retain as many of its appealing properties as possible.    
-In chapter~\ref{ch:EM_quantization}, we will discuss quantization of the EM field, and introduce
+In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the EM field, and introduce
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
@@ -83,12 +83,14 @@ and \ref{ch:force},
 and show agreement with known electromagnetic Casimir results.
 
 The rest of this chapter will cover simple examples of Casimir effects, and expand on background material.
-In section~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
+In Section~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
-In section~\ref{sec:expt_review} we will briefly survey recent experiments on the Casimir effect.
-In section~\ref{sec:numerical_review} we will cover the most prominent numerical methods for computing the Casimir effect.
+In Section~\ref{sec:expt_review} we will briefly survey recent experiments on the Casimir effect.
+In Section~\ref{sec:numerical_review} we will cover the most prominent numerical methods for computing the Casimir effect.
 In particular we will introduce the Feynman path integral and the scalar worldline method at length.  
+Finally, in Section~\ref{sec:thesis_outline} we will review the rest of the thesis, and present
+some of the key equations.
 
 % At the outset, we note that there have been a number of books published on the subject of Casimir forces 
 % in recent years.  This reflects the importance of Casimir forces to both physicists and chemists, as 
@@ -104,10 +106,6 @@ In particular we will introduce the Feynman path integral and the scalar worldli
 % van der Waals forces is also important to problems in surface physics and chemistry, as discussed in the texts by 
 % \citet{Parsegian2006} and \citet{Israelachvili2011}.
 
-% The references in the following sections are given to emphasize the important results and calculations
-% and set the basic context for Casimir effects.   In addition we will often use these results 
-% as checks in our later work.  % Broader bibliographic surveys of the (vast) Casimir literature
-% % are available from Milton~\cite{Milton-bib} and Babb~\cite{Babb-bib}.
 
 \section{Casimir Effect}
 \label{sec:casimir}
@@ -180,7 +178,7 @@ and $\epsilon_0$ is the permittivity of free space.
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the EM field.  We will consider the attraction between
 an atom and a perfectly conducting wall.\footnote{
-This derivation is adapted from chapter~13 and section~14.3 of \citet{SteckNotes} and \citet[section~3.12]{Milonni1994}.}
+This derivation is adapted from Chapter~13 and Section~14.3 of \citet{SteckNotes} and \citet[Section~3.12]{Milonni1994}.}
 The Hamiltonian for the whole atom-field system is
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
@@ -285,7 +283,7 @@ which corresponds to assuming that all components of dipole matrix elements are 
 
 The mode functions for the electric field near a perfectly conducting plane 
 can be substituted into the energy.
-Following \citet[section~3.12]{Milonni1994} % (section~3.12 in Ref.~\citep{Milonni1994})
+Following \citet[Section~3.12]{Milonni1994} % (Section~3.12 in Ref.~\citep{Milonni1994})
 , we assume the atom is close to one wall 
 of a perfectly conducting box, but far from all other walls.
 The EM mode functions for a perfectly conducting box are given by 
@@ -296,7 +294,7 @@ The EM mode functions for a perfectly conducting box are given by
   &+\hat{z}(\hat{\varepsilon}\subkz\cdot\hat{z})\sin(k_xx)\sin(k_y y)\cos(k_zz)\bigg),
 \end{align}
 where $\hat{\varepsilon}\subkz$ are the polarization unit vectors, and the wavenumbers are given by $k_i=n_i\pi/L$,
-with $n_i$ integers~\citep[section~ 8.4.1]{SteckNotes}.
+with $n_i$ integers~\citep[Section~ 8.4.1]{SteckNotes}.
 % The Casimir--Polder energy for an atom and a perfectly conducting wall is then 
 % \begin{align}
 %  V\subCP(\vect{r})=-\frac{2\hbar}{\epsilon_0V}\alpha_0\sum_{\vect{k},\zeta} \big[ &
@@ -462,7 +460,7 @@ The Lifshitz formula for the Casimir energy can be found with an argument due to
 In its full generality, the Lifshitz formula gives the total energy for two planar dielectric bodies with dielectric constants 
 $\epsilon_1$ and $\epsilon_2$,
 separated by a medium with dielectric constant $\epsilon_3$.  
-\footnote{This derivation parallels those in \citet[section~7.2]{Milonni1994}, and \citet[Ch.~12]{Bordag2009}.
+\footnote{This derivation parallels those in \citet[Section~7.2]{Milonni1994}, and \citet[Ch.~12]{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by \citet{Lambrecht2011}.}
 The energy for the EM field in its ground state is 
 \begin{equation}
@@ -879,7 +877,7 @@ For example, the Casimir effect is repulsive in certain regimes for an elongated
 \citep{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
 %In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\citep{Rahi2010}.
 A stability criterion can be derived for the Casimir energy from within the scattering approach to Casimir theory~\citep{Rahi2010,Rahi2011}.
-(The scattering approach which will be briefly discussed in section~\ref{sec:scattering}.)  Only bodies
+(The scattering approach which will be briefly discussed in Section~\ref{sec:scattering}.)  Only bodies
 composed of media for which the planar Casimir force is repulsive can be stably levitated~\citep{Rahi2011}.
 
 \citet{Boyer1968} found that the renormalized Casimir self-stress of a conducting shell 
@@ -932,7 +930,7 @@ and the ability to handle arbitrary shapes.
 % This is a difficult task since the Casimir effect is a broadband phenomenon, depending on the whole 
 % range of frequencies.  Furthermore, it depends sensitively on the geometry of the bodies involved, 
 % and one must carefully renormalize the results to avoid infinite answers.  
-For a simple, symmetric geometry (like the perfectly conducting planes we used in section~\ref{sec:CP_calc})
+For a simple, symmetric geometry (like the perfectly conducting planes we used in Section~\ref{sec:CP_calc})
 it is possible to write down tractable analytical expressions for
 the Casimir energy based on expanding the field in mode functions.
 However, for completely general geometries these requirements force one to adopt a  
@@ -957,7 +955,7 @@ Second, the PFA assumes that the force can be found by integrating up
 the pair-wise Casimir forces between each pair of surface patches.  This ignores the non-additivity
 of the Casimir force.  Unlike the potential between electric charges where the total potential is
 the sum of the pair wise potential energies, the Casimir force for an arrangement
-of bodies is not just the sum of the pair wise energies. [This is discussed further in section~{8.2} and section~{8.4} by \citet{Milonni1994}.]
+of bodies is not just the sum of the pair wise energies. [This is discussed further in Section~{8.2} and Section~{8.4} by \citet{Milonni1994}.]
 As a crude justification, the Casimir energy involves a sum over the frequencies for mode functions 
 of the systems.  Since the mode functions are changed in a global, nonlinear fashion by introducing another
 body, the sum over frequencies also changes in a nonlinear fashion as more bodies are added.  
@@ -985,7 +983,7 @@ which is the scattering matrix as the bodies are moved arbitrarily far apart; th
 self-coupling of the bodies to themselves. 
 The indices of these matrices run over the labels of the possible modes (such as wavelength, polarization, mode origin for different bodies).
 %Since different bodies have different shapes, it is necessary t be able to transform basis.  
-Derivations similar to the argument principle used in section~\ref{sec:lifshitz} can be applied to describe the scattering 
+Derivations similar to the argument principle used in Section~\ref{sec:lifshitz} can be applied to describe the scattering 
 between modes---instead of reflection coefficients for a surface, one considers the full scattering matrix for each body.
 %where matrix indices run over the labels (such as wavenumber and polarization) for the modes.
 This version of the scattering method has been applied to two-body systems such as realistic mirrors~\citep{Lambrecht2006}, 
@@ -1190,7 +1188,7 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
     points.  At the end of the calculation, the spacing between grid points goes to zero, 
     and the size of the grid is taken to be arbitrarily large.  
     We will also only need to consider Gaussian path integrals, of the type considered here.  
-    This derivation will extended to include sources in chapter~\ref{ch:feynman_kac}.
+    This derivation will extended to include sources in Chapter~\ref{ch:feynman_kac}.
 
 \section{Scalar Worldline Casimir Energies}
 \label{sec:dirichlet_worldline}
@@ -1321,7 +1319,7 @@ The quantum partition function for the field is
 \end{equation}
 and the trace is evaluated over the complete set of field states.  
 It is actually more useful to carry out calculations with the free energy $\mathcal{F}=-\kB T \log Z$.
-As in section~\ref{sec:feynman_path_integral}, the exponential operator can be split into $N$ pieces, and resolutions of the identity
+As in Section~\ref{sec:feynman_path_integral}, the exponential operator can be split into $N$ pieces, and resolutions of the identity
 in both fields and conjugate-momentum fields can be inserted between each piece.  
 % \begin{align}
 %   Z &= \int d\phi_0\prod_{n=1}^N d\phi_n \langle \phi_n| e^{-\Delta \beta \op{H}}|\Pi_n\rangle
@@ -1428,7 +1426,7 @@ $[\op{x}_i,\op{p}_j]=i\delta_{ij}$.  Note that $\hbar=1$ in this auxiliary Hilbe
 \end{equation}
 The free energy is now in the form of the imaginary-time transition amplitude for a quantum particle
 in $D$ space-time dimensions, in a potential $V$.
-In the same fashion as in section~\ref{sec:feynman_path_integral},
+In the same fashion as in Section~\ref{sec:feynman_path_integral},
 this can be converted into a single-particle path integral, although 
 there are some minor differences.  First, the starting and ending points are the same,
 so the paths form closed loops.  
@@ -1580,7 +1578,7 @@ where
   c_k = \frac{N-k}{N-k+1}, \quad k=1,\cdots,N-1.
 \end{equation}
 Since we will use the v-loop algorithm in our own simulations, 
-we will discuss this algorithm further in chapter~\ref{ch:numerical}. 
+we will discuss this algorithm further in Chapter~\ref{ch:numerical}. 
 
 Having constructed a path, it is then necessary to compute the worldline integrand $e^{-\cT\langle V\rangle}-1$ along that path.
 If any point along the path intersects one of the surfaces, then in the strong coupling limit the 
@@ -1677,7 +1675,7 @@ no guarantee of correctness.
 % \section{Thesis outline}
 
 % The rest of this thesis is laid out as follows: 
-% In chapter~\ref{ch:EM_quantization} we formally quantize
+% In Chapter~\ref{ch:EM_quantization} we formally quantize
 % the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
 % We will attempt to carry this out in two ways. 
 % First, we will develop the full vector path integral for the EM field.  Unfortunately, this path integral has a number of worrisome features.
@@ -1685,31 +1683,31 @@ no guarantee of correctness.
 % the transverse-electric (TE) and transverse-magnetic (TM) polarizations.
 % %We will also review others work on quantizing the EM field in media.
 
-% In chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
+% In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
 % integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
 %  is the solution to a diffusion equation.  In simple cases, the diffusion equation can be solved.
 % We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
 
-% In chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
+% In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 % results showing agreement between the worldline method and prior results, at least for planar media.
 % We will also discuss the transition between high and low temperature, and near field limits within the
 % worldline context.  
 
-% In chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
+% In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
 % This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
 % for generating paths and sampling $\vect{x}_0$ and $\cT$.  
 % We will examine the convergence of the methods as the path resolution is increased.
 
-% In chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
+% In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
 % for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  
 % We will then discuss how to efficiently sample these expressions, and numerically test them in the case of planar media.  
 
 % Finally, we will summarize our findings and directions for future work in the conclusion.  
 
 \section{Thesis outline}
-
+\label{sec:thesis_outline}
 The rest of this thesis is laid out as follows: 
-In chapter~\ref{ch:EM_quantization} we formally quantize
+In Chapter~\ref{ch:EM_quantization} we formally quantize
 the EM field in media, and derive the worldline expressions for the electromagnetic Casimir energy.
 We will attempt to carry this out in two ways. 
 First, we will develop the full vector path integral for the EM field.  
@@ -1730,10 +1728,10 @@ where
 \end{equation}
 The equivalent TM polarization is recovered by exchanging $\epsr$ and $\mur$.  
 
-In chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
+In Chapter~\ref{ch:feynman_kac} we will discuss the analytical methods for solving single-particle path 
 integrals.  In particular, this relies on the Feynman-Kac formula, which states the path integral
  is the solution to a diffusion equation.
-In particular, as shown in section~\ref{sec:derive_feynman_kac}, the following path integral [Eq.~(\ref{eq:f_soln})],
+In particular, as shown in Section~\ref{sec:derive_feynman_kac}, the following path integral [Eq.~(\ref{eq:f_soln})],
 \begin{align}
   f(\vect{x}) = \int_0^{\infty} ds\,
   \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] \exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle,
@@ -1745,7 +1743,7 @@ is the steady-state solution to diffusion equation~(\ref{eq:diffusion_equation})
 where we have substituted $g=\delta(\vect{x}-\vect{c})$.  
 In simple cases, the diffusion equation can be solved directly.
 We will derive the relevant path integrals solutions for the TE and TM polarizations in a planar geometry. 
-Most importantly, in section~\ref{sec:TM boundary condition} we will show that a regularized form of the TM potential 
+Most importantly, in Section~\ref{sec:TM boundary condition} we will show that a regularized form of the TM potential 
 \begin{equation}
   V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big],
 \end{equation}
@@ -1772,7 +1770,7 @@ and (\ref{eq:Feynman-Kac TE two step}), which are particularly relevant for TE c
 The equivalent results also including TM Boundary conditions are given in Eqs.~(\ref{eq:Feynman-Kac TM two step})
 and (\ref{eq:Feynman-Kac TE two step}).
 
-In chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
+In Chapter~\ref{ch:analytical} we will use the results from the previous chapter to derive analytical 
 results showing agreement between the worldline method and prior results, at least for planar media.
 The Casimir--Polder energy can be derived, and for non-magnetic media ($\mur=1$) the resulting 
 worldline Casimir--Polder energies are [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref{eq:TM_Casimir_Polder})]:
@@ -1790,7 +1788,7 @@ worldline Casimir--Polder energies are [Eqs.~(\ref{eq:TE_Casimir_Polder})--(\ref
       &\hspace{5cm}       -\frac{\cT}{2\epsr(\rA)} \nabla^2 \frac{ e^{-\langle V\subTM\rangle\cT}}{\langle\epsr\rangle^{1/2}}
       \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:VTM_CP_loc}
 \end{align}
-The analytical results from chapter~\ref{ch:feynman_kac} can used by transforming the worldline path integrals 
+The analytical results from Chapter~\ref{ch:feynman_kac} can used by transforming the worldline path integrals 
 ,such as Eqs.~(\ref{eq:VTE_CP_loc}) and (\ref{eq:VTE_CP_loc}), by using 
 the inverse moment theorem~(\ref{eq:moment_theorem}) and the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}).
 The worldline method can then be shown to recover prior results such as the Lifshitz expression for the energy~(\ref{eq:lifshitz}), 
@@ -1798,21 +1796,21 @@ and the Casimir--Polder energy~(\ref{eq:VCP_eta}).
 We will also discuss the transition between high and low temperature, and near field limits within the
 worldline context.  
 
-In chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
+In Chapter~\ref{ch:numerical} we discuss the numerical methods for evaluating worldline path integrals.
 This will include efficient methods for computing derivatives, as well as Monte Carlo sampling methods
 for generating paths and sampling $\vect{x}_0$ and $\cT$.  
 We will examine the convergence of the TE methods as the path resolution is increased.
 The TM polarization is still quite a challenge to deal with numerically.
-As discussed in section~\ref{sec:TM_scaling}, the numerically estimated TM path integral 
+As discussed in Section~\ref{sec:TM_scaling}, the numerically estimated TM path integral 
 shows growing statistical errors as the number of steps $N$ increases.  
-The ``birth-death path swarm'' is introduced in section~\ref{sec:birth_death}, and is essential
+The ``birth-death path swarm'' is introduced in Section~\ref{sec:birth_death}, and is essential
 for reducing the statistical errors associated with multipling $N$ copies of the sub-path-averaged
 potential together.  The birth-death method acts as a simple Markov Chain Monte Carlo method for 
 generating more paths in regions with a large contribution to the path integral. 
-The derivatives are estimated using a ``partial-averaging method'' discussed in section~\ref{sec:partial_averaging},
+The derivatives are estimated using a ``partial-averaging method'' discussed in Section~\ref{sec:partial_averaging},
 which in effect considers paths with a non-uniform step-size.  
 
-In chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
+In Chapter~\ref{ch:force} we develop general expressions for the force, torque and derivative of the force 
 for the TE Casimir energy between arbitrarily shaped, piecewise constant dielectric media.  For example
 the ``pinning'' expression for the TE force is [Eq.~(\ref{eq:pinning_force})]
 \begin{align}

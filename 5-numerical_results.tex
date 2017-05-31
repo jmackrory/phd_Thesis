@@ -7,10 +7,6 @@ cases, such as planar media.  We have developed numerical methods that should al
 case, despite emphasizing planar media in these calculations.  In a general geometry, these methods 
 could still be applied to describe scalar fields coupled to a dielectric, and could serve 
 as an uncontrolled approximation to the full EM field.
-%  Despite the emphasis on planar geometries,
-% we have tried to develop methods that would be well suited to more complicated geometries,
-% and test them in the simple geometry.  In this case we can carefully test their convergence properties
-% as the path resolution is increased. 
 
 Even in a planar geometry a number of tools are required to make the electromagnetic worldline methods tractable.
 The TM polarization is challenging, and has prompted most of these developments.
@@ -18,11 +14,31 @@ The same developments have been used to enhance the TE polarization methods, and
 worldline methods.
 
 The primary ingredients for the numerical methods are ways of efficiently 
-constructing Brownian paths, and Monte Carlo sampling of the path starting points $x_0$
-and path time $\cT$.  In the case of the TE polarization, these are all quite straightforward.  
-However, the simplest numerical estimates of the TM Casimir energy have a large variance which
+constructing Brownian paths, and Monte Carlo sampling of the path starting points $\vect{x}_0$
+and path time $\cT$.  In the case of the TE polarization, these are all quite straightforward. 
+Path construction is discussed in section~\ref{sec:vloop}, while the sampling in $\cT$ and $\vect{x}_0$ are 
+discussed in sections~\ref{sec:T3_sample} and \ref{sec:pos_sample}.  In section~\ref{sec:trapezoid}, 
+we discuss the method for computing the path-averaged dielectric constant $\langle\epsr\rangle$, which
+is needed in the TE worldline integrand.
+
+The numerics for the TM polarization are more complicated than the TE case, since there is an 
+additional potential $V\subTM$, given by Eq.~(\ref{eq:VsubTM}).
+Section~\ref{sec:TM_potential_numerics} presents our strategy for computing the 
+accumulated potential $\exp[-\int_0^\cT dt\,V\subTM]$ along
+the entire path.  We will compute the total contribution from the TM potential by using Eq.~(\ref{eq:TM_potential}) 
+to calculate the potential for a single step from $x_k$ to $x_{k+1}$, and multiplying those together along
+the entire path.  
+Unfortunately, as shown in section~\ref{sec:TM_scaling}, 
+the simplest numerical estimates of the TM Casimir energy have a large variance which
 grows as the path resolution $N$ is increased.  Those numerical fluctuations can be tempered by changing the methods
-used to construct the paths.  In addition, the TM Casimir--Polder energy involves spatial derivatives of the worldline path integral.
+used to construct the paths.  We introduce two methods.  The first is the ``TM-Gaussian'' approach is covered in section~\ref{sec:TM_Gaussian}
+which includes the TM potential in constructing the path increments.  However, this also shows the problem
+of growing statistical errors,  so in section~\ref{sec:birth_death} we develop the ``birth-death'' method,
+where paths branch, or are truncated based on their accumulated weight.  This effectively changes 
+the path creation to sample more from important regions of the integral.  
+In addition, the TM Casimir--Polder energy involves spatial derivatives of the worldline path integral.
+
+
 
 The numerical results will be compared against the expected analytical results.
 The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
@@ -32,7 +48,7 @@ All of the simulations are carried out for a non-dispersive media at zero temper
 At the end we will suggest how to generalize the calculations to include dispersion.  
 
 [The numerical results on the TE Casimir energies were published as \citet{Mackrory2016}.
-A manuscript discussing the gradient estimations presented here and in the next chapter is in
+A manuscript discussing the derivative estimation methods presented here and in the next chapter is in
 preparation, and the TM results and methods will also be published.]
 
 \section{TE Casimir Numerics}
@@ -41,17 +57,6 @@ In this section we will discuss numerically calculating the TE Casimir and Casim
 from the worldline expressions in Eqs.~(\ref{eq:TE_Casimir}) and (\ref{eq:TE_Casimir_Polder}).
 We will first discuss generating the paths, sampling starting positions $\vect{x}_0$ and path times $\cT$,
 and evaluating the dielectric path average $\langle \epsr\rangle$.
- % Despite working with expressions adapted to planar
-% media, we will endeavour to develop general purpose numerical methods that would work in more general
-% geometries.  
-% Recall that the Casimir energy~(\ref{eq:TE_Casimir}) is
-% \begin{equation}
-%   E\subTE-E\sup0 = -\frac{\hbar c}{2(2\pi)^{D/2}}\int_0^\infty\frac{d\cT}{\cT^{1+D/2}}\int d\vect{x}_0
-%   \biggdlangle
-%   \frac{1}{\sqrt{\langle \epsrab\rangle}}-\frac{1}{\sqrt{\epsrab(\vect{x}_0)}}\biggdrangle_{x(t)},
-% \end{equation}
-% where we have momentarily suppressed the renormalization from subtracting off the single body
-% energies.    
 
 \subsection{Path Generation}
 
@@ -61,7 +66,7 @@ Monte Carlo fashion by generating an ensemble of Brownian bridges.
 It is of primary importance to be able to efficiently generate these Gaussian sample paths. 
 
 \subsubsection[{Open Brownian Bridges: \\ V-loop Construction}]{Open Brownian Bridges: v-loop Construction}
-
+\label{sec:vloop}
 
 % The v-loop algorithm is derived by decoupling the product of $N$ Gaussian probability densities 
 % into $N-1$ independent Gaussian deviates.
@@ -191,7 +196,7 @@ This Monte Carlo sampling of $x_0$ and $\cT$ extends the number of independent p
 in a given time, since effort is not wasted on multiple computations on a single path.  
 
 \subsubsection{Sampling Path-Times from a Power Law}
-
+\label{sec:T3_sample}
 The simplest method of sampling path times is to exploit the $\cT^{-(1+D/2)}$ factor in the integral.
 For a particular path, the renormalized TE integrand is only non-zero after the path touches all of the bodies,
 which occurs at some path time $\cT_0$.\footnote{For a Brownian motion $\vect{x}(t)$,
@@ -240,7 +245,7 @@ $\cT$ can then be generated for each path, and each path is then guaranteed to c
 % be made which generate paths that are too small to contribute.  
 
 \subsubsection{Sampling Starting Positions}
-
+\label{sec:pos_sample}
 The integral over the starting point $x_0$ can also be evaluated in Monte Carlo fashion by exploiting some knowledge 
 about the form of the integrand.  
 For points far from all bodies, which are clustered around the origin, the expected minimum path time when the integrand is nonzero 
@@ -302,7 +307,7 @@ fares worse than the straightforward trapezoidal method.
 \label{sec:trapezoid}
 
 \subsection{Results: TE Casimir  and Casimir--Polder Energies for Planar Geometries}
-
+\label{sec:TE_results}
 %These methods can be applied to computing the TE Casimir and Casimir--Polder energies.  
 Figure~\ref{fig:eff_TE_atom_wall} shows the numerical results for evaluating the TE Casimir--Polder path integral~(\ref{eq:TE_Casimir_Polder})
 at over a wide range of $\chi$.  

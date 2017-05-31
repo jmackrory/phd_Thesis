@@ -13,17 +13,24 @@ The path integral solution to the diffusion equations is known as the Feynman--K
 after the work by \citet{Feynman1948} in describing the evolution of a quantum particle, and \citet{Kac1949}
  applying this to the diffusion equation.
 
-Section~\ref{sec:derive_feynman_kac} presents the path integral solution~(\ref{eq:feynman_kac}) to the diffusion equation~(\ref{eq:diffusion_equation}).
+Section~\ref{sec:derive_feynman_kac} presents the path integral solution~(\ref{eq:feynman-kac}) 
+to the diffusion equation~(\ref{eq:diffusion_equation}).
 In sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK}, we will develop analytical expressions relevant for the TE
 worldline path integral in planar geometries, with key results in Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
 (\ref{eq:Feynman-Kac TE two step}).
+The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}), and in section~\ref{sec:TM_potential}
+this potential is regularized, and found to lead to an effective boundary condition~(\ref{eq:TM_boundary_conditions})
+The path integral solution corresponding to the TM potential for open paths is given in Eq.~(\ref{eq:TM_potential}).
+This result is essential for the numerical methods involving the TM polarization.  
+In sections~\ref{sec:TM_onebody_FK} and \ref{sec:TM_twobody_FK}, 
+we derive analytical TM path integrals that include the TM potential, as well as a step-potential
+which models the dielectric average.  These results are given in Eqs.~(\ref{eq:Feynman-Kac TM one step})
+and (\ref{eq:Feynman-Kac TM two step}).
 These analytical formulae will be used in chapter~\ref{ch:analytical} to demonstrate agreement 
 with known results for both Casimir and Casimir--Polder energies.
-The analytical expressions for ensemble-averaged path integrals are essential for handling the singular 
-TM potential.  
-In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
-These analytical solutions are also useful in accelerating numerical methods relying 
-on stochastic simulations.  
+%In fact, these analytical results are necessary to even allow the TM numerics to proceed at all.
+% These analytical solutions (such as for Dirichlet )may also be useful in accelerating numerical methods relying 
+% on stochastic simulations.  
 
 \section{Derivation of the Feynman--Kac formula }
 \label{sec:derive_feynman_kac}
@@ -695,7 +702,7 @@ and identifying $c=x_f-x_i$, where $x_f$ is the final point.
     % \end{align}
 
 \section{Single TM potential and Step}
-
+\label{sec:TM_onebody_FK}
 Next, we consider a dielectric step combined with a TM boundary condition.  
 This is required to analytically compute the TM component of the Casimir--Polder energy for an atom near a
 dielectric half-space.  We will only develop the solution for closed paths.
@@ -745,7 +752,7 @@ The path integral
 
 
 \section{Two TM Step Potentials}
-
+\label{sec:TM_twobody_FK}
 The preceding calculations can be extended to handle two planar dielectric half-spaces subject to 
 TM boundary conditions.  This time, the solution is the path integral for a potential
 \begin{equation}

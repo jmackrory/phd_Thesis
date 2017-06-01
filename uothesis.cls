@@ -319,7 +319,7 @@
 \gdef\@birthplace{}
 \gdef\@birthday{}
 \gdef\@interests{}
-\gdef\@awards{}
+%\gdef\@awards{}
 \gdef\@experience{}
 \gdef\@publications{}
 \def\birthplace#1{\gdef\@birthplace{#1}}
@@ -328,7 +328,7 @@
 \long\def\degree#1{\expandafter\gdef\expandafter\@degrees\expandafter{\@degrees\cvpars{#1}}}
 \def\interests#1{\expandafter\gdef\expandafter\@interests\expandafter{\@interests\cvpars{#1}}}
 \def\position#1{\expandafter\gdef\expandafter\@experience\expandafter{\@experience\cvpars{#1}}}
-\def\award#1{\expandafter\gdef\expandafter\@awards\expandafter{\@awards\cvpars{#1}}}
+%\def\award#1{\expandafter\gdef\expandafter\@awards\expandafter{\@awards\cvpars{#1}}}
 \def\publication#1{\expandafter\gdef\expandafter\@publications\expandafter{\@publications\cvpars{#1}}}
 \setstretch{1.7}
 \newcommand{\@normalheaderdims}{
@@ -536,7 +536,7 @@
       \hangindent=\@cvhangindent
       \interlinepenalty=\@M}
     \cvitem{PROFESSIONAL EXPERIENCE}{\@experience}
-    \cvitem{GRANTS, AWARDS AND HONORS}{\@awards} 
+%    \cvitem{GRANTS, AWARDS AND HONORS}{\@awards} 
     \cvitem{PUBLICATIONS}{\@publications}
     \par
   \end{singlespacing}}

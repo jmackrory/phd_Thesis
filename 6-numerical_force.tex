@@ -4,9 +4,8 @@ for the TE Polarization}
 
 The preceding work has focused on computing the Casimir energy between dielectric bodies.  However,
 a number of experiments directly measure the force, or even the second spatial derivative of the energy.
-Experiments that detect the shift in frequency of an oscillator, such as 
-measuring the motion of a BEC in a harmonic trap~\citep{Harber2005,Obrecht2007}, or  
-a nanoelectromechanical oscillators~\citep{Chan2001}, are sensitive the curvature of the Casimir energy.
+For example, \citet{Chan2001} detected the Casimir force by measuring the shift in frequency of 
+a nanoelectromechanical oscillator, and that frequency shift is sensitive to the second derivative (or curvature) of the Casimir energy.
 
 As already noted in Section~\ref{sec:finite_difference}, the finite difference method has some drawbacks
 when applied to worldline path integrals.  
@@ -37,7 +36,7 @@ These occupation expressions still work at large $\chi/N$,
 but some care is needed to sample from all of the relevant classes of paths at both weak~($\chi/N\ll 1$) 
 and strong~($\chi/N\gg 1$) coupling.
 Section~\ref{sec:force_numerics} discusses the numerical simulations for planar media where the correspondence
-to the TE polarization can be exploited.
+to the TE polarization can be used to check the numerical results.
 We find that even the occupation methods of Section~\ref{sec:occupation} can fail at strong coupling.  
 However, this is due to the strong-coupling limit requiring a rare set of paths which just ``graze'' the
 bodies.
@@ -55,7 +54,7 @@ TM potential~(\ref{eq:TM_pot}) leads to terms like $(d-x_k)/\Delta \cT$.
 Those terms have large statistical fluctuations as $\Delta \cT\rightarrow 0$, but partial averaging 
 could mitigate those fluctuations.  
 [The results presented here, along with the material on partial averaging in Section~\ref{sec:partial_averaging}
-is in preparation for publication.]
+are in preparation for publication.]
 
 \section{Surface Pinned Paths}
 \label{sec:path-pinning}

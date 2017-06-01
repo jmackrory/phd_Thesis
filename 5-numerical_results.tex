@@ -5,11 +5,11 @@ The goal of this project is to build a general numerical method for computing
 Casimir energies.  As a first step, it is necessary to test the proposed methods in well understood 
 cases, such as planar media.  We have developed numerical methods that should allow efficient computations in the general
 case, despite emphasizing planar media in these calculations.  In a general geometry, these methods 
-could still be applied to describe scalar fields coupled to a dielectric, and could serve 
-as an uncontrolled approximation to the full EM field.
+could still be applied to describe scalar fields coupled to a dielectric, and could be used in
+an uncontrolled approximation to the full EM field.
 
 Even in a planar geometry a number of tools are required to make the electromagnetic worldline methods tractable.
-The TM polarization is challenging, and has prompted most of these developments.
+The TM polarization is particularly challenging, and has prompted most of these developments.
 The same developments have been used to enhance the TE polarization methods, and could be applied to improve existing Dirichlet
 worldline methods.
 
@@ -20,7 +20,7 @@ and in Sections~\ref{sec:T3_sample} and \ref{sec:pos_sample} we discuss the meth
 Monte Carlo sampling for the path time $\cT$, and the path starting points $\vect{x}_0$, respectively.  
 In Section~\ref{sec:trapezoid}, we discuss some approaches to computing the 
 path-averaged dielectric constant $\langle\epsr\rangle$, which
-is needed in the TE worldline integrand.  We then discuss the numerical results and briefly outline 
+is needed in the TE worldline integrand.  We then present the numerical results for the TE path integral and briefly outline 
 their convergence properties in Sections~\ref{sec:TE_results} and \ref{sec:TE_convergence}.
 
 The numerics for the TM polarization are more complicated than the TE case, since there is an 
@@ -46,15 +46,16 @@ In addition, the TM Casimir--Polder energy involves spatial derivatives of the w
 In Section~\ref{sec:partial_averaging}, we introduce a ``partial averaging'' method for evaluating the 
 derivatives that bypasses some of the errors in even simpler approaches.
 Altogether, these methods reproduce the TM Casimir--Polder energy, and partially reproduce the 
-TM Casimir energy, as shown in Section~\ref{sec:TM_results}.  
+TM Casimir energy, as shown by the numerical results presented in Section~\ref{sec:TM_results}.  
 
 %The numerical results will be compared against the expected analytical results.
 Our numerical tests rely on comparing the numerically computed efficiency to the known analytical value.
 The worldline method tends to straightforwardly reproduce the expected distance dependence due to the
 integration over $\cT$, as was briefly discussed in Section~\ref{sec:worldline_distance_dep}. 
 That is still true within the context of electromagnetic worldlines. 
-All of the simulations are carried out for a non-dispersive media at zero temperature.
-In Section~\ref{sec:freq_sampling}, we will suggest how to generalize the calculations to include dispersion.  
+nAll of the simulations are carried out for non-dispersive media at zero temperature.
+In Section~\ref{sec:freq_sampling}, we will suggest how to generalize the calculations to include dispersion
+and nonzero temperature.  
 
 [The numerical results on the TE Casimir energies were published as \citet{Mackrory2016}.
 A manuscript discussing the derivative estimation methods presented here and in the next chapter is in
@@ -431,7 +432,7 @@ the noise floor in Figures~\ref{fig:conv_atom} and \ref{fig:conv_wall}.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{fig/temp/conv_TE2wallN3}
-  \caption[Convergence of planar TE Casimir energy as function of $N$ for various $\chi$.]{
+  \caption[Convergence of planar TE Casimir energy as function of $N$.]{
     Convergence of planar TE Casimir energy as function of $N$.  Results plot the 
     absolute relative error between the numerical estimates from Eq.~(\ref{eq:TE_Casimir_num})
     and the analytical result~(\ref{eq:gammaTE}).
@@ -1287,14 +1288,20 @@ will actually contribute to the path integral.
 
 \section{Frequency Sampling}
 \label{sec:freq_sampling}
-Currently these numerical calculations ignore dispersion.  Given that each frequency contributes
-independently to the Casimir energy,  the integral over frequencies could be handled in a similar 
+Currently these numerical calculations ignore dispersion and nonzero temperatures, such as occur in 
+Eq.~(\ref{eq:TEworldline_partition_function}).
+Given that each frequency contributes independently to the Casimir energy,  the integral over frequencies could be handled in a similar 
 fashion to handling multiple constant $\chi$.  In the TE case, the sojourn time for each body $\langle\Theta_i\rangle$
 must be estimated on a pathwise basis, and then the results could be used to evaluate multiple 
 frequencies at once using $\langle\epsr(i\omega)\rangle = 1+\sum_j\chi_j(i\omega)\langle\Theta_j\rangle$.
+The $\cT$ sampling can be carried out using the procedure discussed in Section~\ref{sec:expT-sampling}.
 Alternatively, further Monte Carlo sampling could be used to randomly select a single frequency for 
-each path.  
-
+each path.
+ We anticipate these methods would also work when applied to $\epsr(i\omega)$ 
+due to the relative success of the worldline method at recovering the distance dependence
+(which is mostly bound up in the $\cT$ integral), and in capturing the efficiency at a wide range of $\chi$.
+Since $\epsr$ is positive along the imaginary frequency axis, capturing the correct answer at all positive 
+$\chi$ should translate to capturing the correct answers once $\epsr$ is allowed to be a function of frequency.
 
 % \subsection{Path Construction Revisited: Path-Pinning as Importance Sampling}
 

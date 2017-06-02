@@ -1743,24 +1743,27 @@ Section~\ref{sec:derive_feynman_kac} considers a diffusion equation~(\ref{eq:dif
   \partial_t f = \frac{1}{2}\nabla^2 f  - [V(\vect{x})+\lambda]f +\delta(\vect{x-c}),
 \end{equation}
 for a probability distribution $f(\vect{x},t)$, interacting with a space-dependent potential $V(\vect{x})$, and a source term $\delta(\vect{x-c})$.
-In the steady-state $(t\rightarrow \infty)$ limit, the solution is given by the following path integral [Eq.~(\ref{eq:f_soln})],
+In the steady-state $(t\rightarrow \infty)$ limit, the solution to Eq.~(\ref{eq:diffusion_equation}) 
+can be simplified to the following path integral [Eq.~(\ref{eq:f_soln})],
 \begin{align}
   f(\vect{x}) = \int_0^{\infty} ds\,
   \biggdlangle \delta[\vect{x}+\vect{W}(s)-\vect{c}] \exp\bigg(-\lambda s -\int_0^s du\, V[\vect{x}+\vect{W}(s-u)]\bigg)\biggdrangle,
+  \label{eq:f_soln_loc}
 \end{align}
 In simple cases, the steady-state diffusion equation~(\ref{eq:diffusion_equation}) can be solved directly to find 
 an analytical expression for the path integral.  
-Most importantly, Section~\ref{sec:TM boundary condition} shows that a regularized form of the TM potential [Eq.~(\ref{eq:VsubTM})]
+Most importantly, Section~\ref{sec:TM boundary condition} shows that the TM potential [Eq.~(\ref{eq:VsubTM})]
 \begin{equation}
   V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big],
 \end{equation}
+can be regularized
 leads to an effective boundary condition in the diffusion equation.
 For a dielectric step characterized by $\epsr = 1+\chi\Theta(x-d)$, the effective boundary condition is given by~[Eq.~(\ref{eq:TM_boundary_conditions})],
 \begin{align}
   f(d+0_+) =& e^{-\Xi}f(d-0_+) \qquad
   \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+),
 \end{align}
-where $e^{\Xi}=\sqrt{1+\chi}$.
+where $e^{\Xi}=\sqrt{1+\chi}$.  (In the TE polarization it is $\mur$ that appears in these boundary conditions.)
 Using that boundary condition, Section~\ref{sec:TM_potential} shows that the path-averaged analytical solution for paths from $x=0$ to $x=c$ in time $t$,
 interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}],
 \begin{align}
@@ -1803,22 +1806,24 @@ In that case, the worldline expressions for the Casimir--Polder energy are given
 \end{align}
 Note that these Casimir--Polder worldline path integrals only involve paths emanating from the atom's position $\rA$.  
 The analytical results from Chapter~\ref{ch:feynman_kac} can used in the worldline path integrals 
-after transforming the path integrals by using the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin}) and the inverse moment theorem~(\ref{eq:moment_theorem}).
-The worldline method can then be shown to recover prior results such as the Casimir--Polder energy~(\ref{eq:VCP_eta}), 
+after transforming the solutions by using the Laplace--Mellin theorem~(\ref{eq:Laplace--Mellin})
+ and the inverse moment theorem~(\ref{eq:moment_theorem}).
+The worldline method then recovers prior results such as the Casimir--Polder energy~(\ref{eq:VCP_eta}), 
 and the Lifshitz expression for the energy~(\ref{eq:lifshitz}).
-The chapter ends by discussing the transition between high and low temperature, and near field limits within the
+The chapter ends by discussing the transition between high and low temperature, and the near-field and far-field limits within the
 worldline context.  
 
 Chapter~\ref{ch:numerical} presents the numerical methods for evaluating worldline path integrals.
-This typically involves using Monte Carlo sampling methods for generating paths 
-and sampling the starting positions $\vect{x}_0$ and path times $\cT$.  
+This involves using Monte Carlo sampling methods for generating paths.  
+The Monte Carlo sampling also extends to the starting positions of the paths $\vect{x}_0$, and the 
+size of the path, which is governed by path time $\cT$.
 These methods are discussed for the TE polarization in Section~\ref{sec:TE_Casimir_numerics}.
 Section~\ref{sec:TE_results} presents the numerical results for the TE polarization,
  and examines the convergence of the TE results as the path resolution is increased.
 Numerical calculations involving the TM polarization are more challenging than their TE counterparts,
  even after regularization and analytical averaging.
 As discussed in Section~\ref{sec:TM_scaling}, the numerically estimated TM path integral 
-shows growing statistical errors as the number of steps $N$ increases.  
+shows rapidly growing statistical errors as the number of steps $N$ increases.  
 The ``birth-death path swarm'' is introduced in Section~\ref{sec:birth_death}, and is essential
 for reducing the statistical errors associated with accumulating the product of the path-averaged
 potential along the path.  
@@ -1826,11 +1831,11 @@ The derivatives required for the TM Casimir--Polder energy are estimated using a
 The numerical results for the TM polarization are presented in Section~\ref{sec:TM_results}, where
 they show some agreement with the analytical results.
 
-Chapter~\ref{ch:force} develops general expressions for the force, torque and derivative of the force 
+Chapter~\ref{ch:force} develops general expressions for the force, torque, and derivative of the force 
 for the TE worldline path integral.  These expressions emphasize that the Casimir force emerges from paths that
 start on the surfaces of the bodies.  
-For example, the ``pinning'' expression for the Casimir force on the second body is
-is [Eq.~(\ref{eq:pinning_force})]:
+For example, the ``pinning'' expression for the Casimir force on the second body
+is [Eq.~(\ref{eq:pinning_force})]
 \begin{align}
   \vect{F}_{2}&=
   -\frac{a\chi_2\hbar c}{2(2\pi)^{D/2}}
@@ -1846,12 +1851,14 @@ is [Eq.~(\ref{eq:pinning_force})]:
 Here $\sigma_2=0$ defines the surface of the second body, $\hat{n}_2$ is the surface normal of the body, while $\epsilon_{\mathrm{r},12}$ 
 and $\epsilon_{\mathrm{r},2}$ are the dielectric functions involving both bodies, and only the second body, respectively.
 Unfortunately, the pinning method fails to recover the correct answer for strong-coupling cases where $\chi/N\gg 1$,
-which prompts developing the ``occupation'' method in Sec.~\ref{sec:occupation}.  
+which prompts the development of the ``occupation'' method in Section~\ref{sec:occupation}.  
 Some care is still required when using the occupation method numerically, since in the strong-coupling
 limit, only rare paths that just touch the surfaces will contribute.  
-A hybrid approach designed to capture the weak coupling and strong-coupling cases is discussed further in sections~\ref{sec:generic_coupling} and \ref{sec:softened_delta}.
+A hybrid approach designed to capture the weak coupling and strong-coupling cases is discussed further in Sections~\ref{sec:generic_coupling} and \ref{sec:softened_delta}.
 
 Finally, the findings and directions for future work are summarized in the conclusion.  
+In particular, the planar methods could be generalized to general geometries by suitably coupling the two scalar
+polarizations together.
 
 % \begin{figure}
 % \centering

@@ -4,20 +4,21 @@
 
 This chapter develops the worldline path integrals for electromagnetism with a space-dependent
 dielectric function, paralleling the treatment of the Dirichlet scalar worldline method in Section~\ref{sec:dirichlet_worldline}.  
-First, in Section~\ref{sec:quantizing} we will review prior work on quantizing the EM field inside media.
-Following that, we will review classical EM field theory in Section~\ref{sec:classical_EM}, 
-and formally quantize the EM field in Section~\ref{sec:EM_quantization}. 
-The partition function for the EM field will be developed as a gauge-fixed path integral in terms of the scalar and vector potentials
+First, Section~\ref{sec:quantizing} reviews the prior work on quantizing the EM field inside media.
+Following that, Section~\ref{sec:classical_EM} reviews classical EM field theory, 
+and Section~\ref{sec:EM_quantization} formally quantizes the EM field. 
+The partition function for the EM field follows from a gauge-fixed path integral in terms of the scalar and vector potentials
 in Sections~\ref{sec:EM_partition} and \ref{sec:gauge_path_integral}.
 However, the resulting worldline path integrals~(\ref{eq:vector_path_integral}) are unsatisfactory, since
 it is not clear how the contributions from the two physical degrees of freedom emerge from these complicated expressions. 
-As a result, in Section~\ref{sec:scalar_decomposition} we turn our attention to developing scalar models that better capture the features
+In response, Section~\ref{sec:scalar_decomposition} develops scalar models that better capture the features
 of electromagnetism.
 In planar geometries the scalar models correspond to the amplitudes of the TE and TM polarizations.  
-We will then develop the worldline path integrals for those scalar fields [the TE worldline path integral is presented in
-Eq.~(\ref{eq:TE_worldline}), and the equivalent TM path integral follows from EM duality~(\ref{eq:EM_duality})].
-Those path integrals will form the basis for our analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
-Finally, the extension to include dispersion and nonzero temperature is considered in Section~\ref{sec:nonzero_temp_path_integral}.
+Sections~\ref{sec:scalar_polarization} and \ref{sec:TE_polarization_worldline} develop the worldline path integrals for those scalar fields 
+[the TE worldline path integral is presented in Eq.~(\ref{eq:TE_worldline}), 
+and the equivalent TM path integral follows from EM duality~(\ref{eq:EM_duality})].
+Those path integrals will form the basis for the analytical and numerical work in Chapters~\ref{ch:analytical} and \ref{ch:numerical}.  
+Finally, the extension to dispersive materials and nonzero temperature is considered in Section~\ref{sec:nonzero_temp_path_integral}.
 
 [The decomposition of the EM field into two scalars, and the derivation of the associated 
 worldline path integrals was carried out in \citet{Mackrory2016}.]
@@ -28,7 +29,7 @@ The quantization of the EM field inside dielectric media provides a number of ch
 beyond quantization in vacuum~\citep{Huttner1992,Dung1998,Bechler1999,Bordag1998,Rahi2009,Reid2013}.  
  First, in Casimir problems the dielectric varies spatially.  The usual procedure for
 quantizing the EM field decomposes the field into a set of normal modes, and quantizes their amplitudes.
-  While it is possible to write down the wave equations for the modes, and quantize the amplitudes
+ While it is possible to write down the wave equations for the modes, and quantize the amplitudes
  in analogy with free space~\citep{Glauber1991}, a full development of this method still requires finding those mode functions.
 For our purposed, an ideal procedure for quantizing the field would not require solving for the mode functions in
 general geometries, nor would it be adapted to any particular geometry.   
@@ -810,7 +811,7 @@ electric and magnetic properties of both fields and matter.
 
 
 \subsection{Scalar-Polarization Partition Functions}
-
+\label{sec:scalar_polarization}
 In the TE polarization the electric field is described by a single scalar field, $\vect{E}=\partial_t\phi\hat{y}$,
 where  $\phi:=\phi(\vect{r},t)$.  In this case $\phi$ corresponds to the y-component of the vector potential.  
 The magnetic field can also be written in terms of this scalar.
@@ -865,7 +866,7 @@ The simplicity of this derivation is one reason for working with both magnetic a
 However, we will often set $\mur=1$, since magnetic media are rare in typical quantum optical situations.  
 
 \subsection{TE Polarization Worldline}
-
+\label{sec:TE_polarization_worldline}
 It is a straightforward matter to develop the TE worldline path-integral.
  In the same fashion as the Dirichlet scalar method in Section~\ref{sec:dirichlet_worldline}, 
  two formal identities can be used to rewrite the free energy in exponential form.

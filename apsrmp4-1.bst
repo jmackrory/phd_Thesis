@@ -223,7 +223,7 @@ FUNCTION { control.init }
   'control.author.initials :=
   #0
   'control.author.nocomma  :=
-  #0
+  #1
   'control.author.first    :=
   #1
   'control.author.reversed :=
@@ -235,7 +235,7 @@ FUNCTION { control.init }
   'control.pages  :=
   #0
   'control.eprint :=
-  #1
+  #0
   'control.year   :=
 }
 

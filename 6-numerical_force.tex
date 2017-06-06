@@ -7,11 +7,11 @@ a number of experiments directly measure the force, or even the second spatial d
 For example, \citet{Chan2001} detected the Casimir force by measuring the shift in frequency of 
 a nanoelectromechanical oscillator, and that frequency shift is sensitive to the second derivative (or curvature) of the Casimir energy.
 
-As already noted in Section~\ref{sec:finite_difference}, the finite difference method has some drawbacks
+As already noted in Section~\ref{sec:finite_difference}, the finite-difference method has some drawbacks
 when applied to worldline path integrals.  
 Derivatives of discontinuous functions such as those required in worldline path integrals lead to large statistical errors.
-In Section~\ref{sec:partial_averaging}, we developed specialized techniques for handling derivatives of Casimir--Polder 
-energies.  This chapter develops a parallel discussion for computing the force on macroscopic bodies.  
+Section~\ref{sec:partial_averaging} develops specialized techniques for handling derivatives of Casimir--Polder 
+energies.  The current chapter develops a parallel discussion for computing the force on macroscopic bodies.  
 
 Prior investigations by \citet{Weber2009, Weber2010} computed the Casimir force in the worldline method for
 the Dirichlet boundary conditions.
@@ -22,14 +22,13 @@ the path time $\cT$ and path starting position $\vect{x}_0$.
 
 In contrast, our approach to the worldline method has also emphasized Monte Carlo integration over
 the path time and starting position.  
-In Section~\ref{sec:path-pinning}, we derive the ``pinning'' approach, where the forces emerge from
+Section~\ref{sec:path-pinning} derives the ``pinning'' approach, where the forces emerge from
 paths that are pinned to start on the surfaces of the relevant bodies.  
 This approach is used to derive worldline expressions for the force~(\ref{eq:pinning_force}),
  potential curvature~(\ref{eq:potential_curvature}) and torque~(\ref{eq:pinning_torque}).
-%In these expressions the forces emerge from paths that are just touch the bodies, or are ``pinned'' to the surfaces.
 Unfortunately, when $\chi/N\gg 1$ the pinning expressions give too small an answer, which prompts developing the 
 ``occupation'' method in Section~\ref{sec:occupation}.  
-Using the occupation method, we can derive alternative expressions for the force~(\ref{eq:occupation_force}), 
+The occupation method leads to alternative expressions for the force~(\ref{eq:occupation_force}), 
 potential curvature~(\ref{eq:curvature_occupy}) and torque~(\ref{eq:torque_occupy}).  These expressions
 also make contact with the approach used by \citet{Weber2009,Weber2010}.
 These occupation expressions still work at large $\chi/N$,
@@ -136,9 +135,9 @@ The path-averaged delta function acts to pin the paths to the surface where $\si
 % whose argument involves $\vect{x}(t)$, as a constraint on the
 % source point $\vect{x}_0$ of the paths.
 Writing out the relevant part of the path integral (\ref{eq:forcepathint}),
-the delta function reduces the $D$-dimensional integration
-over $\vect{x}_0$ to a $(D-1)$-dimensional integration over
-the surface of body 2, with the result
+the delta function reduces the $D-1$-dimensional integration
+over $\vect{x}_0$ to a $(D-2)$-dimensional integration over
+the surface of the second body, with the result
 \begin{align}
   &\int d\vect{x}_0  \Biggdlangle \frac{
   \big\langle 
@@ -153,20 +152,9 @@ the surface of body 2, with the result
    \hspace{-3ex}
 dS\hspace{1.5ex}\biggdlangle 
   \frac{\nabla\sigma_2(\x0-\vect{R}_2)}
-  {\langle\epsr\rangle^{a+1}|\nabla\sigma_2(\x0-\vect{R}_2)|}\biggdrangle_{\vect{x}(t)},
+  {\langle\epsr\rangle^{a+1}|\nabla\sigma_2(\x0-\vect{R}_2)|}\biggdrangle_{\vect{x}(t)}.
   \label{eq:delta-normal}
 \end{align}
-where the final integral (over path source points $\vect{x}_0$)
-is a surface integral over the 
-surface of body 2.  % The first equality here can be understood
-% in terms of a discrete path (i.e., in a ``time-slicing'' regularization
-% of the path integral), where the path average in the numerator
-% amounts to a sum of terms, each involving a delta function
-% involving a path coordinate $\vect{x}_j$.  In the average over all
-% paths and sum over all source points $\vect{x}_0$,
-% the delta function is equivalently a function of the
-% source point, since $\vect{x}_j$ is the source point
-% of another equivalent path.
 This relation follows from simplifying the path-averaged delta function using Eq.~(\ref{eq:delta_pin}),
 and the result~\citep{Hormander1983} 
 \begin{equation}
@@ -197,7 +185,7 @@ the corresponding single-body force,
   \Biggdrangle_{\vect{x}(t)},
   \label{eq:pinning_force}
 \end{align}
-where the unit-normal vector for the surface of body 2 is defined as
+where the unit-normal vector for the surface of the second body is defined as
 \begin{equation}
   \hat{n}_2(\x0) := -\frac{\nabla \sigma_2(\x0-\vect{R}_2)}{|\nabla \sigma_2(\x0-\vect{R}_2)|}.
 \end{equation}
@@ -211,8 +199,8 @@ over the surface is carried out, this results in a net force on the body.
 
 \subsection{Potential Curvature}
 
-This method can be easily extended to the second derivative of the worldline energy, which 
-computes the potential curvature,  
+This method can be easily extended to the second derivative of the worldline energy~(\ref{eq:spatial_path_integralE}), 
+which computes the potential curvature,  
 \begin{equation}
   C_{ij} := (\hat{r}_i\cdot \nablaR2)(\hat{r}_j\cdot \nablaR2)E.
 \end{equation}
@@ -222,7 +210,7 @@ in terms of gradients with respect to the first body's center $\vect{R}_1$, and 
   \nablaR2\langle \epsr\rangle  
   =& \bigg(\sum_{k=1}^N\nablaxk-\nablaR1\bigg)% \nonumber\\
   % & \times
-[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
+\big[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle\big],
 % \frac{\partial}{\partial R_{2,i}}\langle \epsr\rangle  
 %   =& \bigg(\sum_{k=1}^N\frac{\partial}{\partial {x}_{k,i}}-\frac{\partial}{\partial R_{1,i}}\bigg)\nonumber\\
 %   & \times[\langle \epsilon_1(\vect{x}-\vect{R}_1)\rangle+\langle\epsilon_2(\vect{x}-\vect{R}_2)\rangle],
@@ -274,10 +262,10 @@ There is then a further average over which point is pinned to the second surface
 The resulting expression for the potential curvature is 
 \begin{align}
   C_{ij}&=
-  \frac{a(a+1)\chi_1\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
+  \frac{a(a+1)\chi_1\chi_2\hbar c}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}}
   \hspace{-2ex}
   \oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0}^{}
-   \hspace{-4ex} dS\hspace{1ex} %   \nonumber\\
+   \hspace{-4ex} dS_0\hspace{1ex} %   \nonumber\\
   % &\hspace{0.5cm} \times 
   \frac{1}{N} \sum_{k=1}^{N-1} \,
   \oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0}^{}
@@ -292,9 +280,9 @@ The resulting expression for the potential curvature is
 where 
 $\dlangle \cdots\drangle_{\sigma_2(\vect{x}_k-\vect{R}_2)=0}$ is the ensemble
 average over discrete paths $\vect{x}(t)$ subject to the constraint that $\sigma_2(\vect{x}_k-\vect{R}_2)=0$.
-The $D$-dimensional Gaussian probability density
+The $D-1$-dimensional Gaussian probability density
 \begin{equation}
-  \mathcal{G}(\vect{x},\sigma^2)=\frac{e^{-(\vect{x})^2/2 \sigma^2}}{[2\pi \sigma^2]^{D/2}},
+  \mathcal{G}(\vect{x},\sigma^2)=\frac{e^{-(\vect{x})^2/2 \sigma^2}}{[2\pi \sigma^2]^{(D-1)/2}},
   \label{eq:Gauss_normalization}
 \end{equation}
 has been used to write the combined normalization factor for Brownian bridges propagating from $\vect{x}_0$ to $\vect{x}_k$ in $k$ steps, and returning to $\vect{x}_0$
@@ -362,7 +350,7 @@ and similar manipulations to those in Eq.~(\ref{eq:delta-normal}) can be carried
 to pin the paths to the surface of the second body.
 The total torque on the body can be found by adding up the torques for infinitesimal rotations
 about each of the Cartesian axes 
-(\textit{i.e.} taking $\hat{m}$ to be each cartesian axis in turn, and adding up the results).  
+(\textit{i.e.} taking $\hat{m}$ to be each cartesian axis in turn, and summing the results).  
 % In addition, given the form of $\partial_\phi\langle\epsr\rangle$ the torque $\vect{K}$
 % can be found by identifying $\partial_\phi E=\hat{m}\cdot\vect{K}$.  
 The renormalized torque worldline path integral is 
@@ -370,7 +358,7 @@ The renormalized torque worldline path integral is
   \vect{K} &= \frac{a\hbar c\chi_2}{2(2\pi)^{D/2}}\intzinf \frac{d\cT}{\cT^{1+D/2}} 
   \hspace{-3ex}
   \oint\limits_{\sigma_2(\vect{x}_0-\vect{R}_2)=0} 
-   \hspace{-4ex} dS\hspace{1ex}\!\big[(\vect{x}_0-\vect{R}_{2})\! \wedge \!\hat{n}_2(\vect{x}_0)\big]   % \nonumber\\
+   \hspace{-4ex} dS_0\hspace{1ex}\!\big[(\vect{x}_0-\vect{R}_{2})\! \wedge \!\hat{n}_2(\vect{x}_0)\big]   % \nonumber\\
   % &\hspace{0.5cm}\times
   \biggdlangle 
 \frac{1}{\langle \epsilon_{\mathrm{r},12}\rangle^{a+1}}
@@ -441,14 +429,14 @@ However, any further derivatives would require the techniques used in Section~\r
 The preceding methods offer an intuitive picture of the Casimir force,
 however they are poorly behaved in the strong-coupling limit.  
 For a typical discrete path of $N$ steps pinned to the surface, a substantial fraction
-of the path will lie inside the body.  For $\chi\gg N$, the denominator $\langle\epsr\rangle^{-1/2}$ dominates
-the integrand, so the estimated derivatives decay as $\chi^{-1/2}$ for almost all paths.  
+of the path will lie inside the body.  For $\chi\gg N$, the denominator $\langle\epsr\rangle^{-(a+1)}$ dominates
+the integrand, so the estimated derivatives decay as $\chi^{-a}$ for almost all paths, where $a=1/2$ for Casimir energies.  
 Only rare paths that start on the surface, but do not enter the bulk of the body will contribute substantially.  
 As a result, the numerically estimated force will likewise decay in the strong-coupling limit.
 In this section we develop alternative expressions that behave better in the strong-coupling
 limit.  This method also makes contact with the work by \citet{Weber2009,Weber2010} on forces and torques for Dirichlet worldlines.  
 
-The spatial path integral can be written in exponential form via the inverse-moment theorem~(\ref{eq:moment_theorem}), 
+The spatial path integral~(\ref{eq:spatial_path_integral}) can be written in exponential form via the inverse-moment theorem~(\ref{eq:moment_theorem}), 
 \begin{align}
   W &= \frac{1}{\Gamma[a]}\int d\vect{x}_0 \int ds\, s^{a-1}e^{-s}% \nonumber\\
   % &\hspace{0.5cm}\times
@@ -617,20 +605,20 @@ which correspond to paths that graze both bodies.
 The formulation for the Casimir force in Eq.~(\ref{eq:occupation_force}) 
 is analogous to the construction of paths employed by \citet{Weber2010} for computing 
 forces in the sphere-plane and cylinder-plane geometries in the Dirichlet limit.  
-In that work, the paths are shifted so that they start on the plane and only move away from the plane.
+In that work, the paths are shifted so that they start on the plane, but do not pass through the plane.
 The force on the planar surface is computed by integrating over the values of $\cT$ when the path intersects the other surface.
 The expressions presented here extend their expressions by accounting for finite $\chi$, 
 and accounting for arbitrary geometries.  
 
 In general, different classes of paths are important in the finite-$\chi$ and strong-coupling 
 cases.  At small $\chi$, the most important path statistic is the sojourn time,
-while in the strong-coupling regime, the first-touching time is the most important statistic.    
+while in the strong-coupling regime, the path time at the first intersection is the most important statistic.    
 This correspondence was used to discuss the numerical convergence properties of the method as 
 the path length was varied.  [There is a brief discussion on this point in Section~\ref{sec:TE_convergence},
 and an extended discussion in \citet{Mackrory2016}.]
-More practically, these different requirements make it difficult to use a single class of path to efficiently evaluate the potential at all $\chi$:
-in weak coupling one wants a path ensemble that enters all of the bodies, while in strong coupling
-it is the paths that just touch the surfaces that are most important.
+More practically, these different requirements make it difficult to use a single class of path to efficiently evaluate the potential at all $\chi$.
+In weak coupling, the paths should enter all of the bodies, while in strong coupling
+the most important paths are those that just touch the surfaces.
 
 % The expressions for the force in Eqs.~(\ref{eq:pinning_force}) and (\ref{eq:occupation_force})
 % reflect taking two limits in different orders, namely the taking the large $N$ limit and differentiation.  
@@ -668,7 +656,7 @@ is the appropriate normalized result.
   \centering
   \includegraphics[width=0.8\columnwidth]{fig/numerics/force}
   \caption[Numerically computed TE force]{(Preliminary data) Numerically computed TE force for pinning (squares),
- occupation (circles), and finite difference (squares) methods.
+ occupation (diamonds), and finite difference (circles) methods.
     The finite difference used a step-size $\delta=d/\sqrt{N}$.
     The calculations used $N=10^4$ points per path, and $10^8$ trajectories.}
   \label{fig:force}
@@ -754,7 +742,7 @@ In addition for planar surfaces, the integral over the transverse dimensions amo
 The expression for the potential curvature for general-$\chi$  coupling is
 \begin{align}
   C_{ij}=& \frac{\hbar c N }{2(2\pi)^{D/2}}\sum_{k=1}^{N-1}\oint\limits_{\sigma_1(\vect{x}_0-\vect{R}_1)=0} \hspace{-4ex} dS_0\,\biggdlangle 
-\oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0} \hspace{-4ex} dS_k\,\frac{3c'_{N}[\hat{r}_i\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_j\cdot\hat{n}_2(\vect{x}_{k})]}{|\vect{x}_0-\vect{x}_{k}|^{5}}
+\oint\limits_{\sigma_2(\vect{x}_k-\vect{R}_2)=0} \hspace{-4ex} dS_k\,\frac{3\cN_{\text{pin}}[\hat{r}_i\cdot\hat{n}_1(\vect{x}_0)][\hat{r}_j\cdot\hat{n}_2(\vect{x}_{k})]}{|\vect{x}_0-\vect{x}_{k}|^{5}}
   \nonumber\\
   &\hspace{2cm} \sum_{n=0}^{N-2}\sum_{m=0}^{N-n-2}\I[1]n\I[2]m g_{m,n}
   \biggdrangle_{k,\cT,\vect{x}_0\leftrightarrow\vect{x}_k},\label{eq:generic_coupling}

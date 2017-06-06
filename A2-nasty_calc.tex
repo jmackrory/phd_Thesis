@@ -1,13 +1,13 @@
 \chapter{Detailed Calculations}
 \label{app:nasty_calc}
-This Appendix collects a number of lengthy, but tedious calculations required in the main text.  
+This appendix collects a couple lengthy, but tedious calculations required in the main text.  
 
 \section{Integrated Renormalized Two-Body Feynman-Kac Formula}
 
 The following calculation is required for the renormalized two-body energies for both TE and 
 TM.  Since TE and TM mimic each other in the form of their solutions, most of this can proceed in 
 parallel.  Only at the end is the exact form of the solution required.  The form of the two-body
-solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feynman-Kac TM two step})
+solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feynman-Kac TM two step}).
 
   The spatial integral over the solution $f_{12}$  in region I is
   \begin{align}
@@ -17,15 +17,13 @@ solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feyn
     {\sqrt{2(\lambda+\chi_1)}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}   \nonumber\\
     % &\hspace{1cm}- e^{-2\sqrt{2(\lambda+\chi_1)}(d_1-x_0)}\dfrac{ - r_1}{\sqrt{2(\lambda+\chi_1)}} -  e^{-2\sqrt{2\lambda}(d_2-x_0)}
     % \frac{r_2}{\sqrt{2(\lambda)}}\bigg]\\
-    &=\frac{r_2 e^{-2\sqrt{2\lambda}d} - r_1}{4(\lambda+\chi_1)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}%   \nonumber\\
+    &=\frac{r_2 e^{-2\sqrt{2\lambda}d} - r_1}{4(\lambda+\chi_1)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}.
     \label{eq:J1}
-%    &\hspace{1cm}
-%    + \dfrac{ r_1}{4(\lambda+\chi_1)} -  e^{-2\sqrt{2\lambda}d}\frac{r_2}{4\lambda}
   \end{align}
-  The equivalent one-body expressions can be found by setting the one of the susceptibilities to zero.  
+  The equivalent one-body expressions can be found by setting one of the susceptibilities to zero.  
   The spatial integrals over the other regions are 
   \begin{align}
-    J_{II} &= \int_{d_1}^{d_2}dx_0\,\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big)\nonumber\\
+    J_{II} &= \int_{d_1}^{d_2}dx_0\,\big[f_{12}(\vect{x}_0)-f_{12}\sup0\big]\nonumber\\
     &=\int_{d_1}^{d_2}dx_0\bigg[\dfrac{2r_1r_2 e^{-2\sqrt{2\lambda}d} + r_1 e^{2\sqrt{2\lambda}(d_1-x_0)} 
     +r_2 e^{-2\sqrt{2\lambda}(d_2-x_0)}}{\sqrt{2\lambda}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}\bigg]\nonumber\\
     &=\frac{2d\,r_1r_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
@@ -38,12 +36,12 @@ solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feyn
     &=\int_{d_2}^\infty dx_0\,e^{2\sqrt{2(\lambda+\chi_2)}(d_2-x_0)}\dfrac{(r_1 e^{-2\sqrt{2\lambda}d}-r_2)}
     {\sqrt{2(\lambda+\chi_2)}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}    \\
     &=\dfrac{(r_1 e^{-2\sqrt{2\lambda}d}-r_2)}
-    {4(\lambda+\chi_2)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}    \label{eq:J3}
+    {4(\lambda+\chi_2)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}.    \label{eq:J3}
   \end{align}
-  The total spatial integral for the fully renormalized two-body solution is found by adding together Eqs.(\ref{eq:J1})-(\ref{eq:J3}),
+  The total spatial integral for the fully renormalized two-body solution is found by adding together Eqs.~(\ref{eq:J1})--(\ref{eq:J3}),
   and subtracting off the one-body integrals.  The result is
   \begin{align}
-    &\int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
+    \int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
     -\big(f_{2}(\vect{x}_0)-f_{2}\sup0\big)\bigg]\\
     % 
    =&\frac{r_2 e^{-2\sqrt{2\lambda}d} - r_1}{4(\lambda+\chi_1)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})} 

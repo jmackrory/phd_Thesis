@@ -17,7 +17,7 @@ Section~\ref{sec:derive_feynman_kac} presents the path integral solution~(\ref{e
 to the diffusion equation~(\ref{eq:diffusion_equation}).
 Sections~\ref{sec:TE_onebody_FK} and \ref{sec:TE_twobody_FK} then develop the analytical expressions relevant for the TE
 worldline path integral in planar geometries.
-The dielectric surfaces are modeled by step potentials, and the analytical solutions are given by  Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
+The sharp dielectric interfaces are modeled by step functions, and the analytical solutions are given by  Eqs.~(\ref{eq:Feynman-Kac TE one step}) and
 (\ref{eq:Feynman-Kac TE two step}), respectively.
 The worldline path integral also involves a highly singular potential~(\ref{eq:VsubTM2}). In Section~\ref{sec:TM_potential}
 this potential is regularized, and found to lead to an effective boundary condition~(\ref{eq:TM_boundary_conditions}).
@@ -98,7 +98,7 @@ The position and momentum operators then acquire the eigenvalues from operating 
 \begin{align}
   M  = \int \prod_{k=0}^{N-1}\frac{d\vect{x}_{k}d\vect{p}_k}{(2\pi)^{D/2}}
   \prod_{j=1}^{N}\left( e^{-\vect{p}_j^2\Delta t/2 -[V(\vect{x}_{j+1})+\lambda]\Delta t+i\vect{p}_j\cdot(\vect{x}_{j+1}-\vect{x}_j)}\right)
-  f(\vect{x}_0,0)
+  f(\vect{x}_0,0).
 \end{align}
 After carrying out the Gaussian momentum integrals, the matrix element is 
 \begin{align}
@@ -112,7 +112,7 @@ This is the traditional discrete form of the imaginary-time path integral.
 The connection to Brownian motion can be made even clearer by changing integration variables.
 The arguments of the Gaussians $\vect{x}_{j+1}-\vect{x}_{j}$, are zero mean random variables, with
 variance $\Delta t$.  The Gaussians  can be interpreted as the probability distributions for the  vector Wiener increments discussed in Section~\ref{sec:dirichlet_worldline_derivation}.
-In this particular case, the vector Wiener increments are defined $\Delta \vect{W}_j := \vect{x}_{N-j-1}-\vect{x}_{N-j}$.
+In this particular case, the vector Wiener increments are defined as $\Delta \vect{W}_j := \vect{x}_{N-j-1}-\vect{x}_{N-j}$.
 Note that this labeling is backwards in time from the usual convention, but it 
 ensures that the solutions are defined in reference to the final coordinate $\vect{x}_N$.
 A general point along the path is given by 
@@ -123,9 +123,9 @@ A general point along the path is given by
 % So our coordinates should be defined relative to that point, which prompts defining
 \begin{equation}
 %  \sum_{k=0}^{j} \Delta \vect{W}_k = \vect{x}_{N-j}-\vect{x}_N\rightarrow 
-  \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j} \Delta \vect{W}_k= \vect{x}_N+\vect{W}_{N-j},
+  \vect{x}_j = \vect{x}_N+\sum_{k=0}^{N-j-1} \Delta \vect{W}_k= \vect{x}_N+\vect{W}_{N-j},
 \end{equation}
-where the Wiener process is defined as $\vect{W}_j:=\sum_{k=0}^{j} \Delta \vect{W}_k$.
+where the Wiener process is defined as $\vect{W}_j:=\sum_{k=0}^{j-1} \Delta \vect{W}_k$.
 In terms of the Wiener paths, the path integral is
 \begin{align}
   M %  &= \int \prod_{k=0}^{N-1}\frac{d(\Delta \vect{W}_{k})}{(2\pi\Delta t)^{D/2}}
@@ -137,7 +137,7 @@ In terms of the Wiener paths, the path integral is
 \end{align}
 After taking the continuum limit $N\rightarrow\infty$, 
 the Wiener path $\vect{W}_k=\vect{W}(t_k)$ becomes a continuously varying stochastic process, and
-the sum over potentials $V(\vect{x}_j)$ can be written as an integral.  The path integral can then be written as
+the sum over potentials $\sum_jV(\vect{x}_j)\Delta t$ can be written as an integral.  The path integral can then be written as
 \begin{align}
   M  &= \biggdlangle \exp\bigg(-\lambda t-\int_0^t du\, V[\vect{x}+\vect{W}(t-u)]\bigg) f[\vect{x}+\vect{W}(t),0]\biggdrangle.
 \end{align}
@@ -226,7 +226,7 @@ which approximates the bodies \emph{globally} by the tangent planes.
 This is a local approximation based on a particular point in space.
 As the path steps through space, the nearest tangent plane will vary, but assuming that each 
 step is small relative to the scale over which the potential changes,
- the contribution from each step would be well approximated by the interaction with a single plane. 
+ the contribution from each step should be well approximated by the interaction with a single plane. 
 These contributions could be accumulated along the path to develop the full path integral solution,
  even in potentials that might not be directly solvable in a global sense.  
 
@@ -317,8 +317,8 @@ This solution is explicitly related to the path integral via
 \end{equation}
 where the first ensemble average is over free, unconstrained Wiener paths, while the second is over Brownian bridges that satisfy $x(0)=x(\cT)=0$.
 The factor of $\sqrt{2\pi \cT}$ is the normalization for using closed Brownian bridges.  
-In this case, we will not undo the Laplace transform, since later results can convert the relevant 
-Casimir energies to exploit this form of the energy. 
+In this case, we will not invert the Laplace transform, since in Chapter~\ref{ch:analytical} we will convert
+the relevant Casimir energies to exploit these analytical expression. 
 
 It is possible to generalize this calculation to compute the equivalent formulae for open Brownian
 bridges from $0\rightarrow c$, as discussed in Appendix B of ~\cite{Mackrory2016}.
@@ -407,13 +407,6 @@ The solutions for each region are
 The ``12'' subscript indicates that both the first and second bodies are present.
 The equivalent single body expressions can be derived from these.  For example, the solution for body 1 can
 be found by keeping $d_1$ fixed, but taking the limit where $d$ and $d_2$ approach positive infinity.  
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\linewidth]{fig/analytical/twoslab_ch3}
-  \caption[Sketch of two planar dielectric slabs]{
-    Sketch of two planar dielectric slabs, with dielectrics $\epsilon_1$ and $\epsilon_2$, with interfaces at $x=d_1$ and $x=d_2$.
-    The slabs are separated by vacuum.}
-\end{figure}
 
 The solutions all involve $1-r\supTE_1r\supTE_2e^{-2\sqrt{2\lambda}d}$ in the denominators.
 This factor was previously encountered in deriving the Lifshitz formula in Section~\ref{sec:lifshitz},
@@ -437,7 +430,7 @@ This naturally goes over to the reflection picture for the Dirichlet scalar disc
 The same methods can be used to yield sensible, finite results for worldline path integrals
 involving singular potentials, such as $V\subTE$ and $V\subTM$ where
 \begin{equation}
-  V\subTM(x) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
+  V\subTM(x-d) = \frac{1}{2}\big[(\partial_x\log\sqrt{\epsilon})^2-\partial_x^2\log\sqrt{\epsilon}\big].
   \label{eq:VsubTM}
 \end{equation}
 (We will focus on $V\subTM$, since $\mur=1$ for almost all materials, so $V\subTE=0$.)
@@ -449,7 +442,7 @@ the second derivative is $\delta'$, or the derivative of a delta function.
  We define a parameter $\Xi:=\log\sqrt{1+\chi}$, which implies
 $\log\sqrt{\epsr}(x) = \Xi\Theta(x-d)$.  If the derivatives are taken directly then the potential is given by
 \begin{equation}
-  V\subTM(x) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big],
+  V\subTM(x-d,\Xi) \sim \frac{1}{2}\big[\Xi^2\delta^2(x-d)-\Xi \delta'(x-d)\big],
 \end{equation}
 which involves the square of the delta function!  
 The only way to make sense of this is to regularize the singularity in the step function,
@@ -485,7 +478,7 @@ the logarithm of the dielectric can then be written
 \end{equation}
 The regularized TM potential is now given by 
 \begin{equation}
-  V\subTM\supa(x) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{2a}[\delta(x-d)-\delta(x-d-a)\big],
+  V\subTM\supa(x-d,\Xi) = \frac{\Xi^2}{2a^2}\Theta(x-d)\Theta(d+a-x)-\frac{\Xi}{2a}[\delta(x-d)-\delta(x-d-a)\big],
   \label{eq:VTM_reg}
 \end{equation}
 as sketched in Figure~\ref{fig:TMpot}.
@@ -507,7 +500,7 @@ However, the ensemble averaged expression over many such paths is well behaved.
 \subsection[Transfer Layer Boundary Conditions for the \\ TM Potential]
 {Transfer Layer Boundary Conditions for the TM Potential}
 
-We will show that the regularized TM potential imposes an effective boundary condition at the interface. 
+We will now show that the regularized TM potential~(\ref{eq:VTM_reg}) imposes an effective boundary condition at the interface. 
 The diffusion equation can be solved inside the boundary layer $x\in(d,d+a)$, and all references 
 to the interior can be eliminated.  The result of this will be conditions relating
 the solution and its derivatives on either side of the surface.
@@ -542,8 +535,6 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
     \end{subequations}
    These equations can be solved for the internal parameters $B$ and $C$, as well as two of the external 
    parameters, $f_2$ and $\partial_x f_2$ in terms of $f_1$ and $\partial_x f_1$.
-   As a result, we will have found simple effective boundary conditions between
-   the field values $f_1,\partial_xf_1$ and $f_2,\partial_xf_2$ on either side of the boundary.
 %   Given this calculation's importance to our subsequent work, we will actually go through the elementary algebra.  
 
    % Find relations between $f(d\pm \epsilon)$ and $f'(d\pm \epsilon)$.
@@ -568,7 +559,7 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
       \partial_xf_2 = e^{\Xi}\partial_xf_1.
     \end{equation}
     In addition, under the assumption that the external gradients $\partial_x f_1$ and $\partial_xf_2$ are independent of $a$ and of order one,
-    then Eq.~(\ref{eq:M d1}) implies that $B\sim\order(a)$, since $\frac{B}{a}$ must is proportional to $\partial_x f_1$.  
+    then Eq.~(\ref{eq:M d1}) implies that $B\sim\order(a)$, since $B/a$ is proportional to $\partial_x f_1$.  
     That implies that in the continuity conditions~(\ref{eq:M c1}) and (\ref{eq:M c2}),
     $B$ is much smaller than $C$ which must also be order one.
     On setting $B=0$, it is clear from Eqs.~(\ref{eq:M c1})-(\ref{eq:M c2}) that 
@@ -598,12 +589,12 @@ Let $f_{\text{mid}}$ be the solution in the middle region for $x\in(d,d+a)$,
 We aim to find a closed form solution for the path integral over paths starting at $x=0$ and terminating at $x=c$ after time $t$,
  and interacting with potential $V\subTM$:
 \begin{equation}
-  f\subTMBC(c,d,\Xi)=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt\, V\subTM}\drangle.
+  f\subTMBC=\int_0^\infty dt\, e^{-\lambda t}\frac{e^{-c^2/(2t)}}{\sqrt{2\pi t}} \dlangle e^{-\int_0^T dt\, V\subTM(x-d,\Xi)}\drangle.
 \end{equation}
 The Gaussian factor is the probability density for a 1D Brownian bridge between $x=0$ and $c$ in time $t$.
 This path integral is found by solving
 \begin{equation}
-  0 = \frac{1}{2} \partial_x^2 f\subTMBC - (V\subTM+\lambda)f\subTMBC + \delta(x-c),
+  0 = \frac{1}{2} \partial_x^2 f\subTMBC - [V\subTM(x-d,\Xi)+\lambda]f\subTMBC + \delta(x-c),
 \end{equation}
 where TM boundary conditions~(\ref{eq:TM_boundary_conditions}) are imposed at $x=d$,
 and delta function boundary conditions~(\ref{eq:delta_BC}) are imposed at $x=c$.  
@@ -636,7 +627,7 @@ the path integral is
 % \end{equation}
 % which is exactly the factor we isolated in front of $\mathcal{M}$.  
 \begin{align}
-  \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
+  \dlangle e^{-\int_0^t dt'\, V\subTM(x-d,\Xi)}\drangle 
   &=\left\{ \begin{array}{lc} 
       1   + \sgn(d)\tanh\Xi\, e^{-2d(d-c)/t} & d(d-c)>0\\
       \sech\Xi & d(d-c)<0.
@@ -709,11 +700,11 @@ This is required to analytically compute the TM component of the Casimir--Polder
 dielectric half-space.  We will only develop the solution for closed paths.
 The path integral
     \begin{equation}
-      f\subTMone = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x,d) + \chi\Theta(x-d)]}\bigdrangle ,
+      f\subTMone = \int_0^\infty dt\, e^{-\lambda t}\frac{1}{\sqrt{2\pi t}}\bigdlangle e^{-\int_0^t dt'\, [V\subTM(x-d,\Xi) + \chi\Theta(x-d)]}\bigdrangle ,
     \end{equation}
     is the steady-state solution to 
     \begin{equation}
-      \partial_t f\subTMone = \frac{1}{2}\partial_x^2f\subTMone -[V\subTM(x,d) + \chi\Theta(x-d)+\lambda]f\subTMone +\delta(x). 
+      \partial_t f\subTMone = \frac{1}{2}\partial_x^2f\subTMone -[V\subTM(x-d,\Xi) + \chi\Theta(x-d)+\lambda]f\subTMone +\delta(x). 
     \end{equation}
     The analytical expression is found by solving the diffusion equation directly, with 
     TM boundary conditions~(\ref{eq:TM_boundary_conditions}) at $x=d$ and 
@@ -722,7 +713,7 @@ The path integral
   \begin{equation}
       f\subTMone(x) = \left\{\begin{array}{lcr} 
           \dfrac{1}{\sqrt{2\lambda}}\left(1+ r\supTM e^{-2\sqrt{2\lambda}d}\right)  & \hspace{2cm} & d<0\\
-          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left(1 - r\supTM e^{-2\sqrt{2(\lambda+\chi)}d}\right) & \hspace{2cm} & d>0\\
+          \dfrac{1}{\sqrt{2(\lambda+\chi)}}\left(1 - r\supTM e^{-2\sqrt{2(\lambda+\chi)}d}\right) & \hspace{2cm} & d>0,
         \end{array} \right. 
       \label{eq:Feynman-Kac TM one step}
     \end{equation}
@@ -757,10 +748,10 @@ The path integral
 The preceding calculations can be extended to handle two planar dielectric half-spaces subject to 
 TM boundary conditions.  This time, the solution is the path integral for a potential
 \begin{equation}
-  V = \chi_1\Theta(-d_1-x)+\chi_2\Theta(x-d_2)+V\subTM(-\Xi_1,d_1)+V\subTM(\Xi_2,d_2).
+  V = \chi_1\Theta(d_1-x)+\chi_2\Theta(x-d_2)+V\subTM(d_1-x,\Xi_1)+V\subTM(x-d_2,\Xi_2).
 \end{equation}
 In this case a little care is needed in defining the boundary conditions at the left hand surface.
-Since the left body has the opposite orientation (the permittivity decreases as $x$ increases at $x=-d_1$),
+Since the left body has the opposite orientation (the permittivity decreases as $x$ increases at $x=d_1$),
 the correct TM potential for the left body has $\Xi_1\rightarrow-\Xi_1$ replaced everywhere.
 This change reverses the nature of the effective boundary conditions at the surface: if passing 
 through the surface decreases the function, and increases the gradient, then traversing the surface in the   

@@ -67,11 +67,12 @@ SetLogAxisX NoSetLogAxisY
 
 /xmaxstr (3.5) def
 /xminstr (-3.5) def
-/ymaxstr (1.1) def
+/ymaxstr (.6) def
 /yminstr (0) def
 
 startinset
 
+/symbolsz 4.5 def % in points
 %seems to reset 
 /ytitlevertnudge 0.0 def
 
@@ -88,8 +89,6 @@ PlotStackDataAuto
  (data/TM_2wall_eff_expT.clean.dat) run % load loop 1
   10 PlotStackDataPointsYerr
 
-
-
 grestore
 
 	% % tweak settings for 2-column figure, if necessary
@@ -101,12 +100,11 @@ grestore
 
 %XAxisLabelsLog
 %YAxisLabels
-[ (0) (0.5) (1.0) ] ExtraYTicks
-%[ (0.05) (0.1) ] ExtraYTicks
+[ (0) (0.25) (.50) ] ExtraYTicks
 [ (-2) (0) (2) ] ExtraXTicksLog
 [ /KahoeTechGreek normal (c)]  XAxisTitle
-[ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
-[ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
+% [ /KahoeTechGreek normal (g o   (c))]  YAxisTitle
+% [ /ComputerModern-Regular subscript (TM   )]  YAxisTitle
 
 endinset
 

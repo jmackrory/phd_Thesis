@@ -10,12 +10,23 @@ where each mode has vacuum energy proportional to its frequency.
 The presence of the conducting bodies restricts the electric field on the plates.
 The allowed modes must have a half-integer number of wavelengths fit between the plates.  
 Changing the plates separation changes the allowed modes, and thus the total energy. 
-While the total vacuum energy is a badly divergent quantity, the difference in energy for two configurations
+While the total vacuum energy is a divergent quantity, the difference in energy for two configurations
 is well defined.  
 The vacuum energy is compared between the cases when the plates are a finite distance apart, and when
 they are removed to arbitrarily far apart.  
 As the plates are brought closer together, this vacuum energy difference is reduced, leading to an attractive force
 between the plates.  
+
+\begin{figure}
+\center
+\includegraphics[width=6cm]{fig/intro/twoplanes_wave}
+\caption[Allowed modes between parallel plates]
+{Sketch of allowed modes between perfectly conducting parallel plates. 
+ Only waves with a half-integer number of wavelengths are allowed between the plates.
+The blue modes are only allowed outside the plates, while green modes are allowed inside
+and outside.  The modes have been vertically offset for clarity.  }
+\label{fig:Casimir_sketch}
+\end{figure}
 
 While the Casimir effect is a generic consequence of quantum field theory subject to boundary conditions,
 the electromagnetic Casimir effect is the most important example.  
@@ -57,7 +68,7 @@ The most important of these modern methods are the so-called ``scattering method
 To date, the scattering method is the only general purpose numerical method available for computing
 Casimir forces in arbitrary arrangements of bodies~\citep{Reid2009,Reid2011,Reid2013}.  
 This method considers fluctuating currents confined to the surfaces of the interacting bodies,
-where the currents at each patch of surface interact with one another via emitting and reabsorbing photons.
+where the currents at each patch of surface interact with one another by emitting and reabsorbing photons.
 The Casimir energy is calculated by evaluating the determinant of the (large) scattering matrix for all of these patches~\citep{Reid2011}.  
 The worldline method is another promising method for calculating Casimir energies~\citep{Gies2003},
 which considers an ensemble of closed Brownian paths propagating through space.
@@ -78,14 +89,14 @@ In Chapter~\ref{ch:EM_quantization}, we will discuss quantization of the EM fiel
 two versions of the worldline path integral: one in terms of the vector and scalar potentials, and another 
 in terms of two scalar fields.  The scalar field description is specialized for planar geometries, 
 but it does account for the magnetic and dielectric properties of the medium.
-We will develop the necessary analytical methods for evaluating path integral in Chapter~\ref{ch:feynman_kac},
+We will develop the necessary analytical methods for evaluating path integrals in Chapter~\ref{ch:feynman_kac},
 and apply them to Casimir worldline path integrals in Chapter~\ref{ch:analytical}.
 In Chapters \ref{ch:numerical} and \ref{ch:force}, we develop and test numerical methods for evaluating 
 the electromagnetic worldline method.
 In both analytical and numerical cases the results show agreement with known electromagnetic Casimir results.
 (A longer outline of the thesis, and some key analytical results is presented in Section~\ref{sec:thesis_outline}.)
 
-The rest of this chapter will cover simple examples of Casimir effects, and expand on background material.
+The rest of this chapter will cover simple examples of Casimir effects, and expand on some necessary background material.
 In Section~\ref{sec:casimir}, we will introduce some simple calculations for Casimir effects such as
 the Casimir--Polder potential between an atom and a conducting wall, and the Lifshitz formula for the Casimir
 effect between dielectric half-spaces (both of which we will use as checks on our later work).
@@ -182,7 +193,7 @@ and $\epsilon_0$ is the permittivity of free space.
 The Casimir--Polder potential between an atom in its ground state and a surface can be derived via perturbation theory
 in the coupling of the atom to the EM field.  We will consider the attraction between
 an atom and a perfectly conducting wall.\footnote{
-This derivation is adapted from Chapter~13 and Section~14.3 of \citet{SteckNotes} and \citet[Section~3.12]{Milonni1994}.}
+This derivation is adapted from Chapter~13 and Section~14.3 of \citet{SteckNotes} and Section~3.12 of \citet{Milonni1994}.}
 The Hamiltonian for the whole atom-field system is
 \begin{equation}
   H = H_{\text{atom}} + H_{\text{field}} + H_{\text{int}}
@@ -191,30 +202,31 @@ where we have split the energy into energy for atom, the EM field, and a term de
 interaction.  
 The atomic Hamiltonian is 
 \begin{gather}
-  H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\sigma_j^\dag\sigma_j 
+  H_{\text{atom}} = \frac{\hat{\vect{p}}^2}{2m} + \sum_j\hbar\omega_{j}\hat{\sigma}_j^\dag\hat{\sigma}_j 
   \label{eq:Hatom}
 \end{gather}
 where the first term is the kinetic energy, and the second term gives the atom's internal 
 electronic energy. The atom's quantized energy levels are given by $E_j=\hbar\omega_j$, 
-and $\sigma_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's internal state.  
+and $\hat{\sigma}_j=|g\rangle\langle e_j|$ is the lowering operator for the atom's internal state.  
 The field Hamiltonian is
 \begin{equation}
-  H_{\text{field}} = \sum\subkz \hbar\omega_k\left(a^\dag\subkz a\subkz + \frac{1}{2}\right),
+  H_{\text{field}} = \sum\subkz \hbar\omega_k\left(\hat{a}^\dag\subkz \hat{a}\subkz + \frac{1}{2}\right),
   \label{eq:Hfield}
 \end{equation}
-where $a\subkz$ is the annihilation operator for the EM field mode with wavenumber $k$, and polarization $\zeta$,
-which has spatial mode function $\vect{f}\subkz(x).$
+where $\hat{a}\subkz$ is the annihilation operator for the EM field mode with wavenumber $k$, and polarization $\zeta$,
+which has spatial mode function $\vect{f}\subkz(\hat{\vect{x}}).$
 This field energy also includes the zero-point energy, $\sum_k\hbar\omega_k/2$, which will be important 
 in the Casimir effect.
 For the Casimir--Polder calculation, this zero-point-energy is a divergent constant which drops out when
 considering the energy differences when the atom is moved close to the surface from arbitrarily far away.  
 Finally, the interaction Hamiltonian couples the internal state of the atom to the quantized light field,
 \begin{equation}
-H_{\text{int}} = -\vect{d\cdot E} = \sum_j\sum\subkz
-  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\sigma_j+\sigma_j^\dag)
-  \vect{d}_j\cdot[a\subkz \vect{f}^*_k(\hat{x})+a^\dag\subkz \vect{f}\subkz(\hat{x})].
+H_{\text{int}} = -\vect{\hat{d}\cdot \hat{E}} = \sum_j\sum\subkz
+  \sqrt{\frac{\hbar\omega_k}{2\epsilon_0}}(\hat{\sigma}_j+\hat{\sigma}_j^\dag)
+  \vect{d}_j\cdot[\hat{a}\subkz \vect{f}^*_k(\hat{\vect{x}})+\hat{a}^\dag\subkz \vect{f}\subkz(\hat{\vect{x}})],
   \label{eq:Hint}
 \end{equation}
+where $\smash{\vect{d}_j=-e\langle g|\hat{\vect{x}}| e_j\rangle}$.
 The interaction Hamiltonian is written in the dipole approximation, which assumes that the atom is much smaller than
 the relevant wavelengths.  In this case, the dominant wavelengths are typically on the order of the separation between the atom
 and the wall.  
@@ -227,7 +239,8 @@ Note that some of the terms in the interaction Hamiltonian violate energy conser
 $[H_{\text{atom}}+H_{\text{field}},H_{\text{int}}]\ne 0$, so $H_{\text{int}}$ causes transitions between the eigenstates of the 
 non-interacting Hamiltonians $H_{\text{atom}}+H_{\text{field}}$. 
 For example,
-$\sigma_j^\dag a^\dag\subkz$ creates a photon with frequency $\omega_k$ and raises the atom from the ground state to an excited state
+$\hat{\sigma}_j^\dag \hat{a}^\dag\subkz$ creates a photon with energy $\hbar\omega_k$ 
+and raises the atom from the ground state to an excited state
 with energy $\hbar\omega_j$.
 These terms are normally dropped in the rotating-wave-approximation, since they oscillate quickly
 in time as $e^{i(\omega_j+\omega_k)t}$, and average down to zero on typical atomic timescales.  
@@ -277,7 +290,7 @@ intermediate states are not directly physically observable on a detector.
 After substituting in $H_{\text{int}}$, the Casimir--Polder energy can be written as
 \begin{align}
   V\subCP(\vect{r}) 
-&= -\sum_{m\ne 0,\vect{k},\zeta} \frac{\hbar\omega_k}{6\epsilon_0}
+&= -\sum_{n\ne 0,\vect{k},\zeta} \frac{\hbar\omega_k}{6\epsilon_0}
     \frac{|\langle E_0|\vect{d}|E_n\rangle|^2 |\vect{f}_{\vect{k},\zeta,i}(\vect{r})|^2}
     {\hbar(\omega_k+\omega_{n0})},
 \end{align}
@@ -287,9 +300,9 @@ which corresponds to assuming that all components of dipole matrix elements are 
 
 The mode functions for the electric field near a perfectly conducting plane 
 can be substituted into the energy.
-Following \citet[Section~3.12]{Milonni1994} % (Section~3.12 in Ref.~\citep{Milonni1994})
-, we assume the atom is close to one wall 
+Following \citet[Section~3.12]{Milonni1994}, we assume the atom is close to one wall 
 of a perfectly conducting box, but far from all other walls.
+The box is formed by conducting planes at $x=0,L$, $y=0,L$, and $z=0,L$.
 The EM mode functions for a perfectly conducting box are given by 
 \begin{align}
   \vect{f}\subkz(\vect{r}) = \sqrt{\frac{8}{V}}\bigg(&
@@ -322,7 +335,7 @@ The sum over dipole matrix elements can also be rewritten in terms of the atom's
   \frac{2\omega_{n0}\langle E_0|d_i|E_n\rangle\langle E_n| d_j|E_0\rangle}{\hbar(\omega_{n0}^2-\omega^2)}.
 \end{equation}
 If we assume the atom's distance from the surface $d$ is larger than the atom's dominant emission wavelength, $\omega_{n0}$
-then the dominant contribution to the sum will come from frequencies for which $\omega_k\sim \frac{c}{d}\ll \omega_{n0}$.
+then the dominant contribution to the sum will come from frequencies for which $\omega_k\sim c/d\ll \omega_{n0}$.
 In that limit, the atomic polarizability can be replaced by the atom's static (zero frequency) polarizability 
 \begin{equation}
   \alpha_0=\lim_{\omega\rightarrow 0}\alpha(\omega) = \sum_n
@@ -352,8 +365,8 @@ The renormalized Casimir--Polder energy between an atom and a conducting plane c
 coordinates, although some care is required to regularize these oscillatory integrals---this can be done by introducing an exponential
 convergence factor $e^{-a k}$ and taking the limit $a\rightarrow 0$ at the end of the computation:
 \begin{align}
- V\subCP(\vect{r})- V\sup0&=\lim_{a\rightarrow 0}-\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k 
-  (-1)\frac{2k_z^2}{k^2}\cos(2k_zz) e^{-ka}\\
+ V\subCP(\vect{r})- V\sup0&=\lim_{a\rightarrow 0}\frac{\hbar\alpha_0}{8\pi^3\epsilon_0}\int d^3k\,\omega_k 
+  \frac{2k_z^2}{k^2}\cos(2k_zz) e^{-ka}\\
 &=\lim_{a\rightarrow 0}\frac{\hbar c\alpha_0}{4\pi^2\epsilon_0}\int_0^\infty dk \int_0^{\pi/2} d\theta\,k^3\sin\theta 
   \cos^2\theta\cos(2kz\cos\theta) e^{-ka}\\
   &=-\frac{3\hbar c\alpha_0}{32\pi^2\epsilon_0 z^4}.\label{eq:CP_conductor}
@@ -425,25 +438,15 @@ In this case, the energy is renormalized by subtracting the energy when the bodi
 from one another.  
 For example, the renormalized energy between two perfectly conducting plates is
 \begin{equation}
-  E-E_0 = -\frac{\hbar c}{720\pi^2 d^3},\label{eq:Casimir_energy}
+  E-E_0 = -\frac{\pi^2\hbar c}{720 d^3},\label{eq:Casimir_energy}
 \end{equation}
 where $d$ is the distance between the plates.  % Note that in this expression there is no
 % mention of the material properties of the media --- this is an artifact of imposing Dirichlet
 % boundary conditions on the surfaces.  
 
-\begin{figure}
-\center
-\includegraphics[width=6cm]{fig/intro/twoplanes_wave}
-\caption[Allowed modes between parallel plates]
-{Sketch of allowed modes between perfectly conducting parallel plates. 
- Only waves with a half-integer number of wavelengths are allowed between the plates.
-The blue modes are only allowed outside the plates, while green modes are allowed inside
-and outside.  The modes have been vertically offset for clarity.  }
-\label{fig:Casimir_sketch}
-\end{figure}
 
 The theory was extended by Lifshitz and coworkers to describe forces between dielectric half-spaces~\citep{Lifshitz1956,
-Dzyaloshinskii1959,Dzyaloshinskii1961}.  This can recover the Casimir force between 
+Dzyaloshinskii1959,Dzyaloshinskii1961}.  The Lifshitz calculation can also recover the Casimir force between 
 perfect conductors, and Casimir--Polder forces between atom's and dielectric surfaces.  
 We will sketch the derivation of the Lifshitz formula (which will be used later),
 since this can naturally also compute the Casimir energy.
@@ -465,6 +468,7 @@ In its full generality, the Lifshitz formula gives the total energy for two plan
 $\epsilon_1$ and $\epsilon_2$,
 separated by a medium with dielectric constant $\epsilon_3$.\footnote{This derivation parallels those in \citet[Section~7.2]{Milonni1994}, and \citet[Ch.~12]{Bordag2009}.
 A similar result emerges from the scattering approach as discussed by \citet{Lambrecht2011}.}
+This geometry is illustrated in Figure~\ref{fig:twoslab}.
 The energy for the EM field in its ground state is 
 \begin{equation}
   E = \sum_{\zeta}\sum_{k_x,k_y,\omega} \frac{\hbar\omega_k}{2},
@@ -473,13 +477,21 @@ where the sum runs over all of the allowed modes for the particular arrangement 
 In this case, the  non-zero contribution to the Casimir effect comes from surface plasmon modes, which propagate along the interfaces
 and decay exponentially away from the bodies.  
 The mode sum can be converted into an integral with respect to the transverse wavenumber $k_T:=\sqrt{k_x^2+k_y^2}$.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\linewidth]{fig/analytical/twoslab_ch3}
+  \caption[Sketch of two planar dielectric slabs]{
+    Sketch of two planar dielectric slabs, with dielectrics $\epsilon_1$ and $\epsilon_2$, with interfaces at $x=d_1$ and $x=d_2$.
+    The slabs are separated by vacuum.}
+  \label{fig:twoslab}
+\end{figure}
 The sum over frequencies can be recast as a contour integral over complex frequency $\xi$, against a function $\Delta^{(\zeta)}$,
  whose poles occur at the allowed frequencies, with residue $\omega_k$  
 \begin{equation}
   E = \frac{L^2}{(2\pi)^2}\sum_{\zeta}\int_0^\infty dk_T\,k_T\oint d\xi\, 
   \frac{\hbar \xi}{2} \frac{1}{(2\pi i)\Delta^{(\zeta)}(\xi)}\frac{d\Delta^{(\zeta)}(\xi)}{d\xi}.
 \end{equation}
-The function $[2\pi i\Delta(\xi)]^{-1}d\Delta(\xi)/d\xi$ is designed to have unit residue at the zeroes of $\Delta(\xi)$, 
+The function $[2\pi i\Delta(\xi)]^{-1}d\Delta(\xi)/d\xi$ is designed to have unit residue at the zeroes of $\Delta(\xi)$.   
 The factor of $L^2$ is accounted for by considering the energy per unit area.  
 The energy can be simplified by integrating by parts, leading to 
 \begin{equation}
@@ -490,7 +502,7 @@ The most important modes are the surface modes, since these modes are sensitive 
 these modes exponentially decay between the bodies.
 The allowed frequencies for these modes must satisfy 
 \begin{equation}
-  r^{(\zeta)}_{13}r^{(\zeta)}_{23} e^{-2k_z d}=1,
+  r^{(\zeta)}_{13}r^{(\zeta)}_{23} e^{-2k_z d}=1,\label{eq:resonance_condition}
 \end{equation}
 where $r^{(\zeta)}_i$ are the reflection coefficients for surface $i$ and polarization $\zeta$, and\
 the wavenumber is given by $k_z=\sqrt{k_T^2-\epsilon(\omega)\omega^2/c^2}$.  The reflection coefficients
@@ -502,7 +514,7 @@ are given by
 The frequency condition is suggestive of the requirement that accumulated round-trip phase 
 including reflections from both walls, is unity for
 allowed modes [this interpretation is bolstered by considering the Casimir force between realistic mirrors~\citep{Genet2003}].
-This suggests choosing $\Delta(\xi) = 1-r^{(\zeta)}_{13}r^{(\zeta)}_{23} e^{-2k_z d}$, where the wavenumber $k_z$
+The condition~(\ref{eq:resonance_condition}) suggests choosing $\Delta(\xi) = 1-r^{(\zeta)}_{13}r^{(\zeta)}_{23} e^{-2k_z d}$, where the wavenumber $k_z$
 and the reflection coefficients are functions of $\xi$.  
 
 The contour integral~(\ref{eq:lifshitz_logDelta}) can be split into two pieces. The integral over the right semi-circle 
@@ -534,10 +546,8 @@ and
 \end{equation}
 following \citet{Zhou1995}.
 The variables have been adjusted to agree with the Lifshitz calculation, by defining 
-\begin{align}
-  k_T &= \frac{s}{c}\sqrt{\epsilon_3(p^2-1)}.
-\end{align}
-In general, this integral form is the simplest expression for the Casimir energy between two dielectrics planes. 
+$k_T = s\sqrt{\epsilon_3(p^2-1)}/c$.
+In general, this integral form~(\ref{eq:lifshitz}) is the simplest expression for the Casimir energy between two dielectrics planes. 
 % As intimidating as this expression may be, it is a necessary touchstone for later comparison, and it allows 
 % us to examine the different scaling regimes at different distances.  
 The perfect-conductor Casimir energy result (\ref{eq:Casimir_energy}) can be found by taking the strong-coupling limit,
@@ -560,8 +570,8 @@ At non-zero temperature it is necessary to also include the effects of real, the
 At inverse temperature $\beta=(\kB T)^{-1}$, for a 
 frequency $\omega$, the mean number of photons is $\bar{n}(\omega) = \coth(\beta\hbar \omega/2)$.  
 Note that $\coth(i x)$ has simple poles at $x=\pm n \pi$ for $n$  integer. 
-Exactly the same style of argument can be used to find the thermal Casimir energy between dielectrics, 
-but now due to the presence of $\coth(is)$, the integral over imaginary frequency picks up the residues of the integrand at the 
+Exactly the same style of argument that used to derive Eq.~(\ref{eq:lifshitz}), can be used to find the thermal Casimir energy between dielectrics. 
+But due to the presence of $\coth(is)$, the integral over imaginary frequency picks up the residues of the integrand at the 
 Matsubara frequencies $s_n:= 2\pi n/(\beta\hbar)$.
 The resulting free energy per unit area is 
 \begin{align}
@@ -571,7 +581,7 @@ The resulting free energy per unit area is
 \end{align}
 where the primed sum weights the $n=0$ term by $1/2$, and all functions of frequency are evaluated at $s_n.$ 
 At zero temperature, this result passes over to the previous one, 
-by transforming the sum over frequencies into an integral.  This is the most general form of the Lifshitz
+by transforming the sum over frequencies into an integral.  Eq.~(\ref{eq:lifshitz_finite_temp}) is the most general form of the Lifshitz
 formula, and can recover all of the limiting behaviors in the near and far field, and perfect conducting
 media, and rarefied media.
 
@@ -580,7 +590,7 @@ media, and rarefied media.
 Casimir's original calculation vividly shows the importance of vacuum fields, and is said to show the reality 
 of the vacuum field~\citep{Jaffe2005}.  This is due to the emphasis given to the imposed boundary conditions,
 which are emphasized over the matter that created the boundary conditions.  
-It is the author's opinion that the Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
+The Casimir effect is best thought of as a long-ranged interaction between dielectric bodies 
 mediated via the EM field~\citep{Jaffe2005, Rahi2009}.  This picture is also
 analogous to the intuitive photon exchange picture used to explain the Casimir--Polder potential.
 % This view makes the clearest connection to the underlying fundamental physics, rather than emphasizing idealized
@@ -588,8 +598,8 @@ analogous to the intuitive photon exchange picture used to explain the Casimir--
   Figure~\ref{fig:electron-effective-interaction} shows a term contributing to the Casimir effect where 
 electrons on different bodies interact with one another via the EM field.
   The solid lines should
-be understood as the current operators for the electrons bound to a particular, separate media, while the 
-wavy lines are the EM green functions describing the photon.  In fact, if summed over all such dipole ``bubbles,''
+be understood as the current operators $\hat{j}_\mu$ for the electrons bound to a particular, separate media, while the 
+wavy lines are the EM Green functions describing the photon.  In fact, if summed over all such dipole ``bubbles,''
 one can recover the full Casimir force results---as was done by \citet{Dzyaloshinskii1961} in re-summing a field 
 theoretic expansion.  
 In that case the closed electron loops should be understood as current-current correlation functions,
@@ -667,7 +677,7 @@ In particular, one must compare the separation of the bodies $d$ to the resonant
 This requires some knowledge of the peak frequencies $\omega_A$ of the atomic polarizabilities $\alpha(\omega)$ or the dielectric
  function $\epsilon(\omega)$.  At nonzero temperature, there is another distance scale given by the thermal wavelength,
  $\omega_T=\kB T/\hbar$.  One can estimate the most important frequencies by examining $\alpha(is),\epsilon(is),e^{-2pd\xi/c}$
-and approximating the integral in various limits. 
+and approximating the integral~(\label{eq:lifshitz_finite_temp}) in various limits. 
 
  In the near field or van der Waals regime, the separation of the bodies is less than any of the 
  resonant wavelengths for the bodies $d\ll \omega_A/c$.  In that limit all of the frequencies 
@@ -705,11 +715,11 @@ the wall of its container~\citep{Sabisky1973,Dzyaloshinskii1961}.
 In that case, helium satisfies the repulsive Casimir criterion and it is energetically favorable
 to have a thin film of helium between the vacuum and the walls.  
 
-The Casimir effect was only precisely measured in 1997 by \citet{Lamoreaux1997}.   
+The first precise measurement of the Casimir effect was carried out by \citet{Lamoreaux1997}.   
 This experiment measured the Casimir force between a sphere above a metal plate
- via a torsion pendulum.  
+ via a torsion pendulum.
 This landmark experiment was closely followed by \citet{Mohideen1998},
-who used an atomic force microscope in a closer distance regime to measure the force in a sphere-plate geometry.  
+who used an atomic force microscope in a closer distance regime to measure the force in a sphere-plate geometry.
 The Casimir force has also been directly measured in a nanoelectromechanical (NEMS) system 
 by \citet{Chan2001}.  In this case, the Casimir force is detected by the modification it
 makes to the frequency of a torsional oscillator suspended above a plate.  
@@ -790,7 +800,7 @@ atoms~\citep{Kimble2008}.
 % quantum devices for computation and simulation of quantum systems
 The desire to get strong coupling between the atom and light fields, addressable qubits, and a scalable
 architecture has pushed groups towards developing traps that hold atoms close to dielectric surfaces.  
-In this limit, the Casimir--Polder force is the dominant force, which can only be partially mitigated
+In this regime, the Casimir--Polder force is the dominant force, which can only be partially mitigated
 by using laser fields to generate repulsive potentials.
 In designing these new devices it is essential to compute and account for the Casimir--Polder force
 the atoms experience when brought close to the dielectric surface.  
@@ -850,11 +860,11 @@ Casimir forces, and carefully remove all known backgrounds.
 
 \subsubsection{Repulsive Casimir Effects}
 
-Given that Casimir effects tend to enforce lower bounds for how close bodies can approach each other,
-there has been a search for repulsive Casimir effects.  This would open the possibility
+Given that Casimir effects tend to enforce lower bounds for how close bodies can approach each other
+without stiction, there has been a search for repulsive Casimir effects.  This would open the possibility
 of trapping particles, and potentially allow smaller devices to be constructed.  
 Unfortunately, these prospects are somewhat limited, due to requiring unusual material properties.
-From the Lifshitz formula, the force is repulsive if $r_{12}r_{23}<0$.
+From the Lifshitz formula~(\ref{eq:lifshitz_finite_temp}), the Casimir force is repulsive if $r_{12}r_{23}<0$.
 This implies Casimir repulsion should be possible if $\epsilon_1<\epsilon_3<\epsilon_2$ over a broad range of frequencies.
 This was experimentally demonstrated for a gold sphere immersed in bromobenzene above a silica plate
 by \citet{Munday2009}.  However, this is method is little help for Casimir forces between
@@ -863,9 +873,9 @@ identical materials or cold atoms in vacuum.
 Alternatively, the Casimir force is also repulsive for combinations of dielectric and magnetic materials~\citep{Boyer1974}.  
 Given the strength of electric interactions over magnetic interactions in atoms, this spurred interest
 in exploiting materials with strong magnetic responses~\citep{Kenneth2002}.  
-Since these are relatively rare, there was some interest in exploiting metamaterials (arrays of micropatterned circuits with
-effective magnetic response at certain wavelengths~\citep{Pendry1999}).  However, this was shown to be ineffective
-for Casimir applications since the underlying metallic dielectric response dominates for the most important long wavelengths.
+Since these material are relatively rare, there was some interest in exploiting metamaterials (arrays of micropatterned circuits with
+large effective magnetic response at certain wavelengths~\citep{Pendry1999}).  However, this was shown to be ineffective
+for Casimir applications since the underlying metallic dielectric response of the metamaterial dominates for the most important long wavelengths.
 Since the metallic response implies an attractive potential, the overall Casimir effect is attractive~
 \citep{Ianuzzi2003comment,Rosa2008,Pirozhenko2008,Yannopapas2009}.  
 
@@ -879,9 +889,9 @@ Another method of generating repulsive Casimir effects is by varying the geometr
 For example, the Casimir effect is repulsive in certain regimes for an elongated needle above a hole in a conducting plate~
 \citep{Levin2010,Rodriguez2013}.  However, in this example the repulsion is unstable. 
 %In fact, it seems that it is impossible to get stable levitation for similar bodies via Casimir forces alone~\citep{Rahi2010}.
-A stability criterion can be derived for the Casimir energy from within the scattering approach to Casimir theory~\citep{Rahi2010,Rahi2011}.
-(The scattering approach which will be briefly discussed in Section~\ref{sec:scattering}.)  Only bodies
-composed of media for which the planar Casimir force is repulsive can be stably levitated~\citep{Rahi2011}.
+A stability criterion can be derived for the Casimir energy from within the scattering approach to 
+Casimir theory~\citep{Rahi2010,Rahi2011}.\footnote{The scattering approach which will be briefly discussed in Section~\ref{sec:scattering}.}  
+Only bodies composed of media for which the planar Casimir force is repulsive can be stably levitated~\citep{Rahi2011}.
 
 \citet{Boyer1968} found that the renormalized Casimir self-stress of a conducting shell 
 is repulsive.  In this case, a great deal of care is required in isolating 
@@ -889,7 +899,7 @@ divergent terms to find a finite result.
 This surprising result has been verified multiple times [the issue of self-stresses
  is reviewed in \citet{Milton2011}, and chapters 5 and 6 of \citet{Milton2001}].
 There is also a similar repulsive Casimir effect for a dielectric sphere.  
-While the stress on a spherical shell is repulsive, the force between two spherical half-shells is attractive.  
+While the self stress on a spherical shell is repulsive, the force between two separated halves of a sphere is attractive.  
 Thus it is not clear how this self-stress could be measured.  
 
 \subsubsection{Searches for New Physics}
@@ -1165,8 +1175,8 @@ Each path is weighted with a phase $e^{iS[x(t)]/\hbar}$ where $S[x(t)]$ is the c
         &= \int D\vect{x} 
         \exp\left[\frac{i}{\hbar}\int_{0}^{t} dt'\,\left( \frac{m}{2} \dot{\vect{x}}^2-V[\vect{x}(t')]\right)\right].
     \end{align}
-    In the final line we have taken the continuum limit, replacing $(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
-    \rightarrow \dot{\vect{x}}, \sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
+    In the final line we have taken the continuum limit, replacing ${(\vect{x}_{n+1}-\vect{x}_n)/\Delta t
+    \rightarrow \dot{\vect{x}}}$, $\sum_n\Delta t f(n\Delta t) \rightarrow \int dt f(t)$, and introducing 
     $D\vect{x} = \prod_{k=1}^{N-1}d\vect{x}_k\Big[m /(2\pi i\hbar\Delta t)\Big]^{D/2}$.  The phase in exponent is the classical action for a particle
     in a potential.  Paths with the same phase will add together constructively, while 
     paths in regions where the phase is quickly varying will cancel.  
@@ -1232,7 +1242,7 @@ The worldline method was first used to compute scalar Casimir energies by Gies\e
 The scalar worldline method has been extended to nonzero temperatures \citep{Klingmueller2008},
  used to study the torsion of inclined planes~\citep{Weber2009},
 and forces in the sphere-plane and cylinder-plane geometries~\citep{Weber2010, Weber2010a}.  
-In these non-trivial geometries the worldline method has also been used to examine the failure of the proximity force approximation.
+In these nontrivial geometries the worldline method has also been used to examine the failure of the proximity force approximation.
 More recent work has focused on computing the stress-energy tensor~\citep{Schafer2012, Schafer2016},
 with a view to exploring how the Casimir energy violates certain energy conditions (violations of which are required for certain exotic physics).
 
@@ -1240,7 +1250,7 @@ The scalar worldline is also related to some semiclassical expansions for the Ca
 In particular, it is a direct numerical method for computing the so-called optical path integral
 discussed by \citet{Scardicchio2005, Scardicchio2006}.  The sum over intersecting paths is also reminiscent 
 of the semiclassical approach to the Casimir force by \citet{Schaden1998}, which evaluates 
-the Casimir energy by summing over all periodic orbits of light.  This latter work is particularly 
+the Casimir energy by summing over all periodic orbits of light around the interacting bodies.  This latter work is particularly 
 related to other work on the semiclassical limits of path integrals involving chaos~\citep{Gutzwiller1990}.
 Both of these approximate techniques rely on a path integral expression for the Casimir energy that models electromagnetism as a
 scalar field. The worldline provides a general way of evaluating those path integrals.   
@@ -1275,8 +1285,8 @@ choices used in the original papers by \citet{Gies2003}.
 some of the analytical techniques will be used in later chapters~\citep{SteckNotes}.]
 
 Consider a scalar field $\phi(\vect{r},t)$, interacting with a background potential $V(\vect{r})$.  
-As a matter of convention we will distinguish between $\vect{r}$ as a position label or parameter
- and $\vect{x}$, the coordinate of a path integral.
+As a matter of convention we will distinguish between $\vect{r}$, which is a position label or parameter,
+ and the coordinate of a path integral $\vect{x}$.
 The action for the field $\phi$ is given by the time integral of the Lagrangian density $\cL$, 
 \begin{equation}
   S = \int_0^T dt \int d\vect{r}\, \cL = \int_0^T dt \int d\vect{r} 
@@ -1284,10 +1294,10 @@ The action for the field $\phi$ is given by the time integral of the Lagrangian 
 \end{equation}
 The potential $V(\vect{r})$ defines the surfaces of the interacting objects
 \begin{equation}
-  V(\vect{r}) := \lambda \sum_r \delta[\sigma_r(\vect{r}-\vect{R}_r)],
+  V(\vect{r}) := \lambda \sum_j \delta[\sigma_j(\vect{r}-\vect{R}_j)],
 \end{equation}
-where $\lambda$ is the coupling constant, $\sigma_r(\vect{r})=0$ defines the surfaces, 
-and $\vect{R}_r$ marks the center location of each body.
+where $\lambda$ is the coupling constant, $\sigma_j(\vect{r})=0$ defines the surfaces, 
+and $\vect{R}_j$ marks the center location of each body.
 In most work on scalar worldlines, the coupling constant $\lambda$ is taken to infinity, 
 which corresponds to imposing Dirichlet boundary conditions on the surfaces. 
 For planar geometries, this recovers electromagnetic Casimir results for idealized perfect conductors.  
@@ -1302,7 +1312,7 @@ The momentum conjugate to $\phi$ is given by
 %where $\frac{\delta}{\delta f(t)}$ denotes the functional derivative with respect to $f(t)$.    
 The Hamiltonian is then given by
 \begin{align}
-  H &:= \int d\vect{r}\,(\Pi\partial_t\phi -  L)
+  H &:= \int d\vect{r}\,(\Pi\partial_t\phi -  \cL)
 = \int d\vect{r}\,\bigg(\frac{\Pi^2}{2} + \frac{1}{2}(\nabla\phi)^2 +V(\vect{r})\phi^2\bigg).  
 \end{align}
 The theory can now be quantized by promoting the classical fields to quantum operators, 
@@ -1350,7 +1360,7 @@ Some care is required in regularizing such infinite determinants.
 This is done in analogy with finite dimensional Gaussian integrals.  
 The fields can be considered as only being evaluated on a finite lattice of space-time points,
 with the lattice also having a finite extent which bounds all bodies.  
-The field at each point is treated as an independent variable from the others.   
+The field $\phi$ at each point $\vect{x}_k$ ,is treated as an independent variable from the fields at other positions.   
 The gradient operators can be treated via their finite difference approximations, 
 which can be thought of as sparse matrices.
 For example, $\partial_x^2\phi(x_k) \approx [\phi(x_k+\Delta)-2\phi(x_k)+\phi(x_k-\Delta)]/\Delta^2$.
@@ -1424,7 +1434,7 @@ $\langle \vect{x},x_{\tau}| \op{p}_i|\psi\rangle = -i \partial_i\langle \vect{x}
 $[\op{x}_i,\op{p}_j]=i\delta_{ij}$.  Note that $\hbar=1$ in this auxiliary Hilbert space.  The free energy is then
 \begin{equation}
   \mathcal{F}-\mathcal{F}_0 = -\frac{\kB T}{2}\int_0^\infty \frac{d\cT}{\cT}
-  \int d\vect{x}_0d\tau_0\, \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2 -\cT V(\op{\vect{x}})}
+  \int d\vect{x}_0d\tau_0\, \langle \vect{x}_0,\tau_0|e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2 -V(\op{\vect{x}})\cT}
 -e^{-(\op{p}_\tau^2+\op{\vect{p}}^2)\cT/2}  |\vect{x}_0,\tau_0\rangle.
 \end{equation}
 The free energy is now in the form of the imaginary-time transition amplitude for a quantum particle
@@ -1447,7 +1457,7 @@ The resulting worldline path integral for the free energy at zero temperature  i
   \end{align}
 The intermediate Gaussian integrals over $\tau_k$ can be carried out, since the potential
 is independent of $\tau$.  
-The final integral $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
+The final integral over $\tau$ is $\int d\tau_0 = \beta\hbar c$, since $\tau_0\in[0,\beta\hbar c]$.  
 % (A more careful derivation for non-zero temperature handles the $\tau$ direction via a Fourier transform,
 % which introduces the Matsubara frequencies, $s_n = 2\pi n/(\beta \hbar)$.  
 There is also a normalization constant of $(2\pi\cT)^{-1/2}$ for each dimension due to the loop 
@@ -1477,7 +1487,7 @@ In addition, the resulting paths must close on themselves.
 The resulting paths are a specific form of Brownian motion.
  A Brownian motion (or Wiener process) is a continuous random process $W(t)$, that starts at the origin ${W(t=0)=0}$, 
 and has increments $\Delta W(t):=W(t+\Delta t)-W(t)$, that are Gaussian random variables with $\dlangle \Delta W(t)\drangle=0$,
-$\dlangle \Delta W(t) \Delta W(t')\drangle = 0$ for $t\ne t'$ and $\dlangle [\Delta W(t)]^2\drangle=0$~\citep{Gardiner2009}.  
+$\dlangle \Delta W(t) \Delta W(t')\drangle = 0$ for $t\ne t'$ and $\dlangle [\Delta W(t)]^2\drangle=\Delta t$~\citep{Gardiner2009}.  
 (Note that we are using $\dlangle\cdots\drangle$ to denote the ensemble average.)
 A Brownian bridge is a Brownian motion with fixed end points at times $t=0$ and $t=T$, where 
 $B(t=0)=0$, and $B(t=T)=c$, and its increments obey the same statistics as the Wiener process~\citep{Karatzas1991}.  
@@ -1491,13 +1501,14 @@ The result of these manipulations is
   \label{eq:scalar_worldline}
 \end{align}
  where $\dlangle\cdots\drangle_{\vect{x}(t)}$ denotes an ensemble average over closed Brownian bridges $\vect{x}(t)$
-starting at $\vect{x}_0$ and returning with $\vect{x}_N=\vect{x}_0$, and 
+starting at $\vect{x}_0$ and returning to $\vect{x}_N=\vect{x}_0$, and 
 \begin{equation}
   \langle V\rangle := \frac{1}{\cT}\int_0^\cT dt\,V[\vect{x}(t)] = \frac{1}{N}\sum_{k=0}^{N-1}V(\vect{x}_k)
 \end{equation}  
 is the path-averaged value of the potential. 
 The worldline method relies on generating an ensemble of closed Brownian bridges, and evaluating
-the path-averaged potential for each path.  The total Casimir energy then requires further integrals over the starting point $\vect{x}_0$
+the path-averaged potential for each path.
+The total Casimir energy~(\ref{eq:scalar_worldline}) then requires further integrals over the starting point $\vect{x}_0$
 of the paths, and the total path time $\cT$.  The path time $\cT$ governs the spatial extent of the paths, 
 where the typical extent of a path is given by $x\sim\sqrt{\cT}$.
 The renormalization against vacuum ensures that only paths that touch one of the bodies contribute.  
@@ -1526,8 +1537,7 @@ to the $\cT^{-(1+D/2)}$ dependence, the lower path would have a smaller contribu
 \subsection{Worldline Distance Dependence}
 
 The distance dependence can also be read off from Eq.~(\ref{eq:scalar_worldline}).
-  The typical extent of a Brownian motion of total path time $\cT$ is $\sqrt{\cT}$. 
-A typical path will touch a surface a distance $d$ away, at total path time $\cT\sim d^2$.
+A typical path will touch a surface a distance $d$ away, at a path time $\cT\sim d^2$.
 Since the integrand~(\ref{eq:scalar_worldline}) is either zero or one, depending on whether any points
 on the path intersect the bodies,
 the energy density at a point $d$ from the surface is approximately $\int_{d^2}^\infty d\cT\, \cT^{1+D/2}\sim d^{-D}$.  
@@ -1539,7 +1549,7 @@ The generalization is straightforward---in essence the fields must be periodic o
 since $\phi(0)=\phi(\beta\hbar c)$ due to the nature of the trace in Eq.~(\ref{eq:Zphi}).  This motivates
 expanding the fields in a Fourier series, with the Matsubara frequencies $s_n=(2\pi n)/(\beta \hbar)$,
 where each Fourier component contributes independently of the others.  The same sort of manipulations
-can be carried out with the result 
+used to derive the zero temperature worldline~(\ref{eq:scalar_worldline}), can be extended to nonzero temperature with the result 
 \begin{align}
   \mathcal{F}-\mathcal{F}_0 =& -\kB T {\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{(2\pi\cT)^{(D-1)/2}\cT} \int d\vect{x}_0\,
   e^{-s_n^2\cT/(2c^2)}\dlangle e^{-\cT\langle V\rangle} - 1\drangle,
@@ -1559,7 +1569,7 @@ on itself after $N$ steps is negligible, it is essential to force the closure co
 constructing the paths.  
 
 The simplest method generates a free Brownian motion, and then forces the path to close by subtracting
-off a pro-rated fraction of the final position from each increment.  So if we have a free random walk,
+off a pro-rated fraction of the final position from each increment.  So if $W_k$ is a random walk,
 \begin{equation}
   W_k = \sum_{j=1}^k \Delta W_k,
 \end{equation}
@@ -1574,11 +1584,11 @@ in order to construct the closed version.
 Brownian paths. 
 A Brownian bridge can be constructed as 
 \begin{equation}
-  B_k = c_k B_{k-1} + \sqrt{c_k} \Delta W_k,
+  B_k = c_k B_{k-1} + \sqrt{c_k} \Delta W_k, \qquad k=1,\ldots,N-1,
 \end{equation}
-where 
+where $B_0=0$ and 
 \begin{equation}
-  c_k = \frac{N-k}{N-k+1}, \quad k=1,\cdots,N-1.
+  c_k = \frac{N-k}{N-k+1}, \quad k=1,\ldots,N-1.
 \end{equation}
 Since we will use the v-loop algorithm in our own simulations, 
 we will discuss this algorithm further in Chapter~\ref{ch:numerical}. 
@@ -1620,7 +1630,7 @@ can be handled by a separate computing process, without any requirement that the
 with one another, except when accumulating results.  This has the advantage of exploiting the growth of computing clusters with many nodes,
 where that power can be harnessed with minimal effort: once the algorithm works on a single computer,
 it can be easily extended to arbitrarily many computers to increase the size of the ensemble sampled
-from, or reduce the time required to reach a given accuracy.  
+from, or to reduce the time required to reach a given accuracy.  
 
 % \begin{enumerate}
 %   % \item Advantages
@@ -1715,7 +1725,7 @@ The rest of this thesis is laid out as follows:
 Chapter~\ref{ch:EM_quantization} formally quantizes
 the EM field in media characterized by their relative permeability $\epsr$ and permittivity $\mur$.
 There are two approaches to developing the worldline expressions for the electromagnetic Casimir energy.
-The fist emphasizes a full vector path integral for the EM field partition function~(\ref{eq:Z_4pot}),  
+The first emphasizes a full vector path integral for the EM field partition function~(\ref{eq:Z_4pot}),  
 which can then be converted into a worldline path integral expression~(\ref{eq:vector_path_integral}).
 Unfortunately, it is not clear how to extract the two physical degrees of freedom from that complicated
 expression, which involves the cancellation of a number of degrees of freedom.
@@ -1756,16 +1766,15 @@ Most importantly, Section~\ref{sec:TM boundary condition} shows that the TM pote
 \begin{equation}
   V\subTM(z) := \frac{1}{2}\big[(\partial_z\log\sqrt{\epsr})^2-\partial_z^2\log\sqrt{\epsr}\big],
 \end{equation}
-can be regularized
-leads to an effective boundary condition in the diffusion equation.
-For a dielectric step characterized by $\epsr = 1+\chi\Theta(x-d)$, the effective boundary condition is given by~[Eq.~(\ref{eq:TM_boundary_conditions})],
+can be regularized leading to an effective boundary condition in the diffusion equation.
+For a dielectric step characterized by $\epsr = 1+\chi\Theta(x-d)$, the corresponding effective boundary condition from $V\subTM$ is given by~[Eq.~(\ref{eq:TM_boundary_conditions})],
 \begin{align}
   f(d+0_+) =& e^{-\Xi}f(d-0_+) \qquad
   \partial_xf(d+0_+)= e^{\Xi}\partial_xf(d-0_+),
 \end{align}
-where $e^{\Xi}=\sqrt{1+\chi}$.  (In the TE polarization it is $\mur$ that appears in these boundary conditions.)
+where $e^{\Xi}=\sqrt{1+\chi}$. 
 Using that boundary condition, Section~\ref{sec:TM_potential} shows that the path-averaged analytical solution for paths from $x=0$ to $x=c$ in time $t$,
-interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}],
+interacting with potential $V\subTM$ is [Eq.~\ref{eq:TM_potential}]
 \begin{align}
   \dlangle e^{-\int_0^t dt'\, V\subTM(x-d)}\drangle 
   &=\left\{ \begin{array}{lc} 

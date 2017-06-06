@@ -1,20 +1,20 @@
 \chapter{Electromagnetic Worldlines: Analytical Results}
 \label{ch:analytical}
 
-This chapter will show that in planar media the worldline path integrals yield the same results as the more direct 
+This chapter shows that in planar media the worldline path integrals yield the same results as the more direct 
 calculations outlined in Chapter~\ref{ch:introduction}.   
-In Section~\ref{sec:casimir-polder_worldline}, we extract the Casimir--Polder energy from the worldline expressions by treating
+Section~\ref{sec:casimir-polder_worldline} extracts the Casimir--Polder energy from the worldline expressions by treating
 the atom as a localized perturbation.  The resulting Casimir--Polder worldline path integrals given for non-magnetic media 
 by Eqs.~(\ref{eq:TE_Casimir_Polder}) and (\ref{eq:TM_Casimir_Polder}).
 %The analytical energies can be derived by evaluating an analytical average over paths for the relevant path integrals.
-In Section~\ref{sec:rearrange}, we will use the Laplace--Mellin transform~(\ref{eq:Laplace--Mellin}) and 
-the inverse moment theorem~(\ref{eq:moment_theorem})
-to rewrite the worldline expressions so that the analytical solutions from Chapter~\ref{ch:feynman_kac}
+Section~\ref{sec:rearrange} then uses the Laplace--Mellin transform~(\ref{eq:Laplace--Mellin}) and 
+the inverse moment theorem~(\ref{eq:moment_theorem}) to rewrite the worldline expressions so that the analytical solutions from Chapter~\ref{ch:feynman_kac}
 can be substituted into the worldline path integral.  Sections~\ref{sec:TE_CP}--\ref{sec:TM_energy} show that 
 the worldline expressions yield the correct Casimir and Casimir--Polder energies for the TE and TM 
 polarizations in planar geometries.
-Finally, in Section~\ref{sec:nonzero_temp}, we examine the behavior of the worldline path integrals in the case of nonzero temperature, 
-and show that known results for the near-field and high temperature results emerge from this formalism.    
+Finally, Section~\ref{sec:nonzero_temp} examines the behavior of the worldline path integrals in the case of nonzero temperature, 
+and shows that known results for the near-field and high temperature results emerge from this formalism.    
+
 [The work presented on the TE polarization was published as \citet{Mackrory2016}, 
 and the work on the TM polarization is being prepared for publication.]
 
@@ -22,14 +22,14 @@ and the work on the TM polarization is being prepared for publication.]
 \label{sec:casimir-polder_worldline}
 The Casimir--Polder energy for an atom interacting with macroscopic bodies can be derived 
 by treating the atom as a perturbation to the permittivity and permeability.  
-The atom is located at $\rA$, and has polarizability $\alpha$ and magnetizability $\beta$.
+The atom is located at $\rA$, and has static polarizability $\alpha_0$ and magnetizability $\beta_0$.
 The atom perturbs the background permittivity $\epsr(\vect{r})\rightarrow \epsr(\vect{r})+\delta\epsr(\vect{r})$,
 and permeability $\mur(\vect{r})\rightarrow \mur(\vect{r})+\delta\mur(\vect{r})$, where
 \begin{equation}
-  \delta\epsr(\vect{r})=\frac{\alpha}{\epsilon_0}\delta(\vect{r}-\rA), 
-  \quad \delta\mu_r(\vect{r})=\mu_0\beta\delta(\vect{r}-\rA).
+  \delta\epsr(\vect{r})=\frac{\alpha_0}{\epsilon_0}\delta(\vect{r}-\rA), 
+  \quad \delta\mu_r(\vect{r})=\mu_0\beta_0\delta(\vect{r}-\rA).
 \end{equation}
-Note that the delta functions are being used a short-hand notation for a sharply localized function which has unit integral.
+Note that the delta functions physically represent a sharply localized atom.
 All expansions involving these delta functions can be carried out with a finite regularization of the 
 delta function, and the limit of an arbitrarily small particle can be taken at the end of the computations.  
 We will initially carry out calculations for dispersion-free media, at zero temperature.  The generalization 
@@ -43,11 +43,11 @@ In the zero-temperature limit, the energy in the EM field in the TE polarization
   \frac{e^{-\langle V\subTE(\vect{x})\rangle\cT}}{\sqrt{\langle \epsr(\vect{x})\mur(\vect{x})\rangle}} -1
   \biggdrangle_{\vect{x}(t)}.\label{eq:TE_energy}
 \end{equation}
-The Casimir--Polder energy comes from expanding the energy to linear order in the $\alpha$ and $\beta$.
-The expansions in $\alpha$ and $\beta$ must be carried out in both $\langle\epsr\mur\rangle$, and the potential $V\subTE$.
+The Casimir--Polder energy comes from expanding the energy to linear order in the $\alpha_0/\epsilon_0$ and $\mu_0\beta_0$.
+The expansions  must be carried out in both $\langle\epsr\mur\rangle$, and the potential $V\subTE$.
 %This expansion corresponds to extracting the lowest order linear response.
 Considering the similarities between the polarizations, we will carry these expansions out for only
-one polarization, since the others follow by duality.  
+the TE polarization, since the TM results follow by duality~(\ref{eq:EM_duality}).  
 
 % It is important be clear about exactly what the energy is, and how it is computed.  
 % As discussed in \citep[Section~ 4.7]{Jackson1998}, the electrostatic energy for a system depends on the 
@@ -57,19 +57,18 @@ one polarization, since the others follow by duality.
 
 % The energy for an atom in the EM field can be found by considering the change in the energy 
 % from adding the perturbation. 
-The energy can be written as a functional of the permittivity and permeability, $E[\epsr,\mur]$.
+The energy~(\ref{eq:TE_energy}) can be written as a functional of the permittivity and permeability, $E[\epsr,\mur]$.
 The change in energy for adding an atom is then
 \begin{equation}
   \delta E[\epsr,\mur] = E[\epsr+\delta\epsr,\mur+\delta\mur]-E[\epsr,\mur].
 \end{equation}
-The expansions can be carried out with $\alpha_0/\epsilon_0$ and $\mu_0\beta_0$ acting as the small parameters.
 The Casimir--Polder energy can be found by expanding the change in energy to linear order 
 in $\alpha_0/\epsilon_0$ and $\mu_0\beta_0$, which corresponds to taking the following functional derivatives:
 \begin{equation}
   V\subCP(\rA) = \frac{\alpha_0}{\epsilon_0}\frac{\delta}{\delta\epsr(\rA)}E+\mu_0\beta_0\frac{\delta}{\delta\mur(\rA)}E,
 \end{equation}
 where $\rA$ is the atom's location.  
-The Casimir--Polder energy must be renormalized by considering the change in the energy as the atom is removed 
+The Casimir--Polder energy must then be renormalized by considering the change in the energy as the atom is removed 
 arbitrarily from the dielectric objects.
 
 The expansion for the path-averaged permittivity and permeability is
@@ -77,7 +76,7 @@ The expansion for the path-averaged permittivity and permeability is
   \langle(\epsr+\delta\epsr)(\mur+\delta\mur)\rangle^{-1/2} &= \langle\epsr\mur\rangle^{-1/2}
   -\frac{1}{2}\langle \mur\delta\epsr+\epsr\delta\mur\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
 &= \langle\epsr\mur\rangle^{-1/2}
--\frac{1}{2}\frac{\alpha_0}{\epsilon_0}\langle \mur(\vect{x})\delta(x-\rA)\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
+-\frac{1}{2}\frac{\alpha_0}{\epsilon_0}\langle \mur(\vect{x})\delta(\vect{x}-\rA)\rangle\langle\epsr\mur\rangle^{-3/2}\nonumber\\
 &\hspace{1cm} -\frac{1}{2}\mu_0\beta_0\langle\epsr(\vect{x})\delta(\vect{x}-\rA)\rangle \langle\epsr\mur\rangle^{-3/2}.
 \label{eq:mueps_expansion}
 \end{align}
@@ -101,7 +100,7 @@ acting on the path integral after an integration by parts.
 % \begin{equation}
 %   \int d\vect{x} f(\vect{x})\nabla\delta(\vect{x}-\rA)  = -\nabla f(\vect{x})\bigg|_{\vect{x}=\rA}.
 % \end{equation}
-In all of these expansions, the path-averaged delta functions act to restrict the path integrals to paths starting at the atom's
+In all of these expansions, the path-averaged delta functions restrict the path integrals to paths starting at the atom's
 position $\rA$.  
 The path integral can be written schematically as some path-averaged function $\Phi(\vect{x})$,
  and a path-averaged delta function,
@@ -120,8 +119,8 @@ Then for each term $\delta(\vect{x}_j-\rA)$, the labels can be permuted $j$ time
 coordinates $\vect{x}_j\rightarrow \vect{x}_0$.  Since there is now a sum of $N$ identical terms, the 
 path integral can be written as
 \begin{equation}
-  I = \int \prod_{n=0}^{N-1}d\vect{x}_n\,P(\vect{x}_0,\ldots, \vect{x}_{N-1}) \sum_{k=0}^{N-1}f(\vect{x}_k)\delta(\vect{x}_0-\rA)g(\vect{x}_0)
-= \Bigdlangle\, \langle f\rangle g(\rA)\,\Bigdrangle_{\vect{x}(t), \vect{x}(0)=\rA}.\label{eq:delta_pin}
+  I = \int \prod_{n=0}^{N-1}d\vect{x}_n\,P(\vect{x}_0,\ldots, \vect{x}_{N-1}) \sum_{k=0}^{N-1}\Phi(\vect{x}_k)\delta(\vect{x}_0-\rA)g(\vect{x}_0)
+= \Bigdlangle\, \langle \Phi\rangle g(\rA)\,\Bigdrangle_{\vect{x}(t), \vect{x}(0)=\rA}.\label{eq:delta_pin}
 \end{equation}
 % For a closed path, integrated over all space, with integrands athat are all written as averaged around the path, 
 % there is some freedom in which point of the path is called the origin.  
@@ -156,9 +155,9 @@ and integrating by parts, the Casimir--Polder energy is
     \biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.
 \end{align}
 Note that the gradients in parentheses such as $(\nabla\log\mur)$ should be interpreted as functions, while the 
-other derivative operators act on everything to their right.  The remaining derivatives act with respect to 
+other gradient operators act on everything to their right.  The remaining gradients act with respect to 
 the path origin $\vect{x}_0=\rA$.
-The corresponding TM Casimir--Polder energy can be found via the duality transformation, and is given by 
+The corresponding TM Casimir--Polder energy is given by 
 \begin{align}
     V\supTM\subCP(\vect{\rA}) &= \frac{\hbar c}{4}\int_0^\infty\frac{d\cT}{(2\pi\cT)^{D/2}\cT}
     \biggdlangle
@@ -189,7 +188,7 @@ In this case, the TE and TM Casimir--Polder energies are given by
 \end{align}
 These expressions were renormalized by subtracting off the equivalent expressions with a constant dielectric of permittivity $\epsr(\rA)$.
 This corresponds to finding the change in energy for the atom when it is brought to 
-a finite distance from dielectric, after starting arbitrarily far away.
+a finite distance from the dielectric interface, after starting arbitrarily far away.
 In non magnetic media, the TE Casimir--Polder energy is the simpler case to evaluate 
 since it only depends on $\langle\epsr\rangle$, which is well behaved.
 By contrast, the TM Casimir--Polder energy involves the singular TM potential, which implies the need for spatial derivatives.
@@ -307,15 +306,15 @@ to the relevant diffusion equation~(\ref{eq:diffusion_eq}), as discussed in Chap
 The TE contribution to the Casimir--Polder energy for an atom interacting with a dielectric body is given 
 by combining these formal manipulations with the relevant path integral solution.  
 For an atom at the origin, interacting with a planar dielectric interface $\epsr(z)=1+\chi\Theta(x-d)$, 
-the path-integral solution is given by Eq.~(\ref{eq:Feynman-Kac TE one step}).
-Under the rescalings $s\rightarrow s\chi, \lambda\rightarrow \lambda+s$,
- the renormalized TE Casimir--Polder potential is
+the path integral solution is given by Eq.~(\ref{eq:Feynman-Kac TE one step}).
+After rescalings the path integral~(\ref{eq:Feynman-Kac TE one step}) with $s\rightarrow s\chi, \lambda\rightarrow \lambda+s$,
+ the renormalized TE Casimir--Polder potential can be written as
 \begin{align}
 V\subCP\supTE-V\subCP\sup0=&-\frac{\hbar c\alpha_0}{4\epsilon_0(2\pi)^{D/2}}
 \frac{\sqrt{\pi}}{\Gamma[a]\Gamma\left[(D+1)/2-a\right]}
 \int_0^\infty ds\, s^{a-1}\int_0^\infty d\lambda\, \lambda^{(D-1)/2-a}\nonumber\\
 &\times\frac{e^{-2\sqrt{2(\lambda+s)}|d|}}{\sqrt{\lambda+s}} 
-\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}},
+\frac{\sqrt{\lambda+s(1+\chi)}-\sqrt{\lambda+s}}{\sqrt{\lambda+s(1+\chi)}+\sqrt{\lambda+s}}.
 \label{eq:VCP_TE_inter}
 \end{align}
 This can be put into the same form as the known results by changing integration variables.
@@ -393,8 +392,7 @@ and the inverse moment theorem:
   &\times\int_0^\infty d\cT \frac{e^{-(\lambda+s)\cT}}{\sqrt{\cT}}
   \Bigdlangle e^{-\int_0^\cT dt\,[V\subTM(\vect{x}) + s\chi(\vect{x)]}}-1  \Bigdrangle_{\vect{x}(t),\vect{x}(0)=\rA}\label{eq:TM_subpart}.
 \end{align}
-Note that the TM-potential is already in the exponential, so the TM potential and $\Xi$ does not need to be rescaled by $s$. 
-In this sense $\Xi$ is an independent parameter from $\chi$. 
+Note that the TM potential is already in the exponential, so the TM potential and $\Xi$ does not need to be rescaled by $s$. 
 The analytical result~(\ref{eq:Feynman-Kac TM one step}) can be substituted into Eq.~(\ref{eq:TM_subpart}),
 and the integral can be transformed in the same manner as in Section~\ref{sec:TE_CP}, with the result
 % \begin{align}
@@ -421,10 +419,10 @@ and the integral can be transformed in the same manner as in Section~\ref{sec:TE
 \end{align}
 The two cases of interest are for $\nu =4, a=3/2$ and $\nu =2,a=1/2$:
 \begin{align}
-\cV_{2,3/2} %=&-\frac{\sqrt{\pi}\Gamma(4)}{8^{2}d^{4}\frac{\sqrt{\pi}}{2}\Gamma(1)}\int_1^\infty dp\,\frac{1}{p^{4}}(p^2-1)^{2-1/2-3/2}
+\cV_{4,3/2} %=&-\frac{\sqrt{\pi}\Gamma(4)}{8^{2}d^{4}\frac{\sqrt{\pi}}{2}\Gamma(1)}\int_1^\infty dp\,\frac{1}{p^{4}}(p^2-1)^{2-1/2-3/2}
   % \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
 =\,&-\frac{3}{4d^{4}}\int_1^\infty dp\,\frac{1}{p^{4}}\frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}\\
-\cV_{1,1/2}=\,&-\frac{1}{2d^{2}}\int_1^\infty dp\,\frac{1}{p^{2}}
+\cV_{2,1/2}=\,&-\frac{1}{2d^{2}}\int_1^\infty dp\,\frac{1}{p^{2}}
   \frac{ pe^{2\Xi}-\sqrt{p^2+\chi}} {p e^{2\Xi}+\sqrt{p^2+\chi}}.
 \end{align}
 In Eq.~(\ref{eq:TM_CP_inter}), the derivatives with respect to the starting position $\rA$ 
@@ -436,7 +434,7 @@ After substituting these expressions back into the atom-surface energy~(\ref{eq:
 \end{align}
 where we used $e^{2\Xi}=1+\chi$.  This agrees with the Lifshitz results for the TM Casimir--Polder energy
 for an atom near a dielectric half-space [Eq.~(14.205) in \citet{SteckNotes}\,].
-The TM efficiency $\eta\subTM$ also has a closed-form solution, 
+The TM efficiency $\eta\subTM$ also has a closed-form expression, 
 \begin{align}
   \eta\subTM(\chi):=\,&\frac{1}{2}
   \int_1^\infty dp\,p^{-4}(1-2p^2)  \frac{ p(1+\chi)-\sqrt{p^2+\chi}}{p(1+\chi)+\sqrt{p^2+\chi}}\nonumber\\
@@ -447,7 +445,7 @@ The TM efficiency $\eta\subTM$ also has a closed-form solution,
 \end{align}
 which smoothly interpolates between $0$ and $5/6$ as $\chi$ increases from $0$ to $\infty$.
 The TM polarization provides the majority of the Casimir--Polder energy for between an atom and a dielectric plane.  
-From the worldline point of view, most of the TM energy comes from the term involving $-\partial_d^2\cV_{1,1/2}/2$, 
+From the worldline point of view, most of the TM energy comes from the term involving $-\partial_d^2\cV_{2,1/2}/2$, 
 which suggest it is essential to correctly estimate the derivatives in a numerical procedure.  
 
 \section[{Analytical TE Casimir Energy between Two Dielectric \\ Planes}]
@@ -501,10 +499,10 @@ The fully renormalized Casimir energy between two planes is
   The spatial integral can be carried out for each of the three regions: Region I where $x_0<d_1$, Region II where
   $d_1<x_0<d_2$, and Region III where $d_2<x_0$.  
   Fortunately, the solutions are simple exponentials in $x_0$, making these integrals straightforward.
-  This calculation is deferred to Appendix~\ref{app:nasty_calc}, since it is straightforward, but messy.
+  This calculation is deferred to Appendix~\ref{app:nasty_calc}, since simplifying the expressions is straightforward, but messy.
   The integrated, renormalized solution can be written as
   \begin{align}
-    &\int_{-\infty}^\infty dx_0\bigg(\big[f\supTE_{12}(x_0)-f_{12}\sup0\big] -\big[f\supTE_{1}(x_0)-f_{1}\sup0\big]
+    &\int_{-\infty}^\infty d\vect{x}_0\bigg(\big[f\supTE_{12}(x_0)-f_{12}\sup0\big] -\big[f\supTE_{1}(x_0)-f_{1}\sup0\big]
     -\big[f\supTE_{2}(x_0)-f_{2}\sup0\big]\bigg)\nonumber\\
     & = \frac{A\sqrt{\pi}r\supTE_1r\supTE_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{(\lambda+s)}(1-r\supTE_1r\supTE_2 e^{-2\sqrt{2(\lambda+s)}d})}\left(2d
      + \frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_1)}}+\frac{\sqrt{2}}{\sqrt{\lambda+s(1+\chi_2)}}\right),
@@ -570,7 +568,7 @@ The efficiency is the ratio of the TE Casimir energy between the dielectrics to 
 between perfectly-conducting plates at the same distance.
 In this case, $\gamma\subTE$ increases monotonically between $0$ and $1/2$ as both $\chi_1$ and $\chi_2$ 
 increase from $0$ to $\infty$.  
-Both polarizations contribute equally to the Casimir energy in strong-coupling.  
+Note that both the TE and TM polarizations contribute equally to the Casimir energy in the strong-coupling limit.  
 
 \section[{Analytical TM Casimir Energy between Two Dielectric \\ Planes}]
 {Analytical TM Casimir Energy between  Two Dielectric Planes}
@@ -598,10 +596,10 @@ After the Laplace--Mellin and inverse moment transforms, the TM Casimir energy i
 - \big(f\supTM_{1}(\vect{x}_0)-f_{1}\sup0\big)
 -\big(f\supTM_{2}(\vect{x}_0)-f_{1}\sup0\big)\right],
   \end{align}
-where the solutions are the path integrals in Eqs.~(\ref{eq:Feynman-Kac TM one step}) and 
-(\ref{eq:Feynman-Kac TM two step}).  Again, the following substitutions are required: $\Xi_i\rightarrow \Xi_i$,
+where the solutions $f_i$ are the path integrals in Eqs.~(\ref{eq:Feynman-Kac TM one step}) and 
+(\ref{eq:Feynman-Kac TM two step}).  The solutions must be rescaled using $\Xi_i\rightarrow \Xi_i$,
 $\lambda\rightarrow \lambda+s$, and $\chi_i\rightarrow s\chi_i$.
-This requires evaluating integrals over $x_0$ and combining the results. 
+Evaluating the energy requires integrating the solutions of $\vect{x}_0$ and combining the results. 
 This algebra is again deferred to Appendix~\ref{app:nasty_calc}.
 In this case, the integrated solution is 
 \begin{align}
@@ -609,9 +607,9 @@ In this case, the integrated solution is
 - \big(f\supTM_{1}(\vect{x}_0)-f_{1}\sup0\big)
 -\big(f\supTM_{2}(\vect{x}_0)-f_{1}\sup0\big)\right]\nonumber\\
   &=\frac{\sqrt{\pi} A\,r\supTM_1r\supTM_2e^{-2\sqrt{2(\lambda+s)}d}}{\sqrt{\lambda+s}(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2(\lambda+s)}d})}\nonumber\\
-  &\hspace{0.5cm}\times\bigg[2d
+  &\hspace{0.5cm}\times\bigg(2d
   -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}s\chi_i}{\sqrt{\lambda+s(1+\chi_i)}[(\lambda+s)\,e^{4\Xi_i}-\lambda-s(1+\chi_i)]}
- \bigg],
+ \bigg),
 \end{align}
 where the integral over the transverse coordinates introduced the area $A$, and the reflection coefficients are given by, 
 \begin{equation}
@@ -626,9 +624,9 @@ After changing integration variables from $\lambda$ to $p:=\sqrt{\lambda/s+1}$, 
   &\hspace{0.5cm}
 \times\frac{\sqrt{\pi} \,r\supTM_1r\supTM_2e^{-2\sqrt{2s}pd}}{(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2s}pd})}
 %\nonumber\\  &\hspace{0.5cm}\times
-\bigg[2d
+\bigg(2d
   -\sum_{i=1}^2\frac{\sqrt{2}e^{2\Xi_i}\chi_i}{\sqrt{s}\sqrt{p^2+\chi_i}[p^2\,e^{4\Xi_i}-p^2-\chi_i]}
- \bigg],
+ \bigg),
   \end{align}
 where the reflection coefficients are now given by 
 \begin{equation}
@@ -708,7 +706,7 @@ The free energy for the TE and TM polarizations (for non-magnetic media) is
 =\,&k_BT{\sum_{n=0}^\infty}'\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d\vect{x}_0\,
 %\nonumber\\&\times
 \dlangle  e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
-e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\drangle_{\vect{x}(t)},
+e^{-\cT\langle V\subTM(\vect{x},is_n)\rangle}\drangle_{\vect{x}(t)},
 \end{align}
 where we have suppressed renormalization terms.  
 The Casimir--Polder energies can be derived by the same reasoning used in Section~\ref{sec:casimir-polder_worldline},
@@ -723,7 +721,7 @@ V\supTE\subCP
 V\supTE\subCP
 =\,&k_BT{\sum_{n=0}^\infty}'\frac{\alpha(is_n)}{\epsilon_0}\int_0^\infty \frac{d\cT}{(2\pi \cT)^{(D-1)/2}}\int d\vect{x}_0\,\nonumber\\
 &\times\biggdlangle \bigg(\frac{s_n^2}{2c^2}-\frac{1}{4}\nabla^2\bigg)e^{-s_n^2\langle\epsr(\vect{x},is_n)\rangle\cT /(2c^2)}
-e^{-\cT\langle V\subTM^{(n)}(\vect{x})\rangle}\biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:TM_CP_thermal}
+e^{-\cT\langle V\subTM(\vect{x},is_n)\rangle}\biggdrangle_{\vect{x}(t),\vect{x}(0)=\rA}.\label{eq:TM_CP_thermal}
 \end{align}
 There are some noteworthy features of the finite-temperature worldline expression.  
 First, all material functions are already in the exponent, so there is no need for the inverse moment
@@ -748,8 +746,8 @@ The Drude and plasma models of the dielectric function of a metal are given resp
 \epsr^{\text{(plasma)}}(is) = 1+\frac{\omega_p^2}{s^2},
 \end{equation}
 where $\omega_p$ is the plasma frequency and $\gamma$ is the dissipation rate of the metal.
-The Drude model diverges as $\omega^{-1}$ at zero frequency,
-whereas the plasma model diverges as $\omega^{-2}$.
+The Drude model diverges as $s^{-1}$ at zero frequency,
+whereas the plasma model diverges as $s^{-2}$.
 The faster divergence of the plasma model would 
 lead to a nonzero contribution from the TE polarization at zero frequency or high temperature.
 Early experiments were unable to distinguish between the two models, 
@@ -764,7 +762,7 @@ diverges.  As a result, only the first term significantly contributes.
   with the result that
 \begin{equation}
 \lim_{\beta\rightarrow 0} (\cF\supTM-\cF\sup0)=\frac{\kB T}{4}\int_0^\infty \frac{d\cT}{\cT(2\pi \cT)^{(D-1)/2}}\int d\vect{x}_0\,
-\dlangle 1 -  e^{-\cT\langle V\subTM^{(0)}(\vect{x})\rangle}\drangle.\label{eq:high_temp}
+\dlangle 1 -  e^{-\cT\langle V\subTM(\vect{x},0)\rangle}\drangle.\label{eq:high_temp}
 \end{equation}
 Similar considerations apply to both the Casimir and Casimir--Polder energy.  The TM polarization is 
 similarly dominant at small distances at zero temperature.

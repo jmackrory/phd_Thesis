@@ -141,6 +141,81 @@ grestore
 		
 }def
 
+
+/Axes_L{ %Print orthogonal axes with labels and subscripts for labels.
+		%Allow axes to be rotated by angle theta.
+		/zsub exch def
+		/zlabel exch def
+		/ysub exch def	
+		/ylabel exch def
+		/xsub exch def		
+		/xlabel exch def
+		/angle exch def
+%x,y,z axes
+gsave
+%x arrow
+gsave
+angle rotate
+0 in 0 in 0 in 1 in 2 0.8 arrowend
+grestore
+
+%y dot
+gsave
+  0 in 0 in  4 0 360 arc fill
+  0 in 0 in 10 0 360 arc stroke
+grestore
+
+%z arrow
+gsave
+angle rotate
+0 in 0 in -0.8 in 0 in 2 0.8 arrowend
+grestore
+
+gsave
+angle rotate
+-0.35 in 0.9 in moveto
+angle neg rotate
+		
+[/KahoeTechLatin normal xlabel]
+titlesize PrintArrayCenter
+xsubnudge ysubnudge rmoveto
+		[  /KahoeTechLatin subscript xsub]
+		subsize PrintArrayCenter
+
+		%subscript
+grestore
+
+gsave
+angle rotate
+0.3 in -0.5 in moveto
+angle neg rotate
+[  /KahoeTechLatin normal ylabel]
+		titlesize PrintArrayCenter
+		xsubnudge ysubnudge rmoveto
+[  /KahoeTechLatin subscript ysub]
+		subsize PrintArrayCenter
+grestore
+
+
+gsave
+angle rotate
+-0.8 in -0.4 in moveto
+angle neg rotate
+[  /KahoeTechLatin normal zlabel]
+		titlesize PrintArrayCenter
+		xsubnudge ysubnudge rmoveto
+		[  /KahoeTechLatin subscript zsub]
+		subsize PrintArrayCenter
+
+grestore
+
+grestore
+
+		
+}def
+
+
+
 /OneSlab{
 %Wall
 gsave

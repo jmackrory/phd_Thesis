@@ -1,7 +1,7 @@
 #!/bin/bash
 #bash script to make PDF files of figures
 
-for name in twoslab_ch3 kvectorTE kvectorTM TMpot TMsoln TMsoln2 probTM TM_regularized_potential; do
+for name in kvector_TE kvector_TM; do
 #Dans version
    # ps2eps -l -f $j
    # ps2pdf -dAutoRotatePages=/None -DEPSCrop ${j%.ps}.eps

@@ -1,0 +1,175 @@
+%!PS-Adobe-2.0 
+%%EndComments
+%%BeginProlog
+(plotlib/plotfonts.ps) run
+(plotlib/plotparameters.ps) run
+(plotlib/plotarrows.ps) run
+/width {5}  def
+/height {5}  def
+/xmaxstr (5) def
+/xminstr (-5) def
+/yminstr (-5) def
+/ymaxstr (5) def
+
+/xmax {5.0} def
+/xmin {-5.0} def
+/ymin {-3.0} def
+/ymax {3.0} def
+
+%size of ellipse
+/ComputerModern-Regular findfont 14 scalefont setfont
+/titlefont {/ComputerModernExtraBold} def
+/titlesize {30}         bind def % size of plot title
+/subsize {24}         bind def % size of plot title
+/xsubnudge {3} def
+/ysubnudge {-2} def
+
+/angle {270} def
+(plotlib/plotutilities.ps) run
+(plotlib/casimirutilities.ps) run
+
+startplot
+NoSetLogAxisX NoSetLogAxisY
+
+
+/surfx 0 def
+
+/hitpoint {0 0} def
+/reflect_angle {45} def
+/refract_angle {20} def
+
+%find x/y
+
+% tan r =
+
+/tan{
+  /x exch def
+	x sin x cos div 
+} def
+
+
+/xin {xmin} def
+/yin {xin reflect_angle tan mul} def
+
+/xr {xmin} def
+/yr {xr reflect_angle neg tan mul} def
+/xt {xmax} def
+/yt {xt refract_angle tan mul} def 
+
+
+/xin_c {0.5 xmin mul} def
+/yin_c {xin_c reflect_angle tan mul} def
+
+/xr_c {0.5 xmin mul} def
+/yr_c {xr_c reflect_angle neg tan mul} def
+/xt_c {0.5 xmax mul} def
+/yt_c {xt_c refract_angle tan mul} def 
+
+
+% %wall
+gsave
+0 setgray
+2 setlinewidth
+
+newpath
+fillcol
+surfx ymin cc moveto
+surfx ymax cc lineto
+xmax ymax cc lineto
+xmax ymin cc lineto
+0 ymin cc lineto
+fill
+
+newpath
+0 setgray
+surfx ymin cc moveto
+surfx ymax cc lineto
+stroke
+
+%in line
+1 setlinewidth
+newpath
+hitpoint cc moveto
+xin yin cc lineto
+stroke
+
+newpath
+hitpoint cc moveto
+xr yr cc lineto
+stroke
+
+newpath
+hitpoint cc moveto
+xt yt cc lineto
+stroke
+
+
+
+
+% grestore
+
+
+%gsave
+% %Set up axes
+% -3.5 in -3 in translate
+% 0 (x) () (y) () (z) () Axes
+
+%1 0.4 0 setrgbcolor
+gsave
+TEcol
+
+gsave
+xin_c yin_c cc translate
+reflect_angle neg (k) (I) (E) (I) (B) (I) Axes
+grestore
+
+gsave
+xr_c yr_c cc translate
+reflect_angle (k) (R) (E) (R) (B) (R) Axes
+grestore
+
+gsave
+xt_c yt_c cc translate
+refract_angle 90 sub (k) (T) (E) (T) (B) (T) Axes
+grestore
+
+ grestore 
+
+
+%Labels
+gsave
+0 setgray
+
+0.40 xmin mul  0.85 ymax mul cc moveto
+[  /KahoeTechGreek normal (e) ]		titlesize PrintArrayCenter
+4 0 rmoveto
+[  /KahoeTechGreek subscript (0) ]		titlesize PrintArrayCenter
+4 0 rmoveto
+[  /KahoeTechGreek normal (,) ]		titlesize PrintArrayCenter
+12 0 rmoveto
+[  /KahoeTechGreek normal (m) ]		titlesize PrintArrayCenter
+4 0 rmoveto
+[  /KahoeTechGreek subscript (0) ]		titlesize PrintArrayCenter
+
+% [  /ComputerModern-Regular normal (vacuum) ]
+% 		titlesize PrintArrayCenter
+0.40 xmax mul  0.85 ymax mul cc moveto
+
+
+[  /KahoeTechGreek normal (e) ]		titlesize PrintArrayCenter
+4 0 rmoveto
+[  /KahoeTechGreek normal (,) ]		titlesize PrintArrayCenter
+12 0 rmoveto
+[  /KahoeTechGreek normal (m) ]		titlesize PrintArrayCenter
+
+
+
+% 0.40 xmin mul  0.85 ymax mul cc moveto
+% [  /ComputerModern-Regular normal (vacuum) ]
+% 		titlesize PrintArrayCenter
+% 0.40 xmax mul  0.85 ymax mul cc moveto
+% [  /ComputerModern-Regular normal (medium) ]
+% 		titlesize PrintArrayCenter
+		
+ grestore
+%endplot

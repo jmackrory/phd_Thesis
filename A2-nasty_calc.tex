@@ -41,7 +41,7 @@ solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feyn
   The total spatial integral for the fully renormalized two-body solution is found by adding together Eqs.~(\ref{eq:J1})--(\ref{eq:J3}),
   and subtracting off the one-body integrals.  The result is
   \begin{align}
-    \int_{-\infty}^\infty dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
+   \int_{-\infty}^\infty &dx_0\bigg[\big(f_{12}(\vect{x}_0)-f_{12}\sup0\big) -\big(f_{1}(\vect{x}_0)-f_{1}\sup0\big)
     -\big(f_{2}(\vect{x}_0)-f_{2}\sup0\big)\bigg]\\
     % 
    =&\frac{r_2 e^{-2\sqrt{2\lambda}d} - r_1}{4(\lambda+\chi_1)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})} 
@@ -56,7 +56,7 @@ solutions are given in Eqs.~(\ref{eq:Feynman-Kac TE two step}) and (\ref{eq:Feyn
   \end{align}
   Pairs of common terms can be simplified by using $a/(1-x) -a = ax/(1-x)$, with $a=r_i$ and $x=r_1r_2e^{-2\sqrt{2\lambda}d}$.
 \begin{align}
-  J=&+\frac{2d\,r_1r_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
+  J=&\frac{2d\,r_1r_2 e^{-2\sqrt{2\lambda}d}}{\sqrt{2\lambda}(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
   +\frac{r_2 e^{-2\sqrt{2\lambda}d} - r_1}{4(\lambda+\chi_1)(1-r_1r_2 e^{-2\sqrt{2\lambda}d})} 
     +\frac{r_1}{4(\lambda+\chi_1)}   \nonumber\\
     &   +\frac{(r_1 +r_2)(1-e^{-2\sqrt{2\lambda}d})}{4\lambda(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
@@ -90,14 +90,16 @@ and $(\lambda+\chi_2)^{-1}$,
     +r_2 [1 - (r_1)^2]\left(\frac{1}{4(\lambda+\chi_1)}-\frac{1}{4\lambda} \right)\nonumber\\
     &+r_1[1-(r_2)^2]\left(\frac{1}{4(\lambda+\chi_2)}-\frac{1}{4\lambda}\right)\bigg]
   \end{align}
-Now factor out $r_1r_2$,  
-\begin{align*}
+After factoring out $r_1r_2$,  the result is
+\begin{align}
   J=\frac{r_1r_2e^{-2\sqrt{2\lambda}d}}{(1-r_1r_2 e^{-2\sqrt{2\lambda}d})}
     \bigg[\frac{2d}{\sqrt{2\lambda}}
     -[r_1^{-1} - (r_1)]\frac{\chi_1}{4\lambda(\lambda+\chi_1)}
     -[r_2^{-1}-(r_2)]\frac{\chi_2}{4\lambda(\lambda+\chi_2)}\bigg].
-  \end{align*}
-This is as far as you can get without using the exact form of the reflection coefficients.  
+    \label{eq:Jfinal}
+  \end{align}
+At this point, the exact form of the reflection coefficients must be used to proceed any further.  
+
 \subsection{TE Reflection Coefficients}
 For TE reflection coefficents~(\ref{eq:TE_coeff}), the integrated, renormalized two body solution is
 % \begin{align*}
@@ -132,9 +134,9 @@ The extra terms will be allow an integration by parts to occur, that considerabl
 
 \subsection{TM Reflection Coefficients}
 In contrast, for the TM polarization, the $\sqrt{\lambda}\rightarrow e^{2\Xi}\sqrt{\lambda}$, but $\sqrt{\lambda+\chi}$ is unchanged.
-Note that the post-factor of $\chi_i/[4\lambda(\lambda+\chi_i)]$ came from the integrating the  
+Note that the post-factor of $\chi_i/[4\lambda(\lambda+\chi_i)]$ in Eq.~(\ref{eq:Jfinal}) came from the integrating the  
 the exponentials, rather than the reflection coefficients.  The TM reflection coefficients are given by Eq.~(\ref{eq:TM_coeff}).
-This means the answer is
+After combining $r\supTM_i-1/r\supTM_i$, the result is
 \begin{align}
   J\supTM&=\frac{r\supTM_1r\supTM_2e^{-2\sqrt{2\lambda}d}}{(1-r\supTM_1r\supTM_2 e^{-2\sqrt{2\lambda}d})}
   \bigg[\frac{2d}{\sqrt{2\lambda}}

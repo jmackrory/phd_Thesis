@@ -456,6 +456,8 @@ PlotClip % default to clipping outside graph window
   counttomark 2 div PlotStackDataPointsLogY cleartomark
 } bind def
 
+
+
 /PlotStackDataPointsYerr { % plot x,y pairs on the stack
                            %   as separate points, not line
                            %   with y error bars
@@ -494,6 +496,45 @@ PlotClip % default to clipping outside graph window
   } for
   grestore
 } bind def
+
+% /PlotStackDataPointsYerr { % plot x,y pairs on the stack
+%                            %   as separate points, not line
+%                            %   with y error bars
+%                            %   select point symbol with selectsymbol first
+%   % to use: give
+%   %   1. data to plot on stack with errs, x1, y1, e1, x2, y2, e2, ...
+%   %   2. number of data triples on stack (after data)
+%   % e.g.:
+%   %   1.0 1.1 0.1   2.0 1.2 0.2   2 PlotStackDataPointsYerr
+%   /npoints exch def
+%   gsave SetClip newpath
+%   1 1 npoints { pop
+%     /myrawerr exch def
+%     /myrawy exch def
+%     /myrawx exch def
+%     myrawx myrawy cc
+%     /myy exch def
+%     /myx exch def
+%     myx myy pointsymbol
+%     % compute error bar locations on page
+%     myrawx myrawy myrawerr add cc /myyerru exch def pop
+%     myrawx myrawy myrawerr sub cc /myyerrl exch def pop
+%     newpath
+%     errorbarthick setlinewidth
+%     myx myyerrl moveto
+%     myx myyerru lineto
+%     stroke newpath
+%     myx myyerrl moveto
+%     errorbarwid -0.5 mul 0 rmoveto
+%     errorbarwid 0 rlineto
+%     stroke newpath
+%     myx myyerru moveto
+%     errorbarwid -0.5 mul 0 rmoveto
+%     errorbarwid 0 rlineto
+%     stroke
+%   } for
+%   grestore
+% } bind def
 
 /PlotStackDataPointsYerrAuto { % same as PlotStackDataPointsYerr
                                %   but gets # of points  automatically 

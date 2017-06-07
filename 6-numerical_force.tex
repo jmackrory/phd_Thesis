@@ -240,7 +240,7 @@ The first derivative can be carried out as before:
 % \end{align}
 It is possible to integrate by parts with respect to $\vect{x}_k$, so that the gradient $\nablaxk$ 
 then acts on the Gaussian probability density,
- and yields a term proportional to ${\sum_{k}(\vect{x}_k-\vect{x}_{k+1})}$.
+ which yields a term proportional to ${\sum_{k}(\vect{x}_k-\vect{x}_{k+1})}$.
 This sum of path increments vanishes for closed paths, and thus this term can be dropped.  
 The remaining gradient $\nablaR{1}$ can be straightforwardly evaluated, which yields 
 a second independent path-averaged delta function:  
@@ -474,7 +474,7 @@ can be written
   \prod_{k\ne j}\left[1+\Theta_{2}(\vect{x}_k)(e^{-s\chi_2/N}-1)\right]\!\Big\}
   \biggdrangle_{\!\!\vect{x}(t)}\!,
 \end{align}
-where the constant term has zero derivative.
+where the constant term from renormalization has zero derivative.
 The integral over $s$ can be carried out more easily if the integrand is rearranged into terms with 
 a definite number of points $n$ inside each body $i$.  
 We define the indicator functions as
@@ -612,7 +612,7 @@ and accounting for arbitrary geometries.
 
 In general, different classes of paths are important in the finite-$\chi$ and strong-coupling 
 cases.  At small $\chi$, the most important path statistic is the sojourn time,
-while in the strong-coupling regime, the path time at the first intersection is the most important statistic.    
+while in the strong-coupling regime, the the first path time when the path intersects the bodies is the most important statistic.    
 This correspondence was used to discuss the numerical convergence properties of the method as 
 the path length was varied.  [There is a brief discussion on this point in Section~\ref{sec:TE_convergence},
 and an extended discussion in \citet{Mackrory2016}.]
@@ -693,7 +693,7 @@ account for enforcing the restrictions.
 In the absence of that step to explicitly capture the strong-coupling limit, 
 only very rare paths will contribute, since most random paths
 starting on the surface are equally like to explore both positive and negative regions. 
-Most paths will intersect both bodies, and contribute zero to the force.  For small ensembles ($N_{\text{trial}}\le 10^7$)
+Most paths will intersect both bodies, and contribute zero to the force.  For small ensembles ($N_{\text{path}}\le 10^7$)
 this causes similar convergence problems to the pinning methods at large $\chi$. 
 However, this would be a statistical error due to insufficient sampling, as opposed to the 
 intrinsic problems in the pinning method.  Similar methods will be discussed in more detail
@@ -736,7 +736,7 @@ and the normalization constant from $\mathcal{G}[d,k(N-k)\cT/N^2]$,  with distri
 \begin{equation}
   P_{\text{pin}}(k;N)=\cN_{\text{pin}} \bigg(\frac{k(N-k)}{N^2}\bigg)^{D/2},
 \end{equation}
-where $\cN_{\text{pin}} = \sum_{k=1}^NP(k;N)\approx 1/30$ for large $N$.  
+where $\cN_{\text{pin}} = \sum_{k=1}^NP(k;N)\approx N/30$ for large $N$.  
 In addition for planar surfaces, the integral over the transverse dimensions amounts to an area factor. 
 
 The expression for the potential curvature for general-$\chi$  coupling is
@@ -805,28 +805,28 @@ can be written in a schematic form as
 % As an example of the manipulation we propose to use in the curvature path integral~(\ref{eq:curvature_occupy}),
 % let us consider the following constrained path integral:
 \begin{align}
-  I&=\frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}\\
+  I&=\frac{1}{(2\pi\cT)^{(D-1)/2}}\biggdlangle \delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}\\
   &= \int \prod_{n=1}^{N-1}d\vect{x}_n\, \prod_{k=0}^{N-1}\bigg(\frac{e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}}{
-    (2\pi\Delta \cT)^{D/2}}\bigg)\delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1}),\label{eq:constrain_int}
+    (2\pi\Delta \cT)^{(D-1)/2}}\bigg)\delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_{N-1}),\label{eq:constrain_int}
 \end{align}
 where $f(\vect{x}_k)$ and $\Phi$ are placeholders for the constraint $\sigma_2(\vect{x}_k-\vect{R}_2)$, 
-integrand $\sum_n\sum_m\I[1]m\I[2]n g_{m,n}$, respectively.  There is no Gaussian term,
+and integrand $\sum_n\sum_m\I[1]m\I[2]n g_{m,n}$, respectively.  There is no Gaussian term,
  since that only arises after pinning the paths, and normalizing
 for pinned Brownian bridges.   
 
 Instead of just evaluating the integral over $\vect{x}_k$ (which pins the paths), the integral can
 be multiplied by a factor of unity of the form:
 \begin{equation}
-  1 = \dfrac{(2\pi\Delta \cT)^{-D}\int d\vect{y}_k\, e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{
-    (4\pi\Delta T)^{-D/2}\,e^{-(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}}.\label{eq:fac_one}
+  1 = \dfrac{(2\pi\Delta \cT)^{-(D-1)}\int d\vect{y}_k\, e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{
+    (4\pi\Delta T)^{-(D-1)/2}\,e^{-(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}}.\label{eq:fac_one}
 \end{equation}
 This involves multiplying and dividing by an unconstrained integral connecting $\vect{x}_{k-1}$
 and $\vect{x}_{k+1}$ via a new coordinate $\vect{y}_k$.  The integral has been evaluated in the denominator.  
 Then the constrained integral~(\ref{eq:constrain_int}) can now be written
 \begin{align}
   I&= \int d\vect{y}_k\int \prod_{n=1}^{N-1}d\vect{x}_n\, \prod_{k=0}^{N-1}\bigg(\frac{e^{-(\vect{x}_{k+1}-\vect{x}_k)^2/(2\Delta \cT)}}
-  {(2\pi\Delta \cT)^{D/2}}\bigg) \frac{e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{(2\pi\Delta\cT)^{D}}\nonumber\\
-  &\hspace{0.5cm}\times    (4\pi\Delta T)^{D/2}\,e^{(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}
+  {(2\pi\Delta \cT)^{(D-1)/2}}\bigg) \frac{e^{-(\vect{x}_{k+1}-\vect{y}_k)^2/(2\Delta \cT)-(\vect{y}_{k}-\vect{x}_{k-1})^2/(2\Delta \cT)}}{(2\pi\Delta\cT)^{D-1}}\nonumber\\
+  &\hspace{0.5cm}\times    (4\pi\Delta T)^{(D-1)/2}\,e^{(\vect{x}_{k+1}-\vect{x}_{k-1})^2/(4\Delta \cT)}
   \delta[f(\vect{x}_k)]\Phi(\vect{x}_1,\ldots,\vect{x}_k,\ldots,\vect{x}_{N-1}).
 \end{align}
 The label for the constrained coordinate $\vect{x}_k$ and the unconstrained coordinate $\vect{y}_k$ can be swapped using $\vect{x}_k\leftrightarrow\vect{y}_k$.
@@ -835,8 +835,8 @@ and $\delta[f(\vect{y}_k)]$ is now isolated in an auxiliary integral.
 %The Gaussian factors in $\vect{y}_k-\vect{x}_{k+1}$ can be swapped with their counterparts involving $\vect{x}_k-\vect{x}_{k+1}$.
 The path integral can be written in ensemble-averaged form,
 \begin{align}
-  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \int d\vect{y}_k \frac{e^{-(\vect{y}_{k}-\bar{\vect{x}}_k)^2/\Delta \cT}}
-  {(\pi\Delta \cT)^{D/2}}\delta[f(\vect{y}_k)]\Phi(\vect{x}_1,\ldots,\vect{y}_k,\ldots,\vect{x}_{N-1})\biggdrangle,
+  I&= \frac{1}{(2\pi\cT)^{(D-1)/2}}\biggdlangle \int d\vect{y}_k \frac{e^{-(\vect{y}_{k}-\bar{\vect{x}}_k)^2/\Delta \cT}}
+  {(\pi\Delta \cT)^{(D-1)/2}}\delta[f(\vect{y}_k)]\Phi(\vect{x}_1,\ldots,\vect{y}_k,\ldots,\vect{x}_{N-1})\biggdrangle,
 \end{align}
 where $\vect{\bar{x}}_k:=(\vect{x}_{k-1}+\vect{x}_{k+1})^2$, and the exponential terms were combined using
 \begin{align}
@@ -853,17 +853,17 @@ where $\vect{\bar{x}}_k:=(\vect{x}_{k-1}+\vect{x}_{k+1})^2$, and the exponential
 \end{align}
 Now the delta function can be integrated over using Eq.~(\ref{hormander1}), with the result 
 \begin{align}
-  I&= \frac{1}{(2\pi\cT)^{D/2}}\biggdlangle \oint_{f(\vect{y})=0} \hspace{-4ex}dS(\vect{y})\, \frac{1}{|\nabla_yf(\vect{y})|}\frac{e^{-(\vect{y}-\bar{\vect{x}}_k)^2/\Delta \cT}}
-  {(\pi\Delta \cT)^{D/2}}\Phi(\vect{x}_1,\ldots,\vect{y},\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}.\label{eq:soft_delta_general}
+  I&= \frac{1}{(2\pi\cT)^{(D-1)/2}}\biggdlangle \oint_{f(\vect{y})=0} \hspace{-4ex}dS(\vect{y})\, \frac{1}{|\nabla_yf(\vect{y})|}\frac{e^{-(\vect{y}-\bar{\vect{x}}_k)^2/\Delta \cT}}
+  {(\pi\Delta \cT)^{(D-1)/2}}\Phi(\vect{x}_1,\ldots,\vect{y},\ldots,\vect{x}_{N-1})\biggdrangle_{\vect{x}(t)}.\label{eq:soft_delta_general}
 \end{align}
 There is an integral over the surface of constraint $f(\vect{y})$, and the functional $\Phi$ is constrained such that 
 its $k$th coordinate is on the surface.  The paths can be  constructed without any concern for the constraints,
-but they will be suppressed by the Gaussian if they strongly violate the constraint that $\vect{y}\sim\vect{\bar{x}}_k$.  
+but they will be suppressed by the Gaussian if they strongly violate the constraint that $\vect{y}\approx\vect{\bar{x}}_k$.  
 In effect, this manipulation has ``softened'' the constraints. Previously, $\vect{x}_k$ had to lie exactly on the 
 surface, whereas now $\bar{\vect{x}}_k$ should be within $\sqrt{\Delta \cT}$ of the surface to contribute to the path
 integral.  
 Since a broader class of paths can be considered, it maybe easier to find sample paths where 
-that almost obey the constraint $\vect{y}\sim\vect{\bar{x}}_k$.
+that almost obey the constraint $\vect{y}\approx\vect{\bar{x}}_k$.
 Those paths can then contribute to the path integral in regions where $\Phi$ is nonzero.     
 
 \subsubsection{Splitting the Potential Curvature}
@@ -905,14 +905,14 @@ C^{\text{(g)}}_{ij}
   % \nonumber\\
   % &\hspace{0.75cm} \times
   \I[1]m\,\I[2]n\, g_{m,n}
-  \biggdrangle_{\sigma_2(\vect{x}_k-\vect{R}_2)=0},\label{eq:curvature_generic}
+  \biggdrangle_{\sigma_2(\vect{x}_k-\vect{R}_2)=0}.\label{eq:curvature_generic}
 \end{align}
 The integral~(\ref{eq:curvature_strong}) is only substantially nonzero under two conditions.
 First, the path must pass within a distance $\sqrt{\Delta\cT}$ of the 
 surface, and second the paths must not enter either body.
 Note that due to the pinning, the indicator functions $\I[1]0\,\I[2]0$ are currently defined with $\vect{y}$ in the $k$th spot.
 This means that if $\vect{x}_k$ lies inside either body, that does not influence the integrand.  
-The indicators only go to zero when one of the \emph{other} points on the path cross into the bodies.  
+The indicators only go to zero when one of the \emph{other} points on the path crosses into the bodies.  
 
 In a planar geometry, the $(D-2)$-dimensional surface integrals can be evaluated.  
 The integral over $S(\vect{y})$ eliminates the transverse Gaussian integrals, and 
@@ -950,7 +950,7 @@ where $\bar{B}_\text{max} := (B_{m^*+1}-B_{m^*-1})/2$, and $m^*$ is the index of
 This can be regarded as the probability distribution for $\cT$.  
 The normalized probability distribution for $1/\sqrt{\cT}$ is  
 \begin{equation}
-  P_S(\cT;\bar{B}_\text{max},d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_\text{max}}{d}\right)^2\bigg]\Theta\left(\frac{d^2}{\bar{B}^2_\text{max}}-\cT\right)
+  P_S(\cT;\bar{B}_\text{max},d,N) = \sqrt{\frac{Nd^2}{\pi\cT^3}}\exp\bigg[-Nd^2\left(\frac{1}{\sqrt{\cT}}-\frac{\bar{B}_\text{max}}{d}\right)^2\bigg]\Theta\left(\frac{d^2}{\bar{B}^2_\text{max}}-\cT\right).
   \label{eq:time_fix_curve}
 \end{equation}
 The probability distribution can simplified by defining
@@ -989,7 +989,7 @@ if the paths do not enter the bodies.
     of dielectric, for $N=10^5$, with $10^8$ trajectories.
     Strong coupling results are shown as blue squares, generic coupling as red diamonds, 
     and their sum as green triangles.  
-    All simulations are computed using
+    All calculations are carried out using
   ``occupation'' method in Eq.~\ref{eq:curvature_occupy}, and both estimates use the the same ensemble of random numbers.}
 \label{fig:curvature_c}
 \end{figure}
@@ -1009,11 +1009,11 @@ still under study.
 There is yet another way of treating the delta function in terms of restricting $\cT$. 
 If the paths are assumed to start on the surface of the first body, and not enter, 
 then the delta function can be interpreted as a delta function in the path time $\cT$. 
-(Since there is only one $\cT$ integral in the path integral, only one of the $\delta$ functions can be handled in this manner.
+(Since there is only one $\cT$ integral in the path integral, only one of the delta functions can be handled in this manner.
 The remainder should be accounted for in the spatial integrals.)
 For a given Brownian bridge $\vect{B}_k$, the times $\cT_*$ that it intersects the  surfaces, or 
 satisfies $\sigma_2(\vect{x}_0+\sqrt{\cT_*}\vect{B}_k-\vect{R}_2)=0$ could be found.  
-This has not yet been fully implemented, but would be much simpler.  However, the softened delta function
+This has not yet been implemented, but would be much simpler.  However, the softened delta function
 approach may be also be useful in handling other constraints.    For example, it may be useful when 
 computing the potential in a complicated geometry.  It might be hard to construct paths that 
 touch both surfaces, and yet enter neither from randomly constructing Brownian bridges.

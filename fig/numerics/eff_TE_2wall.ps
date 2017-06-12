@@ -30,7 +30,7 @@ SetLogAxisX SetLogAxisY
 /symbolsz 3 def % in points
 0 plotcolor
 mark
-(data/TE_2wall_anlt.dat) run % load loop 1
+(data/TE_2wall_anlt_interp.dat) run % load loop 1
 PlotStackDataAuto
 
 
@@ -73,10 +73,10 @@ startinset
 
 gsave
 %Energy curve 
-1 setlinewidth
+0.5 setlinewidth
 0 plotcolor
 mark
-(data/TE_2wall_anlt.dat) run % load loop 1
+(data/TE_2wall_anlt_interp.dat) run % load loop 1
 PlotStackDataAuto
 
 TEcol

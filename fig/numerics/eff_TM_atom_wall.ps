@@ -25,11 +25,14 @@ twocolumndimensions
 
 startplot
 %Energy curve 
-1 setlinewidth
+0.5 setlinewidth
 /symbolsz 3 def % in points
 outcol
-(data/TM_atom_wall_anlt.clean.dat) run % load loop 1
-20 PlotStackDataLogLog
+% (data/TM_atom_wall_anlt.clean.dat) run % load loop 1
+% 20 PlotStackDataLogLog
+mark
+(data/TM_atom_wall_anlt_interp.dat) run % load loop 1
+PlotStackDataLogLogAuto
 
 TMcol
 (data/TM_atom_wall_eff.clean.dat) run % load loop 1
@@ -60,10 +63,15 @@ startinset
 
 gsave
 %Energy curve 
-1 setlinewidth
+0.5 setlinewidth
 outcol
-(data/TM_atom_wall_anlt.clean.dat) run % load loop 1
-20 PlotStackData
+
+mark
+(data/TM_atom_wall_anlt_interp.dat) run % load loop 1
+PlotStackDataAuto
+
+% (data/TM_atom_wall_anlt.clean.dat) run % load loop 1
+% 20 PlotStackData
 
 TMcol
 (data/TM_atom_wall_eff.clean.dat) run % load loop 1

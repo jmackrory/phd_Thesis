@@ -419,7 +419,7 @@
     This \@papertype\ has been accepted and approved
     in partial fulfillment of the requirements for the
     \@degree\ degree in the \@narrowdepartment\ by:\\*[\baselineskip]
-    \begin{tabular}[t]{p{2.25in} p{3.25in}}
+    \begin{tabular}[t]{@{}p{2.25in} p{3.25in}}
       \@chair & Chair\\
       \if@cochair
       \@cochair& Co-chair\\
@@ -455,7 +455,6 @@
     \@department\\*[\baselineskip]
     \@degreemonth ~\thedegreeyear\\*[\baselineskip]
     Title: \@abstracttitle\\*[\baselineskip] 
-    \\*[2\baselineskip]
   \end{spacing}
   \ifjustified\else\RaggedRight\fi
   \@abstract}
@@ -559,10 +558,11 @@
     \ifnotables\else
     \IfFileExists{\jobname.\ext@table}{\@listoftables}{\@starttoc{\ext@table}}
     \fi
-    \clearpage
+%    \cleardoublepage
     \@normalheaderdims
-    \clearpage
-  \end{singlespacing}}
+%    \clearpage
+  \end{singlespacing}
+}
 
 \def\@makedraftcover{
   \clearpage
@@ -615,8 +615,10 @@
   \fi
   \pagestyle{plain}
   \ifjustified\else\RaggedRight\fi
+  \clearpage
   \pagenumbering{arabic}
-  \setcounter{page}{1}}
+  \setcounter{page}{1}
+}
 
 \def\@footlines#1{\hbox to\textwidth{#1}}
 \ifbound
@@ -670,7 +672,8 @@
   \vspace*{14pt}
   \noindent
   \makebox[\textwidth][l]{Chapter \hfill Page}
-  \pagestyle{tocextraheadings}\@mysingle\@starttoc{toc}}
+  \pagestyle{tocextraheadings}\@mysingle\@starttoc{toc}
+}
 \def\@listoffigures{%
   \clearpage
   \markboth{Figure}{Figure}
@@ -679,7 +682,8 @@
   \vspace*{14pt}
   \noindent
   \makebox[\textwidth][l]{Figure \hfill Page}
-  \pagestyle{lofextraheadings}\@mydouble\@starttoc{\ext@figure}}
+  \pagestyle{lofextraheadings}\@mydouble\@starttoc{\ext@figure}
+}
 \def\@listoftables{%
   \clearpage
   \markboth{Table}{Table}
@@ -688,7 +692,8 @@
   \vspace*{14pt}
   \noindent
   \makebox[\textwidth][l]{Table \hfill Page}
-  \pagestyle{lotextraheadings}\@mydouble\@starttoc{\ext@table}}
+  \pagestyle{lotextraheadings}\@mydouble\@starttoc{\ext@table}
+}
 % \if@gsmodern
 % \def\numberline#1{\hbox to\@tempdima{\hskip 2.75em #1.\hfil}}
 % \else
@@ -765,9 +770,9 @@
 \def\@makeschapterhead#1{{
     \@startchapter{\ifsc\textsc{#1}\else\uppercase{#1}\fi}\par
     \nopagebreak\vskip 4ex}}
-\def\chapter{
-  \clearpage\global\@topnum\z@
-  \@afterindenttrue\secdef\@chapter\@schapter}
+% \def\chapter{
+%   \clearpage\global\@topnum\z@
+%   \@afterindenttrue\secdef\@chapter\@schapter}
 \def\@chapter[#1]#2{
   \stepcounter{chapter}
   \if@appendices
@@ -782,9 +787,10 @@
   \ifnum\c@chapter=1
   \ifnum\aux@appendices=1
   \addtocontents{toc}{
-    \protect\pagebreak[3]\protect\vspace{3ex}
-    \protect\nopagebreak\protect\noindent
-    {}\protect\nopagebreak}
+    % \protect\pagebreak[3] \protect\vspace{1ex}
+    % \protect\nopagebreak\protect\noindent
+    % {}\protect\nopagebreak
+  }
   \else
   \addtocontents{toc}{
     \protect\pagebreak[3]\protect\vspace{3ex}
@@ -831,8 +837,8 @@
   \@makeschapterhead{\ifsc\textsc{#1}\else\uppercase{#1}\fi}
   \@afterheading
   \fi}
-\def\chapter{
-  \clearpage\global\@topnum\z@
+\def\chapter{\clearpage
+  \global\@topnum\z@
   \@afterindenttrue \secdef\@chapter\@schapter}
 \def\@chapterline#1{\centerline{#1}}
 \def\@startchapter#1{\@chapterline{#1}}
@@ -849,6 +855,7 @@
   \fi
   \@ifstar{\@ssect{#2}{#3}{#4}{#5}{#6}}{\@dblarg{
       \@sect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
 \def\@sect#1#2#3#4#5#6[#7]#8{
   \if@gsmodern
   \refstepcounter{#1} 
@@ -909,7 +916,9 @@
       \protect\numberline{\csname the#1\endcsname}
       \fi#7}}
   \fi
-  \@xsect{#5}}
+  \@xsect{#5}
+}
+
 \def\@ssect#1#2#3#4#5#6{\@tempskipa #4\relax
   \ifdim\@tempskipa>\z@
   \begingroup #5\@hangfrom{\hskip #2}{\interlinepenalty \@M
@@ -924,8 +933,8 @@
   \else
   \def\@svsechd{#5\hskip #2\relax {#6}}
   \fi
-  \@xsect{#4}}
-
+  \@xsect{#4}
+}
 \if@gsmodern
 \def\section{\@startsection{section}{1}{\z@}{3ex}{2ex}{}}
 \renewcommand{\thesection}{\thechapter.\arabic{section}}

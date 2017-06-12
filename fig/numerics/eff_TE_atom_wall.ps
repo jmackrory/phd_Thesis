@@ -24,11 +24,12 @@ startplot
 %Energy curve 
 0.5 setlinewidth
 /symbolsz 3 def % in points
-0 plotcolor
-% (data/TE_atom_chi_anlt.dat) run % load loop 1
-% 20 PlotStackDataLogLog
+% 0 plotcolor
+%  (data/TE_atom_chi_anlt.dat) run % load loop 1
+%  20 PlotStackDataLogLog
+mark
 (data/TE_atom_anlt.dat) run % load loop 1
-160 PlotStackDataLogLog
+PlotStackDataLogLogAuto
 
 TEcol
 (data/TE_atom_chi_num.dat) run % load loop 1

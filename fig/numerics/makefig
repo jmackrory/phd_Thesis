@@ -1,7 +1,7 @@
 #!/bin/bash
 #bash script to make PDF files of figures
 
-for name in curvature_a; do
+for name in eff_TE_2wall eff_TE_atom_wall eff_TM_2wall eff_TM_atom_wall; do
 #for name in force curvature_a curvature_c; do
  ps2pdf -P $name.ps $name.1.pdf
  pdfcrop  $name.1.pdf $name.pdf

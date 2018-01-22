@@ -19,7 +19,7 @@
 %% JBM May 2017: 
 %% Added subsubsections to contents by changing tocdepth.
 %% Added phantomsection before addcontentsline.  This fixes pdf bookmark hierarchy.
-%% Added fix for lineno and mathmode with "patch".
+%% Added fix for lineno and mathmode with "patch".  Only needed in draft mode.
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uothesis} %[2012/02/08 v2.5.6 Submission to University of Oregon Graduate School]
